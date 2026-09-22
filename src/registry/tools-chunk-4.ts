@@ -1116,9 +1116,9 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "SSL/TLS Checker",
     slug: "ssl-tls-checker",
     category: "Developer",
-    description: 'Analyze SSL/TLS certificate details including issuer, expiry, and supported protocols. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online SSL/TLS Checker \u2014 Analyze SSL/TLS certificate details including issuer, expiry, and supported protocols. ',
-    dependencies: "None",
+    description: 'Check HTTPS reachability with browser-validated certificates, plus issuer and expiry history from public certificate records.',
+    seoDescription: 'Free online SSL/TLS Checker \u2014 HTTPS reachability, certificate validity, issuer and expiry from certificate transparency logs. ',
+    dependencies: "crt.sh API, Fetch API",
 },
   {
 
@@ -1126,9 +1126,9 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "HTTP Security Checker",
     slug: "http-security-checker",
     category: "Developer",
-    description: 'Scan HTTP response headers for security best practices like HSTS, X-Frame-Options, and CSP.',
-    seoDescription: 'Free online HTTP Security Checker \u2014 Scan HTTP response headers for security best practices. ',
-    dependencies: "None",
+    description: 'Probe a live URL for reachability, redirect chain, and visible response details, plus a reference checklist for HSTS, X-Frame-Options, and CSP to verify server-side.',
+    seoDescription: 'Free online HTTP Security Checker \u2014 live reachability and redirect analysis plus HSTS, X-Frame-Options, and CSP reference checklist. ',
+    dependencies: "Fetch API",
 },
   {
 
@@ -1206,9 +1206,9 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "DNS Lookup Generator",
     slug: "dns-lookup-generator",
     category: "Developer",
-    description: 'Perform DNS lookups for A, AAAA, CNAME, MX, TXT, and NS records. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online DNS Lookup Generator \u2014 Perform DNS lookups for A, AAAA, CNAME, MX, TXT, and NS records. ',
-    dependencies: "None",
+    description: 'Look up live A, AAAA, CNAME, MX, TXT, and NS records via DNS-over-HTTPS, answered in your browser.',
+    seoDescription: 'Free online DNS Lookup Generator \u2014 live A, AAAA, CNAME, MX, TXT, and NS records via DNS-over-HTTPS. ',
+    dependencies: "Google DNS API",
 },
   {
 
@@ -1216,9 +1216,9 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "CORS Inspector",
     slug: "cors-inspector",
     category: "Developer",
-    description: 'Analyze CORS headers to identify cross-origin request configuration issues. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online CORS Inspector \u2014 Analyze CORS headers to identify cross-origin request configuration issues. ',
-    dependencies: "None",
+    description: 'Run a real cross-origin preflight from your browser to test whether an endpoint allows it, with the exact server headers to confirm.',
+    seoDescription: 'Free online CORS Inspector \u2014 real browser preflight test for cross-origin endpoints. ',
+    dependencies: "Fetch API",
 },
   {
 
@@ -1256,9 +1256,9 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "CVE Lookup",
     slug: "cve-lookup",
     category: "Developer",
-    description: 'Look up Common Vulnerabilities and Exposures (CVE) by ID or keyword search. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online CVE Lookup \u2014 Look up Common Vulnerabilities and Exposures (CVE) by ID or keyword search. ',
-    dependencies: "None",
+    description: 'Look up vulnerabilities by CVE ID with severity, summary, and references from the OSV database, plus direct NVD/MITRE links.',
+    seoDescription: 'Free online CVE Lookup \u2014 CVE details with severity and references via OSV. ',
+    dependencies: "OSV API, Fetch API",
 },
   {
 
@@ -1343,9 +1343,9 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "IP Reputation Checker",
     slug: "ip-reputation-checker",
     category: "Developer",
-    description: 'Check an IP address against known threat intelligence and blacklist databases. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online IP Reputation Checker \u2014 Check an IP address against known threat intelligence and blacklist databases. ',
-    dependencies: "None",
+    description: 'Look up IP geolocation, ASN, and hostname instantly, with direct links to AbuseIPDB and VirusTotal for blacklist verdicts.',
+    seoDescription: 'Free online IP Reputation Checker \u2014 IP geolocation and ASN plus AbuseIPDB and VirusTotal verdict links. ',
+    dependencies: "ipinfo.io API, Fetch API",
 },
   {
 
@@ -1373,9 +1373,14 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "Subdomain Finder",
     slug: "subdomain-finder",
     category: "Developer",
-    description: 'Discover subdomains for a given domain using common wordlists and patterns. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Subdomain Finder \u2014 Discover subdomains for a given domain using common wordlists and patterns. ',
-    dependencies: "None",
+    description: 'Discover subdomains via public certificate records plus live DNS checks of common names. Read-only lookups run from your browser — the domain you check is visible to crt.sh and Google DNS, as with any lookup.',
+    seoDescription: 'Free online Subdomain Finder \u2014 discover subdomains from certificate transparency logs plus live DNS probing. ',
+    dependencies: "crt.sh API, Google DNS API",
+    faqs: [
+      { question: "Where do the results come from?", answer: "Two sources: public certificate records (crt.sh) show names that ever had a certificate, and live DNS checks probe 24 common names (www, api, mail…). A name missing here can still exist — CNAME-only, unlisted, or firewalled names won't show." },
+      { question: "Why do I see subdomains that no longer exist?", answer: "Certificate logs are historical: a name stays listed after the certificate expires or the host is retired. The 'Live' section shows only names that resolve right now." },
+      { question: "Is this exhaustive like Amass or Sublist3r?", answer: "No — those run wordlists of thousands plus brute-forcing from a server. This tool covers certificate history plus two dozen common names, which catches the usual suspects honestly labeled as such." },
+    ],
 },
   {
 

@@ -124,45 +124,100 @@ export function SubnetVisualizer() {
 }
 
 
+const DNS_RECORD_TYPES = ['A', 'AAAA', 'MX', 'NS', 'TXT', 'CNAME'] as const;
+
+interface DnsRecords {
+  domain: string;
+  records: { type: string; values: string[] }[];
+  failed: string[];
+}
+
 export function DnsLookupGenerator() {
   const [domain, setDomain] = useState('');
-  const [output, setOutput] = useState('');
+  const [results, setResults] = useState<DnsRecords | null>(null);
+  const [looking, setLooking] = useState(false);
+  const [error, setError] = useState('');
   const domainPresets = ['example.com', 'google.com', 'cloudflare.com'];
-  const gen = () => {
-    if (!domain.trim()) { setOutput('Please enter a domain'); return; }
-    setOutput(`DNS Records for ${domain}
 
-⚠ Server-side DNS lookup not available in browser
-For real DNS lookup, use:
-
-  dig ${domain} ANY
-  dig ${domain} A
-  dig ${domain} AAAA
-  dig ${domain} MX
-  dig ${domain} NS
-  dig ${domain} TXT
-  dig ${domain} CNAME
-
-Expected record types for a typical domain:
-• A / AAAA — IP address(es)
-• NS — Nameservers
-• MX — Mail servers
-• TXT — SPF, DKIM, DMARC
-• CNAME — Aliases (if any)`);
+  const gen = async () => {
+    const raw = domain.trim().toLowerCase()
+      .replace(/^https?:\/\//, '')
+      .replace(/^www\./, '')
+      .split('/')[0]!;
+    if (!raw || !/^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/.test(raw)) {
+      setError('Enter a valid domain, e.g. example.com');
+      setResults(null);
+      return;
+    }
+    setLooking(true);
+    setError('');
+    setResults(null);
+    try {
+      // Real DNS answers via DNS-over-HTTPS (no raw DNS in browsers).
+      const records: DnsRecords['records'] = [];
+      const failed: string[] = [];
+      for (const type of DNS_RECORD_TYPES) {
+        try {
+          const data = await fetchJson(
+            `https://dns.google/resolve?name=${encodeURIComponent(raw)}&type=${type}`, 10000,
+          ) as { Status?: number; Answer?: { data?: string }[] };
+          if (data?.Status === 0 && Array.isArray(data?.Answer) && data.Answer.length > 0) {
+            const values = [...new Set(data.Answer.map(a => String(a?.data || '').replace(/^"|"$/g, '')))];
+            records.push({ type, values });
+          }
+        } catch {
+          failed.push(type);
+        }
+      }
+      setResults({ domain: raw, records, failed });
+      if (records.length === 0) {
+        setError(failed.length > 0
+          ? `No records returned — DNS-over-HTTPS may be blocked or rate-limited. Retry in a minute.`
+          : `No A/AAAA/MX/NS/TXT/CNAME records found for ${raw}.`);
+      }
+    } finally {
+      setLooking(false);
+    }
   };
+
+  const copyAll = () => {
+    if (!results) return;
+    const text = [`DNS Records for ${results.domain}`, '',
+      ...results.records.flatMap(r => [`${r.type}:`, ...r.values.map(v => `  ${v}`), '']),
+    ].join('\n');
+    clipboardWrite(text).then(ok => {
+      if (ok) toast.success('Records copied!');
+      else toast.error('Copy blocked by the browser — select the text manually.');
+    });
+  };
+
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (output) { clipboardWrite(output).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
+  const copy = () => { if (results) { copyAll(); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
     <Section title="DNS Lookup Record Generator">
       <div className="flex flex-wrap gap-1.5 mb-3">
         {domainPresets.map(d => <button key={d} onClick={() => { setDomain(d); }} className="px-2.5 py-1 text-xs rounded-lg bg-orange-500/10 text-orange-600 dark:text-orange-400 hover:bg-orange-500/20 border border-orange-500/20 transition-colors">{d}</button>)}
       </div>
-      <Input label="Domain" value={domain} onChange={setDomain} placeholder="example.com" />
-      <button onClick={gen} className="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-medium transition-colors">Generate Records</button>
-      {output && (
-        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-orange-400">
-          <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)]">{output}</pre>
-          <button onClick={copy} className="mt-3 px-3 py-1.5 text-xs bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+      <Input label="Domain" value={domain} onChange={v => { setDomain(v); setResults(null); setError(''); }} placeholder="example.com" />
+      <button onClick={gen} disabled={looking} className="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 disabled:opacity-50 text-white rounded-xl text-sm font-medium transition-colors">{looking ? 'Looking up…' : 'Generate Records'}</button>
+      {error && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-red-500/40">
+          <p className="text-sm text-[var(--text-primary)]">{error}</p>
+        </div>
+      )}
+      {results && results.records.length > 0 && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-orange-400 space-y-3">
+          <div className="flex items-center gap-3">
+            <p className="text-sm font-bold text-[var(--text-primary)]">DNS Records for {results.domain}</p>
+            <button onClick={copy} className="ml-auto px-3 py-1.5 text-xs bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          {results.records.map(r => (
+            <div key={r.type}>
+              <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider mb-1">{r.type}</p>
+              <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)] break-all">{r.values.join('\n')}</pre>
+            </div>
+          ))}
+          <p className="text-xs text-[var(--text-muted)]">Live answers via DNS-over-HTTPS. A missing type means no records published — not an error.</p>
         </div>
       )}
     </Section>
@@ -170,45 +225,110 @@ Expected record types for a typical domain:
 }
 
 
+interface IpInfo {
+  ip: string;
+  hostname: string;
+  city: string;
+  region: string;
+  country: string;
+  org: string;
+}
+
 export function IpReputationChecker() {
   const [ip, setIp] = useState('');
-  const [output, setOutput] = useState('');
+  const [info, setInfo] = useState<IpInfo | null>(null);
+  const [checking, setChecking] = useState(false);
+  const [error, setError] = useState('');
   const ipPresets = ['8.8.8.8', '1.1.1.1', '185.220.101.0'];
-  const check = () => {
-    if (!ip.trim()) { setOutput('Please enter an IP address'); return; }
-    setOutput(`IP Reputation Check for ${ip}
-
-⚠ Server-side API access not available in browser
-
-For real IP reputation lookup, use:
-• https://www.abuseipdb.com/check/${ip}
-• https://www.virustotal.com/gui/ip-address/${ip}
-• https://ipinfo.io/${ip}
-
-To check from CLI:
-  curl -s "https://ipinfo.io/${ip}/json" | jq .
-  curl -s "https://www.virustotal.com/api/v3/ip_addresses/${ip}" -H "x-apikey: YOUR_KEY"
-
-Common checks:
-• Blacklist status (Spamhaus, Barracuda, etc.)
-• Abuse reports
-• Geolocation
-• ASN / ISP
-• Proxy/VPN detection`);
+  const check = async () => {
+    const target = ip.trim();
+    if (!target || !/^[a-zA-Z0-9.:]+$/.test(target)) {
+      setError('Enter an IP address or hostname, e.g. 8.8.8.8');
+      setInfo(null);
+      return;
+    }
+    setChecking(true);
+    setError('');
+    setInfo(null);
+    try {
+      // Real geo/ASN/org data via ipinfo.io (browser-friendly, no key).
+      // Abuse/blacklist verdicts need keyed APIs (AbuseIPDB, VirusTotal),
+      // so those are honest link-outs, not faked results.
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 15000);
+      let data: Record<string, string>;
+      try {
+        const res = await fetch(`https://ipinfo.io/${encodeURIComponent(target)}/json`, { signal: ctrl.signal });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        data = await res.json();
+      } finally {
+        clearTimeout(t);
+      }
+      if (data?.bogon) {
+        setError(`${target} is a bogon (private/reserved) address — no public reputation exists.`);
+        return;
+      }
+      setInfo({
+        ip: data?.ip || target,
+        hostname: data?.hostname || '—',
+        city: data?.city || '—',
+        region: data?.region || '—',
+        country: data?.country || '—',
+        org: data?.org || '—',
+      });
+    } catch {
+      setError('Lookup failed — ipinfo.io may be rate-limiting. Wait a minute and retry, or use the direct links below.');
+    } finally {
+      setChecking(false);
+    }
   };
+  const target = ip.trim();
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (output) { clipboardWrite(output).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
+  const copy = () => {
+    if (!info) return;
+    clipboardWrite(`IP: ${info.ip}\nHostname: ${info.hostname}\nLocation: ${info.city}, ${info.region}, ${info.country}\nOrg: ${info.org}`).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } });
+  };
+  const rows: [string, string][] = info ? [
+    ['IP', info.ip],
+    ['Hostname', info.hostname],
+    ['Location', [info.city, info.region, info.country].filter(v => v !== '—').join(', ') || '—'],
+    ['ASN / Org', info.org],
+  ] : [];
   return (
     <Section title="IP Reputation Checker">
       <div className="flex flex-wrap gap-1.5 mb-3">
         {ipPresets.map(i => <button key={i} onClick={() => { setIp(i); }} className="px-2.5 py-1 text-xs rounded-lg bg-slate-500/10 text-slate-600 dark:text-slate-400 hover:bg-slate-500/20 border border-slate-500/20 transition-colors">{i}</button>)}
       </div>
-      <Input label="IP Address" value={ip} onChange={v => { setIp(v); setOutput(''); }} placeholder="8.8.8.8" />
-      <button onClick={check} className="px-5 py-2.5 bg-slate-500 hover:bg-slate-600 text-white rounded-xl text-sm font-medium transition-colors">Check Reputation</button>
-      {output && (
-        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-slate-400">
-          <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)]">{output}</pre>
-          <button onClick={copy} className="mt-3 px-3 py-1.5 text-xs bg-slate-500 hover:bg-slate-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+      <Input label="IP Address" value={ip} onChange={v => { setIp(v); setInfo(null); setError(''); }} placeholder="8.8.8.8" />
+      <button onClick={check} disabled={checking} className="px-5 py-2.5 bg-slate-500 hover:bg-slate-600 disabled:opacity-50 text-white rounded-xl text-sm font-medium transition-colors">{checking ? 'Checking…' : 'Check Reputation'}</button>
+      {error && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-red-500/40">
+          <p className="text-sm text-[var(--text-primary)]">{error}</p>
+        </div>
+      )}
+      {info && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-slate-400 space-y-2">
+          {rows.map(([k, v]) => (
+            <div key={k} className="flex flex-wrap gap-2 text-sm">
+              <span className="w-24 shrink-0 text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider pt-0.5">{k}</span>
+              <span className="flex-1 min-w-0 font-mono text-[var(--text-primary)] break-all">{v}</span>
+            </div>
+          ))}
+          <button onClick={copy} className="mt-1 px-3 py-1.5 text-xs bg-slate-500 hover:bg-slate-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+        </div>
+      )}
+      {target && (
+        <div className="mt-3 p-4 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)]">
+          <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Abuse & blacklist verdicts (need an account — open directly)</p>
+          <div className="flex flex-wrap gap-2 text-xs">
+            {[
+              [`https://www.abuseipdb.com/check/${encodeURIComponent(target)}`, 'AbuseIPDB'],
+              [`https://www.virustotal.com/gui/ip-address/${encodeURIComponent(target)}`, 'VirusTotal'],
+              [`https://ipinfo.io/${encodeURIComponent(target)}`, 'ipinfo.io'],
+            ].map(([u, label]) => (
+              <a key={u} href={u} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-lg bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--accent)] hover:underline">{label}</a>
+            ))}
+          </div>
         </div>
       )}
     </Section>
@@ -274,51 +394,138 @@ export function UrlSanitizer() {
 }
 
 
+const COMMON_SUBDOMAINS = [
+  'www', 'api', 'mail', 'admin', 'dev', 'staging', 'blog', 'cdn',
+  'app', 'portal', 'support', 'docs', 'shop', 'forum', 'status', 'vpn',
+  'ftp', 'smtp', 'test', 'demo', 'beta', 'm', 'mobile', 'secure',
+];
+
+interface SubdomainResults {
+  fromCerts: string[];
+  live: string[];
+  probed: number;
+}
+
+async function fetchJson(url: string, timeoutMs: number): Promise<unknown> {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, { signal: ctrl.signal });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  } finally {
+    clearTimeout(t);
+  }
+}
+
 export function SubdomainFinder() {
   const [domain, setDomain] = useState('');
-  const [output, setOutput] = useState('');
+  const [results, setResults] = useState<SubdomainResults | null>(null);
+  const [scanning, setScanning] = useState(false);
+  const [error, setError] = useState('');
   const domainPresets = ['example.com', 'google.com', 'cloudflare.com'];
-  const find = () => {
-    if (!domain.trim()) { setOutput('Please enter a domain'); return; }
-    setOutput(`Subdomain Finder for ${domain}
 
-⚠ Server-side API access not available in browser
+  const find = async () => {
+    const raw = domain.trim().toLowerCase()
+      .replace(/^https?:\/\//, '')
+      .replace(/^www\./, '')
+      .split('/')[0]!;
+    if (!raw || !/^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/.test(raw)) {
+      setError('Enter a valid domain, e.g. example.com');
+      setResults(null);
+      return;
+    }
+    setScanning(true);
+    setError('');
+    setResults(null);
+    try {
+      // Passive enumeration via Certificate Transparency (crt.sh allows
+      // browser requests). May be slow or rate-limited — handled below.
+      const certData = await fetchJson(
+        `https://crt.sh/?q=%25.${encodeURIComponent(raw)}&output=json`, 25000,
+      ) as { name_value?: string }[];
+      const seen = new Set<string>();
+      for (const entry of Array.isArray(certData) ? certData : []) {
+        for (const name of String(entry?.name_value || '').split('\n')) {
+          const n = name.trim().toLowerCase().replace(/^\*\./, '');
+          if ((n === raw || n.endsWith(`.${raw}`)) && !seen.has(n)) seen.add(n);
+        }
+      }
+      const fromCerts = [...seen].sort().slice(0, 500);
 
-For real subdomain enumeration, use:
-
-  # Passive reconnaissance:
-  curl -s "https://crt.sh/?q=%25.${domain}&output=json" | jq -r '.[].name_value' | sort -u
-
-  # Using Sublist3r:
-  sublist3r -d ${domain}
-
-  # Using Amass:
-  amass enum -d ${domain}
-
-  # DNS brute-force:
-  for sub in www api mail admin dev; do
-    host "\$sub.${domain}" && echo "\$sub.${domain}"
-  done
-
-Common subdomains to check:
-• www, api, mail, admin
-• dev, staging, blog, cdn
-• app, portal, support, docs
-• git, jenkins, monitor, status`);
+      // Live probing of common names via DNS-over-HTTPS (no raw DNS in
+      // browsers). Batched to stay polite; a miss means "no A record",
+      // not "doesn't exist" (could be CNAME-only or firewalled).
+      const live: string[] = [];
+      const BATCH = 6;
+      for (let i = 0; i < COMMON_SUBDOMAINS.length; i += BATCH) {
+        const batch = COMMON_SUBDOMAINS.slice(i, i + BATCH);
+        const checks = await Promise.all(batch.map(async (sub) => {
+          try {
+            const data = await fetchJson(
+              `https://dns.google/resolve?name=${encodeURIComponent(`${sub}.${raw}`)}&type=A`, 10000,
+            ) as { Status?: number; Answer?: unknown[] };
+            return data?.Status === 0 && Array.isArray(data?.Answer) && data.Answer.length > 0 ? `${sub}.${raw}` : null;
+          } catch {
+            return null;
+          }
+        }));
+        for (const hit of checks) if (hit) live.push(hit);
+      }
+      setResults({ fromCerts, live, probed: COMMON_SUBDOMAINS.length });
+      if (fromCerts.length === 0 && live.length === 0) {
+        setError(`No subdomains found for ${raw} — it may have no public certificates yet, or crt.sh is rate-limiting. Try again in a minute.`);
+      }
+    } catch {
+      setError('Lookup failed — crt.sh may be down or rate-limiting. Wait a minute and retry.');
+    } finally {
+      setScanning(false);
+    }
   };
+
+  const copyAll = () => {
+    if (!results) return;
+    const all = [...new Set([...results.live, ...results.fromCerts])].join('\n');
+    clipboardWrite(all).then(ok => {
+      if (ok) toast.success('Subdomains copied!');
+      else toast.error('Copy blocked by the browser — select the text manually.');
+    });
+  };
+
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (output) { clipboardWrite(output).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
+  const copy = () => { if (results) { copyAll(); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
     <Section title="Subdomain Finder">
       <div className="flex flex-wrap gap-1.5 mb-3">
         {domainPresets.map(d => <button key={d} onClick={() => { setDomain(d); }} className="px-2.5 py-1 text-xs rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] hover:bg-[var(--accent)]/20 border border-[var(--accent)]/20 transition-colors">{d}</button>)}
       </div>
-      <Input label="Domain" value={domain} onChange={v => { setDomain(v); setOutput(''); }} placeholder="example.com" />
-      <button onClick={find} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-xl text-sm font-medium transition-colors">Find Subdomains</button>
-      {output && (
-        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-[var(--accent)]/20">
-          <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)]">{output}</pre>
-          <button onClick={copy} className="mt-3 px-3 py-1.5 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+      <Input label="Domain" value={domain} onChange={v => { setDomain(v); setResults(null); setError(''); }} placeholder="example.com" />
+      <button onClick={find} disabled={scanning} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] disabled:opacity-50 text-white rounded-xl text-sm font-medium transition-colors">{scanning ? 'Scanning…' : 'Find Subdomains'}</button>
+      {error && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-red-500/40">
+          <p className="text-sm text-[var(--text-primary)]">{error}</p>
+        </div>
+      )}
+      {results && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-[var(--accent)]/20 space-y-4">
+          <div className="flex flex-wrap items-center gap-4 text-sm">
+            <span className="text-[var(--text-primary)]"><strong>{results.live.length}</strong> live <span className="text-[var(--text-muted)]">({results.probed} common names probed)</span></span>
+            <span className="text-[var(--text-primary)]"><strong>{results.fromCerts.length}</strong> in certificates</span>
+            <button onClick={copy} className="ml-auto px-3 py-1.5 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy all'}</button>
+          </div>
+          {results.live.length > 0 && (
+            <div>
+              <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Live — DNS resolves</p>
+              <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)]">{results.live.join('\n')}</pre>
+            </div>
+          )}
+          {results.fromCerts.length > 0 && (
+            <div>
+              <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Seen in public certificates (may include retired names)</p>
+              <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)] break-all">{results.fromCerts.slice(0, 100).join('\n')}{results.fromCerts.length > 100 ? `\n…plus ${results.fromCerts.length - 100} more (Copy all to get everything)` : ''}</pre>
+            </div>
+          )}
+          <p className="text-xs text-[var(--text-muted)]">Sources: Certificate Transparency via crt.sh plus live DNS checks of {COMMON_SUBDOMAINS.length} common names. A name missing here can still exist (CNAME-only, unlisted, or behind a firewall) — for exhaustive recon use Amass or Sublist3r.</p>
         </div>
       )}
     </Section>

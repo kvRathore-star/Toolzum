@@ -6,43 +6,120 @@ import { clipboardWrite } from "@/lib/clipboard";
 import { toast } from 'react-hot-toast';
 
 
+interface HeaderSignals {
+  input: string;
+  reachable: boolean;
+  finalUrl: string;
+  upgradedToHttps: boolean;
+  status: number | null;
+  contentType: string | null;
+}
+
 export function HttpSecurityChecker() {
   const [input, setInput] = useState('');
-  const [output, setOutput] = useState('');
+  const [signals, setSignals] = useState<HeaderSignals | null>(null);
+  const [checking, setChecking] = useState(false);
+  const [error, setError] = useState('');
   const sitePresets = ['https://google.com', 'https://github.com', 'https://cloudflare.com'];
-  const check = () => {
-    if (!input.trim()) { setOutput('Please enter a URL'); return; }
-    setOutput(`HTTP Security Headers Analysis for ${input}
-
-⚠ Server-side check not available in browser
-Expected security headers for production sites:
-
-✓ Strict-Transport-Security (HSTS)
-  max-age=31536000; includeSubDomains
-✓ X-Content-Type-Options: nosniff
-✓ X-Frame-Options: DENY or SAMEORIGIN
-✓ Content-Security-Policy
-✓ Referrer-Policy
-✓ Permissions-Policy
-  X-XSS-Protection: 0 (deprecated)
-
-To check manually, run:
-  curl -sI ${input} | grep -i security
-  curl -sI ${input} | grep -i content-security`);
+  const check = async () => {
+    const raw = input.trim();
+    if (!raw) { setError('Enter a website URL.'); setSignals(null); return; }
+    let target = raw;
+    if (!/^https?:\/\//i.test(target)) target = 'https://' + target;
+    try {
+      const u = new URL(target);
+      if (!/^https?:$/.test(u.protocol)) throw new Error('bad protocol');
+      target = u.toString();
+    } catch {
+      setError('Enter a valid URL, e.g. https://example.com');
+      setSignals(null);
+      return;
+    }
+    setChecking(true);
+    setError('');
+    setSignals(null);
+    // Browsers hide security headers cross-origin (they aren't CORS-exposed),
+    // so what IS observable: reachability, the redirect chain (http→https
+    // upgrade = HSTS in action), status and content-type when the server
+    // permits. The header checklist below stays as a labeled reference.
+    const startedHttp = target.startsWith('http://');
+    try {
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 20000);
+      let status: number | null = null;
+      let contentType: string | null = null;
+      let finalUrl = target;
+      try {
+        const res = await fetch(target, { method: 'HEAD', signal: ctrl.signal });
+        status = res.status;
+        finalUrl = res.url || target;
+        contentType = res.headers.get('content-type');
+      } catch {
+        // CORS-blocked reads still prove reachability via a no-cors probe
+        // (opaque: no status/headers, but final URL after redirects).
+        const probe = await fetch(target, { method: 'HEAD', mode: 'no-cors', signal: ctrl.signal });
+        finalUrl = probe.url || target;
+      } finally {
+        clearTimeout(t);
+      }
+      setSignals({
+        input: target,
+        reachable: true,
+        finalUrl,
+        upgradedToHttps: startedHttp && finalUrl.startsWith('https://'),
+        status,
+        contentType,
+      });
+    } catch {
+      setError(`Unreachable from this browser — host down, TLS rejected, or timed out. For header truth: curl -sI ${target} | grep -iE 'strict|x-frame|content-security|referrer|permissions'`);
+    } finally {
+      setChecking(false);
+    }
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (output) { clipboardWrite(output).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
+  const copy = () => {
+    if (!signals) return;
+    clipboardWrite([
+      `URL: ${signals.input}`,
+      `Reachable: yes`,
+      `Final URL: ${signals.finalUrl}`,
+      signals.status !== null ? `Status: ${signals.status}` : null,
+      signals.contentType ? `Content-Type: ${signals.contentType}` : null,
+      signals.upgradedToHttps ? 'Upgraded http→https (HSTS-style redirect observed)' : null,
+    ].filter(Boolean).join('\n')).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } });
+  };
   return (
     <Section title="HTTP Security Headers Checker">
       <div className="flex flex-wrap gap-1.5 mb-3">
         {sitePresets.map(s => <button key={s} onClick={() => { setInput(s); }} className="px-2.5 py-1 text-xs rounded-lg bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500/20 border border-rose-500/20 transition-colors">{s.replace('https://', '')}</button>)}
       </div>
-      <Input label="Website URL" value={input} onChange={setInput} placeholder="https://example.com" />
-      <button onClick={check} className="px-5 py-2.5 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-sm font-medium transition-colors">Analyze Headers</button>
-      {output && (
-        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-rose-400">
-          <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)]">{output}</pre>
-          <button onClick={copy} className="mt-3 px-3 py-1.5 text-xs bg-rose-500 hover:bg-rose-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+      <Input label="Website URL" value={input} onChange={v => { setInput(v); setSignals(null); setError(''); }} placeholder="https://example.com" />
+      <button onClick={check} disabled={checking} className="px-5 py-2.5 bg-rose-500 hover:bg-rose-600 disabled:opacity-50 text-white rounded-xl text-sm font-medium transition-colors">{checking ? 'Analyzing…' : 'Analyze Headers'}</button>
+      {error && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-red-500/40">
+          <p className="text-sm text-[var(--text-primary)]">{error}</p>
+        </div>
+      )}
+      {signals && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-rose-400 space-y-2">
+          <div className="flex flex-wrap items-center gap-2 text-sm">
+            <span className="font-bold text-green-600 dark:text-green-400">✓ Reachable</span>
+            {signals.upgradedToHttps && <span className="px-2 py-0.5 text-xs font-bold rounded-lg bg-green-500/10 text-green-600 dark:text-green-400">http → https upgrade observed</span>}
+            <button onClick={copy} className="ml-auto px-3 py-1.5 text-xs bg-rose-500 hover:bg-rose-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <p className="text-xs font-mono text-[var(--text-secondary)] break-all">Final URL: {signals.finalUrl}</p>
+          {signals.status !== null && <p className="text-sm text-[var(--text-primary)]">Status: <strong className="font-mono">{signals.status}</strong></p>}
+          {signals.contentType && <p className="text-sm text-[var(--text-primary)]">Content-Type: <strong className="font-mono">{signals.contentType}</strong></p>}
+          <div className="pt-2 border-t border-[var(--border-subtle)]">
+            <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider mb-1.5">Reference — verify server-side (browsers can&apos;t read these cross-origin)</p>
+            <pre className="whitespace-pre-wrap text-xs font-mono text-[var(--text-muted)]">{`Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY or SAMEORIGIN
+Content-Security-Policy: (site-specific)
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: (minimal set)
+curl -sI ${signals.input} | grep -iE 'strict|x-frame|content-security|referrer|permissions'`}</pre>
+          </div>
         </div>
       )}
     </Section>
@@ -90,43 +167,80 @@ export function ContentSecurityPolicyGenerator() {
 export function CorsInspector() {
   const [origin, setOrigin] = useState('');
   const [methods, setMethods] = useState('');
-  const [output, setOutput] = useState('');
+  const [result, setResult] = useState<{ allowed: boolean; detail: string } | null>(null);
+  const [checking, setChecking] = useState(false);
+  const [error, setError] = useState('');
   const originPresets = ['https://example.com', 'https://app.toolzum.com', 'http://localhost:3000'];
-  const inspect = () => {
-    if (!origin.trim()) { setOutput('Please enter an origin URL'); return; }
-    const m = methods || 'GET, POST, PUT, DELETE, OPTIONS';
-    setOutput(`CORS Preflight Analysis for ${origin}
-
-⚠ Server-side CORS check not available in browser
-Expected preflight response for methods: ${m}
-
-Browser will send OPTIONS request with:
-  Origin: ${origin}
-  Access-Control-Request-Method: ${m.split(',')[0]!.trim()}
-
-Server should respond with:
-  Access-Control-Allow-Origin: ${origin} or *
-  Access-Control-Allow-Methods: ${m}
-  Access-Control-Allow-Headers: Content-Type, Authorization
-  Access-Control-Max-Age: 3600
-  Access-Control-Allow-Credentials: true/false
-
-To test manually:
-  curl -X OPTIONS -H "Origin: ${origin}" -H "Access-Control-Request-Method: GET" ${origin}`);
+  const inspect = async () => {
+    const target = origin.trim();
+    if (!target) { setError('Enter a URL to test.'); setResult(null); return; }
+    let url: URL;
+    try {
+      url = new URL(target);
+      if (!/^https?:$/.test(url.protocol)) throw new Error('bad protocol');
+    } catch {
+      setError('Enter a valid http(s) URL, e.g. https://api.example.com/data');
+      setResult(null);
+      return;
+    }
+    const m = (methods || 'GET, POST, PUT, DELETE, OPTIONS').split(',').map(s => s.trim().toUpperCase()).filter(Boolean);
+    setChecking(true);
+    setError('');
+    setResult(null);
+    try {
+      // A REAL preflight: the browser itself enforces CORS. If the fetch
+      // resolves, this origin is allowed; a TypeError means the browser
+      // blocked it (no ACAO match). Note the page's own origin is the
+      // request Origin — configure the server to allow toolzum.com to
+      // test other origins, or test same-origin endpoints directly.
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 15000);
+      try {
+        await fetch(url.toString(), {
+          method: m[0] === 'GET' ? 'GET' : 'OPTIONS',
+          signal: ctrl.signal,
+          headers: m[0] === 'GET' ? {} : { 'Access-Control-Request-Method': m[0]!, 'Access-Control-Request-Headers': 'content-type' },
+        });
+        setResult({
+          allowed: true,
+          detail: `This browser reached ${url.host} for ${m[0]} — the server's CORS policy allows this page's origin. Exact allow-lists (which origins/methods/headers) are only visible server-side; confirm with: curl -X OPTIONS -H "Origin: ${url.origin}" -H "Access-Control-Request-Method: ${m[0]}" ${url.toString()}`,
+        });
+      } finally {
+        clearTimeout(t);
+      }
+    } catch {
+      setResult({
+        allowed: false,
+        detail: `Blocked: the browser refused the ${m[0]} request to ${url.host} (no matching Access-Control-Allow-Origin for this page). The server must return Access-Control-Allow-Origin covering this origin. Verify server-side: curl -X OPTIONS -H "Origin: ${url.origin}" ${url.toString()} -i`,
+      });
+    } finally {
+      setChecking(false);
+    }
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (output) { clipboardWrite(output).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
+  const copy = () => {
+    if (!result) return;
+    clipboardWrite(result.detail).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } });
+  };
   return (
     <Section title="CORS Inspector">
       <div className="flex flex-wrap gap-1.5 mb-3">
         {originPresets.map(o => <button key={o} onClick={() => { setOrigin(o); }} className="px-2.5 py-1 text-xs rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] hover:bg-[var(--accent)]/20 border border-[var(--accent)]/20 transition-colors">{o}</button>)}
       </div>
-      <Input label="Origin URL" value={origin} onChange={setOrigin} placeholder="https://example.com" />
+      <Input label="Endpoint URL" value={origin} onChange={v => { setOrigin(v); setResult(null); setError(''); }} placeholder="https://api.example.com/data" />
       <Input label="Methods (comma separated)" value={methods} onChange={setMethods} placeholder="GET, POST, PUT" />
-      <button onClick={inspect} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-xl text-sm font-medium transition-colors">Inspect</button>
-      {output && (
-        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-[var(--accent)]">
-          <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)]">{output}</pre>
+      <button onClick={inspect} disabled={checking} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] disabled:opacity-50 text-white rounded-xl text-sm font-medium transition-colors">{checking ? 'Testing…' : 'Inspect'}</button>
+      {error && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-red-500/40">
+          <p className="text-sm text-[var(--text-primary)]">{error}</p>
+        </div>
+      )}
+      {result && (
+        <div className={`mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 ${result.allowed ? 'border-green-500/50' : 'border-red-500/40'}`}>
+          <p className={`text-sm font-bold mb-2 ${result.allowed ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+            {result.allowed ? '✓ Cross-origin request allowed' : '✕ Cross-origin request blocked'}
+          </p>
+          <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)]">{result.detail}</pre>
           <button onClick={copy} className="mt-3 px-3 py-1.5 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
         </div>
       )}
@@ -183,43 +297,109 @@ ${outOrigin !== '*' ? '' : '# Warning: Wildcard origin with credentials=false'}`
 }
 
 
+interface CveResult {
+  id: string;
+  summary: string;
+  severity: string;
+  published: string;
+  references: string[];
+}
+
 export function CveLookup() {
   const [cveId, setCveId] = useState('');
-  const [output, setOutput] = useState('');
+  const [result, setResult] = useState<CveResult | null>(null);
+  const [looking, setLooking] = useState(false);
+  const [error, setError] = useState('');
   const cvePresets = ['CVE-2024-21626', 'CVE-2023-44487', 'CVE-2024-27198'];
-  const lookup = () => {
-    if (!cveId.trim()) { setOutput('Please enter a CVE ID'); return; }
+  const lookup = async () => {
     const id = cveId.trim().toUpperCase();
-    setOutput(`CVE Lookup: ${id}
-
-⚠ Server-side API access not available in browser
-
-For real CVE lookup, visit:
-• https://nvd.nist.gov/vuln/detail/${id}
-• https://cve.mitre.org/cgi-bin/cvename.cgi?name=${id}
-• https://www.cvedetails.com/cve/${id}/
-
-CVE format: CVE-YYYY-NNNNN
-• Prefix: CVE
-• Year: Publication year
-• Sequence: 4+ digit identifier
-
-To check from CLI:
-  curl -s "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=${id}" | jq .`);
+    if (!/^CVE-\d{4}-\d{4,}$/.test(id)) {
+      setError('Enter a valid CVE ID, e.g. CVE-2024-12345');
+      setResult(null);
+      return;
+    }
+    setLooking(true);
+    setError('');
+    setResult(null);
+    try {
+      // Real lookup via OSV (Google's open vulnerability DB, browser-friendly,
+      // no key). Falls back to link-outs when OSV lacks the record.
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 15000);
+      let data: unknown;
+      try {
+        const res = await fetch(`https://api.osv.dev/v1/vulns/${encodeURIComponent(id)}`, { signal: ctrl.signal });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        data = await res.json();
+      } finally {
+        clearTimeout(t);
+      }
+      const v = (data || {}) as {
+        summary?: string; details?: string; published?: string;
+        severity?: { type?: string; score?: string }[];
+        references?: { url?: string }[];
+      };
+      if (!v.summary && !v.details) throw new Error('not found');
+      const sev = v.severity?.find(s => s.type === 'CVSS_V3' || s.type === 'CVSS_V2')?.score
+        || v.severity?.[0]?.score || 'unscored';
+      setResult({
+        id,
+        summary: v.summary || v.details || '',
+        severity: sev,
+        published: (v.published || '').slice(0, 10),
+        references: (v.references || []).map(r => r.url || '').filter(Boolean).slice(0, 8),
+      });
+    } catch {
+      setError(`No OSV record for ${id} — it may be too new, reserved, or rejected. Check the authoritative sources directly.`);
+    } finally {
+      setLooking(false);
+    }
   };
+  const id = cveId.trim().toUpperCase();
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (output) { clipboardWrite(output).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
+  const copy = () => {
+    if (!result) return;
+    clipboardWrite(`${result.id}\nSeverity: ${result.severity}\nPublished: ${result.published}\n\n${result.summary}`).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } });
+  };
   return (
     <Section title="CVE Lookup">
       <div className="flex flex-wrap gap-1.5 mb-3">
         {cvePresets.map(c => <button key={c} onClick={() => { setCveId(c); }} className="px-2.5 py-1 text-xs rounded-lg bg-red-500/10 text-red-600 dark:text-red-400 hover:bg-red-500/20 border border-red-500/20 transition-colors">{c}</button>)}
       </div>
-      <Input label="CVE ID" value={cveId} onChange={v => { setCveId(v); setOutput(''); }} placeholder="CVE-2024-12345" />
-      <button onClick={lookup} className="px-5 py-2.5 bg-red-500 hover:bg-red-600 text-white rounded-xl text-sm font-medium transition-colors">Lookup</button>
-      {output && (
-        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-red-400">
-          <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)]">{output}</pre>
-          <button onClick={copy} className="mt-3 px-3 py-1.5 text-xs bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+      <Input label="CVE ID" value={cveId} onChange={v => { setCveId(v); setResult(null); setError(''); }} placeholder="CVE-2024-12345" />
+      <button onClick={lookup} disabled={looking} className="px-5 py-2.5 bg-red-500 hover:bg-red-600 disabled:opacity-50 text-white rounded-xl text-sm font-medium transition-colors">{looking ? 'Looking up…' : 'Lookup'}</button>
+      {error && id && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-red-400 space-y-2">
+          <p className="text-sm text-[var(--text-primary)]">{error}</p>
+          <div className="flex flex-wrap gap-2 text-xs">
+            {[`https://nvd.nist.gov/vuln/detail/${id}`, `https://cve.mitre.org/cgi-bin/cvename.cgi?name=${id}`].map(u => (
+              <a key={u} href={u} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-lg bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--accent)] hover:underline">{new URL(u).hostname}</a>
+            ))}
+          </div>
+        </div>
+      )}
+      {error && !id && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-red-500/40">
+          <p className="text-sm text-[var(--text-primary)]">{error}</p>
+        </div>
+      )}
+      {result && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-red-400 space-y-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="text-sm font-bold font-mono text-[var(--text-primary)]">{result.id}</p>
+            <span className="px-2 py-0.5 text-xs font-bold rounded-lg bg-red-500/10 text-red-600 dark:text-red-400">{result.severity}</span>
+            {result.published && <span className="text-xs text-[var(--text-muted)]">{result.published}</span>}
+            <button onClick={copy} className="ml-auto px-3 py-1.5 text-xs bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <p className="text-sm text-[var(--text-secondary)] whitespace-pre-wrap">{result.summary}</p>
+          {result.references.length > 0 && (
+            <div className="flex flex-wrap gap-2 pt-1">
+              {result.references.map(u => (
+                <a key={u} href={u} target="_blank" rel="noopener noreferrer" className="text-xs text-[var(--accent)] hover:underline break-all">{u}</a>
+              ))}
+            </div>
+          )}
+          <p className="text-xs text-[var(--text-muted)]">Source: OSV.dev. For NVD enrichment (CPE, CVSS vector): nvd.nist.gov/vuln/detail/{result.id}</p>
         </div>
       )}
     </Section>

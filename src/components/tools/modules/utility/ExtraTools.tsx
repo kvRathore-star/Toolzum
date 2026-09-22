@@ -266,21 +266,47 @@ export function HoursToMinutesConverter() {
 export function ParquetToCsvConverter() {
   const [file, setFile] = useState<File | null>(null);
   const [csv, setCsv] = useState<string | null>(null);
+  const [rowCount, setRowCount] = useState(0);
+  const [truncated, setTruncated] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleFileSelect = (f: File) => {
     setFile(f);
     setCsv(null);
+    setTruncated(false);
   };
 
   const convert = async () => {
     if (!file) return;
     setIsProcessing(true);
     try {
-      // parquet-wasm API is complex - for now show informative message
-      setCsv('Parquet to CSV conversion requires server-side processing due to complex Arrow format handling. This is a client-side limitation. Use a server-based tool or Python (pandas/pyarrow) for Parquet conversion.');
+      // Real client-side Parquet reading (hyparquet, no wasm needed) +
+      // papaparse for CSV output. Complex/nested values are JSON-encoded;
+      // BigInts stringified (CSV has no 64-bit integers).
+      const { parquetReadObjects } = await import('hyparquet');
+      const { default: Papa } = await import('papaparse');
+      const rows = await parquetReadObjects({ file }) as Record<string, unknown>[];
+      const MAX_ROWS = 50000;
+      const slice = rows.slice(0, MAX_ROWS);
+      setTruncated(rows.length > MAX_ROWS);
+      setRowCount(rows.length);
+      const flat = slice.map((row) => {
+        const out: Record<string, string> = {};
+        for (const [k, v] of Object.entries(row ?? {})) {
+          if (typeof v === 'bigint') out[k] = v.toString();
+          else if (v instanceof Uint8Array) out[k] = new TextDecoder().decode(v);
+          else if (v !== null && typeof v === 'object') out[k] = JSON.stringify(v);
+          else out[k] = String(v ?? '');
+        }
+        return out;
+      });
+      setCsv(Papa.unparse(flat));
+      toast.success(`Converted ${Math.min(rows.length, MAX_ROWS).toLocaleString()} rows${rows.length > MAX_ROWS ? ' (capped at 50k)' : ''}.`);
     } catch (err) {
-      setCsv('Error: ' + (err instanceof Error ? err.message : 'Failed to process Parquet'));
+      setCsv(null);
+      toast.error(err instanceof Error && /magic|parquet|footer/i.test(err.message)
+        ? 'Not a valid Parquet file — check the file and retry.'
+        : 'Failed to process Parquet — the file may use unsupported encodings.');
     } finally {
       setIsProcessing(false);
     }
@@ -288,7 +314,7 @@ export function ParquetToCsvConverter() {
 
   return (
     <Section title="Parquet to CSV Converter">
-      <p className="text-sm text-[var(--text-secondary)] mb-4">Convert Parquet files to CSV format. Runs entirely in your browser using parquet-wasm.</p>
+      <p className="text-sm text-[var(--text-secondary)] mb-4">Convert Parquet files to CSV format. Runs entirely in your browser — nothing is uploaded{rowCount > 0 && ` · ${rowCount.toLocaleString()} rows read`}.</p>
       <FileUploader 
         accept=".parquet" 
         onFileSelect={handleFileSelect} 
@@ -305,9 +331,9 @@ export function ParquetToCsvConverter() {
       )}
       {csv && (
         <div className="mt-4">
-          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">CSV Output</label>
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">CSV Output{truncated && ' (first 50,000 rows)'}</label>
           <div className="relative">
-            <pre className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] overflow-x-auto whitespace-pre-wrap max-h-60">{csv}</pre>
+            <pre className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] overflow-x-auto whitespace-pre-wrap max-h-60">{csv.slice(0, 20000)}{csv.length > 20000 ? '\n…preview truncated — download for the full CSV' : ''}</pre>
             <button onClick={() => downloadOrShare(csv, 'converted.csv')} className="absolute top-2 right-2 px-3 py-1 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors">Download</button>
           </div>
         </div>

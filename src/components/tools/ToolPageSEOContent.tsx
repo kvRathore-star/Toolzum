@@ -512,13 +512,18 @@ export const categoryFaqTemplates: Record<string, ((tool: ToolMetadata) => { que
     { question: `Is my audio data private?`, answer: `Yes. All audio processing happens locally in your browser using WebAssembly. No data is transmitted.` },
     { question: `How long does processing take?`, answer: `Most audio operations complete in seconds. Longer files or complex operations may take a bit longer.` },
   ],
-  "Developer": (tool) => [
-    { question: `What does ${tool.name} do?`, answer: `${tool.description} All processing runs locally — no code is sent to any server.` },
-    { question: `What programming languages are supported?`, answer: `Tools cover JavaScript, CSS, HTML, SQL, Python, JSON, XML, CSV, and more. Check the tool description for specifics.` },
-    { question: `Can I process large code files?`, answer: `Yes. Since processing is local, performance depends on your device. Most operations handle large files without issue.` },
-    { question: `Do the tools follow standard conventions?`, answer: `Yes. Formatters use well-known libraries (sql-formatter, Prettier-compatible patterns) and follow widely adopted rules.` },
-    { question: `Can I use ${tool.name} offline?`, answer: `Yes. All developer tools work fully offline after the initial page load.` },
-  ],
+  "Developer": (tool) => {
+    // Network-dependent tools (DNS, CVE, cert, header lookups) query public
+    // third-party APIs — the offline/local claims below would lie for them.
+    const needsNet = requiresCloudApi(tool.dependencies || '');
+    return [
+      { question: `What does ${tool.name} do?`, answer: needsNet ? `${tool.description} Lookups run from your browser against public APIs.` : `${tool.description} All processing runs locally — no code is sent to any server.` },
+      { question: `What programming languages are supported?`, answer: `Tools cover JavaScript, CSS, HTML, SQL, Python, JSON, XML, CSV, and more. Check the tool description for specifics.` },
+      { question: `Can I process large code files?`, answer: `Yes. Since processing is local, performance depends on your device. Most operations handle large files without issue.` },
+      { question: `Do the tools follow standard conventions?`, answer: `Yes. Formatters use well-known libraries (sql-formatter, Prettier-compatible patterns) and follow widely adopted rules.` },
+      { question: `Can I use ${tool.name} offline?`, answer: needsNet ? `No — this tool queries live public APIs (DNS, certificate, vulnerability data), so it needs an internet connection. The page itself loads offline, but lookups won't run.` : `Yes. All developer tools work fully offline after the initial page load.` },
+    ];
+  },
   "Text": (tool) => [
     { question: `What does ${tool.name} do?`, answer: `${tool.description} All processing runs locally in your browser.` },
     { question: `Will my text be saved or shared?`, answer: `No. Your text stays on your device and is never sent to any server.` },
