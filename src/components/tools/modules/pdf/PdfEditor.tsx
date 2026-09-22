@@ -8,7 +8,7 @@ import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2,
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from '@/lib/clipboard';
-import { inputCls, labelCls } from '../../Calculators.shared';
+import { inputCls, labelCls } from '../Calculators.shared';
 import { useAiProvider } from '@/hooks/useAiProvider';
 import { useProStatus } from '@/hooks/useProStatus';
 import { useSession } from '@/lib/auth-client';
