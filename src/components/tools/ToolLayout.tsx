@@ -5,7 +5,7 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { GlobalErrorBoundary } from '../GlobalErrorBoundary';
 import { CategorySidebar, type SidebarGroup } from './CategorySidebar';
-import { ChevronRight, Shield, Zap, Info, ArrowLeft, Sparkles } from 'lucide-react';
+import { ChevronRight, Shield, Zap, Info, ArrowLeft, Sparkles, LayoutGrid } from 'lucide-react';
 import type { RelatedTool, ToolMetadata } from '@/registry/tools';
 import { PerToolBadge } from '@/components/privacy-claims';
 import { useSession } from '@/lib/auth-client';
@@ -106,6 +106,24 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
   const isAnonResolved = !isPending && !sessionData?.user;
   const isLocked = isPro && isAnonResolved;
   const displayCategory = category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  // Layout option: sidebar rail vs classic wide. Persisted per browser;
+  // defaults to the rail. Pure presentation — same content, same URLs.
+  const [rail, setRail] = useState<boolean>(() => {
+    try {
+      return window.localStorage.getItem('toolzum:sidebar') !== 'off';
+    } catch {
+      return true;
+    }
+  });
+  const showRail = rail && !!sidebarGroups && sidebarGroups.length > 0;
+  const toggleRail = () => {
+    setRail((r) => {
+      try {
+        window.localStorage.setItem('toolzum:sidebar', r ? 'off' : 'on');
+      } catch { /* private mode */ }
+      return !r;
+    });
+  };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -194,10 +212,10 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
         
         <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[var(--accent-ink)]/5 blur-[120px] rounded-full pointer-events-none hidden sm:block" />
 
-        <div className={`${sidebarGroups && sidebarGroups.length > 0 ? 'max-w-[1240px]' : 'max-w-[960px]'} mx-auto py-10 sm:py-14 lg:py-16 px-4 sm:px-8 md:px-10 relative z-10 flex flex-col items-center text-center`}>
-          
-          {/* Back link */}
-          <div className="w-full flex justify-start mb-4">
+        <div className={`${showRail ? 'max-w-[1240px]' : 'max-w-[960px]'} mx-auto py-10 sm:py-14 lg:py-16 px-4 sm:px-8 md:px-10 relative z-10 flex flex-col items-center text-center`}>
+
+          {/* Back link + layout option */}
+          <div className="w-full flex justify-between items-center mb-4">
             <Link
               href={`/${category}`}
               className="inline-flex items-center gap-1.5 text-[11px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors uppercase tracking-wider"
@@ -205,6 +223,18 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
               <ArrowLeft className="w-3 h-3" />
               Back to {displayCategory}
             </Link>
+            {sidebarGroups && sidebarGroups.length > 0 && (
+              <button
+                onClick={toggleRail}
+                aria-pressed={showRail}
+                aria-label={showRail ? 'Switch to wide layout without sidebar' : 'Switch to sidebar layout'}
+                title={showRail ? 'Wide view' : 'Sidebar view'}
+                className="inline-flex items-center gap-1.5 text-[11px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors uppercase tracking-wider"
+              >
+                <LayoutGrid className="w-3 h-3" />
+                {showRail ? 'Wide' : 'Sidebar'}
+              </button>
+            )}
           </div>
 
           {/* Breadcrumb */}
@@ -272,13 +302,13 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
           {/* Tool + sidebar: rail on xl, drawer on mobile. Without groups
               the layout is byte-identical to before (no sidebar rendered). */}
           <div className="w-full xl:flex xl:items-start xl:gap-6 xl:text-left">
-            {sidebarGroups && sidebarGroups.length > 0 && (
+            {showRail && (
               <CategorySidebar
                 categoryName={displayCategory}
                 categoryHref={`/${category}`}
-                totalCount={sidebarGroups.reduce((n, g) => n + g.tools.length, 0)}
+                totalCount={(sidebarGroups || []).reduce((n, g) => n + g.tools.length, 0)}
                 currentSlug={slug}
-                groups={sidebarGroups}
+                groups={sidebarGroups || []}
               />
             )}
             <div className="min-w-0 flex-1">

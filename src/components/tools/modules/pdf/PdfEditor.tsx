@@ -86,6 +86,8 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.j
 
 const RENDER_SCALE = 1.5;
 const MAX_FILE_BYTES = 100 * 1024 * 1024;
+const MAX_PAGES = 300;
+const THUMB_INITIAL = 60;
 const HIGHLIGHT_COLORS = ['#ffff00', '#00ff00', '#00ccff', '#ff99cc', '#ff9900'];
 const INK_COLORS = ['#000000', '#1a56db', '#c81e1e', '#047857'];
 
@@ -130,7 +132,10 @@ export default function PdfEditor() {
   const [shapeVariant, setShapeVariant] = useState<'rect' | 'ellipse' | 'line' | 'arrow'>('rect');
   const [exporting, setExporting] = useState(false);
   const [showSignPad, setShowSignPad] = useState(false);
-  const [thumbUrls, setThumbUrls] = useState<string[]>([]);
+  // Thumbnails: first window immediately, rest idle (a 300-page doc would
+  // jank for seconds rendering all at once). Nulls stay as placeholders so
+  // indexes always match page numbers.
+  const [thumbUrls, setThumbUrls] = useState<(string | null)[]>([]);
   const [aiWorking, setAiWorking] = useState(false);
   const isPro = useProStatus();
   const [ocrWords, setOcrWords] = useState<{ text: string; x: number; y: number; size: number; conf: number }[]>([]);
@@ -159,9 +164,15 @@ export default function PdfEditor() {
       toast.error('File exceeds the 100 MB limit — compress or split it first.');
       return;
     }
+    const toastId = toast.loading('Opening PDF…');
     try {
       const bytes = new Uint8Array(await f.arrayBuffer());
       const doc = await pdfjsLib.getDocument({ data: bytes.slice() }).promise;
+      if (doc.numPages > MAX_PAGES) {
+        toast.error(`This PDF has ${doc.numPages} pages (limit ${MAX_PAGES}) — split it first, then edit in parts.`, { id: toastId });
+        try { await doc.destroy(); } catch { /* ignore */ }
+        return;
+      }
       setFile(f);
       setFileBytes(bytes);
       setPdfDoc(doc);
@@ -169,9 +180,9 @@ export default function PdfEditor() {
       setPage(1);
       setAnnos({});
       setSelected(null);
-      toast.success(`${doc.numPages}-page PDF loaded — everything stays in your browser.`);
+      toast.success(`${doc.numPages}-page PDF loaded — everything stays in your browser.`, { id: toastId });
     } catch {
-      toast.error('Could not open this PDF — it may be encrypted or corrupted.');
+      toast.error('Could not open this PDF — it may be encrypted or corrupted.', { id: toastId });
     }
   };
 
@@ -202,23 +213,39 @@ export default function PdfEditor() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pdfDoc, page, scale]);
 
-  // Thumbnails once per document.
+  // Thumbnails: first window immediately, rest idle (a 300-page doc would
+  // jank for seconds rendering all at once).
   useEffect(() => {
     if (!pdfDoc) return;
     let cancelled = false;
-    (async () => {
-      const urls: string[] = [];
-      for (let n = 1; n <= pdfDoc.numPages; n++) {
-        if (cancelled) break;
+    const renderThumb = async (n: number): Promise<string | null> => {
+      try {
         const pg = await pdfDoc.getPage(n);
         const vp = pg.getViewport({ scale: 0.22 });
         const c = document.createElement('canvas');
         c.width = Math.floor(vp.width);
         c.height = Math.floor(vp.height);
         await pg.render({ canvasContext: c.getContext('2d')!, viewport: vp }).promise;
-        urls.push(c.toDataURL('image/jpeg', 0.6));
+        return c.toDataURL('image/jpeg', 0.6);
+      } catch {
+        return null;
+      }
+    };
+    (async () => {
+      const urls: (string | null)[] = [];
+      const first = Math.min(pdfDoc.numPages, THUMB_INITIAL);
+      for (let n = 1; n <= first; n++) {
+        if (cancelled) break;
+        urls.push(await renderThumb(n));
       }
       if (!cancelled) setThumbUrls(urls);
+      for (let n = first + 1; n <= pdfDoc.numPages; n++) {
+        if (cancelled) break;
+        await new Promise((r) => setTimeout(r, 0));
+        const u = await renderThumb(n);
+        if (cancelled) break;
+        setThumbUrls((prev) => (prev.length >= n ? prev : [...prev, u]));
+      }
     })();
     return () => { cancelled = true; };
   }, [pdfDoc]);
@@ -1069,7 +1096,7 @@ export default function PdfEditor() {
             Free, no signup, no watermark. Everything runs in your browser — your file is never uploaded.
             Edits are additions on top of the original; existing text can&apos;t be retyped.
           </p>
-          <FileUploader accept=".pdf,application/pdf" onFileSelect={loadFile} title="Open a PDF to edit" subtitle="Up to 100 MB · encrypted PDFs need unlocking first" />
+          <FileUploader accept=".pdf,application/pdf" freeMaxSizeMB={30} maxSizeMB={100} onFileSelect={loadFile} title="Open a PDF to edit" subtitle="Up to 30 MB free · 100 MB signed in · 300 pages max" />
         </div>
       </div>
     );
@@ -1403,8 +1430,12 @@ export default function PdfEditor() {
           <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Pages</p>
           {thumbUrls.map((u, i) => (
             <button key={i} onClick={() => goPage(i + 1)} aria-label={`Go to page ${i + 1}`} aria-current={page === i + 1} className={`relative block w-full rounded-lg overflow-hidden border-2 ${page === i + 1 ? 'border-[var(--accent)]' : 'border-transparent'}`}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={u} alt={`Page ${i + 1}`} className="w-full" />
+              {u ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={u} alt={`Page ${i + 1}`} className="w-full" />
+              ) : (
+                <span className="flex items-center justify-center w-full h-16 bg-[var(--bg-overlay)] text-xs font-mono text-[var(--text-muted)]">…</span>
+              )}
               {(annos[i + 1] || []).length > 0 && (
                 <span className="absolute top-1 right-1 px-1.5 py-0.5 text-[10px] font-bold rounded-full bg-[var(--accent-ink)] text-white">{(annos[i + 1] || []).length}</span>
               )}
