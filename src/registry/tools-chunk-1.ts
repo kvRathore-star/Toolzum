@@ -427,7 +427,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: 'pdf-lib',
     instructions: [
       { title: "1. Open a PDF", desc: "Drop in any PDF up to 100 MB. Encrypted files need unlocking first — the editor refuses them honestly rather than failing mid-export." },
-      { title: "2. Pick a tool and click the page", desc: "Text places editable boxes, Retype covers existing text for retyping, Highlight and Cover-up drag over areas, Draw is freehand, Shapes add rectangles/ellipses/arrows, Image stamps a PNG/JPG, Sign draws a signature to place." },
+      { title: "2. Pick a tool and click the page", desc: "Text places editable boxes, Retype covers existing text for retyping, Highlight and Cover-up drag over areas, Draw is freehand, Shapes add rectangles/ellipses/arrows, Image stamps a PNG/JPG, Sign draws a signature to place. Find & replace runs from the left panel." },
       { title: "3. Edit and undo freely", desc: "Click a text box to retype it in the left panel. Undo removes the last annotation; the bin icon deletes the selected one. Zoom to 200% for fine work." },
       { title: "4. OCR scans, AI summaries, download", desc: "Scanned pages: run OCR, then click recognized words to insert them as text. Signed-in users can AI-summarize or grammar-fix a page for 1 credit. Download burns everything into a clean PDF." },
     ],

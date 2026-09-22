@@ -137,6 +137,10 @@ export default function PdfEditor() {
   const [ocrRunning, setOcrRunning] = useState(false);
   const [ocrProgress, setOcrProgress] = useState(0);
   const [ocrLang, setOcrLang] = useState('eng');
+  const [findText, setFindText] = useState('');
+  const [replaceText, setReplaceText] = useState('');
+  const [replaceScope, setReplaceScope] = useState<'page' | 'all'>('page');
+  const [replacing, setReplacing] = useState(false);
   const ocrWorkerRef = useRef<{ recognize: (img: string) => Promise<{ data: { words?: { text: string; confidence: number; bbox: { x0: number; y0: number; x1: number; y1: number } }[] } }> } | null>(null);
   const { generateCompletion } = useAiProvider();
   const { data: session } = useSession();
@@ -714,6 +718,55 @@ export default function PdfEditor() {
     }
   };
 
+  // Find & replace: substring match (case-insensitive) against text-layer
+  // items, cover each hit with white and retypeset the replacement at the
+  // same position/size in Helvetica. Same honesty as Retype: matched layout,
+  // not original fonts. Page scope or whole document.
+  const findReplace = async () => {
+    const needle = findText.trim();
+    if (needle.length < 2) {
+      toast.error('Enter at least 2 characters to find.');
+      return;
+    }
+    if (!pdfDoc) return;
+    setReplacing(true);
+    try {
+      const pages = replaceScope === 'all'
+        ? Array.from({ length: pageCount }, (_, i) => i + 1)
+        : [page];
+      const needleLower = needle.toLowerCase();
+      let total = 0;
+      const hitsByPage: Record<number, { x: number; yTop: number; w: number; size: number; bold: boolean }[]> = {};
+      for (const pg of pages) {
+        const items = await ensureTextLayer(pg);
+        hitsByPage[pg] = items.filter((it) => it.str.toLowerCase().includes(needleLower));
+      }
+      setAnnos((prev) => {
+        const next = { ...prev };
+        for (const pg of pages) {
+          const hits = hitsByPage[pg] || [];
+          if (hits.length === 0) continue;
+          total += hits.length;
+          next[pg] = [
+            ...(next[pg] || []),
+            ...hits.flatMap((h) => ([
+              { kind: 'whiteout', x: h.x - 2, y: h.yTop - 2, w: h.w + 4, h: h.size + 5, color: '#ffffff' },
+              { kind: 'text', x: h.x, y: h.yTop + h.size * 0.85, text: replaceText, size: Math.round(h.size), color: '#000000', bold: h.bold },
+            ] as Anno[])),
+          ];
+        }
+        return next;
+      });
+      toast.success(total > 0
+        ? `Replaced ${total} match${total === 1 ? '' : 'es'}${replaceScope === 'all' ? ' across the document' : ''} — Helvetica retypeset, verify placement.`
+        : `No matches for “${needle}”.`);
+    } catch {
+      toast.error('Could not read the text layer — scanned pages need OCR first.');
+    } finally {
+      setReplacing(false);
+    }
+  };
+
   const undo = () => {
     const list = annos[page] || [];
     if (list.length === 0) return;
@@ -1274,8 +1327,7 @@ export default function PdfEditor() {
               />
             </div>
           )}
-          {selAnno?.kind === 'note' && selected && (
-            <div className="pt-2 border-t border-[var(--border-subtle)] space-y-2">
+          {selAnno?.kind === 'note' && selected && (            <div className="pt-2 border-t border-[var(--border-subtle)] space-y-2">
               <span className={labelCls}>Edit note</span>
               <textarea
                 value={selAnno.text}
@@ -1293,6 +1345,34 @@ export default function PdfEditor() {
               />
             </div>
           )}
+          <div className="pt-2 border-t border-[var(--border-subtle)] space-y-2">
+            <span className={labelCls}>Find & replace</span>
+            <input
+              value={findText}
+              onChange={(e) => setFindText(e.target.value)}
+              placeholder="Find text"
+              className={inputCls}
+              aria-label="Text to find"
+            />
+            <input
+              value={replaceText}
+              onChange={(e) => setReplaceText(e.target.value)}
+              placeholder="Replace with"
+              className={inputCls}
+              aria-label="Replacement text"
+            />
+            <div className="flex gap-1.5" role="group" aria-label="Replace scope">
+              {(['page', 'all'] as const).map((s) => (
+                <button key={s} onClick={() => setReplaceScope(s)} aria-pressed={replaceScope === s} className={`flex-1 px-2 py-1.5 rounded-lg text-xs font-bold border ${replaceScope === s ? 'bg-[var(--accent-ink)] text-white border-transparent' : 'border-[var(--border-subtle)]'}`}>
+                  {s === 'page' ? 'This page' : 'All pages'}
+                </button>
+              ))}
+            </div>
+            <button onClick={findReplace} disabled={replacing} className="w-full px-3 py-2 rounded-xl bg-[var(--accent-ink)] text-white text-xs font-bold disabled:opacity-50">
+              {replacing ? 'Replacing…' : 'Replace all'}
+            </button>
+            <p className="text-[11px] text-[var(--text-muted)]">Case-insensitive match; retypeset in Helvetica at matched size.</p>
+          </div>
         </div>
 
         <div className="lg:col-span-8 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 overflow-auto">
