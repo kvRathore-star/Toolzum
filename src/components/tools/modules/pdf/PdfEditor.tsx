@@ -159,21 +159,16 @@ export default function PdfEditor() {
   const imagePickRef = useRef<HTMLInputElement>(null);
   const pendingImageRef = useRef<string | null>(null);
 
-  const loadFile = async (f: File) => {
-    if (f.size > MAX_FILE_BYTES) {
-      toast.error('File exceeds the 100 MB limit — compress or split it first.');
-      return;
-    }
+  const openBytes = async (bytes: Uint8Array, name: string) => {
     const toastId = toast.loading('Opening PDF…');
     try {
-      const bytes = new Uint8Array(await f.arrayBuffer());
       const doc = await pdfjsLib.getDocument({ data: bytes.slice() }).promise;
       if (doc.numPages > MAX_PAGES) {
         toast.error(`This PDF has ${doc.numPages} pages (limit ${MAX_PAGES}) — split it first, then edit in parts.`, { id: toastId });
         try { await doc.destroy(); } catch { /* ignore */ }
         return;
       }
-      setFile(f);
+      setFile(new File([bytes as unknown as BlobPart], name, { type: 'application/pdf' }));
       setFileBytes(bytes);
       setPdfDoc(doc);
       setPageCount(doc.numPages);
@@ -183,6 +178,27 @@ export default function PdfEditor() {
       toast.success(`${doc.numPages}-page PDF loaded — everything stays in your browser.`, { id: toastId });
     } catch {
       toast.error('Could not open this PDF — it may be encrypted or corrupted.', { id: toastId });
+    }
+  };
+
+  const loadFile = async (f: File) => {
+    if (f.size > MAX_FILE_BYTES) {
+      toast.error('File exceeds the 100 MB limit — compress or split it first.');
+      return;
+    }
+    await openBytes(new Uint8Array(await f.arrayBuffer()), f.name);
+  };
+
+  // Blank document: brand-new A4/Letter PDF built locally — no upload needed.
+  const newBlankDoc = async (size: 'a4' | 'letter') => {
+    try {
+      const { PDFDocument: Lib } = await import('pdf-lib');
+      const doc = await Lib.create();
+      doc.addPage(size === 'a4' ? [595.28, 841.89] : [612, 792]);
+      const bytes = new Uint8Array(await doc.save());
+      await openBytes(bytes, size === 'a4' ? 'blank-a4.pdf' : 'blank-letter.pdf');
+    } catch {
+      toast.error('Could not create a blank document.');
     }
   };
 
@@ -1097,6 +1113,19 @@ export default function PdfEditor() {
             Edits are additions on top of the original; existing text can&apos;t be retyped.
           </p>
           <FileUploader accept=".pdf,application/pdf" freeMaxSizeMB={30} maxSizeMB={100} onFileSelect={loadFile} title="Open a PDF to edit" subtitle="Up to 30 MB free · 100 MB signed in · 300 pages max" />
+          <div className="flex items-center gap-3">
+            <span className="h-px flex-1 bg-[var(--border-subtle)]" />
+            <span className="text-xs text-[var(--text-muted)]">or start blank</span>
+            <span className="h-px flex-1 bg-[var(--border-subtle)]" />
+          </div>
+          <div className="flex justify-center gap-2">
+            <button onClick={() => newBlankDoc('a4')} className="px-5 py-2.5 rounded-xl border border-[var(--border-subtle)] text-sm font-bold hover:bg-[var(--bg-overlay)] transition-colors">
+              New blank A4
+            </button>
+            <button onClick={() => newBlankDoc('letter')} className="px-5 py-2.5 rounded-xl border border-[var(--border-subtle)] text-sm font-bold hover:bg-[var(--bg-overlay)] transition-colors">
+              New blank Letter
+            </button>
+          </div>
         </div>
       </div>
     );
