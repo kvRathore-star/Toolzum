@@ -30,6 +30,11 @@ import { checkRateLimit, recordRateLimit } from './rate-limit';
 import { createAuth } from '../../src/lib/auth';
 import { effectivePlanForUser } from '../../src/lib/planTiers';
 import { sendEmail } from '../../src/lib/email';
+import {
+  SITEMAP_URLS_PER_FILE,
+  sitemapFileCount,
+  buildSitemapIndexXml,
+} from '../../src/lib/sitemapIndex';
 
 function escapeXml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
@@ -64,6 +69,29 @@ function generateXML(pages: CrawledPage[], baseUrl: string): string {
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 ${urls}
 </urlset>`;
+}
+
+/**
+ * Chunked XML output for the complete event. `xml` stays the single-file
+ * document (existing consumers: copy button, email notification); `xmlFiles`
+ * partitions the same healthy URLs into SITEMAP_URLS_PER_FILE chunks and
+ * `xmlIndex` points at them (null when one file suffices).
+ */
+function buildXmlOutput(pages: CrawledPage[], baseUrl: string): {
+  xml: string;
+  xmlFiles: string[];
+  xmlIndex: string | null;
+} {
+  const xml = generateXML(pages, baseUrl);
+  const good = pages.filter((p) => !p.isBroken);
+  const count = sitemapFileCount(good.length);
+  const xmlFiles: string[] = [];
+  for (let i = 0; i < count; i++) {
+    xmlFiles.push(
+      generateXML(good.slice(i * SITEMAP_URLS_PER_FILE, (i + 1) * SITEMAP_URLS_PER_FILE), baseUrl),
+    );
+  }
+  return { xml, xmlFiles, xmlIndex: buildSitemapIndexXml(count, baseUrl) };
 }
 
 function generateHTMLSitemap(pages: CrawledPage[], baseUrl: string): string {
@@ -271,9 +299,9 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
 
   try { new URL(inputUrl); } catch { return new Response('Invalid URL', { status: 400 }); }
 
-  const maxPages = Math.min(Math.max(parseInt(maxParam || '50', 10) || 50, 5), 500);
+  const maxPages = Math.min(Math.max(parseInt(maxParam || '50', 10) || 50, 5), 2000);
 
-  // Tier enforcement (matches UI labels): anon 100, signed-in 200, pro 500.
+  // Tier enforcement (matches UI labels): anon 100, signed-in 200, pro 2000.
   // Best-effort: any failure resolves to anon caps, never blocks the crawl.
   // Resumed crawls keep the cap stored at creation (no re-resolution mid-crawl).
   let tierCap = 100;
@@ -294,12 +322,12 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
             .first<{ plan: string | null }>()
             .catch(() => null);
           const plan = await effectivePlanForUser(env.DB, session.user.id, row?.plan ?? null);
-          tierCap = plan === 'pro' ? 500 : 200;
+          tierCap = plan === 'pro' ? 2000 : 200;
         }
       }
     } catch { /* anon caps */ }
   } else {
-    tierCap = 500; // cap already pinned in session; Math.min below is a no-op guard
+    tierCap = 2000; // cap already pinned in session; Math.min below is a no-op guard
   }
   const maxAllowed = resumed ? resumed.maxAllowed : Math.min(maxPages, tierCap);
   const exclusions = resumed
@@ -494,13 +522,16 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
           const completeData = {
             type: 'complete' as const,
             pages,
-            xml: generateXML(pages, baseUrl),
+            ...buildXmlOutput(pages, baseUrl),
             html: generateHTMLSitemap(pages, baseUrl),
             txt: pages.filter(p => !p.isBroken).map(p => p.url).join('\n'),
             insights: generateInsights(pages),
             durationMs: Date.now() - startTime,
             jsRendering,
             url: inputUrl,
+            discovered,
+            maxAllowed,
+            capped: pages.length >= maxAllowed && discovered > pages.length,
           };
           sendEvent(completeData);
           if (notifyEmail) sendCrawlNotification(env, notifyEmail, baseUrl, pages, completeData.durationMs, completeData.insights).catch(() => {});
@@ -517,13 +548,16 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
       sendEvent({
         type: 'complete',
         pages,
-        xml: generateXML(pages, baseUrl),
+        ...buildXmlOutput(pages, baseUrl),
         html: generateHTMLSitemap(pages, baseUrl),
         txt: pages.filter(p => !p.isBroken).map(p => p.url).join('\n'),
         insights: finalInsights,
         durationMs: finalDurationMs,
         jsRendering,
         url: inputUrl,
+        discovered,
+        maxAllowed,
+        capped: pages.length >= maxAllowed && discovered > pages.length,
       });
       if (notifyEmail) sendCrawlNotification(env, notifyEmail, baseUrl, pages, finalDurationMs, finalInsights).catch(() => {});
       controller.close();

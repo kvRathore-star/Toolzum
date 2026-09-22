@@ -28,7 +28,7 @@ type SitemapState =
   | { status: "idle" }
   | { status: "detecting"; url: string }
   | { status: "crawling"; url: string; discovered: number; crawled: number; max: number; currentPage: string; log: string[]; jsRendering: boolean }
-  | { status: "complete"; url: string; pages: CrawledPage[]; xml: string; html: string; txt: string; insights: SEOInsights; durationMs: number; jsRendering: boolean }
+  | { status: "complete"; url: string; pages: CrawledPage[]; xml: string; xmlFiles: string[]; xmlIndex: string | null; html: string; txt: string; insights: SEOInsights; durationMs: number; jsRendering: boolean; discovered: number; capped: boolean }
   | { status: "error"; message: string };
 
 function truncateUrl(url: string, max: number): string {
@@ -53,7 +53,7 @@ const FAQS = [
   },
   {
     q: 'What is the maximum number of URLs?',
-    a: 'Free crawls go up to 100 URLs per sitemap; signed-in users up to 200 and Pro up to 500. The crawl starts from your existing sitemap.xml and robots.txt when available, then follows same-origin links.',
+    a: 'Free crawls go up to 100 URLs; signed-in users up to 200 and Pro up to 2000. Large crawls are split automatically into 500-URL sitemap files plus a sitemap index — upload them all and submit the index to Google. The crawl starts from your existing sitemap.xml and robots.txt when available, then follows same-origin links.',
   },
   {
     q: 'How do I submit my sitemap to Google?',
@@ -74,7 +74,7 @@ export default function XmlSitemapGenerator() {
   const [url, setUrl] = useState('');
   const [exclusions, setExclusions] = useState<ExclusionRule[]>(DEFAULT_EXCLUSIONS);
   const [newExclusion, setNewExclusion] = useState('');
-  const [maxPages, setMaxPages] = useState(50);
+  const [maxPages, setMaxPages] = useState(100);
   const [planCap, setPlanCap] = useState<number | null>(null);
   const maxTouchedRef = useRef(false);
   const [notifyEmail, setNotifyEmail] = useState('');
@@ -87,8 +87,8 @@ export default function XmlSitemapGenerator() {
   }, []);
 
   // Default "Max pages" to the visitor's plan cap (backend enforces the same
-  // tiers): Pro 500, signed-in 200, anon 50. Without this, Pro users silently
-  // crawled with max=50 while the discovered counter climbed into the 100s.
+  // tiers): Pro 2000, signed-in 200, anon 100. Without this, capped users
+  // silently crawled with max=50 while the discovered counter climbed higher.
   React.useEffect(() => {
     let live = true;
     fetch('/api/check-plan')
@@ -96,10 +96,10 @@ export default function XmlSitemapGenerator() {
       .then((d: unknown) => {
         if (!live || !d || typeof d !== 'object') return;
         const plan = (d as { plan?: string }).plan;
-        const cap = plan === 'pro' ? 500 : plan === 'signedin' ? 200 : 100;
+        const cap = plan === 'pro' ? 2000 : plan === 'signedin' ? 200 : 100;
         setPlanCap(cap);
         if (!maxTouchedRef.current) {
-          setMaxPages(plan === 'pro' ? 500 : plan === 'signedin' ? 200 : 50);
+          setMaxPages(plan === 'pro' ? 2000 : plan === 'signedin' ? 200 : 100);
         }
       })
       .catch(() => {});
@@ -198,11 +198,15 @@ export default function XmlSitemapGenerator() {
             url: data.url,
             pages: data.pages,
             xml: data.xml,
+            xmlFiles: Array.isArray(data.xmlFiles) ? data.xmlFiles : [],
+            xmlIndex: typeof data.xmlIndex === 'string' ? data.xmlIndex : null,
             html: data.html,
             txt: data.txt,
             insights: data.insights,
             durationMs: data.durationMs,
             jsRendering: data.jsRendering,
+            discovered: typeof data.discovered === 'number' ? data.discovered : data.pages.length,
+            capped: data.capped === true,
           });
           return;
         }
@@ -249,6 +253,16 @@ export default function XmlSitemapGenerator() {
   const handleDownloadXml = () => {
     if (state.status !== 'complete') return;
     downloadOrShare(makeBlobUrl(state.xml, 'application/xml'), 'sitemap.xml');
+  };
+
+  const handleDownloadIndex = () => {
+    if (state.status !== 'complete' || !state.xmlIndex) return;
+    downloadOrShare(makeBlobUrl(state.xmlIndex, 'application/xml'), 'sitemap-index.xml');
+  };
+
+  const handleDownloadPart = (idx: number) => {
+    if (state.status !== 'complete' || !state.xmlFiles[idx]) return;
+    downloadOrShare(makeBlobUrl(state.xmlFiles[idx]!, 'application/xml'), `sitemap-${idx + 1}.xml`);
   };
 
   const handleDownloadHtml = () => {
@@ -334,10 +348,11 @@ export default function XmlSitemapGenerator() {
                     disabled={isCrawling}
                   >
                     <option value={30}>30 pages (quick test)</option>
-                    <option value={50}>50 pages (free)</option>
                     <option value={100} disabled={planCap !== null && planCap < 100}>100 pages (free)</option>
                     <option value={200} disabled={planCap !== null && planCap < 200}>200 pages (signed in)</option>
                     <option value={500} disabled={planCap !== null && planCap < 500}>500 pages (Pro)</option>
+                    <option value={1000} disabled={planCap !== null && planCap < 1000}>1000 pages (Pro)</option>
+                    <option value={2000} disabled={planCap !== null && planCap < 2000}>2000 pages (Pro)</option>
                   </select>
                 </div>
 
@@ -471,10 +486,31 @@ export default function XmlSitemapGenerator() {
               <button onClick={handleDownloadTxt} className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] rounded-lg text-[11px] transition-colors">
                 <List className="w-3 h-3" /> URL List (.txt)
               </button>
+              {state.xmlIndex && (
+                <button onClick={handleDownloadIndex} className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] rounded-lg text-[11px] font-semibold transition-colors">
+                  <List className="w-3 h-3" /> Sitemap index (.xml)
+                </button>
+              )}
+              {state.xmlFiles.length > 1 && state.xmlFiles.map((_, i) => (
+                <button key={i} onClick={() => handleDownloadPart(i)} aria-label={`Download sitemap part ${i + 1}`} className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] rounded-lg text-[11px] transition-colors">
+                  <FileText className="w-3 h-3" /> sitemap-{i + 1}.xml
+                </button>
+              ))}
               <button onClick={() => setState({ status: 'idle' })} className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] rounded-lg text-[11px] transition-colors ml-auto">
                 Generate another →
               </button>
             </div>
+            {state.xmlIndex && (
+              <p className="mt-3 text-xs text-[var(--text-secondary)]">
+                Large site split into {state.xmlFiles.length} files of up to 500 URLs. Upload them all next to your sitemap index and submit <strong>sitemap-index.xml</strong> to Google Search Console.
+              </p>
+            )}
+            {state.capped && (
+              <div className="mt-3 flex items-start gap-2 px-3 py-2 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-lg text-xs text-[var(--accent)]">
+                <AlertTriangle className="w-3.5 h-3.5 mt-0.5 shrink-0" />
+                <span>Showing {state.pages.length} of ~{state.discovered} discovered URLs — your plan cap was reached. The rest were not crawled. Raise the limit or narrow the crawl with exclusions.</span>
+              </div>
+            )}
           </div>
 
           {/* SEO Insights */}
@@ -552,8 +588,8 @@ export default function XmlSitemapGenerator() {
                 <span className="w-7 h-7 rounded-full bg-emerald-700/10 text-emerald-500 text-xs font-bold flex items-center justify-center shrink-0">1</span>
                 <div className="flex-1">
                   <p className="text-sm font-medium text-[var(--text-primary)]">Upload to your server root</p>
-                  <p className="text-xs text-[var(--text-secondary)] mt-0.5">Upload sitemap.xml to the root of your website so search engines can find it.</p>
-                  <pre className="mt-2 px-3 py-2 bg-[var(--bg-overlay)] rounded-lg text-[11px] font-mono text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Upload sitemap.xml → /public_html/sitemap.xml</pre>
+                  <p className="text-xs text-[var(--text-secondary)] mt-0.5">{state.xmlIndex ? 'Upload the index plus every sitemap-N.xml file to the root of your website.' : 'Upload sitemap.xml to the root of your website so search engines can find it.'}</p>
+                  <pre className="mt-2 px-3 py-2 bg-[var(--bg-overlay)] rounded-lg text-[11px] font-mono text-[var(--text-secondary)] dark:text-[var(--text-muted)]">{state.xmlIndex ? 'Upload sitemap-index.xml + sitemap-*.xml → /public_html/' : 'Upload sitemap.xml → /public_html/sitemap.xml'}</pre>
                 </div>
               </div>
               <div className="flex gap-4">
@@ -561,7 +597,7 @@ export default function XmlSitemapGenerator() {
                 <div className="flex-1">
                   <p className="text-sm font-medium text-[var(--text-primary)]">Add to robots.txt</p>
                   <p className="text-xs text-[var(--text-secondary)] mt-0.5">Tell all search engine bots where your sitemap is.</p>
-                  <pre className="mt-2 px-3 py-2 bg-[var(--bg-overlay)] rounded-lg text-[11px] font-mono text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Sitemap: {state.url}sitemap.xml</pre>
+                  <pre className="mt-2 px-3 py-2 bg-[var(--bg-overlay)] rounded-lg text-[11px] font-mono text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Sitemap: {state.url}{state.xmlIndex ? 'sitemap-index.xml' : 'sitemap.xml'}</pre>
                 </div>
               </div>
               <div className="flex gap-4">

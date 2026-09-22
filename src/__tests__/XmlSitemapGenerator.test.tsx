@@ -35,19 +35,19 @@ function openSettings() {
 }
 
 describe('XmlSitemapGenerator max-pages default', () => {
-  it('defaults to 50 before plan resolves', () => {
+  it('defaults to 100 before plan resolves', () => {
     vi.stubGlobal('fetch', vi.fn().mockReturnValue(new Promise(() => {})));
     render(<XmlSitemapGenerator />);
     openSettings();
-    expect((screen.getByLabelText('Max pages to crawl') as HTMLSelectElement).value).toBe('50');
+    expect((screen.getByLabelText('Max pages to crawl') as HTMLSelectElement).value).toBe('100');
   });
 
-  it('defaults to 500 for Pro users', async () => {
+  it('defaults to 2000 for Pro users', async () => {
     mockPlan('pro');
     render(<XmlSitemapGenerator />);
     openSettings();
     await waitFor(() => {
-      expect((screen.getByLabelText('Max pages to crawl') as HTMLSelectElement).value).toBe('500');
+      expect((screen.getByLabelText('Max pages to crawl') as HTMLSelectElement).value).toBe('2000');
     });
   });
 
@@ -60,18 +60,18 @@ describe('XmlSitemapGenerator max-pages default', () => {
     });
   });
 
-  it('keeps 50 for anon users and disables above-cap options', async () => {
+  it('keeps 100 for anon users and disables above-cap options', async () => {
     mockPlan('anon');
     render(<XmlSitemapGenerator />);
     openSettings();
     await waitFor(() => {
       expect(screen.getByText(/your plan allows up to 100/)).toBeDefined();
     });
-    expect((screen.getByLabelText('Max pages to crawl') as HTMLSelectElement).value).toBe('50');
+    expect((screen.getByLabelText('Max pages to crawl') as HTMLSelectElement).value).toBe('100');
     const options = screen.getAllByRole('option') as HTMLOptionElement[];
     const byValue = Object.fromEntries(options.map(o => [o.value, o]));
     expect(byValue['100']!.disabled).toBe(false);
     expect(byValue['200']!.disabled).toBe(true);
-    expect(byValue['500']!.disabled).toBe(true);
+    expect(byValue['2000']!.disabled).toBe(true);
   });
 });

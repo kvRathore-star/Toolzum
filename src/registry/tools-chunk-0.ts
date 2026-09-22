@@ -1330,7 +1330,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "Fetch API / DOMParser",
     faqs: [
       { question: "Where does the crawl run?", answer: "On our server: pages are fetched and analyzed server-side, then the sitemap is generated for download. Crawled URLs are not retained after your session." },
-      { question: "How many pages can it crawl?", answer: "Free crawls go up to 100 URLs per sitemap; signed-in users up to 200 and Pro up to 500. Larger sites should split by section." },
+      { question: "How many pages can it crawl?", answer: "Free crawls go up to 100 URLs; signed-in users up to 200 and Pro up to 2000. Crawls over 500 URLs are split automatically into 500-URL sitemap files plus a sitemap index — upload them all and submit the index to Google." },
       { question: "Does it respect robots.txt?", answer: "Yes. The crawler reads robots.txt first and skips disallowed paths, and seeds from your existing sitemap.xml when available." },
     ],
   },
