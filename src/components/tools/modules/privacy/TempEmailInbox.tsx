@@ -111,7 +111,7 @@ export default function TempEmailInbox() {
     else toast.error('Copy blocked by the browser — select the address manually.');
   };
 
-  const destroy = async () => {
+  const destroy = async (silent = false) => {
     if (!address) return;
     try {
       await fetch(`${WORKER_BASE}/api/temp-inbox?address=${encodeURIComponent(address)}`, { method: 'DELETE' });
@@ -121,7 +121,21 @@ export default function TempEmailInbox() {
     setAddress('');
     setMessages([]);
     setOpenIdx(null);
-    toast.success('Address destroyed.');
+    if (!silent) toast.success('Address destroyed.');
+  };
+
+  // Change email = destroy the current address and mint a fresh one.
+  // Reuses generate() so Turnstile + capacity rules apply identically.
+  const newAddress = async () => {
+    if (creating) return;
+    await destroy(true);
+    await generate();
+  };
+
+  const copyBody = async (body: string) => {
+    const ok = await clipboardWrite(body);
+    if (ok) toast.success('Message copied — paste your code where asked.');
+    else toast.error('Copy blocked by the browser — select the text manually.');
   };
 
   const remaining = expiresAt - now;
@@ -168,9 +182,15 @@ export default function TempEmailInbox() {
               <button onClick={copyAddress} aria-label="Copy address" className="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-semibold rounded-xl bg-[var(--accent-ink)] text-white hover:bg-[var(--accent-hover)] transition-all">
                 <Copy className="w-3.5 h-3.5" /> Copy
               </button>
-              <button onClick={destroy} aria-label="Destroy address" className="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-semibold rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-red-600 dark:text-red-400 hover:bg-red-500/10 transition-all">
+              <button onClick={() => destroy()} aria-label="Destroy address" className="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-semibold rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-red-600 dark:text-red-400 hover:bg-red-500/10 transition-all">
                 <Trash2 className="w-3.5 h-3.5" /> Destroy
               </button>
+              <button onClick={newAddress} aria-label="Get a new address" title="Destroy this address and generate a fresh one" className="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-semibold rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all">
+                <RefreshCw className="w-3.5 h-3.5" /> New address
+              </button>
+            </div>
+            <div className="h-1.5 rounded-full bg-[var(--bg-overlay)] overflow-hidden" role="progressbar" aria-label="Time remaining" aria-valuenow={Math.max(0, Math.round(remaining / 1000))} aria-valuemin={0} aria-valuemax={3600}>
+              <div className="h-full bg-[var(--accent)] transition-all duration-1000" style={{ width: `${Math.max(0, Math.min(100, (remaining / 3600000) * 100))}%` }} />
             </div>
             <div className="flex items-center gap-4 text-xs text-[var(--text-muted)]">
               <span className="inline-flex items-center gap-1.5">
@@ -205,8 +225,15 @@ export default function TempEmailInbox() {
                       <ChevronRight className={`w-4 h-4 text-[var(--text-muted)] shrink-0 transition-transform ${openIdx === i ? 'rotate-90' : ''}`} />
                     </button>
                     {openIdx === i && (
-                      <div className="px-4 py-3 border-t border-[var(--border-subtle)] text-sm text-[var(--text-secondary)] whitespace-pre-wrap break-words max-h-96 overflow-y-auto">
-                        {m.body || '(empty message)'}
+                      <div className="px-4 py-3 border-t border-[var(--border-subtle)]">
+                        <div className="flex justify-end mb-2">
+                          <button onClick={() => copyBody(m.body)} aria-label="Copy message text" className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                            <Copy className="w-3 h-3" /> Copy text
+                          </button>
+                        </div>
+                        <div className="text-sm text-[var(--text-secondary)] whitespace-pre-wrap break-words max-h-96 overflow-y-auto">
+                          {m.body || '(empty message)'}
+                        </div>
                       </div>
                     )}
                   </div>

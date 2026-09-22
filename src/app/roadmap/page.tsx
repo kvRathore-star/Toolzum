@@ -25,14 +25,6 @@ interface RoadmapItem {
 
 const PLANNED: RoadmapItem[] = [
   {
-    id: "temp-email",
-    title: "Temporary Email Generator",
-    description: "Disposable inboxes with configurable expiry. Parked: needs a backend inbox service, and faking it client-side would be dishonest.",
-    tag: "Utility",
-    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
-    votes: 342
-  },
-  {
     id: "whisper-wasm",
     title: "Offline Audio Transcriber",
     description: "Utilize localized Whisper.js neural models running on WebGPU for speech-to-text dictation without any API usage. (Partially covered by existing text tools.)",
@@ -101,6 +93,14 @@ const COMPLETED: RoadmapItem[] = [
     tag: "Performance",
     tagColor: "bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20",
     votes: 382
+  },
+  {
+    id: "temp-email",
+    title: "Temporary Email Generator",
+    description: "Disposable 60-minute inboxes on a real backend (Cloudflare Email Routing + D1) — inbound only, auto-refreshing, destroyed on expiry.",
+    tag: "Utility",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
+    votes: 342
   }
 ];
 
