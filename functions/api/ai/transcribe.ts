@@ -1,7 +1,16 @@
 interface Env {
   DB: D1Database;
-  OPENAI_API_KEY: string;
+  OPENAI_API_KEY?: string;
   GROQ_API_KEY?: string;
+  GEMINI_API_KEY?: string;
+}
+
+function toBase64(bytes: Uint8Array): string {
+  let binary = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  }
+  return btoa(binary);
 }
 
 import { checkRateLimit, recordRateLimit } from '../rate-limit';
@@ -194,7 +203,11 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     const openaiKey = context.env.OPENAI_API_KEY;
     const groqKey = context.env.GROQ_API_KEY;
-    if (!openaiKey) {
+    const geminiKey = context.env.GEMINI_API_KEY;
+    // No OpenAI key (no billing on file) is not fatal: Groq covers English
+    // and Gemini native audio (free tier, pre-existing key) covers the rest.
+    // Only 500 when no provider key exists at all.
+    if (!openaiKey && !groqKey && !geminiKey) {
       return new Response(JSON.stringify({ error: 'Server configuration error' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' },
@@ -205,11 +218,80 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     // Provider routing: English → Groq Whisper Turbo (~$0.0007/min),
     // everything else → gpt-4o-mini-transcribe (~$0.003/min, multilingual).
-    // Missing Groq key degrades English to OpenAI rather than 500ing.
+    // Missing keys degrade gracefully, never 500 when any path can serve:
+    // no Groq key → English falls to OpenAI; no OpenAI key → non-English
+    // falls back to Gemini native audio (free tier); Groq outage retries
+    // once on OpenAI for English input only.
     const validLang =
       language && /^[a-z]{2}(-[A-Z]{2})?$/.test(language) ? language : null;
     let provider: TranscriptionProvider = transcriptionProviderForLanguage(validLang);
     if (provider === 'groq' && !groqKey) provider = 'openai';
+
+    // Gemini native fallback (no OpenAI billing on file): same request the
+    // pre-migration code path served. Metering is unchanged (per-minute).
+    if (provider === 'openai' && !openaiKey && geminiKey) {
+      // Realm-safe byte read: Response() consumes any Blob/File flavor
+      // (workers, undici, jsdom) where direct .arrayBuffer() may not exist.
+      let rawBytes: Uint8Array | null = null;
+      try {
+        rawBytes = new Uint8Array(await new Response(file as unknown as BodyInit).arrayBuffer());
+      } catch {
+        rawBytes = null;
+      }
+      if (!rawBytes || rawBytes.length === 0) {
+        return new Response(JSON.stringify({ error: 'Could not read audio file' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+      const base64 = toBase64(rawBytes);
+      const mimeType = file.type || 'audio/mpeg';
+      const langInstruction =
+        validLang && validLang !== 'en' ? `Transcribe the audio into ${validLang}. ` : '';
+      const gres = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{
+              role: 'user',
+              parts: [
+                { inlineData: { mimeType, data: base64 } },
+                { text: `${langInstruction}Transcribe the audio from this file. Return only the transcribed text, no commentary.` },
+              ],
+            }],
+            generationConfig: { temperature: 0.1 },
+          }),
+        },
+      );
+      if (!gres.ok) {
+        const errBody = await gres.text();
+        console.error('Gemini transcription fallback error:', gres.status, errBody);
+        return new Response(JSON.stringify({ error: 'Transcription failed' }), {
+          status: 502,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+      const gdata: { candidates?: { content?: { parts?: { text?: string }[] } }[] } = await gres.json();
+      const gtext = gdata.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+      if (!gtext) {
+        return new Response(JSON.stringify({ error: 'Empty transcription' }), {
+          status: 502,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+      await DB.prepare(`UPDATE user SET credits = credits - ${cost} WHERE id = ? AND credits >= ${cost}`).bind(userId).run();
+      await logAiCreditEvent(DB, { userId, task: 'transcribe', outcome: 'allowed', balance: balance - cost, allowance: maxCredits });
+      return new Response(gtext, { headers: { 'Content-Type': 'text/plain' } });
+    }
+
+    if (provider === 'openai' && !openaiKey) {
+      return new Response(JSON.stringify({ error: 'Server configuration error' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
 
     const upstream = new FormData();
     upstream.append('file', file as unknown as Blob, file.name || 'audio.mpeg');

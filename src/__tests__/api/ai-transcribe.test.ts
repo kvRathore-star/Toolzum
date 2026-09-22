@@ -343,3 +343,34 @@ describe('POST /api/ai/transcribe provider routing (English Groq, rest mini)', (
     vi.unstubAllGlobals();
   });
 });
+
+describe('POST /api/ai/transcribe Gemini fallback (no OpenAI billing on file)', () => {
+  const F = { name: 'clip.mp3', mime: 'audio/mpeg', content: 'fake-audio-bytes' };
+
+  it('serves non-English via Gemini native audio when OPENAI_API_KEY is absent', async () => {
+    const fetchSpy = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ candidates: [{ content: { parts: [{ text: 'hola mundo' }] } }] }),
+    });
+    vi.stubGlobal('fetch', fetchSpy);
+    const env = { DB: mockDb({ credits: 30 }), GEMINI_API_KEY: 'gk' } as unknown as typeof ENV;
+    const res = await onRequestPost({
+      request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'es' } }),
+      env,
+    });
+    expect(res.status).toBe(200);
+    expect(await res.text()).toBe('hola mundo');
+    const called = fetchSpy.mock.calls.map(c => (c as unknown[])[0] as string);
+    expect(called[0]).toContain('generativelanguage.googleapis.com');
+    vi.unstubAllGlobals();
+  });
+
+  it('500s only when no provider key exists at all', async () => {
+    const env = { DB: mockDb({ credits: 30 }) } as unknown as typeof ENV;
+    const res = await onRequestPost({
+      request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'es' } }),
+      env,
+    });
+    expect(res.status).toBe(500);
+  });
+});
