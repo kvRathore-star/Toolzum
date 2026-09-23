@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 import { PDFDocument, StandardFonts, rgb, degrees } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
 import { setupPdfWorker } from '@/lib/pdfjsWorker';
-import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Redo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers, Maximize2, Minimize2, Keyboard, MoveLeft, MoveRight, Save, Search, BringToFront, SendToBack, History, Flag } from 'lucide-react';
+import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Redo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers, Maximize2, Minimize2, Keyboard, MoveLeft, MoveRight, Save, Search, BringToFront, SendToBack, History, Flag, MessageCircleQuestion } from 'lucide-react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from '@/lib/clipboard';
@@ -1021,6 +1021,35 @@ export default function PdfEditor() {
 
   useEffect(() => { drawOverlay(); }, [drawOverlay]);
 
+  // Chat handoff: the standalone ai-chat-pdf tool answers questions, but
+  // opening it fresh loses the open file + scroll + unsaved work. Instead,
+  // stash the bytes in a dedicated handoff DB and navigate with ?from= —
+  // the chat tool picks the file up on mount and consumes the key.
+  // (Separate DB name on purpose: no version migration on the editor DB.)
+  const askAboutDoc = async () => {
+    if (!fileBytes) return;
+    try {
+      const db = await new Promise<IDBDatabase>((resolve, reject) => {
+        const req = indexedDB.open('toolzum-handoff', 1);
+        req.onupgradeneeded = () => req.result.createObjectStore('files');
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+      await new Promise<void>((resolve, reject) => {
+        const tx = db.transaction('files', 'readwrite');
+        tx.objectStore('files').put(
+          { bytes: fileBytes.slice().buffer as ArrayBuffer, name: file?.name || 'document.pdf', at: Date.now() },
+          'pdf-editor→chat',
+        );
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+      });
+      db.close();
+      window.location.href = '/ai/ai-chat-pdf?from=pdf-editor';
+    } catch {
+      toast.error('Handoff failed — open AI Chat and upload the file there instead.');
+    }
+  };
   // Preset intents: picked before a file exists, applied right after open.
   const intentRef = useRef<'sign' | 'watermark' | 'review' | null>(null);
   const pickPreset = (intent: 'sign' | 'watermark' | 'review') => {
@@ -2274,6 +2303,9 @@ export default function PdfEditor() {
                 {selection.length} selected ✕
               </button>
             )}
+            <button onClick={askAboutDoc} aria-label="Ask AI chat about this document" title="Open AI Chat with this file loaded" className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
+              <MessageCircleQuestion className="w-4 h-4" /> Ask doc
+            </button>
             <button onClick={runOcr} disabled={ocrRunning} aria-label="OCR this page" title="Recognize text on scanned pages" className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
               <ScanText className="w-4 h-4" /> {ocrRunning ? `${ocrProgress}%` : 'OCR'}
             </button>

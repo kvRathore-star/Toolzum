@@ -27,6 +27,45 @@ export default function AiChatPdf() {
     }
   }, [chatHistory]);
 
+  // Editor handoff: ?from=pdf-editor + IDB key written by the PDF editor's
+  // "Ask doc" button. Consumed (deleted) on read so a stale file never
+  // reappears on later visits.
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('from') !== 'pdf-editor') return;
+        const db = await new Promise<IDBDatabase>((resolve, reject) => {
+          const req = indexedDB.open('toolzum-handoff', 1);
+          req.onupgradeneeded = () => req.result.createObjectStore('files');
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => reject(req.error);
+        });
+        const row = await new Promise<{ bytes?: ArrayBuffer; name?: string } | null>((resolve, reject) => {
+          const tx = db.transaction('files', 'readwrite');
+          const store = tx.objectStore('files');
+          const get = store.get('pdf-editor→chat');
+          get.onsuccess = () => {
+            const val = (get.result as typeof row) || null;
+            try { store.delete('pdf-editor→chat'); } catch { /* ignore */ }
+            resolve(val);
+          };
+          get.onerror = () => reject(get.error);
+        });
+        db.close();
+        if (!row || !row.bytes || cancelled) return;
+        const f = new File([row.bytes], row.name || 'document.pdf', { type: 'application/pdf' });
+        setFile(f);
+        toast.success('Document handed off from the PDF editor — analyzing…');
+        await analyzeFile(f);
+      } catch {
+        /* no handoff — normal direct visit */
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
   useEffect(() => {
     return () => {
       if (blobUrlRef.current) {
@@ -88,11 +127,10 @@ export default function AiChatPdf() {
 
   const handleFileSelect = (f: File) => setFile(f);
 
-  const handleAnalyze = async () => {
-    if (!file) return;
+  const analyzeFile = async (f: File) => {
     setIsProcessing(true);
     try {
-      const text = await extractPdfText(file);
+      const text = await extractPdfText(f);
       setPdfText(text);
       chunksRef.current = chunkText(text);
       setModelLoaded(true);
@@ -103,6 +141,11 @@ export default function AiChatPdf() {
     } finally {
       setIsProcessing(false);
     }
+  };
+
+  const handleAnalyze = async () => {
+    if (!file) return;
+    await analyzeFile(file);
   };
 
   const handleAsk = async () => {
