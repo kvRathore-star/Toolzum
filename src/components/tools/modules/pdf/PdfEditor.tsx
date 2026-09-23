@@ -266,11 +266,15 @@ export default function PdfEditor() {
     }
   };
 
-  // Render current page + thumbs.
+  // Render current page + thumbs. `rendering` drives a progress veil so a
+  // slow first paint (cold worker, heavy page) never looks like a broken
+  // narrow strip — the exact confusion from field reports.
+  const [rendering, setRendering] = useState(false);
   useEffect(() => {
     if (!pdfDoc) return;
     let cancelled = false;
     (async () => {
+      setRendering(true);
       const pg = await pdfDoc.getPage(page);
       const viewport = pg.getViewport({ scale });
       viewportRef.current = { w: viewport.width, h: viewport.height };
@@ -286,7 +290,11 @@ export default function PdfEditor() {
       }
       const ctx = canvas.getContext('2d')!;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      await pg.render({ canvasContext: ctx, viewport }).promise;
+      try {
+        await pg.render({ canvasContext: ctx, viewport }).promise;
+      } finally {
+        if (!cancelled) setRendering(false);
+      }
       if (!cancelled) {
         // Silent-blank guard: a resolved render can still leave an unpainted
         // canvas (worker/transform edge cases). Sample the center pixel —
@@ -1605,6 +1613,12 @@ export default function PdfEditor() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 overflow-auto">
           <div className="relative mx-auto w-fit" tabIndex={0} role="application" onKeyDown={onCanvasKey} aria-label="PDF page canvas. Arrow keys nudge the selection, Delete removes it, Control C and V copy and paste.">
             <span className="sr-only" aria-live="polite">Page {page} of {pageCount}. Text content: {pageText || 'No readable text on this page.'}</span>
+            {rendering && (
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-lg bg-[var(--bg-overlay)]/80" role="status" aria-label="Rendering page">
+                <span className="w-8 h-8 rounded-full border-[3px] border-[var(--accent)] border-t-transparent animate-spin motion-reduce:animate-none" />
+                <span className="text-xs font-semibold text-[var(--text-secondary)]">Rendering page {page}…</span>
+              </div>
+            )}
             <canvas ref={canvasRef} className="rounded-lg shadow" />
             <canvas
               ref={overlayRef}
