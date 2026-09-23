@@ -288,6 +288,22 @@ export default function PdfEditor() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       await pg.render({ canvasContext: ctx, viewport }).promise;
       if (!cancelled) {
+        // Silent-blank guard: a resolved render can still leave an unpainted
+        // canvas (worker/transform edge cases). Sample the center pixel —
+        // transparent means nothing painted. One auto-retry, then console
+        // diagnostics, instead of a mysterious white sliver.
+        let painted = true;
+        try {
+          const sample = ctx.getImageData(Math.floor(viewport.width / 2), Math.floor(viewport.height / 2), 1, 1).data;
+          painted = sample[3]! > 0;
+        } catch {
+          painted = true; // tainted canvas — can't sample, assume painted
+        }
+        if (!painted) {
+          console.warn('[pdf-editor] blank paint detected, retrying render', { w: viewport.width, h: viewport.height, scale });
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          await pg.render({ canvasContext: ctx, viewport }).promise;
+        }
         drawOverlay();
         ensureTextLayer(page).then((items) => {
           if (!cancelled) setPageText(items.map((it) => it.str).join(' '));
