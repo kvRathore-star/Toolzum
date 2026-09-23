@@ -450,6 +450,18 @@ export default function PdfEditor() {
 
   useEffect(() => { drawOverlay(); }, [drawOverlay]);
 
+  // Unsaved-work guard: everything lives in memory, so a refresh destroys
+  // the session. Hub links below open in a new tab; refresh/back gets the
+  // native browser warning instead.
+  useEffect(() => {
+    if (!pdfDoc) return;
+    const guard = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+    };
+    window.addEventListener('beforeunload', guard);
+    return () => window.removeEventListener('beforeunload', guard);
+  }, [pdfDoc]);
+
   // OCR words belong to the visible page — clear on navigation (done in the
   // setter call sites, not an effect, to avoid cascading renders).
   const goPage = (n: number) => {
@@ -1457,7 +1469,7 @@ export default function PdfEditor() {
                 </button>
               ))}
             </div>
-            <Link href="/utility/emoji-picker" className="text-[11px] text-[var(--accent)] hover:underline">More emoji →</Link>
+            <Link href="/utility/emoji-picker" target="_blank" rel="noopener" title="Opens in a new tab — your editing session stays intact" className="text-[11px] text-[var(--accent)] hover:underline">More emoji →</Link>
           </div>
           <div className="pt-2 space-y-2">
             {(tool === 'text') && (
@@ -1693,7 +1705,7 @@ export default function PdfEditor() {
           ['E-sign', '/pdf/esign-pdf'],
           ['AI summarize', '/pdf/pdf-ai-summariser'],
         ] as [string, string][]).map(([label, href]) => (
-          <Link key={href} href={href} className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] transition-colors">
+          <Link key={href} href={href} target="_blank" rel="noopener" title="Opens in a new tab — your editing session stays intact" className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] transition-colors">
             {label}
           </Link>
         ))}
