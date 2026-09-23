@@ -154,6 +154,71 @@ export function moveLayerIndex<T>(list: T[], index: number, dir: 1 | -1): { list
   next.splice(j, 0, a!);
   return { list: next, index: j };
 }
+
+/** A version-history entry: full annotations + page + label. */
+export interface EditorVersion {
+  at: number;
+  annos: Record<number, Anno[]>;
+  page: number;
+  label: string;
+}
+
+/** Max retained versions (session-only, in-memory — see retention note). */
+export const MAX_VERSIONS = 10;
+
+/** Append a version, evicting oldest beyond the cap. Pure — tested. */
+export function pushVersion(
+  prev: EditorVersion[],
+  entry: EditorVersion,
+): EditorVersion[] {
+  return [...prev, entry].slice(-MAX_VERSIONS);
+}
+
+/** Split AI prose into short exportable lines. Pure — tested. */
+export function splitAiLines(out: string, maxChars = 75, maxLines = 20): string[] {
+  const words = out.replace(/\s+/g, ' ').split(' ').filter(Boolean);
+  const lines: string[] = [];
+  let cur = '';
+  for (const w of words) {
+    const trial = cur ? `${cur} ${w}` : w;
+    if (trial.length > maxChars && cur) {
+      lines.push(cur);
+      cur = w;
+    } else {
+      cur = trial;
+    }
+  }
+  if (cur.trim()) lines.push(cur.trim());
+  return lines.slice(0, maxLines);
+}
+
+/** Parse the PII-sweep JSON (fenced or bare). Never throws — malformed AI output degrades to []. */
+export function parseSensitiveList(out: string): string[] {
+  try {
+    const cleaned = out.replace(/```json|```/g, '').trim();
+    const parsed: unknown = JSON.parse(cleaned.slice(cleaned.indexOf('[')));
+    if (Array.isArray(parsed)) return parsed.filter((s): s is string => typeof s === 'string').slice(0, 60);
+    return [];
+  } catch {
+    return [];
+  }
+}
+
+/** Map OCR words (image px) to page points. Pure — tested. */
+export function mapOcrWords(
+  words: { text: string; confidence: number; bbox: { x0: number; y0: number; x1: number; y1: number } }[],
+  kx: number,
+): { text: string; x: number; y: number; size: number; conf: number }[] {
+  return words
+    .filter((w) => w.text.trim().length > 0)
+    .map((w) => ({
+      text: w.text.trim(),
+      x: w.bbox.x0 * kx,
+      y: w.bbox.y0 * kx,
+      size: Math.max(6, Math.min(48, (w.bbox.y1 - w.bbox.y0) * kx)),
+      conf: Math.round(w.confidence),
+    }));
+}
 /**
  * Word-wrap shared by canvas preview and pdf-lib export — one function so
  * the two can never disagree on line breaks. measure must draw with the
@@ -331,15 +396,14 @@ export default function PdfEditor() {
   // Version history: timestamped snapshots beside the rolling draft.
   // Autosave protects against crashes; history protects against mistakes
   // (deleted blocks, bad replaces) that autosave would otherwise cement.
-  // Kept small (last 10) — each entry is full annos + page, tiny vs the PDF.
-  const [versions, setVersions] = useState<{ at: number; annos: Record<number, Anno[]>; page: number; label: string }[]>([]);
+  // Retention ceiling: last MAX_VERSIONS, session-only (in-memory, never
+  // IndexedDB) — each entry is full annos + page, tiny vs the PDF, and
+  // nothing accumulates across visits to fill browser storage.
+  const [versions, setVersions] = useState<EditorVersion[]>([]);
   const [showVersions, setShowVersions] = useState(false);
 
   const takeVersion = (label: string) => {
-    setVersions((prev) => {
-      const entry = { at: Date.now(), annos: structuredClone(annos), page, label };
-      return [...prev, entry].slice(-10);
-    });
+    setVersions((prev) => pushVersion(prev, { at: Date.now(), annos: structuredClone(annos), page, label }));
   };
 
   const restoreVersion = (at: number) => {
@@ -379,7 +443,6 @@ export default function PdfEditor() {
       /* BroadcastChannel absent — single-tab assumption stands */
     }
     return () => channel?.close();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const announceWrite = () => {
@@ -590,7 +653,7 @@ export default function PdfEditor() {
     }
     toast.error('No matches in scope.');
   };
-  const ocrWorkerRef = useRef<{ recognize: (img: string) => Promise<{ data: { words?: { text: string; confidence: number; bbox: { x0: number; y0: number; x1: number; y1: number } }[] } }> } | null>(null);
+  const ocrWorkerRef = useRef<{ recognize: (_img: string) => Promise<{ data: { words?: { text: string; confidence: number; bbox: { x0: number; y0: number; x1: number; y1: number } }[] } }> } | null>(null);
   const { generateCompletion } = useAiProvider();
   const { data: session } = useSession();
   const isSignedIn = !!session?.user;
@@ -1128,16 +1191,9 @@ export default function PdfEditor() {
           ? `Fix the grammar and spelling of this PDF text. Return only the corrected text, no commentary:\n\n${clipped}`
           : `Translate this PDF text to English. Return only the translation, no commentary:\n\n${clipped}`;
       const out = await generateCompletion([{ role: 'user', content: prompt }], 0.3);
-      // drawText doesn't wrap: split into ~75-char lines, stacked downward.
-      const words = out.replace(/\s+/g, ' ').split(' ');
-      const lines: string[] = [];
-      let cur = '';
-      for (const w of words) {
-        if ((cur + ' ' + w).trim().length > 75) { lines.push(cur.trim()); cur = w; }
-        else cur += ' ' + w;
-      }
-      if (cur.trim()) lines.push(cur.trim());
-      const capped = lines.slice(0, 20);
+      // drawText doesn't wrap: split into short stacked lines (shared helper
+      // keeps preview/export/tests on identical breaks).
+      const capped = splitAiLines(out);
       commitAnnos((prev) => {
         const list = [...(prev[page] || [])];
         capped.forEach((line, i) => {
@@ -1187,15 +1243,7 @@ export default function PdfEditor() {
       const { data } = await ocrWorkerRef.current!.recognize(c.toDataURL('image/png'));
       const pageWpt = viewportRef.current.w / scale;
       const kx = pageWpt / c.width;
-      const words = (data.words || [])
-        .filter((w) => w.text.trim().length > 0)
-        .map((w) => ({
-          text: w.text.trim(),
-          x: w.bbox.x0 * kx,
-          y: w.bbox.y0 * kx,
-          size: Math.max(6, Math.min(48, (w.bbox.y1 - w.bbox.y0) * kx)),
-          conf: Math.round(w.confidence),
-        }));
+      const words = mapOcrWords(data.words || [], kx);
       setOcrWords(words);
       toast.success(words.length > 0 ? `${words.length} words recognized — click one to insert it as editable text.` : 'No words recognized on this page.');
     } catch {
@@ -1364,14 +1412,7 @@ export default function PdfEditor() {
         role: 'user',
         content: `Find personal data in this PDF page text: email addresses, phone numbers, ID/government numbers, person names, street addresses, account numbers. Return ONLY a JSON array of the exact substrings as they appear, e.g. ["john@x.com", "+1-555-0100"]. Empty array if none:\n\n${raw}`,
       }], 0.1);
-      let found: string[] = [];
-      try {
-        const cleaned = out.replace(/```json|```/g, '').trim();
-        const parsed: unknown = JSON.parse(cleaned.slice(cleaned.indexOf('[')));
-        if (Array.isArray(parsed)) found = parsed.filter((s): s is string => typeof s === 'string').slice(0, 60);
-      } catch {
-        found = [];
-      }
+      const found = parseSensitiveList(out);
       if (found.length === 0) {
         toast.success('No personal data patterns found on this page.');
         return;
@@ -1456,7 +1497,7 @@ export default function PdfEditor() {
   // directly and must never snapshot (hence raw setAnnos there).
   const undoStack = useRef<Record<number, Anno[]>[]>([]);
   const redoStack = useRef<Record<number, Anno[]>[]>([]);
-  const commitAnnos = (updater: (prev: Record<number, Anno[]>) => Record<number, Anno[]>) => {
+  const commitAnnos = (updater: (_prev: Record<number, Anno[]>) => Record<number, Anno[]>) => {
     undoStack.current.push(structuredClone(annos));
     if (undoStack.current.length > 100) undoStack.current.shift();
     redoStack.current = [];
@@ -1678,7 +1719,6 @@ export default function PdfEditor() {
   // Preload saved-signature presence whenever the pad opens.
   useEffect(() => {
     if (showSignPad) loadSavedSig();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showSignPad]);
 
   // Saved signature: persisted locally (never uploaded) so repeat signing

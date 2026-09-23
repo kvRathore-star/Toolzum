@@ -4,6 +4,11 @@ import {
   pruneEmptyAnnos,
   moveLayerIndex,
   wrapLines,
+  pushVersion,
+  splitAiLines,
+  parseSensitiveList,
+  mapOcrWords,
+  MAX_VERSIONS,
   type Anno,
 } from '@/components/tools/modules/pdf/PdfEditor';
 
@@ -79,5 +84,63 @@ describe('moveLayerIndex (z-order)', () => {
 describe('wrapLines (preview/export agreement)', () => {
   it('splits paragraphs independently', () => {
     expect(wrapLines('ab\ncdef gh', 1000, (s) => s.length)).toEqual(['ab', 'cdef gh']);
+  });
+});
+
+describe('pushVersion (retention ceiling)', () => {
+  it(`keeps at most ${MAX_VERSIONS} versions, evicting oldest`, () => {
+    let vs: ReturnType<typeof pushVersion> = [];
+    for (let i = 0; i < MAX_VERSIONS + 5; i++) {
+      vs = pushVersion(vs, { at: i, annos: {}, page: 1, label: `v${i}` });
+    }
+    expect(vs.length).toBe(MAX_VERSIONS);
+    expect(vs[0]!.label).toBe('v5');
+    expect(vs[MAX_VERSIONS - 1]!.label).toBe(`v${MAX_VERSIONS + 4}`);
+  });
+});
+
+describe('splitAiLines (AI insert shaping)', () => {
+  it('wraps long prose and caps lines', () => {
+    const out = splitAiLines('word '.repeat(100), 75, 20);
+    expect(out.length).toBeLessThanOrEqual(20);
+    expect(out.every((l) => l.length <= 80)).toBe(true);
+  });
+
+  it('empty/AI-garbage input yields no phantom annotations', () => {
+    expect(splitAiLines('   ')).toEqual([]);
+    expect(splitAiLines('')).toEqual([]);
+  });
+});
+
+describe('parseSensitiveList (malformed-AI degradation)', () => {
+  it('parses bare and fenced JSON', () => {
+    expect(parseSensitiveList('["a@b.c"]')).toEqual(['a@b.c']);
+    expect(parseSensitiveList('```json\n["a@b.c"]\n```')).toEqual(['a@b.c']);
+  });
+
+  it('degrades every malformed shape to [] (never throws, never corrupts)', () => {
+    expect(parseSensitiveList('')).toEqual([]);
+    expect(parseSensitiveList('no json here')).toEqual([]);
+    expect(parseSensitiveList('{"not": "an array"}')).toEqual([]);
+    expect(parseSensitiveList('[1,2')).toEqual([]);
+    expect(parseSensitiveList('[\"ok\", 42, null]')).toEqual(['ok']);
+  });
+
+  it('caps at 60 entries', () => {
+    const big = `[${Array.from({ length: 100 }, (_, i) => `"s${i}"`).join(',')}]`;
+    expect(parseSensitiveList(big).length).toBe(60);
+  });
+});
+
+describe('mapOcrWords (geometry mapping)', () => {
+  it('maps bboxes with size clamping and drops blanks', () => {
+    const out = mapOcrWords([
+      { text: 'hi', confidence: 95.4, bbox: { x0: 10, y0: 20, x1: 50, y1: 40 } },
+      { text: '   ', confidence: 10, bbox: { x0: 0, y0: 0, x1: 1, y1: 1 } },
+      { text: 'tall', confidence: 80, bbox: { x0: 0, y0: 0, x1: 10, y1: 1000 } },
+    ], 2);
+    expect(out.length).toBe(2);
+    expect(out[0]).toEqual({ text: 'hi', x: 20, y: 40, size: 40, conf: 95 });
+    expect(out[1]!.size).toBe(48); // clamped
   });
 });
