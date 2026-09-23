@@ -1587,7 +1587,8 @@ export default function PdfEditor() {
               }
             }
           } else if (a.kind === 'note') {
-            // Wrapped lines: export must never silently drop note text.            const words = a.text.split(/\s+/).filter(Boolean);
+            // Wrapped lines: export must never silently drop note text.
+            const words = a.text.split(/\s+/).filter(Boolean);
             const lines: string[] = [];
             let cur = '';
             for (const w of words) {
