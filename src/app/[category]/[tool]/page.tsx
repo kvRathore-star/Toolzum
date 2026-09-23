@@ -108,9 +108,13 @@ export default async function ToolPage(props: { params: Promise<{ category: stri
 
   // Sidebar wayfinding: same-category shelves + tools for CategorySidebar.
   // Reuses CATEGORY_SECTIONS (the category page source of truth); leftover
-  // tools land in a "More …" bucket so nothing is ever unlisted.
+  // tools land in a "More …" bucket so nothing is ever unlisted. The base
+  // list mirrors the category page filter EXACTLY (incl. cross-listed
+  // section tools) — otherwise the sidebar total disagrees with the tabs.
+  const sectionSlugsForSidebar = new Set((CATEGORY_SECTIONS[toolMetadata.category] || []).flatMap(s => s.slugs));
   const catTools = toolsRegistry.filter(t =>
-    t.category === toolMetadata.category && t.showInCategory !== false
+    (t.category === toolMetadata.category && t.showInCategory !== false) ||
+    (sectionSlugsForSidebar.has(t.slug) && t.showInCategory !== false)
   );
   const catSections = CATEGORY_SECTIONS[toolMetadata.category] || [];
   const covered = new Set(catSections.flatMap(s => s.slugs));
