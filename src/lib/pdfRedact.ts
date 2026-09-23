@@ -19,7 +19,7 @@
  * Each reports instead of pretending — see RedactReport.
  */
 
-import { PDFDocument, PDFName, PDFArray } from 'pdf-lib';
+import { PDFDocument, PDFName, PDFArray, PDFDict } from 'pdf-lib';
 
 export type Token =
   | { kind: 'str'; value: string }
@@ -566,11 +566,9 @@ export async function applyRedactions(
       const res = lp.node.Resources();
       if (res) {
         const resolvedRes = doc.context.lookup(res);
-        const xo =
-          resolvedRes && typeof (resolvedRes as { get?: unknown }).get === 'function'
-            ? (doc.context.lookup((resolvedRes as { get: (k: unknown) => unknown }).get(PDFName.of('XObject'))) as unknown)
-            : null;
-        if (xo && typeof (xo as { size?: unknown }).size === 'function' && ((xo as { size: () => number }).size?.() || 0) > 0) {
+        const xoRef = resolvedRes instanceof PDFDict ? resolvedRes.get(PDFName.of('XObject')) : undefined;
+        const xo = xoRef ? doc.context.lookup(xoRef) : null;
+        if (xo instanceof PDFDict && Array.from(xo.entries()).length > 0) {
           flagged.push(`page ${pageNum}: images present — pixels under black boxes are NOT wiped (text runs removed)`);
         }
       }

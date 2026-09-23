@@ -2127,6 +2127,7 @@ export default function PdfEditor() {
         // it in. Nothing extractable survives — text, images, hidden layers
         // all become pixels (and page text selection dies with them; stated
         // in the mode picker, not discovered at export).
+        if (!pdfDoc) throw new Error('PDF not loaded');
         if (redactMode === 'maximum') {
           const targets = Object.keys(redactRects).map(Number).sort((a, b) => b - a);
           for (const pn of targets) {
