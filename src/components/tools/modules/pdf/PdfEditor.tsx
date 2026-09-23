@@ -1452,7 +1452,8 @@ export default function PdfEditor() {
       )}
 
       {/* Focus keeps all three columns (toolbar is never hidden) and drops
-          only the footer strips; true fullscreen comes from the browser API. */}
+      {/* Focus keeps the full 3-column workspace and drops only the footer
+          strips; true fullscreen comes from the browser API. */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
         <div className="lg:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-3 space-y-1.5 max-h-[720px] overflow-y-auto">
           {tools.map((t) => (
@@ -1610,7 +1611,7 @@ export default function PdfEditor() {
           </div>
         </div>
 
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 overflow-auto">
+        <div className="lg:col-span-8 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 overflow-auto">
           <div className="relative mx-auto w-fit" tabIndex={0} role="application" onKeyDown={onCanvasKey} aria-label="PDF page canvas. Arrow keys nudge the selection, Delete removes it, Control C and V copy and paste.">
             <span className="sr-only" aria-live="polite">Page {page} of {pageCount}. Text content: {pageText || 'No readable text on this page.'}</span>
             {rendering && (
