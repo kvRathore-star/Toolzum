@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 import { PDFDocument, StandardFonts, rgb, degrees } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
 import { setupPdfWorker } from '@/lib/pdfjsWorker';
-import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers, Maximize2, Minimize2 } from 'lucide-react';
+import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Redo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers, Maximize2, Minimize2, Keyboard, MoveLeft, MoveRight, Save } from 'lucide-react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from '@/lib/clipboard';
@@ -99,13 +99,14 @@ const INK_COLORS = ['#000000', '#1a56db', '#c81e1e', '#047857'];
 
 type Tool = 'text' | 'highlight' | 'draw' | 'whiteout' | 'image' | 'sign' | 'shape' | 'note' | 'retype' | 'select';
 
-interface TextAnno { kind: 'text'; x: number; y: number; text: string; size: number; color: string; bold: boolean }
+type PdfFont = 'sans' | 'serif' | 'mono';
+interface TextAnno { kind: 'text'; x: number; y: number; text: string; size: number; color: string; bold: boolean; italic?: boolean; underline?: boolean; strike?: boolean; align?: 'left' | 'center' | 'right'; font?: PdfFont }
 interface RectAnno { kind: 'highlight' | 'whiteout'; x: number; y: number; w: number; h: number; color: string }
 interface DrawAnno { kind: 'draw'; points: number[]; color: string; width: number }
 interface ImageAnno { kind: 'image'; x: number; y: number; w: number; h: number; dataUrl: string }
 interface ShapeAnno { kind: 'shape'; shape: 'rect' | 'ellipse' | 'line' | 'arrow'; x: number; y: number; w: number; h: number; color: string; width: number }
 interface NoteAnno { kind: 'note'; x: number; y: number; text: string; color: string }
-interface FlowAnno { kind: 'flow'; x: number; y: number; w: number; text: string; size: number; color: string; bold: boolean }
+interface FlowAnno { kind: 'flow'; x: number; y: number; w: number; text: string; size: number; color: string; bold: boolean; font?: PdfFont }
 type Anno = TextAnno | RectAnno | DrawAnno | ImageAnno | ShapeAnno | NoteAnno | FlowAnno;
 
 /**
@@ -146,6 +147,18 @@ function hexToRgb(hex: string): { r: number; g: number; b: number } {
   };
 }
 
+// Three honest families — the only ones pdf-lib embeds without shipping
+// font files (Helvetica/Times/Courier + bold). No fake "200 fonts" list.
+const FONT_STACK: Record<PdfFont, string> = {
+  sans: 'Helvetica, Arial, sans-serif',
+  serif: 'Times New Roman, Times, serif',
+  mono: 'Courier New, Courier, monospace',
+};
+
+function canvasFont(sizePx: number, bold: boolean, italic: boolean, font: PdfFont = 'sans'): string {
+  return `${italic ? 'italic ' : ''}${bold ? 'bold ' : ''}${sizePx}px ${FONT_STACK[font]}`;
+}
+
 export default function PdfEditor() {
   const [file, setFile] = useState<File | null>(null);
   const [fileBytes, setFileBytes] = useState<Uint8Array | null>(null);
@@ -162,6 +175,11 @@ export default function PdfEditor() {
   const [textColor, setTextColor] = useState('#000000');
   const [textSize, setTextSize] = useState(14);
   const [textBold, setTextBold] = useState(false);
+  const [textItalic, setTextItalic] = useState(false);
+  const [textUnderline, setTextUnderline] = useState(false);
+  const [textStrike, setTextStrike] = useState(false);
+  const [textAlign, setTextAlign] = useState<'left' | 'center' | 'right'>('left');
+  const [textFont, setTextFont] = useState<PdfFont>('sans');
   const [markColor, setMarkColor] = useState(HIGHLIGHT_COLORS[0]!);
   const [inkColor, setInkColor] = useState(INK_COLORS[0]!);
   const [shapeVariant, setShapeVariant] = useState<'rect' | 'ellipse' | 'line' | 'arrow'>('rect');
@@ -180,6 +198,7 @@ export default function PdfEditor() {
   const [ocrRunning, setOcrRunning] = useState(false);
   const [ocrProgress, setOcrProgress] = useState(0);
   const [ocrLang, setOcrLang] = useState('eng');
+  const [showShortcuts, setShowShortcuts] = useState(false);
   // Screen-reader page text: canvas pixels expose nothing to AT. Fed from
   // the cached text layer; empty on scanned pages until OCR runs.
   const [pageText, setPageText] = useState('');
@@ -187,7 +206,127 @@ export default function PdfEditor() {
   // reverts (live-per-keystroke re-rendered the overlay on every press).
   const [textDraft, setTextDraft] = useState<string | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
+  const canvasColRef = useRef<HTMLDivElement>(null);
   const [focus, setFocus] = useState(false);
+
+  // Autosave (IndexedDB — file-sized data doesn't fit localStorage):
+  // debounced after edits, explicit Save button, recovery on mount.
+  // "Save" persists working state; "Download PDF" exports flattened output.
+  // Dirty-ness is DERIVED (last-saved identity vs current), never set in an
+  // effect — the repo's hooks rules forbid setState-in-effect bodies.
+  const [saving, setSaving] = useState(false);
+  const [savedAt, setSavedAt] = useState<number | null>(null);
+  const lastSaved = useRef<{ annos: Record<number, Anno[]>; page: number } | null>(null);
+  const dirty = !!fileBytes && (lastSaved.current === null || lastSaved.current.annos !== annos);
+
+  const idb = () =>
+    new Promise<IDBDatabase>((resolve, reject) => {
+      const req = indexedDB.open('toolzum-pdf-editor', 1);
+      req.onupgradeneeded = () => {
+        req.result.createObjectStore('sessions');
+      };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+
+  const writeDraft = async (annosSnap: Record<number, Anno[]>, bytes: Uint8Array | null, name: string | undefined, pg: number) => {
+    if (!bytes) return false;
+    setSaving(true);
+    try {
+      const db = await idb();
+      await new Promise<void>((resolve, reject) => {
+        const tx = db.transaction('sessions', 'readwrite');
+        tx.objectStore('sessions').put(
+          { bytes: bytes.slice().buffer as ArrayBuffer, name: name || 'document.pdf', annos: annosSnap, page: pg, updatedAt: Date.now() },
+          'draft',
+        );
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+      });
+      db.close();
+      lastSaved.current = { annos: annosSnap, page: pg };
+      setSavedAt(Date.now());
+      return true;
+    } catch {
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const saveNow = async (silent = false) => {
+    if (!fileBytes) return;
+    if (!silent) toast.loading('Saving…', { id: 'pdfedit-save' });
+    const ok = await writeDraft(annos, fileBytes, file?.name, page);
+    if (!silent) {
+      if (ok) toast.success('Saved — pick up where you left off anytime.', { id: 'pdfedit-save' });
+      else toast.error('Save failed — browser storage may be full or blocked.', { id: 'pdfedit-save' });
+    }
+  };
+
+  // Debounced autosave on edits (3s idle). Skips when neither annos nor
+  // page moved since the last write (page turns alone don't rewrite 100MB).
+  useEffect(() => {
+    if (!fileBytes) return;
+    const last = lastSaved.current;
+    if (last && last.annos === annos && last.page === page) return;
+    const bytes = fileBytes;
+    const name = file?.name;
+    const pg = page;
+    const snap = annos;
+    const t = setTimeout(() => {
+      writeDraft(snap, bytes, name, pg);
+    }, 3000);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [annos, page]);
+
+  // Recovery on mount: restore last draft and say so (with age).
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const db = await idb();
+        const row = await new Promise<{
+          bytes?: ArrayBuffer; name?: string; annos?: Record<number, Anno[]>; page?: number; updatedAt?: number;
+        } | null>((resolve, reject) => {
+          const tx = db.transaction('sessions', 'readonly');
+          const req = tx.objectStore('sessions').get('draft');
+          req.onsuccess = () => resolve((req.result as typeof row) || null);
+          req.onerror = () => reject(req.error);
+        });
+        db.close();
+        if (!row || !row.bytes || cancelled) return;
+        const ageMin = Math.round((Date.now() - (row.updatedAt || Date.now())) / 60000);
+        if (Date.now() - (row.updatedAt || 0) > 7 * 24 * 3600 * 1000) return; // stale
+        await openBytes(new Uint8Array(row.bytes), row.name || 'recovered.pdf');
+        if (cancelled) return;
+        setAnnos(row.annos || {});
+        if (row.page) setPage(row.page);
+        lastSaved.current = { annos: row.annos || {}, page: row.page || 1 };
+        setSavedAt(row.updatedAt || null);
+        toast.success(`Recovered your last session${ageMin > 1 ? ` — ${ageMin} min ago` : ''}.`, { duration: 5000 });
+      } catch {
+        /* no draft or IDB unavailable — start clean */
+      }
+    })();
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Fit-to-width / fit-to-page: derive scale from the live column size and
+  // the page's point dimensions (viewport units ÷ current scale).
+  const fitZoom = (mode: 'width' | 'page') => {
+    const col = canvasColRef.current;
+    if (!col || !pdfDoc) return;
+    const availW = col.clientWidth - 32;
+    const availH = 640;
+    const ptW = viewportRef.current.w / scale;
+    const ptH = viewportRef.current.h / scale;
+    if (!ptW || !ptH) return;
+    const z = mode === 'width' ? availW / ptW : Math.min(availW / ptW, availH / ptH);
+    setScale(Math.max(0.25, Math.min(3, Math.round(z * 100) / 100)));
+  };
 
   // Focus = true browser fullscreen on the editor root (Google-Docs-style):
   // site chrome disappears, toolbar + canvas + thumbs stay. Falls back to
@@ -216,6 +355,67 @@ export default function PdfEditor() {
   const [replaceText, setReplaceText] = useState('');
   const [replaceScope, setReplaceScope] = useState<'page' | 'all'>('page');
   const [replacing, setReplacing] = useState(false);
+  // Find navigation: non-persisted match boxes (never exported), current in
+  // solid amber, rest dashed. Cross-page when scope is All.
+  const [findNav, setFindNav] = useState<{ page: number; rects: { x: number; y: number; w: number; h: number }[]; idx: number } | null>(null);
+
+  const findMatchesOn = async (pg: number, needle: string) => {
+    const items = await ensureTextLayer(pg);
+    const q = needle.toLowerCase();
+    return items
+      .filter((it) => it.str.toLowerCase().includes(q))
+      .map((it) => ({ x: it.x - 2, y: it.yTop - 2, w: it.w + 4, h: it.size + 5 }));
+  };
+
+  const findHighlight = async () => {
+    const needle = findText.trim();
+    if (needle.length < 2) {
+      toast.error('Enter at least 2 characters to find.');
+      return;
+    }
+    try {
+      const rects = await findMatchesOn(page, needle);
+      if (rects.length === 0) {
+        const scopeMsg = replaceScope === 'all' ? ' on this page — try Next to scan onward' : '';
+        toast.error(`No matches${scopeMsg}.`);
+        setFindNav(null);
+        return;
+      }
+      setFindNav({ page, rects, idx: 0 });
+      toast.success(`${rects.length} match${rects.length === 1 ? '' : 'es'} on this page.`);
+    } catch {
+      toast.error('Could not read the text layer — scanned pages need OCR first.');
+    }
+  };
+
+  const findStep = async (dir: 1 | -1) => {
+    const needle = findText.trim();
+    if (needle.length < 2 || !pdfDoc) return;
+    const cur = findNav;
+    const pages = replaceScope === 'all'
+      ? Array.from({ length: pageCount }, (_, i) => i + 1)
+      : [page];
+    // Order pages starting from current, wrapping in the step direction.
+    const start = pages.indexOf(cur?.page ?? page);
+    const ordered: number[] = [];
+    for (let k = 0; k < pages.length; k++) {
+      ordered.push(pages[(start + dir * k % pages.length + pages.length) % pages.length]!);
+    }
+    for (const pg of ordered) {
+      try {
+        const rects = await findMatchesOn(pg, needle);
+        if (rects.length === 0) continue;
+        let idx = dir === 1 ? 0 : rects.length - 1;
+        if (pg === cur?.page) {
+          idx = (cur.idx + dir + rects.length) % rects.length;
+        }
+        if (pg !== page) goPage(pg);
+        setFindNav({ page: pg, rects, idx });
+        return;
+      } catch { /* next page */ }
+    }
+    toast.error('No matches in scope.');
+  };
   const ocrWorkerRef = useRef<{ recognize: (img: string) => Promise<{ data: { words?: { text: string; confidence: number; bbox: { x0: number; y0: number; x1: number; y1: number } }[] } }> } | null>(null);
   const { generateCompletion } = useAiProvider();
   const { data: session } = useSession();
@@ -257,6 +457,8 @@ export default function PdfEditor() {
       setThumbUrls([]);
       setThumbsAll(false);
       loadedRef.current = new Set();
+      undoStack.current = [];
+      redoStack.current = [];
       toast.success(`${doc.numPages}-page PDF loaded — everything stays in your browser.`, { id: toastId });
     } catch (e) {
       toast.error(
@@ -408,13 +610,39 @@ export default function PdfEditor() {
     const ctx = overlay.getContext('2d')!;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, viewportRef.current.w, viewportRef.current.h);
+    // Find-match overlay (ephemeral: drawn, never stored or exported).
+    if (findNav && findNav.page === page) {
+      findNav.rects.forEach((r, i) => {
+        ctx.strokeStyle = i === findNav.idx ? '#f59e0b' : 'rgba(245,158,11,0.55)';
+        ctx.lineWidth = i === findNav.idx ? 2.5 : 1.5;
+        if (i !== findNav.idx) ctx.setLineDash([4, 3]);
+        ctx.strokeRect(px(r.x), px(r.y), px(r.w), px(r.h));
+        ctx.setLineDash([]);
+      });
+    }
     const list = annos[page] || [];
     list.forEach((a, i) => {
       const isSel = selected?.page === page && selected?.index === i;
       if (a.kind === 'text') {
-        ctx.font = `${a.bold ? 'bold ' : ''}${px(a.size)}px Helvetica, Arial, sans-serif`;
+        // Alignment anchors at the click point: left grows rightward,
+        // center grows both ways, right grows leftward.
+        ctx.font = canvasFont(px(a.size), a.bold, !!a.italic, a.font);
         ctx.fillStyle = a.color;
+        ctx.textAlign = a.align || 'left';
         ctx.fillText(a.text || '…', px(a.x), px(a.y));
+        const tw = ctx.measureText(a.text || '…').width;
+        const bx = a.align === 'center' ? px(a.x) - tw / 2 : a.align === 'right' ? px(a.x) - tw : px(a.x);
+        ctx.textAlign = 'left';
+        const deco = (dy: number) => {
+          ctx.strokeStyle = a.color;
+          ctx.lineWidth = Math.max(1, px(a.size) / 14);
+          ctx.beginPath();
+          ctx.moveTo(bx, dy);
+          ctx.lineTo(bx + tw, dy);
+          ctx.stroke();
+        };
+        if (a.underline) deco(px(a.y) + 2);
+        if (a.strike) deco(px(a.y) - px(a.size) * 0.3);
       } else if (a.kind === 'highlight') {
         ctx.globalAlpha = 0.4;
         ctx.fillStyle = a.color;
@@ -468,8 +696,7 @@ export default function PdfEditor() {
         ctx.font = 'bold 14px Helvetica, Arial, sans-serif';
         ctx.fillText('!', px(a.x) + 8, px(a.y) + 16);
       } else if (a.kind === 'flow') {
-        const font = `${a.bold ? 'bold ' : ''}${px(a.size)}px Helvetica, Arial, sans-serif`;
-        ctx.font = font;
+        ctx.font = canvasFont(px(a.size), a.bold, false, a.font);
         const lines = wrapLines(a.text || 'Type here…', px(a.w), (s) => ctx.measureText(s).width);
         ctx.fillStyle = a.color;
         lines.forEach((line, li) => {
@@ -499,7 +726,7 @@ export default function PdfEditor() {
         ctx.setLineDash([]);
       }
     });
-  }, [annos, page, selected, scale]);
+  }, [annos, page, selected, scale, findNav]);
 
   useEffect(() => { drawOverlay(); }, [drawOverlay]);
 
@@ -522,6 +749,7 @@ export default function PdfEditor() {
     setOcrWords([]);
     setSelection([]);
     setTextDraft(null);
+    setFindNav(null);
   };
 
   const canvasPos = (e: React.PointerEvent) => {
@@ -530,7 +758,7 @@ export default function PdfEditor() {
   };
 
   const pushAnno = (p: number, a: Anno) => {
-    setAnnos((prev) => ({ ...prev, [p]: [...(prev[p] || []), a] }));
+    commitAnnos((prev) => ({ ...prev, [p]: [...(prev[p] || []), a] }));
     setSelected({ page: p, index: (annos[p] || []).length });
   };
 
@@ -549,10 +777,10 @@ export default function PdfEditor() {
       if (items.length === 0 && existing.length === 0 && file) {
         const pageW = viewportRef.current.w / scale;
         const margin = Math.min(72, pageW * 0.12);
-        pushAnno(page, { kind: 'flow', x: margin, y: pos.y, w: pageW - margin * 2, text: '', size: textSize, color: textColor, bold: textBold });
+        pushAnno(page, { kind: 'flow', x: margin, y: pos.y, w: pageW - margin * 2, text: '', size: textSize, color: textColor, bold: textBold, font: textFont });
         toast.success('Flowing text box — type in the left panel, it wraps and grows.');
       } else {
-        pushAnno(page, { kind: 'text', x, y, text: 'New text', size: textSize, color: textColor, bold: textBold });
+        pushAnno(page, { kind: 'text', x, y, text: 'New text', size: textSize, color: textColor, bold: textBold, italic: textItalic, underline: textUnderline, strike: textStrike, align: textAlign, font: textFont });
       }
     } else if (tool === 'retype') {
       retypeAt(x, y);
@@ -696,7 +924,7 @@ export default function PdfEditor() {
       }
       if (cur.trim()) lines.push(cur.trim());
       const capped = lines.slice(0, 20);
-      setAnnos((prev) => {
+      commitAnnos((prev) => {
         const list = [...(prev[page] || [])];
         capped.forEach((line, i) => {
           list.push({ kind: 'text', x: 36, y: 60 + i * 16, text: line, size: 11, color: '#1a56db', bold: false });
@@ -840,7 +1068,7 @@ export default function PdfEditor() {
         toast.error('No text found here — this may be a scanned page (run OCR) or an image.');
         return;
       }
-      setAnnos((prev) => ({
+      commitAnnos((prev) => ({
         ...prev,
         [page]: [
           ...(prev[page] || []),
@@ -917,7 +1145,7 @@ export default function PdfEditor() {
         toast.success('AI flagged items, but none matched on-page text exactly — review manually.');
         return;
       }
-      setAnnos((prev) => ({
+      commitAnnos((prev) => ({
         ...prev,
         [page]: [
           ...(prev[page] || []),
@@ -955,7 +1183,7 @@ export default function PdfEditor() {
         const items = await ensureTextLayer(pg);
         hitsByPage[pg] = items.filter((it) => it.str.toLowerCase().includes(needleLower));
       }
-      setAnnos((prev) => {
+      commitAnnos((prev) => {
         const next = { ...prev };
         for (const pg of pages) {
           const hits = hitsByPage[pg] || [];
@@ -981,47 +1209,91 @@ export default function PdfEditor() {
     }
   };
 
+  // History: every mutating op goes through commitAnnos (snapshots first).
+  // Redo stack clears on any new change (standard). Undo/redo restore
+  // directly and must never snapshot (hence raw setAnnos there).
+  const undoStack = useRef<Record<number, Anno[]>[]>([]);
+  const redoStack = useRef<Record<number, Anno[]>[]>([]);
+  const commitAnnos = (updater: (prev: Record<number, Anno[]>) => Record<number, Anno[]>) => {
+    undoStack.current.push(structuredClone(annos));
+    if (undoStack.current.length > 100) undoStack.current.shift();
+    redoStack.current = [];
+    setAnnos(updater);
+  };
+
   const undo = () => {
-    const list = annos[page] || [];
-    if (list.length === 0) return;
-    setAnnos((prev) => ({ ...prev, [page]: list.slice(0, -1) }));
+    const prev = undoStack.current.pop();
+    if (!prev) return;
+    redoStack.current.push(structuredClone(annos));
+    setAnnos(prev);
     setSelected(null);
   };
 
-  // Page structure ops (rotate / duplicate / delete current page). Annotations
-  // are cleared because page indices shift — stated in the toast, not hidden.
-  const restructure = async (op: 'rotate' | 'duplicate' | 'delete') => {
+  const redo = () => {
+    const next = redoStack.current.pop();
+    if (!next) return;
+    undoStack.current.push(structuredClone(annos));
+    setAnnos(next);
+    setSelected(null);
+  };
+
+  const historyCount = undoStack.current.length;
+  const redoCount = redoStack.current.length;
+
+  // Page structure ops (rotate / duplicate / delete / move current page).
+  // Annotations are cleared because page indices shift — stated in the
+  // toast, not hidden.
+  const restructure = async (op: 'rotate' | 'duplicate' | 'delete' | 'left' | 'right') => {
     if (!fileBytes) return;
     if (op === 'delete' && pageCount <= 1) {
       toast.error('Cannot delete the only page.');
       return;
     }
+    if ((op === 'left' && page <= 1) || (op === 'right' && page >= pageCount)) return;
     try {
       const doc = await PDFDocument.load(fileBytes.slice());
       const idx = page - 1;
+      let nextPage = page;
       if (op === 'rotate') {
         const pg = doc.getPages()[idx]!;
         pg.setRotation(degrees((pg.getRotation().angle + 90) % 360));
       } else if (op === 'duplicate') {
         const [copy] = await doc.copyPages(doc, [idx]);
         doc.insertPage(idx + 1, copy!);
-      } else {
+        nextPage = page + 1;
+      } else if (op === 'delete') {
         doc.removePage(idx);
+        nextPage = Math.min(page, doc.getPageCount());
+      } else {
+        // Reorder: remove + reinsert one slot over (annotations cleared —
+        // page indices shift — stated in the toast below).
+        const [moving] = await doc.copyPages(doc, [idx]);
+        doc.removePage(idx);
+        const at = op === 'left' ? idx - 1 : idx + 1;
+        doc.insertPage(Math.max(0, Math.min(at, doc.getPageCount())), moving!);
+        nextPage = op === 'left' ? page - 1 : page + 1;
       }
       const bytes = new Uint8Array(await doc.save());
       const fresh = await pdfjsLib.getDocument({ data: bytes.slice() }).promise;
       setFileBytes(bytes);
       setPdfDoc(fresh);
       setPageCount(fresh.numPages);
-      setPage(Math.min(page, fresh.numPages));
+      setPage(nextPage);
       setAnnos({});
       setSelected(null);
       setThumbUrls([]);
       setThumbsAll(false);
       loadedRef.current = new Set();
+      undoStack.current = [];
+      redoStack.current = [];
       setOcrWords([]);
       textLayerRef.current = {};
-      toast.success(op === 'rotate' ? 'Page rotated.' : op === 'duplicate' ? 'Page duplicated.' : 'Page deleted. Annotations were cleared (page order changed).');
+      toast.success(
+        op === 'rotate' ? 'Page rotated.'
+          : op === 'duplicate' ? 'Page duplicated.'
+            : op === 'delete' ? 'Page deleted. Annotations were cleared (page order changed).'
+              : `Page moved ${op === 'left' ? 'earlier' : 'later'}. Annotations were cleared (page order changed).`,
+      );
     } catch {
       toast.error('Page operation failed.');
     }
@@ -1029,8 +1301,19 @@ export default function PdfEditor() {
 
   const deleteSelected = () => {
     if (!selected) return;
-    setAnnos((prev) => ({ ...prev, [selected.page]: (prev[selected.page] || []).filter((_, i) => i !== selected.index) }));
+    commitAnnos((prev) => ({ ...prev, [selected.page]: (prev[selected.page] || []).filter((_, i) => i !== selected.index) }));
     setSelected(null);
+  };
+
+  const duplicateSelected = () => {
+    if (!selected) return;
+    const a = annos[selected.page]?.[selected.index];
+    if (!a) return;
+    const copy = JSON.parse(JSON.stringify(a)) as Anno;
+    if (copy.kind === 'text' || copy.kind === 'note') { copy.x += 12; copy.y += 12; }
+    else if (copy.kind === 'draw') { copy.points = copy.points.map((p) => p + 12); }
+    else { copy.x += 12; copy.y += 12; }
+    pushAnno(selected.page, copy);
   };
 
   const clipboardRef = useRef<Anno | null>(null);
@@ -1066,7 +1349,7 @@ export default function PdfEditor() {
       toast.error('Select a signature or image stamp first.');
       return;
     }
-    setAnnos((prev) => {
+    commitAnnos((prev) => {
       const next = { ...prev };
       for (let p = 1; p <= pageCount; p++) {
         if (p === selected.page) continue;
@@ -1077,11 +1360,18 @@ export default function PdfEditor() {
     toast.success(`Stamped on all ${pageCount} pages.`);
   };
 
-  // Keyboard: arrows nudge, Delete removes, Ctrl+C/V copies. Ignored while
-  // typing in the text/note panels.
+  // Keyboard: arrows nudge, Delete removes, Ctrl+C/V copies, Ctrl+Z/Y
+  // undo/redo, Ctrl+S downloads, Ctrl+D duplicates selection, ? opens help.
+  // Ignored while typing in the text/note panels.
   const onCanvasKey = (e: React.KeyboardEvent) => {
     const t = e.target as HTMLElement;
     if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') return;
+    const mod = e.ctrlKey || e.metaKey;
+    if (mod && e.key.toLowerCase() === 'z' && !e.shiftKey) { e.preventDefault(); undo(); return; }
+    if ((mod && e.key.toLowerCase() === 'y') || (mod && e.shiftKey && e.key.toLowerCase() === 'z')) { e.preventDefault(); redo(); return; }
+    if (mod && e.key.toLowerCase() === 's') { e.preventDefault(); saveNow(); return; }
+    if (mod && e.key.toLowerCase() === 'd') { e.preventDefault(); duplicateSelected(); return; }
+    if (e.key === '?') { setShowShortcuts(true); return; }
     const step = e.shiftKey ? 10 : 1;
     if (!selected) return;
     if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); deleteSelected(); }
@@ -1091,7 +1381,7 @@ export default function PdfEditor() {
       e.preventDefault();
       const dx = e.key === 'ArrowLeft' ? -step : e.key === 'ArrowRight' ? step : 0;
       const dy = e.key === 'ArrowUp' ? -step : e.key === 'ArrowDown' ? step : 0;
-      setAnnos((prev) => ({
+      commitAnnos((prev) => ({
         ...prev,
         [selected.page]: (prev[selected.page] || []).map((a, i) => {
           if (i !== selected.index) return a;
@@ -1185,6 +1475,32 @@ export default function PdfEditor() {
       }
       const helv = await pdfDocLib.embedFont(StandardFonts.Helvetica);
       const helvBold = await pdfDocLib.embedFont(StandardFonts.HelveticaBold);
+      // Full style matrix per family — the only fonts pdf-lib embeds
+      // without shipping files (hence the 3-family cap in the UI).
+      const libFonts = {
+        sans: {
+          plain: helv,
+          bold: helvBold,
+          italic: await pdfDocLib.embedFont(StandardFonts.HelveticaOblique),
+          boldItalic: await pdfDocLib.embedFont(StandardFonts.HelveticaBoldOblique),
+        },
+        serif: {
+          plain: await pdfDocLib.embedFont(StandardFonts.TimesRoman),
+          bold: await pdfDocLib.embedFont(StandardFonts.TimesRomanBold),
+          italic: await pdfDocLib.embedFont(StandardFonts.TimesRomanItalic),
+          boldItalic: await pdfDocLib.embedFont(StandardFonts.TimesRomanBoldItalic),
+        },
+        mono: {
+          plain: await pdfDocLib.embedFont(StandardFonts.Courier),
+          bold: await pdfDocLib.embedFont(StandardFonts.CourierBold),
+          italic: await pdfDocLib.embedFont(StandardFonts.CourierOblique),
+          boldItalic: await pdfDocLib.embedFont(StandardFonts.CourierBoldOblique),
+        },
+      } as const;
+      const libFontFor = (font: PdfFont | undefined, bold: boolean, italic: boolean) => {
+        const fam = libFonts[font || 'sans'];
+        return italic ? (bold ? fam.boldItalic : fam.italic) : bold ? fam.bold : fam.plain;
+      };
       const libPages = pdfDocLib.getPages();
       for (const [pageNum, list] of Object.entries(annos)) {
         const lp = libPages[Number(pageNum) - 1];
@@ -1194,18 +1510,27 @@ export default function PdfEditor() {
         for (const a of list) {
           if (a.kind === 'text') {
             const c = hexToRgb(a.color);
+            const font = libFontFor(a.font, a.bold, !!a.italic);
+            const tw = font.widthOfTextAtSize(a.text, a.size);
+            const tx = a.align === 'center' ? a.x - tw / 2 : a.align === 'right' ? a.x - tw : a.x;
+            const ty = pageH - a.y;
             lp.drawText(a.text, {
-              x: a.x,
-              y: pageH - a.y,
+              x: tx,
+              y: ty,
               size: a.size,
-              font: a.bold ? helvBold : helv,
+              font,
               color: rgb(c.r, c.g, c.b),
             });
+            const decoPdf = (dy: number) => {
+              lp.drawLine({ start: { x: tx, y: dy }, end: { x: tx + tw, y: dy }, thickness: Math.max(0.75, a.size / 14), color: rgb(c.r, c.g, c.b) });
+            };
+            if (a.underline) decoPdf(ty - 2);
+            if (a.strike) decoPdf(ty + a.size * 0.3);
           } else if (a.kind === 'flow') {
             // Same wrapLines as the preview (export measures approximately;
             // maxWidth scales any over-wide line down so nothing overflows).
             const c = hexToRgb(a.color);
-            const font = a.bold ? helvBold : helv;
+            const font = libFontFor(a.font, a.bold, false);
             const approx = (s: string) => s.length * a.size * 0.55;
             const lines = wrapLines(a.text, a.w, approx);
             lines.forEach((line, li) => {
@@ -1300,18 +1625,19 @@ export default function PdfEditor() {
 
   const selAnno = selected ? annos[selected.page]?.[selected.index] : undefined;
 
-  const tools: { id: Tool; label: string; icon: React.ReactNode }[] = [
-    { id: 'text', label: 'Text', icon: <Type className="w-4 h-4" /> },
-    { id: 'select', label: 'Select', icon: <TextSelect className="w-4 h-4" /> },
-    { id: 'retype', label: 'Retype', icon: <MousePointerClick className="w-4 h-4" /> },
-    { id: 'highlight', label: 'Highlight', icon: <Highlighter className="w-4 h-4" /> },
-    { id: 'draw', label: 'Draw', icon: <PenLine className="w-4 h-4" /> },
-    { id: 'shape', label: 'Shapes', icon: <Square className="w-4 h-4" /> },
-    { id: 'note', label: 'Note', icon: <StickyNote className="w-4 h-4" /> },
-    { id: 'whiteout', label: 'Cover up', icon: <Eraser className="w-4 h-4" /> },
-    { id: 'image', label: 'Image', icon: <ImageIcon className="w-4 h-4" /> },
-    { id: 'sign', label: 'Sign', icon: <PenTool className="w-4 h-4" /> },
+  const tools: { id: Tool; label: string; icon: React.ReactNode; group: string }[] = [
+    { id: 'text', label: 'Text', icon: <Type className="w-4 h-4" />, group: 'Text & content' },
+    { id: 'select', label: 'Select', icon: <TextSelect className="w-4 h-4" />, group: 'Text & content' },
+    { id: 'retype', label: 'Retype', icon: <MousePointerClick className="w-4 h-4" />, group: 'Text & content' },
+    { id: 'highlight', label: 'Highlight', icon: <Highlighter className="w-4 h-4" />, group: 'Drawing' },
+    { id: 'draw', label: 'Draw', icon: <PenLine className="w-4 h-4" />, group: 'Drawing' },
+    { id: 'shape', label: 'Shapes', icon: <Square className="w-4 h-4" />, group: 'Drawing' },
+    { id: 'note', label: 'Note', icon: <StickyNote className="w-4 h-4" />, group: 'Text & content' },
+    { id: 'whiteout', label: 'Cover up', icon: <Eraser className="w-4 h-4" />, group: 'Drawing' },
+    { id: 'image', label: 'Image', icon: <ImageIcon className="w-4 h-4" />, group: 'Media & extras' },
+    { id: 'sign', label: 'Sign', icon: <PenTool className="w-4 h-4" />, group: 'Media & extras' },
   ];
+  const toolGroups = ['Text & content', 'Drawing', 'Media & extras'];
 
   if (!pdfDoc) {
     return (
@@ -1369,8 +1695,22 @@ export default function PdfEditor() {
                 {Math.round(z * 100)}%
               </button>
             ))}
+            <button onClick={() => fitZoom('width')} aria-label="Fit page width" title="Fit to width" className="px-2 py-1.5 rounded-lg text-[11px] font-bold border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-overlay)]">
+              Fit
+            </button>
+            <button onClick={() => fitZoom('page')} aria-label="Fit whole page" title="Fit whole page" className="px-2 py-1.5 rounded-lg text-[11px] font-bold border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-overlay)]">
+              Page
+            </button>
           </div>
           <div className="flex items-center gap-2 ml-auto">
+            {fileBytes && (
+              <span className="text-[11px] font-mono text-[var(--text-muted)]" aria-live="polite" title={savedAt ? `Last saved ${new Date(savedAt).toLocaleTimeString()}` : 'Not saved yet'}>
+                {saving ? 'Saving…' : dirty ? 'Unsaved changes' : savedAt ? `Saved ${new Date(savedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` : ''}
+              </span>
+            )}
+            <button onClick={() => saveNow()} aria-label="Save working session" title="Save session (Ctrl+S) — persists edits without exporting" className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
+              <Save className="w-4 h-4" /> Save
+            </button>
             <button onClick={toggleFocus} aria-pressed={focus} aria-label={focus ? 'Exit focus mode' : 'Enter focus mode (editor only)'} title={focus ? 'Exit focus mode' : 'Focus mode — editor only'} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
               {focus ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />} {focus ? 'Exit focus' : 'Focus'}
             </button>
@@ -1381,7 +1721,7 @@ export default function PdfEditor() {
         </div>
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-2.5 border-t border-[var(--border-subtle)] max-sm:flex-nowrap max-sm:overflow-x-auto">
           <div className="flex items-center gap-1.5" role="group" aria-label="AI actions">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">AI</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]" title="Editing is local. AI actions send only the page text to our server.">AI</span>
             <button onClick={() => runAiAction('summarize')} disabled={aiWorking} aria-label="Summarize this page with AI, 1 credit" title={isSignedIn ? 'Summarize page · 1 credit' : 'Sign in to use AI actions'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
               <Sparkles className="w-4 h-4" /> {aiWorking ? '…' : 'Summarize'}
             </button>
@@ -1413,6 +1753,12 @@ export default function PdfEditor() {
             </button>
             <button onClick={() => restructure('delete')} aria-label="Delete current page" title="Delete page" className="p-2 rounded-lg border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)]">
               <FileMinus2 className="w-4 h-4" />
+            </button>
+            <button onClick={() => restructure('left')} disabled={page <= 1} aria-label="Move page earlier" title="Move page earlier" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
+              <MoveLeft className="w-4 h-4" />
+            </button>
+            <button onClick={() => restructure('right')} disabled={page >= pageCount} aria-label="Move page later" title="Move page later" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
+              <MoveRight className="w-4 h-4" />
             </button>
           </div>
           <div className="flex items-center gap-1.5" role="group" aria-label="Edit actions">
@@ -1526,24 +1872,53 @@ export default function PdfEditor() {
       {/* Focus keeps all three columns (toolbar is never hidden) and drops
       {/* Focus keeps the full 3-column workspace and drops only the footer
           strips; true fullscreen comes from the browser API. */}
+      {showShortcuts && (
+        <div className="fixed inset-0 z-[95] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
+          <button aria-label="Close shortcuts" onClick={() => setShowShortcuts(false)} tabIndex={-1} className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-default" />
+          <div className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 max-w-sm w-full space-y-2">
+            <p className="text-sm font-bold text-[var(--text-primary)] mb-3">Keyboard shortcuts</p>
+            {[
+              ['Undo / redo', 'Ctrl+Z · Ctrl+Y'],
+              ['Save session', 'Ctrl+S'],
+              ['Duplicate selected', 'Ctrl+D'],
+              ['Delete selected', 'Del'],
+              ['Copy / paste', 'Ctrl+C · Ctrl+V'],
+              ['Nudge (×10 with Shift)', 'Arrow keys'],
+              ['This panel', '?'],
+            ].map(([label, keys]) => (
+              <div key={label} className="flex items-center justify-between text-xs">
+                <span className="text-[var(--text-secondary)]">{label}</span>
+                <kbd className="px-2 py-1 rounded-lg bg-[var(--bg-overlay)] border border-[var(--border-subtle)] font-mono text-[var(--text-primary)]">{keys}</kbd>
+              </div>
+            ))}
+            <button onClick={() => setShowShortcuts(false)} className="w-full mt-3 px-4 py-2 rounded-xl bg-[var(--accent-ink)] text-white text-xs font-bold">Done</button>
+          </div>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
-        <div className="lg:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-3 space-y-1.5 max-h-[720px] overflow-y-auto">
-          {tools.map((t) => (
-            <button
-              key={t.id}
-              onClick={() => { setTool(t.id); if (t.id === 'sign' && !signPadDataRef.current) setShowSignPad(true); if (t.id === 'image' && !pendingImageRef.current) imagePickRef.current?.click(); }}
-              aria-pressed={tool === t.id}
-              aria-label={`${t.label} tool`}
-              title={t.label}
-              className={`w-full flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold transition-colors ${tool === t.id ? 'bg-[var(--accent-ink)] text-white shadow' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border border-[var(--border-subtle)]'}`}
-            >
-              {t.icon} {t.label}
-            </button>
+        <div className="lg:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-3 space-y-3 max-h-[720px] overflow-y-auto">
+          {toolGroups.map((g) => (
+            <div key={g} className="space-y-1.5">
+              <p className="px-1 text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">{g}</p>
+              {tools.filter((t) => t.group === g).map((t) => (
+                <button
+                  key={t.id}
+                  onClick={() => { setTool(t.id); if (t.id === 'sign' && !signPadDataRef.current) setShowSignPad(true); if (t.id === 'image' && !pendingImageRef.current) imagePickRef.current?.click(); }}
+                  aria-pressed={tool === t.id}
+                  aria-label={`${t.label} tool`}
+                  title={t.label}
+                  className={`w-full flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold transition-colors ${tool === t.id ? 'bg-[var(--accent-ink)] text-white shadow' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border border-[var(--border-subtle)]'}`}
+                >
+                  {t.icon} {t.label}
+                </button>
+              ))}
+            </div>
           ))}
           <input ref={imagePickRef} type="file" accept="image/png,image/jpeg" className="hidden" aria-label="Pick stamp image" onChange={(e) => onPickImage(e.target.files?.[0] || null)} />
-          <div className="pt-1">
-            <span className={labelCls}>Emoji stamps</span>
-            <div className="grid grid-cols-6 gap-1">
+          <details className="pt-1">
+            <summary className="px-1 text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] cursor-pointer hover:text-[var(--text-primary)]">Emoji stamps</summary>
+            <div className="grid grid-cols-6 gap-1 mt-1.5">
               {EMOJI_SET.map((e) => (
                 <button key={e} onClick={() => stampEmoji(e)} aria-label={`Stamp ${e}`} title="Stamp this emoji" className="text-lg leading-none p-1 rounded-lg hover:bg-[var(--bg-overlay)] transition-colors">
                   {e}
@@ -1551,19 +1926,40 @@ export default function PdfEditor() {
               ))}
             </div>
             <Link href="/utility/emoji-picker" target="_blank" rel="noopener" title="Opens in a new tab — your editing session stays intact" className="text-[11px] text-[var(--accent)] hover:underline">More emoji →</Link>
-          </div>
+          </details>
           <div className="pt-2 space-y-2">
             {(tool === 'text') && (
               <>
                 <span className={labelCls}>Text color</span>
                 <div className="flex gap-1.5 flex-wrap">
                   {INK_COLORS.map((c) => (
-                    <button key={c} onClick={() => setTextColor(c)} aria-label={`Text color ${c}`} className={`w-6 h-6 rounded-full border-2 ${textColor === c ? 'border-[var(--accent)]' : 'border-transparent'}`} style={{ backgroundColor: c }} />
+                    <button key={c} onClick={() => setTextColor(c)} aria-label={`Text color ${c}`} title={`Text color ${c}`} className={`w-6 h-6 rounded-full border-2 ${textColor === c ? 'border-[var(--accent)]' : 'border-transparent'}`} style={{ backgroundColor: c }} />
                   ))}
                 </div>
+                <label className={labelCls} htmlFor="pdfed-font-family">Font</label>
+                <select
+                  id="pdfed-font-family"
+                  value={textFont}
+                  onChange={(e) => setTextFont(e.target.value as PdfFont)}
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm"
+                >
+                  <option value="sans">Sans (Helvetica)</option>
+                  <option value="serif">Serif (Times)</option>
+                  <option value="mono">Mono (Courier)</option>
+                </select>
                 <label className={labelCls} htmlFor="pdfed-text-size">Size</label>
                 <input id="pdfed-text-size" type="range" min={8} max={48} value={textSize} onChange={(e) => setTextSize(Number(e.target.value))} className="w-full" aria-label="Text size" />
-                <button onClick={() => setTextBold((b) => !b)} aria-pressed={textBold} className={`px-3 py-1.5 rounded-lg text-xs font-bold border ${textBold ? 'bg-[var(--accent-ink)] text-white' : 'border-[var(--border-subtle)]'}`}>Bold</button>
+                <div className="flex gap-1.5 flex-wrap" role="group" aria-label="Text style">
+                  <button onClick={() => setTextBold((b) => !b)} aria-pressed={textBold} title="Bold" className={`px-3 py-1.5 rounded-lg text-xs font-bold border ${textBold ? 'bg-[var(--accent-ink)] text-white' : 'border-[var(--border-subtle)]'}`}>Bold</button>
+                  <button onClick={() => setTextItalic((b) => !b)} aria-pressed={textItalic} title="Italic" className={`px-3 py-1.5 rounded-lg text-xs italic font-bold border ${textItalic ? 'bg-[var(--accent-ink)] text-white' : 'border-[var(--border-subtle)]'}`}>Italic</button>
+                  <button onClick={() => setTextUnderline((b) => !b)} aria-pressed={textUnderline} title="Underline" className={`px-3 py-1.5 rounded-lg text-xs font-bold underline border ${textUnderline ? 'bg-[var(--accent-ink)] text-white' : 'border-[var(--border-subtle)]'}`}>U</button>
+                  <button onClick={() => setTextStrike((b) => !b)} aria-pressed={textStrike} title="Strikethrough" className={`px-3 py-1.5 rounded-lg text-xs font-bold line-through border ${textStrike ? 'bg-[var(--accent-ink)] text-white' : 'border-[var(--border-subtle)]'}`}>S</button>
+                </div>
+                <div className="flex gap-1.5" role="group" aria-label="Text alignment">
+                  {(['left', 'center', 'right'] as const).map((a) => (
+                    <button key={a} onClick={() => setTextAlign(a)} aria-pressed={textAlign === a} title={`Align ${a}`} className={`flex-1 px-2 py-1.5 rounded-lg text-xs font-bold border capitalize ${textAlign === a ? 'bg-[var(--accent-ink)] text-white' : 'border-[var(--border-subtle)]'}`}>{a[0]}</button>
+                  ))}
+                </div>
               </>
             )}
             {(tool === 'highlight') && (
@@ -1618,7 +2014,7 @@ export default function PdfEditor() {
                 onBlur={() => {
                   if (textDraft !== null) {
                     const v = textDraft;
-                    setAnnos((prev) => ({
+                    commitAnnos((prev) => ({
                       ...prev,
                       [selected.page]: (prev[selected.page] || []).map((a, i) => (i === selected.index && a.kind === 'text' ? { ...a, text: v } : a)),
                     }));
@@ -1643,7 +2039,7 @@ export default function PdfEditor() {
                 onBlur={() => {
                   if (textDraft !== null) {
                     const v = textDraft;
-                    setAnnos((prev) => ({
+                    commitAnnos((prev) => ({
                       ...prev,
                       [selected.page]: (prev[selected.page] || []).map((a, i) => (i === selected.index && a.kind === 'flow' ? { ...a, text: v } : a)),
                     }));
@@ -1666,7 +2062,7 @@ export default function PdfEditor() {
                 value={selAnno.text}
                 onChange={(e) => {
                   const v = e.target.value.slice(0, 240);
-                  setAnnos((prev) => ({
+                  commitAnnos((prev) => ({
                     ...prev,
                     [selected.page]: (prev[selected.page] || []).map((a, i) => (i === selected.index && a.kind === 'note' ? { ...a, text: v } : a)),
                   }));
@@ -1682,7 +2078,7 @@ export default function PdfEditor() {
             <span className={labelCls}>Find & replace</span>
             <input
               value={findText}
-              onChange={(e) => setFindText(e.target.value)}
+              onChange={(e) => { setFindText(e.target.value); setFindNav(null); }}
               placeholder="Find text"
               className={inputCls}
               aria-label="Text to find"
@@ -1704,11 +2100,27 @@ export default function PdfEditor() {
             <button onClick={findReplace} disabled={replacing} className="w-full px-3 py-2 rounded-xl bg-[var(--accent-ink)] text-white text-xs font-bold disabled:opacity-50">
               {replacing ? 'Replacing…' : 'Replace all'}
             </button>
+            <div className="flex gap-1.5" role="group" aria-label="Find navigation">
+              <button onClick={findHighlight} aria-label="Highlight matches" title="Highlight all matches on this page" className="flex-1 px-2 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
+                Highlight
+              </button>
+              <button onClick={() => findStep(-1)} aria-label="Previous match" title="Previous match" className="flex-1 px-2 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
+                ↑ Prev
+              </button>
+              <button onClick={() => findStep(1)} aria-label="Next match" title="Next match" className="flex-1 px-2 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
+                Next ↓
+              </button>
+            </div>
+            {findNav && (
+              <p className="text-[11px] font-mono text-[var(--text-muted)] text-center" aria-live="polite">
+                Match {findNav.idx + 1} of {findNav.rects.length}{replaceScope === 'all' ? ` · page ${findNav.page}` : ''}
+              </p>
+            )}
             <p className="text-[11px] text-[var(--text-muted)]">Case-insensitive match; retypeset in Helvetica at matched size.</p>
           </div>
         </div>
 
-        <div className="lg:col-span-8 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 overflow-auto">
+        <div ref={canvasColRef} className="lg:col-span-8 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 overflow-auto">
           <div className="relative mx-auto w-fit" tabIndex={0} role="application" onKeyDown={onCanvasKey} aria-label="PDF page canvas. Arrow keys nudge the selection, Delete removes it, Control C and V copy and paste.">
             <span className="sr-only" aria-live="polite">Page {page} of {pageCount}. Text content: {pageText || 'No readable text on this page.'}</span>
             {rendering && (

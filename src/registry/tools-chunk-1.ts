@@ -440,7 +440,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Is there a file size limit?", answer: "30 MB for guests, 100 MB signed in; up to 150 pages anonymous, 300 signed in, 500 Pro. Page caps are device memory, not pricing — hundreds of rendered pages will crash mobile browsers on any plan. Larger files: split or compress first." },
       { question: "What fonts can added text use?", answer: "Helvetica (regular and bold) in any size and color. Added text won't match the document's original fonts — that's the tradeoff of additive editing." },
       { question: "Can I upload a photo of my signature?", answer: "Deliberately not. Photo signatures with background removal are the easiest way to lift someone else's signature off a document, so this editor offers draw and type only. If you need your handwritten mark, draw it on the pad." },
-      { question: "Do annotations stay editable after export?", answer: "No — export flattens everything into the PDF permanently. Keep working by re-opening the exported file and adding more." },
+      { question: "Do annotations stay editable after export?", answer: "No — export flattens everything into the PDF permanently. But your working session autosaves to this browser every few seconds (Save button or Ctrl+S), and reopens after a crash or reload — stated next to the filename. Keep iterating by re-opening the exported file." },
     ],
   },
   {
