@@ -14,6 +14,8 @@ import { useAiProvider } from '@/hooks/useAiProvider';
 import { useProStatus } from '@/hooks/useProStatus';
 import { useSession } from '@/lib/auth-client';
 import { Turnstile } from '@marsidev/react-turnstile';
+import type { PdfFont } from '@/lib/pdfFonts';
+import { fontCss, detectFontFamily, detectBold, loadFontBytes, ensurePreviewFont } from '@/lib/pdfFonts';
 import Link from 'next/link';
 
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '';
@@ -103,7 +105,6 @@ const INK_COLORS = ['#000000', '#1a56db', '#c81e1e', '#047857'];
 
 type Tool = 'text' | 'highlight' | 'draw' | 'whiteout' | 'image' | 'sign' | 'shape' | 'note' | 'retype' | 'select';
 
-type PdfFont = 'sans' | 'serif' | 'mono';
 interface TextAnno { kind: 'text'; x: number; y: number; text: string; size: number; color: string; bold: boolean; italic?: boolean; underline?: boolean; strike?: boolean; align?: 'left' | 'center' | 'right'; font?: PdfFont }
 interface RectAnno { kind: 'highlight' | 'whiteout'; x: number; y: number; w: number; h: number; color: string; opacity?: number }
 interface DrawAnno { kind: 'draw'; points: number[]; color: string; width: number }
@@ -157,6 +158,50 @@ export function moveLayerIndex<T>(list: T[], index: number, dir: 1 | -1): { list
   const [a] = next.splice(index, 1);
   next.splice(j, 0, a!);
   return { list: next, index: j };
+}
+
+export interface TextItem {
+  x: number;
+  yTop: number;
+  w: number;
+  size: number;
+  bold: boolean;
+  str: string;
+  fontName: string;
+}
+
+/**
+ * Group text-layer items into paragraphs: sort by y, cluster lines whose
+ * baselines sit within half a line-height, then split clusters separated
+ * by a full line-height gap or a short last line. Heuristic, not typesetting
+ * — good enough for select-paragraph and retype scoping. Pure — tested.
+ */
+export function groupParagraphs(items: TextItem[]): TextItem[][] {
+  if (items.length === 0) return [];
+  const sorted = [...items].sort((a, b) => a.yTop - b.yTop || a.x - b.x);
+  const lines: TextItem[][] = [];
+  for (const it of sorted) {
+    const last = lines[lines.length - 1];
+    const prev = last?.[last.length - 1];
+    if (last && prev && Math.abs(it.yTop - prev.yTop) <= Math.max(it.size, prev.size) * 0.6) {
+      last.push(it);
+    } else {
+      lines.push([it]);
+    }
+  }
+  const paras: TextItem[][] = [];
+  for (const line of lines) {
+    const prev = paras[paras.length - 1];
+    const prevLine = prev ? [prev[prev.length - 1]!] : null;
+    const gap = prevLine ? line[0]!.yTop - (prevLine[0]!.yTop + prevLine[0]!.size) : 0;
+    const prevSize = prevLine ? prevLine[0]!.size : 0;
+    if (prev && gap <= prevSize * 1.1) {
+      prev.push(...line);
+    } else {
+      paras.push([...line]);
+    }
+  }
+  return paras;
 }
 
 /** A version-history entry: full annotations + page + label. */
@@ -261,16 +306,11 @@ function hexToRgb(hex: string): { r: number; g: number; b: number } {
   };
 }
 
-// Three honest families — the only ones pdf-lib embeds without shipping
-// font files (Helvetica/Times/Courier + bold). No fake "200 fonts" list.
-const FONT_STACK: Record<PdfFont, string> = {
-  sans: 'Helvetica, Arial, sans-serif',
-  serif: 'Times New Roman, Times, serif',
-  mono: 'Courier New, Courier, monospace',
-};
-
+// Canvas preview stacks use the metric-compatible webfonts (Arimo/Tinos/
+// Cousine) with system fallbacks — same metrics as the embedded export
+// fonts, so preview and output agree.
 function canvasFont(sizePx: number, bold: boolean, italic: boolean, font: PdfFont = 'sans'): string {
-  return `${italic ? 'italic ' : ''}${bold ? 'bold ' : ''}${sizePx}px ${FONT_STACK[font]}`;
+  return `${italic ? 'italic ' : ''}${bold ? 'bold ' : ''}${sizePx}px ${fontCss(font)}`;
 }
 
 export default function PdfEditor() {
@@ -701,6 +741,12 @@ export default function PdfEditor() {
       undoStack.current = [];
       redoStack.current = [];
       toast.success(`${doc.numPages}-page PDF loaded — everything stays in your browser.`, { id: toastId });
+      // Preload text fonts for WYSIWYG preview (fire-and-forget; export and
+      // preview fall back to base-14 offline without failing).
+      (['sans', 'serif', 'mono'] as PdfFont[]).forEach((fam) => {
+        ensurePreviewFont(fam, false);
+        ensurePreviewFont(fam, true);
+      });
       const intent = intentRef.current;
       intentRef.current = null;
       if (intent) applyPreset(intent);
@@ -1084,6 +1130,23 @@ export default function PdfEditor() {
         if (tool === 'image') pendingImageRef.current = null;
       };
     } else {
+      // Double-click with Select grabs the whole paragraph; single drag
+      // selects a rect. Both feed the same AI/selection pipeline.
+      if (tool === 'select' && e.detail >= 2) {
+        try {
+          const items = await ensureTextLayer(page);
+          const hit = items.find((it) => x >= it.x - 4 && x <= it.x + it.w + 4 && y >= it.yTop - 4 && y <= it.yTop + it.size + 4);
+          if (hit) {
+            const para = groupParagraphs(items).find((g) => g.includes(hit));
+            const strs = (para || [hit]).map((it) => it.str);
+            setSelection(strs);
+            toast.success(`${strs.length} text runs selected (paragraph) — AI actions now use the selection.`);
+            return;
+          }
+        } catch {
+          /* fall through to rect select */
+        }
+      }
       dragRef.current = { x, y, points: tool === 'draw' ? [x, y] : undefined };
     }
   };
@@ -1283,7 +1346,7 @@ export default function PdfEditor() {
     toast.success(`${Math.min(ocrWords.length, 300)} words inserted as editable text.`);
   };
 
-  const textLayerRef = useRef<Record<number, { x: number; yTop: number; w: number; size: number; bold: boolean; str: string }[]>>({});
+  const textLayerRef = useRef<Record<number, TextItem[]>>({});
   const [selection, setSelection] = useState<string[]>([]);
 
   // Cached text-layer items in PDF points (shared by retype, select, AI).
@@ -1306,8 +1369,9 @@ export default function PdfEditor() {
           yTop: vp1.height - tx[5] - size,
           w,
           size,
-          bold: /bold|black|heavy|demi/i.test(it.fontName || ''),
+          bold: detectBold(it.fontName),
           str: it.str,
+          fontName: it.fontName || '',
         });
       }
       textLayerRef.current[pg] = items;
@@ -1366,10 +1430,10 @@ export default function PdfEditor() {
         [page]: [
           ...(prev[page] || []),
           { kind: 'whiteout', x: best.x - 2, y: best.yTop - 2, w: best.w + 4, h: best.size + 5, color: '#ffffff' },
-          { kind: 'text', x: best.x, y: best.yTop + best.size * 0.85, text: best.str, size: Math.round(best.size), color: '#000000', bold: best.bold },
+          { kind: 'text', x: best.x, y: best.yTop + best.size * 0.85, text: best.str, size: Math.round(best.size), color: '#000000', bold: best.bold, font: detectFontFamily(best.fontName) },
         ],
       }));
-      toast.success('Text covered — retype it in the left panel. Rendered in Helvetica at matched size.');
+      toast.success('Text covered — retype it in the left panel. Rendered in the matched family (Arimo/Tinos/Cousine).');
     } catch {
       toast.error('Could not read this page’s text layer.');
     }
@@ -1868,31 +1932,51 @@ export default function PdfEditor() {
       }
       const helv = await pdfDocLib.embedFont(StandardFonts.Helvetica);
       const helvBold = await pdfDocLib.embedFont(StandardFonts.HelveticaBold);
-      // Full style matrix per family — the only fonts pdf-lib embeds
-      // without shipping files (hence the 3-family cap in the UI).
-      const libFonts = {
-        sans: {
-          plain: helv,
-          bold: helvBold,
-          italic: await pdfDocLib.embedFont(StandardFonts.HelveticaOblique),
-          boldItalic: await pdfDocLib.embedFont(StandardFonts.HelveticaBoldOblique),
-        },
-        serif: {
-          plain: await pdfDocLib.embedFont(StandardFonts.TimesRoman),
-          bold: await pdfDocLib.embedFont(StandardFonts.TimesRomanBold),
-          italic: await pdfDocLib.embedFont(StandardFonts.TimesRomanItalic),
-          boldItalic: await pdfDocLib.embedFont(StandardFonts.TimesRomanBoldItalic),
-        },
-        mono: {
-          plain: await pdfDocLib.embedFont(StandardFonts.Courier),
-          bold: await pdfDocLib.embedFont(StandardFonts.CourierBold),
-          italic: await pdfDocLib.embedFont(StandardFonts.CourierOblique),
-          boldItalic: await pdfDocLib.embedFont(StandardFonts.CourierBoldOblique),
-        },
-      } as const;
-      const libFontFor = (font: PdfFont | undefined, bold: boolean, italic: boolean) => {
-        const fam = libFonts[font || 'sans'];
-        return italic ? (bold ? fam.boldItalic : fam.italic) : bold ? fam.bold : fam.plain;
+      // Embedded text fonts: metric-compatible webfonts (Arimo/Tinos/Cousine)
+      // fetched + cached, with base-14 fallback when offline. Only families
+      // actually used are embedded (faster export, smaller output).
+      const usedFams = new Set<PdfFont>();
+      for (const list of Object.values(clean)) {
+        for (const a of list) {
+          if ((a.kind === 'text' || a.kind === 'flow') && a.font) usedFams.add(a.font);
+        }
+      }
+      type famFonts = { plain: unknown; bold: unknown; italic: unknown; boldItalic: unknown };
+      const embedded = new Map<PdfFont, famFonts | null>();
+      let fontNoticeShown = false;
+      const noteOfflineFonts = () => {
+        if (fontNoticeShown) return;
+        fontNoticeShown = true;
+        toast.success('Exported with built-in fonts (custom fonts need internet once).');
+      };
+      const libFontsFor = async (fam: PdfFont) => {
+        const hit = embedded.get(fam);
+        if (hit !== undefined) return hit;
+        try {
+          const fontkit = (await import('fontkit')).default;
+          pdfDocLib.registerFontkit(fontkit);
+          const [plainBytes, boldBytes] = await Promise.all([
+            loadFontBytes(fam, false),
+            loadFontBytes(fam, true),
+          ]);
+          // pdf-lib has no oblique custom faces — reuse upright for italics
+          // (stated; synthetic slanting would lie about the metrics).
+          const plain = await pdfDocLib.embedFont(plainBytes);
+          const bold = await pdfDocLib.embedFont(boldBytes);
+          const set: famFonts = { plain, bold, italic: plain, boldItalic: bold };
+          embedded.set(fam, set);
+          return set;
+        } catch {
+          noteOfflineFonts();
+          embedded.set(fam, null);
+          return null;
+        }
+      };
+      const libFontFor = async (font: PdfFont | undefined, bold: boolean, _italic: boolean) => {
+        void _italic;
+        const set = await libFontsFor(font || 'sans');
+        if (!set) return bold ? helvBold : helv;
+        return bold ? set.bold : set.plain;
       };
       const libPages = pdfDocLib.getPages();
       for (const [pageNum, list] of Object.entries(clean)) {
@@ -1903,7 +1987,7 @@ export default function PdfEditor() {
         for (const a of list) {
           if (a.kind === 'text') {
             const c = hexToRgb(a.color);
-            const font = libFontFor(a.font, a.bold, !!a.italic);
+            const font = await libFontFor(a.font, a.bold, !!a.italic);
             const tw = font.widthOfTextAtSize(a.text, a.size);
             const tx = a.align === 'center' ? a.x - tw / 2 : a.align === 'right' ? a.x - tw : a.x;
             const ty = pageH - a.y;
@@ -1923,7 +2007,7 @@ export default function PdfEditor() {
             // Same wrapLines as the preview (export measures approximately;
             // maxWidth scales any over-wide line down so nothing overflows).
             const c = hexToRgb(a.color);
-            const font = libFontFor(a.font, a.bold, false);
+            const font = await libFontFor(a.font, a.bold, false);
             const approx = (s: string) => s.length * a.size * 0.55;
             const lines = wrapLines(a.text, a.w, approx);
             lines.forEach((line, li) => {
@@ -2396,9 +2480,9 @@ export default function PdfEditor() {
             title="Font family"
             className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs font-bold"
           >
-            <option value="sans">Sans (Helvetica)</option>
-            <option value="serif">Serif (Times)</option>
-            <option value="mono">Mono (Courier)</option>
+                  <option value="sans">Sans (Arimo)</option>
+                  <option value="serif">Serif (Tinos)</option>
+                  <option value="mono">Mono (Cousine)</option>
           </select>
           <input
             type="range" min={8} max={48}
@@ -2891,6 +2975,7 @@ export default function PdfEditor() {
           ['Fill form', '/pdf/pdf-form-filler'],
           ['E-sign', '/pdf/esign-pdf'],
           ['AI summarize', '/pdf/pdf-ai-summariser'],
+          ['AI chat with PDF', '/ai/ai-chat-pdf'],
           ['Protect', '/pdf/protect-pdf'],
           ['True redact', '/pdf/redact-pdf'],
           ['PDF to Word', '/pdf/pdf-to-word'],

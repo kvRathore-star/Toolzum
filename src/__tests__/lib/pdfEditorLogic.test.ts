@@ -8,6 +8,7 @@ import {
   splitAiLines,
   parseSensitiveList,
   mapOcrWords,
+  groupParagraphs,
   MAX_VERSIONS,
   type Anno,
 } from '@/components/tools/modules/pdf/PdfEditor';
@@ -142,5 +143,26 @@ describe('mapOcrWords (geometry mapping)', () => {
     expect(out.length).toBe(2);
     expect(out[0]).toEqual({ text: 'hi', x: 20, y: 40, size: 40, conf: 95 });
     expect(out[1]!.size).toBe(48); // clamped
+  });
+});
+
+describe('groupParagraphs', () => {
+  const item = (x: number, yTop: number, str: string, size = 12): Parameters<typeof groupParagraphs>[0][number] => ({
+    x, yTop, w: 50, size, bold: false, str, fontName: 'Arial',
+  });
+
+  it('groups one visual line, splits on paragraph gaps', () => {
+    const groups = groupParagraphs([
+      item(0, 100, 'a'),
+      item(60, 100, 'b'),
+      item(0, 150, 'c'),
+    ]);
+    expect(groups.length).toBe(2);
+    expect(groups[0]!.map((i) => i.str)).toEqual(['a', 'b']);
+    expect(groups[1]!.map((i) => i.str)).toEqual(['c']);
+  });
+
+  it('handles empty input', () => {
+    expect(groupParagraphs([])).toEqual([]);
   });
 });
