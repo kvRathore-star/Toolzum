@@ -58,6 +58,23 @@ export async function downloadOrShare(blobUrl: string, fileName: string): Promis
     }
     return true;
   } else {
+    // Mobile (esp. iOS Safari) ignores <a download> — it just navigates.
+    // Prefer the native share sheet with a real File when supported.
+    try {
+      const nav = navigator as Navigator & { canShare?: (d: { files: File[] }) => boolean; share?: (d: { files: File[]; title?: string }) => Promise<void> };
+      if (nav.canShare) {
+        const response = await fetch(blobUrl);
+        const blob = await response.blob();
+        const file = new File([blob], fileName, { type: blob.type || 'application/octet-stream' });
+        if (nav.canShare({ files: [file] }) && nav.share) {
+          await nav.share({ files: [file], title: fileName });
+          setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+          return true;
+        }
+      }
+    } catch {
+      /* user dismissed or share failed — fall through to anchor */
+    }
     const a = document.createElement('a');
     a.href = blobUrl;
     a.download = fileName;
