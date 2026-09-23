@@ -105,7 +105,36 @@ interface DrawAnno { kind: 'draw'; points: number[]; color: string; width: numbe
 interface ImageAnno { kind: 'image'; x: number; y: number; w: number; h: number; dataUrl: string }
 interface ShapeAnno { kind: 'shape'; shape: 'rect' | 'ellipse' | 'line' | 'arrow'; x: number; y: number; w: number; h: number; color: string; width: number }
 interface NoteAnno { kind: 'note'; x: number; y: number; text: string; color: string }
-type Anno = TextAnno | RectAnno | DrawAnno | ImageAnno | ShapeAnno | NoteAnno;
+interface FlowAnno { kind: 'flow'; x: number; y: number; w: number; text: string; size: number; color: string; bold: boolean }
+type Anno = TextAnno | RectAnno | DrawAnno | ImageAnno | ShapeAnno | NoteAnno | FlowAnno;
+
+/**
+ * Word-wrap shared by canvas preview and pdf-lib export — one function so
+ * the two can never disagree on line breaks. measure must draw with the
+ * same font string the renderer uses.
+ */
+export function wrapLines(
+  text: string,
+  maxWidth: number,
+  measure: (line: string) => number,
+): string[] {
+  const out: string[] = [];
+  for (const para of text.split('\n')) {
+    const words = para.replace(/\s+/g, ' ').split(' ').filter(Boolean);
+    let cur = '';
+    for (const w of words) {
+      const trial = cur ? `${cur} ${w}` : w;
+      if (measure(trial) > maxWidth && cur) {
+        out.push(cur);
+        cur = w;
+      } else {
+        cur = trial;
+      }
+    }
+    out.push(cur);
+  }
+  return out.length > 0 ? out : [''];
+}
 
 function hexToRgb(hex: string): { r: number; g: number; b: number } {
   const h = hex.replace('#', '');
@@ -438,6 +467,19 @@ export default function PdfEditor() {
         ctx.fillStyle = '#000';
         ctx.font = 'bold 14px Helvetica, Arial, sans-serif';
         ctx.fillText('!', px(a.x) + 8, px(a.y) + 16);
+      } else if (a.kind === 'flow') {
+        const font = `${a.bold ? 'bold ' : ''}${px(a.size)}px Helvetica, Arial, sans-serif`;
+        ctx.font = font;
+        const lines = wrapLines(a.text || 'Type here…', px(a.w), (s) => ctx.measureText(s).width);
+        ctx.fillStyle = a.color;
+        lines.forEach((line, li) => {
+          ctx.fillText(line, px(a.x), px(a.y) + li * px(a.size) * 1.25);
+        });
+        ctx.strokeStyle = 'rgba(26,86,219,0.5)';
+        ctx.setLineDash([4, 3]);
+        ctx.lineWidth = 1;
+        ctx.strokeRect(px(a.x) - 4, px(a.y) - px(a.size) - 4, px(a.w) + 8, lines.length * px(a.size) * 1.25 + 8);
+        ctx.setLineDash([]);
       }
       if (isSel) {
         ctx.strokeStyle = '#1a56db';
@@ -448,6 +490,9 @@ export default function PdfEditor() {
           ctx.strokeRect(px(a.x) - 2, px(a.y) - px(a.size) - 2, w + 4, px(a.size) + 6);
         } else if (a.kind === 'image' || a.kind === 'highlight' || a.kind === 'whiteout' || a.kind === 'shape') {
           ctx.strokeRect(px(a.x) - 2, px(a.y) - 2, px(a.w) + 4, px(a.h) + 4);
+        } else if (a.kind === 'flow') {
+          const lines = wrapLines(a.text || 'x', a.w, (s) => s.length * a.size * 0.55);
+          ctx.strokeRect(px(a.x) - 4, px(a.y) - px(a.size) - 4, px(a.w) + 8, lines.length * px(a.size) * 1.25 + 8);
         } else if (a.kind === 'note') {
           ctx.strokeRect(px(a.x) - 2, px(a.y) - 2, 26, 26);
         }
@@ -489,7 +534,7 @@ export default function PdfEditor() {
     setSelected({ page: p, index: (annos[p] || []).length });
   };
 
-  const onPointerDown = (e: React.PointerEvent) => {
+  const onPointerDown = async (e: React.PointerEvent) => {
     if (!pdfDoc) return;
     (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
     const pos = canvasPos(e);
@@ -497,7 +542,18 @@ export default function PdfEditor() {
     const x = pos.x / scale;
     const y = pos.y / scale;
     if (tool === 'text') {
-      pushAnno(page, { kind: 'text', x, y, text: 'New text', size: textSize, color: textColor, bold: textBold });
+      // Blank-page writing: no text layer + no annotations yet → one flowing
+      // box (wraps, grows) instead of sticker-style single lines.
+      const items = await ensureTextLayer(page).catch(() => []);
+      const existing = annos[page] || [];
+      if (items.length === 0 && existing.length === 0 && file) {
+        const pageW = viewportRef.current.w / scale;
+        const margin = Math.min(72, pageW * 0.12);
+        pushAnno(page, { kind: 'flow', x: margin, y: pos.y, w: pageW - margin * 2, text: '', size: textSize, color: textColor, bold: textBold });
+        toast.success('Flowing text box — type in the left panel, it wraps and grows.');
+      } else {
+        pushAnno(page, { kind: 'text', x, y, text: 'New text', size: textSize, color: textColor, bold: textBold });
+      }
     } else if (tool === 'retype') {
       retypeAt(x, y);
     } else if (tool === 'note') {
@@ -1145,6 +1201,23 @@ export default function PdfEditor() {
               font: a.bold ? helvBold : helv,
               color: rgb(c.r, c.g, c.b),
             });
+          } else if (a.kind === 'flow') {
+            // Same wrapLines as the preview (export measures approximately;
+            // maxWidth scales any over-wide line down so nothing overflows).
+            const c = hexToRgb(a.color);
+            const font = a.bold ? helvBold : helv;
+            const approx = (s: string) => s.length * a.size * 0.55;
+            const lines = wrapLines(a.text, a.w, approx);
+            lines.forEach((line, li) => {
+              lp.drawText(line, {
+                x: a.x,
+                y: pageH - (a.y + li * a.size * 1.25),
+                size: a.size,
+                font,
+                color: rgb(c.r, c.g, c.b),
+                maxWidth: a.w,
+              });
+            });
           } else if (a.kind === 'highlight') {
             const c = hexToRgb(a.color);
             lp.drawRectangle({
@@ -1189,8 +1262,7 @@ export default function PdfEditor() {
               }
             }
           } else if (a.kind === 'note') {
-            // Wrapped lines: export must never silently drop note text.
-            const words = a.text.split(/\s+/).filter(Boolean);
+            // Wrapped lines: export must never silently drop note text.            const words = a.text.split(/\s+/).filter(Boolean);
             const lines: string[] = [];
             let cur = '';
             for (const w of words) {
@@ -1538,8 +1610,7 @@ export default function PdfEditor() {
               <p className="text-xs text-[var(--text-muted)]">Covers an area with white. Hides visually — does not delete the underlying text.</p>
             )}
           </div>
-          {selAnno?.kind === 'text' && selected && (
-            <div className="pt-2 border-t border-[var(--border-subtle)] space-y-2">
+          {selAnno?.kind === 'text' && selected && (            <div className="pt-2 border-t border-[var(--border-subtle)] space-y-2">
               <span className={labelCls}>Edit selected text</span>
               <input
                 value={textDraft ?? selAnno.text}
@@ -1560,6 +1631,32 @@ export default function PdfEditor() {
                 }}
                 className={inputCls}
                 aria-label="Selected annotation text. Enter commits, Escape reverts."
+              />
+            </div>
+          )}
+          {selAnno?.kind === 'flow' && selected && (
+            <div className="pt-2 border-t border-[var(--border-subtle)] space-y-2">
+              <span className={labelCls}>Flowing text (wraps automatically)</span>
+              <textarea
+                value={textDraft ?? selAnno.text}
+                onChange={(e) => setTextDraft(e.target.value)}
+                onBlur={() => {
+                  if (textDraft !== null) {
+                    const v = textDraft;
+                    setAnnos((prev) => ({
+                      ...prev,
+                      [selected.page]: (prev[selected.page] || []).map((a, i) => (i === selected.index && a.kind === 'flow' ? { ...a, text: v } : a)),
+                    }));
+                    setTextDraft(null);
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape') setTextDraft(null);
+                }}
+                className={inputCls}
+                rows={6}
+                autoFocus
+                aria-label="Flowing text. Edits apply when you leave the field, Escape reverts."
               />
             </div>
           )}
@@ -1631,7 +1728,7 @@ export default function PdfEditor() {
             />
           </div>
           <p className="mt-3 text-xs text-[var(--text-muted)] text-center">
-            {tool === 'text' && 'Click anywhere to place text, then edit it in the left panel.'}
+            {tool === 'text' && 'Click for a flowing box on blank pages, or place separate boxes on existing PDFs.'}
             {tool === 'retype' && 'Click existing text to cover it and retype in matched-size Helvetica.'}
             {tool === 'highlight' && 'Drag over an area to highlight it.'}
             {tool === 'draw' && 'Drag to draw freehand.'}
