@@ -86,7 +86,11 @@ function RequestFeature({ tool, prompt, placeholder }: { tool: string; prompt: s
 setupPdfWorker(pdfjsLib);
 
 const RENDER_SCALE = 1.5;
-const MAX_FILE_BYTES = 100 * 1024 * 1024;
+// Upload caps: generous across the board — the browser (not our server)
+// does the work, so size costs us nothing. guests 125MB, signed-in 125MB,
+// Pro unlimited (device memory is the only real ceiling; huge files may
+// still crawl on weak hardware and the editor says so).
+const FREE_MAX_MB = 125;
 // Page caps are device-memory honesty, not pricing: rendering + thumbs for
 // hundreds of pages will OOM mobile browsers whichever plan pays. Tiers
 // reflect likely hardware (Pro skews desktop), capped where physics bites.
@@ -717,8 +721,9 @@ export default function PdfEditor() {
   }, []);
 
   const loadFile = async (f: File) => {
-    if (f.size > MAX_FILE_BYTES) {
-      toast.error('File exceeds the 100 MB limit — compress or split it first.');
+    const capMB = isPro ? Infinity : FREE_MAX_MB;
+    if (f.size > capMB * 1024 * 1024) {
+      toast.error(`File exceeds the ${FREE_MAX_MB} MB limit — compress or split it first. Pro has no size limit.`);
       return;
     }
     await openBytes(new Uint8Array(await f.arrayBuffer()), f.name);
@@ -2067,7 +2072,7 @@ export default function PdfEditor() {
             Free, no signup, no watermark. Everything runs in your browser — your file is never uploaded.
             Edits are additions on top of the original; existing text can&apos;t be retyped.
           </p>
-          <FileUploader accept=".pdf,application/pdf" freeMaxSizeMB={30} maxSizeMB={100} onFileSelect={loadFile} title="Open a PDF to edit" subtitle="Up to 30 MB free · 100 MB signed in · 150–500 pages by plan" />
+          <FileUploader accept=".pdf,application/pdf" freeMaxSizeMB={125} maxSizeMB={isPro ? Number.MAX_SAFE_INTEGER : 125} onFileSelect={loadFile} title="Open a PDF to edit" subtitle={isPro ? 'No size limit on Pro · 150–500 pages by plan' : 'Up to 125 MB free · 150–500 pages by plan'} />
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-left">
             {([
               ['Fill & sign', 'Form + signature, guided', 'sign'],
