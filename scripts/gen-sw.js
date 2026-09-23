@@ -149,6 +149,10 @@ async function main() {
       '*.svg',
       '*.ico',
       'favicon*',
+      // pdf.js worker (same-origin since Sep 2026): the editor, OCR, and
+      // every PDF tool need it offline. Without this entry the first
+      // offline open fails even though everything else is cached.
+      'pdf.worker.min.mjs',
     ],
     // #10: uncached navigations fall back to the offline page instead of
     // the browser error screen. API calls are excluded (JSON must 404/503

@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 import { PDFDocument, StandardFonts, rgb, degrees } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
 import { setupPdfWorker } from '@/lib/pdfjsWorker';
-import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Redo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers, Maximize2, Minimize2, Keyboard, MoveLeft, MoveRight, Save, Search, BringToFront, SendToBack } from 'lucide-react';
+import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Redo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers, Maximize2, Minimize2, Keyboard, MoveLeft, MoveRight, Save, Search, BringToFront, SendToBack, History, Flag } from 'lucide-react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from '@/lib/clipboard';
@@ -110,6 +110,51 @@ interface FlowAnno { kind: 'flow'; x: number; y: number; w: number; text: string
 type Anno = TextAnno | RectAnno | DrawAnno | ImageAnno | ShapeAnno | NoteAnno | FlowAnno;
 
 /**
+ * Pure geometry helpers (module scope = unit-testable without a DOM).
+ * These encode the regression classes from the field: overlap stacking,
+ * ghost boxes, z-order.
+ */
+
+/** Topmost text-family box containing the point (6pt grace), or null. */
+export function hitTestText(
+  list: Anno[],
+  x: number,
+  y: number,
+): number | null {
+  for (let i = list.length - 1; i >= 0; i--) {
+    const a = list[i]!;
+    if (a.kind === 'text') {
+      const w = Math.max(20, a.text.length * a.size * 0.55);
+      if (x >= a.x - 6 && x <= a.x + w + 6 && y >= a.y - a.size - 6 && y <= a.y + 6) return i;
+    } else if (a.kind === 'flow') {
+      const lines = wrapLines(a.text || 'x', a.w, (s) => s.length * a.size * 0.55);
+      const h = lines.length * a.size * 1.25 + 8;
+      if (x >= a.x - 6 && x <= a.x + a.w + 6 && y >= a.y - a.size - 6 && y <= a.y + h) return i;
+    } else if (a.kind === 'note') {
+      if (x >= a.x - 6 && x <= a.x + 196 && y >= a.y - 6 && y <= a.y + 116) return i;
+    }
+  }
+  return null;
+}
+
+/** Drop text/flow boxes with no content (stray-click litter). */
+export function pruneEmptyAnnos(list: Anno[]): Anno[] {
+  return list.filter((a) => {
+    if (a.kind === 'text' || a.kind === 'flow') return a.text.trim().length > 0;
+    return true;
+  });
+}
+
+/** Move index one step; out-of-range is a no-op (never throws). */
+export function moveLayerIndex<T>(list: T[], index: number, dir: 1 | -1): { list: T[]; index: number } {
+  const j = index + dir;
+  if (index < 0 || index >= list.length || j < 0 || j >= list.length) return { list, index };
+  const next = [...list];
+  const [a] = next.splice(index, 1);
+  next.splice(j, 0, a!);
+  return { list: next, index: j };
+}
+/**
  * Word-wrap shared by canvas preview and pdf-lib export — one function so
  * the two can never disagree on line breaks. measure must draw with the
  * same font string the renderer uses.
@@ -202,6 +247,22 @@ export default function PdfEditor() {
   const [ocrProgress, setOcrProgress] = useState(0);
   const [ocrLang, setOcrLang] = useState('eng');
   const [showShortcuts, setShowShortcuts] = useState(false);
+  // One-time "what changed" banner per release marker (not per version —
+  // bump the marker only when the toolbar actually moves again). Lazy
+  // initializer (no setState-in-effect); module is client-only (ssr:false).
+  const [showNews, setShowNews] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem('toolzum:pdf-editor-news') !== 'toolbar-2';
+    } catch {
+      return true;
+    }
+  });
+  const dismissNews = () => {
+    try {
+      localStorage.setItem('toolzum:pdf-editor-news', 'toolbar-2');
+    } catch { /* ignore */ }
+    setShowNews(false);
+  };
   // Screen-reader page text: canvas pixels expose nothing to AT. Fed from
   // the cached text layer; empty on scanned pages until OCR runs.
   const [pageText, setPageText] = useState('');
@@ -267,8 +328,108 @@ export default function PdfEditor() {
     }
   };
 
+  // Version history: timestamped snapshots beside the rolling draft.
+  // Autosave protects against crashes; history protects against mistakes
+  // (deleted blocks, bad replaces) that autosave would otherwise cement.
+  // Kept small (last 10) — each entry is full annos + page, tiny vs the PDF.
+  const [versions, setVersions] = useState<{ at: number; annos: Record<number, Anno[]>; page: number; label: string }[]>([]);
+  const [showVersions, setShowVersions] = useState(false);
+
+  const takeVersion = (label: string) => {
+    setVersions((prev) => {
+      const entry = { at: Date.now(), annos: structuredClone(annos), page, label };
+      return [...prev, entry].slice(-10);
+    });
+  };
+
+  const restoreVersion = (at: number) => {
+    const v = versions.find((e) => e.at === at);
+    if (!v) return;
+    takeVersion('before restore');
+    setAnnos(structuredClone(v.annos));
+    setPage(v.page);
+    setSelected(null);
+    setShowVersions(false);
+    toast.success(`Restored “${v.label}”. Previous state kept as newest version.`);
+  };
+
+  const fmtAge = (at: number) => {
+    const m = Math.max(0, Math.round((Date.now() - at) / 60000));
+    return m < 1 ? 'just now' : m < 60 ? `${m} min ago` : `${Math.round(m / 60)}h ago`;
+  };
+  // Multi-tab conflict guard: two tabs editing means last-writer-wins data
+  // loss. Each tab announces its writes; a tab that sees a NEWER external
+  // write while holding unsaved local edits warns instead of overwriting.
+  const tabId = useRef(`${Date.now().toString(36)}-${Math.floor(Math.random() * 1e6).toString(36)}`);
+  const [conflict, setConflict] = useState(false);
+  const externalWriteRef = useRef(0);
+  const saveStampRef = useRef(0);
+
+  useEffect(() => {
+    let channel: BroadcastChannel | null = null;
+    try {
+      channel = new BroadcastChannel('toolzum-pdf-editor');
+      channel.onmessage = (e: MessageEvent<{ from?: string; at?: number }>) => {
+        if (!e.data || e.data.from === tabId.current) return;
+        externalWriteRef.current = Math.max(externalWriteRef.current, e.data.at || Date.now());
+        // Warn only if we hold unsaved edits the other tab can't see.
+        if (dirtyRef.current) setConflict(true);
+      };
+    } catch {
+      /* BroadcastChannel absent — single-tab assumption stands */
+    }
+    return () => channel?.close();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const announceWrite = () => {
+    try {
+      new BroadcastChannel('toolzum-pdf-editor').postMessage({ from: tabId.current, at: Date.now() });
+    } catch { /* ignore */ }
+  };
+
+  // Load the other tab's version (used by the conflict banner). Overwrites
+  // local unsaved edits — stated on the button, never silent.
+  const loadExternalDraft = async () => {
+    try {
+      const db = await idb();
+      const row = await new Promise<{
+        bytes?: ArrayBuffer; name?: string; annos?: Record<number, Anno[]>; page?: number;
+      } | null>((resolve, reject) => {
+        const tx = db.transaction('sessions', 'readonly');
+        const req = tx.objectStore('sessions').get('draft');
+        req.onsuccess = () => resolve((req.result as typeof row) || null);
+        req.onerror = () => reject(req.error);
+      });
+      db.close();
+      if (!row || !row.bytes) {
+        toast.error('No saved version found.');
+        return;
+      }
+      await openBytes(new Uint8Array(row.bytes), row.name || 'document.pdf');
+      setAnnos(row.annos || {});
+      if (row.page) setPage(row.page);
+      lastSaved.current = { annos: row.annos || {}, page: row.page || 1 };
+      externalWriteRef.current = 0;
+      setConflict(false);
+      toast.success('Loaded the other tab’s version.');
+    } catch {
+      toast.error('Could not load the saved version.');
+    }
+  };
+
+  // Ref mirror of dirty for the channel handler (updated in an effect —
+  // refs must not be written during render).
+  const dirtyRef = useRef(false);
+  useEffect(() => {
+    dirtyRef.current = dirty;
+  }, [dirty]);
+
   // Debounced autosave on edits (3s idle). Skips when neither annos nor
   // page moved since the last write (page turns alone don't rewrite 100MB).
+  // Pre-write conflict check: if another tab wrote since our last save and
+  // we hold unsaved edits, skip silently (banner already warns) — never
+  // clobber. Announce every write we do make.
   useEffect(() => {
     if (!fileBytes) return;
     const last = lastSaved.current;
@@ -277,8 +438,18 @@ export default function PdfEditor() {
     const name = file?.name;
     const pg = page;
     const snap = annos;
-    const t = setTimeout(() => {
-      writeDraft(snap, bytes, name, pg);
+    const t = setTimeout(async () => {
+      // Another tab wrote after our last save and we still hold unsaved
+      // edits → skip this write (banner already warns). Never clobber.
+      if (externalWriteRef.current > saveStampRef.current && dirtyRef.current) {
+        setConflict(true);
+        return;
+      }
+      const ok = await writeDraft(snap, bytes, name, pg);
+      if (ok) {
+        saveStampRef.current = Date.now();
+        announceWrite();
+      }
     }, 3000);
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -463,6 +634,9 @@ export default function PdfEditor() {
       undoStack.current = [];
       redoStack.current = [];
       toast.success(`${doc.numPages}-page PDF loaded — everything stays in your browser.`, { id: toastId });
+      const intent = intentRef.current;
+      intentRef.current = null;
+      if (intent) applyPreset(intent);
     } catch (e) {
       toast.error(
         e instanceof Error && e.message === 'timeout'
@@ -733,9 +907,39 @@ export default function PdfEditor() {
 
   useEffect(() => { drawOverlay(); }, [drawOverlay]);
 
+  // Preset intents: picked before a file exists, applied right after open.
+  const intentRef = useRef<'sign' | 'watermark' | 'review' | null>(null);
+  const pickPreset = (intent: 'sign' | 'watermark' | 'review') => {
+    if (!pdfDoc) {
+      intentRef.current = intent;
+      toast.success(
+        intent === 'sign' ? 'Open a PDF — the Sign tool will be ready.'
+          : intent === 'watermark' ? 'Open a PDF — the Text tool will be ready for your stamp.'
+            : 'Open a PDF — highlights and sticky notes will be ready.',
+      );
+      return;
+    }
+    applyPreset(intent);
+  };
+  const applyPreset = (intent: 'sign' | 'watermark' | 'review') => {
+    if (intent === 'sign') {
+      setTool('sign');
+      if (!signPadDataRef.current) setShowSignPad(true);
+      toast.success('Step 1 of 2: save a signature, click to place it, then Download.');
+    } else if (intent === 'watermark') {
+      setTool('text');
+      setTextColor('#9ca3af');
+      setTextSize(48);
+      toast.success('Step 1 of 2: click the page center and type your watermark, then Download.');
+    } else {
+      setTool('highlight');
+      toast.success('Step 1 of 2: drag over key passages, add notes where needed, then Download.');
+    }
+  };
+
   // Unsaved-work guard: everything lives in memory, so a refresh destroys
-  // the session. Hub links below open in a new tab; refresh/back gets the
-  // native browser warning instead.
+  // the session. Hub links open in a new tab; refresh/back gets the native
+  // browser warning instead.
   useEffect(() => {
     if (!pdfDoc) return;
     const guard = (e: BeforeUnloadEvent) => {
@@ -1063,12 +1267,7 @@ export default function PdfEditor() {
   // Empty-box cleanup: text/flow boxes left with no content are litter
   // (especially from stray clicks pre-hit-test). Pruned on deselect and
   // before export — never while selected (the box being typed in is empty).
-  const pruneEmpty = (list: Anno[]): Anno[] =>
-    list.filter((a) => {
-      if (a.kind === 'text' || a.kind === 'flow') return a.text.trim().length > 0;
-      if (a.kind === 'note') return true; // notes show an icon even when empty
-      return true;
-    });
+  const pruneEmpty = (list: Anno[]): Anno[] => pruneEmptyAnnos(list);
 
   const selectBox = (page: number, index: number | null) => {
     if (index === null) {
@@ -1082,23 +1281,10 @@ export default function PdfEditor() {
     setSelected(index === null ? null : { page, index });
   };
 
-  const hitTextAnno = (x: number, y: number): number | null => {
-    const list = annos[page] || [];
-    for (let i = list.length - 1; i >= 0; i--) {
-      const a = list[i]!;
-      if (a.kind === 'text') {
-        const w = Math.max(20, a.text.length * a.size * 0.55);
-        if (x >= a.x - 6 && x <= a.x + w + 6 && y >= a.y - a.size - 6 && y <= a.y + 6) return i;
-      } else if (a.kind === 'flow') {
-        const lines = wrapLines(a.text || 'x', a.w, (s) => s.length * a.size * 0.55);
-        const h = lines.length * a.size * 1.25 + 8;
-        if (x >= a.x - 6 && x <= a.x + a.w + 6 && y >= a.y - a.size - 6 && y <= a.y + h) return i;
-      } else if (a.kind === 'note') {
-        if (x >= a.x - 6 && x <= a.x + 196 && y >= a.y - 6 && y <= a.y + 116) return i;
-      }
-    }
-    return null;
-  };
+  // Thin wrapper so call sites read naturally; logic lives in the tested
+  // pure helper above (regression classes stay covered without a DOM).
+  const hitTextAnno = (x: number, y: number): number | null =>
+    hitTestText(annos[page] || [], x, y);
   // and drop an editable Helvetica box at the same size/position. Honest
   // label: retypeset, NOT same-font — the original font is matched for size
   // and placement only (see FAQ).
@@ -1207,6 +1393,7 @@ export default function PdfEditor() {
         ],
       }));
       toast.success(`${hits.length} spots covered for review — 1 credit used. This hides visually; it does NOT delete text (see FAQ). Verify each box, then export.`);
+      takeVersion('PII sweep');
     } catch (e) {
       toast.error(e instanceof Error ? e.message : 'PII sweep failed.');
     } finally {
@@ -1256,6 +1443,7 @@ export default function PdfEditor() {
       toast.success(total > 0
         ? `Replaced ${total} match${total === 1 ? '' : 'es'}${replaceScope === 'all' ? ' across the document' : ''} — Helvetica retypeset, verify placement.`
         : `No matches for “${needle}”.`);
+      if (total > 0) takeVersion(`replace “${needle.slice(0, 24)}”`);
     } catch {
       toast.error('Could not read the text layer — scanned pages need OCR first.');
     } finally {
@@ -1348,6 +1536,7 @@ export default function PdfEditor() {
             : op === 'delete' ? 'Page deleted. Annotations were cleared (page order changed).'
               : `Page moved ${op === 'left' ? 'earlier' : 'later'}. Annotations were cleared (page order changed).`,
       );
+      if (op === 'delete') takeVersion(`delete page ${page}`);
     } catch {
       toast.error('Page operation failed.');
     }
@@ -1357,16 +1546,10 @@ export default function PdfEditor() {
   // deliberate controls — bring forward / send backward one step each.
   const moveLayer = (dir: 1 | -1) => {
     if (!selected) return;
-    commitAnnos((prev) => {
-      const list = [...(prev[selected.page] || [])];
-      const i = selected.index;
-      const j = i + dir;
-      if (i < 0 || i >= list.length || j < 0 || j >= list.length) return prev;
-      const [a] = list.splice(i, 1);
-      list.splice(j, 0, a!);
-      return { ...prev, [selected.page]: list };
-    });
-    setSelected({ page: selected.page, index: selected.index + dir });
+    const { list, index } = moveLayerIndex([...(annos[selected.page] || [])], selected.index, dir);
+    if (index === selected.index) return;
+    commitAnnos((prev) => ({ ...prev, [selected.page]: list }));
+    setSelected({ page: selected.page, index });
   };
 
   const deleteSelected = () => {
@@ -1845,6 +2028,22 @@ export default function PdfEditor() {
             Edits are additions on top of the original; existing text can&apos;t be retyped.
           </p>
           <FileUploader accept=".pdf,application/pdf" freeMaxSizeMB={30} maxSizeMB={100} onFileSelect={loadFile} title="Open a PDF to edit" subtitle="Up to 30 MB free · 100 MB signed in · 150–500 pages by plan" />
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-left">
+            {([
+              ['Fill & sign', 'Form + signature, guided', 'sign'],
+              ['Mark up', 'Highlight + notes, guided', 'review'],
+              ['Stamp copy', 'Big gray text stamp', 'watermark'],
+            ] as const).map(([label, desc, intent]) => (
+              <button
+                key={label}
+                onClick={() => pickPreset(intent)}
+                className="p-3 rounded-xl border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] transition-colors"
+              >
+                <span className="block text-xs font-bold text-[var(--text-primary)]">{label}</span>
+                <span className="block text-[11px] text-[var(--text-muted)] mt-0.5">{desc}</span>
+              </button>
+            ))}
+          </div>
           <div className="flex items-center gap-3">
             <span className="h-px flex-1 bg-[var(--border-subtle)]" />
             <span className="text-xs text-[var(--text-muted)]">or start blank</span>
@@ -1907,12 +2106,23 @@ export default function PdfEditor() {
             <button onClick={() => saveNow()} aria-label="Save working session" title="Save session (Ctrl+S) — persists edits without exporting" className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
               <Save className="w-4 h-4" /> Save
             </button>
+            <button onClick={() => setShowVersions((v) => !v)} aria-pressed={showVersions} aria-label="Version history" title="Version history — restore earlier states" className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
+              <History className="w-4 h-4" /> {versions.length > 0 ? versions.length : 'History'}
+            </button>
             <button onClick={toggleFocus} aria-pressed={focus} aria-label={focus ? 'Exit focus mode' : 'Enter focus mode (editor only)'} title={focus ? 'Exit focus mode' : 'Focus mode — editor only'} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
               {focus ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />} {focus ? 'Exit focus' : 'Focus'}
             </button>
             <button onClick={exportPdf} disabled={exporting} aria-label="Download flattened PDF" title="Download — annotations are flattened permanently" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[var(--accent-ink)] text-white text-xs font-bold hover:opacity-90 disabled:opacity-50">
               <Download className="w-4 h-4" /> {exporting ? 'Exporting…' : 'Download · flattened'}
             </button>
+            <a
+              href={`/contact?subject=general&message=${encodeURIComponent(`PDF Editor issue on ${typeof window !== 'undefined' ? window.location.pathname : '/pdf/pdf-editor'}: `)}`}
+              title="Report a problem with this tool"
+              aria-label="Report a problem with this tool"
+              className="p-2 rounded-xl border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] text-[var(--text-secondary)]"
+            >
+              <Flag className="w-4 h-4" />
+            </a>
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-2.5 border-t border-[var(--border-subtle)] max-sm:flex-nowrap max-sm:overflow-x-auto">
@@ -2234,6 +2444,68 @@ export default function PdfEditor() {
               </div>
             </>
           )}
+        </div>
+      )}
+
+      {showVersions && (
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 space-y-2" role="dialog" aria-label="Version history">
+          <div className="flex items-center gap-2">
+            <p className="text-sm font-bold text-[var(--text-primary)]">Version history</p>
+            <button onClick={() => { takeVersion('manual snapshot'); toast.success('Snapshot saved.'); }} className="ml-auto px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
+              Snapshot now
+            </button>
+            <button onClick={() => setShowVersions(false)} aria-label="Close version history" className="text-[var(--text-muted)] hover:text-[var(--text-primary)] text-sm px-1">✕</button>
+          </div>
+          {versions.length === 0 ? (
+            <p className="text-xs text-[var(--text-muted)]">No versions yet — destructive actions (replace-all, PII sweep, page delete) snapshot automatically, or take one manually.</p>
+          ) : (
+            <ul className="space-y-1.5 max-h-48 overflow-y-auto">
+              {[...versions].reverse().map((v) => (
+                <li key={v.at} className="flex items-center gap-2 text-xs">
+                  <span className="font-mono text-[var(--text-muted)]">{fmtAge(v.at)}</span>
+                  <span className="flex-1 truncate text-[var(--text-secondary)]">{v.label} · p{v.page}</span>
+                  <button onClick={() => restoreVersion(v.at)} className="px-2.5 py-1 rounded-lg border border-[var(--border-subtle)] font-bold hover:bg-[var(--bg-overlay)]">
+                    Restore
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+          <p className="text-[11px] text-[var(--text-muted)]">Versions live in this browser only — same privacy as everything else. Restoring keeps your current state as the newest version.</p>
+        </div>
+      )}
+
+      {conflict && (
+        <div className="flex flex-wrap items-center gap-2 px-4 py-3 rounded-2xl bg-amber-50 dark:bg-amber-500/10 border border-amber-300 dark:border-amber-500/30 text-xs" role="alert">
+          <span className="font-bold text-[var(--text-primary)]">Another tab saved a newer version.</span>
+          <span className="text-[var(--text-secondary)]">Autosave is paused here so nothing gets overwritten.</span>
+          <span className="ml-auto flex gap-2">
+            <button onClick={loadExternalDraft} className="px-3 py-1.5 rounded-lg bg-[var(--accent-ink)] text-white font-bold">
+              Load their version (discards my unsaved edits)
+            </button>
+            <button
+              onClick={() => {
+                externalWriteRef.current = 0;
+                setConflict(false);
+                toast.success('Keeping your version — next save overwrites.');
+              }}
+              className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] font-bold"
+            >
+              Keep mine
+            </button>
+          </span>
+        </div>
+      )}
+
+      {showNews && (
+        <div className="flex flex-wrap items-center gap-2 px-4 py-3 rounded-2xl bg-[var(--accent-ink)]/5 border border-[var(--accent)]/20 text-xs" role="status">
+          <Sparkles className="w-4 h-4 text-[var(--accent)] shrink-0" />
+          <span className="text-[var(--text-secondary)]">
+            <strong className="text-[var(--text-primary)]">Toolbar cleaned up:</strong> formatting lives in the top bar when text is active, Find is an overlay (Ctrl+F), emoji search inline. Your muscle memory from last time moved — this is the map.
+          </span>
+          <button onClick={dismissNews} aria-label="Dismiss update notice" className="ml-auto px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] font-bold hover:bg-[var(--bg-overlay)]">
+            Got it
+          </button>
         </div>
       )}
 
