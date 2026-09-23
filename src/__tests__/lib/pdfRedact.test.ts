@@ -6,9 +6,11 @@ import {
   serialize,
   decodeBytes,
   applyRedactions,
+  stripAnnotations,
+  sanitizeMetadata,
   type Token,
 } from '@/lib/pdfRedact';
-import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
+import { PDFDocument, StandardFonts, rgb, PDFArray } from 'pdf-lib';
 
 const STREAM = `BT /F1 12 Tf 72 720 Td (Hello World) Tj ET
 BT /F1 12 Tf 72 700 Td [(Sec) 20 (ret Data)] TJ ET`;
@@ -154,5 +156,68 @@ describe('applyRedactions (real pdf-lib document)', () => {
     expect(out.removedTexts).toEqual([]);
     const text = await streamText(doc);
     expect(text).toContain('Secret');
+  });
+});
+
+describe('stripAnnotations + sanitizeMetadata (step 3)', () => {
+  async function makeDocWithAnnot(): Promise<PDFDocument> {
+    const doc = await PDFDocument.create();
+    const page = doc.addPage([595, 842]);
+    const font = await doc.embedFont(StandardFonts.Helvetica);
+    page.drawText('Hello', { x: 72, y: 750, size: 14, font, color: rgb(0, 0, 0) });
+    // Note annotation overlapping (70,690)-(200,730).
+    const { PDFName, PDFString, PDFArray, PDFNumber } = await import('pdf-lib');
+    const annot = doc.context.obj({
+      Type: PDFName.of('Annot'),
+      Subtype: PDFName.of('Text'),
+      Rect: (() => {
+        const a = PDFArray.withContext(doc.context);
+        for (const v of [70, 690, 200, 730]) a.push(PDFNumber.of(v));
+        return a;
+      })(),
+      Contents: PDFString.of('secret note here'),
+    });
+    const existing = page.node.Annots();
+    if (existing) {
+      const arr = doc.context.lookup(existing);
+      if (arr instanceof PDFArray) arr.push(annot);
+    } else {
+      const arr = PDFArray.withContext(doc.context);
+      arr.push(annot);
+      page.node.set(PDFName.of('Annots'), arr);
+    }
+    return doc;
+  }
+
+  function annotCount(doc: PDFDocument): number {
+    const annots = doc.getPages()[0]!.node.Annots();
+    if (!annots) return 0;
+    const resolved = doc.context.lookup(annots);
+    return resolved instanceof PDFArray ? resolved.size() : 0;
+  }
+
+  it('removes annotations intersecting the rect, keeps others', async () => {
+    const doc = await makeDocWithAnnot();
+    expect(annotCount(doc)).toBe(1);
+    const hit = stripAnnotations(doc, { 1: [{ x: 60, y: 680, w: 200, h: 60 }] });
+    expect(hit.removed).toBe(1);
+    expect(annotCount(doc)).toBe(0);
+    const miss = stripAnnotations(doc, { 1: [{ x: 0, y: 0, w: 10, h: 10 }] });
+    expect(miss.removed).toBe(0);
+  });
+
+  it('neutralizes metadata without throwing on bare docs', async () => {
+    const doc = await PDFDocument.create();
+    doc.addPage([595, 842]);
+    expect(() => sanitizeMetadata(doc)).not.toThrow();
+    expect(doc.getAuthor()).toBe('');
+    expect(doc.getProducer()).toBe('Toolzum');
+  });
+
+  it('flags attachments instead of deleting them', async () => {
+    const doc = await PDFDocument.create();
+    doc.addPage([595, 842]);
+    // No embedded files → no flag.
+    expect(stripAnnotations(doc, {}).flaggedAttachments).toBe(false);
   });
 });

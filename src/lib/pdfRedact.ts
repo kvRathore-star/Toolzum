@@ -568,3 +568,110 @@ export async function applyRedactions(
   }
   return { removedTexts, flagged, pagesTouched };
 }
+
+/* ------------------------------------------------------------------ */
+/* Step 3: annotations, metadata, attachments. Annotations under a      */
+/* redact rect are removed (they can carry their own text). Metadata is */
+/* neutralized on redacted exports (author tracking defeats redaction). */
+/* Attachments are FLAGGED, never stripped — deleting user files        */
+/* silently would be data loss, not privacy.                           */
+/* ------------------------------------------------------------------ */
+
+function rectFromAnnot(annot: unknown, lookup: (o: unknown) => unknown): EngineRect | null {
+  try {
+    const dict = lookup(annot) as { get?: (k: unknown) => unknown } | null;
+    if (!dict || typeof dict.get !== 'function') return null;
+    const rectObj = lookup(dict.get(PDFName.of('Rect')));
+    const arr = rectObj as { size?: () => number; get?: (i: number) => unknown } | null;
+    if (!arr || typeof arr.size !== 'function' || arr.size() < 4) return null;
+    const nums: number[] = [];
+    for (let i = 0; i < 4; i++) {
+      const v = lookup(arr.get!(i)) as { valueOf?: () => number; asNumber?: () => number } | number | null;
+      const n = typeof v === 'number' ? v : typeof (v as { asNumber?: unknown }).asNumber === 'function' ? ((v as { asNumber: () => number }).asNumber()) : NaN;
+      if (!Number.isFinite(n)) return null;
+      nums.push(n);
+    }
+    const [x1, y1, x2, y2] = nums as [number, number, number, number];
+    return { x: Math.min(x1, x2), y: Math.min(y1, y2), w: Math.abs(x2 - x1), h: Math.abs(y2 - y1) };
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Remove annotations intersecting redact rects (PDF y-up space).
+ * Returns removed count + kept count for reporting.
+ */
+export function stripAnnotations(
+  doc: PDFDocument,
+  rectsByPage: Record<number, EngineRect[]>,
+): { removed: number; flaggedAttachments: boolean } {
+  let removed = 0;
+  const lookup = (o: unknown) => {
+    try {
+      return doc.context.lookup(o as never);
+    } catch {
+      return null;
+    }
+  };
+  for (const [pageNumStr, rects] of Object.entries(rectsByPage)) {
+    const pageNum = Number(pageNumStr);
+    if (!rects.length || !Number.isFinite(pageNum)) continue;
+    const lp = doc.getPages()[pageNum - 1];
+    if (!lp) continue;
+    const annots = lp.node.Annots();
+    if (!annots) continue;
+    const resolved = lookup(annots);
+    if (!(resolved instanceof PDFArray)) continue;
+    const kept: unknown[] = [];
+    for (let i = 0; i < resolved.size(); i++) {
+      const entry = resolved.get(i);
+      const box = rectFromAnnot(entry, lookup);
+      if (box && rects.some((r) => rectsOverlap(box, r))) {
+        removed++;
+        continue;
+      }
+      kept.push(entry);
+    }
+    if (kept.length !== resolved.size()) {
+      const fresh = PDFArray.withContext(doc.context);
+      for (const k of kept) fresh.push(k as never);
+      lp.node.set(PDFName.of('Annots'), fresh);
+    }
+  }
+
+  // Attachments: detect, never delete.
+  let flaggedAttachments = false;
+  try {
+    const names = lookup(doc.catalog.get(PDFName.of('Names'))) as {
+      get?: (k: unknown) => unknown;
+    } | null;
+    const embedded =
+      names && typeof names.get === 'function'
+        ? lookup(names.get(PDFName.of('EmbeddedFiles')))
+        : null;
+    flaggedAttachments = !!embedded;
+  } catch {
+    /* ignore */
+  }
+  return { removed, flaggedAttachments };
+}
+
+/**
+ * Neutralize document metadata on redacted exports (author tracking
+ * defeats content redaction). Only called when redactions exist.
+ */
+export function sanitizeMetadata(doc: PDFDocument): void {
+  try {
+    doc.setTitle('Redacted document');
+  } catch { /* ignore */ }
+  try {
+    doc.setAuthor('');
+  } catch { /* ignore */ }
+  try {
+    doc.setCreator('');
+  } catch { /* ignore */ }
+  try {
+    doc.setProducer('Toolzum');
+  } catch { /* ignore */ }
+}

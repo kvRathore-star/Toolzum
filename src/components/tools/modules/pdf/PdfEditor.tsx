@@ -2083,7 +2083,6 @@ export default function PdfEditor() {
       // True redaction FIRST (before the visual burn): strip text bytes
       // inside redact rects, then verify by re-extracting. Anything the
       // engine can't map blocks "verified" status — stated, never silent.
-      const { applyRedactions } = await import('@/lib/pdfRedact');
       const redactRects: Record<number, { x: number; y: number; w: number; h: number }[]> = {};
       for (const [pageNum, list] of Object.entries(clean)) {
         const lp0 = libPages[Number(pageNum) - 1];
@@ -2101,7 +2100,18 @@ export default function PdfEditor() {
       }
       let redactOutcome: { removedTexts: string[]; flagged: string[]; pagesTouched: number } | null = null;
       if (Object.keys(redactRects).length > 0) {
+        const { applyRedactions, stripAnnotations, sanitizeMetadata } = await import('@/lib/pdfRedact');
         redactOutcome = await applyRedactions(pdfDocLib, redactRects);
+        // Annotations under rects + metadata ride along on redacted exports.
+        // Attachments are flagged, never stripped (see pdfRedact step 3).
+        const annotRes = stripAnnotations(pdfDocLib, redactRects);
+        if (annotRes.removed > 0) {
+          toast.success(`Removed ${annotRes.removed} annotation(s) inside redaction regions.`);
+        }
+        if (annotRes.flaggedAttachments) {
+          redactOutcome.flagged.push('embedded files detected — inspect manually, never auto-deleted');
+        }
+        sanitizeMetadata(pdfDocLib);
       }
       for (const [pageNum, list] of Object.entries(clean)) {
         const lp = libPages[Number(pageNum) - 1];
