@@ -9,6 +9,7 @@ import {
   parseSensitiveList,
   mapOcrWords,
   groupParagraphs,
+  annoFlag,
   MAX_VERSIONS,
   type Anno,
 } from '@/components/tools/modules/pdf/PdfEditor';
@@ -146,8 +147,20 @@ describe('mapOcrWords (geometry mapping)', () => {
   });
 });
 
-describe('groupParagraphs', () => {
-  const item = (x: number, yTop: number, str: string, size = 12): Parameters<typeof groupParagraphs>[0][number] => ({
+describe('annoFlag (format-bar state without casts)', () => {
+  it('reads text flags, flow bold-only, nothing else', () => {
+    expect(annoFlag(text({ bold: true }), 'bold')).toBe(true);
+    expect(annoFlag(text({ bold: false }), 'bold')).toBe(false);
+    expect(annoFlag(text({ italic: true } as Partial<Extract<Anno, { kind: 'text' }>> as Extract<Anno, { kind: 'text' }>), 'italic')).toBe(true);
+    const flow: Anno = { kind: 'flow', x: 0, y: 0, w: 10, text: 'x', size: 12, color: '#000', bold: true };
+    expect(annoFlag(flow, 'bold')).toBe(true);
+    expect(annoFlag(flow, 'italic')).toBe(false);
+    expect(annoFlag(undefined, 'bold')).toBe(false);
+    expect(annoFlag({ kind: 'draw', points: [], color: '#000', width: 1 }, 'bold')).toBe(false);
+  });
+});
+
+describe('groupParagraphs', () => {  const item = (x: number, yTop: number, str: string, size = 12): Parameters<typeof groupParagraphs>[0][number] => ({
     x, yTop, w: 50, size, bold: false, str, fontName: 'Arial',
   });
 

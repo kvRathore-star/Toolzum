@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { PDFDocument, StandardFonts, rgb, type PDFFont } from 'pdf-lib';
 import { EmptyState } from '@/components/EmptyState';
+import Link from 'next/link';
 
 type InputMode = 'text' | 'csv' | 'json' | 'xml';
 
@@ -17,6 +18,7 @@ export default function CreatePdf() {
   const [fontSize, setFontSize] = useState(12);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [handoffReady, setHandoffReady] = useState(false);
   const [csvFile, setCsvFile] = useState<File | null>(null);
   const [csvRaw, setCsvRaw] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -213,6 +215,28 @@ export default function CreatePdf() {
       const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       setOutputUrl(URL.createObjectURL(blob));
+      // Stash bytes for the editor handoff ("Edit in PDF Editor" below).
+      try {
+        const db = await new Promise<IDBDatabase>((resolve, reject) => {
+          const req = indexedDB.open('toolzum-handoff', 1);
+          req.onupgradeneeded = () => req.result.createObjectStore('files');
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => reject(req.error);
+        });
+        await new Promise<void>((resolve, reject) => {
+          const tx = db.transaction('files', 'readwrite');
+          tx.objectStore('files').put(
+            { bytes: pdfBytes.slice().buffer as ArrayBuffer, name: `${titleText.toLowerCase().replace(/\s+/g, '-') || 'document'}.pdf`, at: Date.now() },
+            'create-pdf→editor',
+          );
+          tx.oncomplete = () => resolve();
+          tx.onerror = () => reject(tx.error);
+        });
+        db.close();
+        setHandoffReady(true);
+      } catch {
+        /* handoff unavailable — download still works */
+      }
       toast.success('PDF created successfully!');
     } catch (e) {
       console.error(e);
@@ -317,6 +341,14 @@ export default function CreatePdf() {
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
             Download PDF
           </button>
+          {handoffReady && (
+            <Link
+              href="/pdf/pdf-editor?from=create-pdf"
+              className="block w-full text-center border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] font-bold px-4 py-3 rounded-xl transition-colors text-sm"
+            >
+              Continue editing in PDF Editor →
+            </Link>
+          )}
         </div>
       ) : (
         <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">

@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
-import { PDFDocument, StandardFonts, rgb, degrees } from 'pdf-lib';
+import { PDFDocument, StandardFonts, rgb, degrees, type PDFFont } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
 import { setupPdfWorker } from '@/lib/pdfjsWorker';
 import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Redo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers, Maximize2, Minimize2, Keyboard, MoveLeft, MoveRight, Save, Search, BringToFront, SendToBack, History, Flag, MessageCircleQuestion } from 'lucide-react';
@@ -204,6 +204,13 @@ export function groupParagraphs(items: TextItem[]): TextItem[][] {
   return paras;
 }
 
+/** Read a style flag off a text/flow annotation (flow supports bold only). */
+export function annoFlag(a: Anno | undefined, key: 'bold' | 'italic' | 'underline' | 'strike'): boolean {
+  if (!a) return false;
+  if (a.kind === 'text') return !!a[key];
+  if (a.kind === 'flow') return key === 'bold' ? a.bold : false;
+  return false;
+}
 /** A version-history entry: full annotations + page + label. */
 export interface EditorVersion {
   at: number;
@@ -562,6 +569,43 @@ export default function PdfEditor() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [annos, page]);
 
+  // Create-PDF handoff: ?from=create-pdf + IDB key written by the Create
+  // PDF tool's "Continue editing" button. Consumed on read; the draft
+  // recovery below ignores it (separate keys, separate flows).
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('from') !== 'create-pdf') return;
+        const db = await new Promise<IDBDatabase>((resolve, reject) => {
+          const req = indexedDB.open('toolzum-handoff', 1);
+          req.onupgradeneeded = () => req.result.createObjectStore('files');
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => reject(req.error);
+        });
+        const row = await new Promise<{ bytes?: ArrayBuffer; name?: string } | null>((resolve, reject) => {
+          const tx = db.transaction('files', 'readwrite');
+          const store = tx.objectStore('files');
+          const get = store.get('create-pdf→editor');
+          get.onsuccess = () => {
+            const val = (get.result as typeof row) || null;
+            try { store.delete('create-pdf→editor'); } catch { /* ignore */ }
+            resolve(val);
+          };
+          get.onerror = () => reject(get.error);
+        });
+        db.close();
+        if (!row || !row.bytes || cancelled) return;
+        await openBytes(new Uint8Array(row.bytes), row.name || 'created.pdf');
+        if (!cancelled) toast.success('Created document loaded — annotate away.');
+      } catch {
+        /* no handoff — normal direct visit */
+      }
+    })();
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   // Recovery on mount: restore last draft and say so (with age).
   useEffect(() => {
     let cancelled = false;
@@ -1386,7 +1430,7 @@ export default function PdfEditor() {
       const vp1 = pageObj.getViewport({ scale: 1 });
       const tc = await pageObj.getTextContent();
       const meas = document.createElement('canvas').getContext('2d')!;
-      const items: { x: number; yTop: number; w: number; size: number; bold: boolean; str: string }[] = [];
+      const items: TextItem[] = [];
       for (const it of tc.items) {
         if (!('str' in it) || !it.str.trim()) continue;
         const tx = pdfjsLib.Util.transform(vp1.transform, it.transform);
@@ -1970,7 +2014,7 @@ export default function PdfEditor() {
           if ((a.kind === 'text' || a.kind === 'flow') && a.font) usedFams.add(a.font);
         }
       }
-      type famFonts = { plain: unknown; bold: unknown; italic: unknown; boldItalic: unknown };
+      type famFonts = { plain: PDFFont; bold: PDFFont; italic: PDFFont; boldItalic: PDFFont };
       const embedded = new Map<PdfFont, famFonts | null>();
       let fontNoticeShown = false;
       const noteOfflineFonts = () => {
@@ -1982,8 +2026,18 @@ export default function PdfEditor() {
         const hit = embedded.get(fam);
         if (hit !== undefined) return hit;
         try {
-          const fontkit = (await import('fontkit')).default;
-          pdfDocLib.registerFontkit(fontkit);
+          // @pdf-lib/fontkit ships types only as a UMD global (no ESM
+          // typings): resolve the default export dynamically and narrow to
+          // pdf-lib's Fontkit interface. A mismatch throws here and falls
+          // back to base-14 below — never mid-export.
+          const mod = (await import('@pdf-lib/fontkit')) as unknown as {
+            default?: Parameters<typeof pdfDocLib.registerFontkit>[0];
+          };
+          const fk = mod.default;
+          if (!fk || typeof (fk as { create?: unknown }).create !== 'function') {
+            throw new Error('fontkit shape mismatch');
+          }
+          pdfDocLib.registerFontkit(fk);
           const [plainBytes, boldBytes] = await Promise.all([
             loadFontBytes(fam, false),
             loadFontBytes(fam, true),
@@ -2530,12 +2584,12 @@ export default function PdfEditor() {
               ['strike', 'S', 'Strikethrough', 'line-through'],
             ] as const).map(([key, label, title, cls]) => {
               const active = selIsText
-                ? Boolean((selAnno as Record<string, unknown>)[key])
+                ? annoFlag(selAnno, key)
                 : key === 'bold' ? textBold : key === 'italic' ? textItalic : key === 'underline' ? textUnderline : textStrike;
               return (
                 <button
                   key={key}
-                  onClick={() => patchTextStyle({ [key]: !active } as Partial<{ bold: boolean; italic: boolean; underline: boolean; strike: boolean }>)}
+                  onClick={() => patchTextStyle({ [key]: !active } as { bold?: boolean; italic?: boolean; underline?: boolean; strike?: boolean })}
                   aria-pressed={active}
                   title={title}
                   className={`px-2.5 py-2 rounded-lg text-xs font-bold border ${cls} ${active ? 'bg-[var(--accent-ink)] text-white border-transparent' : 'border-[var(--border-subtle)]'}`}
