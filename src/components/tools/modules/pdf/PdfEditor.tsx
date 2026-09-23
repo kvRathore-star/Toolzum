@@ -365,6 +365,11 @@ export default function PdfEditor() {
   const [ocrRunning, setOcrRunning] = useState(false);
   const [ocrProgress, setOcrProgress] = useState(0);
   const [ocrLang, setOcrLang] = useState('eng');
+  // Redaction mode: Selective strips text bytes (keeps the page live);
+  // Maximum rasterizes redacted pages to images (nothing extractable at
+  // all, but text selection dies with it). Explicit user choice, stated.
+  const [redactMode, setRedactMode] = useState<'selective' | 'maximum'>('selective');
+  const redactCount = Object.values(annos).reduce((n, l) => n + l.filter((a) => a.kind === 'redact').length, 0);
   const [showShortcuts, setShowShortcuts] = useState(false);
   // One-time "what changed" banner per release marker (not per version —
   // bump the marker only when the toolbar actually moves again). Lazy
@@ -2085,14 +2090,14 @@ export default function PdfEditor() {
       // engine can't map blocks "verified" status — stated, never silent.
       const redactRects: Record<number, { x: number; y: number; w: number; h: number }[]> = {};
       for (const [pageNum, list] of Object.entries(clean)) {
-        const lp0 = libPages[Number(pageNum) - 1];
-        if (!lp0) continue;
-        const pageH0 = lp0.getHeight();
+        if (!libPages[Number(pageNum) - 1]) continue;
         for (const a of list) {
           if (a.kind !== 'redact') continue;
+          // Stored raw (top-down); flipped once via flipRectForPdf below —
+          // flipping here too would double-flip onto the wrong region.
           (redactRects[Number(pageNum)] ||= []).push({
             x: a.x,
-            y: pageH0 - (a.y + a.h),
+            y: a.y,
             w: a.w,
             h: a.h,
           });
@@ -2100,11 +2105,17 @@ export default function PdfEditor() {
       }
       let redactOutcome: { removedTexts: string[]; flagged: string[]; pagesTouched: number } | null = null;
       if (Object.keys(redactRects).length > 0) {
-        const { applyRedactions, stripAnnotations, sanitizeMetadata } = await import('@/lib/pdfRedact');
-        redactOutcome = await applyRedactions(pdfDocLib, redactRects);
+        const { applyRedactions, stripAnnotations, sanitizeMetadata, flipRectForPdf } = await import('@/lib/pdfRedact');
+        const pdfRects: Record<number, { x: number; y: number; w: number; h: number }[]> = {};
+        for (const [pn, list] of Object.entries(redactRects)) {
+          const lp = libPages[Number(pn) - 1];
+          if (!lp) continue;
+          pdfRects[Number(pn)] = list.map((r) => flipRectForPdf(r, lp.getHeight()));
+        }
+        redactOutcome = await applyRedactions(pdfDocLib, pdfRects);
         // Annotations under rects + metadata ride along on redacted exports.
         // Attachments are flagged, never stripped (see pdfRedact step 3).
-        const annotRes = stripAnnotations(pdfDocLib, redactRects);
+        const annotRes = stripAnnotations(pdfDocLib, pdfRects);
         if (annotRes.removed > 0) {
           toast.success(`Removed ${annotRes.removed} annotation(s) inside redaction regions.`);
         }
@@ -2112,6 +2123,36 @@ export default function PdfEditor() {
           redactOutcome.flagged.push('embedded files detected — inspect manually, never auto-deleted');
         }
         sanitizeMetadata(pdfDocLib);
+        // Maximum mode: rasterize every redacted page at ~200 DPI and swap
+        // it in. Nothing extractable survives — text, images, hidden layers
+        // all become pixels (and page text selection dies with them; stated
+        // in the mode picker, not discovered at export).
+        if (redactMode === 'maximum') {
+          const targets = Object.keys(redactRects).map(Number).sort((a, b) => b - a);
+          for (const pn of targets) {
+            try {
+              const vpg = await pdfDoc.getPage(pn);
+              const vp = vpg.getViewport({ scale: 200 / 72 });
+              const cnv = document.createElement('canvas');
+              cnv.width = Math.floor(vp.width);
+              cnv.height = Math.floor(vp.height);
+              await vpg.render({ canvasContext: cnv.getContext('2d')!, viewport: vp }).promise;
+              const blob = await new Promise<Blob | null>((res) => cnv.toBlob(res, 'image/jpeg', 0.92));
+              if (!blob) throw new Error('rasterize failed');
+              const bytes = new Uint8Array(await blob.arrayBuffer());
+              const img = await pdfDocLib.embedJpg(bytes);
+              const dims = img.scaleToFit(vp.width, vp.height);
+              pdfDocLib.removePage(pn - 1);
+              const fresh = pdfDocLib.insertPage(pn - 1, [dims.width, dims.height]);
+              fresh.drawImage(img, { x: 0, y: 0, width: dims.width, height: dims.height });
+            } catch {
+              redactOutcome.flagged.push(`page ${pn}: rasterize failed — kept selective stripping`);
+            }
+          }
+          // Page indices shifted; refresh the lib page handle list.
+          libPages.length = 0;
+          libPages.push(...pdfDocLib.getPages());
+        }
       }
       for (const [pageNum, list] of Object.entries(clean)) {
         const lp = libPages[Number(pageNum) - 1];
@@ -2261,7 +2302,8 @@ export default function PdfEditor() {
       downloadOrShare(URL.createObjectURL(new Blob([out as unknown as BlobPart], { type: 'application/pdf' })), `edited-${file?.name || 'document.pdf'}`);
       if (redactOutcome && redactOutcome.removedTexts.length > 0) {
         const extra = redactOutcome.flagged.length > 0 ? ` Flagged (verify manually): ${redactOutcome.flagged.slice(0, 3).join('; ')}${redactOutcome.flagged.length > 3 ? '…' : ''}` : '';
-        toast.success(`Exported — redaction VERIFIED clean on ${redactOutcome.pagesTouched} page(s).${extra}`, { duration: 8000 });
+        const modeNote = redactMode === 'maximum' ? ' Redacted pages rasterized (no selectable text remains).' : '';
+        toast.success(`Exported — redaction VERIFIED clean on ${redactOutcome.pagesTouched} page(s).${modeNote}${extra}`, { duration: 8000 });
       } else {
         toast.success(`Exported with ${total} annotation${total === 1 ? '' : 's'} — additions only, original content untouched.`);
       }
@@ -2923,6 +2965,21 @@ export default function PdfEditor() {
             )}
             {(tool === 'whiteout') && (
               <p className="text-xs text-[var(--text-muted)]">Covers an area with white. Hides visually — does not delete the underlying text.</p>
+            )}
+            {(tool === 'redact' || redactCount > 0) && (
+              <div className="pt-2 border-t border-[var(--border-subtle)] space-y-2">
+                <span className="block text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">Redaction mode</span>
+                <div className="space-y-1.5" role="radiogroup" aria-label="Redaction mode">
+                  <button onClick={() => setRedactMode('selective')} aria-pressed={redactMode === 'selective'} role="radio" aria-checked={redactMode === 'selective'} className={`w-full text-left px-3 py-2 rounded-xl border text-xs ${redactMode === 'selective' ? 'border-[var(--accent)] bg-[var(--accent-ink)]/5' : 'border-[var(--border-subtle)]'}`}>
+                    <span className="block font-bold text-[var(--text-primary)]">Selective</span>
+                    <span className="block text-[var(--text-muted)] mt-0.5">Strips text bytes, keeps pages live and selectable.</span>
+                  </button>
+                  <button onClick={() => setRedactMode('maximum')} aria-pressed={redactMode === 'maximum'} role="radio" aria-checked={redactMode === 'maximum'} className={`w-full text-left px-3 py-2 rounded-xl border text-xs ${redactMode === 'maximum' ? 'border-[var(--accent)] bg-[var(--accent-ink)]/5' : 'border-[var(--border-subtle)]'}`}>
+                    <span className="block font-bold text-[var(--text-primary)]">Maximum</span>
+                    <span className="block text-[var(--text-muted)] mt-0.5">Rasterizes redacted pages — nothing extractable, text selection dies too.</span>
+                  </button>
+                </div>
+              </div>
             )}
           </div>
           {selAnno?.kind === 'text' && selected && (            <div className="pt-2 border-t border-[var(--border-subtle)] space-y-2">

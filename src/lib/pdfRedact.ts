@@ -423,6 +423,18 @@ export interface EngineRect {
   h: number;
 }
 
+/**
+ * Editor (top-down) → PDF user space (bottom-up) rect flip. Pure — tested:
+ * a sign error here redacts the WRONG region, the worst possible silent
+ * failure, so the math lives here under test, not inline in the UI.
+ */
+export function flipRectForPdf(
+  r: { x: number; y: number; w: number; h: number },
+  pageHeightPt: number,
+): EngineRect {
+  return { x: r.x, y: pageHeightPt - (r.y + r.h), w: r.w, h: r.h };
+}
+
 export interface EngineOutcome {
   /** Exact removed strings (for the verify gate). */
   removedTexts: string[];

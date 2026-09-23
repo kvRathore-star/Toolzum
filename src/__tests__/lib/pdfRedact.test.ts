@@ -8,6 +8,7 @@ import {
   applyRedactions,
   stripAnnotations,
   sanitizeMetadata,
+  flipRectForPdf,
   type Token,
 } from '@/lib/pdfRedact';
 import { PDFDocument, StandardFonts, rgb, PDFArray } from 'pdf-lib';
@@ -94,6 +95,26 @@ describe('stripRunsInRect + serialize', () => {
 describe('decodeBytes', () => {
   it('decodes WinAnsi incl. smart quotes', () => {
     expect(decodeBytes([0x48, 0x92, 0x93])).toBe('H\u2019\u201c');
+  });
+});
+
+describe('flipRectForPdf (wrong-region redaction guard)', () => {
+  it('flips top-down editor coords to PDF y-up', () => {
+    // A4 (842pt): editor box at y=100 h=20 → PDF y = 842-120 = 722.
+    expect(flipRectForPdf({ x: 10, y: 100, w: 50, h: 20 }, 842)).toEqual({
+      x: 10, y: 722, w: 50, h: 20,
+    });
+  });
+
+  it('is an involution (flip twice = identity)', () => {
+    const r = { x: 5, y: 300, w: 120, h: 40 };
+    const once = flipRectForPdf(r, 842);
+    const twice = { ...flipRectForPdf(once, 842) };
+    expect(twice).toEqual(r);
+  });
+
+  it('preserves zero-area and full-page rects', () => {
+    expect(flipRectForPdf({ x: 0, y: 0, w: 595, h: 842 }, 842)).toEqual({ x: 0, y: 0, w: 595, h: 842 });
   });
 });
 
