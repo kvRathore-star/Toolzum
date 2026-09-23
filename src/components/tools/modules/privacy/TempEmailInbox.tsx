@@ -76,11 +76,11 @@ export default function TempEmailInbox() {
     return () => { if (pollRef.current) clearInterval(pollRef.current); };
   }, [address, fetchInbox]);
 
-  const generate = async () => {
-    if (creating) return;
+  const generate = async (): Promise<boolean> => {
+    if (creating) return false;
     if (TURNSTILE_SITE_KEY && !turnstileToken) {
       toast.error('Please complete the verification first.');
-      return;
+      return false;
     }
     setCreating(true);
     try {
@@ -97,6 +97,7 @@ export default function TempEmailInbox() {
         setOpenIdx(null);
         setNow(Date.now());
         fetchInbox(data.address);
+        return true;
       } else if (data.error === 'captcha_failed') {
         toast.error('Verification failed — complete the fresh check below and try again.');
       } else if (data.error === 'capacity_full') {
@@ -111,6 +112,7 @@ export default function TempEmailInbox() {
       resetCaptcha();
       setCreating(false);
     }
+    return false;
   };
 
   const copyAddress = async () => {
@@ -120,25 +122,33 @@ export default function TempEmailInbox() {
     else toast.error('Copy blocked by the browser — select the address manually.');
   };
 
-  const destroy = async (silent = false) => {
-    if (!address) return;
+  // Server-side retire without touching UI state — used when a fresh
+  // address already replaced the old one on screen.
+  const retireAddress = async (addr: string) => {
     try {
-      await fetch(`${WORKER_BASE}/api/temp-inbox?address=${encodeURIComponent(address)}`, { method: 'DELETE' });
+      await fetch(`${WORKER_BASE}/api/temp-inbox?address=${encodeURIComponent(addr)}`, { method: 'DELETE' });
     } catch {
       /* best-effort */
     }
+  };
+
+  const destroy = async (silent = false) => {
+    if (!address) return;
+    await retireAddress(address);
     setAddress('');
     setMessages([]);
     setOpenIdx(null);
     if (!silent) toast.success('Address destroyed.');
   };
 
-  // Change email = destroy the current address and mint a fresh one.
-  // Reuses generate() so Turnstile + capacity rules apply identically.
+  // Change email = mint the fresh address FIRST, retire the old one only
+  // on success. The old flow destroyed first, then hit the spent-captcha
+  // wall — dumping a live inbox back to the verification screen.
   const newAddress = async () => {
     if (creating) return;
-    await destroy(true);
-    await generate();
+    const prev = address;
+    const ok = await generate();
+    if (ok && prev) await retireAddress(prev);
   };
 
   const copyBody = async (body: string) => {
@@ -149,6 +159,20 @@ export default function TempEmailInbox() {
 
   const remaining = expiresAt - now;
   const expired = address !== '' && remaining <= 0;
+
+  // The verification widget must exist wherever an address can be minted —
+  // previously it only rendered in the empty state, so "New address" on a
+  // live inbox always bounced off the spent-token wall back to this screen.
+  const verifyBlock = TURNSTILE_SITE_KEY ? (
+    <div className="flex justify-center">
+      <Turnstile
+        key={tsKey}
+        siteKey={TURNSTILE_SITE_KEY}
+        onSuccess={(token) => setTurnstileToken(token)}
+        onExpire={() => setTurnstileToken(null)}
+      />
+    </div>
+  ) : null;
 
   return (
     <div className="max-w-3xl mx-auto space-y-5 animate-in fade-in duration-500">
@@ -164,18 +188,9 @@ export default function TempEmailInbox() {
               Anyone who guesses the address can read it, so never use it for banking or passwords.
             </p>
           </div>
-          {TURNSTILE_SITE_KEY && (
-            <div className="flex justify-center">
-              <Turnstile
-                key={tsKey}
-                siteKey={TURNSTILE_SITE_KEY}
-                onSuccess={(token) => setTurnstileToken(token)}
-                onExpire={() => setTurnstileToken(null)}
-              />
-            </div>
-          )}
+          {verifyBlock}
           <button
-            onClick={generate}
+            onClick={() => generate()}
             disabled={creating}
             className="px-8 py-3 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white text-sm font-bold rounded-xl transition-all active:scale-[0.98]"
           >
@@ -211,6 +226,13 @@ export default function TempEmailInbox() {
               </button>
               <span className="ml-auto">{messages.length}/50 messages</span>
             </div>
+          </div>
+
+          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-5 space-y-3">
+            <p className="text-xs text-[var(--text-secondary)] text-center">
+              Want a different address? Complete the check, then press <strong>New address</strong> — your current inbox stays live until the fresh one lands.
+            </p>
+            {verifyBlock}
           </div>
 
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-5">

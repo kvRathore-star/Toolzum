@@ -134,6 +134,32 @@ export default function WebsiteScreenshot() {
       setUrl(targetUrl);
       const effectiveWidth = getEffectiveWidth();
 
+      // Same-origin first: our own /api/fetch-page has no CORS problem,
+      // no third-party rate limits, and no Shields-flagged proxy domain.
+      // The public proxies below are fallback only, not primary.
+      let html: string | null = null;
+      let lastStatus = '';
+      try {
+        const res = await fetch('/api/fetch-page', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url: targetUrl }),
+          signal: AbortSignal.timeout(25000),
+        });
+        if (res.ok) {
+          const data = (await res.json()) as { html?: string };
+          if (data.html) html = data.html;
+          else lastStatus = 'empty response';
+        } else if (res.status === 429) {
+          throw new Error('Screenshot rate limit hit — wait a minute and retry.');
+        } else {
+          const data = (await res.json().catch(() => ({}))) as { error?: string };
+          lastStatus = data.error || `HTTP ${res.status}`;
+        }
+      } catch (e) {
+        if (e instanceof Error && /rate limit/i.test(e.message)) throw e;
+        lastStatus = e instanceof Error && e.name === 'TimeoutError' ? 'timed out' : 'unreachable';
+      }
       // Fetch proxies are individually flaky (rate limits, downtime, Brave
       // Shields flagging proxy domains). Chain three with short timeouts;
       // the final error names what to check instead of "Failed to fetch".
@@ -142,24 +168,35 @@ export default function WebsiteScreenshot() {
         `https://corsproxy.io/?url=${encodeURIComponent(targetUrl)}`,
         `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`,
       ];
-      let html: string | null = null;
-      let lastStatus = '';
-      for (const proxyUrl of proxies) {
-        try {
-          const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(20000) });
-          if (!res.ok) {
-            lastStatus = `HTTP ${res.status}`;
-            continue;
+      if (html === null) {
+        for (const proxyUrl of proxies) {
+          try {
+            const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(20000) });
+            if (!res.ok) {
+              lastStatus = `HTTP ${res.status}`;
+              continue;
+            }
+            html = await res.text();
+            break;
+          } catch (e) {
+            lastStatus = e instanceof Error && e.name === 'TimeoutError' ? 'timed out' : 'unreachable';
           }
-          html = await res.text();
-          break;
-        } catch (e) {
-          lastStatus = e instanceof Error && e.name === 'TimeoutError' ? 'timed out' : 'unreachable';
         }
       }
       if (html === null) {
+        if (lastStatus.startsWith('upstream_')) {
+          throw new Error(
+            `That site refused the fetch (${lastStatus.replace('upstream_', 'HTTP ')}). Some sites block all bots and proxies — nothing to retry here; try a different URL.`,
+          );
+        }
+        if (lastStatus === 'not_html') {
+          throw new Error('That URL is not a web page (PDF, image, or download). Screenshots need an HTML page.');
+        }
+        if (lastStatus === 'too_large') {
+          throw new Error('That page is too large to screenshot (over ~1.5 MB of HTML). Try a lighter page.');
+        }
         throw new Error(
-          `All page-fetch proxies failed (${lastStatus || 'blocked'}). The target may block proxies, Brave Shields may block the proxy domain — try shields-down once — or the proxies are rate-limiting; retry in a minute.`,
+          `Page fetch failed (${lastStatus || 'blocked'}) — our server and all fallback proxies failed. Brave Shields may block the proxy domains (try shields-down once), or the target blocks bots; retry in a minute.`,
         );
       }
       html = html.replace('<head>', `<head><base href="${targetUrl}">`);
@@ -380,7 +417,7 @@ export default function WebsiteScreenshot() {
         </div>
 
         <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] p-4 rounded-xl text-xs text-[var(--text-secondary)] space-y-1">
-          <p>⚠️ <strong>Limitations:</strong> Due to browser security, pages are fetched via a CORS proxy. External CSS, images, and JavaScript may not load, resulting in a plain-HTML rendering of the page. For full-featured screenshots, consider using a browser extension or a server-side tool like Puppeteer.</p>
+          <p>⚠️ <strong>Limitations:</strong> Pages are fetched server-side and rendered locally in your browser, so external CSS, images, and JavaScript may not load — results work best on simple or text-based pages. Sites that block all bots may refuse the fetch entirely. For full-featured screenshots, consider a browser extension or a server-side tool like Puppeteer.</p>
           <p className="pt-1">💡 <strong>Tip:</strong> Increase the delay for JavaScript-heavy sites to allow more content to render before capture.</p>
         </div>
 

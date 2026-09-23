@@ -166,25 +166,36 @@ export default function QrCodeReader() {
         /* permissions API absent — attempt the read directly */
       }
       const items = await navigator.clipboard.read();
+      if (items.length === 0) {
+        toast.error('Clipboard is empty — copy an image, then retry.');
+        return;
+      }
       for (const item of items) {
-        // getType REJECTS for absent types (doesn't return null) — probe
-        // each MIME independently instead of chaining with ||.
-        let blob: Blob | null = null;
-        for (const mime of ['image/png', 'image/jpeg', 'image/webp']) {
+        // Scan the item's OWN type list for anything image/*. A hardcoded
+        // MIME list misses gif/bmp/avif/tiff (and whatever comes next);
+        // the clipboard tells us what it actually holds.
+        const imageTypes = item.types.filter((t) => t.startsWith('image/'));
+        for (const mime of imageTypes) {
           try {
-            blob = await item.getType(mime);
-            if (blob) break;
+            const blob = await item.getType(mime);
+            if (blob) {
+              const ext = (mime.split('/')[1] || 'png').split('+')[0];
+              processFile(new File([blob], `pasted-image.${ext}`, { type: blob.type || mime }));
+              return;
+            }
           } catch {
             /* try next type */
           }
         }
-        if (blob) {
-          const f = new File([blob], 'pasted-image.png', { type: blob.type });
-          processFile(f);
-          return;
-        }
       }
-      toast.error('No image found in clipboard — copy an image, then retry.');
+      // Something is in the clipboard, just not pixels. The classic trap:
+      // copying a FILE (Finder/Explorer/Photos) puts a file reference or
+      // text on the clipboard, not image data — name what we saw.
+      const seen = items[0]?.types.join(', ') || 'unknown content';
+      toast.error(
+        `Clipboard holds ${seen} — not image data. Open the image and copy the picture itself (not the file), or upload it instead.`,
+        { duration: 7000 },
+      );
     } catch {
       toast.error('Clipboard read failed — upload an image instead.');
     }
