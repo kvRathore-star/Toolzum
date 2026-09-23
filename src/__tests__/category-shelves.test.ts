@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { toolsRegistry } from '@/registry/tools';
-import { CATEGORY_SECTIONS } from '@/data/categorySections';
+import { CATEGORY_SECTIONS, CATEGORY_INTROS } from '@/data/categorySections';
 
 describe('category shelves integrity', () => {
   it('every shelf slug resolves to a real tool (no silent drops)', () => {
@@ -44,5 +44,28 @@ describe('category shelves integrity', () => {
       .filter((s) => s.slugs.length > 16)
       .map((s) => `PDF/${s.id}: ${s.slugs.length}`);
     expect(bloated).toEqual([]);
+  });
+
+  it('{count} intros match the displayed tool list (About vs tabs)', () => {
+    // page.tsx renders {count} as allTools.length (category tools +
+    // cross-listed section tools, minus hidden) — the same list the
+    // All/Free/Pro tabs count. Replicate that filter here.
+    const mismatched: string[] = [];
+    for (const [cat, intro] of Object.entries(CATEGORY_INTROS)) {
+      if (!intro.includes('{count}')) continue;
+      const sectionSlugs = new Set((CATEGORY_SECTIONS[cat] || []).flatMap((s) => s.slugs));
+      const shown = toolsRegistry.filter(
+        (t) =>
+          (t.category === cat && t.showInCategory !== false) ||
+          (sectionSlugs.has(t.slug) && t.showInCategory !== false),
+      ).length;
+      // Rendered text must contain the real number, not the placeholder.
+      const rendered = intro.replace('{count}', String(shown));
+      if (rendered.includes('{count}') || !rendered.includes(String(shown))) {
+        mismatched.push(`${cat}: renders without live count`);
+      }
+    }
+    expect(mismatched).toEqual([]);
+    expect(Object.values(CATEGORY_INTROS).some((i) => i.includes('{count}'))).toBe(true);
   });
 });
