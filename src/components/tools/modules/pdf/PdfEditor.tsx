@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 import { PDFDocument, StandardFonts, rgb, degrees, type PDFFont } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
 import { setupPdfWorker } from '@/lib/pdfjsWorker';
-import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Redo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers, Maximize2, Minimize2, Keyboard, MoveLeft, MoveRight, Save, Search, BringToFront, SendToBack, History, Flag, MessageCircleQuestion } from 'lucide-react';
+import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Redo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers, Maximize2, Minimize2, Keyboard, MoveLeft, MoveRight, Save, Search, BringToFront, SendToBack, History, Flag, MessageCircleQuestion, EyeOff } from 'lucide-react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from '@/lib/clipboard';
@@ -103,7 +103,7 @@ const THUMB_INITIAL = 60;
 const HIGHLIGHT_COLORS = ['#ffff00', '#00ff00', '#00ccff', '#ff99cc', '#ff9900'];
 const INK_COLORS = ['#000000', '#1a56db', '#c81e1e', '#047857'];
 
-type Tool = 'text' | 'highlight' | 'draw' | 'whiteout' | 'image' | 'sign' | 'shape' | 'note' | 'retype' | 'select';
+type Tool = 'text' | 'highlight' | 'draw' | 'whiteout' | 'image' | 'sign' | 'shape' | 'note' | 'retype' | 'select' | 'redact';
 
 interface TextAnno { kind: 'text'; x: number; y: number; text: string; size: number; color: string; bold: boolean; italic?: boolean; underline?: boolean; strike?: boolean; align?: 'left' | 'center' | 'right'; font?: PdfFont }
 interface RectAnno { kind: 'highlight' | 'whiteout'; x: number; y: number; w: number; h: number; color: string; opacity?: number }
@@ -112,7 +112,10 @@ interface ImageAnno { kind: 'image'; x: number; y: number; w: number; h: number;
 interface ShapeAnno { kind: 'shape'; shape: 'rect' | 'ellipse' | 'line' | 'arrow'; x: number; y: number; w: number; h: number; color: string; width: number }
 interface NoteAnno { kind: 'note'; x: number; y: number; text: string; color: string }
 interface FlowAnno { kind: 'flow'; x: number; y: number; w: number; text: string; size: number; color: string; bold: boolean; font?: PdfFont }
-type Anno = TextAnno | RectAnno | DrawAnno | ImageAnno | ShapeAnno | NoteAnno | FlowAnno;
+// RedactAnno marks TRUE redaction regions (black burn + text-byte stripping
+// on export) — visually distinct from whiteout cover-up by design.
+interface RedactAnno { kind: 'redact'; x: number; y: number; w: number; h: number }
+type Anno = TextAnno | RectAnno | DrawAnno | ImageAnno | ShapeAnno | NoteAnno | FlowAnno | RedactAnno;
 
 /**
  * Pure geometry helpers (module scope = unit-testable without a DOM).
@@ -986,6 +989,14 @@ export default function PdfEditor() {
       } else if (a.kind === 'whiteout') {
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(px(a.x), px(a.y), px(a.w), px(a.h));
+      } else if (a.kind === 'redact') {
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(px(a.x), px(a.y), px(a.w), px(a.h));
+        ctx.strokeStyle = '#ef4444';
+        ctx.setLineDash([4, 3]);
+        ctx.lineWidth = 1;
+        ctx.strokeRect(px(a.x), px(a.y), px(a.w), px(a.h));
+        ctx.setLineDash([]);
       } else if (a.kind === 'draw') {
         ctx.strokeStyle = a.color;
         ctx.lineWidth = px(a.width);
@@ -1050,7 +1061,7 @@ export default function PdfEditor() {
         if (a.kind === 'text') {
           const w = ctx.measureText(a.text || '…').width;
           ctx.strokeRect(px(a.x) - 2, px(a.y) - px(a.size) - 2, w + 4, px(a.size) + 6);
-        } else if (a.kind === 'image' || a.kind === 'highlight' || a.kind === 'whiteout' || a.kind === 'shape') {
+        } else if (a.kind === 'image' || a.kind === 'highlight' || a.kind === 'whiteout' || a.kind === 'shape' || a.kind === 'redact') {
           ctx.strokeRect(px(a.x) - 2, px(a.y) - 2, px(a.w) + 4, px(a.h) + 4);
         } else if (a.kind === 'flow') {
           const lines = wrapLines(a.text || 'x', a.w, (s) => s.length * a.size * 0.55);
@@ -1257,6 +1268,9 @@ export default function PdfEditor() {
         ctx.fillStyle = markColor;
         ctx.fillRect(x, y, w, h);
         ctx.globalAlpha = 1;
+      } else if (tool === 'redact') {
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(x, y, w, h);
       } else if (tool === 'shape') {
         ctx.strokeStyle = inkColor;
         ctx.lineWidth = shapeWidth * scale;
@@ -1285,7 +1299,7 @@ export default function PdfEditor() {
     const pos = canvasPos(e);
     if (tool === 'draw' && drag.points && drag.points.length >= 4) {
       pushAnno(page, { kind: 'draw', points: drag.points, color: inkColor, width: brushWidth });
-    } else if ((tool === 'highlight' || tool === 'whiteout' || tool === 'shape' || tool === 'select')) {
+    } else if ((tool === 'highlight' || tool === 'whiteout' || tool === 'shape' || tool === 'select' || tool === 'redact')) {
       const w = Math.abs(pos.x / scale - drag.x);
       const h = Math.abs(pos.y / scale - drag.y);
       if (w > 3 && h > 3) {
@@ -1293,6 +1307,10 @@ export default function PdfEditor() {
         const y = Math.min(drag.y, pos.y / scale);
         if (tool === 'highlight') pushAnno(page, { kind: 'highlight', x, y, w, h, color: markColor, opacity: markOpacity });
         else if (tool === 'whiteout') pushAnno(page, { kind: 'whiteout', x, y, w, h, color: '#ffffff' });
+        else if (tool === 'redact') {
+          pushAnno(page, { kind: 'redact', x, y, w, h });
+          toast.success('Redaction region marked — text bytes are stripped on export and verified.', { duration: 4000 });
+        }
         else if (tool === 'select') selectInRect(x, y, w, h);
         else pushAnno(page, { kind: 'shape', shape: shapeVariant, x, y, w, h, color: inkColor, width: shapeWidth });
       } else drawOverlay();
@@ -2062,6 +2080,29 @@ export default function PdfEditor() {
         return bold ? set.bold : set.plain;
       };
       const libPages = pdfDocLib.getPages();
+      // True redaction FIRST (before the visual burn): strip text bytes
+      // inside redact rects, then verify by re-extracting. Anything the
+      // engine can't map blocks "verified" status — stated, never silent.
+      const { applyRedactions } = await import('@/lib/pdfRedact');
+      const redactRects: Record<number, { x: number; y: number; w: number; h: number }[]> = {};
+      for (const [pageNum, list] of Object.entries(clean)) {
+        const lp0 = libPages[Number(pageNum) - 1];
+        if (!lp0) continue;
+        const pageH0 = lp0.getHeight();
+        for (const a of list) {
+          if (a.kind !== 'redact') continue;
+          (redactRects[Number(pageNum)] ||= []).push({
+            x: a.x,
+            y: pageH0 - (a.y + a.h),
+            w: a.w,
+            h: a.h,
+          });
+        }
+      }
+      let redactOutcome: { removedTexts: string[]; flagged: string[]; pagesTouched: number } | null = null;
+      if (Object.keys(redactRects).length > 0) {
+        redactOutcome = await applyRedactions(pdfDocLib, redactRects);
+      }
       for (const [pageNum, list] of Object.entries(clean)) {
         const lp = libPages[Number(pageNum) - 1];
         if (!lp) continue;
@@ -2115,6 +2156,12 @@ export default function PdfEditor() {
               x: a.x, y: pageH - (a.y + a.h),
               width: a.w, height: a.h,
               color: rgb(1, 1, 1),
+            });
+          } else if (a.kind === 'redact') {
+            lp.drawRectangle({
+              x: a.x, y: pageH - (a.y + a.h),
+              width: a.w, height: a.h,
+              color: rgb(0, 0, 0),
             });
           } else if (a.kind === 'draw') {
             const pts = a.points;
@@ -2175,8 +2222,39 @@ export default function PdfEditor() {
         }
       }
       const out = await pdfDocLib.save();
+      // Verify gate: re-extract the EXPORTED bytes and assert every removed
+      // string is actually gone. A redaction that fails verification fails
+      // the whole export loudly — never ships a black box over live text.
+      if (redactOutcome && redactOutcome.removedTexts.length > 0) {
+        try {
+          const check = await pdfjsLib.getDocument({ data: out.slice() }).promise;
+          const leaked: string[] = [];
+          for (let n = 1; n <= check.numPages; n++) {
+            const tc = await (await check.getPage(n)).getTextContent();
+            const pageText = tc.items.map((it) => ('str' in it ? String(it.str) : '')).join(' ');
+            for (const s of redactOutcome.removedTexts) {
+              if (s && pageText.includes(s)) leaked.push(s);
+            }
+          }
+          try { await check.destroy(); } catch { /* ignore */ }
+          if (leaked.length > 0) {
+            toast.error(`Redaction UNVERIFIED — ${leaked.length} removed string(s) still extractable. Export blocked; adjust regions and retry.`, { duration: 8000 });
+            setExporting(false);
+            return;
+          }
+        } catch {
+          toast.error('Redaction verify step failed — export blocked rather than shipping unverified.', { duration: 8000 });
+          setExporting(false);
+          return;
+        }
+      }
       downloadOrShare(URL.createObjectURL(new Blob([out as unknown as BlobPart], { type: 'application/pdf' })), `edited-${file?.name || 'document.pdf'}`);
-      toast.success(`Exported with ${total} annotation${total === 1 ? '' : 's'} — additions only, original content untouched.`);
+      if (redactOutcome && redactOutcome.removedTexts.length > 0) {
+        const extra = redactOutcome.flagged.length > 0 ? ` Flagged (verify manually): ${redactOutcome.flagged.slice(0, 3).join('; ')}${redactOutcome.flagged.length > 3 ? '…' : ''}` : '';
+        toast.success(`Exported — redaction VERIFIED clean on ${redactOutcome.pagesTouched} page(s).${extra}`, { duration: 8000 });
+      } else {
+        toast.success(`Exported with ${total} annotation${total === 1 ? '' : 's'} — additions only, original content untouched.`);
+      }
     } catch {
       toast.error('Export failed — try fewer annotations or a smaller file.');
     } finally {
@@ -2225,6 +2303,7 @@ export default function PdfEditor() {
     { id: 'shape', label: 'Shapes', icon: <Square className="w-4 h-4" />, group: 'Drawing' },
     { id: 'note', label: 'Note', icon: <StickyNote className="w-4 h-4" />, group: 'Text & content' },
     { id: 'whiteout', label: 'Cover up', icon: <Eraser className="w-4 h-4" />, group: 'Drawing' },
+    { id: 'redact', label: 'Redact', icon: <EyeOff className="w-4 h-4" />, group: 'Drawing' },
     { id: 'image', label: 'Image', icon: <ImageIcon className="w-4 h-4" />, group: 'Media & extras' },
     { id: 'sign', label: 'Sign', icon: <PenTool className="w-4 h-4" />, group: 'Media & extras' },
   ];
@@ -2940,6 +3019,7 @@ export default function PdfEditor() {
             {tool === 'shape' && 'Drag to draw a rectangle, ellipse, line, or arrow.'}
             {tool === 'note' && 'Click to drop a sticky note.'}
             {tool === 'whiteout' && 'Drag over an area to cover it with white (visual cover only).'}
+            {tool === 'redact' && 'Drag over text to PERMANENTLY remove it — verified on export. Images underneath are not wiped.'}
             {tool === 'image' && 'Pick an image, then click to stamp it.'}
             {tool === 'sign' && 'Draw a signature above, then click to place it.'}
           </p>

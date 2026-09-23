@@ -19,6 +19,8 @@
  * Each reports instead of pretending — see RedactReport.
  */
 
+import { PDFDocument, PDFName, PDFArray } from 'pdf-lib';
+
 export type Token =
   | { kind: 'str'; value: string }
   | { kind: 'hex'; value: string }
@@ -87,6 +89,16 @@ function unescapeLiteral(s: string): number[] {
     }
   }
   return out;
+}
+
+function hexToBytes(hex: string): number[] {
+  const clean = hex.replace(/\s+/g, '');
+  const bytes: number[] = [];
+  for (let k = 0; k + 1 < clean.length; k += 2) {
+    const b = parseInt(clean.slice(k, k + 2), 16);
+    if (Number.isFinite(b)) bytes.push(b);
+  }
+  return bytes;
 }
 
 export function decodeBytes(bytes: number[]): string {
@@ -287,6 +299,8 @@ export function mapTextRuns(tokens: Token[]): TextRun[] {
         stack.length = 0;
         if (arg && arg.token.kind === 'str') {
           flush(decodeBytes(unescapeLiteral(arg.token.value)), true, arg.index, idx);
+        } else if (arg && arg.token.kind === 'hex') {
+          flush(decodeBytes(hexToBytes(arg.token.value)), true, arg.index, idx);
         }
         break;
       }
@@ -298,11 +312,8 @@ export function mapTextRuns(tokens: Token[]): TextRun[] {
           let ok = true;
           for (const el of arg.token.items) {
             if (el.kind === 'str') parts.push(decodeBytes(unescapeLiteral(el.value)));
-            else if (el.kind === 'hex') {
-              const bytes: number[] = [];
-              for (let k = 0; k + 1 < el.value.length; k += 2) bytes.push(parseInt(el.value.slice(k, k + 2), 16));
-              parts.push(decodeBytes(bytes));
-            } else if (el.kind !== 'num') {
+            else if (el.kind === 'hex') parts.push(decodeBytes(hexToBytes(el.value)));
+            else if (el.kind !== 'num') {
               ok = false;
             }
           }
@@ -339,8 +350,7 @@ export function rectsOverlap(a: { x: number; y: number; w: number; h: number }, 
 }
 
 /** Re-encode kept tokens to a content-stream string. */
-export function serialize(tokens: Token[], keep: boolean[]): string {
-  const out: string[] = [];
+export function serialize(tokens: Token[], keep: boolean[]): string {  const out: string[] = [];
   const emit = (t: Token): void => {
     switch (t.kind) {
       case 'str':
@@ -399,4 +409,162 @@ export function stripRunsInRect(
     removed++;
   }
   return { keep, report: { removed, flaggedUnmapped } };
+}
+
+/* ------------------------------------------------------------------ */
+/* Step 2: document engine (pdf-lib). Strips text runs inside rects,    */
+/* paints nothing itself — the editor burns a black box separately.     */
+/* ------------------------------------------------------------------ */
+
+export interface EngineRect {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+
+export interface EngineOutcome {
+  /** Exact removed strings (for the verify gate). */
+  removedTexts: string[];
+  /** Runs/images the engine could not map — surfaced, never hidden. */
+  flagged: string[];
+  pagesTouched: number;
+}
+
+function bytesToLatin1(bytes: Uint8Array): string {
+  let s = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) {
+    s += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  }
+  return s;
+}
+
+function latin1ToBytes(s: string): Uint8Array {
+  const out = new Uint8Array(s.length);
+  for (let i = 0; i < s.length; i++) out[i] = s.charCodeAt(i) & 0xff;
+  return out;
+}
+
+/**
+ * Strip text runs intersecting rectsByPage (PDF y-up points) from a loaded
+ * pdf-lib document, in place. Returns what was removed + what was flagged.
+ * Limitations (stated in UI + FAQ, enforced by reporting, not silence):
+ * - only WinAnsi-decodable runs are removed; anything else is flagged
+ * - images/annotations/embedded files/metadata under rects are NOT touched
+ *   (flagged as a category when a page has both redactions and XObjects)
+ */
+export async function applyRedactions(
+  doc: PDFDocument,
+  rectsByPage: Record<number, EngineRect[]>,
+): Promise<EngineOutcome> {
+  const removedTexts: string[] = [];
+  const flagged: string[] = [];
+  let pagesTouched = 0;
+
+  const pages = doc.getPages();
+  for (const [pageNumStr, rects] of Object.entries(rectsByPage)) {
+    const pageNum = Number(pageNumStr);
+    if (!rects.length || !Number.isFinite(pageNum)) continue;
+    const lp = pages[pageNum - 1];
+    if (!lp) continue;
+
+    const contents = lp.node.Contents();
+    if (!contents) continue;
+
+    // Resolve single stream or array of streams. PDFContentStream exposes
+    // getContentsString() (decoded text); raw streams expose getContents().
+    // Measure twice: getContents() on a Flate stream returns zlib bytes,
+    // which tokenize as garbage — always prefer the decoded string form.
+    const resolved = doc.context.lookup(contents);
+    const readString = (o: unknown): string | null => {
+      if (!o) return null;
+      const anyObj = o as { getContentsString?: unknown; getContents?: unknown };
+      try {
+        if (typeof anyObj.getContentsString === 'function') {
+          return (anyObj.getContentsString as () => string)();
+        }
+        if (typeof anyObj.getContents === 'function') {
+          const bytes = (anyObj.getContents as () => Uint8Array)();
+          return bytesToLatin1(bytes);
+        }
+      } catch {
+        return null;
+      }
+      return null;
+    };
+    const streams: { get: () => string | null; replace: (data: Uint8Array) => void }[] = [];
+    const asArray = resolved instanceof PDFArray ? resolved : null;
+    if (asArray) {
+      for (let i = 0; i < asArray.size(); i++) {
+        const el = doc.context.lookup(asArray.get(i));
+        streams.push({
+          get: () => readString(el),
+          replace: (data: Uint8Array) => {
+            asArray.set(i, doc.context.stream(data));
+          },
+        });
+      }
+    } else {
+      streams.push({
+        get: () => readString(resolved),
+        replace: (data: Uint8Array) => {
+          lp.node.set(PDFName.of('Contents'), doc.context.stream(data));
+        },
+      });
+    }
+    if (streams.length === 0) {
+      flagged.push(`page ${pageNum}: content stream unreadable`);
+      continue;
+    }
+
+    let pageRemoved = 0;
+    for (const s of streams) {
+      const decodedStr = s.get();
+      if (!decodedStr) {
+        flagged.push(`page ${pageNum}: stream unreadable`);
+        continue;
+      }
+      const tokens = tokenize(decodedStr);
+      // Skip streams with no text ops (vector-only pages) cheaply.
+      if (!tokens.some((t) => t.kind === 'op' && (t.value === 'Tj' || t.value === 'TJ'))) continue;
+      const runs = mapTextRuns(tokens);
+      const keep = tokens.map(() => true);
+      for (const rect of rects) {
+        const { keep: k2, report } = stripRunsInRect(tokens, runs, rect);
+        for (let i = 0; i < k2.length; i++) {
+          if (!k2[i]) {
+            keep[i] = false;
+            const run = runs.find((r) => r.from <= i && i <= r.to);
+            if (run && run.text && !removedTexts.includes(run.text)) removedTexts.push(run.text);
+          }
+        }
+        pageRemoved += report.removed;
+        for (const f of report.flaggedUnmapped) {
+          if (!flagged.includes(f)) flagged.push(`page ${pageNum}: ${f}`);
+        }
+      }
+      if (pageRemoved > 0) {
+        s.replace(latin1ToBytes(serialize(tokens, keep)));
+      }
+    }
+    if (pageRemoved > 0) pagesTouched++;
+
+    // XObject images under a redact rect keep pixels — flag honestly.
+    try {
+      const res = lp.node.Resources();
+      if (res) {
+        const resolvedRes = doc.context.lookup(res);
+        const xo =
+          resolvedRes && typeof (resolvedRes as { get?: unknown }).get === 'function'
+            ? (doc.context.lookup((resolvedRes as { get: (k: unknown) => unknown }).get(PDFName.of('XObject'))) as unknown)
+            : null;
+        if (xo && typeof (xo as { size?: unknown }).size === 'function' && ((xo as { size: () => number }).size?.() || 0) > 0) {
+          flagged.push(`page ${pageNum}: images present — pixels under black boxes are NOT wiped (text runs removed)`);
+        }
+      }
+    } catch {
+      /* best-effort inspection only */
+    }
+  }
+  return { removedTexts, flagged, pagesTouched };
 }
