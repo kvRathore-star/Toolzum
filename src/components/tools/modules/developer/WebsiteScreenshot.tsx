@@ -134,11 +134,34 @@ export default function WebsiteScreenshot() {
       setUrl(targetUrl);
       const effectiveWidth = getEffectiveWidth();
 
-      const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`;
-      const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(30000) });
-      if (!res.ok) throw new Error(`Proxy fetch returned ${res.status}`);
-
-      let html = await res.text();
+      // Fetch proxies are individually flaky (rate limits, downtime, Brave
+      // Shields flagging proxy domains). Chain three with short timeouts;
+      // the final error names what to check instead of "Failed to fetch".
+      const proxies = [
+        `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
+        `https://corsproxy.io/?url=${encodeURIComponent(targetUrl)}`,
+        `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`,
+      ];
+      let html: string | null = null;
+      let lastStatus = '';
+      for (const proxyUrl of proxies) {
+        try {
+          const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(20000) });
+          if (!res.ok) {
+            lastStatus = `HTTP ${res.status}`;
+            continue;
+          }
+          html = await res.text();
+          break;
+        } catch (e) {
+          lastStatus = e instanceof Error && e.name === 'TimeoutError' ? 'timed out' : 'unreachable';
+        }
+      }
+      if (html === null) {
+        throw new Error(
+          `All page-fetch proxies failed (${lastStatus || 'blocked'}). The target may block proxies, Brave Shields may block the proxy domain — try shields-down once — or the proxies are rate-limiting; retry in a minute.`,
+        );
+      }
       html = html.replace('<head>', `<head><base href="${targetUrl}">`);
 
       const el = contentRef.current;

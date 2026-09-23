@@ -32,6 +32,14 @@ export default function TempEmailInbox() {
   const [loading, setLoading] = useState(false);
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  // Widget remount key: Turnstile tokens are single-use server-side, so a
+  // spent token must never linger behind a green checkbox — remount after
+  // every attempt (success or fail) to force a fresh human check.
+  const [tsKey, setTsKey] = useState(0);
+  const resetCaptcha = () => {
+    setTurnstileToken(null);
+    setTsKey((k) => k + 1);
+  };
   const [now, setNow] = useState(() => Date.now());
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -90,8 +98,7 @@ export default function TempEmailInbox() {
         setNow(Date.now());
         fetchInbox(data.address);
       } else if (data.error === 'captcha_failed') {
-        toast.error('Verification failed — please try again.');
-        setTurnstileToken(null);
+        toast.error('Verification failed — complete the fresh check below and try again.');
       } else if (data.error === 'capacity_full') {
         toast.error('All inboxes are busy right now — try again in a few minutes.');
       } else {
@@ -100,6 +107,8 @@ export default function TempEmailInbox() {
     } catch {
       toast.error('Network error — check your connection and try again.');
     } finally {
+      // Token is spent either way — remount for a visibly fresh checkbox.
+      resetCaptcha();
       setCreating(false);
     }
   };
@@ -158,6 +167,7 @@ export default function TempEmailInbox() {
           {TURNSTILE_SITE_KEY && (
             <div className="flex justify-center">
               <Turnstile
+                key={tsKey}
                 siteKey={TURNSTILE_SITE_KEY}
                 onSuccess={(token) => setTurnstileToken(token)}
                 onExpire={() => setTurnstileToken(null)}

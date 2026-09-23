@@ -148,19 +148,45 @@ export default function QrCodeReader() {
   };
 
   const handlePaste = async () => {
+    // Clipboard READS (unlike writes) need explicit permission, and Brave
+    // Shields denies them outright. Probe first so the error names the fix
+    // instead of a dead "access denied".
     try {
+      if (typeof navigator === 'undefined' || !navigator.clipboard?.read) {
+        toast.error('This browser cannot read the clipboard — upload an image instead.');
+        return;
+      }
+      try {
+        const perm = await navigator.permissions.query({ name: 'clipboard-read' as PermissionName });
+        if (perm.state === 'denied') {
+          toast.error('Clipboard reads are blocked (Brave Shields does this) — allow via the address-bar icon, or upload an image instead.', { duration: 6000 });
+          return;
+        }
+      } catch {
+        /* permissions API absent — attempt the read directly */
+      }
       const items = await navigator.clipboard.read();
       for (const item of items) {
-        const blob = await (item.getType('image/png') || item.getType('image/jpeg') || item.getType('image/webp'));
+        // getType REJECTS for absent types (doesn't return null) — probe
+        // each MIME independently instead of chaining with ||.
+        let blob: Blob | null = null;
+        for (const mime of ['image/png', 'image/jpeg', 'image/webp']) {
+          try {
+            blob = await item.getType(mime);
+            if (blob) break;
+          } catch {
+            /* try next type */
+          }
+        }
         if (blob) {
           const f = new File([blob], 'pasted-image.png', { type: blob.type });
           processFile(f);
           return;
         }
       }
-      toast.error('No image found in clipboard');
+      toast.error('No image found in clipboard — copy an image, then retry.');
     } catch {
-      toast.error('Clipboard access denied');
+      toast.error('Clipboard read failed — upload an image instead.');
     }
   };
 
