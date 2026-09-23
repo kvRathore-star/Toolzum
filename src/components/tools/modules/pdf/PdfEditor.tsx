@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 import { PDFDocument, StandardFonts, rgb, degrees } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
 import { setupPdfWorker } from '@/lib/pdfjsWorker';
-import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Redo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers, Maximize2, Minimize2, Keyboard, MoveLeft, MoveRight, Save, Search } from 'lucide-react';
+import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Redo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers, Maximize2, Minimize2, Keyboard, MoveLeft, MoveRight, Save, Search, BringToFront, SendToBack } from 'lucide-react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from '@/lib/clipboard';
@@ -101,7 +101,7 @@ type Tool = 'text' | 'highlight' | 'draw' | 'whiteout' | 'image' | 'sign' | 'sha
 
 type PdfFont = 'sans' | 'serif' | 'mono';
 interface TextAnno { kind: 'text'; x: number; y: number; text: string; size: number; color: string; bold: boolean; italic?: boolean; underline?: boolean; strike?: boolean; align?: 'left' | 'center' | 'right'; font?: PdfFont }
-interface RectAnno { kind: 'highlight' | 'whiteout'; x: number; y: number; w: number; h: number; color: string }
+interface RectAnno { kind: 'highlight' | 'whiteout'; x: number; y: number; w: number; h: number; color: string; opacity?: number }
 interface DrawAnno { kind: 'draw'; points: number[]; color: string; width: number }
 interface ImageAnno { kind: 'image'; x: number; y: number; w: number; h: number; dataUrl: string }
 interface ShapeAnno { kind: 'shape'; shape: 'rect' | 'ellipse' | 'line' | 'arrow'; x: number; y: number; w: number; h: number; color: string; width: number }
@@ -117,7 +117,7 @@ type Anno = TextAnno | RectAnno | DrawAnno | ImageAnno | ShapeAnno | NoteAnno | 
 export function wrapLines(
   text: string,
   maxWidth: number,
-  measure: (line: string) => number,
+  measure: (_line: string) => number,
 ): string[] {
   const out: string[] = [];
   for (const para of text.split('\n')) {
@@ -181,8 +181,11 @@ export default function PdfEditor() {
   const [textAlign, setTextAlign] = useState<'left' | 'center' | 'right'>('left');
   const [textFont, setTextFont] = useState<PdfFont>('sans');
   const [markColor, setMarkColor] = useState(HIGHLIGHT_COLORS[0]!);
+  const [markOpacity, setMarkOpacity] = useState(0.4);
   const [inkColor, setInkColor] = useState(INK_COLORS[0]!);
+  const [brushWidth, setBrushWidth] = useState(1.7);
   const [shapeVariant, setShapeVariant] = useState<'rect' | 'ellipse' | 'line' | 'arrow'>('rect');
+  const [shapeWidth, setShapeWidth] = useState(1.5);
   const [exporting, setExporting] = useState(false);
   const [showSignPad, setShowSignPad] = useState(false);
   // Thumbnails: first window immediately, then only the ±25 pages around
@@ -644,7 +647,7 @@ export default function PdfEditor() {
         if (a.underline) deco(px(a.y) + 2);
         if (a.strike) deco(px(a.y) - px(a.size) * 0.3);
       } else if (a.kind === 'highlight') {
-        ctx.globalAlpha = 0.4;
+        ctx.globalAlpha = a.opacity ?? 0.4;
         ctx.fillStyle = a.color;
         ctx.fillRect(px(a.x), px(a.y), px(a.w), px(a.h));
         ctx.globalAlpha = 1;
@@ -774,7 +777,7 @@ export default function PdfEditor() {
       // of stacking a new one on top (the overlapping-boxes bug).
       const hit = hitTextAnno(x, y);
       if (hit !== null) {
-        setSelected({ page, index: hit });
+        selectBox(page, hit);
         return;
       }
       // Blank-page writing: no text layer + no annotations yet → one flowing
@@ -824,7 +827,7 @@ export default function PdfEditor() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.strokeStyle = inkColor;
-      ctx.lineWidth = 1.7 * scale;
+      ctx.lineWidth = brushWidth * scale;
       ctx.lineCap = 'round';
       const n = drag.points.length;
       ctx.beginPath();
@@ -842,13 +845,13 @@ export default function PdfEditor() {
       const w = Math.abs(pos.x - drag.x * scale);
       const h = Math.abs(pos.y - drag.y * scale);
       if (tool === 'highlight') {
-        ctx.globalAlpha = 0.4;
+        ctx.globalAlpha = markOpacity;
         ctx.fillStyle = markColor;
         ctx.fillRect(x, y, w, h);
         ctx.globalAlpha = 1;
       } else if (tool === 'shape') {
         ctx.strokeStyle = inkColor;
-        ctx.lineWidth = 1.5 * scale;
+        ctx.lineWidth = shapeWidth * scale;
         ctx.beginPath();
         if (shapeVariant === 'rect') ctx.rect(x, y, w, h);
         else if (shapeVariant === 'ellipse') ctx.ellipse(x + w / 2, y + h / 2, Math.abs(w) / 2, Math.abs(h) / 2, 0, 0, Math.PI * 2);
@@ -873,17 +876,17 @@ export default function PdfEditor() {
     if (!drag) return;
     const pos = canvasPos(e);
     if (tool === 'draw' && drag.points && drag.points.length >= 4) {
-      pushAnno(page, { kind: 'draw', points: drag.points, color: inkColor, width: 1.7 });
+      pushAnno(page, { kind: 'draw', points: drag.points, color: inkColor, width: brushWidth });
     } else if ((tool === 'highlight' || tool === 'whiteout' || tool === 'shape' || tool === 'select')) {
       const w = Math.abs(pos.x / scale - drag.x);
       const h = Math.abs(pos.y / scale - drag.y);
       if (w > 3 && h > 3) {
         const x = Math.min(drag.x, pos.x / scale);
         const y = Math.min(drag.y, pos.y / scale);
-        if (tool === 'highlight') pushAnno(page, { kind: 'highlight', x, y, w, h, color: markColor });
+        if (tool === 'highlight') pushAnno(page, { kind: 'highlight', x, y, w, h, color: markColor, opacity: markOpacity });
         else if (tool === 'whiteout') pushAnno(page, { kind: 'whiteout', x, y, w, h, color: '#ffffff' });
         else if (tool === 'select') selectInRect(x, y, w, h);
-        else pushAnno(page, { kind: 'shape', shape: shapeVariant, x, y, w, h, color: inkColor, width: 1.5 });
+        else pushAnno(page, { kind: 'shape', shape: shapeVariant, x, y, w, h, color: inkColor, width: shapeWidth });
       } else drawOverlay();
     }
   };
@@ -1056,9 +1059,29 @@ export default function PdfEditor() {
   };
 
   // Hit-test: clicking on/near an existing text-family box selects it
-  // instead of stacking a new one on top (the "New textNew text" bug).
-  // Hit-test: clicking on/near an existing text-family box selects it
   // instead of stacking a new one on top (Google Docs / Canva behavior).
+  // Empty-box cleanup: text/flow boxes left with no content are litter
+  // (especially from stray clicks pre-hit-test). Pruned on deselect and
+  // before export — never while selected (the box being typed in is empty).
+  const pruneEmpty = (list: Anno[]): Anno[] =>
+    list.filter((a) => {
+      if (a.kind === 'text' || a.kind === 'flow') return a.text.trim().length > 0;
+      if (a.kind === 'note') return true; // notes show an icon even when empty
+      return true;
+    });
+
+  const selectBox = (page: number, index: number | null) => {
+    if (index === null) {
+      setAnnos((prev) => {
+        const list = prev[page] || [];
+        const cleaned = pruneEmpty(list);
+        if (cleaned.length === list.length) return prev;
+        return { ...prev, [page]: cleaned };
+      });
+    }
+    setSelected(index === null ? null : { page, index });
+  };
+
   const hitTextAnno = (x: number, y: number): number | null => {
     const list = annos[page] || [];
     for (let i = list.length - 1; i >= 0; i--) {
@@ -1330,9 +1353,28 @@ export default function PdfEditor() {
     }
   };
 
+  // Z-order: the topmost box wins overlap hit-tests, so stacking needs
+  // deliberate controls — bring forward / send backward one step each.
+  const moveLayer = (dir: 1 | -1) => {
+    if (!selected) return;
+    commitAnnos((prev) => {
+      const list = [...(prev[selected.page] || [])];
+      const i = selected.index;
+      const j = i + dir;
+      if (i < 0 || i >= list.length || j < 0 || j >= list.length) return prev;
+      const [a] = list.splice(i, 1);
+      list.splice(j, 0, a!);
+      return { ...prev, [selected.page]: list };
+    });
+    setSelected({ page: selected.page, index: selected.index + dir });
+  };
+
   const deleteSelected = () => {
     if (!selected) return;
-    commitAnnos((prev) => ({ ...prev, [selected.page]: (prev[selected.page] || []).filter((_, i) => i !== selected.index) }));
+    commitAnnos((prev) => {
+      const list = (prev[selected.page] || []).filter((_, i) => i !== selected.index);
+      return { ...prev, [selected.page]: pruneEmpty(list) };
+    });
     setSelected(null);
   };
 
@@ -1427,6 +1469,59 @@ export default function PdfEditor() {
 
   const signPadDataRef = useRef<string | null>(null);
   const [typedName, setTypedName] = useState('');
+  const [hasSavedSig, setHasSavedSig] = useState(false);
+  // Recently-used emoji (local only): pinned at the top of the picker.
+  const [recentEmoji, setRecentEmoji] = useState<string[]>(() => {
+    try {
+      const raw = localStorage.getItem('toolzum:recent-emoji');
+      if (!raw) return [];
+      return (JSON.parse(raw) as unknown[]).filter((e): e is string => typeof e === 'string').slice(0, 8);
+    } catch {
+      return [];
+    }
+  });
+  const [emojiQuery, setEmojiQuery] = useState('');
+
+  const rememberEmoji = (emoji: string) => {
+    setRecentEmoji((prev) => {
+      const next = [emoji, ...prev.filter((e) => e !== emoji)].slice(0, 8);
+      try {
+        localStorage.setItem('toolzum:recent-emoji', JSON.stringify(next));
+      } catch { /* private mode */ }
+      return next;
+    });
+  };
+
+  // Preload saved-signature presence whenever the pad opens.
+  useEffect(() => {
+    if (showSignPad) loadSavedSig();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showSignPad]);
+
+  // Saved signature: persisted locally (never uploaded) so repeat signing
+  // skips redrawing. Loaded lazily on panel open.
+  const SIG_KEY = 'toolzum:saved-signature';
+  const loadSavedSig = () => {
+    try {
+      const s = localStorage.getItem(SIG_KEY);
+      setHasSavedSig(!!s);
+      return s;
+    } catch {
+      return null;
+    }
+  };
+
+  const applySavedSig = () => {
+    const s = loadSavedSig();
+    if (!s) {
+      toast.error('No saved signature yet — draw or type one first.');
+      return;
+    }
+    signPadDataRef.current = s;
+    setShowSignPad(false);
+    setTool('sign');
+    toast.success('Saved signature loaded — click on the page to place it.');
+  };
 
   // Typed signature: renders the name in a script font onto the pad, then
   // flows through the same save path as drawn signatures.
@@ -1457,6 +1552,10 @@ export default function PdfEditor() {
     for (let i = 3; i < px.length; i += 16) { if (px[i]! > 0) { ink = true; break; } }
     if (!ink) { toast.error('Draw your signature first.'); return; }
     signPadDataRef.current = c.toDataURL('image/png');
+    try {
+      localStorage.setItem(SIG_KEY, signPadDataRef.current);
+      setHasSavedSig(true);
+    } catch { /* private mode — session-only */ }
     setShowSignPad(false);
     toast.success('Signature saved — switch to the Sign tool and click to place it.');
     setTool('sign');
@@ -1466,6 +1565,32 @@ export default function PdfEditor() {
   // glyph to a PNG on an offscreen canvas and stamp it as an image —
   // exports identically everywhere, no font dependency.
   const EMOJI_SET = ['✅', '⭐', '❤️', '➡️', '⚠️', '✔️', '❌', '💡', '📌', '🎉', '👍', '🔥'];
+  const EMOJI_ALL: { emoji: string; name: string; cat: string }[] = [
+    { emoji: '✅', name: 'check', cat: 'Symbols' }, { emoji: '✔️', name: 'heavy check', cat: 'Symbols' },
+    { emoji: '❌', name: 'cross', cat: 'Symbols' }, { emoji: '⚠️', name: 'warning', cat: 'Symbols' },
+    { emoji: '⭐', name: 'star', cat: 'Symbols' }, { emoji: '❤️', name: 'heart', cat: 'Smileys' },
+    { emoji: '➡️', name: 'arrow right', cat: 'Symbols' }, { emoji: '💡', name: 'idea', cat: 'Objects' },
+    { emoji: '📌', name: 'pin', cat: 'Objects' }, { emoji: '🎉', name: 'party', cat: 'Objects' },
+    { emoji: '👍', name: 'thumbs up', cat: 'Gestures' }, { emoji: '🔥', name: 'fire', cat: 'Objects' },
+    { emoji: '😀', name: 'grin', cat: 'Smileys' }, { emoji: '😂', name: 'joy', cat: 'Smileys' },
+    { emoji: '😍', name: 'heart eyes', cat: 'Smileys' }, { emoji: '🤔', name: 'thinking', cat: 'Smileys' },
+    { emoji: '😢', name: 'cry', cat: 'Smileys' }, { emoji: '😎', name: 'cool', cat: 'Smileys' },
+    { emoji: '👏', name: 'clap', cat: 'Gestures' }, { emoji: '🙏', name: 'pray', cat: 'Gestures' },
+    { emoji: '👎', name: 'thumbs down', cat: 'Gestures' }, { emoji: '✋', name: 'hand', cat: 'Gestures' },
+    { emoji: '👀', name: 'eyes', cat: 'Smileys' }, { emoji: '💯', name: 'hundred', cat: 'Symbols' },
+    { emoji: '❓', name: 'question', cat: 'Symbols' }, { emoji: '❗', name: 'exclaim', cat: 'Symbols' },
+    { emoji: '💰', name: 'money', cat: 'Objects' }, { emoji: '📅', name: 'calendar', cat: 'Objects' },
+    { emoji: '📞', name: 'phone', cat: 'Objects' }, { emoji: '✉️', name: 'mail', cat: 'Objects' },
+    { emoji: '🔒', name: 'lock', cat: 'Objects' },
+    { emoji: '🚀', name: 'rocket', cat: 'Objects' }, { emoji: '🏆', name: 'trophy', cat: 'Objects' },
+    { emoji: '📝', name: 'memo', cat: 'Objects' },
+    { emoji: '⚡', name: 'zap', cat: 'Symbols' }, { emoji: '🌟', name: 'glow star', cat: 'Symbols' },
+    { emoji: '⭕', name: 'circle', cat: 'Symbols' }, { emoji: '🔴', name: 'red circle', cat: 'Symbols' },
+    { emoji: '🟢', name: 'green circle', cat: 'Symbols' }, { emoji: '🔵', name: 'blue circle', cat: 'Symbols' },
+    { emoji: '⬆️', name: 'arrow up', cat: 'Symbols' }, { emoji: '⬇️', name: 'arrow down', cat: 'Symbols' },
+    { emoji: '©️', name: 'copyright', cat: 'Symbols' }, { emoji: '®️', name: 'registered', cat: 'Symbols' },
+    { emoji: '™️', name: 'trademark', cat: 'Symbols' },
+  ];
   const stampEmoji = (emoji: string) => {
     const c = document.createElement('canvas');
     c.width = 128;
@@ -1477,6 +1602,7 @@ export default function PdfEditor() {
     ctx.fillText(emoji, 64, 70);
     pendingImageRef.current = c.toDataURL('image/png');
     setTool('image');
+    rememberEmoji(emoji);
     toast.success('Emoji ready — click on the page to stamp it.');
   };
 
@@ -1491,9 +1617,16 @@ export default function PdfEditor() {
     reader.readAsDataURL(f);
   };
 
+  // Editable-annotations export (FreeText/Highlight/Ink dicts) is deferred:
+  // pdf-lib only exposes low-level annotation primitives, and burned
+  // output needs validation across readers we can't run headlessly.
+  // The button below states flattening explicitly instead of implying it.
   const exportPdf = async () => {
     if (!fileBytes) return;
-    const total = Object.values(annos).reduce((n, l) => n + l.length, 0);
+    // Prune empties at export so stray clicks never ship as ghost boxes.
+    const clean: Record<number, Anno[]> = {};
+    for (const [p, list] of Object.entries(annos)) clean[Number(p)] = pruneEmpty(list);
+    const total = Object.values(clean).reduce((n, l) => n + l.length, 0);
     if (total === 0) { toast.error('Nothing to export yet — add some annotations first.'); return; }
     setExporting(true);
     try {
@@ -1534,7 +1667,7 @@ export default function PdfEditor() {
         return italic ? (bold ? fam.boldItalic : fam.italic) : bold ? fam.bold : fam.plain;
       };
       const libPages = pdfDocLib.getPages();
-      for (const [pageNum, list] of Object.entries(annos)) {
+      for (const [pageNum, list] of Object.entries(clean)) {
         const lp = libPages[Number(pageNum) - 1];
         if (!lp) continue;
         const pageH = lp.getHeight();
@@ -1580,7 +1713,7 @@ export default function PdfEditor() {
             lp.drawRectangle({
               x: a.x, y: pageH - (a.y + a.h),
               width: a.w, height: a.h,
-              color: rgb(c.r, c.g, c.b), opacity: 0.4,
+              color: rgb(c.r, c.g, c.b), opacity: a.opacity ?? 0.4,
             });
           } else if (a.kind === 'whiteout') {
             lp.drawRectangle({
@@ -1686,6 +1819,7 @@ export default function PdfEditor() {
   const effColor = selIsText ? (selAnno as TextAnno | FlowAnno).color : textColor;
   const effSize = selIsText ? (selAnno as TextAnno | FlowAnno).size : textSize;
   const [showFind, setShowFind] = useState(false);
+  const showDrawBar = tool === 'draw' || tool === 'highlight' || tool === 'shape';
 
   const tools: { id: Tool; label: string; icon: React.ReactNode; group: string }[] = [
     { id: 'text', label: 'Text', icon: <Type className="w-4 h-4" />, group: 'Text & content' },
@@ -1776,8 +1910,8 @@ export default function PdfEditor() {
             <button onClick={toggleFocus} aria-pressed={focus} aria-label={focus ? 'Exit focus mode' : 'Enter focus mode (editor only)'} title={focus ? 'Exit focus mode' : 'Focus mode — editor only'} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
               {focus ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />} {focus ? 'Exit focus' : 'Focus'}
             </button>
-            <button onClick={exportPdf} disabled={exporting} aria-label="Download edited PDF" title="Download the edited PDF" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[var(--accent-ink)] text-white text-xs font-bold hover:opacity-90 disabled:opacity-50">
-              <Download className="w-4 h-4" /> {exporting ? 'Exporting…' : 'Download PDF'}
+            <button onClick={exportPdf} disabled={exporting} aria-label="Download flattened PDF" title="Download — annotations are flattened permanently" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[var(--accent-ink)] text-white text-xs font-bold hover:opacity-90 disabled:opacity-50">
+              <Download className="w-4 h-4" /> {exporting ? 'Exporting…' : 'Download · flattened'}
             </button>
           </div>
         </div>
@@ -1825,12 +1959,27 @@ export default function PdfEditor() {
           </div>
           <div className="flex items-center gap-1.5" role="group" aria-label="Edit actions">
             <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">Edit</span>
-            <button onClick={undo} aria-label="Undo last annotation" title="Undo last annotation" className="p-2 rounded-lg border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)]">
+            <button onClick={undo} disabled={historyCount === 0} aria-label={`Undo last change (${historyCount} in history)`} title="Undo (Ctrl+Z)" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
               <Undo2 className="w-4 h-4" />
             </button>
-            <button onClick={deleteSelected} disabled={!selected} aria-label="Delete selected annotation" title="Delete selected (Del)" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
-              <Trash2 className="w-4 h-4" />
+            <button onClick={redo} disabled={redoCount === 0} aria-label="Redo" title="Redo (Ctrl+Y)" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
+              <Redo2 className="w-4 h-4" />
             </button>
+            {historyCount > 0 && (
+              <span className="px-2 py-1 text-[10px] font-mono text-[var(--text-muted)]" title="Edits you can undo">{historyCount}</span>
+            )}
+            <button onClick={() => setShowShortcuts(true)} aria-label="Keyboard shortcuts" title="Keyboard shortcuts (?)" className="p-2 rounded-lg border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)]">
+              <Keyboard className="w-4 h-4" />
+            </button>
+          <button onClick={deleteSelected} disabled={!selected} aria-label="Delete selected annotation" title="Delete selected (Del)" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
+            <Trash2 className="w-4 h-4" />
+          </button>
+          <button onClick={() => moveLayer(1)} disabled={!selected} aria-label="Bring forward" title="Bring forward (on top)" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
+            <BringToFront className="w-4 h-4" />
+          </button>
+          <button onClick={() => moveLayer(-1)} disabled={!selected} aria-label="Send backward" title="Send backward (behind)" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
+            <SendToBack className="w-4 h-4" />
+          </button>
             <button onClick={copySelected} disabled={!selected} aria-label="Copy selected annotation" title="Copy selected (Ctrl+C)" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
               <Copy className="w-4 h-4" />
             </button>
@@ -1846,7 +1995,16 @@ export default function PdfEditor() {
 
       {showSignPad && (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 space-y-3">
-          <p className="text-sm font-bold text-[var(--text-primary)]">Draw your signature, then click on the page to place it.</p>
+          <div className="flex items-center gap-2">
+            <p className="text-sm font-bold text-[var(--text-primary)]">Draw your signature, then click on the page to place it.</p>
+            <button
+              onClick={() => applySavedSig()}
+              title="Reuse the signature saved on this device (stored locally, never uploaded)"
+              className="ml-auto px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] whitespace-nowrap"
+            >
+              Use saved{hasSavedSig ? ' ✓' : ''}
+            </button>
+          </div>
           <canvas
             ref={signPadRef}
             width={480}
@@ -1877,6 +2035,18 @@ export default function PdfEditor() {
             <button onClick={saveSignPad} className="px-4 py-2 rounded-xl bg-[var(--accent-ink)] text-white text-xs font-bold">Save signature</button>
             <button onClick={() => { const c = signPadRef.current; c?.getContext('2d')?.clearRect(0, 0, c.width, c.height); }} className="px-4 py-2 rounded-xl border border-[var(--border-subtle)] text-xs">Clear</button>
             <button onClick={() => setShowSignPad(false)} className="px-4 py-2 rounded-xl border border-[var(--border-subtle)] text-xs">Close</button>
+            {hasSavedSig && (
+              <button
+                onClick={() => {
+                  try { localStorage.removeItem(SIG_KEY); } catch { /* ignore */ }
+                  setHasSavedSig(false);
+                  toast.success('Saved signature forgotten on this device.');
+                }}
+                className="px-4 py-2 rounded-xl text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] underline"
+              >
+                Forget saved
+              </button>
+            )}
           </div>
           <div className="flex flex-wrap items-center gap-2 pt-1">
             <span className="text-xs text-[var(--text-muted)]">or type it:</span>
@@ -2024,6 +2194,48 @@ export default function PdfEditor() {
           </button>
         </div>
       )}
+      {showDrawBar && (
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-4 py-2.5" role="toolbar" aria-label={`${tool} options`}>
+          {tool === 'draw' && (
+            <>
+              <label className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]" htmlFor="pdfed-brush">Brush</label>
+              <input id="pdfed-brush" type="range" min={0.5} max={8} step={0.5} value={brushWidth} onChange={(e) => setBrushWidth(Number(e.target.value))} className="w-24" aria-label="Brush width" title={`Brush width ${brushWidth}pt`} />
+              <div className="flex gap-1.5" role="group" aria-label="Ink color">
+                {INK_COLORS.map((c) => (
+                  <button key={c} onClick={() => setInkColor(c)} aria-label={`Ink color ${c}`} title={`Ink color ${c}`} className={`w-6 h-6 rounded-full border-2 ${inkColor === c ? 'border-[var(--accent)]' : 'border-transparent'}`} style={{ backgroundColor: c }} />
+                ))}
+              </div>
+            </>
+          )}
+          {tool === 'highlight' && (
+            <>
+              <div className="flex gap-1.5" role="group" aria-label="Marker color">
+                {HIGHLIGHT_COLORS.map((c) => (
+                  <button key={c} onClick={() => setMarkColor(c)} aria-label={`Marker color ${c}`} title={`Marker color ${c}`} className={`w-6 h-6 rounded-full border-2 ${markColor === c ? 'border-[var(--accent)]' : 'border-transparent'}`} style={{ backgroundColor: c }} />
+                ))}
+              </div>
+              <label className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]" htmlFor="pdfed-opacity">Opacity</label>
+              <input id="pdfed-opacity" type="range" min={0.1} max={0.9} step={0.1} value={markOpacity} onChange={(e) => setMarkOpacity(Number(e.target.value))} className="w-24" aria-label="Highlight opacity" title={`Opacity ${Math.round(markOpacity * 100)}%`} />
+            </>
+          )}
+          {tool === 'shape' && (
+            <>
+              <div className="flex gap-1" role="group" aria-label="Shape">
+                {(['rect', 'ellipse', 'line', 'arrow'] as const).map((s) => (
+                  <button key={s} onClick={() => setShapeVariant(s)} aria-pressed={shapeVariant === s} title={s} className={`px-2 py-1.5 rounded-lg text-xs font-bold border capitalize ${shapeVariant === s ? 'bg-[var(--accent-ink)] text-white border-transparent' : 'border-[var(--border-subtle)]'}`}>{s}</button>
+                ))}
+              </div>
+              <label className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]" htmlFor="pdfed-stroke">Stroke</label>
+              <input id="pdfed-stroke" type="range" min={0.5} max={6} step={0.5} value={shapeWidth} onChange={(e) => setShapeWidth(Number(e.target.value))} className="w-24" aria-label="Shape stroke width" title={`Stroke ${shapeWidth}pt`} />
+              <div className="flex gap-1.5" role="group" aria-label="Shape color">
+                {INK_COLORS.map((c) => (
+                  <button key={c} onClick={() => setInkColor(c)} aria-label={`Shape color ${c}`} title={`Shape color ${c}`} className={`w-6 h-6 rounded-full border-2 ${inkColor === c ? 'border-[var(--accent)]' : 'border-transparent'}`} style={{ backgroundColor: c }} />
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      )}
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
         <div className="lg:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-3 space-y-3 max-h-[720px] overflow-y-auto">
@@ -2054,7 +2266,40 @@ export default function PdfEditor() {
                 </button>
               ))}
             </div>
-            <Link href="/utility/emoji-picker" target="_blank" rel="noopener" title="Opens in a new tab — your editing session stays intact" className="text-[11px] text-[var(--accent)] hover:underline">More emoji →</Link>
+            <input
+              value={emojiQuery}
+              onChange={(e) => setEmojiQuery(e.target.value)}
+              placeholder="Search all emoji…"
+              aria-label="Search emoji"
+              className="mt-1.5 w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-1.5 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+            />
+            {(emojiQuery.trim() || recentEmoji.length > 0) && (
+              <div className="mt-1.5 space-y-1.5 max-h-44 overflow-y-auto">
+                {recentEmoji.length > 0 && !emojiQuery.trim() && (
+                  <div>
+                    <p className="px-1 text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">Recent</p>
+                    <div className="grid grid-cols-8 gap-1 mt-1">
+                      {recentEmoji.map((e) => (
+                        <button key={e} onClick={() => stampEmoji(e)} aria-label={`Stamp ${e}`} title="Stamp this emoji" className="text-base leading-none p-1 rounded-lg hover:bg-[var(--bg-overlay)] transition-colors">
+                          {e}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {emojiQuery.trim() && (
+                  <div className="grid grid-cols-8 gap-1">
+                    {EMOJI_ALL.filter((e) => e.name.includes(emojiQuery.trim().toLowerCase()) || e.cat.toLowerCase().includes(emojiQuery.trim().toLowerCase()))
+                      .slice(0, 32)
+                      .map((e) => (
+                        <button key={`${e.emoji}-${e.name}`} onClick={() => stampEmoji(e.emoji)} aria-label={`Stamp ${e.name}`} title={e.name} className="text-base leading-none p-1 rounded-lg hover:bg-[var(--bg-overlay)] transition-colors">
+                          {e.emoji}
+                        </button>
+                      ))}
+                  </div>
+                )}
+              </div>
+            )}
           </details>
           <div className="pt-2 space-y-2">
             {(tool === 'text') && (
