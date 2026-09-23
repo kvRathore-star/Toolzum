@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 import { PDFDocument, StandardFonts, rgb, degrees } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
 import { setupPdfWorker } from '@/lib/pdfjsWorker';
-import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Redo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers, Maximize2, Minimize2, Keyboard, MoveLeft, MoveRight, Save } from 'lucide-react';
+import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Redo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers, Maximize2, Minimize2, Keyboard, MoveLeft, MoveRight, Save, Search } from 'lucide-react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from '@/lib/clipboard';
@@ -770,6 +770,13 @@ export default function PdfEditor() {
     const x = pos.x / scale;
     const y = pos.y / scale;
     if (tool === 'text') {
+      // Hit first: clicking an existing box selects it for editing instead
+      // of stacking a new one on top (the overlapping-boxes bug).
+      const hit = hitTextAnno(x, y);
+      if (hit !== null) {
+        setSelected({ page, index: hit });
+        return;
+      }
       // Blank-page writing: no text layer + no annotations yet → one flowing
       // box (wraps, grows) instead of sticker-style single lines.
       const items = await ensureTextLayer(page).catch(() => []);
@@ -1048,6 +1055,30 @@ export default function PdfEditor() {
     return textLayerRef.current[pg] || [];
   };
 
+  // Hit-test: clicking on/near an existing text-family box selects it
+  // instead of stacking a new one on top (the "New textNew text" bug).
+  // Hit-test: clicking on/near an existing text-family box selects it
+  // instead of stacking a new one on top (Google Docs / Canva behavior).
+  const hitTextAnno = (x: number, y: number): number | null => {
+    const list = annos[page] || [];
+    for (let i = list.length - 1; i >= 0; i--) {
+      const a = list[i]!;
+      if (a.kind === 'text') {
+        const w = Math.max(20, a.text.length * a.size * 0.55);
+        if (x >= a.x - 6 && x <= a.x + w + 6 && y >= a.y - a.size - 6 && y <= a.y + 6) return i;
+      } else if (a.kind === 'flow') {
+        const lines = wrapLines(a.text || 'x', a.w, (s) => s.length * a.size * 0.55);
+        const h = lines.length * a.size * 1.25 + 8;
+        if (x >= a.x - 6 && x <= a.x + a.w + 6 && y >= a.y - a.size - 6 && y <= a.y + h) return i;
+      } else if (a.kind === 'note') {
+        if (x >= a.x - 6 && x <= a.x + 196 && y >= a.y - 6 && y <= a.y + 116) return i;
+      }
+    }
+    return null;
+  };
+  // and drop an editable Helvetica box at the same size/position. Honest
+  // label: retypeset, NOT same-font — the original font is matched for size
+  // and placement only (see FAQ).
   // Click-to-retype: find the nearest text-layer item, cover it with white,
   // and drop an editable Helvetica box at the same size/position. Honest
   // label: retypeset, NOT same-font — the original font is matched for size
@@ -1371,6 +1402,7 @@ export default function PdfEditor() {
     if ((mod && e.key.toLowerCase() === 'y') || (mod && e.shiftKey && e.key.toLowerCase() === 'z')) { e.preventDefault(); redo(); return; }
     if (mod && e.key.toLowerCase() === 's') { e.preventDefault(); saveNow(); return; }
     if (mod && e.key.toLowerCase() === 'd') { e.preventDefault(); duplicateSelected(); return; }
+    if ((mod && e.key.toLowerCase() === 'f') || e.key === 'F3') { e.preventDefault(); setShowFind(true); return; }
     if (e.key === '?') { setShowShortcuts(true); return; }
     const step = e.shiftKey ? 10 : 1;
     if (!selected) return;
@@ -1625,6 +1657,35 @@ export default function PdfEditor() {
   };
 
   const selAnno = selected ? annos[selected.page]?.[selected.index] : undefined;
+  const selIsText = !!selAnno && (selAnno.kind === 'text' || selAnno.kind === 'flow');
+  const showFormatBar = tool === 'text' || selIsText;
+
+  // One bar, two targets: with a text/flow annotation selected it styles the
+  // selection; otherwise it sets the defaults for the next box. This is the
+  // Word/Google-Docs split — sidebar picks the tool, the bar styles things.
+  const patchTextStyle = (patch: Partial<{ color: string; size: number; bold: boolean; italic: boolean; underline: boolean; strike: boolean; align: 'left' | 'center' | 'right'; font: PdfFont }>) => {
+    if ('color' in patch && patch.color !== undefined) setTextColor(patch.color);
+    if ('size' in patch && patch.size !== undefined) setTextSize(patch.size);
+    if ('bold' in patch && patch.bold !== undefined) setTextBold(patch.bold);
+    if ('italic' in patch && patch.italic !== undefined) setTextItalic(patch.italic);
+    if ('underline' in patch && patch.underline !== undefined) setTextUnderline(patch.underline);
+    if ('strike' in patch && patch.strike !== undefined) setTextStrike(patch.strike);
+    if ('align' in patch && patch.align !== undefined) setTextAlign(patch.align);
+    if ('font' in patch && patch.font !== undefined) setTextFont(patch.font);
+    if (selected && selAnno && (selAnno.kind === 'text' || selAnno.kind === 'flow')) {
+      commitAnnos((prev) => ({
+        ...prev,
+        [selected.page]: (prev[selected.page] || []).map((a, i) =>
+          i === selected.index && (a.kind === 'text' || a.kind === 'flow') ? { ...a, ...patch } : a,
+        ),
+      }));
+    }
+  };
+
+  // Effective values: selection wins, else defaults.
+  const effColor = selIsText ? (selAnno as TextAnno | FlowAnno).color : textColor;
+  const effSize = selIsText ? (selAnno as TextAnno | FlowAnno).size : textSize;
+  const [showFind, setShowFind] = useState(false);
 
   const tools: { id: Tool; label: string; icon: React.ReactNode; group: string }[] = [
     { id: 'text', label: 'Text', icon: <Type className="w-4 h-4" />, group: 'Text & content' },
@@ -1883,6 +1944,7 @@ export default function PdfEditor() {
               ['Save session', 'Ctrl+S'],
               ['Duplicate selected', 'Ctrl+D'],
               ['Delete selected', 'Del'],
+              ['Find panel', 'Ctrl+F'],
               ['Copy / paste', 'Ctrl+C · Ctrl+V'],
               ['Nudge (×10 with Shift)', 'Arrow keys'],
               ['This panel', '?'],
@@ -1894,6 +1956,72 @@ export default function PdfEditor() {
             ))}
             <button onClick={() => setShowShortcuts(false)} className="w-full mt-3 px-4 py-2 rounded-xl bg-[var(--accent-ink)] text-white text-xs font-bold">Done</button>
           </div>
+        </div>
+      )}
+
+      {/* Contextual format bar: visible only when the Text tool is active
+          or a text/flow box is selected. Styles the selection if present,
+          else the defaults for the next box. */}
+      {showFormatBar && (
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-4 py-2.5" role="toolbar" aria-label="Text formatting">
+          <select
+            value={selIsText ? ((selAnno as TextAnno | FlowAnno).font || 'sans') : textFont}
+            onChange={(e) => patchTextStyle({ font: e.target.value as PdfFont })}
+            aria-label="Font family"
+            title="Font family"
+            className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs font-bold"
+          >
+            <option value="sans">Sans (Helvetica)</option>
+            <option value="serif">Serif (Times)</option>
+            <option value="mono">Mono (Courier)</option>
+          </select>
+          <input
+            type="range" min={8} max={48}
+            value={effSize}
+            onChange={(e) => patchTextStyle({ size: Number(e.target.value) })}
+            className="w-24" aria-label="Text size" title={`Text size ${effSize}`}
+          />
+          <div className="flex gap-1" role="group" aria-label="Text style">
+            {([
+              ['bold', 'B', 'Bold', 'font-bold'],
+              ['italic', 'I', 'Italic', 'italic'],
+              ['underline', 'U', 'Underline', 'underline'],
+              ['strike', 'S', 'Strikethrough', 'line-through'],
+            ] as const).map(([key, label, title, cls]) => {
+              const active = selIsText
+                ? Boolean((selAnno as Record<string, unknown>)[key])
+                : key === 'bold' ? textBold : key === 'italic' ? textItalic : key === 'underline' ? textUnderline : textStrike;
+              return (
+                <button
+                  key={key}
+                  onClick={() => patchTextStyle({ [key]: !active } as Partial<{ bold: boolean; italic: boolean; underline: boolean; strike: boolean }>)}
+                  aria-pressed={active}
+                  title={title}
+                  className={`px-2.5 py-2 rounded-lg text-xs font-bold border ${cls} ${active ? 'bg-[var(--accent-ink)] text-white border-transparent' : 'border-[var(--border-subtle)]'}`}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+          <div className="flex gap-1" role="group" aria-label="Text alignment">
+            {(['left', 'center', 'right'] as const).map((a) => {
+              const active = selIsText ? ((selAnno as TextAnno).align || 'left') === a : textAlign === a;
+              return (
+                <button key={a} onClick={() => patchTextStyle({ align: a })} aria-pressed={active} title={`Align ${a}`} className={`px-2.5 py-2 rounded-lg text-xs font-bold border capitalize ${active ? 'bg-[var(--accent-ink)] text-white border-transparent' : 'border-[var(--border-subtle)]'}`}>
+                  {a[0]}
+                </button>
+              );
+            })}
+          </div>
+          <div className="flex gap-1.5" role="group" aria-label="Text color">
+            {INK_COLORS.map((c) => (
+              <button key={c} onClick={() => patchTextStyle({ color: c })} aria-label={`Text color ${c}`} title={`Text color ${c}`} className={`w-6 h-6 rounded-full border-2 ${effColor === c ? 'border-[var(--accent)]' : 'border-transparent'}`} style={{ backgroundColor: c }} />
+            ))}
+          </div>
+          <button onClick={() => setShowFind(true)} aria-label="Find in document" title="Find (Ctrl+F)" className="ml-auto inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
+            <Search className="w-4 h-4" /> Find
+          </button>
         </div>
       )}
 
@@ -1930,38 +2058,7 @@ export default function PdfEditor() {
           </details>
           <div className="pt-2 space-y-2">
             {(tool === 'text') && (
-              <>
-                <span className={labelCls}>Text color</span>
-                <div className="flex gap-1.5 flex-wrap">
-                  {INK_COLORS.map((c) => (
-                    <button key={c} onClick={() => setTextColor(c)} aria-label={`Text color ${c}`} title={`Text color ${c}`} className={`w-6 h-6 rounded-full border-2 ${textColor === c ? 'border-[var(--accent)]' : 'border-transparent'}`} style={{ backgroundColor: c }} />
-                  ))}
-                </div>
-                <label className={labelCls} htmlFor="pdfed-font-family">Font</label>
-                <select
-                  id="pdfed-font-family"
-                  value={textFont}
-                  onChange={(e) => setTextFont(e.target.value as PdfFont)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm"
-                >
-                  <option value="sans">Sans (Helvetica)</option>
-                  <option value="serif">Serif (Times)</option>
-                  <option value="mono">Mono (Courier)</option>
-                </select>
-                <label className={labelCls} htmlFor="pdfed-text-size">Size</label>
-                <input id="pdfed-text-size" type="range" min={8} max={48} value={textSize} onChange={(e) => setTextSize(Number(e.target.value))} className="w-full" aria-label="Text size" />
-                <div className="flex gap-1.5 flex-wrap" role="group" aria-label="Text style">
-                  <button onClick={() => setTextBold((b) => !b)} aria-pressed={textBold} title="Bold" className={`px-3 py-1.5 rounded-lg text-xs font-bold border ${textBold ? 'bg-[var(--accent-ink)] text-white' : 'border-[var(--border-subtle)]'}`}>Bold</button>
-                  <button onClick={() => setTextItalic((b) => !b)} aria-pressed={textItalic} title="Italic" className={`px-3 py-1.5 rounded-lg text-xs italic font-bold border ${textItalic ? 'bg-[var(--accent-ink)] text-white' : 'border-[var(--border-subtle)]'}`}>Italic</button>
-                  <button onClick={() => setTextUnderline((b) => !b)} aria-pressed={textUnderline} title="Underline" className={`px-3 py-1.5 rounded-lg text-xs font-bold underline border ${textUnderline ? 'bg-[var(--accent-ink)] text-white' : 'border-[var(--border-subtle)]'}`}>U</button>
-                  <button onClick={() => setTextStrike((b) => !b)} aria-pressed={textStrike} title="Strikethrough" className={`px-3 py-1.5 rounded-lg text-xs font-bold line-through border ${textStrike ? 'bg-[var(--accent-ink)] text-white' : 'border-[var(--border-subtle)]'}`}>S</button>
-                </div>
-                <div className="flex gap-1.5" role="group" aria-label="Text alignment">
-                  {(['left', 'center', 'right'] as const).map((a) => (
-                    <button key={a} onClick={() => setTextAlign(a)} aria-pressed={textAlign === a} title={`Align ${a}`} className={`flex-1 px-2 py-1.5 rounded-lg text-xs font-bold border capitalize ${textAlign === a ? 'bg-[var(--accent-ink)] text-white' : 'border-[var(--border-subtle)]'}`}>{a[0]}</button>
-                  ))}
-                </div>
-              </>
+              <p className="text-xs text-[var(--text-muted)]">Formatting lives in the bar above — it styles the selected box, or the next one you place.</p>
             )}
             {(tool === 'highlight') && (
               <>
@@ -2076,52 +2173,15 @@ export default function PdfEditor() {
             </div>
           )}
           <div className="pt-2 border-t border-[var(--border-subtle)] space-y-2">
-            <span className={labelCls}>Find & replace</span>
-            <input
-              value={findText}
-              onChange={(e) => { setFindText(e.target.value); setFindNav(null); }}
-              placeholder="Find text"
-              className={inputCls}
-              aria-label="Text to find"
-            />
-            <input
-              value={replaceText}
-              onChange={(e) => setReplaceText(e.target.value)}
-              placeholder="Replace with"
-              className={inputCls}
-              aria-label="Replacement text"
-            />
-            <div className="flex gap-1.5" role="group" aria-label="Replace scope">
-              {(['page', 'all'] as const).map((s) => (
-                <button key={s} onClick={() => setReplaceScope(s)} aria-pressed={replaceScope === s} className={`flex-1 px-2 py-1.5 rounded-lg text-xs font-bold border ${replaceScope === s ? 'bg-[var(--accent-ink)] text-white border-transparent' : 'border-[var(--border-subtle)]'}`}>
-                  {s === 'page' ? 'This page' : 'All pages'}
-                </button>
-              ))}
-            </div>
-            <button onClick={findReplace} disabled={replacing} className="w-full px-3 py-2 rounded-xl bg-[var(--accent-ink)] text-white text-xs font-bold disabled:opacity-50">
-              {replacing ? 'Replacing…' : 'Replace all'}
+            <span className={labelCls}>Find in document</span>
+            <p className="text-xs text-[var(--text-muted)]">Search lives in the format bar (Find button or Ctrl+F) — highlight, navigate, and replace from there.</p>
+            <button onClick={() => setShowFind(true)} className="w-full px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
+              Open Find panel
             </button>
-            <div className="flex gap-1.5" role="group" aria-label="Find navigation">
-              <button onClick={findHighlight} aria-label="Highlight matches" title="Highlight all matches on this page" className="flex-1 px-2 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
-                Highlight
-              </button>
-              <button onClick={() => findStep(-1)} aria-label="Previous match" title="Previous match" className="flex-1 px-2 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
-                ↑ Prev
-              </button>
-              <button onClick={() => findStep(1)} aria-label="Next match" title="Next match" className="flex-1 px-2 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
-                Next ↓
-              </button>
-            </div>
-            {findNav && (
-              <p className="text-[11px] font-mono text-[var(--text-muted)] text-center" aria-live="polite">
-                Match {findNav.idx + 1} of {findNav.rects.length}{replaceScope === 'all' ? ` · page ${findNav.page}` : ''}
-              </p>
-            )}
-            <p className="text-[11px] text-[var(--text-muted)]">Case-insensitive match; retypeset in Helvetica at matched size.</p>
           </div>
         </div>
 
-        <div ref={canvasColRef} className="lg:col-span-8 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 overflow-auto">
+        <div ref={canvasColRef} className="lg:col-span-8 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 overflow-auto relative">
           <div className="relative mx-auto w-fit" tabIndex={0} role="application" onKeyDown={onCanvasKey} aria-label="PDF page canvas. Arrow keys nudge the selection, Delete removes it, Control C and V copy and paste.">
             <span className="sr-only" aria-live="polite">Page {page} of {pageCount}. Text content: {pageText || 'No readable text on this page.'}</span>
             {rendering && (
@@ -2151,6 +2211,57 @@ export default function PdfEditor() {
             {tool === 'image' && 'Pick an image, then click to stamp it.'}
             {tool === 'sign' && 'Draw a signature above, then click to place it.'}
           </p>
+          {showFind && (
+            <div className="absolute top-4 right-4 z-20 w-72 p-4 space-y-2 rounded-2xl bg-[var(--bg-elevated)] border border-[var(--border-subtle)] shadow-xl" role="dialog" aria-label="Find and replace">
+              <div className="flex items-center justify-between">
+                <p className="text-xs font-bold text-[var(--text-primary)]">Find & replace</p>
+                <button onClick={() => setShowFind(false)} aria-label="Close find panel" className="text-[var(--text-muted)] hover:text-[var(--text-primary)] text-sm px-1">✕</button>
+              </div>
+              <input
+                value={findText}
+                onChange={(e) => { setFindText(e.target.value); setFindNav(null); }}
+                onKeyDown={(e) => { if (e.key === 'Enter') findStep(1); }}
+                placeholder="Find text"
+                className={inputCls}
+                aria-label="Text to find"
+                autoFocus
+              />
+              <input
+                value={replaceText}
+                onChange={(e) => setReplaceText(e.target.value)}
+                placeholder="Replace with"
+                className={inputCls}
+                aria-label="Replacement text"
+              />
+              <div className="flex gap-1.5" role="group" aria-label="Replace scope">
+                {(['page', 'all'] as const).map((s) => (
+                  <button key={s} onClick={() => setReplaceScope(s)} aria-pressed={replaceScope === s} className={`flex-1 px-2 py-1.5 rounded-lg text-xs font-bold border ${replaceScope === s ? 'bg-[var(--accent-ink)] text-white border-transparent' : 'border-[var(--border-subtle)]'}`}>
+                    {s === 'page' ? 'This page' : 'All pages'}
+                  </button>
+                ))}
+              </div>
+              <button onClick={findReplace} disabled={replacing} className="w-full px-3 py-2 rounded-xl bg-[var(--accent-ink)] text-white text-xs font-bold disabled:opacity-50">
+                {replacing ? 'Replacing…' : 'Replace all'}
+              </button>
+              <div className="flex gap-1.5" role="group" aria-label="Find navigation">
+                <button onClick={findHighlight} aria-label="Highlight matches" title="Highlight all matches on this page" className="flex-1 px-2 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
+                  Highlight
+                </button>
+                <button onClick={() => findStep(-1)} aria-label="Previous match" title="Previous match" className="flex-1 px-2 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
+                  ↑ Prev
+                </button>
+                <button onClick={() => findStep(1)} aria-label="Next match" title="Next match" className="flex-1 px-2 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
+                  Next ↓
+                </button>
+              </div>
+              {findNav && (
+                <p className="text-[11px] font-mono text-[var(--text-muted)] text-center" aria-live="polite">
+                  Match {findNav.idx + 1} of {findNav.rects.length}{replaceScope === 'all' ? ` · page ${findNav.page}` : ''}
+                </p>
+              )}
+              <p className="text-[11px] text-[var(--text-muted)]">Case-insensitive match; retypeset in Helvetica at matched size.</p>
+            </div>
+          )}
         </div>
 
         {!focus && (
