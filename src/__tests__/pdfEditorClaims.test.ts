@@ -509,11 +509,11 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
 
     it('impl: Pages sidebar hidden below lg; shared list lives behind the sheet (kills 560px scroll-past)', () => {
       expect(editor).toMatch(/hidden lg:block lg:col-span-2/);
-      expect(editor, 'sheet + sidebar must render the same list (DnD/reorder included)').toMatch(
-        /const pagesList = \(onPick\?: \(\) => void\) => \(/,
+      expect(editor, 'sheet + sidebar must render the same component (DnD/reorder included)').toMatch(
+        /export function PagesList\(/,
       );
-      expect(editor.match(/pagesList/g)?.length ?? 0).toBeGreaterThanOrEqual(3); // def + sidebar + sheet
-      expect(editor).toMatch(/pagesList\(\(\) => setShowPagesSheet\(false\)\)/); // navigate closes sheet
+      expect(editor.match(/PagesList/g)?.length ?? 0).toBeGreaterThanOrEqual(3); // def + sidebar + sheet
+      expect(editor).toMatch(/onPick=\{\(\) => setShowPagesSheet\(false\)\}/); // navigate closes sheet
       const pagesSheet = editor.match(/aria-label="Pages">\s*<button aria-label="Close pages"[\s\S]{0,600}/)?.[0] ?? '';
       expect(pagesSheet).toMatch(/max-h-\[70vh\]/);
       expect(pagesSheet, 'close = backdrop + ✕, matching the shortcuts dialog (no window Escape)').toMatch(
