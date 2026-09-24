@@ -1440,7 +1440,12 @@ export default function PdfEditorCore() {
         const w = meas.measureText(it.str).width * 1.1;
         items.push({
           x: tx[4],
-          yTop: vp1.height - tx[5] - size,
+          // tx[5] is already top-based (pdf.js viewport flips y: d=-1),
+          // so the text's top edge is baseline − size. Subtracting
+          // vp1.height here mirrored the coordinate to the page bottom —
+          // which put find highlights, replace boxes, retype covers, and
+          // paragraph-select hit boxes in the wrong place.
+          yTop: tx[5] - size,
           w,
           size,
           bold: detectBold(it.fontName),
