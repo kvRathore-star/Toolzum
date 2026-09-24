@@ -18,8 +18,8 @@ import type { PdfFont } from '@/lib/pdfFonts';
 import { fontCss, detectFontFamily, detectBold, loadFontBytes, ensurePreviewFont } from '@/lib/pdfFonts';
 import Link from 'next/link';
 import { PdfEditorCtx, type PdfEditorApi } from './pdfEditorContext';
-import { PagesList } from './PagesList';
 import { MobileActionBar } from './MobileActionBar';
+import { Sidebar } from './Sidebar';
 import {
   HIGHLIGHT_COLORS,
   INK_COLORS,
@@ -3477,10 +3477,7 @@ export default function PdfEditorCore() {
         </div>
 
         {!focus && (
-        <div className="hidden lg:block lg:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-3 space-y-2 max-h-[560px] overflow-y-auto">
-          <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Pages</p>
-          <PagesList />
-        </div>
+        <Sidebar />
         )}
       </div>
 
