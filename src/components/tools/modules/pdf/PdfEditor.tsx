@@ -116,6 +116,7 @@ interface FlowAnno { kind: 'flow'; x: number; y: number; w: number; text: string
 // on export) — visually distinct from whiteout cover-up by design.
 interface RedactAnno { kind: 'redact'; x: number; y: number; w: number; h: number }
 type Anno = TextAnno | RectAnno | DrawAnno | ImageAnno | ShapeAnno | NoteAnno | FlowAnno | RedactAnno;
+export type { Anno };
 
 /**
  * Pure geometry helpers (module scope = unit-testable without a DOM).
@@ -161,6 +162,119 @@ export function moveLayerIndex<T>(list: T[], index: number, dir: 1 | -1): { list
   const [a] = next.splice(index, 1);
   next.splice(j, 0, a!);
   return { list: next, index: j };
+}
+
+/**
+ * Remap annotations through a page-structure op so they are NEVER wiped.
+ * - rotate: 90° CW in viewport space (old viewport height H): point
+ *   (x,y) → (H−y, x); rects also swap w/h. Storage stays in the current
+ *   viewport frame, which is what placement and (via convertToPdfPoint)
+ *   export already use.
+ * - duplicate/delete/left/right: pure key remaps; annotations follow
+ *   their pages. Same mapping applies to undo/redo snapshots so history
+ *   stays consistent with the new page order.
+ * Pure — tested.
+ */
+export function restructureAnnos(
+  annos: Record<number, Anno[]>,
+  op: 'rotate' | 'duplicate' | 'delete' | 'left' | 'right',
+  page: number,
+  pageCount: number,
+  oldVpH = 0,
+): Record<number, Anno[]> {
+  const next: Record<number, Anno[]> = {};
+  if (op === 'rotate') {
+    const H = oldVpH;
+    for (const [k, list] of Object.entries(annos)) {
+      next[Number(k)] = list.map((a): Anno => {
+        if (a.kind === 'draw') {
+          const pts: number[] = [];
+          for (let i = 0; i < a.points.length; i += 2) pts.push(H - a.points[i + 1]!, a.points[i]!);
+          return { ...a, points: pts };
+        }
+        if (a.kind === 'text' || a.kind === 'note' || a.kind === 'flow') {
+          return { ...a, x: H - a.y, y: a.x };
+        }
+        return { ...a, x: H - a.y - a.h, y: a.x, w: a.h, h: a.w };
+      });
+    }
+    return next;
+  }
+  if (op === 'duplicate') {
+    for (let p = 1; p <= pageCount + 1; p++) {
+      if (p < page) next[p] = annos[p] || [];
+      else if (p === page) next[p] = annos[page] || [];
+      else if (p === page + 1) next[p] = [...(annos[page] || [])];
+      else next[p] = annos[p - 1] || [];
+    }
+    return next;
+  }
+  if (op === 'delete') {
+    for (let p = 1; p <= pageCount - 1; p++) {
+      next[p] = p < page ? annos[p] || [] : annos[p + 1] || [];
+    }
+    return next;
+  }
+  const other = op === 'left' ? page - 1 : page + 1;
+  for (let p = 1; p <= pageCount; p++) {
+    if (p === page) next[p] = annos[other] || [];
+    else if (p === other) next[p] = annos[page] || [];
+    else next[p] = annos[p] || [];
+  }
+  return next;
+}
+
+function distToSeg(px: number, py: number, x1: number, y1: number, x2: number, y2: number): number {
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+  const len2 = dx * dx + dy * dy;
+  if (len2 === 0) return Math.hypot(px - x1, py - y1);
+  let t = ((px - x1) * dx + (py - y1) * dy) / len2;
+  t = Math.max(0, Math.min(1, t));
+  return Math.hypot(px - (x1 + t * dx), py - (y1 + t * dy));
+}
+
+/**
+ * Topmost annotation containing the point, ANY kind — the reselection path.
+ * Unfilled shapes/images/highlights hit on the whole interior (bbox + grace),
+ * not just the 1px border: an empty outline used to be unclickable inside,
+ * trapping users who could not re-select it to delete. Lines/arrows/freehand
+ * hit near the stroke. Pure — tested.
+ */
+export function hitTestAnno(list: Anno[], x: number, y: number, grace = 6): number | null {
+  for (let i = list.length - 1; i >= 0; i--) {
+    const a = list[i]!;
+    if (a.kind === 'text') {
+      const w = Math.max(20, a.text.length * a.size * 0.55);
+      if (x >= a.x - grace && x <= a.x + w + grace && y >= a.y - a.size - grace && y <= a.y + grace) return i;
+    } else if (a.kind === 'flow') {
+      const lines = wrapLines(a.text || 'x', a.w, (s) => s.length * a.size * 0.55);
+      const h = lines.length * a.size * 1.25 + 8;
+      if (x >= a.x - grace && x <= a.x + a.w + grace && y >= a.y - a.size - grace && y <= a.y + h) return i;
+    } else if (a.kind === 'note') {
+      if (x >= a.x - grace && x <= a.x + 196 && y >= a.y - grace && y <= a.y + 116) return i;
+    } else if (a.kind === 'draw') {
+      const p = a.points;
+      const tol = grace + a.width;
+      if (p.length >= 4) {
+        let hit = false;
+        for (let j = 0; j + 3 < p.length; j += 2) {
+          if (distToSeg(x, y, p[j]!, p[j + 1]!, p[j + 2]!, p[j + 3]!) <= tol) { hit = true; break; }
+        }
+        if (hit) return i;
+      } else if (p.length === 2 && Math.hypot(x - p[0]!, y - p[1]!) <= tol) {
+        return i;
+      }
+    } else if (a.kind === 'shape' && (a.shape === 'line' || a.shape === 'arrow')) {
+      if (distToSeg(x, y, a.x, a.y, a.x + a.w, a.y + a.h) <= grace + a.width) return i;
+    } else if (
+      a.kind === 'highlight' || a.kind === 'whiteout' || a.kind === 'redact' ||
+      a.kind === 'image' || a.kind === 'shape'
+    ) {
+      if (x >= a.x - grace && x <= a.x + a.w + grace && y >= a.y - grace && y <= a.y + a.h + grace) return i;
+    }
+  }
+  return null;
 }
 
 export interface TextItem {
@@ -220,6 +334,8 @@ export interface EditorVersion {
   annos: Record<number, Anno[]>;
   page: number;
   label: string;
+  /** Page count when saved — restore warns if the document has changed shape. */
+  pageCount?: number;
 }
 
 /** Max retained versions (session-only, in-memory — see retention note). */
@@ -231,6 +347,45 @@ export function pushVersion(
   entry: EditorVersion,
 ): EditorVersion[] {
   return [...prev, entry].slice(-MAX_VERSIONS);
+}
+
+/**
+ * One undo-stack entry. Annotation-only entries are just a prior annos
+ * snapshot. Structural entries (page rotate/delete/move/duplicate) also
+ * carry the pre-op PDF bytes + page indices so undo can restore the old
+ * document wholesale — never remapped annos on new bytes.
+ */
+export interface HistEntry {
+  annos: Record<number, Anno[]>;
+  bytes?: Uint8Array;
+  pageCount?: number;
+  page?: number;
+}
+
+/** Structural (bytes-carrying) undo entries each pin a full file copy. */
+export const MAX_STRUCTURAL_UNDO = 5;
+
+/**
+ * Enforce the structural-undo cap. When the newest push makes structural
+ * entries exceed the max: drop the OLDEST structural entry AND everything
+ * older than it. Older annotation-only snapshots reference pre-op page
+ * numbering — once their structural anchor is gone they can never be
+ * applied correctly (silent corruption), so they go with it. Entries
+ * newer than the cutoff (annotation edits between later page ops) stay.
+ * Returns `dropped` so the caller can say so out loud instead of
+ * silently shrinking history. Pure — tested.
+ */
+export function capStructuralHistory(stack: HistEntry[]): { stack: HistEntry[]; dropped: boolean } {
+  let structural = 0;
+  let oldest = -1;
+  for (let i = 0; i < stack.length; i++) {
+    if (stack[i]!.bytes) {
+      structural++;
+      if (oldest < 0) oldest = i;
+    }
+  }
+  if (structural <= MAX_STRUCTURAL_UNDO || oldest < 0) return { stack, dropped: false };
+  return { stack: stack.slice(oldest + 1), dropped: true };
 }
 
 /** Split AI prose into short exportable lines. Pure — tested. */
@@ -462,7 +617,7 @@ export default function PdfEditor() {
   const [showVersions, setShowVersions] = useState(false);
 
   const takeVersion = (label: string) => {
-    setVersions((prev) => pushVersion(prev, { at: Date.now(), annos: structuredClone(annos), page, label }));
+    setVersions((prev) => pushVersion(prev, { at: Date.now(), annos: structuredClone(annos), page, label, pageCount }));
   };
 
   const restoreVersion = (at: number) => {
@@ -470,10 +625,17 @@ export default function PdfEditor() {
     if (!v) return;
     takeVersion('before restore');
     setAnnos(structuredClone(v.annos));
-    setPage(v.page);
+    setPage(Math.max(1, Math.min(v.page, pageCount)));
     setSelected(null);
     setShowVersions(false);
-    toast.success(`Restored “${v.label}”. Previous state kept as newest version.`);
+    const shapeChanged = v.pageCount !== undefined && v.pageCount !== pageCount;
+    toast.success(
+      `Restored “${v.label}”. Previous state kept as newest version.` +
+      (shapeChanged
+        ? ` ⚠ Saved on ${v.pageCount} page(s); document now has ${pageCount} — versions don't store the file itself, so use Undo (Ctrl+Z) if the page layout also needs to go back.`
+        : ''),
+      { duration: shapeChanged ? 8000 : 4000 },
+    );
   };
 
   const fmtAge = (at: number) => {
@@ -1140,12 +1302,12 @@ export default function PdfEditor() {
     }
   };
 
-  // Unsaved-work guard: everything lives in memory, so a refresh destroys
-  // the session. Hub links open in a new tab; refresh/back gets the native
-  // browser warning instead.
+  // Unsaved-work guard: fires only when there are actual unsaved edits —
+  // a clean open document should never block refresh.
   useEffect(() => {
     if (!pdfDoc) return;
     const guard = (e: BeforeUnloadEvent) => {
+      if (!dirtyRef.current) return;
       e.preventDefault();
     };
     window.addEventListener('beforeunload', guard);
@@ -1219,6 +1381,19 @@ export default function PdfEditor() {
         if (tool === 'image') pendingImageRef.current = null;
       };
     } else {
+      // Select tool: hit-test existing annotations FIRST (any kind).
+      // Without this, shapes/images/highlights were unselectable after
+      // deselecting — an empty outline trapped users with no way to
+      // re-select it to delete. Unfilled shapes hit on the interior,
+      // not just the border. Double-click still falls through to
+      // paragraph select when nothing is under the cursor.
+      if (tool === 'select') {
+        const hit = hitTestAnno(annos[page] || [], x, y);
+        if (hit !== null) {
+          selectBox(page, hit);
+          return;
+        }
+      }
       // Double-click with Select grabs the whole paragraph; single drag
       // selects a rect. Both feed the same AI/selection pipeline.
       if (tool === 'select' && e.detail >= 2) {
@@ -1318,7 +1493,13 @@ export default function PdfEditor() {
         }
         else if (tool === 'select') selectInRect(x, y, w, h);
         else pushAnno(page, { kind: 'shape', shape: shapeVariant, x, y, w, h, color: inkColor, width: shapeWidth });
-      } else drawOverlay();
+      } else if (tool === 'select') {
+        // Tiny drag / plain click with nothing under it → clear selection
+        // (deselect), matching every other editor.
+        selectBox(page, null);
+      } else {
+        drawOverlay();
+      }
     }
   };
 
@@ -1660,37 +1841,94 @@ export default function PdfEditor() {
   // History: every mutating op goes through commitAnnos (snapshots first).
   // Redo stack clears on any new change (standard). Undo/redo restore
   // directly and must never snapshot (hence raw setAnnos there).
-  const undoStack = useRef<Record<number, Anno[]>[]>([]);
-  const redoStack = useRef<Record<number, Anno[]>[]>([]);
+  // TWO recovery systems, intentionally different jobs:
+  //  - Undo/redo (this stack): fast in-session LIFO. Annos-only entries
+  //    for keystroke-level changes; ≤ MAX_STRUCTURAL_UNDO entries with
+  //    full PDF bytes for page-structure ops. Cleared on file open.
+  //  - Version history panel (EditorVersion[]): ≤10 named checkpoints
+  //    for destructive mistakes, annos + page only (never pins file
+  //    copies), survives in memory across many edits. Restore warns when
+  //    pageCount differs — versions do not carry bytes, so page-shape
+  //    changes are covered by structural undo, not the panel.
+  const undoStack = useRef<HistEntry[]>([]);
+  const redoStack = useRef<HistEntry[]>([]);
   const commitAnnos = (updater: (_prev: Record<number, Anno[]>) => Record<number, Anno[]>) => {
-    undoStack.current.push(structuredClone(annos));
+    undoStack.current.push({ annos: structuredClone(annos) });
     if (undoStack.current.length > 100) undoStack.current.shift();
     redoStack.current = [];
     setAnnos(updater);
   };
 
-  const undo = () => {
-    const prev = undoStack.current.pop();
-    if (!prev) return;
-    redoStack.current.push(structuredClone(annos));
-    setAnnos(prev);
-    setSelected(null);
+  const applyHistEntry = async (entry: HistEntry) => {
+    if (entry.bytes) {
+      const fresh = await pdfjsLib.getDocument({ data: entry.bytes.slice() }).promise;
+      setFileBytes(entry.bytes);
+      setPdfDoc(fresh);
+      setPageCount(entry.pageCount ?? fresh.numPages);
+      setPage(Math.max(1, Math.min(entry.page ?? 1, fresh.numPages)));
+      setAnnos(entry.annos);
+      setThumbUrls([]);
+      setThumbsAll(false);
+      loadedRef.current = new Set();
+      textLayerRef.current = {};
+      setOcrWords([]);
+      setFindNav(null);
+      setSelected(null);
+      return true;
+    }
+    return false;
   };
 
-  const redo = () => {
-    const next = redoStack.current.pop();
-    if (!next) return;
-    undoStack.current.push(structuredClone(annos));
-    setAnnos(next);
-    setSelected(null);
+  const undo = async () => {
+    const entry = undoStack.current.pop();
+    if (!entry) return;
+    const structural = entry.bytes !== undefined;
+    redoStack.current.push(structural
+      ? { annos: structuredClone(annos), bytes: fileBytes ? fileBytes.slice() : undefined, pageCount, page }
+      : { annos: structuredClone(annos) });
+    try {
+      const didRestore = await applyHistEntry(entry);
+      if (!didRestore) {
+        setAnnos(entry.annos);
+        setSelected(null);
+      } else {
+        toast.success('Undid page change — document restored.');
+      }
+    } catch {
+      undoStack.current.push(entry);
+      toast.error('Undo failed — could not restore the previous document.');
+    }
+  };
+
+  const redo = async () => {
+    const entry = redoStack.current.pop();
+    if (!entry) return;
+    const structural = entry.bytes !== undefined;
+    undoStack.current.push(structural
+      ? { annos: structuredClone(annos), bytes: fileBytes ? fileBytes.slice() : undefined, pageCount, page }
+      : { annos: structuredClone(annos) });
+    try {
+      const didRestore = await applyHistEntry(entry);
+      if (!didRestore) {
+        setAnnos(entry.annos);
+        setSelected(null);
+      } else {
+        toast.success('Redid page change.');
+      }
+    } catch {
+      redoStack.current.push(entry);
+      toast.error('Redo failed — could not restore the document.');
+    }
   };
 
   const historyCount = undoStack.current.length;
   const redoCount = redoStack.current.length;
 
   // Page structure ops (rotate / duplicate / delete / move current page).
-  // Annotations are cleared because page indices shift — stated in the
-  // toast, not hidden.
+  // Annotations are REMAPPED through the op (never wiped) and undo history
+  // is kept: the pre-op snapshot carries the old bytes, so undo restores
+  // the old document wholesale. Wiping annos here destroyed work on every
+  // other page during a routine rotate — silent data loss.
   const restructure = async (op: 'rotate' | 'duplicate' | 'delete' | 'left' | 'right') => {
     if (!fileBytes) return;
     if (op === 'delete' && pageCount <= 1) {
@@ -1713,8 +1951,7 @@ export default function PdfEditor() {
         doc.removePage(idx);
         nextPage = Math.min(page, doc.getPageCount());
       } else {
-        // Reorder: remove + reinsert one slot over (annotations cleared —
-        // page indices shift — stated in the toast below).
+        // Reorder: remove + reinsert one slot over; annos follow their pages.
         const [moving] = await doc.copyPages(doc, [idx]);
         doc.removePage(idx);
         const at = op === 'left' ? idx - 1 : idx + 1;
@@ -1723,26 +1960,37 @@ export default function PdfEditor() {
       }
       const bytes = new Uint8Array(await doc.save());
       const fresh = await pdfjsLib.getDocument({ data: bytes.slice() }).promise;
+      const prevAnnos = annos;
+      const vpH = viewportRef.current.h / scale;
+      const mapped = restructureAnnos(prevAnnos, op, page, pageCount, vpH);
+      // Pre-op snapshot (with bytes) so undo restores the old document.
+      undoStack.current.push({ annos: structuredClone(prevAnnos), bytes: fileBytes.slice(), pageCount, page });
+      // Cap structural entries (each pins a full file copy). On overflow,
+      // drop the oldest structural anchor + everything older — and SAY SO;
+      // silent history shrinkage is the failure mode we don't ship.
+      const capped = capStructuralHistory(undoStack.current);
+      undoStack.current = capped.stack;
+      if (capped.dropped) {
+        toast('Undo depth limit — oldest page-operation snapshot dropped. The History panel keeps separate restore points.', { id: 'pdfedit-undo-cap', duration: 6000 });
+      }
+      redoStack.current = [];
       setFileBytes(bytes);
       setPdfDoc(fresh);
       setPageCount(fresh.numPages);
       setPage(nextPage);
-      setAnnos({});
+      setAnnos(mapped);
       setSelected(null);
       setThumbUrls([]);
       setThumbsAll(false);
       loadedRef.current = new Set();
-      undoStack.current = [];
-      redoStack.current = [];
       setOcrWords([]);
       textLayerRef.current = {};
       toast.success(
-        op === 'rotate' ? 'Page rotated.'
-          : op === 'duplicate' ? 'Page duplicated.'
-            : op === 'delete' ? 'Page deleted. Annotations were cleared (page order changed).'
-              : `Page moved ${op === 'left' ? 'earlier' : 'later'}. Annotations were cleared (page order changed).`,
+        op === 'rotate' ? 'Page rotated — annotations kept.'
+          : op === 'duplicate' ? 'Page duplicated — annotations copied to the new page.'
+            : op === 'delete' ? 'Page deleted — annotations on other pages kept.'
+              : `Page moved ${op === 'left' ? 'earlier' : 'later'} — annotations followed their pages. Undo restores everything.`,
       );
-      if (op === 'delete') takeVersion(`delete page ${page}`);
     } catch {
       toast.error('Page operation failed.');
     }
@@ -2085,6 +2333,49 @@ export default function PdfEditor() {
         return bold ? set.bold : set.plain;
       };
       const libPages = pdfDocLib.getPages();
+      if (!pdfDoc) throw new Error('PDF not loaded');
+      // Rotated pages: annotations live in the *viewport* frame (what you
+      // saw while editing). Map them once into unrotated top-down page
+      // space so every later draw/flip (which assumes pageH − y) lands on
+      // the right region. Identity for angle 0 — zero behavior change on
+      // the common path.
+      for (const [p, list] of Object.entries(clean)) {
+        if (!list.length) continue;
+        const n = Number(p);
+        const lp = libPages[n - 1];
+        if (!lp) continue;
+        const angle = ((lp.getRotation().angle % 360) + 360) % 360;
+        if (angle === 0) continue;
+        const vp1 = await (await pdfDoc.getPage(n)).getViewport({ scale: 1 });
+        const pageH = lp.getHeight();
+        const toTop = (x: number, y: number) => {
+          const [px, py] = vp1.convertToPdfPoint(x, y);
+          return { x: px, y: pageH - py };
+        };
+        clean[n] = list.map((a): Anno => {
+          if (a.kind === 'draw') {
+            const pts: number[] = [];
+            for (let i = 0; i < a.points.length; i += 2) {
+              const c = toTop(a.points[i]!, a.points[i + 1]!);
+              pts.push(c.x, c.y);
+            }
+            return { ...a, points: pts };
+          }
+          if (a.kind === 'text' || a.kind === 'note' || a.kind === 'flow') {
+            const c = toTop(a.x, a.y);
+            return { ...a, x: c.x, y: c.y };
+          }
+          const c0 = toTop(a.x, a.y);
+          const c1 = toTop(a.x + a.w, a.y + a.h);
+          return {
+            ...a,
+            x: Math.min(c0.x, c1.x),
+            y: Math.min(c0.y, c1.y),
+            w: Math.abs(c1.x - c0.x),
+            h: Math.abs(c1.y - c0.y),
+          };
+        });
+      }
       // True redaction FIRST (before the visual burn): strip text bytes
       // inside redact rects, then verify by re-extracting. Anything the
       // engine can't map blocks "verified" status — stated, never silent.
@@ -2159,7 +2450,11 @@ export default function PdfEditor() {
         const lp = libPages[Number(pageNum) - 1];
         if (!lp) continue;
         const pageH = lp.getHeight();
-        // Stored coords are already PDF points — no conversion needed.
+        // Coords are unrot top-down (converted above when /Rotate ≠ 0).
+        // On rotated pages, glyphs drawn at 0° would read sideways vs the
+        // on-screen preview — counter-rotate by the page angle so export
+        // matches what the user saw.
+        const pageAngle = ((lp.getRotation().angle % 360) + 360) % 360;
         for (const a of list) {
           if (a.kind === 'text') {
             const c = hexToRgb(a.color);
@@ -2173,6 +2468,7 @@ export default function PdfEditor() {
               size: a.size,
               font,
               color: rgb(c.r, c.g, c.b),
+              ...(pageAngle ? { rotate: degrees(pageAngle) } : {}),
             });
             const decoPdf = (dy: number) => {
               lp.drawLine({ start: { x: tx, y: dy }, end: { x: tx + tw, y: dy }, thickness: Math.max(0.75, a.size / 14), color: rgb(c.r, c.g, c.b) });
@@ -2345,6 +2641,23 @@ export default function PdfEditor() {
   const effColor = selIsText ? (selAnno as TextAnno | FlowAnno).color : textColor;
   const effSize = selIsText ? (selAnno as TextAnno | FlowAnno).size : textSize;
   const [showFind, setShowFind] = useState(false);
+  // Global Ctrl+F / F3: Find is a document-wide action, not tool-scoped.
+  // The canvas key handler only fires when the canvas has focus — this
+  // window listener keeps the shortcut alive with any tool active and
+  // focus anywhere else (sidebar, toolbar buttons).
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const t = e.target as HTMLElement | null;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      const mod = e.ctrlKey || e.metaKey;
+      if ((mod && e.key.toLowerCase() === 'f') || e.key === 'F3') {
+        e.preventDefault();
+        setShowFind(true);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
   const showDrawBar = tool === 'draw' || tool === 'highlight' || tool === 'shape';
 
   const tools: { id: Tool; label: string; icon: React.ReactNode; group: string }[] = [
@@ -2447,11 +2760,14 @@ export default function PdfEditor() {
                 {saving ? 'Saving…' : dirty ? 'Unsaved changes' : savedAt ? `Saved ${new Date(savedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` : ''}
               </span>
             )}
+            <button onClick={() => setShowFind(true)} aria-label="Find in document" title="Find & replace (Ctrl+F) — works with any tool" className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
+              <Search className="w-4 h-4" /> Find
+            </button>
             <button onClick={() => saveNow()} aria-label="Save working session" title="Save session (Ctrl+S) — persists edits without exporting" className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
               <Save className="w-4 h-4" /> Save
             </button>
             <button onClick={() => setShowVersions((v) => !v)} aria-pressed={showVersions} aria-label="Version history" title="Version history — restore earlier states" className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
-              <History className="w-4 h-4" /> {versions.length > 0 ? versions.length : 'History'}
+              <History className="w-4 h-4" /> History{versions.length > 0 ? ` ${versions.length}` : ''}
             </button>
             <button onClick={toggleFocus} aria-pressed={focus} aria-label={focus ? 'Exit focus mode' : 'Enter focus mode (editor only)'} title={focus ? 'Exit focus mode' : 'Focus mode — editor only'} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
               {focus ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />} {focus ? 'Exit focus' : 'Focus'}
@@ -2473,16 +2789,16 @@ export default function PdfEditor() {
           <div className="flex items-center gap-1.5" role="group" aria-label="AI actions">
             <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]" title="Editing is local. AI actions send only the page text to our server.">AI</span>
             <button onClick={() => runAiAction('summarize')} disabled={aiWorking} aria-label="Summarize this page with AI, 1 credit" title={isSignedIn ? 'Summarize page · 1 credit' : 'Sign in to use AI actions'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
-              <Sparkles className="w-4 h-4" /> {aiWorking ? '…' : 'Summarize'}
+              <Sparkles className="w-4 h-4" /> {aiWorking ? '…' : 'Summarize'} <span aria-hidden="true" className="px-1 py-0.5 text-[9px] font-mono rounded bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/30">1</span>
             </button>
             <button onClick={() => runAiAction('grammar')} disabled={aiWorking} aria-label="Fix grammar with AI, 1 credit" title={isSignedIn ? 'Fix grammar · 1 credit' : 'Sign in to use AI actions'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
-              <Sparkles className="w-4 h-4" /> {aiWorking ? '…' : 'Fix grammar'}
+              <Sparkles className="w-4 h-4" /> {aiWorking ? '…' : 'Fix grammar'} <span aria-hidden="true" className="px-1 py-0.5 text-[9px] font-mono rounded bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/30">1</span>
             </button>
             <button onClick={() => runAiAction('translate')} disabled={aiWorking} aria-label="Translate to English with AI, 1 credit" title={isSignedIn ? 'Translate to English · 1 credit' : 'Sign in to use AI actions'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
-              <Sparkles className="w-4 h-4" /> {aiWorking ? '…' : 'Translate'}
+              <Sparkles className="w-4 h-4" /> {aiWorking ? '…' : 'Translate'} <span aria-hidden="true" className="px-1 py-0.5 text-[9px] font-mono rounded bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/30">1</span>
             </button>
             <button onClick={findSensitive} disabled={aiWorking} aria-label="Suggest sensitive-data cover boxes with AI, Pro, 1 credit" title={isPro ? 'Find sensitive data · 1 credit' : 'Pro feature — upgrade to unlock'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
-              {!isPro && <span aria-hidden="true">👑</span>} {aiWorking ? '…' : 'Find sensitive'}
+              {!isPro && <span aria-hidden="true">👑</span>} {aiWorking ? '…' : 'Find sensitive'} <span aria-hidden="true" className="px-1 py-0.5 text-[9px] font-mono rounded bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/30">1</span>
             </button>
             {selection.length > 0 && (
               <button onClick={() => { setSelection([]); drawOverlay(); toast.success('Selection cleared — AI uses the whole page.'); }} aria-label="Clear text selection" title="Clear selection" className="px-2.5 py-2 rounded-lg border border-[var(--accent)]/40 text-xs font-bold text-[var(--accent)] hover:bg-[var(--accent)]/10">
@@ -2492,7 +2808,23 @@ export default function PdfEditor() {
             <button onClick={askAboutDoc} aria-label="Ask AI chat about this document" title="Open AI Chat with this file loaded" className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
               <MessageCircleQuestion className="w-4 h-4" /> Ask doc
             </button>
-            <button onClick={runOcr} disabled={ocrRunning} aria-label="OCR this page" title="Recognize text on scanned pages" className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
+            <select
+              value={ocrLang}
+              onChange={(e) => { setOcrLang(e.target.value); setOcrWords([]); }}
+              aria-label="OCR language (choose before running OCR)"
+              title="Recognition language — pick before you click OCR"
+              className="px-1.5 py-1.5 rounded-lg border border-[var(--border-subtle)] text-[11px] bg-[var(--bg-overlay)] text-[var(--text-secondary)]"
+            >
+              <option value="eng">OCR: English</option>
+              <option value="hin">OCR: Hindi</option>
+              <option value="tam">OCR: Tamil</option>
+              <option value="deu">OCR: German</option>
+              <option value="spa">OCR: Spanish</option>
+              <option value="fra">OCR: French</option>
+              <option value="pol">OCR: Polish</option>
+              <option value="ara">OCR: Arabic</option>
+            </select>
+            <button onClick={runOcr} disabled={ocrRunning} aria-label="OCR this page" title="Recognize text on scanned pages in the selected language" className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
               <ScanText className="w-4 h-4" /> {ocrRunning ? `${ocrProgress}%` : 'OCR'}
             </button>
           </div>
@@ -2658,7 +2990,6 @@ export default function PdfEditor() {
         </div>
       )}
 
-      {/* Focus keeps all three columns (toolbar is never hidden) and drops
       {/* Focus keeps the full 3-column workspace and drops only the footer
           strips; true fullscreen comes from the browser API. */}
       {showShortcuts && (
@@ -2746,9 +3077,6 @@ export default function PdfEditor() {
               <button key={c} onClick={() => patchTextStyle({ color: c })} aria-label={`Text color ${c}`} title={`Text color ${c}`} className={`w-6 h-6 rounded-full border-2 ${effColor === c ? 'border-[var(--accent)]' : 'border-transparent'}`} style={{ backgroundColor: c }} />
             ))}
           </div>
-          <button onClick={() => setShowFind(true)} aria-label="Find in document" title="Find (Ctrl+F)" className="ml-auto inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
-            <Search className="w-4 h-4" /> Find
-          </button>
         </div>
       )}
       {showDrawBar && (
@@ -2958,7 +3286,7 @@ export default function PdfEditor() {
                     <button key={c} onClick={() => setInkColor(c)} aria-label={`Shape color ${c}`} className={`w-6 h-6 rounded-full border-2 ${inkColor === c ? 'border-[var(--accent)]' : 'border-transparent'}`} style={{ backgroundColor: c }} />
                   ))}
                 </div>
-                <p className="text-xs text-[var(--text-muted)]">Drag a line for underline / strikethrough.</p>
+                <p className="text-xs text-[var(--text-muted)]">Drag on the page to draw. Line and arrow: drag from start to end. Click a shape with the Select tool to re-select it.</p>
               </>
             )}
             {(tool === 'note') && (
@@ -3051,13 +3379,6 @@ export default function PdfEditor() {
               />
             </div>
           )}
-          <div className="pt-2 border-t border-[var(--border-subtle)] space-y-2">
-            <span className={labelCls}>Find in document</span>
-            <p className="text-xs text-[var(--text-muted)]">Search lives in the format bar (Find button or Ctrl+F) — highlight, navigate, and replace from there.</p>
-            <button onClick={() => setShowFind(true)} className="w-full px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
-              Open Find panel
-            </button>
-          </div>
         </div>
 
         <div ref={canvasColRef} className="lg:col-span-8 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 overflow-auto relative">
@@ -3172,15 +3493,6 @@ export default function PdfEditor() {
 
       {/* Status bar (Voidmark-style): live doc stats, always visible. */}
       <div className="flex flex-wrap items-center gap-x-4 gap-y-1 px-4 py-2 rounded-2xl bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[11px] font-mono text-[var(--text-muted)]" aria-label="Document status">
-        <span>{file?.name}</span>
-        <span>{(fileBytes ? (fileBytes.length / 1024 / 1024).toFixed(1) : '0')} MB</span>
-        <span>{pageCount} pages</span>
-        <span>{Object.values(annos).reduce((n, l) => n + l.length, 0)} annotations</span>
-        <span className="ml-auto">{Math.round(scale * 100)}%</span>
-       </div>
-
-      {/* Status bar (Voidmark-style): live doc stats, always visible. */}
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 px-4 py-2 rounded-2xl bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[11px] font-mono text-[var(--text-muted)]" aria-label="Document status">
         <span className="truncate max-w-[220px]">{file?.name}</span>
         <span>{fileBytes ? (fileBytes.length / 1024 / 1024).toFixed(1) : '0'} MB</span>
         <span>{pageCount} pages</span>
@@ -3215,12 +3527,6 @@ export default function PdfEditor() {
           ['PDF to Word', '/pdf/pdf-to-word'],
           ['Extract images', '/pdf/extract-images-from-pdf'],
           ['Page manager', '/pdf/pdf-page-manager'],
-          ['OCR document', '/pdf/pdf-ocr'],
-          ['Compare PDFs', '/pdf/compare-pdf-files'],
-          ['Metadata', '/pdf/pdf-metadata-editor'],
-          ['Fill form', '/pdf/pdf-form-filler'],
-          ['E-sign', '/pdf/esign-pdf'],
-          ['AI summarize', '/pdf/pdf-ai-summariser'],
         ] as [string, string][]).map(([label, href]) => (
           <Link key={href} href={href} target="_blank" rel="noopener" title="Opens in a new tab — your editing session stays intact" className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] transition-colors">
             {label}

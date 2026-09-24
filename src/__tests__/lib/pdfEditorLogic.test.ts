@@ -1,6 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import {
   hitTestText,
+  hitTestAnno,
+  restructureAnnos,
+  capStructuralHistory,
   pruneEmptyAnnos,
   moveLayerIndex,
   wrapLines,
@@ -11,11 +14,152 @@ import {
   groupParagraphs,
   annoFlag,
   MAX_VERSIONS,
+  MAX_STRUCTURAL_UNDO,
   type Anno,
+  type HistEntry,
 } from '@/components/tools/modules/pdf/PdfEditor';
 
 const text = (over: Partial<Extract<Anno, { kind: 'text' }>> = {}): Anno => ({
   kind: 'text', x: 100, y: 100, text: 'Hello', size: 14, color: '#000', bold: false, ...over,
+});
+
+describe('hitTestAnno (unselectable-shape regression)', () => {
+  const shape = (over: Partial<Extract<Anno, { kind: 'shape' }>> = {}): Anno => ({
+    kind: 'shape', shape: 'rect', x: 100, y: 100, w: 200, h: 120, color: '#000', width: 1, ...over,
+  });
+
+  it('hits the INTERIOR of an unfilled rect (was: only the 1px border)', () => {
+    expect(hitTestAnno([shape()], 200, 160)).toBe(0);
+    expect(hitTestAnno([shape()], 105, 105)).toBe(0);
+  });
+
+  it('misses far outside the shape', () => {
+    expect(hitTestAnno([shape()], 10, 10)).toBeNull();
+    expect(hitTestAnno([shape()], 400, 300)).toBeNull();
+  });
+
+  it('hits ellipse by bbox interior too', () => {
+    expect(hitTestAnno([shape({ shape: 'ellipse' })], 200, 160)).toBe(0);
+  });
+
+  it('hits a line near the stroke, not its whole bbox', () => {
+    const line = shape({ shape: 'line', x: 0, y: 0, w: 100, h: 100 });
+    expect(hitTestAnno([line], 50, 50)).toBe(0); // on the diagonal
+    expect(hitTestAnno([line], 5, 95)).toBeNull(); // inside bbox, off the line
+  });
+
+  it('hits image/highlight interior', () => {
+    expect(hitTestAnno([{ kind: 'image', x: 10, y: 10, w: 50, h: 50, dataUrl: 'x' }], 30, 30)).toBe(0);
+    expect(hitTestAnno([{ kind: 'highlight', x: 10, y: 10, w: 50, h: 50, color: '#ff0' }], 30, 30)).toBe(0);
+  });
+
+  it('still hits text via the same topmost-wins rule', () => {
+    const a = shape({ x: 0, y: 0, w: 400, h: 400 });
+    const b = text({ x: 100, y: 100 });
+    expect(hitTestAnno([a, b], 120, 95)).toBe(1);
+  });
+
+  it('returns null on empty list', () => {
+    expect(hitTestAnno([], 0, 0)).toBeNull();
+  });
+});
+
+describe('restructureAnnos (page-op annotation-wipe regression)', () => {
+  const annos = (): Record<number, Anno[]> => ({
+    1: [text({ x: 10, y: 20 }), { kind: 'highlight', x: 5, y: 5, w: 50, h: 20, color: '#ff0' }],
+    2: [{ kind: 'note', x: 30, y: 40, text: 'n', color: '#fff' }],
+    3: [{ kind: 'draw', points: [1, 2, 3, 4], color: '#000', width: 1 }],
+  });
+
+  it('delete: drops the page, shifts later pages down, keeps the rest', () => {
+    const out = restructureAnnos(annos(), 'delete', 1, 3);
+    expect(out[1]![0]).toMatchObject({ kind: 'note' }); // old page 2
+    expect(out[2]![0]).toMatchObject({ kind: 'draw' }); // old page 3
+    expect(out[3]).toBeUndefined();
+  });
+
+  it('duplicate: copies the page’s annos and shifts later pages up', () => {
+    const out = restructureAnnos(annos(), 'duplicate', 1, 3);
+    expect(out[1]).toHaveLength(2);
+    expect(out[2]).toHaveLength(2); // copy
+    expect(out[2]![0]).toMatchObject({ kind: 'text' });
+    expect(out[3]![0]).toMatchObject({ kind: 'note' }); // old page 2
+    expect(out[4]![0]).toMatchObject({ kind: 'draw' }); // old page 3
+  });
+
+  it('left/right: swaps annotation lists with the neighbor page', () => {
+    const out = restructureAnnos(annos(), 'right', 1, 3);
+    expect(out[1]![0]).toMatchObject({ kind: 'note' });
+    expect(out[2]![0]).toMatchObject({ kind: 'text' });
+    expect(out[3]![0]).toMatchObject({ kind: 'draw' });
+  });
+
+  it('rotate: never wipes — remaps rect coords 90° CW (H = 800)', () => {
+    const out = restructureAnnos(annos(), 'rotate', 1, 3, 800);
+    // highlight (5,5,50,20) → x' = 800−5−20=775, y'=5, w'=20, h'=50
+    expect(out[1]![1]).toMatchObject({ kind: 'highlight', x: 775, y: 5, w: 20, h: 50 });
+    // text anchor (10,20) → (800−20, 10) = (780, 10)
+    expect(out[1]![0]).toMatchObject({ kind: 'text', x: 780, y: 10 });
+    // other pages untouched by key, coords transformed per-list
+    expect(out[2]).toHaveLength(1);
+    expect(out[3]![0]).toMatchObject({ kind: 'draw' });
+    // draw points (1,2,3,4) → (800−2,1, 800−4,3) = (798,1,796,3)
+    expect((out[3]![0] as Extract<Anno, { kind: 'draw' }>).points).toEqual([798, 1, 796, 3]);
+  });
+
+  it('rotate with H=0 is still non-destructive (keys and counts preserved)', () => {
+    const out = restructureAnnos(annos(), 'rotate', 1, 3, 0);
+    expect(Object.keys(out).sort()).toEqual(['1', '2', '3']);
+    expect(out[1]).toHaveLength(2);
+    expect(out[2]).toHaveLength(1);
+    expect(out[3]).toHaveLength(1);
+  });
+});
+
+describe('capStructuralHistory (silent-cap / orphaned-undo regression)', () => {
+  const anno = (): HistEntry => ({ annos: {} });
+  const structural = (): HistEntry => ({ annos: {}, bytes: new Uint8Array([1]), pageCount: 3, page: 1 });
+  const kinds = (stack: HistEntry[]) => stack.map((e) => (e.bytes ? 'p' : 'n'));
+
+  it('is a no-op at or under the cap', () => {
+    const stack = [structural(), structural(), structural()];
+    const r = capStructuralHistory(stack);
+    expect(r.dropped).toBe(false);
+    expect(r.stack).toBe(stack);
+  });
+
+  it('on overflow drops the oldest structural entry AND everything older than it', () => {
+    const stack = [
+      anno(), structural(), anno(), // n, p1, n — the trailing n sits AFTER p1
+      structural(), structural(), structural(), structural(), structural(), // p2..p6
+    ];
+    const r = capStructuralHistory(stack);
+    expect(r.dropped).toBe(true);
+    // Up through p1 gone (including the pre-p1 anno); the post-p1 anno and p2..p6 stay.
+    expect(kinds(r.stack)).toEqual(['n', 'p', 'p', 'p', 'p', 'p']);
+    expect(r.stack.filter((e) => e.bytes)).toHaveLength(MAX_STRUCTURAL_UNDO);
+  });
+
+  it('never leaves an annos-only entry older than the oldest structural anchor', () => {
+    // Worst case: annotation entries piled up BEFORE the first page op.
+    const stack = [
+      anno(), anno(), structural(),
+      structural(), structural(), structural(), structural(), structural(),
+    ];
+    const r = capStructuralHistory(stack);
+    expect(r.dropped).toBe(true);
+    const oldestStructural = r.stack.findIndex((e) => e.bytes);
+    expect(oldestStructural).toBe(0); // pre-p1 annos orphaned along with p1
+    expect(r.stack.filter((e) => e.bytes)).toHaveLength(MAX_STRUCTURAL_UNDO);
+  });
+
+  it('empty / annos-only stacks pass through untouched', () => {
+    expect(capStructuralHistory([])).toEqual({ stack: [], dropped: false });
+    const annosOnly = [anno(), anno()];
+    const r = capStructuralHistory(annosOnly);
+    expect(r.dropped).toBe(false);
+    expect(r.stack).toBe(annosOnly);
+  });
 });
 
 describe('hitTestText (overlap-stacking regression)', () => {
