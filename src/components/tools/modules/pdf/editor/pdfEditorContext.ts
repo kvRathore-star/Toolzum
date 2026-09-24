@@ -10,7 +10,7 @@
 // renders it. It cannot drift because Core never reads it.
 import { createContext, useContext, type ReactNode } from 'react';
 import type { PdfFont } from '@/lib/pdfFonts';
-import type { Anno, Tool } from './pdfEditorLogic';
+import type { Anno, EditorVersion, Tool } from './pdfEditorLogic';
 
 export interface ToolMeta {
   id: Tool;
@@ -101,6 +101,42 @@ export interface PdfEditorApi {
   setShapeVariant: (_v: 'rect' | 'ellipse' | 'line' | 'arrow') => void;
   shapeWidth: number;
   setShapeWidth: (_v: number) => void;
+  // Toolbar (ribbon): document nav, save/export, AI/OCR, edit actions
+  file: File | null;
+  scale: number;
+  setScale: (_v: number) => void;
+  fitZoom: (_mode: 'width' | 'page') => void;
+  fileBytes: Uint8Array | null;
+  savedAt: number | null;
+  saving: boolean;
+  dirty: boolean;
+  showVersions: boolean;
+  setShowVersions: (_v: boolean) => void;
+  versions: EditorVersion[];
+  toggleFocus: () => Promise<void>;
+  focus: boolean;
+  runAiAction: (_action: 'summarize' | 'grammar' | 'translate') => Promise<void>;
+  aiWorking: boolean;
+  isSignedIn: boolean;
+  isPro: boolean;
+  findSensitive: () => Promise<void>;
+  selection: string[];
+  setSelection: (_v: string[]) => void;
+  drawOverlay: () => void;
+  askAboutDoc: () => Promise<void>;
+  ocrLang: string;
+  setOcrLang: (_v: string) => void;
+  setOcrWords: (_v: { text: string; x: number; y: number; size: number; conf: number }[]) => void;
+  runOcr: () => Promise<void>;
+  ocrRunning: boolean;
+  ocrProgress: number;
+  setShowShortcuts: (_v: boolean) => void;
+  deleteSelected: () => void;
+  selected: { page: number; index: number } | null;
+  moveLayer: (_dir: 1 | -1) => void;
+  copySelected: () => void;
+  pasteClipboard: () => void;
+  stampAllPages: () => void;
 }
 
 export const PdfEditorCtx = createContext<PdfEditorApi | null>(null);
