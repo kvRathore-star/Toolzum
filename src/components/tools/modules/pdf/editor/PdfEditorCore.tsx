@@ -222,6 +222,7 @@ export default function PdfEditorCore() {
   // a flag needs a clear path per exit, and a missed one silences the
   // whole keyboard (the leak class this architecture refuses).
   const [inlineEdit, setInlineEdit] = useState<{ page: number; index: number } | null>(null);
+  const lastClickRef = useRef({ t: 0, x: 0, y: 0 });
   const [inlineDraft, setInlineDraft] = useState('');
   const rootRef = useRef<HTMLDivElement>(null);
   const canvasColRef = useRef<HTMLDivElement>(null);
@@ -1066,18 +1067,21 @@ export default function PdfEditorCore() {
 
   const onPointerDown = async (e: React.PointerEvent) => {
     if (!pdfDoc) return;
+    if (inlineEdit) flushInline();
     (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
     const pos = canvasPos(e);
     // Capture in PDF points (viewport px ÷ scale) so zoom never moves ink.
     const x = pos.x / scale;
     const y = pos.y / scale;
+    const dbl = e.detail >= 2 || (e.timeStamp - lastClickRef.current.t < 500 && Math.abs(x - lastClickRef.current.x) < 6 && Math.abs(y - lastClickRef.current.y) < 6);
+    lastClickRef.current = { t: e.timeStamp, x, y };
     if (tool === 'text') {
       // Hit first: clicking an existing box selects it for editing instead
       // of stacking a new one on top (the overlapping-boxes bug).
       const hit = hitTextAnno(x, y);
       if (hit !== null) {
         // Double-click edits in place; single click selects (left panel).
-        if (e.detail >= 2) beginInlineEdit(page, hit);
+          if (dbl) beginInlineEdit(page, hit);
         else selectBox(page, hit);
         return;
       }
@@ -1155,14 +1159,14 @@ export default function PdfEditorCore() {
         if (hit !== null) {
           // Double-click a text-family annotation → edit in place;
           // shapes/images just select (no text to edit).
-          if (e.detail >= 2) beginInlineEdit(page, hit);
+        if (dbl) beginInlineEdit(page, hit);
           else selectBox(page, hit);
           return;
         }
       }
       // Double-click with Select grabs the whole paragraph; single drag
       // selects a rect. Both feed the same AI/selection pipeline.
-      if (tool === 'select' && e.detail >= 2) {
+      if (tool === 'select' && dbl) {
         try {
           const items = await ensureTextLayer(page);
           const hit = items.find((it) => x >= it.x - 4 && x <= it.x + it.w + 4 && y >= it.yTop - 4 && y <= it.yTop + it.size + 4);
@@ -2960,6 +2964,7 @@ export default function PdfEditorCore() {
               onPointerMove={onPointerMove}
               onPointerUp={onPointerUp}
               onPointerLeave={() => setHoverHandle(null)}
+              onMouseDown={(e) => { if (inlineEdit) e.preventDefault(); }}
             />
             {inlineEdit && (() => {
               // Stay mounted across page flips: when the target isn't live we

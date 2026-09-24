@@ -343,6 +343,10 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
     it('impl: double-click on select/text tools opens beginInlineEdit', () => {
       expect(editor.match(/beginInlineEdit\(page, hit\)/g)?.length ?? 0).toBeGreaterThanOrEqual(2);
       expect(editor).toMatch(/e\.detail >= 2/);
+      expect(
+        editor,
+        'pointerdown.detail is 0 in Chromium — the native detail alone never opens edit',
+      ).toMatch(/const dbl = e\.detail >= 2 \|\| \(/);
     });
     it('impl: real input/textarea overlay + blur-commit + Escape-revert (matches left-panel contract)', () => {
       expect(editor).toMatch(/onBlur: commitInline/);
@@ -352,7 +356,13 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
         /inlineEditBox\(a, scale\)/,
       );
     });
-    it('impl: hidden-when-not-live keeps onBlur as the single commit path (no lost drafts)', () => {
+    it('impl: pointer-down flushes the live draft before tool logic (click-outside commits)', () => {
+      expect(editor).toMatch(/if \(inlineEdit\) flushInline\(\);/);
+    });
+    it('impl: overlay mousedown guard stops focus stealing the just-mounted input', () => {
+      expect(editor).toMatch(/onMouseDown=\{\(e\) => \{ if \(inlineEdit\) e\.preventDefault\(\); \}\}/);
+    });
+    it('impl: hidden-when-not-live keeps the field mounted across page flips', () => {
       expect(editor).toMatch(/className: box \? 'absolute z-20[^']*' : 'hidden'/);
     });
   });
