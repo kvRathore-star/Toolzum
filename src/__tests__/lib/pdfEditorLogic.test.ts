@@ -4,6 +4,7 @@ import {
   hitTestAnno,
   restructureAnnos,
   capStructuralHistory,
+  inlineEditBox,
   pruneEmptyAnnos,
   moveLayerIndex,
   wrapLines,
@@ -159,6 +160,54 @@ describe('capStructuralHistory (silent-cap / orphaned-undo regression)', () => {
     const r = capStructuralHistory(annosOnly);
     expect(r.dropped).toBe(false);
     expect(r.stack).toBe(annosOnly);
+  });
+});
+
+describe('inlineEditBox (in-place edit overlay geometry)', () => {
+  const text = (over: Partial<Extract<Anno, { kind: 'text' }>> = {}): Anno => ({
+    kind: 'text', x: 100, y: 200, text: 'Hello', size: 12, color: '#000', bold: false, ...over,
+  });
+
+  it('text: top sits one ascent above the baseline; left-align anchors at x', () => {
+    const box = inlineEditBox(text(), 2)!;
+    expect(box.top).toBe((200 - 12) * 2);
+    expect(box.left).toBe(100 * 2);
+    expect(box.width).toBeGreaterThan(0);
+    expect(box.height).toBeCloseTo(12 * 2 * 1.4);
+  });
+
+  it('text: center/right alignment shift left edge by the estimated width', () => {
+    const left = inlineEditBox(text({ align: 'left' }), 1)!;
+    const center = inlineEditBox(text({ align: 'center' }), 1)!;
+    const right = inlineEditBox(text({ align: 'right' }), 1)!;
+    expect(center.left).toBeLessThan(left.left);
+    expect(right.left).toBeLessThan(center.left);
+    // center shifts by half the estimate; right shifts by the full width
+    expect(left.left - center.left).toBeCloseTo(center.width / 2);
+    expect(center.left - right.left).toBeCloseTo(right.width / 2);
+    expect(left.left - right.left).toBeCloseTo(right.width);
+  });
+
+  it('flow: width follows the box, height follows wrapped line count', () => {
+    const flow: Anno = { kind: 'flow', x: 50, y: 60, w: 200, text: 'word '.repeat(80), size: 10, color: '#000', bold: false };
+    const box = inlineEditBox(flow, 2)!;
+    expect(box.left).toBe(100);
+    expect(box.width).toBe(400);
+    expect(box.top).toBe((60 - 10) * 2);
+    const oneLine: Anno = { ...(flow as Extract<Anno, { kind: 'flow' }>), text: 'hi' };
+    const small = inlineEditBox(oneLine, 2)!;
+    expect(box.height).toBeGreaterThan(small.height);
+  });
+
+  it('note: expands to the full sticky editable area from the icon origin', () => {
+    const box = inlineEditBox({ kind: 'note', x: 10, y: 20, text: 'n', color: '#fff3a3' }, 2)!;
+    expect(box).toEqual({ left: 20, top: 40, width: 392, height: 220 });
+  });
+
+  it('non-text kinds return null (no inline editor)', () => {
+    expect(inlineEditBox({ kind: 'highlight', x: 0, y: 0, w: 1, h: 1, color: '#ff0' }, 1)).toBeNull();
+    expect(inlineEditBox({ kind: 'draw', points: [0, 0, 1, 1], color: '#000', width: 1 }, 1)).toBeNull();
+    expect(inlineEditBox({ kind: 'image', x: 0, y: 0, w: 1, h: 1, dataUrl: 'data:,' }, 1)).toBeNull();
   });
 });
 

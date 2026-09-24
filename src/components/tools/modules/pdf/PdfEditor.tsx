@@ -154,6 +154,39 @@ export function pruneEmptyAnnos(list: Anno[]): Anno[] {
   });
 }
 
+/**
+ * CSS box (screen px) for the inline-edit overlay of a text-family
+ * annotation. Coordinates mirror drawOverlay: points × scale, y down,
+ * text baseline at a.y → control top sits one ascent above it. Returns
+ * null for kinds that don't edit inline. Pure — tested.
+ */
+export function inlineEditBox(
+  a: Anno,
+  scale: number,
+): { left: number; top: number; width: number; height: number } | null {
+  if (a.kind === 'text') {
+    // Same width estimate as hitTestText so the control covers the ink.
+    const estW = Math.max(48, (a.text.length + 2) * a.size * 0.55);
+    const leftPt = a.align === 'center' ? a.x - estW / 2 : a.align === 'right' ? a.x - estW : a.x;
+    return { left: leftPt * scale, top: (a.y - a.size) * scale, width: estW * scale, height: a.size * scale * 1.4 };
+  }
+  if (a.kind === 'flow') {
+    const lines = Math.max(1, wrapLines(a.text || 'x', a.w, (s) => s.length * a.size * 0.55).length);
+    return {
+      left: a.x * scale,
+      top: (a.y - a.size) * scale,
+      width: a.w * scale,
+      height: (lines * a.size * 1.25 + a.size * 0.5) * scale,
+    };
+  }
+  if (a.kind === 'note') {
+    // hitTestText grace box (196×116 from the icon origin) — the sticky
+    // expands to its full editable area while typing.
+    return { left: a.x * scale, top: a.y * scale, width: 196 * scale, height: 110 * scale };
+  }
+  return null;
+}
+
 /** Move index one step; out-of-range is a no-op (never throws). */
 export function moveLayerIndex<T>(list: T[], index: number, dir: 1 | -1): { list: T[]; index: number } {
   const j = index + dir;
@@ -548,6 +581,14 @@ export default function PdfEditor() {
   // Draft text for the selected-text field: commits on Enter/blur, Escape
   // reverts (live-per-keystroke re-rendered the overlay on every press).
   const [textDraft, setTextDraft] = useState<string | null>(null);
+  // Inline in-place edit (double-click / place-and-type): a real
+  // <input>/<textarea> overlay inside the canvas div — NOT canvas-drawn
+  // text — so the window listener's typing guard suspends global
+  // shortcuts automatically. There is deliberately NO suspend flag:
+  // a flag needs a clear path per exit, and a missed one silences the
+  // whole keyboard (the leak class this architecture refuses).
+  const [inlineEdit, setInlineEdit] = useState<{ page: number; index: number } | null>(null);
+  const [inlineDraft, setInlineDraft] = useState('');
   const rootRef = useRef<HTMLDivElement>(null);
   const canvasColRef = useRef<HTMLDivElement>(null);
   const [focus, setFocus] = useState(false);
@@ -1126,28 +1167,34 @@ export default function PdfEditor() {
       });
     }
     const list = annos[page] || [];
+    // While the inline overlay owns a text-family box, skip drawing its
+    // content (the real input renders it) but keep the selection outline.
+    const editingIdx = inlineEdit && inlineEdit.page === page ? inlineEdit.index : -1;
     list.forEach((a, i) => {
       const isSel = selected?.page === page && selected?.index === i;
+      const hide = i === editingIdx && (a.kind === 'text' || a.kind === 'flow' || a.kind === 'note');
       if (a.kind === 'text') {
-        // Alignment anchors at the click point: left grows rightward,
-        // center grows both ways, right grows leftward.
         ctx.font = canvasFont(px(a.size), a.bold, !!a.italic, a.font);
-        ctx.fillStyle = a.color;
-        ctx.textAlign = a.align || 'left';
-        ctx.fillText(a.text || '…', px(a.x), px(a.y));
-        const tw = ctx.measureText(a.text || '…').width;
-        const bx = a.align === 'center' ? px(a.x) - tw / 2 : a.align === 'right' ? px(a.x) - tw : px(a.x);
-        ctx.textAlign = 'left';
-        const deco = (dy: number) => {
-          ctx.strokeStyle = a.color;
-          ctx.lineWidth = Math.max(1, px(a.size) / 14);
-          ctx.beginPath();
-          ctx.moveTo(bx, dy);
-          ctx.lineTo(bx + tw, dy);
-          ctx.stroke();
-        };
-        if (a.underline) deco(px(a.y) + 2);
-        if (a.strike) deco(px(a.y) - px(a.size) * 0.3);
+        if (!hide) {
+          // Alignment anchors at the click point: left grows rightward,
+          // center grows both ways, right grows leftward.
+          ctx.fillStyle = a.color;
+          ctx.textAlign = a.align || 'left';
+          ctx.fillText(a.text || '…', px(a.x), px(a.y));
+          const tw = ctx.measureText(a.text || '…').width;
+          const bx = a.align === 'center' ? px(a.x) - tw / 2 : a.align === 'right' ? px(a.x) - tw : px(a.x);
+          ctx.textAlign = 'left';
+          const deco = (dy: number) => {
+            ctx.strokeStyle = a.color;
+            ctx.lineWidth = Math.max(1, px(a.size) / 14);
+            ctx.beginPath();
+            ctx.moveTo(bx, dy);
+            ctx.lineTo(bx + tw, dy);
+            ctx.stroke();
+          };
+          if (a.underline) deco(px(a.y) + 2);
+          if (a.strike) deco(px(a.y) - px(a.size) * 0.3);
+        }
       } else if (a.kind === 'highlight') {
         ctx.globalAlpha = a.opacity ?? 0.4;
         ctx.fillStyle = a.color;
@@ -1203,23 +1250,27 @@ export default function PdfEditor() {
           ctx.stroke();
         }
       } else if (a.kind === 'note') {
-        ctx.fillStyle = a.color;
-        ctx.fillRect(px(a.x), px(a.y), 22, 22);
-        ctx.fillStyle = '#000';
-        ctx.font = 'bold 14px Helvetica, Arial, sans-serif';
-        ctx.fillText('!', px(a.x) + 8, px(a.y) + 16);
+        if (!hide) {
+          ctx.fillStyle = a.color;
+          ctx.fillRect(px(a.x), px(a.y), 22, 22);
+          ctx.fillStyle = '#000';
+          ctx.font = 'bold 14px Helvetica, Arial, sans-serif';
+          ctx.fillText('!', px(a.x) + 8, px(a.y) + 16);
+        }
       } else if (a.kind === 'flow') {
-        ctx.font = canvasFont(px(a.size), a.bold, false, a.font);
-        const lines = wrapLines(a.text || 'Type here…', px(a.w), (s) => ctx.measureText(s).width);
-        ctx.fillStyle = a.color;
-        lines.forEach((line, li) => {
-          ctx.fillText(line, px(a.x), px(a.y) + li * px(a.size) * 1.25);
-        });
-        ctx.strokeStyle = 'rgba(26,86,219,0.5)';
-        ctx.setLineDash([4, 3]);
-        ctx.lineWidth = 1;
-        ctx.strokeRect(px(a.x) - 4, px(a.y) - px(a.size) - 4, px(a.w) + 8, lines.length * px(a.size) * 1.25 + 8);
-        ctx.setLineDash([]);
+        if (!hide) {
+          ctx.font = canvasFont(px(a.size), a.bold, false, a.font);
+          const lines = wrapLines(a.text || 'Type here…', px(a.w), (s) => ctx.measureText(s).width);
+          ctx.fillStyle = a.color;
+          lines.forEach((line, li) => {
+            ctx.fillText(line, px(a.x), px(a.y) + li * px(a.size) * 1.25);
+          });
+          ctx.strokeStyle = 'rgba(26,86,219,0.5)';
+          ctx.setLineDash([4, 3]);
+          ctx.lineWidth = 1;
+          ctx.strokeRect(px(a.x) - 4, px(a.y) - px(a.size) - 4, px(a.w) + 8, lines.length * px(a.size) * 1.25 + 8);
+          ctx.setLineDash([]);
+        }
       }
       if (isSel) {
         ctx.strokeStyle = '#1a56db';
@@ -1239,7 +1290,7 @@ export default function PdfEditor() {
         ctx.setLineDash([]);
       }
     });
-  }, [annos, page, selected, scale, findNav]);
+  }, [annos, page, selected, scale, findNav, inlineEdit]);
 
   useEffect(() => { drawOverlay(); }, [drawOverlay]);
 
@@ -1346,7 +1397,9 @@ export default function PdfEditor() {
       // of stacking a new one on top (the overlapping-boxes bug).
       const hit = hitTextAnno(x, y);
       if (hit !== null) {
-        selectBox(page, hit);
+        // Double-click edits in place; single click selects (left panel).
+        if (e.detail >= 2) beginInlineEdit(page, hit);
+        else selectBox(page, hit);
         return;
       }
       // Blank-page writing: no text layer + no annotations yet → one flowing
@@ -1356,10 +1409,16 @@ export default function PdfEditor() {
       if (items.length === 0 && existing.length === 0 && file) {
         const pageW = viewportRef.current.w / scale;
         const margin = Math.min(72, pageW * 0.12);
+        const newIdx = existing.length;
         pushAnno(page, { kind: 'flow', x: margin, y: pos.y, w: pageW - margin * 2, text: '', size: textSize, color: textColor, bold: textBold, font: textFont });
-        toast.success('Flowing text box — type in the left panel, it wraps and grows.');
+        setInlineDraft('');
+        setInlineEdit({ page, index: newIdx });
+        toast.success('Flowing text box — type right here, it wraps and grows.');
       } else {
+        const newIdx = existing.length;
         pushAnno(page, { kind: 'text', x, y, text: 'New text', size: textSize, color: textColor, bold: textBold, italic: textItalic, underline: textUnderline, strike: textStrike, align: textAlign, font: textFont });
+        setInlineDraft('New text');
+        setInlineEdit({ page, index: newIdx });
       }
     } else if (tool === 'retype') {
       retypeAt(x, y);
@@ -1390,7 +1449,10 @@ export default function PdfEditor() {
       if (tool === 'select') {
         const hit = hitTestAnno(annos[page] || [], x, y);
         if (hit !== null) {
-          selectBox(page, hit);
+          // Double-click a text-family annotation → edit in place;
+          // shapes/images just select (no text to edit).
+          if (e.detail >= 2) beginInlineEdit(page, hit);
+          else selectBox(page, hit);
           return;
         }
       }
@@ -1679,6 +1741,41 @@ export default function PdfEditor() {
   // pure helper above (regression classes stay covered without a DOM).
   const hitTextAnno = (x: number, y: number): number | null =>
     hitTestText(annos[page] || [], x, y);
+
+  // In-place editing: open on double-click (select/text tools) or right
+  // after placing a new text/flow box. Contract mirrors the left panel
+  // (see registry instructions): Enter commits single-line text, Escape
+  // reverts, blur commits — element-local keys, never window-bound.
+  const beginInlineEdit = (p: number, index: number) => {
+    const a = annos[p]?.[index];
+    // Always select first — double-click on a shape/image still selects;
+    // only text-family kinds open the overlay.
+    selectBox(p, index);
+    if (!a || (a.kind !== 'text' && a.kind !== 'flow' && a.kind !== 'note')) return;
+    setInlineDraft(a.text);
+    setInlineEdit({ page: p, index });
+  };
+
+  const commitInline = () => {
+    const target = inlineEdit;
+    if (!target) return;
+    setInlineEdit(null);
+    const a = annos[target.page]?.[target.index];
+    if (!a || (a.kind !== 'text' && a.kind !== 'flow' && a.kind !== 'note')) return;
+    const v = a.kind === 'note' ? inlineDraft.slice(0, 240) : inlineDraft;
+    if (v === a.text) return; // no junk undo entries for no-op blurs
+    commitAnnos((prev) => ({
+      ...prev,
+      [target.page]: (prev[target.page] || []).map((x, i) =>
+        i === target.index && (x.kind === 'text' || x.kind === 'flow' || x.kind === 'note')
+          ? { ...x, text: v }
+          : x,
+      ),
+    }));
+  };
+
+  const revertInline = () => setInlineEdit(null);
+
   // and drop an editable Helvetica box at the same size/position. Honest
   // label: retypeset, NOT same-font — the original font is matched for size
   // and placement only (see FAQ).
@@ -3423,6 +3520,62 @@ export default function PdfEditor() {
               onPointerMove={onPointerMove}
               onPointerUp={onPointerUp}
             />
+            {inlineEdit && (() => {
+              // Stay mounted across page flips: when the target isn't live we
+              // render hidden — display:none blurs the field, and onBlur is
+              // the single commit path (no lost drafts, no suspend flag).
+              const raw = inlineEdit.page === page ? annos[page]?.[inlineEdit.index] : undefined;
+              const a = raw && (raw.kind === 'text' || raw.kind === 'flow' || raw.kind === 'note') ? raw : undefined;
+              const box = a ? inlineEditBox(a, scale) : null;
+              const single = a?.kind === 'text';
+              const style: React.CSSProperties | undefined =
+                box && a
+                  ? {
+                      left: box.left,
+                      top: box.top,
+                      width: box.width,
+                      height: box.height,
+                      fontSize: (a.kind === 'note' ? 13 : a.size) * scale,
+                      lineHeight: 1.25,
+                      fontWeight: a.kind !== 'note' && a.bold ? 700 : 400,
+                      fontStyle: a.kind === 'text' && a.italic ? 'italic' : undefined,
+                      fontFamily: a.kind === 'note' ? undefined : fontCss(a.font ?? 'sans'),
+                      color: a.kind === 'note' ? undefined : a.color,
+                      background: 'var(--bg-surface)',
+                      padding: '2px 4px',
+                      resize: 'none',
+                      overflow: 'hidden',
+                    }
+                  : undefined;
+              const shared = {
+                key: `${inlineEdit.page}:${inlineEdit.index}`,
+                value: inlineDraft,
+                onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setInlineDraft(e.target.value),
+                onBlur: commitInline,
+                onKeyDown: (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+                  if (e.key === 'Escape') {
+                    e.stopPropagation();
+                    revertInline();
+                    return;
+                  }
+                  if (single && e.key === 'Enter') {
+                    e.preventDefault();
+                    commitInline();
+                  }
+                },
+                className: box ? 'absolute z-20 rounded border-2 border-[var(--accent)] outline-none' : 'hidden',
+                style,
+                autoFocus: true,
+                'aria-label': single
+                  ? 'Edit text in place. Enter commits, Escape reverts.'
+                  : 'Edit annotation in place. Blur commits, Escape reverts.',
+              } as const;
+              return a?.kind === 'flow' || a?.kind === 'note' ? (
+                <textarea {...shared} rows={a.kind === 'note' ? 5 : 3} maxLength={a.kind === 'note' ? 240 : undefined} />
+              ) : (
+                <input type="text" {...shared} />
+              );
+            })()}
           </div>
           <p className="mt-3 text-xs text-[var(--text-muted)] text-center">
             {tool === 'text' && 'Click for a flowing box on blank pages, or place separate boxes on existing PDFs.'}

@@ -291,10 +291,40 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
     });
   });
 
-  describe('retype field keyboard contract (instructions step 3)', () => {
-    it('claim: instructions + aria-labels promise Enter commits, Escape reverts', () => {
-      expect(registry).toMatch(/Enter commits, Escape reverts/);
+  describe('inline in-place editing (P1)', () => {
+    it('claim: registry instructions promise double-click in-place editing with the key contract', () => {
+      expect(registry).toMatch(
+        /Double-click a text box, note, or flowing text to edit right on the page \(Enter commits single-line text, Escape reverts\)/,
+      );
+    });
+    it('impl: place-and-type — new text/flow boxes open the overlay immediately', () => {
+      expect(editor).toMatch(/setInlineEdit\(\{ page, index: newIdx \}\)/);
+      expect(editor, 'flow toast must match the new in-place behavior').toMatch(
+        /type right here, it wraps and grows/,
+      );
+      expect(editor).not.toMatch(/type in the left panel, it wraps/);
+    });
+    it('impl: double-click on select/text tools opens beginInlineEdit', () => {
+      expect(editor.match(/beginInlineEdit\(page, hit\)/g)?.length ?? 0).toBeGreaterThanOrEqual(2);
+      expect(editor).toMatch(/e\.detail >= 2/);
+    });
+    it('impl: real input/textarea overlay + blur-commit + Escape-revert (matches left-panel contract)', () => {
+      expect(editor).toMatch(/onBlur: commitInline/);
+      expect(editor).toMatch(/revertInline\(\)/);
+      expect(editor).toMatch(/single && e\.key === 'Enter'/);
+      expect(editor, 'overlay must be a DOM editing surface so the typing guard suspends globals').toMatch(
+        /inlineEditBox\(a, scale\)/,
+      );
+    });
+    it('impl: hidden-when-not-live keeps onBlur as the single commit path (no lost drafts)', () => {
+      expect(editor).toMatch(/className: box \? 'absolute z-20[^']*' : 'hidden'/);
+    });
+  });
+
+  describe('retype field keyboard contract (left panel + inline share one contract)', () => {
+    it('claim: aria-labels promise Enter commits, Escape reverts (registry now phrases it on the inline instruction)', () => {
       expect(editor).toMatch(/Enter commits, Escape reverts/);
+      expect(registry).toMatch(/Enter commits, Escape reverts|Enter commits single-line text, Escape reverts/);
     });
     it('impl: both handlers exist on the draft field', () => {
       expect(editor).toMatch(/e\.key === 'Enter'\) \(e\.target as HTMLInputElement\)\.blur\(\)/);
