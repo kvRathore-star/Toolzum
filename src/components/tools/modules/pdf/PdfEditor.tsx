@@ -2076,7 +2076,9 @@ export default function PdfEditor() {
   // "global" shortcuts bug class this split eliminated.
   const onCanvasKey = (e: React.KeyboardEvent) => {
     const t = e.target as HTMLElement;
-    if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') return;
+    // isContentEditable matters: inline-edit overlays live INSIDE this div,
+    // and a contentEditable the guard misses would arrow-nudge mid-keystroke.
+    if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable) return;
     if (!selected) return;
     const step = e.shiftKey ? 10 : 1;
     if (e.key.startsWith('Arrow')) {

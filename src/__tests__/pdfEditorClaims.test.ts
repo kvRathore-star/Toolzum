@@ -257,6 +257,40 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
     });
   });
 
+  describe('inline-edit keyboard scope (designed before the feature shipped)', () => {
+    /**
+     * Inline editing = a real textarea/input overlay inside the canvas div.
+     * The window listener's typing guard IS the suspend mechanism — stateless,
+     * so no flag can leak. These three rules keep it that way:
+     *  1. Only Ctrl+S binds ABOVE the guard (save mid-typing is intentional).
+     *  2. Enter/Escape/Tab never bind on window — element-local only.
+     *  3. The canvas nudge handler guards contentEditable (overlays live
+     *     inside it) or arrows would steal keystrokes mid-edit.
+     */
+    it('rule 1: only Ctrl+S binds above the typing guard; all other keys after', () => {
+      expect(windowListener, 'window listener missing').toBeTruthy();
+      const guardAt = windowListener!.indexOf('isContentEditable');
+      expect(guardAt, 'typing guard missing from window listener').toBeGreaterThan(-1);
+      const saveAt = windowListener!.indexOf("e.key.toLowerCase() === 's'");
+      expect(saveAt).toBeGreaterThan(-1);
+      expect(saveAt, 'Ctrl+S must stay ABOVE the guard (save while typing)').toBeLessThan(guardAt);
+      for (const tok of ["'z'", "'y'", "'f'", "'d'", "'c'", "'v'", "'Delete'", "'?'" ]) {
+        const at = windowListener!.indexOf(tok);
+        expect(at, `key ${tok} missing from window listener`).toBeGreaterThan(-1);
+        expect(at, `key ${tok} must sit BELOW the typing guard`).toBeGreaterThan(guardAt);
+      }
+    });
+
+    it('rule 2: Enter/Escape/Tab never bind on window (element-local on editing surfaces only)', () => {
+      expect(windowListener).not.toMatch(/'Enter'|'Escape'|'Tab'/);
+    });
+
+    it('rule 3: canvas nudge handler guards contentEditable overlays', () => {
+      const canvas = editor.match(/const onCanvasKey[\s\S]*?\n  \};/)?.[0] ?? '';
+      expect(canvas).toMatch(/isContentEditable/);
+    });
+  });
+
   describe('retype field keyboard contract (instructions step 3)', () => {
     it('claim: instructions + aria-labels promise Enter commits, Escape reverts', () => {
       expect(registry).toMatch(/Enter commits, Escape reverts/);
