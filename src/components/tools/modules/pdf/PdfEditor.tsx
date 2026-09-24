@@ -2070,25 +2070,16 @@ export default function PdfEditor() {
     toast.success(`Stamped on all ${pageCount} pages.`);
   };
 
-  // Keyboard (canvas-scoped): arrows nudge, Delete removes, Ctrl+C/V
-  // copies, Ctrl+Z/Y undo/redo, Ctrl+D duplicates, ? opens help.
-  // Ctrl+S and Ctrl+F are window-level (FAQ + shortcuts panel claim them
-  // unqualified) — do NOT re-add them here or both handlers double-fire.
-  // Ignored while typing in the text/note panels.
+  // Keyboard (canvas-scoped): ARROW NUDGE ONLY. Every other shortcut the
+  // (?) panel lists binds on window (see the onKey effect further down). Do not
+  // add modifier-key handling here — that reintroduces the focus-dependent
+  // "global" shortcuts bug class this split eliminated.
   const onCanvasKey = (e: React.KeyboardEvent) => {
     const t = e.target as HTMLElement;
     if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') return;
-    const mod = e.ctrlKey || e.metaKey;
-    if (mod && e.key.toLowerCase() === 'z' && !e.shiftKey) { e.preventDefault(); undo(); return; }
-    if ((mod && e.key.toLowerCase() === 'y') || (mod && e.shiftKey && e.key.toLowerCase() === 'z')) { e.preventDefault(); redo(); return; }
-    if (mod && e.key.toLowerCase() === 'd') { e.preventDefault(); duplicateSelected(); return; }
-    if (e.key === '?') { setShowShortcuts(true); return; }
-    const step = e.shiftKey ? 10 : 1;
     if (!selected) return;
-    if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); deleteSelected(); }
-    else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c') { e.preventDefault(); copySelected(); }
-    else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'v') { e.preventDefault(); pasteClipboard(); }
-    else if (e.key.startsWith('Arrow')) {
+    const step = e.shiftKey ? 10 : 1;
+    if (e.key.startsWith('Arrow')) {
       e.preventDefault();
       const dx = e.key === 'ArrowLeft' ? -step : e.key === 'ArrowRight' ? step : 0;
       const dy = e.key === 'ArrowUp' ? -step : e.key === 'ArrowDown' ? step : 0;
@@ -2641,17 +2632,27 @@ export default function PdfEditor() {
   const effColor = selIsText ? (selAnno as TextAnno | FlowAnno).color : textColor;
   const effSize = selIsText ? (selAnno as TextAnno | FlowAnno).size : textSize;
   const [showFind, setShowFind] = useState(false);
-  // Global shortcuts: FAQ, the shortcuts panel (?), and button titles all
-  // promise Ctrl+F and Ctrl+S without qualification — so they live on
-  // window, not in the canvas key handler (which only fires when the
-  // canvas has focus; the pre-Sep-2026 Ctrl+F was canvas-only and dead
-  // with focus in the sidebar/toolbar). saveNow closes over live annos,
-  // so the listener calls through a ref instead of a stale capture.
+  // Keyboard architecture (audited Sep 2026 after four canvas-only bugs):
+  // ONE window listener owns every shortcut the (?) panel lists, except
+  // arrow nudge, which stays canvas-scoped on purpose (stealing arrows
+  // globally would break scrolling and dropdown navigation). The canvas
+  // handler must never grow modifier-key bindings again — focus-dependent
+  // shortcuts masquerading as global is the exact failure mode this
+  // split exists to prevent. saveNow/actions close over per-render state,
+  // so the once-bound listener calls through refs synced after each render
+  // (never during render — React Compiler flags render-phase ref writes).
   const saveNowRef = useRef(saveNow);
-  saveNowRef.current = saveNow;
+  const selectedRef = useRef(selected);
+  const actionsRef = useRef({ undo, redo, duplicateSelected, deleteSelected, copySelected, pasteClipboard });
+  useEffect(() => {
+    saveNowRef.current = saveNow;
+    selectedRef.current = selected;
+    actionsRef.current = { undo, redo, duplicateSelected, deleteSelected, copySelected, pasteClipboard };
+  });
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const mod = e.ctrlKey || e.metaKey;
+      // Save works even mid-typing (the browser save-page dialog is worse).
       if (mod && e.key.toLowerCase() === 's') {
         e.preventDefault();
         void saveNowRef.current();
@@ -2659,10 +2660,22 @@ export default function PdfEditor() {
       }
       const t = e.target as HTMLElement | null;
       if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
-      if ((mod && e.key.toLowerCase() === 'f') || e.key === 'F3') {
+      const a = actionsRef.current;
+      if (mod && e.key.toLowerCase() === 'z' && !e.shiftKey) { e.preventDefault(); a.undo(); return; }
+      if ((mod && e.key.toLowerCase() === 'y') || (mod && e.shiftKey && e.key.toLowerCase() === 'z')) { e.preventDefault(); a.redo(); return; }
+      if ((mod && e.key.toLowerCase() === 'f') || e.key === 'F3') { e.preventDefault(); setShowFind(true); return; }
+      if (mod && e.key.toLowerCase() === 'd') { e.preventDefault(); a.duplicateSelected(); return; }
+      if (mod && e.key.toLowerCase() === 'c') { e.preventDefault(); a.copySelected(); return; }
+      if (mod && e.key.toLowerCase() === 'v') { e.preventDefault(); a.pasteClipboard(); return; }
+      if (e.key === 'Delete' || e.key === 'Backspace') {
+        // Only swallow Backspace when there's a selection to delete —
+        // otherwise we'd block the browser's own back-navigation for nothing.
+        if (!selectedRef.current) return;
         e.preventDefault();
-        setShowFind(true);
+        a.deleteSelected();
+        return;
       }
+      if (e.key === '?') { setShowShortcuts(true); }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -3391,7 +3404,7 @@ export default function PdfEditor() {
         </div>
 
         <div ref={canvasColRef} className="lg:col-span-8 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 overflow-auto relative">
-          <div className="relative mx-auto w-fit" tabIndex={0} role="application" onKeyDown={onCanvasKey} aria-label="PDF page canvas. Arrow keys nudge the selection, Delete removes it, Control C and V copy and paste.">
+          <div className="relative mx-auto w-fit" tabIndex={0} role="application" onKeyDown={onCanvasKey} aria-label="PDF page canvas. Arrow keys nudge the selection (Shift for ×10). Delete, Ctrl+C/V, and Ctrl+Z/Y work anywhere in the editor.">
             <span className="sr-only" aria-live="polite">Page {page} of {pageCount}. Text content: {pageText || 'No readable text on this page.'}</span>
             {rendering && (
               <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-lg bg-[var(--bg-overlay)]/80" role="status" aria-label="Rendering page">

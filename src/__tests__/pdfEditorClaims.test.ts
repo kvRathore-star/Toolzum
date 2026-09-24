@@ -192,6 +192,71 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
     });
   });
 
+  describe('shortcut binding architecture (audited after four canvas-only bugs)', () => {
+    /**
+     * Every (?) shortcuts-panel row, classified. 'window' = must bind on
+     * the window listener (works with focus anywhere except inputs);
+     * 'canvas' = deliberately focus-scoped (arrows would break scrolling
+     * if stolen globally). Adding a panel row without adding it HERE
+     * fails the classification test — that's the point: no more
+     * unclassified shortcuts that quietly end up canvas-only.
+     */
+    const PANEL: { label: string; location: 'window' | 'canvas'; tokens: string[] }[] = [
+      { label: 'Undo / redo', location: 'window', tokens: ["e.key.toLowerCase() === 'z'", "e.key.toLowerCase() === 'y'"] },
+      { label: 'Save session', location: 'window', tokens: ["e.key.toLowerCase() === 's'"] },
+      { label: 'Duplicate selected', location: 'window', tokens: ["e.key.toLowerCase() === 'd'"] },
+      { label: 'Delete selected', location: 'window', tokens: ["e.key === 'Delete'"] },
+      { label: 'Find panel', location: 'window', tokens: ["e.key.toLowerCase() === 'f'"] },
+      { label: 'Copy / paste', location: 'window', tokens: ["e.key.toLowerCase() === 'c'", "e.key.toLowerCase() === 'v'"] },
+      { label: 'Nudge (×10 with Shift)', location: 'canvas', tokens: ['Arrow'] },
+      { label: 'This panel', location: 'window', tokens: ["e.key === '?'" ] },
+    ];
+
+    const panelLabels = () => {
+      // Anchor on the dialog, not the toolbar button that shares the
+      // aria-label; end at Done so footer link pairs don't leak in.
+      const start = editor.indexOf('role="dialog" aria-modal="true" aria-label="Keyboard shortcuts"');
+      const end = editor.indexOf('Done</button>', start);
+      expect(start, 'shortcuts dialog missing').toBeGreaterThan(-1);
+      expect(end, 'shortcuts dialog Done button missing').toBeGreaterThan(start);
+      const region = editor.slice(start, end);
+      return [...region.matchAll(/\['([^']+)', '[^']+'\]/g)].map((m) => m[1]!);
+    };
+
+    const canvasHandler = () => editor.match(/const onCanvasKey[\s\S]*?\n  \};/)?.[0] ?? '';
+
+    it('every shortcuts-panel row is classified here (new rows must pick a side)', () => {
+      expect(panelLabels().sort()).toEqual(PANEL.map((p) => p.label).sort());
+    });
+
+    it('window-classified shortcuts bind in the window listener', () => {
+      expect(windowListener, 'window keydown listener missing').toBeTruthy();
+      for (const row of PANEL.filter((p) => p.location === 'window')) {
+        for (const tok of row.tokens) {
+          expect(windowListener!, `panel row "${row.label}" missing from window listener: ${tok}`).toContain(tok);
+        }
+      }
+    });
+
+    it('canvas handler is arrow-nudge only — no modifier-key shortcuts (double-fire + focus-dependence)', () => {
+      const canvas = canvasHandler();
+      expect(canvas, 'onCanvasKey not found').toBeTruthy();
+      expect(canvas).toContain('Arrow');
+      expect(canvas, 'canvas handler must not bind ctrl/meta shortcuts').not.toMatch(/ctrlKey/);
+      expect(canvas, 'canvas handler must not bind lowercase-key shortcuts').not.toMatch(/toLowerCase\(\) === '/);
+      expect(canvas).not.toMatch(/'Delete'|'Backspace'|setShowShortcuts|setShowFind/);
+    });
+
+    it('paste shortcut parity: toolbar Paste button works without selection, so must Ctrl+V', () => {
+      // Historical mismatch: the button was never selection-gated, but the
+      // canvas shortcut sat behind `if (!selected) return`.
+      const pasteBtn = editor.match(/<button[^>]*title="Paste \(Ctrl\+V\)"[^>]*>/)?.[0] ?? '';
+      expect(pasteBtn, 'Paste button title missing').toBeTruthy();
+      expect(pasteBtn).not.toContain('disabled={!selected}');
+      expect(windowListener).toMatch(/pasteClipboard/);
+    });
+  });
+
   describe('retype field keyboard contract (instructions step 3)', () => {
     it('claim: instructions + aria-labels promise Enter commits, Escape reverts', () => {
       expect(registry).toMatch(/Enter commits, Escape reverts/);
