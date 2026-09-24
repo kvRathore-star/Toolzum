@@ -138,8 +138,9 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
       expect(editor).toMatch(/annotations kept/);
       expect(editor).toMatch(/annotations followed their pages/);
     });
-    it('impl: restructure remaps via restructureAnnos and stores the result', () => {
-      expect(editor).toMatch(/restructureAnnos\(prevAnnos, op, page, pageCount, vpH\)/);
+    it('impl: restructure remaps via restructureAnnos/moveAnnosPage and stores the result', () => {
+      expect(editor).toMatch(/restructureAnnos\(prevAnnos, op as 'rotate'/);
+      expect(editor).toMatch(/moveAnnosPage\(prevAnnos, move\.from, move\.to, pageCount\)/);
       expect(editor).toMatch(/setAnnos\(mapped\)/);
     });
     it('impl: structural undo entry carries pre-op PDF bytes', () => {
@@ -413,6 +414,37 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
         editor,
         'deselect/tool-switch must clear a stale handle cursor on the next move',
       ).toMatch(/\/\/ Deselect \/ tool switch: a stale handle cursor must not stick\.\s*setHoverHandle\(\(prev\) => \(prev === null \? prev : null\)\)/);
+    });
+  });
+
+  describe('thumbnail drag-reorder (P1)', () => {
+    it('claim: registry instructions promise drag-to-reorder from the Pages sidebar, one Undo step', () => {
+      expect(registry).toMatch(
+        /In the Pages sidebar, drag a thumbnail to reorder the document \(one Undo step\)/,
+      );
+    });
+    it('impl: thumbnails are draggable; drop routes through restructure move with from/to', () => {
+      expect(editor).toMatch(/draggable/);
+      expect(editor, 'Firefox refuses to start a drag without payload data').toMatch(
+        /e\.dataTransfer\.setData\('text\/plain', String\(i\)\)/,
+      );
+      expect(editor).toMatch(/void restructure\('move', \{ from, to: i \}\)/);
+      expect(editor).toMatch(/from !== i/); // self-drop is a no-op
+    });
+    it('impl: move is a structural op — guards, pdf-lib remove+insert, annos remap, undo bytes', () => {
+      expect(editor).toMatch(/move\.from === move\.to/);
+      expect(editor).toMatch(/doc\.removePage\(move\.from\)/);
+      expect(editor).toMatch(/doc\.insertPage\(Math\.max\(0, Math\.min\(move\.to, doc\.getPageCount\(\)\)\), moving!\)/);
+      expect(editor).toMatch(/moveAnnosPage\(prevAnnos, move\.from, move\.to, pageCount\)/);
+      expect(editor).toMatch(/bytes: fileBytes\.slice\(\)/);
+      expect(editor, 'toast must keep the annotations-follow claim').toMatch(
+        /Page moved to position \$\{move \? move\.to \+ 1 : '\?'\} — annotations followed their pages/,
+      );
+    });
+    it('impl: drop target highlighted and drag state always cleared (drop, end, self-drop)', () => {
+      expect(editor).toMatch(/setThumbDragOver\(\(prev\) => \(prev === i \? prev : i\)\)/);
+      expect(editor).toMatch(/setThumbDragOver\(null\)/);
+      expect(editor).toMatch(/thumbDragRef\.current = null/);
     });
   });
 

@@ -3,6 +3,7 @@ import {
   hitTestText,
   hitTestAnno,
   restructureAnnos,
+  moveAnnosPage,
   capStructuralHistory,
   inlineEditBox,
   pruneEmptyAnnos,
@@ -118,6 +119,53 @@ describe('restructureAnnos (page-op annotation-wipe regression)', () => {
     expect(out[1]).toHaveLength(2);
     expect(out[2]).toHaveLength(1);
     expect(out[3]).toHaveLength(1);
+  });
+});
+
+describe('moveAnnosPage (drag-reorder annotation-follow)', () => {
+  const annos = (): Record<number, Anno[]> => ({
+    1: [text({ x: 10, y: 20 })], // A
+    2: [{ kind: 'note', x: 30, y: 40, text: 'n', color: '#fff' }], // B
+    3: [{ kind: 'draw', points: [1, 2, 3, 4], color: '#000', width: 1 }], // C
+  });
+
+  it('move first page to end: later pages shift up, mover lands last', () => {
+    const out = moveAnnosPage(annos(), 0, 2, 3);
+    expect(out[1]![0]).toMatchObject({ kind: 'note' }); // B
+    expect(out[2]![0]).toMatchObject({ kind: 'draw' }); // C
+    expect(out[3]![0]).toMatchObject({ kind: 'text' }); // A follows itself
+  });
+
+  it('move last page to front: earlier pages shift down', () => {
+    const out = moveAnnosPage(annos(), 2, 0, 3);
+    expect(out[1]![0]).toMatchObject({ kind: 'draw' }); // C
+    expect(out[2]![0]).toMatchObject({ kind: 'text' }); // A
+    expect(out[3]![0]).toMatchObject({ kind: 'note' }); // B
+  });
+
+  it('middle → later slot shifts only the in-between range (4-page doc)', () => {
+    const four: Record<number, Anno[]> = {
+      1: [text({ text: 'A' })],
+      2: [text({ text: 'B' })],
+      3: [text({ text: 'C' })],
+      4: [text({ text: 'D' })],
+    };
+    // pdf-lib semantics: remove B, insert at post-removal index 2 → A C B D?
+    // j(C)=1 <2 → stays 1; j(D)=2 ≥2 → 3; moving at 2 → A C B D.
+    const out = moveAnnosPage(four, 1, 2, 4);
+    expect(out[1]![0]).toMatchObject({ text: 'A' });
+    expect(out[2]![0]).toMatchObject({ text: 'C' });
+    expect(out[3]![0]).toMatchObject({ text: 'B' });
+    expect(out[4]![0]).toMatchObject({ text: 'D' });
+  });
+
+  it('no-op and out-of-range return equivalent copies (never corrupt)', () => {
+    const a = annos();
+    expect(moveAnnosPage(a, 1, 1, 3)).toEqual(a);
+    expect(moveAnnosPage(a, -1, 0, 3)).toEqual(a);
+    expect(moveAnnosPage(a, 0, 3, 3)).toEqual(a); // to past end
+    expect(moveAnnosPage(a, 3, 0, 3)).toEqual(a); // from past end
+    expect(moveAnnosPage(a, 0, 2, 3)).not.toBe(a); // real moves are new maps
   });
 });
 

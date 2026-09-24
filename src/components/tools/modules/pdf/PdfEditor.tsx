@@ -257,6 +257,39 @@ export function restructureAnnos(
   return next;
 }
 
+/**
+ * Remap annos for moving page `from` to insert index `to` (both 0-based,
+ * pdf-lib remove+insert semantics — `to` is the index in the POST-removal
+ * array, so `to === pageCount - 1` lands at the end). Annotations follow
+ * their pages; the in-between range shifts by one slot. No-op (equivalent
+ * copy) on self-moves and out-of-range input. Pure — tested.
+ */
+export function moveAnnosPage(
+  annos: Record<number, Anno[]>,
+  from: number,
+  to: number,
+  pageCount: number,
+): Record<number, Anno[]> {
+  if (
+    from === to ||
+    from < 0 || from >= pageCount ||
+    to < 0 || to >= pageCount
+  ) {
+    return { ...annos };
+  }
+  const next: Record<number, Anno[]> = {};
+  const moving = annos[from + 1] || [];
+  for (let p = 1; p <= pageCount; p++) {
+    const i = p - 1;
+    if (i === from) continue;
+    const j = i < from ? i : i - 1; // after removePage(from)
+    const new0 = j >= to ? j + 1 : j; // after insertPage(to, …)
+    next[new0 + 1] = annos[p] || [];
+  }
+  next[to + 1] = moving;
+  return next;
+}
+
 function distToSeg(px: number, py: number, x1: number, y1: number, x2: number, y2: number): number {
   const dx = x2 - x1;
   const dy = y2 - y1;
@@ -1080,6 +1113,10 @@ export default function PdfEditor() {
       pushed: boolean;
     };
   } | null>(null);
+  // Thumbnail drag-reorder (HTML5 DnD): source index while dragging, and
+  // the slot under the pointer for drop-target highlighting.
+  const thumbDragRef = useRef<number | null>(null);
+  const [thumbDragOver, setThumbDragOver] = useState<number | null>(null);
   const viewportRef = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const imagePickRef = useRef<HTMLInputElement>(null);
   const pendingImageRef = useRef<string | null>(null);
@@ -2240,18 +2277,30 @@ export default function PdfEditor() {
   const historyCount = undoStack.current.length;
   const redoCount = redoStack.current.length;
 
-  // Page structure ops (rotate / duplicate / delete / move current page).
+  // Page structure ops (rotate / duplicate / delete / move current page,
+  // or drag-reorder any thumbnail to an arbitrary slot via op 'move').
   // Annotations are REMAPPED through the op (never wiped) and undo history
   // is kept: the pre-op snapshot carries the old bytes, so undo restores
   // the old document wholesale. Wiping annos here destroyed work on every
   // other page during a routine rotate — silent data loss.
-  const restructure = async (op: 'rotate' | 'duplicate' | 'delete' | 'left' | 'right') => {
+  const restructure = async (
+    op: 'rotate' | 'duplicate' | 'delete' | 'left' | 'right' | 'move',
+    move?: { from: number; to: number },
+  ) => {
     if (!fileBytes) return;
     if (op === 'delete' && pageCount <= 1) {
       toast.error('Cannot delete the only page.');
       return;
     }
     if ((op === 'left' && page <= 1) || (op === 'right' && page >= pageCount)) return;
+    if (op === 'move') {
+      if (
+        !move ||
+        move.from === move.to ||
+        move.from < 0 || move.from >= pageCount ||
+        move.to < 0 || move.to >= pageCount
+      ) return;
+    }
     try {
       const doc = await PDFDocument.load(fileBytes.slice());
       const idx = page - 1;
@@ -2266,6 +2315,15 @@ export default function PdfEditor() {
       } else if (op === 'delete') {
         doc.removePage(idx);
         nextPage = Math.min(page, doc.getPageCount());
+      } else if (op === 'move' && move) {
+        // Drag-reorder: remove + reinsert at the drop slot; the view
+        // follows the page that was dragged (that's what the user is
+        // watching). to is post-removal insert index (moveAnnosPage's
+        // contract — keep both sides in lockstep).
+        const [moving] = await doc.copyPages(doc, [move.from]);
+        doc.removePage(move.from);
+        doc.insertPage(Math.max(0, Math.min(move.to, doc.getPageCount())), moving!);
+        nextPage = move.to + 1;
       } else {
         // Reorder: remove + reinsert one slot over; annos follow their pages.
         const [moving] = await doc.copyPages(doc, [idx]);
@@ -2278,7 +2336,9 @@ export default function PdfEditor() {
       const fresh = await pdfjsLib.getDocument({ data: bytes.slice() }).promise;
       const prevAnnos = annos;
       const vpH = viewportRef.current.h / scale;
-      const mapped = restructureAnnos(prevAnnos, op, page, pageCount, vpH);
+      const mapped = op === 'move' && move
+        ? moveAnnosPage(prevAnnos, move.from, move.to, pageCount)
+        : restructureAnnos(prevAnnos, op as 'rotate' | 'duplicate' | 'delete' | 'left' | 'right', page, pageCount, vpH);
       // Pre-op snapshot (with bytes) so undo restores the old document.
       undoStack.current.push({ annos: structuredClone(prevAnnos), bytes: fileBytes.slice(), pageCount, page });
       // Cap structural entries (each pins a full file copy). On overflow,
@@ -2305,7 +2365,8 @@ export default function PdfEditor() {
         op === 'rotate' ? 'Page rotated — annotations kept.'
           : op === 'duplicate' ? 'Page duplicated — annotations copied to the new page.'
             : op === 'delete' ? 'Page deleted — annotations on other pages kept.'
-              : `Page moved ${op === 'left' ? 'earlier' : 'later'} — annotations followed their pages. Undo restores everything.`,
+              : op === 'move' ? `Page moved to position ${move ? move.to + 1 : '?'} — annotations followed their pages. Undo restores everything.`
+                : `Page moved ${op === 'left' ? 'earlier' : 'later'} — annotations followed their pages. Undo restores everything.`,
       );
     } catch {
       toast.error('Page operation failed.');
@@ -3884,7 +3945,37 @@ export default function PdfEditor() {
         <div className="lg:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-3 space-y-2 max-h-[560px] overflow-y-auto">
           <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Pages</p>
           {thumbUrls.map((u, i) => (
-            <button key={i} onClick={() => goPage(i + 1)} aria-label={`Go to page ${i + 1}`} aria-current={page === i + 1} className={`relative block w-full rounded-lg overflow-hidden border-2 ${page === i + 1 ? 'border-[var(--accent)]' : 'border-transparent'}`}>
+            <button
+              key={i}
+              draggable
+              onDragStart={(e) => {
+                thumbDragRef.current = i;
+                e.dataTransfer.effectAllowed = 'move';
+                // Firefox refuses to start a drag without payload data.
+                e.dataTransfer.setData('text/plain', String(i));
+              }}
+              onDragOver={(e) => {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+                setThumbDragOver((prev) => (prev === i ? prev : i));
+              }}
+              onDragLeave={() => setThumbDragOver((prev) => (prev === i ? null : prev))}
+              onDrop={(e) => {
+                e.preventDefault();
+                const from = thumbDragRef.current;
+                thumbDragRef.current = null;
+                setThumbDragOver(null);
+                if (from !== null && from !== i) void restructure('move', { from, to: i });
+              }}
+              onDragEnd={() => {
+                thumbDragRef.current = null;
+                setThumbDragOver(null);
+              }}
+              onClick={() => goPage(i + 1)}
+              aria-label={`Go to page ${i + 1}${thumbDragOver === i ? ' (drop here to reorder)' : ''}`}
+              aria-current={page === i + 1}
+              className={`relative block w-full rounded-lg overflow-hidden border-2 ${page === i + 1 || thumbDragOver === i ? 'border-[var(--accent)]' : 'border-transparent'}`}
+            >
               {u ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={u} alt={`Page ${i + 1}`} className="w-full" />
