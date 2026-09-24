@@ -2070,8 +2070,10 @@ export default function PdfEditor() {
     toast.success(`Stamped on all ${pageCount} pages.`);
   };
 
-  // Keyboard: arrows nudge, Delete removes, Ctrl+C/V copies, Ctrl+Z/Y
-  // undo/redo, Ctrl+S downloads, Ctrl+D duplicates selection, ? opens help.
+  // Keyboard (canvas-scoped): arrows nudge, Delete removes, Ctrl+C/V
+  // copies, Ctrl+Z/Y undo/redo, Ctrl+D duplicates, ? opens help.
+  // Ctrl+S and Ctrl+F are window-level (FAQ + shortcuts panel claim them
+  // unqualified) — do NOT re-add them here or both handlers double-fire.
   // Ignored while typing in the text/note panels.
   const onCanvasKey = (e: React.KeyboardEvent) => {
     const t = e.target as HTMLElement;
@@ -2079,9 +2081,7 @@ export default function PdfEditor() {
     const mod = e.ctrlKey || e.metaKey;
     if (mod && e.key.toLowerCase() === 'z' && !e.shiftKey) { e.preventDefault(); undo(); return; }
     if ((mod && e.key.toLowerCase() === 'y') || (mod && e.shiftKey && e.key.toLowerCase() === 'z')) { e.preventDefault(); redo(); return; }
-    if (mod && e.key.toLowerCase() === 's') { e.preventDefault(); saveNow(); return; }
     if (mod && e.key.toLowerCase() === 'd') { e.preventDefault(); duplicateSelected(); return; }
-    if ((mod && e.key.toLowerCase() === 'f') || e.key === 'F3') { e.preventDefault(); setShowFind(true); return; }
     if (e.key === '?') { setShowShortcuts(true); return; }
     const step = e.shiftKey ? 10 : 1;
     if (!selected) return;
@@ -2641,15 +2641,24 @@ export default function PdfEditor() {
   const effColor = selIsText ? (selAnno as TextAnno | FlowAnno).color : textColor;
   const effSize = selIsText ? (selAnno as TextAnno | FlowAnno).size : textSize;
   const [showFind, setShowFind] = useState(false);
-  // Global Ctrl+F / F3: Find is a document-wide action, not tool-scoped.
-  // The canvas key handler only fires when the canvas has focus — this
-  // window listener keeps the shortcut alive with any tool active and
-  // focus anywhere else (sidebar, toolbar buttons).
+  // Global shortcuts: FAQ, the shortcuts panel (?), and button titles all
+  // promise Ctrl+F and Ctrl+S without qualification — so they live on
+  // window, not in the canvas key handler (which only fires when the
+  // canvas has focus; the pre-Sep-2026 Ctrl+F was canvas-only and dead
+  // with focus in the sidebar/toolbar). saveNow closes over live annos,
+  // so the listener calls through a ref instead of a stale capture.
+  const saveNowRef = useRef(saveNow);
+  saveNowRef.current = saveNow;
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      const mod = e.ctrlKey || e.metaKey;
+      if (mod && e.key.toLowerCase() === 's') {
+        e.preventDefault();
+        void saveNowRef.current();
+        return;
+      }
       const t = e.target as HTMLElement | null;
       if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
-      const mod = e.ctrlKey || e.metaKey;
       if ((mod && e.key.toLowerCase() === 'f') || e.key === 'F3') {
         e.preventDefault();
         setShowFind(true);
