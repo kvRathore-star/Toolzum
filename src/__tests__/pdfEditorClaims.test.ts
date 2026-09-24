@@ -31,7 +31,22 @@ import path from 'node:path';
 const ROOT = process.cwd();
 const read = (rel: string) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 
-const editor = read('src/components/tools/modules/pdf/PdfEditor.tsx');
+/**
+ * Editor source lives under pdf/editor/ (split refactor). We readdir that
+ * directory instead of naming files, so a NEW module automatically joins
+ * the net — the failure mode this file exists to prevent is "the greps
+ * stopped reaching the code and the suite went green for the wrong reason."
+ * PdfEditor.tsx is a re-export shim (asserted below), so import-path
+ * tests and DynamicModuleWrapper keep working while logic moves.
+ */
+const EDITOR_DIR = 'src/components/tools/modules/pdf/editor';
+const editorFiles = fs
+  .readdirSync(path.join(ROOT, EDITOR_DIR))
+  .filter((f) => f.endsWith('.ts') || f.endsWith('.tsx'))
+  .sort();
+const editor = editorFiles
+  .map((f) => fs.readFileSync(path.join(ROOT, EDITOR_DIR, f), 'utf8'))
+  .join('\n');
 const registry = read('src/registry/tools-chunk-1.ts');
 
 /** Window-level keydown listener body (the global-shortcut surface). */
@@ -40,6 +55,24 @@ const windowListener = editor.match(
 )?.[0];
 
 describe('pdf-editor: documented claims vs actual behavior', () => {
+  describe('split-refactor guards (the net must follow the code)', () => {
+    it('net reaches every module under editor/ (readdir — new files join automatically)', () => {
+      expect(editorFiles.length, 'editor/ directory missing or empty').toBeGreaterThanOrEqual(1);
+      // Sanity: the concat actually contains the spine, not just leaves.
+      expect(editor).toContain('onCanvasKey');
+      expect(editor).toContain('const onKey = (e: KeyboardEvent)');
+    });
+
+    it('shim: pdf/PdfEditor.tsx stays a re-export only — no logic hides outside the net', () => {
+      const shim = read('src/components/tools/modules/pdf/PdfEditor.tsx');
+      expect(shim).toMatch(/from '\.\/editor\//);
+      expect(shim, 'component logic must live under editor/ (covered by readdir)').not.toMatch(
+        /onCanvasKey|const onKey = |drawOverlay|commitAnnos/,
+      );
+      expect(shim.length, 'shim unexpectedly large — did logic leak back in?').toBeLessThan(2000);
+    });
+  });
+
   describe('global Ctrl+F (was canvas-focus-only — historical bug #1)', () => {
     it('claim: Find button title promises Ctrl+F with any tool', () => {
       expect(editor).toMatch(/title="Find & replace \(Ctrl\+F\) — works with any tool"/);
