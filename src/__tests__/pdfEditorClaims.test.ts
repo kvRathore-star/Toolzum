@@ -67,7 +67,9 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
     it('impl: Ctrl+S is bound on window and calls saveNow (not download)', () => {
       expect(windowListener, 'window keydown listener missing').toBeTruthy();
       expect(windowListener).toMatch(/'s'/);
-      expect(windowListener).toMatch(/saveNowRef\.current\(\)/);
+      expect(windowListener, 'Ctrl+S must flush inline draft via saveFlushing before writing').toMatch(
+        /saveFlushingRef\.current\(\)/,
+      );
       expect(editor, 'stale "Ctrl+S downloads" comment regressed').not.toMatch(
         /Ctrl\+S downloads/,
       );
@@ -318,6 +320,48 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
     });
     it('impl: hidden-when-not-live keeps onBlur as the single commit path (no lost drafts)', () => {
       expect(editor).toMatch(/className: box \? 'absolute z-20[^']*' : 'hidden'/);
+    });
+  });
+
+  describe('inline edit × save/undo seams (post-ship follow-ups)', () => {
+    it('Q1 impl: Ctrl+S and the Save button flush the live draft before writing', () => {
+      expect(editor).toMatch(/const saveFlushing = \(silent = false\) => saveNow\(silent, flushInline\(\)\)/);
+      expect(editor, 'window Ctrl+S must route through the flush').toMatch(/void saveFlushingRef\.current\(\)/);
+      expect(editor, 'toolbar Save must route through the flush').toMatch(/onClick=\{\(\) => saveFlushing\(\)\}/);
+      expect(editor).toMatch(/const saveNow = async \(silent = false, annosOverride\?:/);
+      expect(editor).toMatch(/writeDraft\(snapshot/);
+      expect(editor, 'old blind saveNow() call sites must not remain for explicit saves').not.toMatch(
+        /onClick=\{\(\) => saveNow\(\)\}/,
+      );
+    });
+
+    it('Q1 impl: dirty counts an uncommitted inline draft so beforeunload warns mid-edit', () => {
+      expect(editor).toMatch(/if \(!inlineEdit\) return false;/);
+      expect(editor).toMatch(/const v = a\.kind === 'note' \? inlineDraft\.slice\(0, 240\) : inlineDraft;/);
+      expect(
+        editor,
+        'dirty must OR in the live draft — committed annos alone stays clean mid-typing',
+      ).toMatch(/const dirty =[\s\S]{0,160}!!fileBytes && inlineUnsaved/);
+      expect(editor).toMatch(/dirtyRef\.current = dirty;/);
+    });
+
+    it('Q2 impl: flow/note plain Enter inserts a line; only single-line text Enter commits', () => {
+      expect(editor).toMatch(/single && e\.key === 'Enter'/);
+      expect(
+        editor,
+        'multi-line boxes need a non-Enter commit path (Ctrl+Enter) or paragraph breaks are impossible',
+      ).toMatch(/!single && e\.key === 'Enter' && \(e\.ctrlKey \|\| e\.metaKey\)/);
+      expect(editor).toMatch(/Enter adds a line, Ctrl\+Enter commits/);
+    });
+
+    it('Q3 impl: keystrokes never touch the undo stack — exactly one flush commit, zero on no-op', () => {
+      // Overlay onChange only writes local draft state (native undo owns keystrokes).
+      expect(editor).toMatch(
+        /onChange: \(e: React\.ChangeEvent<HTMLInputElement \| HTMLTextAreaElement>\) => setInlineDraft\(e\.target\.value\)/,
+      );
+      // Flush commits once via commitAnnos and bails without an entry when unchanged.
+      expect(editor).toMatch(/if \(v === a\.text\) return annos; \/\/ no junk undo entries/);
+      expect(editor).toMatch(/commitAnnos\(\(\) => next\);/);
     });
   });
 

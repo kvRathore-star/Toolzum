@@ -601,7 +601,21 @@ export default function PdfEditor() {
   const [saving, setSaving] = useState(false);
   const [savedAt, setSavedAt] = useState<number | null>(null);
   const lastSaved = useRef<{ annos: Record<number, Anno[]>; page: number } | null>(null);
-  const dirty = !!fileBytes && (lastSaved.current === null || lastSaved.current.annos !== annos);
+  // Live inline draft counts as unsaved work: without this, typing in the
+  // overlay leaves `dirty` false (annos unchanged until flush), so the
+  // beforeunload guard stays silent and a tab close mid-edit loses the
+  // draft with no warning. (Single ref read — React Compiler fans out
+  // one warning per repeated `lastSaved.current` access on this line.)
+  const inlineUnsaved = (() => {
+    if (!inlineEdit) return false;
+    const a = annos[inlineEdit.page]?.[inlineEdit.index];
+    if (!a || (a.kind !== 'text' && a.kind !== 'flow' && a.kind !== 'note')) return false;
+    const v = a.kind === 'note' ? inlineDraft.slice(0, 240) : inlineDraft;
+    return v !== a.text;
+  })();
+  const dirty =
+    (!!fileBytes && (lastSaved.current === null || lastSaved.current.annos !== annos)) ||
+    (!!fileBytes && inlineUnsaved);
 
   const idb = () =>
     new Promise<IDBDatabase>((resolve, reject) => {
@@ -638,10 +652,15 @@ export default function PdfEditor() {
     }
   };
 
-  const saveNow = async (silent = false) => {
+  const saveNow = async (silent = false, annosOverride?: Record<number, Anno[]>) => {
     if (!fileBytes) return;
     if (!silent) toast.loading('Saving…', { id: 'pdfedit-save' });
-    const ok = await writeDraft(annos, fileBytes, file?.name, page);
+    // Override lets callers flush a live inline edit first — otherwise a
+    // Ctrl+S mid-edit would persist the annotation's last-committed text
+    // while the screen shows something newer (autosave-never-loses-what-
+    // you-see, applied to the save seam too).
+    const snapshot = annosOverride ?? annos;
+    const ok = await writeDraft(snapshot, fileBytes, file?.name, page);
     if (!silent) {
       if (ok) toast.success('Saved — pick up where you left off anytime.', { id: 'pdfedit-save' });
       else toast.error('Save failed — browser storage may be full or blocked.', { id: 'pdfedit-save' });
@@ -1756,25 +1775,40 @@ export default function PdfEditor() {
     setInlineEdit({ page: p, index });
   };
 
-  const commitInline = () => {
+  // Flush = commit the live inline draft (if any) as ONE undo entry and
+  // return the resulting annos snapshot. Save paths call this first so
+  // what's on screen is what hits IndexedDB. No draft / no change →
+  // returns current annos untouched (zero junk undo entries).
+  const flushInline = (): Record<number, Anno[]> => {
     const target = inlineEdit;
-    if (!target) return;
+    if (!target) return annos;
     setInlineEdit(null);
     const a = annos[target.page]?.[target.index];
-    if (!a || (a.kind !== 'text' && a.kind !== 'flow' && a.kind !== 'note')) return;
+    if (!a || (a.kind !== 'text' && a.kind !== 'flow' && a.kind !== 'note')) return annos;
     const v = a.kind === 'note' ? inlineDraft.slice(0, 240) : inlineDraft;
-    if (v === a.text) return; // no junk undo entries for no-op blurs
-    commitAnnos((prev) => ({
-      ...prev,
-      [target.page]: (prev[target.page] || []).map((x, i) =>
+    if (v === a.text) return annos; // no junk undo entries for no-op blurs
+    const next: Record<number, Anno[]> = {
+      ...annos,
+      [target.page]: (annos[target.page] || []).map((x, i) =>
         i === target.index && (x.kind === 'text' || x.kind === 'flow' || x.kind === 'note')
           ? { ...x, text: v }
           : x,
       ),
-    }));
+    };
+    commitAnnos(() => next);
+    return next;
+  };
+
+  const commitInline = () => {
+    flushInline();
   };
 
   const revertInline = () => setInlineEdit(null);
+
+  // Save with inline flush: Ctrl+S (window) and the toolbar button both
+  // route here — keystrokes never bypass the flush, so the draft on
+  // screen is always the draft on disk.
+  const saveFlushing = (silent = false) => saveNow(silent, flushInline());
 
   // and drop an editable Helvetica box at the same size/position. Honest
   // label: retypeset, NOT same-font — the original font is matched for size
@@ -2740,21 +2774,22 @@ export default function PdfEditor() {
   // split exists to prevent. saveNow/actions close over per-render state,
   // so the once-bound listener calls through refs synced after each render
   // (never during render — React Compiler flags render-phase ref writes).
-  const saveNowRef = useRef(saveNow);
+  const saveFlushingRef = useRef(saveFlushing);
   const selectedRef = useRef(selected);
   const actionsRef = useRef({ undo, redo, duplicateSelected, deleteSelected, copySelected, pasteClipboard });
   useEffect(() => {
-    saveNowRef.current = saveNow;
+    saveFlushingRef.current = saveFlushing;
     selectedRef.current = selected;
     actionsRef.current = { undo, redo, duplicateSelected, deleteSelected, copySelected, pasteClipboard };
   });
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const mod = e.ctrlKey || e.metaKey;
-      // Save works even mid-typing (the browser save-page dialog is worse).
+      // Save works even mid-typing (the browser save-page dialog is worse)
+      // and flushes the live inline draft first — screen == disk.
       if (mod && e.key.toLowerCase() === 's') {
         e.preventDefault();
-        void saveNowRef.current();
+        void saveFlushingRef.current();
         return;
       }
       const t = e.target as HTMLElement | null;
@@ -2884,7 +2919,7 @@ export default function PdfEditor() {
             <button onClick={() => setShowFind(true)} aria-label="Find in document" title="Find & replace (Ctrl+F) — works with any tool" className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
               <Search className="w-4 h-4" /> Find
             </button>
-            <button onClick={() => saveNow()} aria-label="Save working session" title="Save session (Ctrl+S) — persists edits without exporting" className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
+            <button onClick={() => saveFlushing()} aria-label="Save working session" title="Save session (Ctrl+S) — persists edits without exporting" className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
               <Save className="w-4 h-4" /> Save
             </button>
             <button onClick={() => setShowVersions((v) => !v)} aria-pressed={showVersions} aria-label="Version history" title="Version history — restore earlier states" className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
@@ -3558,7 +3593,17 @@ export default function PdfEditor() {
                     revertInline();
                     return;
                   }
+                  // Single-line text: Enter commits (matches left panel).
+                  // Flow/note: plain Enter inserts a paragraph break —
+                  // forcing a commit here would make multi-line boxes
+                  // un-writable (they exist precisely for manual breaks).
+                  // Ctrl/Cmd+Enter commits those without leaving the field.
                   if (single && e.key === 'Enter') {
+                    e.preventDefault();
+                    commitInline();
+                    return;
+                  }
+                  if (!single && e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
                     e.preventDefault();
                     commitInline();
                   }
@@ -3568,7 +3613,7 @@ export default function PdfEditor() {
                 autoFocus: true,
                 'aria-label': single
                   ? 'Edit text in place. Enter commits, Escape reverts.'
-                  : 'Edit annotation in place. Blur commits, Escape reverts.',
+                  : 'Edit annotation in place. Enter adds a line, Ctrl+Enter commits, Escape reverts.',
               } as const;
               return a?.kind === 'flow' || a?.kind === 'note' ? (
                 <textarea {...shared} rows={a.kind === 'note' ? 5 : 3} maxLength={a.kind === 'note' ? 240 : undefined} />
