@@ -532,3 +532,34 @@ export function hexToRgb(hex: string): { r: number; g: number; b: number } {
 export function canvasFont(sizePx: number, bold: boolean, italic: boolean, font: PdfFont = 'sans'): string {
   return `${italic ? 'italic ' : ''}${bold ? 'bold ' : ''}${sizePx}px ${fontCss(font)}`;
 }
+
+// Emoji stamps: Helvetica can't render color emoji, so rasterize each
+// glyph to a PNG on an offscreen canvas and stamp it as an image —
+// exports identically everywhere, no font dependency.
+export const EMOJI_SET = ['✅', '⭐', '❤️', '➡️', '⚠️', '✔️', '❌', '💡', '📌', '🎉', '👍', '🔥'];
+export const EMOJI_ALL: { emoji: string; name: string; cat: string }[] = [
+  { emoji: '✅', name: 'check', cat: 'Symbols' }, { emoji: '✔️', name: 'heavy check', cat: 'Symbols' },
+  { emoji: '❌', name: 'cross', cat: 'Symbols' }, { emoji: '⚠️', name: 'warning', cat: 'Symbols' },
+  { emoji: '⭐', name: 'star', cat: 'Symbols' }, { emoji: '❤️', name: 'heart', cat: 'Smileys' },
+  { emoji: '➡️', name: 'arrow right', cat: 'Symbols' }, { emoji: '💡', name: 'idea', cat: 'Objects' },
+  { emoji: '📌', name: 'pin', cat: 'Objects' }, { emoji: '🎉', name: 'party', cat: 'Objects' },
+  { emoji: '👍', name: 'thumbs up', cat: 'Gestures' }, { emoji: '🔥', name: 'fire', cat: 'Objects' },
+  { emoji: '😀', name: 'grin', cat: 'Smileys' }, { emoji: '😂', name: 'joy', cat: 'Smileys' },
+  { emoji: '😍', name: 'heart eyes', cat: 'Smileys' }, { emoji: '🤔', name: 'thinking', cat: 'Smileys' },
+  { emoji: '😢', name: 'cry', cat: 'Smileys' }, { emoji: '😎', name: 'cool', cat: 'Smileys' },
+  { emoji: '👏', name: 'clap', cat: 'Gestures' }, { emoji: '🙏', name: 'pray', cat: 'Gestures' },
+  { emoji: '👎', name: 'thumbs down', cat: 'Gestures' }, { emoji: '✋', name: 'hand', cat: 'Gestures' },
+  { emoji: '👀', name: 'eyes', cat: 'Smileys' }, { emoji: '💯', name: 'hundred', cat: 'Symbols' },
+  { emoji: '❓', name: 'question', cat: 'Symbols' }, { emoji: '❗', name: 'exclaim', cat: 'Symbols' },
+  { emoji: '💰', name: 'money', cat: 'Objects' }, { emoji: '📅', name: 'calendar', cat: 'Objects' },
+  { emoji: '📞', name: 'phone', cat: 'Objects' }, { emoji: '✉️', name: 'mail', cat: 'Objects' },
+  { emoji: '🔒', name: 'lock', cat: 'Objects' },
+  { emoji: '🚀', name: 'rocket', cat: 'Objects' }, { emoji: '🏆', name: 'trophy', cat: 'Objects' },
+  { emoji: '📝', name: 'memo', cat: 'Objects' },
+  { emoji: '⚡', name: 'zap', cat: 'Symbols' }, { emoji: '🌟', name: 'glow star', cat: 'Symbols' },
+  { emoji: '⭕', name: 'circle', cat: 'Symbols' }, { emoji: '🔴', name: 'red circle', cat: 'Symbols' },
+  { emoji: '🟢', name: 'green circle', cat: 'Symbols' }, { emoji: '🔵', name: 'blue circle', cat: 'Symbols' },
+  { emoji: '⬆️', name: 'arrow up', cat: 'Symbols' }, { emoji: '⬇️', name: 'arrow down', cat: 'Symbols' },
+  { emoji: '©️', name: 'copyright', cat: 'Symbols' }, { emoji: '®️', name: 'registered', cat: 'Symbols' },
+  { emoji: '™️', name: 'trademark', cat: 'Symbols' },
+];

@@ -137,6 +137,17 @@ export interface PdfEditorApi {
   copySelected: () => void;
   pasteClipboard: () => void;
   stampAllPages: () => void;
+  // LeftPanel (tool picker, emoji stamps, tool settings, selected-anno fields)
+  pickTool: (_id: Tool) => void;
+  stampEmoji: (_emoji: string) => void;
+  recentEmoji: string[];
+  onPickImage: (_f: File | null) => void;
+  redactCount: number;
+  redactMode: 'selective' | 'maximum';
+  setRedactMode: (_v: 'selective' | 'maximum') => void;
+  textDraft: string | null;
+  setTextDraft: (_v: string | null) => void;
+  commitAnnos: (_updater: (_prev: Record<number, Anno[]>) => Record<number, Anno[]>) => void;
 }
 
 export const PdfEditorCtx = createContext<PdfEditorApi | null>(null);
