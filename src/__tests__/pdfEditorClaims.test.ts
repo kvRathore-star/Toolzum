@@ -365,6 +365,57 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
     });
   });
 
+  describe('resize handles (P1)', () => {
+    it('claim: registry instructions promise 8 handles for shape/image, one Undo step, Select tool', () => {
+      expect(registry).toMatch(
+        /With Select, a shape or image grows eight corner\/edge handles you can drag to resize — the whole drag is one Undo step/,
+      );
+    });
+    it('impl: pure geometry helpers exist and are wired (hit/points/resize/cursors)', () => {
+      expect(editor).toMatch(/export function handlePoints\(/);
+      expect(editor).toMatch(/export function hitHandle\(/);
+      expect(editor).toMatch(/export function resizeRect\(/);
+      expect(editor).toMatch(/export function isResizableAnno\(/);
+      expect(editor).toMatch(/export const HANDLE_CURSORS/);
+      expect(editor).toMatch(/export const RESIZE_HANDLES/);
+    });
+    it('impl: pointerdown checks handles first, Select tool only, screen-constant 8px grace', () => {
+      const selectBlock = editor.match(/if \(tool === 'select'\) \{[\s\S]{0,1200}hitTestAnno/)?.[0] ?? '';
+      expect(selectBlock, 'handle check must precede the body hit-test').toMatch(
+        /hitHandle\(sel, x, y, 8 \/ scale\)/,
+      );
+      expect(selectBlock).toMatch(/isResizableAnno\(sel\)/);
+      expect(selectBlock).toMatch(/pushed: false/);
+    });
+    it('impl: drag is one undo entry — commitAnnos on first move only, raw setAnnos after', () => {
+      const move = editor.match(/const onPointerMove = \(e: React\.PointerEvent\) => \{[\s\S]*?\n  \};/)?.[0] ?? '';
+      expect(move, 'resize branch must run before rubber-band drawing').toMatch(/if \(drag\.resize\)/);
+      expect(move.indexOf('if (drag.resize)')).toBeLessThan(move.indexOf("tool === 'draw'"));
+      expect(move).toMatch(
+        /if \(!r\.pushed\) \{\s*r\.pushed = true;\s*commitAnnos\(\(prev\) => applyResize\(prev, r, box\)\);\s*\} else \{\s*setAnnos\(\(prev\) => applyResize\(prev, r, box\)\);\s*\}/,
+      );
+      const up = editor.match(/const onPointerUp = \(e: React\.PointerEvent\) => \{[\s\S]*?\n  \};/)?.[0] ?? '';
+      expect(up, 'pointerup must early-return for resize (no select-rubber logic)').toMatch(
+        /if \(drag\.resize\) \{\s*\/\/ The whole drag was one undo entry/,
+      );
+    });
+    it('impl: overlay draws handles only for selected resizable annos under Select tool', () => {
+      expect(editor).toMatch(/tool === 'select' && isResizableAnno\(a\)/);
+      expect(editor).toMatch(/for \(const id of RESIZE_HANDLES\)/);
+      expect(editor, 'drawOverlay must repaint when the tool changes (handles appear/disappear)').toMatch(
+        /inlineEdit, tool\]\);/,
+      );
+    });
+    it('impl: cursor affordance lives in the React style (re-render-safe), cleared on pointer leave', () => {
+      expect(editor).toMatch(/tool === 'select' && hoverHandle\s*\? HANDLE_CURSORS\[hoverHandle\]/);
+      expect(editor).toMatch(/onPointerLeave=\{\(\) => setHoverHandle\(null\)\}/);
+      expect(
+        editor,
+        'deselect/tool-switch must clear a stale handle cursor on the next move',
+      ).toMatch(/\/\/ Deselect \/ tool switch: a stale handle cursor must not stick\.\s*setHoverHandle\(\(prev\) => \(prev === null \? prev : null\)\)/);
+    });
+  });
+
   describe('retype field keyboard contract (left panel + inline share one contract)', () => {
     it('claim: aria-labels promise Enter commits, Escape reverts (registry now phrases it on the inline instruction)', () => {
       expect(editor).toMatch(/Enter commits, Escape reverts/);

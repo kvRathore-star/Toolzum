@@ -321,6 +321,91 @@ export interface TextItem {
 }
 
 /**
+ * Resize handles (P1): eight-way bbox resize for shape + image annos,
+ * Select tool only. All geometry is pure so the contract lives in tests,
+ * not pointer arithmetic. Text-family annos edit inline instead of
+ * resizing (their bbox is derived from content, not stored).
+ */
+export type ResizeHandleId = 'nw' | 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | 'w';
+
+export const RESIZE_HANDLES: ResizeHandleId[] = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'];
+
+/** Screen cursor per handle (classic eight-way resize affordance). */
+export const HANDLE_CURSORS: Record<ResizeHandleId, string> = {
+  nw: 'nwse-resize',
+  n: 'ns-resize',
+  ne: 'nesw-resize',
+  e: 'ew-resize',
+  se: 'nwse-resize',
+  s: 'ns-resize',
+  sw: 'nesw-resize',
+  w: 'ew-resize',
+};
+
+/** Only these kinds expose a resizable bbox (text-family edits inline). */
+export function isResizableAnno(a: Anno | undefined): a is ShapeAnno | ImageAnno {
+  return a?.kind === 'shape' || a?.kind === 'image';
+}
+
+/** Handle centers in the same units as the bbox (PDF points). */
+export function handlePoints(a: {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}): Record<ResizeHandleId, { x: number; y: number }> {
+  const { x, y, w, h } = a;
+  return {
+    nw: { x, y },
+    n: { x: x + w / 2, y },
+    ne: { x: x + w, y },
+    e: { x: x + w, y: y + h / 2 },
+    se: { x: x + w, y: y + h },
+    s: { x: x + w / 2, y: y + h },
+    sw: { x, y: y + h },
+    w: { x, y: y + h / 2 },
+  };
+}
+
+/** Nearest handle whose center is within `grace` of the point, else null. */
+export function hitHandle(
+  a: { x: number; y: number; w: number; h: number },
+  x: number,
+  y: number,
+  grace = 6,
+): ResizeHandleId | null {
+  const pts = handlePoints(a);
+  for (const id of RESIZE_HANDLES) {
+    const p = pts[id]!;
+    if (Math.abs(x - p.x) <= grace && Math.abs(y - p.y) <= grace) return id;
+  }
+  return null;
+}
+
+/**
+ * Grow/shrink a bbox by dragging `handle` to `pointer`: the opposite
+ * edge stays anchored, size never drops below `minSize` (no flip, no
+ * zero-area collapse — the line/arrow endpoints ride the bbox corners).
+ * Pure — tested.
+ */
+export function resizeRect(
+  a: { x: number; y: number; w: number; h: number },
+  handle: ResizeHandleId,
+  pointer: { x: number; y: number },
+  minSize = 8,
+): { x: number; y: number; w: number; h: number } {
+  let left = a.x;
+  let top = a.y;
+  let right = a.x + a.w;
+  let bottom = a.y + a.h;
+  if (handle.includes('w')) left = Math.min(pointer.x, right - minSize);
+  if (handle.includes('e')) right = Math.max(pointer.x, left + minSize);
+  if (handle.includes('n')) top = Math.min(pointer.y, bottom - minSize);
+  if (handle.includes('s')) bottom = Math.max(pointer.y, top + minSize);
+  return { x: left, y: top, w: right - left, h: bottom - top };
+}
+
+/**
  * Group text-layer items into paragraphs: sort by y, cluster lines whose
  * baselines sit within half a line-height, then split clusters separated
  * by a full line-height gap or a short last line. Heuristic, not typesetting
@@ -524,6 +609,9 @@ export default function PdfEditor() {
   const [tool, setTool] = useState<Tool>('text');
   const [annos, setAnnos] = useState<Record<number, Anno[]>>({});
   const [selected, setSelected] = useState<{ page: number; index: number } | null>(null);
+  // Handle under the pointer (select tool) — drives the resize cursor on
+  // the canvas style so React re-renders can't stomp an imperative write.
+  const [hoverHandle, setHoverHandle] = useState<ResizeHandleId | null>(null);
   const [textColor, setTextColor] = useState('#000000');
   const [textSize, setTextSize] = useState(14);
   const [textBold, setTextBold] = useState(false);
@@ -979,7 +1067,19 @@ export default function PdfEditor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const overlayRef = useRef<HTMLCanvasElement>(null);
   const signPadRef = useRef<HTMLCanvasElement>(null);
-  const dragRef = useRef<{ x: number; y: number; points?: number[] } | null>(null);
+  const dragRef = useRef<{
+    x: number;
+    y: number;
+    points?: number[];
+    resize?: {
+      handle: ResizeHandleId;
+      orig: { x: number; y: number; w: number; h: number };
+      page: number;
+      index: number;
+      // One undo entry per drag: pushed on first move, never again.
+      pushed: boolean;
+    };
+  } | null>(null);
   const viewportRef = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const imagePickRef = useRef<HTMLInputElement>(null);
   const pendingImageRef = useRef<string | null>(null);
@@ -1307,9 +1407,23 @@ export default function PdfEditor() {
           ctx.strokeRect(px(a.x) - 2, px(a.y) - 2, 26, 26);
         }
         ctx.setLineDash([]);
+        // Eight resize handles — shape/image only, Select tool only
+        // (interaction gated in pointerdown; drawing gated here so other
+        // tools never show affordances they can't use).
+        if (tool === 'select' && isResizableAnno(a)) {
+          const pts = handlePoints(a);
+          ctx.fillStyle = '#ffffff';
+          ctx.strokeStyle = '#1a56db';
+          ctx.lineWidth = 1.5;
+          for (const id of RESIZE_HANDLES) {
+            const p = pts[id]!;
+            ctx.fillRect(px(p.x) - 4, px(p.y) - 4, 8, 8);
+            ctx.strokeRect(px(p.x) - 4, px(p.y) - 4, 8, 8);
+          }
+        }
       }
     });
-  }, [annos, page, selected, scale, findNav, inlineEdit]);
+  }, [annos, page, selected, scale, findNav, inlineEdit, tool]);
 
   useEffect(() => { drawOverlay(); }, [drawOverlay]);
 
@@ -1466,6 +1580,31 @@ export default function PdfEditor() {
       // not just the border. Double-click still falls through to
       // paragraph select when nothing is under the cursor.
       if (tool === 'select') {
+        // Resize handles on the selected shape/image win over the body
+        // hit-test — handles sit exactly on the outline it also claims.
+        // Grace is screen-constant (8 CSS px in PDF points at any zoom),
+        // matching the 8px squares drawn in drawOverlay.
+        if (selected?.page === page) {
+          const sel = annos[page]?.[selected.index];
+          if (isResizableAnno(sel)) {
+            const hd = hitHandle(sel, x, y, 8 / scale);
+            if (hd) {
+              setHoverHandle(hd);
+              dragRef.current = {
+                x,
+                y,
+                resize: {
+                  handle: hd,
+                  orig: { x: sel.x, y: sel.y, w: sel.w, h: sel.h },
+                  page,
+                  index: selected.index,
+                  pushed: false,
+                },
+              };
+              return;
+            }
+          }
+        }
         const hit = hitTestAnno(annos[page] || [], x, y);
         if (hit !== null) {
           // Double-click a text-family annotation → edit in place;
@@ -1498,8 +1637,33 @@ export default function PdfEditor() {
 
   const onPointerMove = (e: React.PointerEvent) => {
     const drag = dragRef.current;
-    if (!drag) return;
+    if (!drag) {
+      // Hover affordance: eight-way cursor over the selected box's handles.
+      if (tool === 'select' && selected?.page === page) {
+        const sel = annos[page]?.[selected.index];
+        const pos = canvasPos(e);
+        const hd = sel && isResizableAnno(sel)
+          ? hitHandle(sel, pos.x / scale, pos.y / scale, 8 / scale)
+          : null;
+        setHoverHandle((prev) => (prev === hd ? prev : hd));
+      } else {
+        // Deselect / tool switch: a stale handle cursor must not stick.
+        setHoverHandle((prev) => (prev === null ? prev : null));
+      }
+      return;
+    }
     const pos = canvasPos(e);
+    if (drag.resize) {
+      const r = drag.resize;
+      const box = resizeRect(r.orig, r.handle, { x: pos.x / scale, y: pos.y / scale });
+      if (!r.pushed) {
+        r.pushed = true;
+        commitAnnos((prev) => applyResize(prev, r, box));
+      } else {
+        setAnnos((prev) => applyResize(prev, r, box));
+      }
+      return;
+    }
     if (tool === 'draw' && drag.points) {
       drag.points.push(pos.x / scale, pos.y / scale);
       drawOverlay();
@@ -1557,6 +1721,12 @@ export default function PdfEditor() {
     const drag = dragRef.current;
     dragRef.current = null;
     if (!drag) return;
+    if (drag.resize) {
+      // The whole drag was one undo entry (pushed on first move); nothing
+      // to commit here. Rubber-band/select logic must not see this drag.
+      setHoverHandle(null);
+      return;
+    }
     const pos = canvasPos(e);
     if (tool === 'draw' && drag.points && drag.points.length >= 4) {
       pushAnno(page, { kind: 'draw', points: drag.points, color: inkColor, width: brushWidth });
@@ -1760,6 +1930,21 @@ export default function PdfEditor() {
   // pure helper above (regression classes stay covered without a DOM).
   const hitTextAnno = (x: number, y: number): number | null =>
     hitTestText(annos[page] || [], x, y);
+
+  // Resize applies to the live map; the kind guard keeps a stale selection
+  // (annos changed under us) from resurrecting a deleted box.
+  const applyResize = (
+    prev: Record<number, Anno[]>,
+    target: { page: number; index: number },
+    box: { x: number; y: number; w: number; h: number },
+  ): Record<number, Anno[]> => {
+    const list = prev[target.page];
+    const a = list?.[target.index];
+    if (!a || !isResizableAnno(a)) return prev;
+    const next = [...list!];
+    next[target.index] = { ...a, ...box };
+    return { ...prev, [target.page]: next };
+  };
 
   // In-place editing: open on double-click (select/text tools) or right
   // after placing a new text/flow box. Contract mirrors the left panel
@@ -3550,10 +3735,18 @@ export default function PdfEditor() {
             <canvas
               ref={overlayRef}
               className="absolute inset-0 rounded-lg touch-none"
-              style={{ cursor: tool === 'text' ? 'text' : 'crosshair' }}
+              style={{
+                cursor:
+                  tool === 'select' && hoverHandle
+                    ? HANDLE_CURSORS[hoverHandle]
+                    : tool === 'text'
+                      ? 'text'
+                      : 'crosshair',
+              }}
               onPointerDown={onPointerDown}
               onPointerMove={onPointerMove}
               onPointerUp={onPointerUp}
+              onPointerLeave={() => setHoverHandle(null)}
             />
             {inlineEdit && (() => {
               // Stay mounted across page flips: when the target isn't live we

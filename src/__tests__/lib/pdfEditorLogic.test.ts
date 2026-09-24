@@ -14,6 +14,10 @@ import {
   mapOcrWords,
   groupParagraphs,
   annoFlag,
+  handlePoints,
+  hitHandle,
+  resizeRect,
+  isResizableAnno,
   MAX_VERSIONS,
   MAX_STRUCTURAL_UNDO,
   type Anno,
@@ -370,5 +374,63 @@ describe('groupParagraphs', () => {  const item = (x: number, yTop: number, str:
 
   it('handles empty input', () => {
     expect(groupParagraphs([])).toEqual([]);
+  });
+});
+
+describe('resize handles (eight-way bbox geometry)', () => {
+  const box = { x: 100, y: 100, w: 200, h: 120 };
+
+  it('handlePoints: 4 corners + 4 edge midpoints', () => {
+    const pts = handlePoints(box);
+    expect(pts.nw).toEqual({ x: 100, y: 100 });
+    expect(pts.ne).toEqual({ x: 300, y: 100 });
+    expect(pts.se).toEqual({ x: 300, y: 220 });
+    expect(pts.sw).toEqual({ x: 100, y: 220 });
+    expect(pts.n).toEqual({ x: 200, y: 100 });
+    expect(pts.e).toEqual({ x: 300, y: 160 });
+    expect(pts.s).toEqual({ x: 200, y: 220 });
+    expect(pts.w).toEqual({ x: 100, y: 160 });
+  });
+
+  it('hitHandle: finds handles within grace, misses center and outside', () => {
+    expect(hitHandle(box, 102, 98, 6)).toBe('nw');
+    expect(hitHandle(box, 300, 160, 6)).toBe('e');
+    expect(hitHandle(box, 200, 220, 6)).toBe('s');
+    expect(hitHandle(box, 200, 160, 6)).toBeNull(); // center
+    expect(hitHandle(box, 90, 90, 6)).toBeNull(); // outside grace
+    expect(hitHandle(box, 0, 0, 6)).toBeNull();
+  });
+
+  it('resizeRect: se grows from anchored top-left; nw shrinks from anchored bottom-right', () => {
+    expect(resizeRect(box, 'se', { x: 350, y: 260 })).toEqual({ x: 100, y: 100, w: 250, h: 160 });
+    expect(resizeRect(box, 'nw', { x: 140, y: 130 })).toEqual({ x: 140, y: 130, w: 160, h: 90 });
+  });
+
+  it('resizeRect: edge handles move one axis only', () => {
+    const e = resizeRect(box, 'e', { x: 340, y: 999 });
+    expect(e).toEqual({ x: 100, y: 100, w: 240, h: 120 });
+    const n = resizeRect(box, 'n', { x: -999, y: 140 });
+    expect(n).toEqual({ x: 100, y: 140, w: 200, h: 80 });
+  });
+
+  it('resizeRect: never collapses below minSize (no flip, no zero-area)', () => {
+    const se = resizeRect(box, 'se', { x: 50, y: 50 }, 8);
+    expect(se.w).toBeGreaterThanOrEqual(8);
+    expect(se.h).toBeGreaterThanOrEqual(8);
+    expect(se.x).toBe(100);
+    const nw = resizeRect(box, 'nw', { x: 500, y: 500 }, 8);
+    expect(nw.w).toBeGreaterThanOrEqual(8);
+    expect(nw.h).toBeGreaterThanOrEqual(8);
+    expect(nw.x + nw.w).toBe(300);
+  });
+
+  it('isResizableAnno: shape/image only — text-family edits inline instead', () => {
+    expect(isResizableAnno({ kind: 'shape', shape: 'rect', x: 0, y: 0, w: 1, h: 1, color: '#000', width: 1 })).toBe(true);
+    expect(isResizableAnno({ kind: 'shape', shape: 'line', x: 0, y: 0, w: 1, h: 1, color: '#000', width: 1 })).toBe(true);
+    expect(isResizableAnno({ kind: 'image', x: 0, y: 0, w: 1, h: 1, dataUrl: 'x' })).toBe(true);
+    expect(isResizableAnno(text())).toBe(false);
+    expect(isResizableAnno({ kind: 'highlight', x: 0, y: 0, w: 1, h: 1, color: '#ff0' })).toBe(false);
+    expect(isResizableAnno({ kind: 'flow', x: 0, y: 0, w: 1, text: 'x', size: 12, color: '#000', bold: false })).toBe(false);
+    expect(isResizableAnno(undefined)).toBe(false);
   });
 });
