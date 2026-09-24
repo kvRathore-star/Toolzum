@@ -18,6 +18,13 @@ export interface ToolMeta {
   group: string;
 }
 
+/** Find-highlight geometry (Core draws it on the overlay; panel only displays). */
+export interface FindNav {
+  page: number;
+  rects: { x: number; y: number; w: number; h: number }[];
+  idx: number;
+}
+
 export interface PdfEditorApi {
   // Param names are type-position documentation; underscore-prefixed so
   // the repo's base no-unused-vars rule doesn't flag interface members.
@@ -42,6 +49,20 @@ export interface PdfEditorApi {
   pageCount: number;
   annos: Record<number, Anno[]>;
   thumbUrls: (string | null)[];
+  // Find & replace (state + handlers live in Core; panel is presentational)
+  findText: string;
+  setFindText: (_v: string) => void;
+  replaceText: string;
+  setReplaceText: (_v: string) => void;
+  replaceScope: 'page' | 'all';
+  setReplaceScope: (_v: 'page' | 'all') => void;
+  replacing: boolean;
+  findNav: FindNav | null;
+  setFindNav: (_v: FindNav | null) => void;
+  setShowFind: (_v: boolean) => void;
+  findStep: (_dir: 1 | -1) => Promise<void>;
+  findHighlight: () => Promise<void>;
+  findReplace: () => Promise<void>;
 }
 
 export const PdfEditorCtx = createContext<PdfEditorApi | null>(null);
