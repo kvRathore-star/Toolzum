@@ -9,6 +9,7 @@
 // (sheet open/close, thumbnail drag-hover) lives with the surface that
 // renders it. It cannot drift because Core never reads it.
 import { createContext, useContext, type ReactNode } from 'react';
+import type { PdfFont } from '@/lib/pdfFonts';
 import type { Anno, Tool } from './pdfEditorLogic';
 
 export interface ToolMeta {
@@ -23,6 +24,18 @@ export interface FindNav {
   page: number;
   rects: { x: number; y: number; w: number; h: number }[];
   idx: number;
+}
+
+/** Text-style patch accepted by Core.patchTextStyle (format bar). */
+export interface TextStylePatch {
+  color?: string;
+  size?: number;
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  strike?: boolean;
+  align?: 'left' | 'center' | 'right';
+  font?: PdfFont;
 }
 
 export interface PdfEditorApi {
@@ -63,6 +76,31 @@ export interface PdfEditorApi {
   findStep: (_dir: 1 | -1) => Promise<void>;
   findHighlight: () => Promise<void>;
   findReplace: () => Promise<void>;
+  // Format bar (text tool / selected text): Core computes eff* and selIsText
+  selIsText: boolean;
+  selAnno: Anno | undefined;
+  effColor: string;
+  effSize: number;
+  textFont: PdfFont;
+  textBold: boolean;
+  textItalic: boolean;
+  textUnderline: boolean;
+  textStrike: boolean;
+  textAlign: 'left' | 'center' | 'right';
+  patchTextStyle: (_patch: TextStylePatch) => void;
+  // Draw bar (draw / highlight / shape tools) — `tool` already declared above
+  brushWidth: number;
+  setBrushWidth: (_v: number) => void;
+  inkColor: string;
+  setInkColor: (_v: string) => void;
+  markColor: string;
+  setMarkColor: (_v: string) => void;
+  markOpacity: number;
+  setMarkOpacity: (_v: number) => void;
+  shapeVariant: 'rect' | 'ellipse' | 'line' | 'arrow';
+  setShapeVariant: (_v: 'rect' | 'ellipse' | 'line' | 'arrow') => void;
+  shapeWidth: number;
+  setShapeWidth: (_v: number) => void;
 }
 
 export const PdfEditorCtx = createContext<PdfEditorApi | null>(null);
