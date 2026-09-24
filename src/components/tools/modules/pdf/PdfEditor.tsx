@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 import { PDFDocument, StandardFonts, rgb, degrees, type PDFFont } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
 import { setupPdfWorker } from '@/lib/pdfjsWorker';
-import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Redo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers, Maximize2, Minimize2, Keyboard, MoveLeft, MoveRight, Save, Search, BringToFront, SendToBack, History, Flag, MessageCircleQuestion, EyeOff } from 'lucide-react';
+import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Redo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers, Maximize2, Minimize2, Keyboard, MoveLeft, MoveRight, Save, Search, BringToFront, SendToBack, History, Flag, MessageCircleQuestion, EyeOff, Files } from 'lucide-react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from '@/lib/clipboard';
@@ -680,6 +680,10 @@ export default function PdfEditor() {
   const [redactMode, setRedactMode] = useState<'selective' | 'maximum'>('selective');
   const redactCount = Object.values(annos).reduce((n, l) => n + l.filter((a) => a.kind === 'redact').length, 0);
   const [showShortcuts, setShowShortcuts] = useState(false);
+  // Mobile bottom-bar sheets: Tools picker + Pages strip (below lg the
+  // permanent sidebar is hidden, so Pages must live behind this sheet).
+  const [showToolsSheet, setShowToolsSheet] = useState(false);
+  const [showPagesSheet, setShowPagesSheet] = useState(false);
   // One-time "what changed" banner per release marker (not per version —
   // bump the marker only when the toolbar actually moves again). Lazy
   // initializer (no setState-in-effect); module is client-only (ssr:false).
@@ -1117,6 +1121,9 @@ export default function PdfEditor() {
   // the slot under the pointer for drop-target highlighting.
   const thumbDragRef = useRef<number | null>(null);
   const [thumbDragOver, setThumbDragOver] = useState<number | null>(null);
+  // Mobile-bar Undo: tap = undo, long-press (550ms) = redo. Redo is too
+  // rare to burn one of five thumb slots, so it rides on Undo instead.
+  const undoPressRef = useRef<{ timer: ReturnType<typeof setTimeout> | null; fired: boolean }>({ timer: null, fired: false });
   const viewportRef = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const imagePickRef = useRef<HTMLInputElement>(null);
   const pendingImageRef = useRef<string | null>(null);
@@ -3077,6 +3084,90 @@ export default function PdfEditor() {
   ];
   const toolGroups = ['Text & content', 'Drawing', 'Media & extras'];
 
+  const undoPressDown = () => {
+    const st = undoPressRef.current;
+    st.fired = false;
+    st.timer = setTimeout(() => {
+      st.fired = true;
+      void redo();
+    }, 550);
+  };
+  const undoPressUp = () => {
+    const st = undoPressRef.current;
+    if (st.timer) {
+      clearTimeout(st.timer);
+      st.timer = null;
+    }
+    if (!st.fired) void undo();
+  };
+  const undoPressCancel = () => {
+    const st = undoPressRef.current;
+    if (st.timer) {
+      clearTimeout(st.timer);
+      st.timer = null;
+    }
+  };
+
+  // Shared thumbnail list: permanent sidebar (lg+) and the mobile Pages
+  // sheet render the SAME list — DnD reorder, annos badges, show-all.
+  // onPick closes the sheet after navigation.
+  const pagesList = (onPick?: () => void) => (
+    <>
+      {thumbUrls.map((u, i) => (
+        <button
+          key={i}
+          draggable
+          onDragStart={(e) => {
+            thumbDragRef.current = i;
+            e.dataTransfer.effectAllowed = 'move';
+            // Firefox refuses to start a drag without payload data.
+            e.dataTransfer.setData('text/plain', String(i));
+          }}
+          onDragOver={(e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            setThumbDragOver((prev) => (prev === i ? prev : i));
+          }}
+          onDragLeave={() => setThumbDragOver((prev) => (prev === i ? null : prev))}
+          onDrop={(e) => {
+            e.preventDefault();
+            const from = thumbDragRef.current;
+            thumbDragRef.current = null;
+            setThumbDragOver(null);
+            if (from !== null && from !== i) void restructure('move', { from, to: i });
+          }}
+          onDragEnd={() => {
+            thumbDragRef.current = null;
+            setThumbDragOver(null);
+          }}
+          onClick={() => {
+            goPage(i + 1);
+            onPick?.();
+          }}
+          aria-label={`Go to page ${i + 1}${thumbDragOver === i ? ' (drop here to reorder)' : ''}`}
+          aria-current={page === i + 1}
+          className={`relative block w-full rounded-lg overflow-hidden border-2 ${page === i + 1 || thumbDragOver === i ? 'border-[var(--accent)]' : 'border-transparent'}`}
+        >
+          {u ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={u} alt={`Page ${i + 1}`} className="w-full" />
+          ) : (
+            <span className="flex items-center justify-center w-full h-16 bg-[var(--bg-overlay)] text-xs font-mono text-[var(--text-muted)]">…</span>
+          )}
+          {(annos[i + 1] || []).length > 0 && (
+            <span className="absolute top-1 right-1 px-1.5 py-0.5 text-[10px] font-bold rounded-full bg-[var(--accent-ink)] text-white">{(annos[i + 1] || []).length}</span>
+          )}
+          <span className="absolute bottom-1 left-1 px-1.5 py-0.5 text-[10px] font-mono rounded bg-black/50 text-white">{i + 1}</span>
+        </button>
+      ))}
+      {thumbUrls.length < pageCount && (
+        <button onClick={() => setThumbsAll(true)} className="w-full px-2 py-2 rounded-lg border border-[var(--border-subtle)] text-[11px] font-bold text-[var(--text-secondary)] hover:bg-[var(--bg-overlay)]">
+          Show all {pageCount} thumbnails
+        </button>
+      )}
+    </>
+  );
+
   if (!pdfDoc) {
     return (
       <div className="max-w-3xl mx-auto space-y-5">
@@ -3122,7 +3213,7 @@ export default function PdfEditor() {
   }
 
   return (
-    <div ref={rootRef} className="space-y-4 fullscreen:bg-[var(--bg-base)] fullscreen:p-4 fullscreen:overflow-auto fullscreen:h-screen">
+    <div ref={rootRef} className="space-y-4 pb-24 lg:pb-0 fullscreen:bg-[var(--bg-base)] fullscreen:p-4 fullscreen:overflow-auto fullscreen:h-screen">
       {/* Ribbon: file row + grouped action rows. Wraps always — nothing clips. */}
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-4 py-3 space-y-2.5">
         <div className="flex flex-wrap items-center gap-3">
@@ -3796,6 +3887,11 @@ export default function PdfEditor() {
             <canvas
               ref={overlayRef}
               className="absolute inset-0 rounded-lg touch-none"
+              // TODO(mobile): touch-none blocks native pinch-zoom on the
+              // canvas — two-finger gestures must route to setScale (or
+              // opt out) as their own fix. Deliberately NOT bundled with
+              // the action-bar slice; logging so "mobile bar shipped" is
+              // never read as "mobile: done".
               style={{
                 cursor:
                   tool === 'select' && hoverHandle
@@ -3942,60 +4038,124 @@ export default function PdfEditor() {
         </div>
 
         {!focus && (
-        <div className="lg:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-3 space-y-2 max-h-[560px] overflow-y-auto">
+        <div className="hidden lg:block lg:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-3 space-y-2 max-h-[560px] overflow-y-auto">
           <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Pages</p>
-          {thumbUrls.map((u, i) => (
-            <button
-              key={i}
-              draggable
-              onDragStart={(e) => {
-                thumbDragRef.current = i;
-                e.dataTransfer.effectAllowed = 'move';
-                // Firefox refuses to start a drag without payload data.
-                e.dataTransfer.setData('text/plain', String(i));
-              }}
-              onDragOver={(e) => {
-                e.preventDefault();
-                e.dataTransfer.dropEffect = 'move';
-                setThumbDragOver((prev) => (prev === i ? prev : i));
-              }}
-              onDragLeave={() => setThumbDragOver((prev) => (prev === i ? null : prev))}
-              onDrop={(e) => {
-                e.preventDefault();
-                const from = thumbDragRef.current;
-                thumbDragRef.current = null;
-                setThumbDragOver(null);
-                if (from !== null && from !== i) void restructure('move', { from, to: i });
-              }}
-              onDragEnd={() => {
-                thumbDragRef.current = null;
-                setThumbDragOver(null);
-              }}
-              onClick={() => goPage(i + 1)}
-              aria-label={`Go to page ${i + 1}${thumbDragOver === i ? ' (drop here to reorder)' : ''}`}
-              aria-current={page === i + 1}
-              className={`relative block w-full rounded-lg overflow-hidden border-2 ${page === i + 1 || thumbDragOver === i ? 'border-[var(--accent)]' : 'border-transparent'}`}
-            >
-              {u ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={u} alt={`Page ${i + 1}`} className="w-full" />
-              ) : (
-                <span className="flex items-center justify-center w-full h-16 bg-[var(--bg-overlay)] text-xs font-mono text-[var(--text-muted)]">…</span>
-              )}
-              {(annos[i + 1] || []).length > 0 && (
-                <span className="absolute top-1 right-1 px-1.5 py-0.5 text-[10px] font-bold rounded-full bg-[var(--accent-ink)] text-white">{(annos[i + 1] || []).length}</span>
-              )}
-              <span className="absolute bottom-1 left-1 px-1.5 py-0.5 text-[10px] font-mono rounded bg-black/50 text-white">{i + 1}</span>
-            </button>
-          ))}
-          {thumbUrls.length < pageCount && (
-            <button onClick={() => setThumbsAll(true)} className="w-full px-2 py-2 rounded-lg border border-[var(--border-subtle)] text-[11px] font-bold text-[var(--text-secondary)] hover:bg-[var(--bg-overlay)]">
-              Show all {pageCount} thumbnails
-            </button>
-          )}
+          {pagesList()}
         </div>
         )}
       </div>
+
+      {/* Mobile quick-actions bar: Tools · Undo · Save · Download · Pages.
+          Below lg the Pages sidebar is hidden (behind the sheet), so this
+          bar is what keeps Download and the document one thumb-reach away —
+          the two most-cited mobile complaints. Desktop keeps the ribbon. */}
+      {fileBytes && (
+        <div
+          className="fixed bottom-0 inset-x-0 z-40 lg:hidden bg-[var(--bg-elevated)] border-t border-[var(--border-subtle)] pb-[env(safe-area-inset-bottom)]"
+          role="toolbar"
+          aria-label="Quick actions"
+        >
+          <div className="grid grid-cols-5">
+            <button
+              onClick={() => setShowToolsSheet(true)}
+              aria-label="Tools"
+              aria-haspopup="dialog"
+              className="flex flex-col items-center justify-center gap-0.5 py-2.5 text-[10px] font-bold text-[var(--text-secondary)] hover:text-[var(--text-primary)] select-none touch-manipulation"
+            >
+              <Layers className="w-5 h-5" />
+              Tools
+            </button>
+            <button
+              onPointerDown={undoPressDown}
+              onPointerUp={undoPressUp}
+              onPointerLeave={undoPressCancel}
+              onPointerCancel={undoPressCancel}
+              onContextMenu={(e) => e.preventDefault()}
+              disabled={historyCount === 0 && redoCount === 0}
+              aria-label="Undo — long-press for redo"
+              title="Undo (long-press: redo)"
+              className="flex flex-col items-center justify-center gap-0.5 py-2.5 text-[10px] font-bold text-[var(--text-secondary)] hover:text-[var(--text-primary)] disabled:opacity-40 select-none touch-manipulation"
+            >
+              <Undo2 className="w-5 h-5" />
+              Undo
+            </button>
+            <button
+              onClick={() => saveFlushing()}
+              aria-label="Save working session"
+              className="flex flex-col items-center justify-center gap-0.5 py-2.5 text-[10px] font-bold text-[var(--text-secondary)] hover:text-[var(--text-primary)] select-none touch-manipulation"
+            >
+              <Save className="w-5 h-5" />
+              Save
+            </button>
+            <button
+              onClick={exportPdf}
+              disabled={exporting}
+              aria-label="Download flattened PDF"
+              className="flex flex-col items-center justify-center gap-0.5 py-2.5 text-[10px] font-bold text-[var(--text-secondary)] hover:text-[var(--text-primary)] disabled:opacity-40 select-none touch-manipulation"
+            >
+              <Download className="w-5 h-5" />
+              {exporting ? '…' : 'Download'}
+            </button>
+            <button
+              onClick={() => setShowPagesSheet(true)}
+              aria-label="Pages"
+              aria-haspopup="dialog"
+              className="flex flex-col items-center justify-center gap-0.5 py-2.5 text-[10px] font-bold text-[var(--text-secondary)] hover:text-[var(--text-primary)] select-none touch-manipulation"
+            >
+              <Files className="w-5 h-5" />
+              Pages
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile sheets — same close contract as the shortcuts dialog:
+          backdrop click + ✕ only (no window Escape binding; audit owns
+          Escape outside inputs). */}
+      {showToolsSheet && (
+        <div className="fixed inset-0 z-[96] flex items-end lg:hidden" role="dialog" aria-modal="true" aria-label="Choose a tool">
+          <button aria-label="Close tools" onClick={() => setShowToolsSheet(false)} tabIndex={-1} className="absolute inset-0 bg-black/50 cursor-default" />
+          <div className="relative w-full max-h-[75vh] overflow-y-auto rounded-t-2xl bg-[var(--bg-elevated)] border-t border-[var(--border-subtle)] p-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-sm font-bold text-[var(--text-primary)]">Tools</p>
+              <button onClick={() => setShowToolsSheet(false)} aria-label="Close tools" className="px-2 py-1 text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)]">✕</button>
+            </div>
+            {toolGroups.map((g) => (
+              <div key={g} className="mb-3">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-1.5">{g}</p>
+                <div className="grid grid-cols-3 gap-2">
+                  {tools.filter((t) => t.group === g).map((t) => (
+                    <button
+                      key={t.id}
+                      onClick={() => {
+                        setTool(t.id);
+                        setShowToolsSheet(false);
+                      }}
+                      aria-pressed={tool === t.id}
+                      className={`flex flex-col items-center gap-1 p-3 rounded-xl border text-xs font-bold ${tool === t.id ? 'border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)]' : 'border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}
+                    >
+                      {t.icon}
+                      {t.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {showPagesSheet && (
+        <div className="fixed inset-0 z-[96] flex items-end lg:hidden" role="dialog" aria-modal="true" aria-label="Pages">
+          <button aria-label="Close pages" onClick={() => setShowPagesSheet(false)} tabIndex={-1} className="absolute inset-0 bg-black/50 cursor-default" />
+          <div className="relative w-full max-h-[70vh] overflow-y-auto rounded-t-2xl bg-[var(--bg-elevated)] border-t border-[var(--border-subtle)] p-4 pb-[calc(1rem+env(safe-area-inset-bottom))] space-y-2">
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-bold text-[var(--text-primary)]">Pages</p>
+              <button onClick={() => setShowPagesSheet(false)} aria-label="Close pages" className="px-2 py-1 text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)]">✕</button>
+            </div>
+            {pagesList(() => setShowPagesSheet(false))}
+          </div>
+        </div>
+      )}
 
       {/* Status bar (Voidmark-style): live doc stats, always visible. */}
       <div className="flex flex-wrap items-center gap-x-4 gap-y-1 px-4 py-2 rounded-2xl bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[11px] font-mono text-[var(--text-muted)]" aria-label="Document status">

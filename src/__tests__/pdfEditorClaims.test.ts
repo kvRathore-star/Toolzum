@@ -448,6 +448,62 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
     });
   });
 
+  describe('mobile quick-action bar (P1 slice — NOT all of mobile)', () => {
+    const bar = editor.match(/aria-label="Quick actions"[\s\S]{0,2500}/)?.[0] ?? '';
+
+    it('impl: fixed bar, below-lg only, exactly the 5 agreed slots wired to real actions', () => {
+      expect(bar, 'bar must exist').toBeTruthy();
+      expect(editor).toMatch(/fixed bottom-0 inset-x-0 z-40 lg:hidden/); // before aria-label in source
+      expect(editor).toMatch(/role="toolbar"\s+aria-label="Quick actions"/);
+      expect(bar).toMatch(/aria-label="Tools"/);
+      expect(bar).toMatch(/aria-label="Undo — long-press for redo"/);
+      expect(bar).toMatch(/aria-label="Save working session"/);
+      expect(bar).toMatch(/saveFlushing\(\)/); // same flush path as desktop
+      expect(bar).toMatch(/aria-label="Download flattened PDF"/);
+      expect(bar).toMatch(/onClick=\{exportPdf\}/);
+      expect(bar).toMatch(/aria-label="Pages"/);
+      expect(bar, 'Redo must not take a sixth slot — it rides long-press').not.toMatch(/Redo/);
+      // className sits before aria-label on the bar tag:
+      expect(editor).toMatch(/pb-\[env\(safe-area-inset-bottom\)\]/); // iOS home indicator
+    });
+
+    it('impl: Tools opens a bottom sheet built from the SAME tools array (no drift)', () => {
+      expect(editor).toMatch(/aria-label="Choose a tool"/);
+      expect(editor).toMatch(/tools\.filter\(\(t\) => t\.group === g\)/);
+      expect(editor).toMatch(/setTool\(t\.id\);\s*setShowToolsSheet\(false\)/);
+      expect(editor).toMatch(/aria-haspopup="dialog"/);
+    });
+
+    it('impl: Pages sidebar hidden below lg; shared list lives behind the sheet (kills 560px scroll-past)', () => {
+      expect(editor).toMatch(/hidden lg:block lg:col-span-2/);
+      expect(editor, 'sheet + sidebar must render the same list (DnD/reorder included)').toMatch(
+        /const pagesList = \(onPick\?: \(\) => void\) => \(/,
+      );
+      expect(editor.match(/pagesList/g)?.length ?? 0).toBeGreaterThanOrEqual(3); // def + sidebar + sheet
+      expect(editor).toMatch(/pagesList\(\(\) => setShowPagesSheet\(false\)\)/); // navigate closes sheet
+      const pagesSheet = editor.match(/aria-label="Pages">\s*<button aria-label="Close pages"[\s\S]{0,600}/)?.[0] ?? '';
+      expect(pagesSheet).toMatch(/max-h-\[70vh\]/);
+      expect(pagesSheet, 'close = backdrop + ✕, matching the shortcuts dialog (no window Escape)').toMatch(
+        /aria-label="Close pages" onClick=\{\(\) => setShowPagesSheet\(false\)\}/,
+      );
+    });
+
+    it('impl: long-press Undo = redo (550ms), tap = undo, cancel on leave — single handler pair', () => {
+      expect(editor).toMatch(/st\.fired = true;\s*void redo\(\);\s*\}, 550\)/);
+      expect(editor).toMatch(/if \(!st\.fired\) void undo\(\)/);
+      expect(editor).toMatch(/onPointerLeave=\{undoPressCancel\}/);
+      expect(editor).toMatch(/onContextMenu=\{\(e\) => e\.preventDefault\(\)\}/); // no long-press menu
+    });
+
+    it('follow-up logged: pinch-zoom is explicitly NOT closed by this slice', () => {
+      expect(
+        editor,
+        'touch-none must keep its own TODO so "bar shipped" ≠ "mobile: done"',
+      ).toMatch(/TODO\(mobile\): touch-none blocks native pinch-zoom/);
+      expect(editor).toMatch(/never read as "mobile: done"/);
+    });
+  });
+
   describe('retype field keyboard contract (left panel + inline share one contract)', () => {
     it('claim: aria-labels promise Enter commits, Escape reverts (registry now phrases it on the inline instruction)', () => {
       expect(editor).toMatch(/Enter commits, Escape reverts/);
