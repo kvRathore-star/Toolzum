@@ -345,10 +345,10 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
 
       let rootHtml: string;
       let jsRendering = resumed ? resumed.jsRendering : false;
-      let visited = new Set<string>(resumed ? resumed.visited : []);
-      let queued = new Set<string>(resumed ? resumed.queue.concat(resumed.visited) : [baseUrl]);
-      let queue: string[] = resumed ? [...resumed.queue] : [baseUrl];
-      let pages: CrawledPage[] = resumed ? [...resumed.pages] : [];
+      const visited = new Set<string>(resumed ? resumed.visited : []);
+      const queued = new Set<string>(resumed ? resumed.queue.concat(resumed.visited) : [baseUrl]);
+      const queue: string[] = resumed ? [...resumed.queue] : [baseUrl];
+      const pages: CrawledPage[] = resumed ? [...resumed.pages] : [];
       let discovered = resumed ? resumed.discovered : 1;
       let consecutiveErrors = 0;
       let delayMs = POLITENESS_MS;

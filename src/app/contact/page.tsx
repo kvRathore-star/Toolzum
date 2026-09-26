@@ -45,14 +45,14 @@ export default function ContactPage() {
       const subject = params.get("subject");
       const message = params.get("message");
       const validSubjects = ["general", "api", "licensing", "bug", "suggestion"];
+      // Mount-once deep-link prefill; intentionally not reactive.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFormData((prev) => ({
         ...prev,
         ...(subject && validSubjects.includes(subject) ? { subject } : {}),
         ...(message ? { message: message.replace(/<[^>]*>/g, "").slice(0, 1000) } : {}),
       }));
     } catch { /* malformed URL — leave defaults */ }
-    // Mount-once deep-link prefill; intentionally not reactive.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
   }, []);
 
   const sanitize = (s: string) => s.replace(/<[^>]*>/g, "").slice(0, 1000);

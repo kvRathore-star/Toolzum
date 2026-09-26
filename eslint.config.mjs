@@ -73,6 +73,9 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Generated android app bundles should never have been linted.
     "android/**",
+    // Vendored minified pdf.js worker — third-party artifact in public/,
+    // never hand-edited; linting minified vendor code is pure noise.
+    "public/pdf.worker.min.mjs",
   ]),
 ]);
 
