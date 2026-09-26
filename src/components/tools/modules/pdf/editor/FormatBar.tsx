@@ -59,7 +59,7 @@ export function FormatBar() {
       </div>
       <div className="flex gap-1" role="group" aria-label="Text alignment">
         {(['left', 'center', 'right'] as const).map((a) => {
-          const active = selIsText ? ((selAnno as TextAnno).align || 'left') === a : textAlign === a;
+          const active = selIsText ? ((selAnno as TextAnno | FlowAnno).align || 'left') === a : textAlign === a;
           return (
             <button key={a} onClick={() => patchTextStyle({ align: a })} aria-pressed={active} title={`Align ${a}`} className={`px-2.5 py-2 rounded-lg text-xs font-bold border capitalize ${active ? 'bg-[var(--accent-ink)] text-white border-transparent' : 'border-[var(--border-subtle)]'}`}>
               {a[0]}

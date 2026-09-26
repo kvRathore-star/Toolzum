@@ -925,12 +925,28 @@ export default function PdfEditorCore() {
         }
       } else if (a.kind === 'flow') {
         if (!hide) {
-          ctx.font = canvasFont(px(a.size), a.bold, false, a.font);
+          ctx.font = canvasFont(px(a.size), a.bold, !!a.italic, a.font);
           const lines = wrapLines(a.text || 'Type here…', px(a.w), (s) => ctx.measureText(s).width);
           ctx.fillStyle = a.color;
+          ctx.textAlign = a.align || 'left';
+          const anchorX = a.align === 'center' ? px(a.x) + px(a.w) / 2 : a.align === 'right' ? px(a.x) + px(a.w) : px(a.x);
+          const deco = (bx: number, lw: number, dy: number) => {
+            ctx.strokeStyle = a.color;
+            ctx.lineWidth = Math.max(1, px(a.size) / 14);
+            ctx.beginPath();
+            ctx.moveTo(bx, dy);
+            ctx.lineTo(bx + lw, dy);
+            ctx.stroke();
+          };
           lines.forEach((line, li) => {
-            ctx.fillText(line, px(a.x), px(a.y) + li * px(a.size) * 1.25);
+            const lw = ctx.measureText(line).width;
+            const baseY = px(a.y) + li * px(a.size) * 1.25;
+            const bx = a.align === 'center' ? anchorX - lw / 2 : a.align === 'right' ? anchorX - lw : px(a.x);
+            ctx.fillText(line, anchorX, baseY);
+            if (a.underline) deco(bx, lw, baseY + 2);
+            if (a.strike) deco(bx, lw, baseY - px(a.size) * 0.3);
           });
+          ctx.textAlign = 'left';
           ctx.strokeStyle = 'rgba(26,86,219,0.5)';
           ctx.setLineDash([4, 3]);
           ctx.lineWidth = 1;
@@ -1093,7 +1109,7 @@ export default function PdfEditorCore() {
         const pageW = viewportRef.current.w / scale;
         const margin = Math.min(72, pageW * 0.12);
         const newIdx = existing.length;
-        pushAnno(page, { kind: 'flow', x: margin, y: pos.y, w: pageW - margin * 2, text: '', size: textSize, color: textColor, bold: textBold, font: textFont });
+        pushAnno(page, { kind: 'flow', x: margin, y: pos.y, w: pageW - margin * 2, text: '', size: textSize, color: textColor, bold: textBold, italic: textItalic, underline: textUnderline, strike: textStrike, align: textAlign, font: textFont });
         setInlineDraft('');
         setInlineEdit({ page, index: newIdx });
         toast.success('Flowing text box — type right here, it wraps and grows.');
@@ -2134,6 +2150,8 @@ export default function PdfEditorCore() {
       }
       const helv = await pdfDocLib.embedFont(StandardFonts.Helvetica);
       const helvBold = await pdfDocLib.embedFont(StandardFonts.HelveticaBold);
+      const helvItalic = await pdfDocLib.embedFont(StandardFonts.HelveticaOblique);
+      const helvBoldItalic = await pdfDocLib.embedFont(StandardFonts.HelveticaBoldOblique);
       // Embedded text fonts: metric-compatible webfonts (Arimo/Tinos/Cousine)
       // fetched + cached, with base-14 fallback when offline. Only families
       // actually used are embedded (faster export, smaller output).
@@ -2184,10 +2202,9 @@ export default function PdfEditorCore() {
           return null;
         }
       };
-      const libFontFor = async (font: PdfFont | undefined, bold: boolean, _italic: boolean) => {
-        void _italic;
+      const libFontFor = async (font: PdfFont | undefined, bold: boolean, italic: boolean) => {
         const set = await libFontsFor(font || 'sans');
-        if (!set) return bold ? helvBold : helv;
+        if (!set) return italic ? (bold ? helvBoldItalic : helvItalic) : (bold ? helvBold : helv);
         return bold ? set.bold : set.plain;
       };
       const libPages = pdfDocLib.getPages();
@@ -2337,18 +2354,26 @@ export default function PdfEditorCore() {
             // Same wrapLines as the preview (export measures approximately;
             // maxWidth scales any over-wide line down so nothing overflows).
             const c = hexToRgb(a.color);
-            const font = await libFontFor(a.font, a.bold, false);
+            const font = await libFontFor(a.font, a.bold, !!a.italic);
             const approx = (s: string) => s.length * a.size * 0.55;
             const lines = wrapLines(a.text, a.w, approx);
             lines.forEach((line, li) => {
+              const lw = font.widthOfTextAtSize(line, a.size);
+              const x = a.align === 'center' ? a.x + (a.w - lw) / 2 : a.align === 'right' ? a.x + a.w - lw : a.x;
+              const ly = pageH - (a.y + li * a.size * 1.25);
               lp.drawText(line, {
-                x: a.x,
-                y: pageH - (a.y + li * a.size * 1.25),
+                x,
+                y: ly,
                 size: a.size,
                 font,
                 color: rgb(c.r, c.g, c.b),
                 maxWidth: a.w,
               });
+              const decoFlow = (dy: number) => {
+                lp.drawLine({ start: { x, y: dy }, end: { x: x + lw, y: dy }, thickness: Math.max(0.75, a.size / 14), color: rgb(c.r, c.g, c.b) });
+              };
+              if (a.underline) decoFlow(ly - 2);
+              if (a.strike) decoFlow(ly + a.size * 0.3);
             });
           } else if (a.kind === 'highlight') {
             const c = hexToRgb(a.color);
@@ -2985,7 +3010,7 @@ export default function PdfEditorCore() {
                       fontSize: (a.kind === 'note' ? 13 : a.size) * scale,
                       lineHeight: 1.25,
                       fontWeight: a.kind !== 'note' && a.bold ? 700 : 400,
-                      fontStyle: a.kind === 'text' && a.italic ? 'italic' : undefined,
+                      fontStyle: (a.kind === 'text' || a.kind === 'flow') && a.italic ? 'italic' : undefined,
                       fontFamily: a.kind === 'note' ? undefined : fontCss(a.font ?? 'sans'),
                       color: a.kind === 'note' ? undefined : a.color,
                       background: 'var(--bg-surface)',

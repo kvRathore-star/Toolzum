@@ -101,6 +101,27 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
     });
   });
 
+  describe('flow formatting parity (P1 — flow was bold-only end to end)', () => {
+    it('impl: FlowAnno carries the full style set (italic/underline/strike/align)', () => {
+      expect(editor).toMatch(/export interface FlowAnno \{[^}]*italic\?[^}]*underline\?[^}]*strike\?[^}]*align\?/);
+    });
+    it('impl: annoFlag reads all flags off flow, not bold only', () => {
+      expect(editor).toMatch(/if \(a\.kind === 'text' \|\| a\.kind === 'flow'\) return !!a\[key\];/);
+      expect(editor).not.toMatch(/key === 'bold' \? a\.bold : false/);
+    });
+    it('impl: flow render honors italic/underline/strike/align', () => {
+      expect(editor).toMatch(/else if \(a\.kind === 'flow'\)[\s\S]{0,240}canvasFont\(px\(a\.size\), a\.bold, !!a\.italic, a\.font\)/);
+      expect(editor, 'flow placement must carry the style defaults like stickers do').toMatch(
+        /kind: 'flow', x: margin[\s\S]{0,220}italic: textItalic/,
+      );
+    });
+    it('impl: flow export honors italic (and the base-14 fallback has oblique faces)', () => {
+      expect(editor).toMatch(/else if \(a\.kind === 'flow'\)[\s\S]{0,320}libFontFor\(a\.font, a\.bold, !!a\.italic\)/);
+      expect(editor).toMatch(/embedFont\(StandardFonts\.HelveticaOblique\)/);
+      expect(editor).not.toMatch(/void _italic/);
+    });
+  });
+
   describe('global Ctrl+S (found while writing this file — historical bug #4)', () => {
     it('claim: Save button title promises Ctrl+S session save', () => {
       expect(editor).toMatch(/Save session \(Ctrl\+S\)/);

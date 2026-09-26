@@ -393,13 +393,17 @@ describe('mapOcrWords (geometry mapping)', () => {
 });
 
 describe('annoFlag (format-bar state without casts)', () => {
-  it('reads text flags, flow bold-only, nothing else', () => {
+  it('reads text and flow flags, nothing else', () => {
     expect(annoFlag(text({ bold: true }), 'bold')).toBe(true);
     expect(annoFlag(text({ bold: false }), 'bold')).toBe(false);
     expect(annoFlag(text({ italic: true } as Partial<Extract<Anno, { kind: 'text' }>> as Extract<Anno, { kind: 'text' }>), 'italic')).toBe(true);
     const flow: Anno = { kind: 'flow', x: 0, y: 0, w: 10, text: 'x', size: 12, color: '#000', bold: true };
     expect(annoFlag(flow, 'bold')).toBe(true);
     expect(annoFlag(flow, 'italic')).toBe(false);
+    const flowStyled: Anno = { kind: 'flow', x: 0, y: 0, w: 10, text: 'x', size: 12, color: '#000', bold: false, italic: true, underline: true, strike: true };
+    expect(annoFlag(flowStyled, 'italic')).toBe(true);
+    expect(annoFlag(flowStyled, 'underline')).toBe(true);
+    expect(annoFlag(flowStyled, 'strike')).toBe(true);
     expect(annoFlag(undefined, 'bold')).toBe(false);
     expect(annoFlag({ kind: 'draw', points: [], color: '#000', width: 1 }, 'bold')).toBe(false);
   });

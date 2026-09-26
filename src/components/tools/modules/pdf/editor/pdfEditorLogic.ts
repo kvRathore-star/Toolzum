@@ -15,7 +15,7 @@ interface DrawAnno { kind: 'draw'; points: number[]; color: string; width: numbe
 interface ImageAnno { kind: 'image'; x: number; y: number; w: number; h: number; dataUrl: string }
 interface ShapeAnno { kind: 'shape'; shape: 'rect' | 'ellipse' | 'line' | 'arrow'; x: number; y: number; w: number; h: number; color: string; width: number }
 interface NoteAnno { kind: 'note'; x: number; y: number; text: string; color: string }
-export interface FlowAnno { kind: 'flow'; x: number; y: number; w: number; text: string; size: number; color: string; bold: boolean; font?: PdfFont }
+export interface FlowAnno { kind: 'flow'; x: number; y: number; w: number; text: string; size: number; color: string; bold: boolean; italic?: boolean; underline?: boolean; strike?: boolean; align?: 'left' | 'center' | 'right'; font?: PdfFont }
 // RedactAnno marks TRUE redaction regions (black burn + text-byte stripping
 // on export) — visually distinct from whiteout cover-up by design.
 interface RedactAnno { kind: 'redact'; x: number; y: number; w: number; h: number }
@@ -376,11 +376,10 @@ export function groupParagraphs(items: TextItem[]): TextItem[][] {
   return paras;
 }
 
-/** Read a style flag off a text/flow annotation (flow supports bold only). */
+/** Read a style flag off a text/flow annotation (both kinds carry the full set). */
 export function annoFlag(a: Anno | undefined, key: 'bold' | 'italic' | 'underline' | 'strike'): boolean {
   if (!a) return false;
-  if (a.kind === 'text') return !!a[key];
-  if (a.kind === 'flow') return key === 'bold' ? a.bold : false;
+  if (a.kind === 'text' || a.kind === 'flow') return !!a[key];
   return false;
 }
 /** A version-history entry: full annotations + page + label. */
