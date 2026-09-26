@@ -1676,28 +1676,29 @@ export default function PdfEditorCore() {
         ? Array.from({ length: pageCount }, (_, i) => i + 1)
         : [page];
       const needleLower = needle.toLowerCase();
-      let total = 0;
       const hitsByPage: Record<number, { x: number; yTop: number; w: number; size: number; bold: boolean }[]> = {};
       for (const pg of pages) {
         const items = await ensureTextLayer(pg);
         hitsByPage[pg] = items.filter((it) => it.str.toLowerCase().includes(needleLower));
       }
-      commitAnnos((prev) => {
-        const next = { ...prev };
-        for (const pg of pages) {
-          const hits = hitsByPage[pg] || [];
-          if (hits.length === 0) continue;
-          total += hits.length;
-          next[pg] = [
-            ...(next[pg] || []),
-            ...hits.flatMap((h) => ([
-              { kind: 'whiteout', x: h.x - 2, y: h.yTop - 2, w: h.w + 4, h: h.size + 5, color: '#ffffff' },
-              { kind: 'text', x: h.x, y: h.yTop + h.size * 0.85, text: replaceText, size: Math.round(h.size), color: '#000000', bold: h.bold },
-            ] as Anno[])),
-          ];
-        }
-        return next;
-      });
+      const total = pages.reduce((sum, pg) => sum + (hitsByPage[pg]?.length || 0), 0);
+      if (total > 0) {
+        commitAnnos((prev) => {
+          const next = { ...prev };
+          for (const pg of pages) {
+            const hits = hitsByPage[pg] || [];
+            if (hits.length === 0) continue;
+            next[pg] = [
+              ...(next[pg] || []),
+              ...hits.flatMap((h) => ([
+                { kind: 'whiteout', x: h.x - 2, y: h.yTop - 2, w: h.w + 4, h: h.size + 5, color: '#ffffff' },
+                { kind: 'text', x: h.x, y: h.yTop + h.size * 0.85, text: replaceText, size: Math.round(h.size), color: '#000000', bold: h.bold },
+              ] as Anno[])),
+            ];
+          }
+          return next;
+        });
+      }
       toast.success(total > 0
         ? `Replaced ${total} match${total === 1 ? '' : 'es'}${replaceScope === 'all' ? ' across the document' : ''} — Helvetica retypeset, verify placement.`
         : `No matches for “${needle}”.`);

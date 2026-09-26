@@ -87,6 +87,20 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
     });
   });
 
+  describe('find & replace commit seam (P1 — toast lied, checkpoint skipped)', () => {
+    it('impl: total is computed outside the setAnnos updater (React has not run the updater yet)', () => {
+      expect(editor).toMatch(
+        /const total = pages\.reduce\(\(sum, pg\) => sum \+ \(hitsByPage\[pg\]\?\.length \|\| 0\), 0\)/,
+      );
+      expect(editor, 'counting inside the updater reads 0 — React runs it later').not.toMatch(
+        /total \+= hits\.length/,
+      );
+    });
+    it('impl: no-match replace snapshots no junk undo entry', () => {
+      expect(editor).toMatch(/if \(total > 0\) \{\s*\n\s*commitAnnos\(/);
+    });
+  });
+
   describe('global Ctrl+S (found while writing this file — historical bug #4)', () => {
     it('claim: Save button title promises Ctrl+S session save', () => {
       expect(editor).toMatch(/Save session \(Ctrl\+S\)/);
