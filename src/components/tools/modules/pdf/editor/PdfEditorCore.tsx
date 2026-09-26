@@ -1823,12 +1823,18 @@ export default function PdfEditorCore() {
   const restructure = async (
     op: 'rotate' | 'duplicate' | 'delete' | 'left' | 'right' | 'move',
     move?: { from: number; to: number },
+    // Delete-only: which page to remove (the focused thumbnail). Every
+    // other op — and delete without a target — acts on the viewed page.
+    targetPage?: number,
   ) => {
     if (!fileBytes) return;
     if (op === 'delete' && pageCount <= 1) {
       toast.error('Cannot delete the only page.');
       return;
     }
+    // A keyboard-delivered target must be a real page — NaN or a stale
+    // thumbnail (post-delete DOM) never reaches removePage.
+    if (op === 'delete' && targetPage !== undefined && !(Number.isInteger(targetPage) && targetPage >= 1 && targetPage <= pageCount)) return;
     if ((op === 'left' && page <= 1) || (op === 'right' && page >= pageCount)) return;
     if (op === 'move') {
       if (
@@ -1840,7 +1846,8 @@ export default function PdfEditorCore() {
     }
     try {
       const doc = await PDFDocument.load(fileBytes.slice());
-      const idx = page - 1;
+      const target = op === 'delete' ? targetPage ?? page : page;
+      const idx = target - 1;
       let nextPage = page;
       if (op === 'rotate') {
         const pg = doc.getPages()[idx]!;
@@ -1851,7 +1858,10 @@ export default function PdfEditorCore() {
         nextPage = page + 1;
       } else if (op === 'delete') {
         doc.removePage(idx);
-        nextPage = Math.min(page, doc.getPageCount());
+        // Deleting BEFORE the viewed page shifts it down one slot;
+        // deleting the viewed one clamps to the new last page; deleting
+        // after it leaves the view put.
+        nextPage = idx < page - 1 ? page - 1 : Math.min(page, doc.getPageCount());
       } else if (op === 'move' && move) {
         // Drag-reorder: remove + reinsert at the drop slot; the view
         // follows the page that was dragged (that's what the user is
@@ -1875,7 +1885,7 @@ export default function PdfEditorCore() {
       const vpH = viewportRef.current.h / scale;
       const mapped = op === 'move' && move
         ? moveAnnosPage(prevAnnos, move.from, move.to, pageCount)
-        : restructureAnnos(prevAnnos, op as 'rotate' | 'duplicate' | 'delete' | 'left' | 'right', page, pageCount, vpH);
+        : restructureAnnos(prevAnnos, op as 'rotate' | 'duplicate' | 'delete' | 'left' | 'right', op === 'delete' ? target : page, pageCount, vpH);
       // Pre-op snapshot (with bytes) so undo restores the old document.
       undoStack.current.push({ annos: structuredClone(prevAnnos), bytes: fileBytes.slice(), pageCount, page });
       // Cap structural entries (each pins a full file copy). On overflow,
@@ -1901,7 +1911,7 @@ export default function PdfEditorCore() {
       toast.success(
         op === 'rotate' ? 'Page rotated — annotations kept.'
           : op === 'duplicate' ? 'Page duplicated — annotations copied to the new page.'
-            : op === 'delete' ? 'Page deleted — annotations on other pages kept.'
+            : op === 'delete' ? `Page ${target} deleted — annotations on other pages kept.`
               : op === 'move' ? `Page moved to position ${move ? move.to + 1 : '?'} — annotations followed their pages. Undo restores everything.`
                 : `Page moved ${op === 'left' ? 'earlier' : 'later'} — annotations followed their pages. Undo restores everything.`,
       );
@@ -2558,11 +2568,11 @@ export default function PdfEditorCore() {
   // (never during render — React Compiler flags render-phase ref writes).
   const saveFlushingRef = useRef(saveFlushing);
   const selectedRef = useRef(selected);
-  const actionsRef = useRef({ undo, redo, duplicateSelected, deleteSelected, copySelected, pasteClipboard });
+  const actionsRef = useRef({ undo, redo, duplicateSelected, deleteSelected, copySelected, pasteClipboard, restructure });
   useEffect(() => {
     saveFlushingRef.current = saveFlushing;
     selectedRef.current = selected;
-    actionsRef.current = { undo, redo, duplicateSelected, deleteSelected, copySelected, pasteClipboard };
+    actionsRef.current = { undo, redo, duplicateSelected, deleteSelected, copySelected, pasteClipboard, restructure };
   });
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -2584,8 +2594,19 @@ export default function PdfEditorCore() {
       if (mod && e.key.toLowerCase() === 'c') { e.preventDefault(); a.copySelected(); return; }
       if (mod && e.key.toLowerCase() === 'v') { e.preventDefault(); a.pasteClipboard(); return; }
       if (e.key === 'Delete' || e.key === 'Backspace') {
-        // Only swallow Backspace when there's a selection to delete —
-        // otherwise we'd block the browser's own back-navigation for nothing.
+        // Page delete requires a DELIBERATELY focused thumbnail — Del with
+        // nothing focused stays inert on purpose (a stray keypress must
+        // never nuke a page). Focus beats a sticky annotation selection:
+        // pointing at the thumbnail is the more recent act.
+        const thumb = document.activeElement?.closest?.('[data-thumb-page]') as HTMLElement | null;
+        if (thumb) {
+          e.preventDefault();
+          void a.restructure('delete', undefined, Number(thumb.dataset.thumbPage));
+          return;
+        }
+        // Annotation path: only swallow Backspace when there's a selection
+        // to delete — otherwise we'd block the browser's own
+        // back-navigation for nothing.
         if (!selectedRef.current) return;
         e.preventDefault();
         a.deleteSelected();
@@ -2895,7 +2916,7 @@ export default function PdfEditorCore() {
               ['Undo / redo', 'Ctrl+Z · Ctrl+Y'],
               ['Save session', 'Ctrl+S'],
               ['Duplicate selected', 'Ctrl+D'],
-              ['Delete selected', 'Del'],
+              ['Delete selected or focused thumbnail', 'Del'],
               ['Find panel', 'Ctrl+F'],
               ['Copy / paste', 'Ctrl+C · Ctrl+V'],
               ['Nudge (×10 with Shift)', 'Arrow keys'],

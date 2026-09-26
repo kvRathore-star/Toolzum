@@ -172,6 +172,33 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
     });
   });
 
+  describe('Del deletes a focused thumbnail — and ONLY that (decision Sep 2026)', () => {
+    it('claim: shortcuts panel promises Del for selection OR focused thumbnail', () => {
+      expect(editor).toMatch(/\['Delete selected or focused thumbnail', 'Del'\]/);
+    });
+    it('impl: thumbnails carry the data hook the window handler reads', () => {
+      expect(editor, 'both surfaces render PagesList — one attribute covers sidebar + mobile sheet').toMatch(
+        /data-thumb-page=\{i \+ 1\}/,
+      );
+    });
+    it('impl: focused thumbnail routes Del to restructure with THAT page', () => {
+      expect(editor).toMatch(/document\.activeElement\?\.closest\?\.\('\[data-thumb-page\]'\)/);
+      expect(editor).toMatch(/restructure\('delete', undefined, Number\(thumb\.dataset\.thumbPage\)\)/);
+    });
+    it('impl: no focus + no selection stays inert (no unconditional page delete)', () => {
+      expect(editor, 'annotation branch must still require a selection').toMatch(/if \(!selectedRef\.current\) return;/);
+    });
+    it('impl: restructure validates the keyboard target before removePage', () => {
+      expect(editor).toMatch(/Number\.isInteger\(targetPage\) && targetPage >= 1 && targetPage <= pageCount/);
+    });
+    it('impl: view + annos follow the DELETED page, not the viewed one', () => {
+      expect(editor, 'annos must remap from the deleted page').toMatch(/op === 'delete' \? target : page, pageCount/);
+      expect(editor, 'deleting before the viewed page shifts the view down').toMatch(
+        /nextPage = idx < page - 1 \? page - 1 : Math\.min\(page, doc\.getPageCount\(\)\);/,
+      );
+    });
+  });
+
   describe('global Ctrl+S (found while writing this file — historical bug #4)', () => {
     it('claim: Save button title promises Ctrl+S session save', () => {
       expect(editor).toMatch(/Save session \(Ctrl\+S\)/);
@@ -326,7 +353,7 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
       { label: 'Undo / redo', location: 'window', tokens: ["e.key.toLowerCase() === 'z'", "e.key.toLowerCase() === 'y'"] },
       { label: 'Save session', location: 'window', tokens: ["e.key.toLowerCase() === 's'"] },
       { label: 'Duplicate selected', location: 'window', tokens: ["e.key.toLowerCase() === 'd'"] },
-      { label: 'Delete selected', location: 'window', tokens: ["e.key === 'Delete'"] },
+      { label: 'Delete selected or focused thumbnail', location: 'window', tokens: ["e.key === 'Delete'"] },
       { label: 'Find panel', location: 'window', tokens: ["e.key.toLowerCase() === 'f'"] },
       { label: 'Copy / paste', location: 'window', tokens: ["e.key.toLowerCase() === 'c'", "e.key.toLowerCase() === 'v'"] },
       { label: 'Nudge (×10 with Shift)', location: 'canvas', tokens: ['Arrow'] },

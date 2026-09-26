@@ -50,6 +50,9 @@ export function PagesList({ onPick }: { onPick?: () => void }) {
           }}
           aria-label={`Go to page ${i + 1}${thumbDragOver === i ? ' (drop here to reorder)' : ''}`}
           aria-current={page === i + 1}
+          // Keyboard page-delete: the window Del handler only acts when a
+          // thumbnail holds real focus (both surfaces render this list).
+          data-thumb-page={i + 1}
           className={`relative block w-full rounded-lg overflow-hidden border-2 ${page === i + 1 || thumbDragOver === i ? 'border-[var(--accent)]' : 'border-transparent'}`}
         >
           {u ? (
