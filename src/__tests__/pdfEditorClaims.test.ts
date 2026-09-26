@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
+import { PDF_FONTS, faceUrl, classicFonts, type PdfFont } from '@/lib/pdfFonts';
 
 /**
  * Claims-vs-behavior guard for the PDF editor (Sep 2026).
@@ -119,6 +120,55 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
       expect(editor).toMatch(/else if \(a\.kind === 'flow'\)[\s\S]{0,320}libFontFor\(a\.font, a\.bold, !!a\.italic\)/);
       expect(editor).toMatch(/embedFont\(StandardFonts\.HelveticaOblique\)/);
       expect(editor).not.toMatch(/void _italic/);
+    });
+  });
+
+  describe('font list: 10 families × 4 faces (decision Sep 2026)', () => {
+    it('claim: FAQ names all ten families, the four faces, and the refusal line', () => {
+      for (const fam of [
+        'Ten families', 'Arimo', 'Tinos', 'Cousine', 'Roboto', 'Montserrat',
+        'Open Sans', 'Lato', 'Poppins', 'Inter', 'DM Sans', 'bold-italic',
+      ]) {
+        expect(registry, `FAQ lost ${fam}`).toContain(fam);
+      }
+      expect(registry, 'arbitrary-font refusal must stay').toContain('Arbitrary document fonts are not fetched');
+    });
+    it('impl: exactly 10 families, ids unique, classic trio flagged', () => {
+      expect(PDF_FONTS).toHaveLength(10);
+      expect(new Set(PDF_FONTS.map((f) => f.id)).size).toBe(10);
+      expect(new Set(PDF_FONTS.map((f) => f.label)).size).toBe(10);
+      expect(classicFonts().map((f) => f.id)).toEqual(['sans', 'serif', 'mono']);
+    });
+    it('impl: every family ships all four faces, open license only', () => {
+      for (const f of PDF_FONTS) {
+        expect(['OFL', 'Apache-2.0'], `${f.id} license`).toContain(f.license);
+        const faces = [false, true].flatMap((b) => [false, true].map((i) => faceUrl(f.id as PdfFont, b, i)));
+        expect(new Set(faces).size, `${f.id} must have 4 distinct face URLs`).toBe(4);
+        for (const u of faces) {
+          expect(u).toMatch(/^https:\/\/cdn\.jsdelivr\.net\/fontsource\/fonts\/[^@]+@latest\/latin-(400|700)-(normal|italic)\.ttf$/);
+        }
+      }
+    });
+    it('impl: picker options render from PDF_FONTS (no hardcoded 3-option list)', () => {
+      expect(editor).toMatch(/PDF_FONTS\.filter\(\(f\) => f\.classic\)/);
+      expect(editor).toMatch(/PDF_FONTS\.filter\(\(f\) => !f\.classic\)/);
+      expect(editor, 'old hardcoded trio options must be gone').not.toMatch(/<option value="sans">Sans \(Arimo\)<\/option>/);
+    });
+    it('impl: export resolves a real face per (bold × italic) key — italic never reuses upright', () => {
+      expect(editor, 'all four faces load through the same (fam, bold, italic) call').toMatch(
+        /loadFontBytes\(fam, bold, italic\)/,
+      );
+      expect(editor, 'cache key must carry the italic flag').toMatch(
+        /const key = `\$\{fam\}\|\$\{bold \? 1 : 0\}\|\$\{italic \? 1 : 0\}`;/,
+      );
+      expect(editor, 'offline base-14 fallback keeps the oblique faces').toMatch(
+        /const base14 = \(bold: boolean, italic: boolean\) =>\s*\n\s*italic \? \(bold \? helvBoldItalic : helvItalic\) : \(bold \? helvBold : helv\);/,
+      );
+      expect(editor, 'upright-for-italic shortcut must be gone').not.toMatch(/italic: plain, boldItalic: bold/);
+    });
+    it('impl: preview effect ensures faces beyond the open-time preload', () => {
+      expect(editor).toMatch(/ensurePreviewFont\(fam as PdfFont, b === '1', i === '1'\)/);
+      expect(editor, 'open-time preload is classic-trio only').toMatch(/classicFonts\(\)\.forEach/);
     });
   });
 

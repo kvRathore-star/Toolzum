@@ -1,5 +1,5 @@
 import { annoFlag, HIGHLIGHT_COLORS, INK_COLORS, type FlowAnno, type TextAnno } from './pdfEditorLogic';
-import type { PdfFont } from '@/lib/pdfFonts';
+import { PDF_FONTS, type PdfFont } from '@/lib/pdfFonts';
 import { usePdfEditor } from './pdfEditorContext';
 
 /**
@@ -24,9 +24,16 @@ export function FormatBar() {
         title="Font family"
         className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs font-bold"
       >
-        <option value="sans">Sans (Arimo)</option>
-        <option value="serif">Serif (Tinos)</option>
-        <option value="mono">Mono (Cousine)</option>
+        <optgroup label="Match document">
+          {PDF_FONTS.filter((f) => f.classic).map((f) => (
+            <option key={f.id} value={f.id}>{f.label}</option>
+          ))}
+        </optgroup>
+        <optgroup label="Popular">
+          {PDF_FONTS.filter((f) => !f.classic).map((f) => (
+            <option key={f.id} value={f.id}>{f.label}</option>
+          ))}
+        </optgroup>
       </select>
       <input
         type="range" min={8} max={48}

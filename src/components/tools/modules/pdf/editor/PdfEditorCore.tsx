@@ -14,7 +14,7 @@ import { useProStatus } from '@/hooks/useProStatus';
 import { useSession } from '@/lib/auth-client';
 import { Turnstile } from '@marsidev/react-turnstile';
 import type { PdfFont } from '@/lib/pdfFonts';
-import { fontCss, detectFontFamily, detectBold, loadFontBytes, ensurePreviewFont } from '@/lib/pdfFonts';
+import { fontCss, detectFontFamily, detectBold, loadFontBytes, ensurePreviewFont, classicFonts } from '@/lib/pdfFonts';
 import Link from 'next/link';
 import { PdfEditorCtx, type PdfEditorApi } from './pdfEditorContext';
 import { MobileActionBar } from './MobileActionBar';
@@ -662,11 +662,13 @@ export default function PdfEditorCore() {
       undoStack.current = [];
       redoStack.current = [];
       toast.success(`${doc.numPages}-page PDF loaded — everything stays in your browser.`, { id: toastId });
-      // Preload text fonts for WYSIWYG preview (fire-and-forget; export and
-      // preview fall back to base-14 offline without failing).
-      (['sans', 'serif', 'mono'] as PdfFont[]).forEach((fam) => {
-        ensurePreviewFont(fam, false);
-        ensurePreviewFont(fam, true);
+      // Preload the classic trio (upright faces) for WYSIWYG preview,
+      // fire-and-forget. Italic faces and the popular seven are ensured
+      // on demand by the preview-font effect below; export and preview
+      // fall back to base-14 offline without failing.
+      classicFonts().forEach((d) => {
+        ensurePreviewFont(d.id as PdfFont, false, false);
+        ensurePreviewFont(d.id as PdfFont, true, false);
       });
       const intent = intentRef.current;
       intentRef.current = null;
@@ -2152,60 +2154,54 @@ export default function PdfEditorCore() {
       const helvBold = await pdfDocLib.embedFont(StandardFonts.HelveticaBold);
       const helvItalic = await pdfDocLib.embedFont(StandardFonts.HelveticaOblique);
       const helvBoldItalic = await pdfDocLib.embedFont(StandardFonts.HelveticaBoldOblique);
-      // Embedded text fonts: metric-compatible webfonts (Arimo/Tinos/Cousine)
-      // fetched + cached, with base-14 fallback when offline. Only families
-      // actually used are embedded (faster export, smaller output).
-      const usedFams = new Set<PdfFont>();
-      for (const list of Object.values(clean)) {
-        for (const a of list) {
-          if ((a.kind === 'text' || a.kind === 'flow') && a.font) usedFams.add(a.font);
-        }
-      }
-      type famFonts = { plain: PDFFont; bold: PDFFont; italic: PDFFont; boldItalic: PDFFont };
-      const embedded = new Map<PdfFont, famFonts | null>();
+      // Embedded text fonts: the 10-family list (classic trio + popular
+      // seven), four faces each. Faces embed lazily per (family × bold ×
+      // italic) — only what the document actually uses lands in the output
+      // — with base-14 fallback when offline.
       let fontNoticeShown = false;
       const noteOfflineFonts = () => {
         if (fontNoticeShown) return;
         fontNoticeShown = true;
         toast.success('Exported with built-in fonts (custom fonts need internet once).');
       };
-      const libFontsFor = async (fam: PdfFont) => {
-        const hit = embedded.get(fam);
-        if (hit !== undefined) return hit;
-        try {
-          // @pdf-lib/fontkit ships types only as a UMD global (no ESM
-          // typings): resolve the default export dynamically and narrow to
-          // pdf-lib's Fontkit interface. A mismatch throws here and falls
-          // back to base-14 below — never mid-export.
-          const mod = (await import('@pdf-lib/fontkit')) as unknown as {
-            default?: Parameters<typeof pdfDocLib.registerFontkit>[0];
-          };
-          const fk = mod.default;
-          if (!fk || typeof (fk as { create?: unknown }).create !== 'function') {
-            throw new Error('fontkit shape mismatch');
-          }
-          pdfDocLib.registerFontkit(fk);
-          const [plainBytes, boldBytes] = await Promise.all([
-            loadFontBytes(fam, false),
-            loadFontBytes(fam, true),
-          ]);
-          // pdf-lib has no oblique custom faces — reuse upright for italics
-          // (stated; synthetic slanting would lie about the metrics).
-          const plain = await pdfDocLib.embedFont(plainBytes);
-          const bold = await pdfDocLib.embedFont(boldBytes);
-          const set: famFonts = { plain, bold, italic: plain, boldItalic: bold };
-          embedded.set(fam, set);
-          return set;
-        } catch {
-          noteOfflineFonts();
-          embedded.set(fam, null);
-          return null;
+      const base14 = (bold: boolean, italic: boolean) =>
+        italic ? (bold ? helvBoldItalic : helvItalic) : (bold ? helvBold : helv);
+      // One entry per face. Null marks a settled offline miss (never
+      // retried mid-export — the fallback is deterministic).
+      const embeddedFaces = new Map<string, PDFFont | null>();
+      let fontkitRegistered = false;
+      const registerFontkitOnce = async () => {
+        if (fontkitRegistered) return;
+        // @pdf-lib/fontkit ships types only as a UMD global (no ESM
+        // typings): resolve the default export dynamically and narrow to
+        // pdf-lib's Fontkit interface. A mismatch throws here and falls
+        // back to base-14 below — never mid-export.
+        const mod = (await import('@pdf-lib/fontkit')) as unknown as {
+          default?: Parameters<typeof pdfDocLib.registerFontkit>[0];
+        };
+        const fk = mod.default;
+        if (!fk || typeof (fk as { create?: unknown }).create !== 'function') {
+          throw new Error('fontkit shape mismatch');
         }
+        pdfDocLib.registerFontkit(fk);
+        fontkitRegistered = true;
       };
       const libFontFor = async (font: PdfFont | undefined, bold: boolean, italic: boolean) => {
-        const set = await libFontsFor(font || 'sans');
-        if (!set) return italic ? (bold ? helvBoldItalic : helvItalic) : (bold ? helvBold : helv);
-        return bold ? set.bold : set.plain;
+        const fam = font || 'sans';
+        const key = `${fam}|${bold ? 1 : 0}|${italic ? 1 : 0}`;
+        const hit = embeddedFaces.get(key);
+        if (hit !== undefined) return hit ?? base14(bold, italic);
+        try {
+          await registerFontkitOnce();
+          const bytes = await loadFontBytes(fam, bold, italic);
+          const face = await pdfDocLib.embedFont(bytes);
+          embeddedFaces.set(key, face);
+          return face;
+        } catch {
+          noteOfflineFonts();
+          embeddedFaces.set(key, null);
+          return base14(bold, italic);
+        }
       };
       const libPages = pdfDocLib.getPages();
       if (!pdfDoc) throw new Error('PDF not loaded');
@@ -2523,6 +2519,33 @@ export default function PdfEditorCore() {
   // Effective values: selection wins, else defaults.
   const effColor = selIsText ? (selAnno as TextAnno | FlowAnno).color : textColor;
   const effSize = selIsText ? (selAnno as TextAnno | FlowAnno).size : textSize;
+  // WYSIWYG preview faces: ensure every (family × bold × italic) combo the
+  // editor can currently show. The open-time preload covers only the classic
+  // trio's upright faces, so a saved session using italic — or any of the
+  // popular seven — needs its face registered before the canvas draws it.
+  // Deduped by combo key; newly loaded faces trigger one repaint so the
+  // preview snaps to the real font instead of the system fallback.
+  const previewFacesKey = useRef('');
+  useEffect(() => {
+    const combos = new Set<string>();
+    const add = (fam: PdfFont | undefined, bold: boolean, italic: boolean) =>
+      combos.add(`${fam || 'sans'}|${bold ? 1 : 0}|${italic ? 1 : 0}`);
+    add(textFont, textBold, textItalic);
+    for (const list of Object.values(annos)) {
+      for (const a of list) {
+        if (a.kind === 'text' || a.kind === 'flow') add(a.font, !!a.bold, !!a.italic);
+      }
+    }
+    const key = [...combos].sort().join(',');
+    if (key === previewFacesKey.current) return;
+    previewFacesKey.current = key;
+    void Promise.all(
+      [...combos].map((c) => {
+        const [fam, b, i] = c.split('|');
+        return ensurePreviewFont(fam as PdfFont, b === '1', i === '1');
+      }),
+    ).then(() => drawOverlay());
+  }, [annos, textFont, textBold, textItalic, drawOverlay]);
   const [showFind, setShowFind] = useState(false);
   // Keyboard architecture (audited Sep 2026 after four canvas-only bugs):
   // ONE window listener owns every shortcut the (?) panel lists, except

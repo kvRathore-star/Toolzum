@@ -1,50 +1,95 @@
 /**
- * Metric-compatible font pipeline for the PDF editor.
+ * Font pipeline for the PDF editor.
  *
- * Problem: pdf-lib's built-in fonts (Helvetica/Times/Courier) look wrong
- * on modern documents set in Arial/Georgia/etc. Solution: Arimo (≈Arial),
- * Tinos (≈Times New Roman), Cousine (≈Courier New) — metrically identical,
- * openly licensed, fetched from the fontsource CDN, cached in IndexedDB.
+ * 10 families, four faces each (regular / bold / italic / bold-italic —
+ * all shipped up front, never bolted on later):
+ *
+ *   Classic trio — Arimo ≈ Arial, Tinos ≈ Times New Roman, Cousine ≈
+ *   Courier New. Metrically identical to the originals, which is what
+ *   retype detection maps into and what offline documents expect.
+ *
+ *   Popular seven — Roboto, Montserrat, Open Sans, Lato, Poppins, Inter,
+ *   DM Sans: the families people actually look for in the picker instead
+ *   of Helvetica-only.
+ *
+ * Licenses: OFL for all except Roboto (Apache-2.0). Both permit
+ * redistribution and offline caching; files come from the fontsource CDN
+ * and land in IndexedDB after first fetch.
  *
  * Honest boundaries (stated in FAQs, enforced here):
- * - Only these 3 families. Arbitrary /BaseFont fetching would redistribute
+ * - Only these 10 families. Arbitrary /BaseFont fetching would redistribute
  *   commercial fonts and break offline use — refused by design.
- * - Offline first run falls back to base-14 (previous behavior), never fails.
+ * - Offline first run falls back to base-14 (Helvetica oblique etc.),
+ *   never fails.
  */
 
-export type PdfFont = 'sans' | 'serif' | 'mono';
-
 const CDN = 'https://cdn.jsdelivr.net/fontsource/fonts';
-const VER = 'v1';
+const VER = 'v2';
 
-const FILES: Record<PdfFont, { plain: string; bold: string; css: string }> = {
-  sans: {
-    plain: `${CDN}/arimo@latest/latin-400-normal.ttf`,
-    bold: `${CDN}/arimo@latest/latin-700-normal.ttf`,
-    css: 'Arimo, Arial, Helvetica, sans-serif',
-  },
-  serif: {
-    plain: `${CDN}/tinos@latest/latin-400-normal.ttf`,
-    bold: `${CDN}/tinos@latest/latin-700-normal.ttf`,
-    css: 'Tinos, "Times New Roman", Times, serif',
-  },
-  mono: {
-    plain: `${CDN}/cousine@latest/latin-400-normal.ttf`,
-    bold: `${CDN}/cousine@latest/latin-700-normal.ttf`,
-    css: 'Cousine, "Courier New", Courier, monospace',
-  },
-};
+export interface FontDef {
+  /** Stable id — persisted in annotations + saved sessions. */
+  id: string;
+  /** Picker label. */
+  label: string;
+  /** FontFace/CSS family name (what canvas and the inline editor resolve). */
+  family: string;
+  /** fontsource CDN slug. */
+  slug: string;
+  /** CSS family stack with an offline system fallback. */
+  css: string;
+  /** Font license — OFL unless noted. */
+  license: 'OFL' | 'Apache-2.0';
+  /** Metric-compatible trio: preloaded at document open for WYSIWYG. */
+  classic: boolean;
+}
+
+export const PDF_FONTS: readonly FontDef[] = [
+  { id: 'sans', label: 'Sans (Arimo ≈ Arial)', family: 'Arimo', slug: 'arimo', css: 'Arimo, Arial, Helvetica, sans-serif', license: 'OFL', classic: true },
+  { id: 'serif', label: 'Serif (Tinos ≈ Times)', family: 'Tinos', slug: 'tinos', css: 'Tinos, "Times New Roman", Times, serif', license: 'OFL', classic: true },
+  { id: 'mono', label: 'Mono (Cousine ≈ Courier)', family: 'Cousine', slug: 'cousine', css: 'Cousine, "Courier New", Courier, monospace', license: 'OFL', classic: true },
+  { id: 'roboto', label: 'Roboto', family: 'Roboto', slug: 'roboto', css: 'Roboto, Arial, sans-serif', license: 'Apache-2.0', classic: false },
+  { id: 'montserrat', label: 'Montserrat', family: 'Montserrat', slug: 'montserrat', css: 'Montserrat, Arial, sans-serif', license: 'OFL', classic: false },
+  { id: 'open-sans', label: 'Open Sans', family: 'Open Sans', slug: 'open-sans', css: '"Open Sans", Arial, sans-serif', license: 'OFL', classic: false },
+  { id: 'lato', label: 'Lato', family: 'Lato', slug: 'lato', css: 'Lato, Arial, sans-serif', license: 'OFL', classic: false },
+  { id: 'poppins', label: 'Poppins', family: 'Poppins', slug: 'poppins', css: 'Poppins, Arial, sans-serif', license: 'OFL', classic: false },
+  { id: 'inter', label: 'Inter', family: 'Inter', slug: 'inter', css: 'Inter, Arial, sans-serif', license: 'OFL', classic: false },
+  { id: 'dm-sans', label: 'DM Sans', family: 'DM Sans', slug: 'dm-sans', css: '"DM Sans", Arial, sans-serif', license: 'OFL', classic: false },
+];
+
+export type PdfFont = 'sans' | 'serif' | 'mono' | 'roboto' | 'montserrat' | 'open-sans' | 'lato' | 'poppins' | 'inter' | 'dm-sans';
+
+const BY_ID = new Map<string, FontDef>(PDF_FONTS.map((f) => [f.id, f]));
+
+export function fontDef(fam: PdfFont): FontDef {
+  return BY_ID.get(fam) || BY_ID.get('sans')!;
+}
 
 export function fontCss(fam: PdfFont = 'sans'): string {
-  return FILES[fam].css;
+  return fontDef(fam).css;
+}
+
+/** The metric-compatible trio — preloaded at open (see PDF_FONTS.classic). */
+export function classicFonts(): readonly FontDef[] {
+  return PDF_FONTS.filter((f) => f.classic);
 }
 
 /**
- * Map a PDF /BaseFont or font name to one of the 3 families by keyword.
- * Subset prefixes (ABCDEE+Arial-BoldMT) are stripped first. Unknown →
- * 'sans'. Pure — tested.
+ * Face URL for one of the four shipped faces per family.
+ * fontsource layout: latin-{400,700}-{normal,italic}.ttf — all 40 files
+ * verified present before this list shipped.
  */
-export function detectFontFamily(fontName: string | null | undefined): PdfFont {
+export function faceUrl(fam: PdfFont, bold: boolean, italic: boolean): string {
+  const d = fontDef(fam);
+  return `${CDN}/${d.slug}@latest/latin-${bold ? 700 : 400}-${italic ? 'italic' : 'normal'}.ttf`;
+}
+
+/**
+ * Map a PDF /BaseFont or font name to one of the classic trio by keyword.
+ * Subset prefixes (ABCDEE+Arial-BoldMT) are stripped first. Unknown →
+ * 'sans'. Pure — tested. (Retype is metric-detection, so it never lands
+ * on the popular seven.)
+ */
+export function detectFontFamily(fontName: string | null | undefined): 'sans' | 'serif' | 'mono' {
   const n = (fontName || '').replace(/^[A-Z]{6}\+/, '').toLowerCase();
   if (/courier|mono|consolas|menlo|fixedsys|lucida.*typewriter|nimbusmono/.test(n)) return 'mono';
   if (/times|georgia|garamond|serif|palatino|bookman|charter|freeserif|liberationserif/.test(n)) return 'serif';
@@ -69,11 +114,11 @@ function idb(): Promise<IDBDatabase> {
 }
 
 /**
- * Fetch a font file with IndexedDB caching (keyed with version so future
+ * Fetch one face with IndexedDB caching (keyed with version so future
  * swaps invalidate). Throws on network failure — callers fall back.
  */
-export async function loadFontBytes(fam: PdfFont, bold: boolean): Promise<ArrayBuffer> {
-  const key = `font-${VER}-${fam}-${bold ? '700' : '400'}`;
+export async function loadFontBytes(fam: PdfFont, bold: boolean, italic: boolean): Promise<ArrayBuffer> {
+  const key = `font-${VER}-${fam}-${bold ? '700' : '400'}-${italic ? 'italic' : 'normal'}`;
   try {
     const db = await idb();
     const hit = await new Promise<ArrayBuffer | null>((resolve, reject) => {
@@ -86,7 +131,7 @@ export async function loadFontBytes(fam: PdfFont, bold: boolean): Promise<ArrayB
       db.close();
       return hit;
     }
-    const res = await fetch(FILES[fam][bold ? 'bold' : 'plain']);
+    const res = await fetch(faceUrl(fam, bold, italic));
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const buf = await res.arrayBuffer();
     if (buf.byteLength < 1000) throw new Error('truncated font');
@@ -104,18 +149,20 @@ export async function loadFontBytes(fam: PdfFont, bold: boolean): Promise<ArrayB
 }
 
 /**
- * Make the family usable for canvas preview via FontFace (best-effort —
- * preview falls back to system fonts silently on failure).
+ * Make one face usable for canvas/DOM preview via FontFace (best-effort —
+ * preview falls back to the CSS stack's system font silently on failure).
+ * No-op when the face is already registered.
  */
-export async function ensurePreviewFont(fam: PdfFont, bold: boolean): Promise<void> {
+export async function ensurePreviewFont(fam: PdfFont, bold: boolean, italic: boolean): Promise<void> {
   try {
-    const name = fam === 'sans' ? 'Arimo' : fam === 'serif' ? 'Tinos' : 'Cousine';
-    const style = `${bold ? '700' : '400'}`;
+    const d = fontDef(fam);
+    const weight = bold ? '700' : '400';
+    const style = italic ? 'italic' : 'normal';
     for (const f of document.fonts) {
-      if (f.family === name && f.weight === style && f.status === 'loaded') return;
+      if (f.family === d.family && f.weight === weight && f.style === style && f.status === 'loaded') return;
     }
-    const buf = await loadFontBytes(fam, bold);
-    const face = new FontFace(name, buf, { weight: style });
+    const buf = await loadFontBytes(fam, bold, italic);
+    const face = new FontFace(d.family, buf, { weight, style });
     await face.load();
     document.fonts.add(face);
   } catch {
