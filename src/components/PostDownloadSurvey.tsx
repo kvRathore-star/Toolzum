@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { toast } from "react-hot-toast";
 import { ThumbsUp, ThumbsDown, X } from "lucide-react";
+import { mayCollectTelemetry } from "@/lib/consent";
 
 const SURVEY_KEY = "th_survey_shown";
 
@@ -39,13 +40,17 @@ export function PostDownloadSurvey() {
       localStorage.setItem("th_survey_responses", JSON.stringify(responses));
       localStorage.setItem(SURVEY_KEY, "1");
     } catch (e) { console.error("[toolzum]", e); }
-    try {
-      fetch("/api/analytics", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ path: window.location.pathname || '/', event: 'vote', vote }),
-      }).catch(() => {});
-    } catch { /* best-effort */ }
+    // Telemetry leg honors the GDPR choice: Decline keeps the vote local
+    // only (localStorage above) — the network send is non-essential.
+    if (mayCollectTelemetry()) {
+      try {
+        fetch("/api/analytics", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ path: window.location.pathname || '/', event: 'vote', vote }),
+        }).catch(() => {});
+      } catch { /* best-effort */ }
+    }
     setVisible(false);
     if (helpful) {
       toast.success("Glad it helped!");

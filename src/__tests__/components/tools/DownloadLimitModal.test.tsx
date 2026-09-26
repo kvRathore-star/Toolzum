@@ -95,7 +95,7 @@ describe('DownloadLimitModal', () => {
     
     fireEvent(window, new CustomEvent('toolzum:download-blocked'));
     
-    const signInLink = screen.getByText('Sign in free — unlock 5/day + 10 credits');
+    const signInLink = screen.getByText('Sign in free — unlock 5/day + 5 trial credits');
     expect(signInLink).toBeDefined();
   });
 

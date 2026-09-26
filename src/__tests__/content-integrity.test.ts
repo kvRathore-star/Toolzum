@@ -312,8 +312,13 @@ describe('content integrity gate: registry copy + FAQ ratchet (item 26)', () => 
       const src = fs.readFileSync(f, 'utf8');
       if (src.split('\n').length >= 40) return false;
       if (src.includes('export *')) return false; // barrel
-      // healthy thin wrappers reuse shared engines/shells/hubs/configs
-      return !/shared\/|Shell|Hub|config|preset|BulkToolShell/i.test(src);
+      // healthy thin wrappers reuse shared engines/shells/hubs/configs …
+      if (/shared\/|Shell|Hub|config|preset|BulkToolShell/i.test(src)) return false;
+      // … or compose sibling modules (the core/leaf split: a leaf like
+      // pdf/editor/Sidebar.tsx is thin ON PURPOSE because the shared piece
+      // — PagesList, shared desktop + mobile — lives next door). Importing
+      // a local module is reuse the keyword list can't spell.
+      return !/from ['"]\.\.?\//.test(src);
     }).map((f) => path.relative(root, f));
     expect(suspects, 'thin modules with no shared reuse').toEqual([]);
   });

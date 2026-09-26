@@ -29,6 +29,11 @@ const CROSS_LISTING_WHITELIST: Record<string, string[]> = {
     'url-to-pdf', 'eml-to-pdf', 'tiff-to-pdf', 'bulk-image-to-pdf',
   ],
   'Video/convert': ['video-converter'],
+  // PDF hub shelves (ad65e8ab PDF shelf resplit): PDF's own create/ai
+  // sections deliberately surface converters and AI tools that live in
+  // other categories. Declared here when the resplit shipped.
+  'PDF/create': ['epub-to-pdf'],
+  'PDF/ai': ['pdf-ai-summariser', 'ai-chat-pdf'],
 };
 
 const sectionIndex: { category: string; id: string; slug: string }[] = [];
