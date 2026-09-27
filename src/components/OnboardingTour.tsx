@@ -6,14 +6,14 @@ import { useSession } from "@/lib/auth-client";
 const STORAGE_KEY = "toolzum_onboarded";
 export const REPLAY_TOUR_EVENT = "toolzum:replay-tour";
 
-interface TourStep {
+export interface TourStep {
   /** CSS selector for the anchor element. Omitted → centered card. */
   anchor?: string;
   title: string;
   body: string;
 }
 
-const STEPS: TourStep[] = [
+const SITE_STEPS: TourStep[] = [
   {
     anchor: '[aria-label="Open search"]',
     title: "1,100+ tools, one keystroke away",
@@ -30,13 +30,43 @@ const STEPS: TourStep[] = [
   },
 ];
 
+interface OnboardingTourProps {
+  steps?: TourStep[];
+  /** localStorage flag — one show per device per key. */
+  storageKey?: string;
+  /** aria-label prefix: "… tour, step N of M". */
+  label?: string;
+  /** Mirror "seen" to /api/account/tour for signed-in users (site tour only). */
+  syncAccount?: boolean;
+  /** Footer replay event; null → no replay entry point. */
+  replayEvent?: string | null;
+  /**
+   * Hold until the site tour is done (its flag set OR its dialog gone) so
+   * two tours never stack when a first visit lands straight on a tool page.
+   * The dialog check covers private mode, where the flag write throws but
+   * the dialog still closes. Site instance: off — it IS the site tour.
+   */
+  deferUntilSiteTour?: boolean;
+}
+
 /**
  * First-visit tooltip tour. Shows once (localStorage flag), dismissible
  * via Next/Skip/Escape, never blocks. Steps 1–2 anchor to header
  * elements; step 3 is a centered card. Copy approved as product voice —
  * keep the "most tools" qualifier honest for cloud-AI tools.
+ *
+ * Parameterized: the PDF editor mounts its own instance (own steps, own
+ * flag, localStorage-only — no account sync, no replay event). Defaults
+ * are the site tour, behavior unchanged.
  */
-export function OnboardingTour() {
+export function OnboardingTour({
+  steps = SITE_STEPS,
+  storageKey = STORAGE_KEY,
+  label = "Welcome tour",
+  syncAccount = true,
+  replayEvent = REPLAY_TOUR_EVENT,
+  deferUntilSiteTour = false,
+}: OnboardingTourProps = {}) {
   const [step, setStep] = useState<number | null>(null);
   const [pos, setPos] = useState<{ top: number; left: number } | null>(null);
   const prevFocus = useRef<HTMLElement | null>(null);
@@ -46,12 +76,12 @@ export function OnboardingTour() {
   const persistSeen = useCallback(
     async (seen: boolean) => {
       try {
-        if (seen) localStorage.setItem(STORAGE_KEY, "1");
-        else localStorage.removeItem(STORAGE_KEY);
+        if (seen) localStorage.setItem(storageKey, "1");
+        else localStorage.removeItem(storageKey);
       } catch {
         /* private mode — server flag still applies for signed users */
       }
-      if (isSignedIn) {
+      if (isSignedIn && syncAccount) {
         try {
           await fetch("/api/account/tour", {
             method: "POST",
@@ -63,26 +93,38 @@ export function OnboardingTour() {
         }
       }
     },
-    [isSignedIn],
+    [isSignedIn, syncAccount, storageKey],
   );
 
   useEffect(() => {
     if (isPending) return;
     let cancelled = false;
-    (async () => {
+    let poll: ReturnType<typeof setInterval> | null = null;
+    const flagSet = () => {
       try {
-        if (localStorage.getItem(STORAGE_KEY)) return;
+        return !!localStorage.getItem(storageKey);
       } catch {
-        /* fall through to server check for signed users */
+        return false;
       }
-      if (isSignedIn) {
+    };
+    const siteTourDone = () => {
+      try {
+        if (localStorage.getItem(STORAGE_KEY)) return true;
+      } catch {
+        /* private mode — fall through to the dialog check */
+      }
+      return !document.querySelector('[aria-label^="Welcome tour"]');
+    };
+    (async () => {
+      if (flagSet()) return;
+      if (isSignedIn && syncAccount) {
         try {
           const res = await fetch("/api/account/tour");
           if (res.ok) {
             const data = (await res.json()) as { seen?: boolean };
             if (data.seen) {
               try {
-                localStorage.setItem(STORAGE_KEY, "1");
+                localStorage.setItem(storageKey, "1");
               } catch {
                 /* ignore */
               }
@@ -93,24 +135,36 @@ export function OnboardingTour() {
           /* show the tour rather than failing silently */
         }
       }
-      if (!cancelled) {
-        // Intentional: show tour exactly once on first mount.
-        setStep(0);
+      if (cancelled) return;
+      if (deferUntilSiteTour && !siteTourDone()) {
+        // Poll cheaply until the site tour finishes (flag set or dialog
+        // closed) — a second dialog must never stack on the first.
+        poll = setInterval(() => {
+          if (cancelled || !siteTourDone()) return;
+          clearInterval(poll!);
+          poll = null;
+          if (!flagSet()) setStep(0);
+        }, 500);
+        return;
       }
+      // Intentional: show tour exactly once on first mount.
+      setStep(0);
     })();
     return () => {
       cancelled = true;
+      if (poll) clearInterval(poll);
     };
-  }, [isPending, isSignedIn]);
+  }, [isPending, isSignedIn, syncAccount, storageKey, deferUntilSiteTour]);
 
   // Footer "Replay tour" entry point — resets both flags and restarts.
   useEffect(() => {
+    if (replayEvent === null) return;
     const onReplay = () => {
       void persistSeen(false).finally(() => setStep(0));
     };
-    window.addEventListener(REPLAY_TOUR_EVENT, onReplay);
-    return () => window.removeEventListener(REPLAY_TOUR_EVENT, onReplay);
-  }, [persistSeen]);
+    window.addEventListener(replayEvent, onReplay);
+    return () => window.removeEventListener(replayEvent, onReplay);
+  }, [replayEvent, persistSeen]);
 
   // Skip AND Done both persist — a dismissed tour must never reappear
   // (previously Skip forgot the flag and nagged every visit).
@@ -138,8 +192,8 @@ export function OnboardingTour() {
   useEffect(() => {
     if (step === null) return;
     const place = () => {
-      const anchor = STEPS[step]!.anchor
-        ? document.querySelector(STEPS[step]!.anchor as string)
+      const anchor = steps[step]!.anchor
+        ? document.querySelector(steps[step]!.anchor as string)
         : null;
       // Hidden anchors (e.g. `header nav` is display:none on mobile) still
       // query-match but report a zero rect — treat them as missing so the
@@ -166,16 +220,16 @@ export function OnboardingTour() {
       window.removeEventListener("resize", place);
       document.removeEventListener("keydown", onKey);
     };
-  }, [step, dismiss]);
+  }, [step, dismiss, steps]);
 
   if (step === null) return null;
-  const current = STEPS[step];
-  const last = step === STEPS.length - 1;
+  const current = steps[step];
+  const last = step === steps.length - 1;
 
   return (
     <div
       role="dialog"
-      aria-label={`Welcome tour, step ${step + 1} of ${STEPS.length}`}
+      aria-label={`${label}, step ${step + 1} of ${steps.length}`}
       className="fixed z-[9998] w-[320px] rounded-[var(--radius-xl)] border border-[var(--border-subtle)] bg-[var(--bg-elevated)] p-4 shadow-xl"
       style={pos ? { top: pos.top, left: pos.left } : { bottom: 24, left: "50%", transform: "translateX(-50%)" }}
     >
@@ -190,7 +244,7 @@ export function OnboardingTour() {
         </button>
         <div className="flex items-center gap-2">
           <span className="text-[11px] text-[var(--text-muted)]">
-            {step + 1} / {STEPS.length}
+            {step + 1} / {steps.length}
           </span>
           <button
             autoFocus

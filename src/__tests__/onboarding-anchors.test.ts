@@ -5,7 +5,7 @@ import path from "node:path";
 /**
  * Onboarding tour anchor gate (#32). Tour steps anchor to live header
  * elements by selector — a header rename silently orphans the step
- * (the card still shows, just unanchored). Every selector in STEPS must
+ * (the card still shows, just unanchored). Every selector in SITE_STEPS must
  * resolve against Header source.
  */
 const ROOT = process.cwd();
@@ -15,10 +15,11 @@ function tourAnchors(): string[] {
     path.join(ROOT, "src/components/OnboardingTour.tsx"),
     "utf8",
   );
-  // STEPS block only — the dialog's own aria-label={`...`} template
+  // SITE_STEPS block only (the PDF editor's steps live in PdfEditorCore
+  // and are gated there) — the dialog's own aria-label={`...`} template
   // below would otherwise match the anchor pattern. Anchors are
   // single-quoted (they contain double quotes), so match those.
-  const block = src.match(/const STEPS[\s\S]*?];/)?.[0] ?? "";
+  const block = src.match(/const SITE_STEPS[\s\S]*?];/)?.[0] ?? "";
   return [...block.matchAll(/anchor:\s*'([^']+)'/g)].map((m) => m[1]!);
 }
 

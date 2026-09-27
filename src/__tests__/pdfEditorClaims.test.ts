@@ -199,6 +199,41 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
     });
   });
 
+  describe('first-open editor tour (decision Sep 2026)', () => {
+    it('impl: tour mounts only in the workspace — never behind the empty-state uploader', () => {
+      const mount = editor.indexOf('<OnboardingTour');
+      expect(mount, 'OnboardingTour not mounted').toBeGreaterThan(-1);
+      expect(mount, 'must mount after the empty-state screen (controls absent there)').toBeGreaterThan(
+        editor.indexOf('Open a PDF to edit'),
+      );
+      expect(editor.match(/<OnboardingTour/g)).toHaveLength(1);
+    });
+    it('claim: 3–4 steps whose anchors match shipped DOM hooks', () => {
+      const block = editor.match(/const PDF_EDITOR_TOUR_STEPS[\s\S]*?\n\];/)?.[0] ?? '';
+      expect(block, 'PDF_EDITOR_TOUR_STEPS missing').toBeTruthy();
+      const titles = [...block.matchAll(/title: '/g)].length;
+      expect(titles).toBeGreaterThanOrEqual(3);
+      expect(titles).toBeLessThanOrEqual(4);
+      expect(block).toMatch(/anchor: '\[aria-label="Editing tools"\]'/);
+      expect(block, 'pages step must target the Del-deletable thumbnail').toMatch(/anchor: '\[data-thumb-page\]'/);
+      expect(block).toMatch(/anchor: '\[aria-label="Download flattened PDF"\]'/);
+      expect(editor, 'LeftPanel must keep the region the tour anchors to').toMatch(/aria-label="Editing tools"/);
+    });
+    it('impl: once per device via its own localStorage key — no account sync', () => {
+      expect(editor).toMatch(/PDF_EDITOR_TOUR_KEY = 'toolzum_pdf_editor_toured'/);
+      expect(editor).toMatch(/storageKey=\{PDF_EDITOR_TOUR_KEY\}/);
+      expect(editor, 'editor tour must not mirror seen to the account API').toMatch(/syncAccount=\{false\}/);
+    });
+    it('impl: defers behind the site tour so two dialogs never stack', () => {
+      expect(editor).toMatch(/replayEvent=\{null\}/);
+      expect(editor).toMatch(/deferUntilSiteTour/);
+    });
+    it('claim: step copy matches shipped behavior (Del = focused thumbnail only)', () => {
+      expect(editor).toMatch(/focus a thumbnail and press Del to remove that page/);
+      expect(editor, 'privacy claim must stay local-only').toMatch(/never leaves this device/);
+    });
+  });
+
   describe('global Ctrl+S (found while writing this file — historical bug #4)', () => {
     it('claim: Save button title promises Ctrl+S session save', () => {
       expect(editor).toMatch(/Save session \(Ctrl\+S\)/);

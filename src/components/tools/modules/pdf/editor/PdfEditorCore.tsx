@@ -16,6 +16,7 @@ import { Turnstile } from '@marsidev/react-turnstile';
 import type { PdfFont } from '@/lib/pdfFonts';
 import { fontCss, detectFontFamily, detectBold, loadFontBytes, ensurePreviewFont, classicFonts } from '@/lib/pdfFonts';
 import Link from 'next/link';
+import { OnboardingTour, type TourStep } from '@/components/OnboardingTour';
 import { PdfEditorCtx, type PdfEditorApi } from './pdfEditorContext';
 import { MobileActionBar } from './MobileActionBar';
 import { Sidebar } from './Sidebar';
@@ -141,6 +142,37 @@ const MAX_PAGES_ANON = 150;
 const MAX_PAGES_SIGNED = 300;
 const MAX_PAGES_PRO = 500;
 const THUMB_INITIAL = 60;
+
+/** First-open editor tour flag — once per device, localStorage only. */
+export const PDF_EDITOR_TOUR_KEY = 'toolzum_pdf_editor_toured';
+
+/**
+ * 3–4 step tour for the first time a document is open (mounted in the
+ * workspace only — the empty state has none of these controls). Defers
+ * behind the site-wide tour so dialogs never stack. Step 2 copy mirrors
+ * the shipped focused-thumbnail Del behavior (see PagesList).
+ */
+const PDF_EDITOR_TOUR_STEPS: TourStep[] = [
+  {
+    anchor: '[aria-label="Editing tools"]',
+    title: 'Pick a tool on the left',
+    body: 'Highlight, draw, sign, redact — choose a tool, then click the page.',
+  },
+  {
+    anchor: '[data-thumb-page]',
+    title: 'Pages live as thumbnails',
+    body: 'Drag to reorder, rotate, or focus a thumbnail and press Del to remove that page.',
+  },
+  {
+    anchor: '[aria-label="Download flattened PDF"]',
+    title: 'Download makes a fresh copy',
+    body: 'Edits flatten into a new PDF — the original file on your device is never touched.',
+  },
+  {
+    title: 'Private by default',
+    body: 'Your PDF never leaves this device — editing, OCR, and export run right in your browser.',
+  },
+];
 
 export default function PdfEditorCore() {
   const [file, setFile] = useState<File | null>(null);
@@ -3124,6 +3156,17 @@ export default function PdfEditorCore() {
       </div>
 
       {fileBytes && <MobileActionBar />}
+
+      {/* First-open tour — only mounted with a doc open (the controls it
+          points at exist), and it defers behind the site-wide tour. */}
+      <OnboardingTour
+        steps={PDF_EDITOR_TOUR_STEPS}
+        storageKey={PDF_EDITOR_TOUR_KEY}
+        label="PDF editor tour"
+        syncAccount={false}
+        replayEvent={null}
+        deferUntilSiteTour
+      />
 
 
       {/* Status bar (Voidmark-style): live doc stats, always visible. */}

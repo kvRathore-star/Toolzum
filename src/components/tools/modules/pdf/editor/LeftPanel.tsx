@@ -21,7 +21,7 @@ export function LeftPanel() {
   const [emojiQuery, setEmojiQuery] = useState('');
 
   return (
-        <div className="lg:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-3 space-y-3 max-h-[720px] overflow-y-auto">
+        <div role="region" aria-label="Editing tools" className="lg:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-3 space-y-3 max-h-[720px] overflow-y-auto">
           {toolGroups.map((g) => (
             <div key={g} className="space-y-1.5">
               <p className="px-1 text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">{g}</p>

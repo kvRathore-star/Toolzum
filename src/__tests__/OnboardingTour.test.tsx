@@ -86,4 +86,62 @@ describe('OnboardingTour persistence', () => {
     anchor.remove();
     vi.unstubAllGlobals();
   });
+
+  // PDF editor instance — decision Sep 2026: once per device via its own
+  // localStorage key, NO account sync, and never stacked on the site tour.
+  const editorProps = {
+    steps: [{ title: 'Step A', body: 'Body A' }],
+    storageKey: 'toolzum_pdf_editor_toured',
+    label: 'PDF editor tour',
+    syncAccount: false,
+    replayEvent: null,
+    deferUntilSiteTour: true,
+  };
+
+  it('editor tour shows once under its own key, never the site key', async () => {
+    render(<OnboardingTour {...editorProps} />);
+    await waitFor(() => {
+      expect(screen.getByText('Skip tour')).toBeDefined();
+    });
+    fireEvent.click(screen.getByText('Skip tour'));
+    expect(localStorage.getItem('toolzum_pdf_editor_toured')).toBe('1');
+    expect(localStorage.getItem('toolzum_onboarded')).toBeNull();
+    // second mount: hidden for good
+    const { container } = render(<OnboardingTour {...editorProps} />);
+    expect(container.innerHTML).toBe('');
+  });
+
+  it('editor tour never calls the account API (localStorage only, no account)', async () => {
+    const fetchSpy = vi.fn();
+    vi.stubGlobal('fetch', fetchSpy);
+    render(<OnboardingTour {...editorProps} />);
+    await waitFor(() => {
+      expect(screen.getByText('Skip tour')).toBeDefined();
+    });
+    expect(fetchSpy).not.toHaveBeenCalled();
+    vi.unstubAllGlobals();
+  });
+
+  it('editor tour defers while the site-tour dialog is live (no stacked tours)', async () => {
+    const siteDialog = document.createElement('div');
+    siteDialog.setAttribute('role', 'dialog');
+    siteDialog.setAttribute('aria-label', 'Welcome tour, step 1 of 3');
+    document.body.appendChild(siteDialog);
+    const { container } = render(<OnboardingTour {...editorProps} />);
+    // poll ticks every 500ms — two full ticks must not release it
+    await new Promise((r) => setTimeout(r, 1100));
+    expect(container.innerHTML).toBe('');
+    siteDialog.remove();
+    await waitFor(() => {
+      expect(screen.getByText('Skip tour')).toBeDefined();
+    }, { timeout: 2000 });
+  });
+
+  it('editor tour releases immediately when the site flag is already set', async () => {
+    localStorage.setItem('toolzum_onboarded', '1');
+    render(<OnboardingTour {...editorProps} />);
+    await waitFor(() => {
+      expect(screen.getByText('Skip tour')).toBeDefined();
+    });
+  });
 });
