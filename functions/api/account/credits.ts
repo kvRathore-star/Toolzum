@@ -80,7 +80,19 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       }
     }
 
-    return new Response(JSON.stringify({ credits, plan, allowance }), {
+    // Credit packs stack ON TOP of the allowance and are spent after it —
+    // shown separately so "45 of 200" never silently includes pack credits.
+    let packCredits = 0;
+    try {
+      const pack = await DB.prepare(
+        "SELECT COALESCE(SUM(remaining), 0) AS total FROM credit_grants WHERE userId = ? AND expiresAt > ?"
+      ).bind(session.user.id, now).first<{ total: number | null }>();
+      packCredits = pack?.total ?? 0;
+    } catch {
+      /* migration 0027 not applied yet — behave as if no packs */
+    }
+
+    return new Response(JSON.stringify({ credits, plan, allowance, packCredits }), {
       headers: { "Content-Type": "application/json" },
     });
   } catch {

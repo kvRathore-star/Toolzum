@@ -7,6 +7,8 @@ export interface LiveCredits {
   credits: number;
   plan: string;
   allowance: number;
+  /** Non-expired credit-pack balance — spent only after the allowance. */
+  packCredits: number;
 }
 
 /**
@@ -33,6 +35,7 @@ export function useLiveCredits(active: boolean): LiveCredits | null {
           allowance: typeof data.allowance === "number"
             ? data.allowance
             : data.plan === "pro" ? PRO_CREDITS : FREE_CREDITS,
+          packCredits: typeof data.packCredits === "number" ? data.packCredits : 0,
         });
       } catch {
         // Session value remains the fallback — never blank the UI.

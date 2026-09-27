@@ -17,6 +17,7 @@ import {
   effectivePlanForUser, FREE_TRIAL_CREDITS,
   type EffectivePlan,
 } from '../../../src/lib/planTiers';
+import { creditsAvailable, spendCredits } from '../../../src/lib/creditPacks';
 
 // Per-task cost: plain text generation. (Transcription is metered per
 // minute — see CREDITS_PER_MINUTE in transcribe.ts / transcriptionPricing.ts.)
@@ -110,7 +111,9 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     const { balance, maxCredits } = await resetCreditsIfNeeded(DB, userId, resetPlan, user.creditResetAt, user.credits);
 
-    if (balance <= 0) {
+    // Allowance first; non-expired credit packs cover the rest (packs are
+    // spent only after the monthly/trial balance — see creditPacks.ts).
+    if (!(await creditsAvailable(DB, userId, TEXT_GENERATION_CREDITS, balance))) {
       await logAiCreditEvent(DB, { userId, task: 'generate', outcome: 'blocked_exhausted', balance, allowance: maxCredits });
       return new Response(JSON.stringify({ error: 'No credits remaining' }), {
         status: 403,
@@ -176,8 +179,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    await DB.prepare(`UPDATE user SET credits = credits - ${TEXT_GENERATION_CREDITS} WHERE id = ? AND credits > 0`).bind(userId).run();
-    await logAiCreditEvent(DB, { userId, task: 'generate', outcome: 'allowed', balance: balance - TEXT_GENERATION_CREDITS, allowance: maxCredits });
+    const spent = await spendCredits(DB, userId, TEXT_GENERATION_CREDITS, balance);
+    await logAiCreditEvent(DB, { userId, task: 'generate', outcome: 'allowed', balance: Math.max(balance - spent.allowance, 0), allowance: maxCredits });
 
     return new Response(JSON.stringify({ content: text }), {
       headers: { 'Content-Type': 'application/json' },

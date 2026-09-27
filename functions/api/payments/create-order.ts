@@ -9,6 +9,13 @@ const DODO_PRODUCTS: Record<string, string> = {
   monthly: "pdt_0Nnxjj5tGkZs2aaArMZAg",
   yearly: "pdt_0NnxnhVX9UpNpAWGnPKis",
   pass: "pdt_0NnxoUmsSDo8QS9UhLJ0J",
+  // Credit packs: create three ONE-TIME products in the Dodo dashboard at
+  // the INR+USD prices in PRICES below (and in webhook PACK_PRODUCTS),
+  // then paste their IDs here. Empty string keeps the guard honest —
+  // checkout 400s instead of selling a pack at the wrong product.
+  pack_100: "",
+  pack_500: "",
+  pack_1000: "",
 };
 
 const PRICES: Record<string, { INR: number; USD: number }> = {
@@ -19,6 +26,11 @@ const PRICES: Record<string, { INR: number; USD: number }> = {
   pass: { INR: 99, USD: 3.99 },
   monthly: { INR: 299, USD: 9.99 },
   yearly: { INR: 2990, USD: 99 },
+  // Credit packs — one-time, valid 12 months. Volume ladder above the
+  // Pro floor ($9.99 ÷ 200 ≈ $0.05/credit): $0.08 → $0.06 → $0.05.
+  pack_100: { INR: 249, USD: 7.99 },
+  pack_500: { INR: 899, USD: 29.99 },
+  pack_1000: { INR: 1499, USD: 49.99 },
 };
 
 const VALID_GATEWAYS = ['razorpay', 'dodo'];
@@ -26,6 +38,7 @@ const VALID_GATEWAYS = ['razorpay', 'dodo'];
 const RATE_LIMIT = 5;
 
 import { checkRateLimit, recordRateLimit } from '../rate-limit';
+import { packCreditsFor } from '../../../src/lib/creditPacks';
 
 export async function onRequestPost(context: { request: Request; env: Env }) {
   try {
@@ -135,7 +148,9 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
           body: JSON.stringify({
             product_cart: [{ product_id: productId, quantity: 1 }],
             customer: { email: buyer.email, name: buyer.name || undefined },
-            metadata: { plan: plan === "pass" ? "pass" : "pro", orderId },
+            metadata: plan.startsWith("pack_")
+              ? { plan: "pack", tier: plan, credits: String(packCreditsFor(plan) ?? ""), orderId }
+              : { plan: plan === "pass" ? "pass" : "pro", orderId },
             billing_currency: currency,
             billing_address: { country: buyerCountry },
             return_url: `https://toolzum.com/api/payments/return?order=${orderId}`,

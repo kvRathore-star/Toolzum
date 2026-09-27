@@ -15,6 +15,7 @@ import {
   effectivePlanForUser, FREE_TRIAL_CREDITS,
   type EffectivePlan,
 } from '../../../src/lib/planTiers';
+import { creditsAvailable, spendCredits } from '../../../src/lib/creditPacks';
 
 // Per-task cost: HD generation (~$0.045/image) costs 5 credits — ~40/mo Pro.
 // (Old comment claimed "~6 images/mo free": stale since the one-time trial;
@@ -146,7 +147,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     const { balance, maxCredits } = await resetCreditsIfNeeded(DB, userId, resetPlan, user.creditResetAt, user.credits);
 
-    if (balance < cost) {
+    // Allowance first; credit packs cover the remainder (creditPacks.ts).
+    if (!(await creditsAvailable(DB, userId, cost, balance))) {
       await logAiCreditEvent(DB, { userId, task: 'image', outcome: 'blocked_exhausted', balance, allowance: maxCredits });
       return new Response(JSON.stringify({ error: `Not enough credits — image generation requires ${cost}` }), {
         status: 403,
@@ -211,8 +213,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
           headers: { 'Content-Type': 'application/json' },
         });
       }
-      await DB.prepare(`UPDATE user SET credits = credits - ${cost} WHERE id = ? AND credits >= ${cost}`).bind(userId).run();
-      await logAiCreditEvent(DB, { userId, task: 'image', outcome: 'allowed', balance: balance - cost, allowance: maxCredits });
+      const spentDraft = await spendCredits(DB, userId, cost, balance);
+      await logAiCreditEvent(DB, { userId, task: 'image', outcome: 'allowed', balance: Math.max(balance - spentDraft.allowance, 0), allowance: maxCredits });
       return new Response(JSON.stringify({ image: base64, mimeType: 'image/png' }), {
         headers: { 'Content-Type': 'application/json' },
       });
@@ -253,8 +255,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    await DB.prepare(`UPDATE user SET credits = credits - ${cost} WHERE id = ? AND credits >= ${cost}`).bind(userId).run();
-    await logAiCreditEvent(DB, { userId, task: 'image', outcome: 'allowed', balance: balance - cost, allowance: maxCredits });
+    const spentImg = await spendCredits(DB, userId, cost, balance);
+    await logAiCreditEvent(DB, { userId, task: 'image', outcome: 'allowed', balance: Math.max(balance - spentImg.allowance, 0), allowance: maxCredits });
 
     return new Response(JSON.stringify({
       image: imagePart.inlineData.data,

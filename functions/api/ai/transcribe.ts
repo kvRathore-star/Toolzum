@@ -24,6 +24,7 @@ import {
   effectivePlanForUser, FREE_TRIAL_CREDITS,
   type EffectivePlan,
 } from '../../../src/lib/planTiers';
+import { creditsAvailable, spendCredits } from '../../../src/lib/creditPacks';
 import {
   TRANSCRIPTION_MAX_SECONDS,
   TRANSCRIPTION_MAX_BYTES,
@@ -192,7 +193,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     }
 
     const cost = transcriptionCostForDuration(durationSec);
-    if (balance < cost) {
+    // Allowance first; credit packs cover the remainder (creditPacks.ts).
+    if (!(await creditsAvailable(DB, userId, cost, balance))) {
       await logAiCreditEvent(DB, { userId, task: 'transcribe', outcome: 'blocked_exhausted', balance, allowance: maxCredits });
       return new Response(JSON.stringify({ error: `Not enough credits — this file costs ${cost}` }), {
         status: 403,
@@ -326,8 +328,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    await DB.prepare(`UPDATE user SET credits = credits - ${cost} WHERE id = ? AND credits >= ${cost}`).bind(userId).run();
-    await logAiCreditEvent(DB, { userId, task: 'transcribe', outcome: 'allowed', balance: balance - cost, allowance: maxCredits });
+    const spent = await spendCredits(DB, userId, cost, balance);
+    await logAiCreditEvent(DB, { userId, task: 'transcribe', outcome: 'allowed', balance: Math.max(balance - spent.allowance, 0), allowance: maxCredits });
 
     const contentType = responseFormat === 'srt' ? 'text/plain' : 'text/plain';
 

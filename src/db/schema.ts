@@ -111,4 +111,19 @@ export const userToolUsage = sqliteTable("user_tool_usage", {
   index("user_tool_usage_usedAt_idx").on(t.usedAt),
 ]);
 
+// AI credit packs — one-time top-ups with 12-month expiry, spent only
+// after the monthly allowance (migration 0027, src/lib/creditPacks.ts).
+export const creditGrants = sqliteTable("credit_grants", {
+  id: text("id").primaryKey(),
+  userId: text("userId").notNull(),
+  credits: integer("credits").notNull(),
+  remaining: integer("remaining").notNull(),
+  source: text("source").notNull(),
+  orderId: text("orderId"),
+  grantedAt: integer("grantedAt").notNull(),
+  expiresAt: integer("expiresAt").notNull(),
+}, (t) => [
+  index("idx_credit_grants_user_expiry").on(t.userId, t.expiresAt),
+]);
+
 

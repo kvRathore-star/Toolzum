@@ -21,7 +21,7 @@ Last updated: 2026-08-23
 
 ## Business decisions (separate thread)
 - [x] 9. Email capture — where do signups go? → answered Sep 19 2026: `notify_waitlist` D1 table via POST /api/notify-me (ComingSoon pages + extension waitlist); launch broadcast via GET /api/admin/notify-broadcast
-- [ ] 10. Annual plan / credit pack — what price/credit size?
+- [x] 10. Annual plan / credit pack — what price/credit size? → answered Sep 26 2026 (annual already shipped `1a398f0c`; packs): 100/500/1,000 credits at ₹249/$7.99, ₹899/$29.99, ₹1,499/$49.99, valid 12 months, spent after monthly allowance (partial OK), FIFO earliest-expiry. New `credit_grants` table (migration 0027), `src/lib/creditPacks.ts`, spend sites rewired, PricingCards "AI credit packs" section, webhook grants on `pack_*` plans, `packCredits` in `/api/account/credits`. Blocked on: Dodo dashboard product IDs in `DODO_PRODUCTS` + applying migration 0027 to D1.
 
 ## Save for Focus Time
 - [ ] 11. FAQ rollout (~1,060 tools) — multi-day
@@ -104,12 +104,18 @@ One rescue — the "Important Notes" honesty block (~15 lines): the coverage-def
 
 Contact form — FIXED Sep 19 2026: functions/api/contact.ts relays via Cloudflare Email Sending; success gated on res.ok && data.ok; honest 503/502 fallbacks. Suggest-a-tool boxes (homepage, contact, roadmap) deep-link into it.
 
-Clipboard honesty long tail: 154 clipboardWrite callers + 137 direct navigator.clipboard uses still assume success. Batch-convert to checked returns with fallback toasts. Shared shells already done.
+  Clipboard honesty long tail: DONE Sep 2026 (commit `1b23e6bc`). Actual scope was 67 unchecked sites (not 154+137 — recount proved it), all converted to checked returns with fallback toasts; 6 direct navigator.clipboard uses were already-guarded reads. Scanner-verified zero remaining.
 
 
 
 
- Todos
+  Todos — SUPERSEDED Sep 2026, do not action as written:
+  (Audit batches below were agent findings, never hand-verified. Spot-checks
+  against files actually read disproved 5/5 sampled integrity fires:
+  youtube-transcripts DO fetch captions, KeywordDensity multi-word fixed,
+  Nickname out-of-bounds guarded, GstinLookup does real Luhn mod-36,
+  QrCodeReader shows only real decoded data. Treat the lists below as
+  unverified leads, not findings.)
 [✓] Audit batch 1: calculator, finance, health, converters
 [✓] Audit batch 2: text, developer, seo, image
 [✓] Audit batch 3: pdf, video, audio, ai

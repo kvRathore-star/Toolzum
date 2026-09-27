@@ -121,17 +121,27 @@ describe('POST /api/ai/generate-image draft tier (Workers AI, 1 credit)', () => 
   });
 
   it('deducts 1 credit on draft success', async () => {
-    const updates: string[] = [];
+    const updates: { sql: string; args: unknown[] }[] = [];
     const db = mockDb({ credits: 10 });
     const origPrepare = (db as unknown as { prepare: (sql: string) => unknown }).prepare;
     (db as unknown as { prepare: (sql: string) => unknown }).prepare = ((sql: string) => {
-      if (sql.startsWith('UPDATE user SET credits')) updates.push(sql);
-      return (origPrepare as (s: string) => unknown)(sql);
+      const stmt = (origPrepare as (s: string) => unknown)(sql) as {
+        bind: (...a: unknown[]) => unknown;
+      };
+      if (sql.startsWith('UPDATE user SET credits')) {
+        const origBind = stmt.bind;
+        stmt.bind = (...args: unknown[]) => {
+          updates.push({ sql, args });
+          return origBind(...args);
+        };
+      }
+      return stmt;
     }) as never;
     const env = { DB: db, GEMINI_API_KEY: 'k', AI: mockAi({ image: 'ZHJhZnQ=' }) } as unknown as typeof ENV;
     const res = await onRequestPost({ request: req({ prompt: 'a cat', tier: 'draft' }), env });
     expect(res.status).toBe(200);
-    expect(updates.some(u => u.includes('credits - 1'))).toBe(true);
+    // spendCredits: parameterized `credits - ?`, bound first arg = cost 1.
+    expect(updates.some(u => u.sql.includes('credits - ?') && u.args[0] === 1)).toBe(true);
   });
 
   it('403s drafts below the 1-credit cost without touching the binding', async () => {

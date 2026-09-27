@@ -227,12 +227,21 @@ describe('POST /api/ai/transcribe credit cost (1 per minute, 30-min cap)', () =>
   });
 
   it('deducts the per-minute cost on success (100-sec file costs 2)', async () => {
-    const updates: string[] = [];
+    const updates: { sql: string; args: unknown[] }[] = [];
     const db = mockDb({ credits: 30 });
     const origPrepare = (db as unknown as { prepare: (sql: string) => unknown }).prepare;
     (db as unknown as { prepare: (sql: string) => unknown }).prepare = ((sql: string) => {
-      if (sql.startsWith('UPDATE user SET credits')) updates.push(sql);
-      return (origPrepare as (s: string) => unknown)(sql);
+      const stmt = (origPrepare as (s: string) => unknown)(sql) as {
+        bind: (...a: unknown[]) => unknown;
+      };
+      if (sql.startsWith('UPDATE user SET credits')) {
+        const origBind = stmt.bind;
+        stmt.bind = (...args: unknown[]) => {
+          updates.push({ sql, args });
+          return origBind(...args);
+        };
+      }
+      return stmt;
     }) as never;
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
       ok: true,
@@ -249,7 +258,9 @@ describe('POST /api/ai/transcribe credit cost (1 per minute, 30-min cap)', () =>
     });
     expect(res.status).toBe(200);
     expect(await res.text()).toBe('hello world');
-    expect(updates.some(u => u.includes('credits - 2'))).toBe(true);
+    // spendCredits uses a parameterized `credits - ?` (allowance-first,
+    // packs-covered) — the bound first arg is the allowance part of cost 2.
+    expect(updates.some(u => u.sql.includes('credits - ?') && u.args[0] === 2)).toBe(true);
     vi.unstubAllGlobals();
   });
 });

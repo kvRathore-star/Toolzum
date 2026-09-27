@@ -119,6 +119,39 @@ getUserLimit(plan, isProTool):
 > whose window renewed mid-request got a wrongful 403. Reset now returns the
 > fresh balance.
 
+### Credit packs (one-time top-ups, Sep 2026)
+
+Bought alongside any tier (including free). Credits live in the separate
+`credit_grants` table (migration `0027_credit_grants.sql`), **not** in
+`user.credits` — the allowance counter stays untouched by purchases.
+
+| Pack | Credits | Price | Per credit |
+|------|---------|-------|------------|
+| `pack_100` | 100 | ₹249 / $7.99 | $0.080 |
+| `pack_500` | 500 | ₹899 / $29.99 | $0.060 |
+| `pack_1000` | 1,000 | ₹1,499 / $49.99 | $0.050 |
+
+- **Valid:** 12 months from purchase (`expiresAt`), then invisible/unspendable.
+- **Spend order** (`spendCredits` in `src/lib/creditPacks.ts`): monthly allowance
+  first — partial use allowed (balance 2, cost 5 → 2 allowance + 3 pack) — then
+  pack credits FIFO by earliest expiry. Expired grants are never touched.
+- **Grant:** Dodo webhook `payment.succeeded` on a `pack_*` plan → `grantPack`
+  (idempotent on orderId) + payment row + receipt email; balance surfaced as
+  `packCredits` in `GET /api/account/credits` (UI shows "+ N pack credits").
+  The webhook also flips the local `ord_*` row to `paid` (`settleLocalOrder`),
+  so the checkout return page / `payments/status` poll can confirm pack, pass,
+  AND pro honestly — before this, only `plan=pro` ever flipped and pass/pack
+  buyers sat on "Payment processing…" forever.
+- **Pricing parity:** `PricingCards.tsx` creditPacks ↔ `create-order.ts` PRICES,
+  guarded by `credit-pack-pricing.test.ts`.
+- **Checkout:** requires the 3 one-time products created in the Dodo dashboard
+  with IDs pasted into `DODO_PRODUCTS` (`create-order.ts`); until then checkout
+  returns 400 `plan_unavailable_on_gateway` by design. `PACK_PRODUCTS` in
+  `webhook.ts` is optional belt-and-braces (metadata `{plan:"pack", credits}`
+  is the primary grant path).
+- **Margin:** $0.050–0.080/credit vs costliest leg $0.009/credit → ≥44% floor
+  (all-HD) → 99% (text/transcription).
+
 ### Per-Task Credit Costs
 
 | Task | Credits | Actual API cost | Mechanism |

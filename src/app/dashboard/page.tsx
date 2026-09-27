@@ -208,6 +208,9 @@ export default function DashboardPage() {
                 {shownCredits}
               </span>
               <span className="text-xs text-[var(--text-muted)]">remaining of {allowance}/mo</span>
+              {live && live.packCredits > 0 && (
+                <span className="text-xs font-medium text-[var(--success)]">+ {live.packCredits} pack credits</span>
+              )}
             </div>
             <div className="mt-3 w-full bg-[var(--bg-overlay)] rounded-full h-1">
               <div

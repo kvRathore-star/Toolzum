@@ -1,5 +1,6 @@
 import { sendEmail } from "../../../src/lib/email";
 import { grantPass } from "../../../src/lib/planTiers";
+import { grantPack } from "../../../src/lib/creditPacks";
 
 /**
  * Dodo Payments webhook (#36 verify-then-upgrade).
@@ -32,6 +33,15 @@ const PRO_PRODUCT_IDS = new Set([
 ]);
 const PASS_PRODUCT_IDS = new Set([
   "pdt_0NnxoUmsSDo8QS9UhLJ0J", // 7-day pass
+]);
+// Credit packs: one-time products → grant N credits (12-month expiry).
+// Must match create-order.ts DODO_PRODUCTS — paste IDs when created in
+// the Dodo dashboard. Metadata plan=pack, credits=N (set by our checkout)
+// is the fallback for payloads without a known product ID.
+const PACK_PRODUCTS = new Map<string, number>([
+  // ["pdt_…", 100],  // pack_100
+  // ["pdt_…", 500],  // pack_500
+  // ["pdt_…", 1000], // pack_1000
 ]);
 
 const REPLAY_TOLERANCE_S = 300;
@@ -117,16 +127,29 @@ async function setPlan(
   action: string,
 ): Promise<void> {
   await DB.prepare('UPDATE "user" SET plan = ? WHERE id = ?').bind(plan, userId).run();
-  await DB.prepare('DELETE FROM "session" WHERE userId = ?')
+  await DB.prepare("DELETE FROM \"session\" WHERE userId = ?")
     .bind(userId)
     .run()
     .catch(() => {});
   await DB.prepare(
     "INSERT INTO admin_audit_log (actorEmail, action, targetUserId, oldValue, newValue, createdAt) VALUES (?, ?, ?, ?, ?, datetime('now'))"
-  )
-    .bind(actor, action, userId, null, plan)
+  ).bind(actor, action, userId, null, plan)
     .run()
     .catch(() => {});
+}
+
+// Settle the local 'created' row (id = metadata.orderId, written by
+// create-order) so /payments/return and /payments/status can confirm the
+// grant honestly — they poll payment.status, and without this the ord_*
+// row stayed 'created' forever (only plan=pro ever flipped). Best-effort:
+// the grant itself is already durable + idempotent; worst case the return
+// page keeps its honest "processing" state and the receipt email lands.
+async function settleLocalOrder(DB: D1Database, meta: Record<string, unknown>): Promise<void> {
+  const localId = str(meta.orderId);
+  if (!localId) return;
+  await DB.prepare(
+    "UPDATE payment SET status = 'paid' WHERE id = ? AND status = 'created'",
+  ).bind(localId).run().catch(() => {});
 }
 
 export async function onRequestPost(context: { request: Request; env: Env }) {
@@ -170,12 +193,19 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     // alone (no charge yet) only ensures the account row exists.
     const { email, name } = extractCustomer(data);
     const prod = extractProduct(data);
+    const meta = ((data.metadata || {}) as Record<string, unknown>);
+    const metaCredits = parseInt(str(meta.credits), 10);
+    const packCredits =
+      PACK_PRODUCTS.get(prod.productId) ??
+      (prod.plan === "pack" && Number.isFinite(metaCredits) && metaCredits > 0 ? metaCredits : 0);
     const plan =
-      prod.plan === "pass" || PASS_PRODUCT_IDS.has(prod.productId)
-        ? "pass"
-        : prod.plan === "pro" || PRO_PRODUCT_IDS.has(prod.productId)
-          ? "pro"
-          : null;
+      packCredits > 0
+        ? "pack"
+        : prod.plan === "pass" || PASS_PRODUCT_IDS.has(prod.productId)
+          ? "pass"
+          : prod.plan === "pro" || PRO_PRODUCT_IDS.has(prod.productId)
+            ? "pro"
+            : null;
     if (!email || !plan) {
       console.error(`[DODO] unrecognized grant shape type=${type}`, raw.slice(0, 1000));
       return json({ ok: true, ignored: "unrecognized product" });
@@ -206,6 +236,53 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     const currency = prod.currency || localCurrency;
     const amount = prod.amount ?? localAmount;
     const charged = type !== "subscription.active";
+    if (plan === "pack") {
+      // One-time pack: grant credits only — never touches user.plan.
+      if (!charged) return json({ ok: true, granted: false });
+      const granted = await grantPack(DB, {
+        userId: user.id,
+        credits: packCredits,
+        source: str(meta.tier) || `pack_${packCredits}`,
+        // Prefer our ord_* id (metadata.orderId) so the grant is
+        // attributable to the local payment row on the return page.
+        orderId: str(meta.orderId) || prod.paymentId || id,
+      });
+      if (granted) {
+        try {
+          await DB.prepare(
+            "INSERT INTO payment (id, userId, gateway, orderId, amount, currency, status, createdAt) VALUES (?, ?, 'dodo', ?, ?, ?, 'paid', datetime('now'))"
+          )
+            .bind(
+              `dodo_${prod.paymentId || id}`,
+              user.id,
+              prod.paymentId || id,
+              amount ?? 0,
+              currency || "USD",
+            )
+            .run();
+        } catch {
+          /* duplicate payment row — grant already applied */
+        }
+        await settleLocalOrder(DB, meta);
+        await sendEmail(context.env, {
+          to: user.email,
+          subject: "Your Toolzum AI credit pack",
+          text: [
+            `Hi${name ? ` ${name}` : ""},`,
+            ``,
+            `Your ${packCredits}-credit pack has been added to your account.`,
+            amount !== null
+              ? `Charged: ${amount}${currency ? ` ${currency}` : ""}`
+              : `Credits: ${packCredits}`,
+            `Payment: ${prod.paymentId || id}`,
+            ``,
+            `Pack credits are valid for 12 months and are used only after your monthly allowance runs out.`,
+            `Balance: https://toolzum.com/dashboard/account`,
+          ].join("\n"),
+        });
+      }
+      return json({ ok: true, granted: granted ? "pack" : false });
+    }
     if (plan === "pass") {
       if (charged) {
         await grantPass(DB, user.id);
@@ -224,6 +301,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
         } catch {
           /* duplicate payment row — grant already applied */
         }
+        await settleLocalOrder(DB, meta);
         await sendEmail(context.env, {
           to: user.email,
           subject: "Receipt for your Toolzum 7-Day Pass",
@@ -248,6 +326,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     if (charged) {
       const planLabel =
         prod.productId === "pdt_0NnxnhVX9UpNpAWGnPKis" ? "Toolzum Pro Yearly" : "Toolzum Pro Monthly";
+      await settleLocalOrder(DB, meta);
       try {
         await DB.prepare(
           "INSERT INTO payment (id, userId, gateway, orderId, amount, currency, status, createdAt) VALUES (?, ?, 'dodo', ?, ?, ?, 'paid', datetime('now'))"

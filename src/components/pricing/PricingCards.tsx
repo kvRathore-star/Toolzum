@@ -28,6 +28,21 @@ const pricingData: Record<"USD" | "INR", Record<BillingInterval, PricingPlan>> =
   },
 };
 
+// AI credit packs — one-time top-ups (decision Sep 2026). Prices MUST
+// match PRICES in functions/api/payments/create-order.ts (parity test:
+// credit-pack-pricing.test.ts) or checkout lies.
+const creditPacks: readonly {
+  id: string;
+  credits: number;
+  USD: string;
+  INR: string;
+  badge?: string;
+}[] = [
+  { id: "pack_100", credits: 100, USD: "7.99", INR: "249" },
+  { id: "pack_500", credits: 500, USD: "29.99", INR: "899", badge: "POPULAR" },
+  { id: "pack_1000", credits: 1000, USD: "49.99", INR: "1499", badge: "BEST VALUE" },
+];
+
 export function PricingCards({ proCount, totalTools }: { proCount: number; totalTools: number }) {
   const [billingInterval, setBillingInterval] = useState<BillingInterval>("monthly");
   const isIndia = useIsIndia();
@@ -201,6 +216,57 @@ export function PricingCards({ proCount, totalTools }: { proCount: number; total
           </div>
         </div>
       </div>
+
+      {/* AI credit packs — one-time, stack on the allowance (spent after it) */}
+      <section className="mt-16 max-w-4xl w-full relative z-10">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-semibold text-[var(--text-primary)]">AI credit packs</h2>
+          <p className="text-sm text-[var(--text-secondary)] mt-2 max-w-xl mx-auto">
+            One-time top-up for AI tools — no subscription. Packs stack on top of your monthly
+            allowance (used only after it runs out) and stay valid for 12 months.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {creditPacks.map((pack) => {
+            const price = isIndia ? pack.INR : pack.USD;
+            return (
+              <div
+                key={pack.id}
+                className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 flex flex-col justify-between transition-all duration-300 hover:border-[var(--text-muted)] hover:shadow-lg"
+              >
+                {pack.badge && (
+                  <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-[var(--accent-ink)] text-white text-[9px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full shadow">
+                    {pack.badge}
+                  </span>
+                )}
+                <div>
+                  <div className="flex items-baseline gap-1 mb-1">
+                    <span className="text-3xl font-mono font-bold text-[var(--text-primary)]">
+                      {currencySymbol}
+                      {price}
+                    </span>
+                    <span className="text-xs text-[var(--text-muted)]">one-time</span>
+                  </div>
+                  <p className="text-sm font-semibold text-[var(--text-primary)]">
+                    {pack.credits.toLocaleString()} AI credits
+                  </p>
+                  <p className="text-xs text-[var(--text-muted)] mt-1">
+                    {currencySymbol}
+                    {(Number(price) / pack.credits).toFixed(2)}/credit · valid 12 months
+                  </p>
+                </div>
+                <form action="/api/payments/create-order" method="POST" className="mt-5">
+                  <input type="hidden" name="plan" value={pack.id} />
+                  <input type="hidden" name="gateway" value="dodo" />
+                  <Button variant="secondary" className="w-full" size="lg" type="submit">
+                    Buy {pack.credits.toLocaleString()} credits
+                  </Button>
+                </form>
+              </div>
+            );
+          })}
+        </div>
+      </section>
     </>
   );
 }

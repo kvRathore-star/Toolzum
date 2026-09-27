@@ -323,6 +323,9 @@ export default function AccountPage() {
                   </span>
                   <span className="font-mono font-semibold text-[var(--text-primary)]">{shownCredits} <span className="text-xs font-normal text-[var(--text-muted)]">of {allowance}/mo</span></span>
                 </div>
+                {live && live.packCredits > 0 && (
+                  <div className="text-xs text-[var(--success)] mt-1">+ {live.packCredits} pack credits (spent after your allowance)</div>
+                )}
                 <div className="w-full bg-[var(--bg-overlay)] rounded-full h-2 overflow-hidden">
                   <div
                     className="bg-[var(--accent-ink)] h-full transition-all duration-500"

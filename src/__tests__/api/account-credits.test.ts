@@ -65,7 +65,7 @@ describe('GET /api/account/credits contract', () => {
     });
     const res = await credits({ request: req('pro-user'), env: { DB: db } as never });
     expect(res.status).toBe(200);
-    expect(await res.json()).toEqual({ credits: PRO_CREDITS, plan: 'pro', allowance: PRO_CREDITS });
+    expect(await res.json()).toEqual({ credits: PRO_CREDITS, plan: 'pro', allowance: PRO_CREDITS, packCredits: 0 });
     expect(runs.some((sql) => sql.startsWith('UPDATE user SET'))).toBe(true);
   });
 
@@ -75,7 +75,7 @@ describe('GET /api/account/credits contract', () => {
     });
     const res = await credits({ request: req('free-user'), env: { DB: db } as never });
     expect(res.status).toBe(200);
-    expect(await res.json()).toEqual({ credits: 17, plan: 'signedin', allowance: FREE_CREDITS });
+    expect(await res.json()).toEqual({ credits: 17, plan: 'signedin', allowance: FREE_CREDITS, packCredits: 0 });
     expect(runs).toEqual([]);
   });
 
@@ -85,7 +85,7 @@ describe('GET /api/account/credits contract', () => {
     });
     const res = await credits({ request: req('free-user'), env: { DB: db } as never });
     expect(res.status).toBe(200);
-    expect(await res.json()).toEqual({ credits: 2, plan: 'signedin', allowance: FREE_CREDITS });
+    expect(await res.json()).toEqual({ credits: 2, plan: 'signedin', allowance: FREE_CREDITS, packCredits: 0 });
     expect(runs).toEqual([]);
   });
 
@@ -95,7 +95,7 @@ describe('GET /api/account/credits contract', () => {
     });
     const res = await credits({ request: req('free-user'), env: { DB: db } as never });
     expect(res.status).toBe(200);
-    expect(await res.json()).toEqual({ credits: 5, plan: 'signedin', allowance: FREE_CREDITS });
+    expect(await res.json()).toEqual({ credits: 5, plan: 'signedin', allowance: FREE_CREDITS, packCredits: 0 });
     expect(runs.some((sql) => sql.startsWith('UPDATE user SET'))).toBe(true);
   });
 
