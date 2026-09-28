@@ -33,7 +33,7 @@ export default function Sorter() {
       <div className="flex flex-wrap gap-2 mb-4">
         {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Sorter</h2>
       <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
       <Input label="Sort column" value={col} onChange={v => { setCol(v); setOut(''); }} placeholder="Column name" />

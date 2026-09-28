@@ -224,7 +224,7 @@ export default function SubtitleGenerator() {
           </div>
         </div>
       ) : (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-5 space-y-4">
+        <div className="space-y-4">
           <p className="text-xs text-[var(--text-secondary)]">Use the Web Speech API to dictate subtitles in real-time. Click "Start Dictation" and speak clearly — each pause creates a new subtitle entry.</p>
 
           <TimedTextInput

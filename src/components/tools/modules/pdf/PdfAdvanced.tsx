@@ -254,7 +254,7 @@ export default function PdfAdvanced() {
         ))}
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+      <div className="space-y-6">
         <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">
           {actionLabel()}
         </h4>
@@ -323,7 +323,7 @@ export default function PdfAdvanced() {
       </div>
 
       {outputUrl ? (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
+        <div className="space-y-4 animate-in zoom-in-95 duration-300">
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
             <h4 className="font-bold text-emerald-500">Complete</h4>
           </div>

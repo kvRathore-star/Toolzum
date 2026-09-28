@@ -36,7 +36,7 @@ export default function GradientGenerator() {
           <button key={i} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-pink-400 transition-colors">{p.label}</button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Gradient Generator</h2>
           <div className="flex gap-2 flex-wrap items-center">
             <label className="block text-sm font-medium text-[var(--text-secondary)]">Type</label>

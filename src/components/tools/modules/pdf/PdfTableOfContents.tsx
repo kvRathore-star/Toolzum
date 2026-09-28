@@ -151,7 +151,7 @@ export default function PdfTableOfContents() {
       </button>
 
       {entries.length > 0 && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-3">
+        <div className="space-y-3">
           <h4 className="font-bold text-[var(--text-primary)]">Detected headings ({entries.length})</h4>
           <ul className="text-sm text-[var(--text-secondary)] space-y-1 max-h-60 overflow-y-auto">
             {entries.map((e, i) => (

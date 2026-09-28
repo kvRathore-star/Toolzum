@@ -123,7 +123,7 @@ export default function ExifDataRemover() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         
         {/* Analysis Panel */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col min-h-[500px]">
+        <div className="flex flex-col min-h-[500px]">
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4 mb-4">
             <h4 className="text-[var(--text-primary)] font-medium">Metadata Analysis</h4>
             {isAnalyzing ? (
@@ -179,7 +179,7 @@ export default function ExifDataRemover() {
         </div>
 
         {/* Output Panel */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col">
+        <div className="flex flex-col">
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4 mb-4">
             <h4 className="text-[var(--text-primary)] font-medium">Safe Export</h4>
             {outputUrl && <span className="text-xs font-bold bg-emerald-700 text-white px-2 py-1 rounded">100% Clean</span>}

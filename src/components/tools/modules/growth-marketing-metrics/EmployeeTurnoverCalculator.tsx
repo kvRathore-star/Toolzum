@@ -65,7 +65,7 @@ export default function EmployeeTurnoverCalculator() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         {/* Input Panel */}
-        <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+        <div className="lg:col-span-5 space-y-6">
           <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider border-b border-[var(--border-subtle)] dark:border-zinc-800 pb-2">
             Workforce Details
           </h3>
@@ -151,7 +151,7 @@ export default function EmployeeTurnoverCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             
             {/* Turnover Rate */}
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 shadow-md flex flex-col justify-between">
+            <div className="flex flex-col justify-between">
               <div>
                 <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Turnover Rate</span>
                 <h4 className="text-2xl font-black text-[var(--accent)] mt-1">
@@ -165,7 +165,7 @@ export default function EmployeeTurnoverCalculator() {
             </div>
 
             {/* Retention Rate */}
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 shadow-md flex flex-col justify-between">
+            <div className="flex flex-col justify-between">
               <div>
                 <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Retention Rate</span>
                 <h4 className="text-2xl font-black text-emerald-500 mt-1">
@@ -176,7 +176,7 @@ export default function EmployeeTurnoverCalculator() {
             </div>
 
             {/* Estimated Total Loss */}
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 shadow-md flex flex-col justify-between">
+            <div className="flex flex-col justify-between">
               <div>
                 <span className="text-[10px] font-bold text-rose-700 dark:text-rose-400 uppercase tracking-wider">Financial Loss</span>
                 <h4 className="text-2xl font-black text-[var(--accent)] mt-1">
@@ -192,7 +192,7 @@ export default function EmployeeTurnoverCalculator() {
 
           {/* Replacement Cost Breakdown */}
           {totalReplacementCost > 0 && (
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+            <div className="space-y-4">
               <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider pb-2 border-b border-[var(--border-subtle)] dark:border-zinc-800">
                 Turnover Financial Breakdown
               </h3>
@@ -241,7 +241,7 @@ export default function EmployeeTurnoverCalculator() {
           />
 
           {/* Actionable Recommendations */}
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-3">
+          <div className="space-y-3">
             <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider pb-2 border-b border-[var(--border-subtle)] dark:border-zinc-800 flex items-center gap-1">
               <Sparkles className="w-4 h-4 text-amber-500 animate-pulse" />
               Culture & Retention Advisory

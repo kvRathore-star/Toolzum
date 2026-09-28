@@ -15,7 +15,7 @@ export default function PercentageCalculator() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         {/* Calc 1 */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
+        <div className="space-y-6">
            <h2 className="text-xl font-bold text-[var(--text-primary)]">What is X% of Y?</h2>
            <div className="flex items-center space-x-4">
               <input aria-label="What is X% of Y?" 
@@ -40,7 +40,7 @@ export default function PercentageCalculator() {
         </div>
 
         {/* Calc 2 */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
+        <div className="space-y-6">
            <h2 className="text-xl font-bold text-[var(--text-primary)]">X is what % of Y?</h2>
            <div className="flex items-center space-x-4">
               <input aria-label="X is what % of Y?" 

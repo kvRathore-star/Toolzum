@@ -24,7 +24,7 @@ export default function ApiDocumentationGenerator() {
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">API Documentation Generator</h2>
         <div className="grid grid-cols-3 gap-3">
           <div className="col-span-2">

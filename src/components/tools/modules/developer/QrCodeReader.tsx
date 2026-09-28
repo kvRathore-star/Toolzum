@@ -227,7 +227,7 @@ export default function QrCodeReader() {
         <p className="text-[var(--text-secondary)]">Scan QR codes from images. 100% browser-based.</p>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 space-y-5">
+      <div className="space-y-5">
         <div
           ref={dropRef}
           onDrop={handleDrop}

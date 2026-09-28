@@ -108,7 +108,7 @@ document.getElementById('stopBtn').addEventListener('click', () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <div className="lg:col-span-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-4">
+        <div className="lg:col-span-4 space-y-4">
           <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block border-b border-[var(--border-subtle)] pb-2">Settings</span>
           
           <div className="space-y-2">
@@ -126,7 +126,7 @@ document.getElementById('stopBtn').addEventListener('click', () => {
           </button>
         </div>
 
-        <div className="lg:col-span-8 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl flex flex-col justify-between min-h-[450px]">
+        <div className="lg:col-span-8 flex flex-col justify-between min-h-[450px]">
           <div className="space-y-3 flex-1 flex flex-col">
             <div className="flex bg-[var(--bg-overlay)]/45 p-1 rounded-xl gap-1" role="tablist" aria-label="Extension files" onKeyDown={extTabs.onKeyDown}>
               <button role="tab" {...extTabs.tabProps('manifest')} aria-selected={activeTab === 'manifest'} onClick={() => setActiveTab('manifest')} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${activeTab === 'manifest' ? 'bg-white dark:bg-[var(--bg-surface)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>

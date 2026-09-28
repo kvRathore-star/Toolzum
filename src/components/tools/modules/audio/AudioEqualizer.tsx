@@ -289,7 +289,7 @@ export default function AudioEqualizer() {
           </svg>
           <h3 className="text-lg font-bold text-[var(--text-primary)]">Audio Equalizer</h3>
         </div>
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+        <div className="overflow-hidden space-y-5">
           <p className="text-xs text-[var(--text-secondary)]">
             Adjust frequency bands with a 10-band graphic equalizer. All processing happens locally in your browser.
           </p>
@@ -327,7 +327,7 @@ export default function AudioEqualizer() {
         <h3 className="text-lg font-bold text-[var(--text-primary)]">Audio Equalizer</h3>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="overflow-hidden space-y-5">
         <div className="flex items-center justify-between p-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
           <div className="flex items-center gap-3 min-w-0">
             <div className="w-8 h-8 rounded-lg bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center flex-shrink-0">

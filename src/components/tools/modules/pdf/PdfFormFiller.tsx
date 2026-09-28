@@ -137,7 +137,7 @@ export default function PdfFormFiller() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl max-h-[600px] overflow-y-auto space-y-4">
+        <div className="max-h-[600px] overflow-y-auto space-y-4">
           <h4 className="text-[var(--text-primary)] font-medium sticky top-0 bg-[var(--bg-elevated)] pb-2 z-10 border-b border-[var(--border-subtle)]">Fill Fields</h4>
           
           {fields.length === 0 ? (
@@ -176,7 +176,7 @@ export default function PdfFormFiller() {
         </div>
 
         <div className="space-y-6">
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl">
+          <div className="">
             <button 
               onClick={generateFilledPdf}
               disabled={isProcessing || fields.length === 0}

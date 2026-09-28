@@ -25,7 +25,7 @@ export default function MarkupCalculator() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Markup Calculator</h2>
         <div className="flex gap-2">
           <div><label className={labelClass}>Cost</label><Input label="Cost" type="number" value={cost} onChange={setCost} /></div>

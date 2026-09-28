@@ -271,7 +271,7 @@ export default function AiGrammarChecker() {
         <span>Rules-based checker for common grammar, spelling, and punctuation errors. Not exhaustive — proofread manually.</span>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+      <div className="space-y-4">
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Your Text</span>

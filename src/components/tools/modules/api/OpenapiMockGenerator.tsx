@@ -76,7 +76,7 @@ export default function OpenapiMockGenerator() {
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">OpenAPI Mock Generator</h2>
         <p className="text-xs text-[var(--text-secondary)]">Spec-driven: paste an OpenAPI YAML fragment with paths and types. For freeform JSON shapes without a spec, use the Mock API Response Generator instead.</p>
         <div>

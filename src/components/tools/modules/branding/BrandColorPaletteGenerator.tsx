@@ -94,7 +94,7 @@ Use real, harmonious hex codes appropriate for the brand and style.`;
       <AiSettings />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col justify-between">
+        <div className="lg:col-span-5 flex flex-col justify-between">
           <div className="space-y-4">
             <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3">
               <Palette className="w-5 h-5 text-pink-500" />
@@ -145,7 +145,7 @@ Use real, harmonious hex codes appropriate for the brand and style.`;
           </button>
         </div>
 
-        <div className="lg:col-span-7 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col min-h-[450px]">
+        <div className="lg:col-span-7 flex flex-col min-h-[450px]">
           <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3 mb-4">
             <h4 className="font-semibold text-[var(--text-primary)]">Generated Palette</h4>
             {outputText && (

@@ -300,7 +300,7 @@ export default function OdtRtfConverter() {
         <button onClick={clearAll} className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-3">
+      <div className="space-y-3">
         <div className="flex justify-between items-center">
           <h4 className="text-[var(--text-primary)] font-medium">Extracted Text Preview</h4>
           {extractedText.length > 500 && (
@@ -315,7 +315,7 @@ export default function OdtRtfConverter() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+        <div className="space-y-6 h-fit">
           <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">PDF Settings</h4>
 
           <div>
@@ -350,7 +350,7 @@ export default function OdtRtfConverter() {
 
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+            <div className="space-y-6 animate-in zoom-in-95 duration-300">
               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">PDF Ready</h4>
               </div>

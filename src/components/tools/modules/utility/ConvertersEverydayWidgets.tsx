@@ -271,7 +271,7 @@ export function LargeTextViewer() {
   };
 
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
+    <div className="space-y-4">
       <h5 className="text-sm font-bold text-[var(--text-primary)]">Large Text File Viewer</h5>
       <input aria-label="Text file to view" type="file" accept=".txt,.csv,.json,.log,.md,.html,.xml" onChange={handleFile}
         className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-[var(--accent)]/10 file:text-[var(--accent)] hover:file:bg-[var(--accent)]/20 cursor-pointer" />
@@ -305,7 +305,7 @@ export function AvroSchemaGenerator() {
   };
 
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
+    <div className="space-y-4">
       <h5 className="text-sm font-bold text-[var(--text-primary)]">Avro Schema Generator</h5>
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-1">
@@ -352,7 +352,7 @@ export function AvroToJsonSample() {
   };
 
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
+    <div className="space-y-4">
       <h5 className="text-sm font-bold text-[var(--text-primary)]">Avro to JSON Sample</h5>
       <div className="space-y-1">
         <label htmlFor="lbl-converterseverydaywidgets-avro-schema" className="text-xs font-medium text-[var(--text-secondary)]">Avro schema</label>
@@ -396,7 +396,7 @@ export function IcalEventGenerator() {
   };
 
   return (
-    <div className="md:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
+    <div className="md:col-span-2 space-y-4">
       <h5 className="text-sm font-bold text-[var(--text-primary)]">iCal Event Generator</h5>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div className="space-y-1"><label htmlFor="lbl-converterseverydaywidgets-summary" className="text-xs font-medium text-[var(--text-secondary)]">Summary</label><input id="lbl-converterseverydaywidgets-summary" aria-label="Summary" type="text" value={summary} onChange={e => setSummary(e.target.value)} placeholder="Summary" className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>

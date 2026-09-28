@@ -241,7 +241,7 @@ export default function ScreenRecorder() {
       </div>
 
       {isIdle && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-8">
+        <div className="space-y-8">
           <div className="text-center">
             <div className="w-16 h-16 mx-auto mb-4 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
               <svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -298,7 +298,7 @@ export default function ScreenRecorder() {
       )}
 
       {isRecording && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-8 text-center">
+        <div className="space-y-8 text-center">
           <div className="flex items-center justify-center gap-3">
             {!isPaused && <span className="w-4 h-4 bg-red-500 rounded-full animate-pulse" />}
             {isPaused && (
@@ -332,7 +332,7 @@ export default function ScreenRecorder() {
       )}
 
       {recordedUrl && !isRecording && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
+        <div className="space-y-6">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-bold text-emerald-500">Recording Complete</h3>
             <span className="text-sm text-[var(--text-muted)] font-mono">{formatTime(duration)}</span>

@@ -500,7 +500,7 @@ export function CssSpecificityCalculator() {
   const output = compareMode ? `${sel} ${result1} ${winnerText}\n${sel2} ${result2}` : result1;
 
   return (
-    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">
+    <div className="w-full space-y-4">
       <PresetBar presets={presetList} />
 
       <div className="space-y-2">
@@ -617,7 +617,7 @@ export function CssValidator() {
   ];
 
   return (
-    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">
+    <div className="w-full space-y-4">
       <PresetBar presets={presetList} />
       <textarea aria-label="CSS to validate" value={input} onChange={e => setInput(e.target.value)} placeholder="Paste CSS to validate..."
         className="w-full h-32 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />

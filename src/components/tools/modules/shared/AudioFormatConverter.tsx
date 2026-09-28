@@ -288,7 +288,7 @@ export default function AudioFormatConverter({ slug }: AudioFormatConverterProps
         <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm" dangerouslySetInnerHTML={{ __html: description }} />
       )}
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="overflow-hidden space-y-5">
         {!file ? (
           <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer relative">
             <input type="file" accept={inputFmt.accept} onChange={handleFileSelect} className="absolute inset-0 opacity-0 cursor-pointer" aria-label={`Upload ${inputFmt.label} Audio`} />

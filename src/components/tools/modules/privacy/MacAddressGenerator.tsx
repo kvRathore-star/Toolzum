@@ -52,7 +52,7 @@ export default function MacAddressGenerator() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Controls */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 text-xs">
+        <div className="space-y-4 text-xs">
           <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-[var(--border-subtle)] pb-2">Formatting</h3>
           
           <div className="grid grid-cols-2 gap-4">
@@ -91,7 +91,7 @@ export default function MacAddressGenerator() {
         </div>
 
         {/* Results */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl min-h-[250px] flex flex-col justify-between">
+        <div className="min-h-[250px] flex flex-col justify-between">
           <div className="space-y-2 flex-1 flex flex-col">
             <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
               <span className="text-xs text-[var(--text-muted)] font-bold uppercase">MAC Addresses</span>

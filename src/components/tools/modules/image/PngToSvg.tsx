@@ -116,7 +116,7 @@ export default function PngToSvg() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+        <div className="space-y-4">
           <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider border-b border-[var(--border-subtle)] pb-2">Image Upload</h3>
           
           <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-2xl p-8 flex flex-col items-center justify-center bg-[var(--bg-overlay)] text-center">
@@ -163,7 +163,7 @@ export default function PngToSvg() {
         </div>
 
         {/* Vector Display Panel */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col justify-between items-center min-h-[300px]">
+        <div className="flex flex-col justify-between items-center min-h-[300px]">
           {svgContent ? (
             <div className="flex-1 flex flex-col items-center justify-between w-full h-full">
               <div className="flex-1 flex items-center justify-center w-full p-4 bg-[var(--bg-overlay)] dark:bg-zinc-950 border border-[var(--border-subtle)] rounded-xl min-h-[220px]">

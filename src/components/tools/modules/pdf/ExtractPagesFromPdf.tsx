@@ -127,7 +127,7 @@ export default function ExtractPagesFromPdf() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+        <div className="space-y-6 h-fit">
           <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Page Selection</h4>
 
           <div className="space-y-3">
@@ -155,7 +155,7 @@ export default function ExtractPagesFromPdf() {
 
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+            <div className="space-y-6 animate-in zoom-in-95 duration-300">
               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">Extraction Complete</h4>
               </div>

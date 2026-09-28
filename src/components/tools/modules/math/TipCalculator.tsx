@@ -26,7 +26,7 @@ export default function TipCalculator() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Tip Calculator</h2>
         <div className="flex gap-2">
           <div><label className={labelClass}>Bill</label><Input label="Bill" type="number" value={bill} onChange={setBill} /></div>

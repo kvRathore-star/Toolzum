@@ -183,7 +183,7 @@ export default function PsdToJpgPng() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+        <div className="space-y-6 h-fit">
           <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">
             Export Settings
           </h4>

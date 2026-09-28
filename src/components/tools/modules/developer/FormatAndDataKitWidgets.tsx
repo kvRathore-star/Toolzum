@@ -84,7 +84,7 @@ export function MessagePackInspector() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">MessagePack Inspector</h2>
         <div className="flex gap-2">
           <button onClick={() => setMode('encode')} className={'px-3 py-1.5 text-sm rounded-lg ' + (mode === 'encode' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>Encode JSON → MsgPack</button>
@@ -139,7 +139,7 @@ export function CborInspector() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">CBOR Inspector</h2>
         <div className="flex gap-2">
           <button onClick={() => setMode('encode')} className={'px-3 py-1.5 text-sm rounded-lg ' + (mode === 'encode' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>Encode JSON → CBOR</button>
@@ -213,7 +213,7 @@ export function DataAnonymizer() {
         <button onClick={() => setInput(PRESETS.pii!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">PII Data</button>
         <button onClick={() => setInput(PRESETS.financial!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Financial Data</button>
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Data Anonymizer</h2>
         <DualPanel
           input={<>
@@ -379,7 +379,7 @@ export function CurlToCodeConverter() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">cURL to Code Converter</h2>
         <div className="flex flex-wrap gap-2">
           {(['fetch', 'axios', 'xhr', 'python', 'node'] as const).map(lang => (
@@ -424,7 +424,7 @@ export function JsonRpcBuilder() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">JSON-RPC Builder</h2>
         <div>
           <label className="text-xs text-[var(--text-secondary)] mb-1 block">Method</label>
@@ -542,7 +542,7 @@ export function HarAnalyzer() {
         <button onClick={() => setInput(PRESETS.small!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Small HAR</button>
         <button onClick={() => setInput(PRESETS.cookies!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">With cookies</button>
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">HAR File Analyzer</h2>
         <DualPanel
           input={<>
@@ -649,7 +649,7 @@ export function LogAnalyzer() {
         <button onClick={() => setInput(PRESETS.apache!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Apache access</button>
         <button onClick={() => setInput(PRESETS.nginx!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Nginx error</button>
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Log File Analyzer</h2>
         <DualPanel
           input={<>
@@ -696,7 +696,7 @@ export function PackageJsonValidator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">package.json Validator</h2>
         <textarea aria-label="package.json Validator" rows={6} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
@@ -739,7 +739,7 @@ export function MimeFinder() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">MIME Type Finder</h2>
         <input aria-label="MIME Type Finder" type="text" value={ext} onChange={e => setExt(e.target.value.startsWith('.') ? e.target.value : '.' + e.target.value)} placeholder=".ext"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />

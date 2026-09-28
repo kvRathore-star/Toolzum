@@ -88,7 +88,7 @@ export default function SaasPricingCalculator() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         {/* Input Panel */}
-        <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+        <div className="lg:col-span-5 space-y-6">
           <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider border-b border-[var(--border-subtle)] pb-2">
             Economics & Drivers
           </h3>
@@ -194,7 +194,7 @@ export default function SaasPricingCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             
             {/* LTV:CAC Ratio */}
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 shadow-md flex flex-col justify-between">
+            <div className="flex flex-col justify-between">
               <div>
                 <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">LTV : CAC Ratio</span>
                 <h4 className="text-2xl font-black text-[var(--text-primary)] mt-1">
@@ -207,7 +207,7 @@ export default function SaasPricingCalculator() {
             </div>
 
             {/* CAC Payback Period */}
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 shadow-md flex flex-col justify-between">
+            <div className="flex flex-col justify-between">
               <div>
                 <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">CAC Payback</span>
                 <h4 className="text-2xl font-black text-[var(--accent)] mt-1">
@@ -218,7 +218,7 @@ export default function SaasPricingCalculator() {
             </div>
 
             {/* Break-Even Points */}
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 shadow-md flex flex-col justify-between">
+            <div className="flex flex-col justify-between">
               <div>
                 <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">OpEx Break-even</span>
                 <h4 className="text-2xl font-black text-emerald-500 mt-1">
@@ -240,7 +240,7 @@ export default function SaasPricingCalculator() {
           />
 
           {/* Core Metrics Breakdown */}
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+          <div className="space-y-4">
             <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider pb-2 border-b border-[var(--border-subtle)] dark:border-zinc-800">
               Economics Analysis
             </h3>
@@ -266,7 +266,7 @@ export default function SaasPricingCalculator() {
           </div>
 
           {/* Growth Simulator Output */}
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+          <div className="space-y-4">
             <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider pb-2 border-b border-[var(--border-subtle)] dark:border-zinc-800 flex items-center justify-between">
               <span>12-Month Projections</span>
               <span className="text-[10px] text-[var(--text-muted)] font-normal">Assumes 30% of OpEx allocated to CAC acquisition</span>

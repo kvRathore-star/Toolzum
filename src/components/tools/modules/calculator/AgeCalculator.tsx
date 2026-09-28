@@ -38,7 +38,7 @@ export default function AgeCalculator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
+      <div className="space-y-6">
          <h2 className="text-2xl font-bold text-[var(--text-primary)]">Age Calculator</h2>
          <p className="text-[var(--text-secondary)]">Calculate your exact age in years, months, and days.</p>
          

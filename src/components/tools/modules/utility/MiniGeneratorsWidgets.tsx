@@ -631,7 +631,7 @@ export function ULIDGenerator() {
   ];
 
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+    <div className="space-y-4">
       <h2 className="text-lg font-bold text-[var(--text-primary)]">ULID Generator</h2>
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p, i) => (
@@ -701,7 +701,7 @@ export function NumeronymGenerator() {
   ];
 
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+    <div className="space-y-4">
       <h2 className="text-lg font-bold text-[var(--text-primary)]">Numeronym Generator</h2>
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p, i) => (
@@ -783,7 +783,7 @@ export function MACVendorLookup() {
         <p className="text-sm text-[var(--text-secondary)] mt-1">Look up the vendor associated with a MAC address OUI.</p>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="overflow-hidden space-y-5">
         <div className="flex items-center gap-2">
           <Search className="w-5 h-5 text-emerald-500" />
           <h3 className="text-lg font-bold text-[var(--text-primary)]">MAC Vendor Lookup</h3>

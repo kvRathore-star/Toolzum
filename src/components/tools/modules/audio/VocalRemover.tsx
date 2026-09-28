@@ -184,7 +184,7 @@ export default function VocalRemover() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-5 space-y-5">
+      <div className="space-y-5">
         <div className="flex items-center justify-between p-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
           <div>
             <div className="text-sm font-semibold text-[var(--text-primary)]">{file.name}</div>

@@ -38,7 +38,7 @@ export function CsvAnalyzer() {
         <h2 className="text-2xl font-bold">CSV Analyzer</h2>
         <p className="text-sm text-[var(--text-secondary)] mt-1">Analyze CSV structure — column types, counts, unique values, and empty cells.</p>
       </div>
-      <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">
+      <div className="w-full space-y-4">
         <textarea aria-label="Analyze CSV structure — column types, counts, unique values, and empty cells." value={csv} onChange={e => setCsv(e.target.value)} rows={6} className="w-full p-3 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-sm font-mono" placeholder="Paste CSV data (first row = headers)..." />
         <button onClick={analyze} className="px-4 py-2 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg text-sm transition">Analyze</button>
         {analysis && (
@@ -104,7 +104,7 @@ export function JsonPathQueryBuilder() {
         <h2 className="text-2xl font-bold">JSON Path Query Builder</h2>
         <p className="text-sm text-[var(--text-secondary)] mt-1">Query JSON data using dot-notation path expressions with wildcard support.</p>
       </div>
-      <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">
+      <div className="w-full space-y-4">
         <DualPanel
           input={<>
         <div>
@@ -166,7 +166,7 @@ export function JsonTreeViewer() {
         <h2 className="text-2xl font-bold">JSON Tree Viewer</h2>
         <p className="text-sm text-[var(--text-secondary)] mt-1">Visualize JSON structure as an indented tree — see nested objects and arrays at a glance.</p>
       </div>
-      <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">
+      <div className="w-full space-y-4">
         <textarea aria-label="JSON data" value={json} onChange={e => setJson(e.target.value)} rows={4} className="w-full p-3 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-sm font-mono" placeholder="Paste JSON..." />
         {error && <p className="text-red-500 text-sm">{error}</p>}
         {parsed && (

@@ -109,7 +109,7 @@ export default function IndianAgeCalculator() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+        <div className="lg:col-span-2 space-y-6">
           <div className="space-y-4">
             <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Date of Birth</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">

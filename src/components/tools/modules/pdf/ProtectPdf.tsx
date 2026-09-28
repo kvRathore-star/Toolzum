@@ -226,7 +226,7 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
 
         <div className="flex flex-col justify-center">
           {outputUrl ? (
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300 h-full flex flex-col justify-center">
+            <div className="space-y-6 animate-in zoom-in-95 duration-300 h-full flex flex-col justify-center">
               <div className={`rounded-xl overflow-hidden border flex flex-col items-center justify-center p-8 ${isProtect ? 'bg-[var(--accent)]/10 border-[var(--accent)]/20 text-[var(--accent)]' : 'bg-emerald-700/10 border-emerald-500/20 text-emerald-500'}`}>
                 {isProtect ? <Lock className="w-16 h-16 mb-4" /> : <Unlock className="w-16 h-16 mb-4" />}
                 <p className="font-bold text-center">{isProtect ? `protected_${file!.name}` : `unlocked_${file!.name}`}</p>

@@ -190,7 +190,7 @@ export default function LogoMaker() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         {/* Editor Controls */}
-        <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 max-h-[680px] overflow-y-auto pr-2">
+        <div className="lg:col-span-5 space-y-6 max-h-[680px] overflow-y-auto pr-2">
           
           {/* Preset templates */}
           <div className="space-y-2">

@@ -75,7 +75,7 @@ export default function RotateImage() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6 text-center">
+      <div className="space-y-6 text-center">
          <h2 className="text-2xl font-bold">Rotate & Flip Image</h2>
          <p className="text-[var(--text-secondary)]">Rotate to any angle, flip horizontally or vertically. All processing in your browser.</p>
          

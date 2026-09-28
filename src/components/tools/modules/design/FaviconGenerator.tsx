@@ -130,7 +130,7 @@ export default function FaviconGenerator() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+        <div className="space-y-6">
           <h4 className="text-[var(--text-primary)] font-medium">Included Assets</h4>
           
           <ul className="space-y-3 text-sm text-[var(--text-secondary)] dark:text-zinc-300">
@@ -154,7 +154,7 @@ export default function FaviconGenerator() {
 
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+            <div className="space-y-6 animate-in zoom-in-95 duration-300">
                <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                   <h4 className="font-bold text-emerald-500">Package Ready</h4>
                </div>
@@ -173,7 +173,7 @@ export default function FaviconGenerator() {
                 </button>
             </div>
           ) : (
-             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+             <div className="space-y-6">
                 <h4 className="text-[var(--text-primary)] font-medium mb-4">Original Image Preview</h4>
                 <div className="bg-[var(--bg-overlay)] rounded-xl overflow-hidden border border-[var(--border-subtle)] flex items-center justify-center min-h-[250px] p-4 chess-bg">
                   <style>{`

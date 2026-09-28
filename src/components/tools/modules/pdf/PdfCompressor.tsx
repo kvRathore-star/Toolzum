@@ -87,7 +87,7 @@ export default function PdfOptimizer() {
         </button>
       </div>
 
-      <div className="p-6 border border-[var(--border-subtle)] bg-[var(--bg-elevated)] rounded-2xl shadow-[var(--shadow-md)]">
+      <div className="">
         <h4 className="text-[var(--text-primary)] font-medium mb-4">Optimization Strategy</h4>
         <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] p-4 rounded-xl mb-6">
           <p className="text-sm text-[var(--text-secondary)]">

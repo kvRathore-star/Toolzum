@@ -436,7 +436,7 @@ export default function EpubToPdf() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+        <div className="space-y-6 h-fit">
           <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Conversion Settings</h4>
 
           <div>
@@ -517,7 +517,7 @@ export default function EpubToPdf() {
 
         <div className="space-y-6">
           {isProcessing && (
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-3">
+            <div className="space-y-3">
               <h4 className="text-[var(--text-primary)] font-medium">Processing Chapters</h4>
               <div className="w-full bg-[var(--bg-overlay)] rounded-full h-3 overflow-hidden">
                 <div
@@ -530,7 +530,7 @@ export default function EpubToPdf() {
           )}
 
           {outputUrl ? (
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+            <div className="space-y-6 animate-in zoom-in-95 duration-300">
               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">Conversion Complete</h4>
               </div>

@@ -95,7 +95,7 @@ export default function PdfAttachments() {
         </button>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+      <div className="space-y-6">
         <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">
           Add Attachment
         </h4>
@@ -135,7 +135,7 @@ export default function PdfAttachments() {
       </div>
 
       {outputUrl ? (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
+        <div className="space-y-4 animate-in zoom-in-95 duration-300">
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
             <h4 className="font-bold text-emerald-500">Attachment Added</h4>
           </div>

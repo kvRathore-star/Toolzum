@@ -30,7 +30,7 @@ export function OauthClientSetup() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">OAuth Client Setup</h2>
         <DualPanel
           input={<>
@@ -101,7 +101,7 @@ export function PkceVerifier() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">PKCE Verifier</h2>
         <DualPanel
           input={<>
@@ -198,7 +198,7 @@ export function OAuthScopeBuilder() {
         })}
         <button onClick={() => { const defaults: Record<string, boolean> = {}; (SCOPE_DB[activeProvider] || []).forEach(function(s) { defaults[s.label] = true; }); setSelectedScopes(defaults); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--accent-ink)] text-white rounded-lg">Select All</button>
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">OAuth Scope Builder — {activeProvider}</h2>
 
         <DualPanel
@@ -296,7 +296,7 @@ export function OAuthStateValidator() {
         <button onClick={() => setState(PRESETS.valid!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Valid state</button>
         <button onClick={() => setState(PRESETS.invalid!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Invalid base64</button>
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">OAuth State Validator</h2>
         <DualPanel
           input={<>
@@ -334,7 +334,7 @@ export function Pbkdf2HashGenerator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">PBKDF2 Hash Generator</h2>
         <DualPanel
           input={<>
@@ -392,7 +392,7 @@ export function CookieParser() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Cookie Parser &amp; Analyzer</h2>
         <DualPanel
           input={<>

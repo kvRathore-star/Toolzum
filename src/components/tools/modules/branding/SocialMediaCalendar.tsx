@@ -137,7 +137,7 @@ export default function SocialMediaCalendar() {
         </button>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="overflow-hidden space-y-5">
         <div className="grid grid-cols-3 gap-3">
           {Object.entries(statusCounts).map(([key, count]) => (
             <div key={key} className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">

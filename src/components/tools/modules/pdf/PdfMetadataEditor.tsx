@@ -138,7 +138,7 @@ export default function PdfMetadataEditor() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         
         {/* Left Col: Editor */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+        <div className="space-y-6">
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
              <h4 className="text-[var(--text-primary)] font-medium">Metadata Editor</h4>
              <button onClick={removeAllMetadata} className="text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 font-bold">Clear All</button>
@@ -220,7 +220,7 @@ export default function PdfMetadataEditor() {
         {/* Right Col: Output */}
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300 h-full flex flex-col justify-center">
+            <div className="space-y-6 animate-in zoom-in-95 duration-300 h-full flex flex-col justify-center">
                <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                   <h4 className="font-bold text-emerald-500">Document Updated</h4>
                </div>

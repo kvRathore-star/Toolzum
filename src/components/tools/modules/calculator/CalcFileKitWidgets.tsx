@@ -21,7 +21,7 @@ export function StudyTimeCalculator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Study Time Calculator</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
@@ -65,7 +65,7 @@ export function TestScoreCalculator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Test Score Calculator</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
@@ -102,7 +102,7 @@ export function WordsPerPageCalculator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Words Per Page Calculator</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
@@ -144,7 +144,7 @@ export function ProfitLossCalculator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Working Capital Calculator</h2>
         <div className="grid grid-cols-3 gap-3">
           <div>
@@ -194,7 +194,7 @@ export function RingSizeConverter() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Ring Size Converter</h2>
         <div>
           <label htmlFor="lbl-calcfilekitwidgets-inner-diameter-mm" className="text-xs text-[var(--text-secondary)] mb-1 block">Inner diameter (mm)</label>
@@ -224,7 +224,7 @@ export function ScreenSizeConverter() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Screen Size Calculator</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
@@ -314,7 +314,7 @@ export function ZipFileExtractor() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">ZIP File Extractor</h2>
         <p className="text-xs text-[var(--text-secondary)]">Select a ZIP file to view its contents.</p>
         <input aria-label="ZIP file" type="file" accept=".zip" onChange={extract} className="w-full text-xs" />

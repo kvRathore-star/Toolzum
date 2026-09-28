@@ -60,7 +60,7 @@ export function AnnualContractValueCalculator() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Annual Contract Value (ACV) Calculator</h2>
         <Input label="Total Contract Value ($)" value={tv} onChange={setTv} placeholder="e.g. 120000" type="number" />
         <Input label="Contract Term (Years)" value={years} onChange={setYears} placeholder="e.g. 3" type="number" />
@@ -111,7 +111,7 @@ export function AsciiTableGenerator() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">ASCII Table Generator</h2>
         <Input label="CSV Data (first row = headers)" value={data} onChange={setData} placeholder="Name, Age, City\nAlice, 30, NYC\nBob, 25, SF" rows={4} />
         <button onClick={gen} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Generate Table</button>
@@ -194,7 +194,7 @@ export function GitignoreGenerator() {
   ];
 
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+    <div className="space-y-4">
       <h2 className="text-lg font-bold text-[var(--text-primary)]">.gitignore Generator</h2>
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p, i) => (
@@ -369,7 +369,7 @@ export function SaasPaybackPeriod() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">SaaS Payback Period</h2>
         <Input label="Customer Acquisition Cost ($)" value={cac} onChange={setCac} placeholder="e.g. 500" type="number" />
         <Input label="Monthly Revenue per Customer ($)" value={mrr} onChange={setMrr} placeholder="e.g. 50" type="number" />
@@ -411,7 +411,7 @@ export function SaasQuickRatio() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">SaaS Quick Ratio</h2>
         <Input label="New MRR ($)" value={n} onChange={setN} placeholder="e.g. 10000" type="number" />
         <Input label="Expansion MRR ($)" value={e} onChange={setE} placeholder="e.g. 3000" type="number" />
@@ -454,7 +454,7 @@ export function SaasRuleOf40() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">SaaS Rule of 40</h2>
       <Input label="Revenue Growth Rate (%)" value={growth} onChange={setGrowth} placeholder="e.g. 25" type="number" />
       <Input label="Profit Margin (%)" value={margin} onChange={setMargin} placeholder="e.g. 20 (or -5 for loss)" type="number" />
@@ -504,7 +504,7 @@ export function SwiftFormatter() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Swift Formatter</h2>
       <Input label="Swift Code" value={code} onChange={setCode} placeholder="struct Foo {\nlet bar: String\n}" rows={6} />
       <button onClick={fmt} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Format</button>

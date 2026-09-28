@@ -437,7 +437,7 @@ export function EmojiPicker() {
         Browse 400+ emoji organized by category. Click any emoji to copy it.
       </p>
       <div className="space-y-4">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+        <div className="space-y-4">
           <input aria-label="Search emoji" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search emoji..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           {lastCopied && (
             <div className="bg-[var(--accent)]/10/20 rounded-xl px-4 py-3 flex items-center gap-3">

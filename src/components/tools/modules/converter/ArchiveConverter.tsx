@@ -95,7 +95,7 @@ export default function ArchiveConverter() {
         <FileArchive className="w-5 h-5 text-emerald-500" />
         <h3 className="text-lg font-bold text-[var(--text-primary)]">ZIP File Creator</h3>
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="overflow-hidden space-y-5">
         <p className="text-xs text-[var(--text-secondary)]">Drag & drop files or select them to create a ZIP archive. All processing is done locally in your browser.</p>
 
         <div onDrop={handleDrop} onDragOver={handleDragOver} role="button" tabIndex={0} ref={dropRef} aria-label="Upload files to archive" onClick={() => { armReturn(); inputRef.current?.click(); }}

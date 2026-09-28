@@ -147,7 +147,7 @@ export default function ImageCompressor() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Settings panel */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+        <div className="space-y-6">
           <h4 className="font-bold text-[var(--text-primary)] flex items-center gap-2 border-b border-[var(--border-subtle)] pb-2 text-sm uppercase tracking-wider">
             <Sliders className="w-4 h-4 text-[var(--accent)]" />
             Compression Settings

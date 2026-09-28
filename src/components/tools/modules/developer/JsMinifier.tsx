@@ -157,7 +157,7 @@ export function MinifierTool({ lang = 'javascript' }: { lang?: Lang }) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="space-y-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl flex flex-col justify-between">
+        <div className="space-y-4 flex flex-col justify-between">
           <div className="space-y-2">
             <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Original {cfg.label}</span>
             <textarea value={input} onChange={e => setInput(e.target.value)} aria-label={`Original ${cfg.label}`} placeholder={cfg.placeholder}
@@ -168,7 +168,7 @@ export function MinifierTool({ lang = 'javascript' }: { lang?: Lang }) {
           </button>
         </div>
 
-        <div className="space-y-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl flex flex-col justify-between">
+        <div className="space-y-4 flex flex-col justify-between">
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Minified {cfg.label}</span>

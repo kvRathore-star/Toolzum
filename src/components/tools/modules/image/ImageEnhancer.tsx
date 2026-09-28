@@ -153,7 +153,7 @@ export default function ImageEnhancer() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Settings */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 max-h-[600px] overflow-y-auto pr-1">
+        <div className="space-y-6 max-h-[600px] overflow-y-auto pr-1">
           {/* Quick presets */}
           <div className="space-y-3">
             <h4 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1">

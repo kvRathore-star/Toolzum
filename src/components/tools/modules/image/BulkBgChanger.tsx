@@ -169,7 +169,7 @@ export default function BulkBgChanger() {
         <span className="text-[9px] font-bold text-[var(--text-secondary)] bg-[var(--bg-surface)] px-2 py-1 rounded-full">{images.length} images</span>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="overflow-hidden space-y-5">
         <div role="button" tabIndex={0} aria-label="Upload product photos" className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-6 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
           onClick={() => fileInputRef.current?.click()}
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInputRef.current?.click(); } }}>

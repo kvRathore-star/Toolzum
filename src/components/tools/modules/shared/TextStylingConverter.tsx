@@ -132,7 +132,7 @@ function FancyView() {
           Type your text to generate stylized fonts, bubble letters, cursive scripts, and brackets. Copy instantly for Instagram, X, or Discord.
         </p>
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+      <div className="space-y-6">
         <div className="space-y-2">
           <label htmlFor="lbl-textstylingconverter-input-text" className="block text-sm font-bold text-[var(--text-primary)]">Input Text</label>
           <input id="lbl-textstylingconverter-input-text" aria-label="Input Text" type="text" value={inputText} onChange={e => setInputText(e.target.value)}
@@ -204,7 +204,7 @@ function CursiveView() {
   };
 
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6">
+    <div className="space-y-6">
       <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3">
         <Type className="w-5 h-5 text-[var(--accent)]" />
         <h3 className="text-lg font-bold text-[var(--text-primary)]">Unicode Cursive Text Generator</h3>
@@ -260,7 +260,7 @@ function ZalgoView() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 space-y-6 h-fit">
+      <div className="space-y-6 h-fit">
         <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider border-b border-[var(--border-subtle)] dark:border-[var(--border-subtle)] pb-2">
           Zalgo Parameters
         </h4>

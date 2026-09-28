@@ -211,7 +211,7 @@ export default function BankStatementAnalyser() {
         <h3 className="text-lg font-bold text-[var(--text-primary)]">Bank Statement Analyser</h3>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="overflow-hidden space-y-5">
         {transactions.length === 0 ? (
           <div>
             <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-10 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"

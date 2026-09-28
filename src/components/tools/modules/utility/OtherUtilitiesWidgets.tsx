@@ -76,7 +76,7 @@ export function PhoneParser() {
       </div>
       <input value={phoneInput} onChange={e => { setPhoneInput(e.target.value); setPhoneResult(detectCountry(e.target.value)); }} aria-label="Phone number" placeholder="Enter phone number (e.g. +14155552671 or +919876543210)..." className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
       {phoneResult && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-2">
+        <div className="space-y-2">
           <div className="text-xs flex justify-between"><span className="text-[var(--text-muted)]">Country</span><span className="font-bold text-[var(--text-primary)]">{phoneResult.country}</span></div>
           <div className="text-xs flex justify-between"><span className="text-[var(--text-muted)]">Country Code</span><span className="font-bold text-[var(--text-primary)]">{phoneResult.code}</span></div>
           <div className="text-xs flex justify-between"><span className="text-[var(--text-muted)]">National Number</span><span className="font-bold text-[var(--text-primary)]">{phoneResult.national}</span></div>
@@ -127,7 +127,7 @@ export function OTPGenerator() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <div className="flex items-center gap-4 flex-wrap">
           <div>
             <label htmlFor="lbl-otherutilitieswidgets-length" className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Length</label>
@@ -203,7 +203,7 @@ export function SlugifyTool() {
         </label>
       </div>
       {slugInput && (
-        <div className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
+        <div className="relative">
           <label htmlFor="lbl-otherutilitieswidgets-slug" className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Slug</label>
           <input id="lbl-otherutilitieswidgets-slug" aria-label="Slug" type="text" readOnly value={slugOutput} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
           <div className="absolute top-6 right-3 flex gap-2">

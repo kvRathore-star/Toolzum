@@ -20,7 +20,7 @@ export default function WebhookTester() {
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Webhook Tester</h2>
         <div>
           <label htmlFor="lbl-webhooktester-webhook-url" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Webhook URL</label>

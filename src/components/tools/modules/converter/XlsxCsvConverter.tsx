@@ -194,7 +194,7 @@ export default function XlsxCsvConverter() {
         </div>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+      <div className="space-y-4">
         <div className="flex flex-wrap gap-4 items-end">
           <div className="flex-1 min-w-[200px]">
             <label className="block text-xs text-[var(--text-secondary)] mb-1 font-medium">Upload File</label>

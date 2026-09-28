@@ -28,7 +28,7 @@ export default function JwkGenerator() {
       <div className="flex flex-wrap gap-2 mb-4">
         {bitPresets.map(b => <button key={b} onClick={() => handle(b)} className={`px-2.5 py-1 text-xs rounded-lg border transition-colors ${bits === b ? 'bg-yellow-500 text-white border-yellow-500' : 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 hover:bg-yellow-500/20 border-yellow-500/20'}`}>{b} bits</button>)}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">JWK Generator</h2>
       <button onClick={() => handle()} className="px-5 py-2.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-sm font-medium transition-colors">Generate JWK</button>
       {out && (

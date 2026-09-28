@@ -59,7 +59,7 @@ export default function TextRepeater() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6">
+      <div className="space-y-6">
         <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3">
           <Repeat className="w-5 h-5 text-[var(--accent)]" />
           <h3 className="text-lg font-bold text-[var(--text-primary)]">Text Repeater</h3>

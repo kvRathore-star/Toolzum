@@ -97,7 +97,7 @@ export default function BulkUrlShortener() {
 
   return (
     <div className="w-full max-w-4xl mx-auto space-y-6">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-6">
+      <div className="space-y-6">
         {/* Input */}
         <div className="space-y-3">
           <label htmlFor="lbl-bulkurlshortener-paste-urls-to-shorten" className="text-sm font-medium text-[var(--text-primary)]">

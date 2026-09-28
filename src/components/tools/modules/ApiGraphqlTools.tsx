@@ -25,7 +25,7 @@ export function GraphqlCostEstimator() {
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">GraphQL Cost Estimator</h2>
         <div className="flex flex-wrap gap-1.5">
           {presets.map(p => (
@@ -85,7 +85,7 @@ export function GraphqlQueryFormatter() {
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">GraphQL Query Formatter</h2>
         <div className="flex flex-wrap gap-1.5">
           {presets.map(p => (
@@ -141,7 +141,7 @@ export function GraphqlSchemaToJsonSchema() {
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">GraphQL Schema to JSON Schema</h2>
         <div className="flex flex-wrap gap-1.5">
           {presets.map(p => (
@@ -200,7 +200,7 @@ export function GraphqlSchemaValidator() {
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">GraphQL Schema Validator</h2>
         <div className="flex flex-wrap gap-1.5">
           {presets.map(p => (
@@ -247,7 +247,7 @@ export function GraphqlSubscriptionBuilder() {
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">GraphQL Subscription Builder</h2>
         <div className="flex flex-wrap gap-1.5">
           {presets.map(p => (
@@ -319,7 +319,7 @@ export function GraphqlTester() {
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">GraphQL Tester</h2>
         <div>
           <label htmlFor="lbl-apigraphqltools-endpoint" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Endpoint URL</label>
@@ -366,7 +366,7 @@ export function GraphqlVariablesFormatter() {
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">GraphQL Variables Formatter</h2>
         <div>
           <label htmlFor="lbl-apigraphqltools-variables-json-9" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Variables JSON</label>

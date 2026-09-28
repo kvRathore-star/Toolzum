@@ -414,7 +414,7 @@ export default function IndianInvestmentCalculator() {
         ))}
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl">
+      <div className="">
         {mode === 'sip' && <SipTab />}
         {mode === 'ppf' && <PpfTab />}
         {mode === 'epf' && <EpfTab />}

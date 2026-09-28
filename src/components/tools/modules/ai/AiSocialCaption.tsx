@@ -218,7 +218,7 @@ export default function AiSocialCaption() {
         <p className="text-xs text-[var(--text-secondary)] mt-1">Generate engaging captions for any social media platform.</p>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-5">
+      <div className="space-y-5">
         <div className="space-y-2">
           <label htmlFor="lbl-aisocialcaption-what-is-your-post-about" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">What is your post about?</label>
           <textarea id="lbl-aisocialcaption-what-is-your-post-about" aria-label="What is your post about?"

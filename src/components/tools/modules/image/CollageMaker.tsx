@@ -235,7 +235,7 @@ export default function CollageMaker() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+        <div className="space-y-6 h-fit">
           <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Layout</h4>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {LAYOUTS.map(l => {
@@ -329,7 +329,7 @@ export default function CollageMaker() {
 
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+            <div className="space-y-6 animate-in zoom-in-95 duration-300">
               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">Collage Ready</h4>
               </div>
@@ -356,7 +356,7 @@ export default function CollageMaker() {
           )}
 
           {!outputUrl && (
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl">
+            <div className="">
               <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2 mb-4">Images ({images.length})</h4>
               <div className="flex flex-wrap gap-3">
                 {images.map((img, i) => (

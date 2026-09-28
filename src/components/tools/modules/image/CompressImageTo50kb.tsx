@@ -131,7 +131,7 @@ export default function CompressImageTo50kb() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* original preview */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col justify-between items-center text-center">
+        <div className="flex flex-col justify-between items-center text-center">
           <span className="text-xs font-bold text-[var(--text-secondary)] uppercase block mb-3">Original Preview</span>
           <div className="relative border border-[var(--border-subtle)] rounded-xl overflow-hidden bg-black flex justify-center items-center h-[250px] w-full">
             {originalUrl && (

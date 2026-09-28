@@ -182,7 +182,7 @@ export default function GifToWebpWebm() {
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
         <div className="lg:col-span-3 space-y-6">
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-5">
+          <div className="space-y-5">
             <h4 className="text-[var(--text-primary)] font-medium">Settings</h4>
 
             <div>

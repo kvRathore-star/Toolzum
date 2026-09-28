@@ -94,7 +94,7 @@ export default function BrandKit() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-8">
+      <div className="space-y-8">
          <div className="flex items-center gap-3 border-b border-[var(--border-subtle)] pb-6">
            <div className="p-3 bg-rose-100 dark:bg-rose-900/30 rounded-xl">
              <Palette className="w-8 h-8 text-[var(--accent)]" />

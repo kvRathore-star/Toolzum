@@ -100,7 +100,7 @@ export default function NatoPhoneticConverter() {
         </div>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
+      <div className="">
         <h3 className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider mb-3">NATO Phonetic Alphabet Reference</h3>
         <div className="grid grid-cols-3 sm:grid-cols-5 gap-1.5 text-xs">
           {Object.entries(NATO_MAP).map(([letter, word]) => (

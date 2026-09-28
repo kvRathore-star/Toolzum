@@ -133,7 +133,7 @@ export default function PdfToMarkdown() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+        <div className="space-y-6 h-fit">
           <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Extraction</h4>
           <p className="text-sm text-[var(--text-secondary)]">Extract all readable text as formatted Markdown. Headings are detected from font sizes.</p>
           <button
@@ -148,7 +148,7 @@ export default function PdfToMarkdown() {
 
         <div className="space-y-6">
           {markdown ? (
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
+            <div className="space-y-4 animate-in zoom-in-95 duration-300">
               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">Markdown Output</h4>
                 <div className="flex gap-2">

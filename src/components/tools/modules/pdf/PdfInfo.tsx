@@ -184,7 +184,7 @@ export default function PdfInfo() {
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--accent)]" />
         </div>
       ) : (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl">
+        <div className="">
           {activeTab === 'metadata' && metadata && (
             <div className="space-y-0">
               {Object.entries(metadata).map(([key, val]) => (

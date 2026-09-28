@@ -38,7 +38,7 @@ export default function CsvMerger() {
       <div className="flex flex-wrap gap-2 mb-4">
         {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v1, p.v2)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">CSV Merger</h2>
       <Input label="First CSV (left table)" rows={3} value={input1} onChange={v => { setInput1(v); setOut(''); }} placeholder="First CSV..." />
       <Input label="Second CSV (right table)" rows={3} value={input2} onChange={v => { setInput2(v); setOut(''); }} placeholder="Second CSV..." />

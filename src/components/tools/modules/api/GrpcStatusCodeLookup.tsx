@@ -27,7 +27,7 @@ export default function GrpcStatusCodeLookup() {
   const info = codes[code] || null;
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">gRPC Status Code Lookup</h2>
         <div className="flex flex-wrap gap-1">
           {presets.map(c => (

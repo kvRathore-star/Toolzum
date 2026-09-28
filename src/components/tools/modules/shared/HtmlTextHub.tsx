@@ -68,7 +68,7 @@ export default function HtmlTextHub({ slug: defaultSlug }: { slug: string; descr
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">{config.name}</h2>
         <p className="text-xs text-[var(--text-secondary)]">{config.description}</p>
         <textarea rows={6} value={input} onChange={e => setInput(e.target.value)} aria-label="Input HTML"

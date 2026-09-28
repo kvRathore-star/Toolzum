@@ -247,7 +247,7 @@ export default function AudioMerger() {
         <strong>Audio Merger:</strong> Drag to reorder or use the arrows. All processing is done locally — nothing is uploaded.
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="overflow-hidden space-y-5">
         {/* File list */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">

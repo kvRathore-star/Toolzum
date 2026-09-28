@@ -156,7 +156,7 @@ export default function PdfOcr() {
       </div>
 
       {!extractedText && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+        <div className="space-y-6">
           <p className="text-[var(--text-primary)] text-center text-lg">
             Ready to extract text. Note that processing multi-page PDFs locally may take a few moments depending on your device speed.
           </p>

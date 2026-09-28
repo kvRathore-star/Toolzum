@@ -454,7 +454,7 @@ export default function ChartMaker() {
   if (step === 'preview') {
     return (
       <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+        <div className="space-y-6">
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
             <h4 className="font-bold text-emerald-500">Chart Generated</h4>
           </div>
@@ -483,7 +483,7 @@ export default function ChartMaker() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left: Data Input */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 h-fit">
+        <div className="space-y-4 h-fit">
           <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Data Entry</h4>
 
           <div>
@@ -522,7 +522,7 @@ export default function ChartMaker() {
         </div>
 
         {/* Right: Chart Settings */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 h-fit">
+        <div className="space-y-4 h-fit">
           <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Chart Settings</h4>
 
           <div>

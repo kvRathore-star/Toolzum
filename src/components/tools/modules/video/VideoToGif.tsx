@@ -145,7 +145,7 @@ export default function VideoToGif() {
       )}
 
       {isProcessing && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-5 space-y-2">
+        <div className="space-y-2">
           <div className="flex justify-between text-[10px] font-semibold text-pink-600 dark:text-pink-400">
             <span>{progress === 0 ? 'Analyzing colors & encoding frames... (large videos take a while)' : 'Generating GIF...'}</span>
             <span>{progress === 0 ? '—' : `${progress}%`}</span>
@@ -161,7 +161,7 @@ export default function VideoToGif() {
       )}
 
       {outputUrl ? (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-5 space-y-4">
+        <div className="space-y-4">
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-3"><h4 className="text-xs font-bold text-emerald-500">GIF Ready</h4>{outputSize && <span className="text-[10px] bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded font-bold">{(outputSize / 1024).toFixed(1)} KB</span>}</div>
           <div className="bg-[var(--bg-overlay)] dark:bg-black rounded-xl overflow-hidden p-4 flex items-center justify-center" style={{backgroundImage: 'linear-gradient(45deg,#eee 25%,transparent 25%,transparent 75%,#eee 75%,#eee),linear-gradient(45deg,#eee 25%,transparent 25%,transparent 75%,#eee 75%,#eee)', backgroundSize: '20px 20px', backgroundPosition: '0 0,10px 10px'}}>
             <img  loading="lazy" src={outputUrl} alt="Generated GIF" className="max-w-full max-h-[250px] object-contain rounded drop-shadow-md" />

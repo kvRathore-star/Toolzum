@@ -25,7 +25,7 @@ export default function PermutationCalculator() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Permutations (nPr)</h2>
         <div className="flex gap-2 items-center">
           <Input label="n" type="number" value={n} onChange={setN} placeholder="n" />

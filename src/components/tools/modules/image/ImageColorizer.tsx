@@ -73,7 +73,7 @@ export default function ImageColorizer() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 text-xs">
         {/* Workspace */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+        <div className="space-y-4">
           <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-[var(--border-subtle)] pb-2">Filter Parameters</h3>
           
           {!imageSrc ? (
@@ -139,7 +139,7 @@ export default function ImageColorizer() {
         </div>
 
         {/* Output */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col justify-between items-center min-h-[300px]">
+        <div className="flex flex-col justify-between items-center min-h-[300px]">
           {colorizedUrl ? (
             <div className="flex-1 flex flex-col items-center justify-between w-full h-full space-y-4">
               <div className="flex-1 flex items-center justify-center w-full p-4 bg-[var(--bg-overlay)] dark:bg-zinc-950 border border-zinc-800 rounded-xl">

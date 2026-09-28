@@ -88,7 +88,7 @@ function ConverterDropdown({ family, slug }: { family: FamilyConfig; slug: strin
   const swap = () => { setFrom(to); setTo(from); setOutput(''); };
 
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+    <div className="space-y-4">
       <h2 className="text-lg font-bold text-[var(--text-primary)]">{family.title}</h2>
       <p className="text-xs text-[var(--text-secondary)]">{family.desc}</p>
       <ConverterExamples examples={family.examples ?? []} onSelect={v => setValue(v)} />
@@ -147,7 +147,7 @@ function ConverterAllOutputs({ family, slug }: { family: FamilyConfig; slug: str
   });
 
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+    <div className="space-y-4">
       <h2 className="text-lg font-bold text-[var(--text-primary)]">{family.title}</h2>
       <p className="text-xs text-[var(--text-secondary)]">{family.desc}</p>
       <ConverterExamples examples={family.examples ?? []} onSelect={v => setValue(v)} />

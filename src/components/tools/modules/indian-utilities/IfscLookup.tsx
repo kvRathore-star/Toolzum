@@ -95,7 +95,7 @@ export default function IfscLookup() {
         </p>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+      <div className="space-y-6">
         {!isProUser && (
         <div className="flex items-center justify-between bg-[var(--bg-overlay)]/50 px-4 py-2.5 rounded-xl border border-[var(--border-subtle)]">
           <p className="text-xs text-[var(--text-secondary)]">Daily free lookups:</p>

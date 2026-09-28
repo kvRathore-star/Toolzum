@@ -208,7 +208,7 @@ export default function TextToSpeechTts() {
         </div>
 
         {/* Right: Settings Sidebar */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-xl p-6 space-y-8">
+        <div className="overflow-hidden space-y-8">
            <h3 className="font-bold text-[var(--text-primary)] border-b border-[var(--border-subtle)] pb-2">Audio Settings</h3>
            
            <div className="space-y-4">

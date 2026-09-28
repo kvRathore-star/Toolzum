@@ -71,7 +71,7 @@ export default function ChmodCalculator() {
       {error && <div role="alert" className="text-sm font-medium text-rose-600 dark:text-rose-400">{error}</div>}
       {/^[0-7]{3}$/.test(numeric) && (
         <div className="space-y-4">
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
+          <div className="">
             <div className="grid grid-cols-3 gap-4">
               {[
                 { label: 'Owner', val: parseInt(numeric[0]!) },

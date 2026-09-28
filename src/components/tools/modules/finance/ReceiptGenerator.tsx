@@ -150,7 +150,7 @@ export default function ReceiptGenerator() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 text-xs text-[var(--text-muted)]">
         {/* Workspace */}
-        <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+        <div className="lg:col-span-5 space-y-4">
           <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-zinc-800 pb-2">Details</h3>
           
           <div className="grid grid-cols-2 gap-4">
@@ -200,7 +200,7 @@ export default function ReceiptGenerator() {
         </div>
 
         {/* Live Bill preview */}
-        <div className="lg:col-span-7 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col justify-between min-h-[450px]">
+        <div className="lg:col-span-7 flex flex-col justify-between min-h-[450px]">
           <div className="space-y-4 flex-1">
             <div className="flex justify-between items-start border-b border-zinc-800 pb-3">
               <div>

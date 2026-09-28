@@ -116,7 +116,7 @@ export default function PanVerification() {
         </p>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+      <div className="space-y-6">
         <div className="space-y-2">
           <label className="block text-sm font-bold text-[var(--text-primary)]">
             Enter 10-Digit PAN Number

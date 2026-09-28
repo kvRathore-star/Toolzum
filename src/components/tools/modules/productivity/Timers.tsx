@@ -498,7 +498,7 @@ export function TimeDurationCalculator() {
   };
 
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+    <div className="space-y-4">
       <h2 className="text-lg font-bold text-[var(--text-primary)]">Time Duration Calculator</h2>
       <div className="flex gap-4">
         <div className="flex-1"><label htmlFor="lbl-timers-start-time" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Start Time</label><input id="lbl-timers-start-time" aria-label="Start Time" type="time" value={startTime} onChange={e => setStartTime(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" /></div>

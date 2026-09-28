@@ -402,7 +402,7 @@ export default function MarriageBiodataMaker() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-        <div className="lg:col-span-3 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl">
+        <div className="lg:col-span-3">
           {stepContent()}
 
           <div className="flex justify-between mt-6 pt-4 border-t border-[var(--border-subtle)]">

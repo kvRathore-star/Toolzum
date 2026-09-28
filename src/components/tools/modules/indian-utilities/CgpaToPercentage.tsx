@@ -111,7 +111,7 @@ export default function CgpaToPercentage() {
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+        <div className="lg:col-span-2 space-y-6">
           <div className="space-y-2">
             <label className="block text-sm font-bold text-[var(--text-primary)]">Select Board or University Scale</label>
             <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">

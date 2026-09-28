@@ -167,7 +167,7 @@ export default function AudioCompressor() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 space-y-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
+        <div className="lg:col-span-2 space-y-5">
           <div className="flex items-center justify-between">
             <h4 className="text-[var(--text-primary)] font-medium">Compressor Settings</h4>
             <div className="flex gap-1.5 flex-wrap">

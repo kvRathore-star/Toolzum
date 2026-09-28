@@ -73,7 +73,7 @@ export default function IpAddressLookup() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Lookup Controls */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 flex flex-col justify-between">
+        <div className="space-y-4 flex flex-col justify-between">
           <div className="space-y-3">
             <span className="text-xs text-[var(--text-muted)] font-bold uppercase block">IP Address query</span>
             <input aria-label="IP Address query" 
@@ -95,7 +95,7 @@ export default function IpAddressLookup() {
         </div>
 
         {/* Geo Details */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl min-h-[250px] flex flex-col justify-center">
+        <div className="min-h-[250px] flex flex-col justify-center">
           {details ? (
             <div className="space-y-4 animate-in zoom-in-95 duration-200 text-xs">
               <span className="text-xs text-[var(--text-muted)] font-bold uppercase block border-b border-[var(--border-subtle)] pb-2">Resolved Geolocation details</span>

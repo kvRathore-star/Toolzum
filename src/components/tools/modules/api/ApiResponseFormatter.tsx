@@ -34,7 +34,7 @@ export default function ApiResponseFormatter() {
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">API Response Formatter</h2>
         <div>
           <label htmlFor="lbl-apiresponseformatter-json-input" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">JSON Input</label>

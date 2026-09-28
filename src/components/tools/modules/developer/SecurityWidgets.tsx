@@ -57,7 +57,7 @@ export function SecretScanner() {
     }
   };
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+    <div className="space-y-4">
       <Section title="Secret Scanner">
         <DualPanel
           input={<>
@@ -100,7 +100,7 @@ export function SecurityTxtGenerator() {
     toast.success('security.txt generated!');
   };
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+    <div className="space-y-4">
       <Section title="security.txt Generator">
         <DualPanel
           input={<>
@@ -144,7 +144,7 @@ export function RobotsTxtValidator() {
     toast.success(issues.length ? `Found ${issues.length} issue(s)` : 'Valid!');
   };
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+    <div className="space-y-4">
       <Section title="robots.txt Validator">
         <DualPanel
           input={<>
@@ -183,7 +183,7 @@ export function DnsRecordValidator() {
     setOutput(results.join('\n'));
   };
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+    <div className="space-y-4">
       <Section title="DNS Record Validator">
         <DualPanel
           input={<>

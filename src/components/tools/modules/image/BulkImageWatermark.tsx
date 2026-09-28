@@ -198,7 +198,7 @@ export default function BulkImageWatermark() {
 
   return (
     <div className="w-full max-w-3xl mx-auto space-y-6">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-6">
+      <div className="space-y-6">
         {/* Upload */}
         <div
           role="button" tabIndex={0}

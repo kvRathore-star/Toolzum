@@ -65,7 +65,7 @@ export default function TypographyPreview() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+      <div className="space-y-4">
         <div className="flex flex-wrap gap-2">
           {presets.map((p) => (
             <button key={p.label} onClick={() => applyPreset(p)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">

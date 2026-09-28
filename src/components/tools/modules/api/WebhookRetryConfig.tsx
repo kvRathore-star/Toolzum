@@ -23,7 +23,7 @@ export default function WebhookRetryConfig() {
   const maxTotal = result.length ? Math.max(...result.map(r => r.total)) : 1;
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Webhook Retry Config</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>

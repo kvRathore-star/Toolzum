@@ -89,7 +89,7 @@ export default function VideoToMp3() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6 text-center">
+      <div className="space-y-6 text-center">
          <div className="flex items-center justify-center gap-3 mb-2">
            <Music className="w-8 h-8 text-fuchsia-500" />
            <h2 className="text-2xl font-bold">Audio Extractor</h2>

@@ -593,7 +593,7 @@ export default function AiArticleWriter() {
         <span>This tool uses a smart template system with pre-written patterns — not a true AI generator. Content is generated locally from curated sentence templates and transition phrases.</span>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-5">
+      <div className="space-y-5">
         <div className="space-y-2">
           <label htmlFor="lbl-aiarticlewriter-topic" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Topic</label>
           <input id="lbl-aiarticlewriter-topic" aria-label="Topic"
@@ -682,7 +682,7 @@ export default function AiArticleWriter() {
 
       {finished && outline.length > 0 && (
         <div className="space-y-4 animate-in fade-in slide-in-from-top-4 duration-300">
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+          <div className="space-y-4">
             <div className="flex items-center justify-between flex-wrap gap-3">
               <div className="flex items-center gap-3">
                 <h3 className="text-sm font-bold text-[var(--text-primary)]">Generated Outline</h3>

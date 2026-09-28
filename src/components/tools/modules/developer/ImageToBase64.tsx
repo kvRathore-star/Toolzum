@@ -108,7 +108,7 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col space-y-4">
+            <div className="flex flex-col space-y-4">
               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
                 <div>
                   <h3 className="text-[var(--text-primary)] font-medium">{file.name}</h3>
@@ -122,7 +122,7 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
               </div>
             </div>
 
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 flex flex-col">
+            <div className="space-y-4 flex flex-col">
               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
                 <h3 className="text-[var(--text-primary)] font-medium">Base64 Output</h3>
                 <span className="text-xs text-[var(--text-secondary)] font-mono bg-[var(--bg-surface)] px-2 py-1 rounded">~{((getOutputString().length * 3 / 4) / 1024).toFixed(2)} KB decoded</span>
@@ -141,7 +141,7 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
         )
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 flex flex-col min-h-[400px]">
+          <div className="space-y-4 flex flex-col min-h-[400px]">
             <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
               <h3 className="text-[var(--text-primary)] font-medium">Base64 String</h3>
               <div className="flex gap-2">
@@ -154,7 +154,7 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
             <button onClick={processBase64} disabled={!base64Input.trim()} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50">Decode to Image</button>
           </div>
 
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col space-y-6 min-h-[400px]">
+          <div className="flex flex-col space-y-6 min-h-[400px]">
             <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
               <h3 className="text-[var(--text-primary)] font-medium">Image Preview</h3>
             </div>

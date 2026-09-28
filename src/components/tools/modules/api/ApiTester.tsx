@@ -27,7 +27,7 @@ export default function ApiTester() {
   const statusColor = status !== null ? (status >= 200 && status < 300 ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' : status >= 400 ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300' : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300') : '';
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">API Tester</h2>
         <div className="flex flex-wrap gap-1.5">
           {presets.map(p => (

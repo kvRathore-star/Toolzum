@@ -139,7 +139,7 @@ Note: Connect backend LLM for exact deduction processing.`);
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         <div className="lg:col-span-3 space-y-6">
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
+          <div className="">
             <h4 className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider flex items-center gap-1.5 mb-4">
               <FileText className="w-3.5 h-3.5" /> Step-by-Step Guide
             </h4>
@@ -166,7 +166,7 @@ Note: Connect backend LLM for exact deduction processing.`);
             </div>
           </div>
 
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
+          <div className="">
             <h4 className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider flex items-center gap-1.5 mb-4">
               <FileText className="w-3.5 h-3.5" /> Select Your ITR Form
             </h4>
@@ -194,7 +194,7 @@ Note: Connect backend LLM for exact deduction processing.`);
             )}
           </div>
 
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
+          <div className="">
             <div className="flex items-center justify-between mb-4">
               <h4 className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider flex items-center gap-1.5">
                 <ClipboardList className="w-3.5 h-3.5" /> Document Checklist
@@ -221,7 +221,7 @@ Note: Connect backend LLM for exact deduction processing.`);
         </div>
 
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
+          <div className="">
             <div className="flex items-center justify-between mb-4">
               <h4 className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">Tax Calculator</h4>
               <button onClick={() => setShowCalc(!showCalc)}
@@ -258,7 +258,7 @@ Note: Connect backend LLM for exact deduction processing.`);
             )}
           </div>
 
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
+          <div className="">
             <h4 className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider flex items-center gap-1.5 mb-4">
               <ExternalLink className="w-3.5 h-3.5" /> Official Resources
             </h4>

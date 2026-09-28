@@ -114,7 +114,7 @@ export default function PrivacyCleaner() {
         <h3 className="text-lg font-bold text-[var(--text-primary)]">Privacy Cleaner</h3>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="overflow-hidden space-y-5">
         <p className="text-xs text-[var(--text-secondary)]">
           View and clear your browser storage for this site. Cookies, localStorage, sessionStorage — all in one place. Everything runs locally, nothing leaves your device.
         </p>

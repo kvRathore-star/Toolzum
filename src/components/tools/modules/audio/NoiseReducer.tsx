@@ -146,7 +146,7 @@ export default function NoiseReducer() {
         <h3 className="text-lg font-bold text-[var(--text-primary)]">Audio Noise Reducer</h3>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="overflow-hidden space-y-5">
         <p className="text-xs text-[var(--text-secondary)]">Remove background noise using adaptive spectral subtraction and non-local means denoising. All processing is local.</p>
 
         {!file ? (

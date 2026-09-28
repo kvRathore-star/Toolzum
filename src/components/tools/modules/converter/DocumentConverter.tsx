@@ -145,7 +145,7 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
   const outFilename = downloadFilename || (convertedFiles.length > 0 ? convertedFiles[0]!.name : `converted.${dstFormat.toLowerCase()}`);
 
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+    <div className="space-y-4">
       <Section title="Document Converter">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
           <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-3">

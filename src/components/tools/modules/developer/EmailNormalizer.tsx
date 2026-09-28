@@ -143,7 +143,7 @@ export default function EmailNormalizer() {
         <button onClick={() => setInput(PRESETS.corporate!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Corporate</button>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
+      <div className="">
         <label htmlFor="lbl-emailnormalizer-email-input-one-per-line" className="text-[11px] font-bold text-[var(--text-muted)] uppercase mb-2 block">Email Input (one per line)</label>
         <textarea id="lbl-emailnormalizer-email-input-one-per-line" aria-label="Email Input (one per line)" value={input} onChange={e => setInput(e.target.value)} placeholder="Enter emails, one per line..."
           className="w-full h-[200px] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
@@ -153,7 +153,7 @@ export default function EmailNormalizer() {
       </div>
 
       {results.length > 0 && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
+        <div className="">
           <div className="flex justify-between items-center mb-3">
             <span className="text-[11px] font-bold text-[var(--text-muted)] uppercase">Results ({results.length} processed)</span>
             <div className="flex gap-2">
@@ -186,7 +186,7 @@ export default function EmailNormalizer() {
       )}
 
       {output && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
+        <div className="">
           <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-64 overflow-y-auto">{output}</pre>
         </div>
       )}

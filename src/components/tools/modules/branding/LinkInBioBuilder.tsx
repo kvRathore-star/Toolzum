@@ -147,7 +147,7 @@ ${linkCards}
         <h3 className="text-lg font-bold text-[var(--text-primary)]">Link-in-Bio Builder</h3>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="overflow-hidden space-y-5">
         <p className="text-xs text-[var(--text-secondary)]">Build a Link-in-Bio page. Preview in real-time, then copy the HTML to deploy anywhere.</p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">

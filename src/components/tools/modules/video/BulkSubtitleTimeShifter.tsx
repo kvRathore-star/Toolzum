@@ -67,7 +67,7 @@ export default function BulkSubtitleTimeShifter() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+      <div className="space-y-4">
         <div className="flex flex-wrap gap-2">
           {timePresets.map((p) => (
             <button key={p.label} onClick={() => setOffset(p.offset)} className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ${offset === p.offset ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>

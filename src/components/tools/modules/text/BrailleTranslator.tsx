@@ -84,7 +84,7 @@ export default function BrailleTranslator() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-4">
+        <div className="space-y-4">
           <span className="text-xs text-[var(--text-muted)] font-bold uppercase block">English Plaintext</span>
           <textarea aria-label="English Plaintext"
             value={text}
@@ -102,7 +102,7 @@ export default function BrailleTranslator() {
           </div>
         </div>
 
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-4">
+        <div className="space-y-4">
           <span className="text-xs text-[var(--text-muted)] font-bold uppercase block">Braille Characters Output</span>
           <textarea aria-label="Braille Characters Output"
             value={braille}

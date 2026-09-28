@@ -262,7 +262,7 @@ export default function EsignPdf() {
 
         {/* Signature Controls (Right Col) */}
         <div className="lg:col-span-4 space-y-6">
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl">
+          <div className="">
             <h4 className="text-[var(--text-primary)] font-medium mb-4 flex justify-between items-center">
               Your Signature
               <button onClick={clearSignature} className="text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-2 py-1 bg-[var(--bg-surface)] rounded">Clear</button>

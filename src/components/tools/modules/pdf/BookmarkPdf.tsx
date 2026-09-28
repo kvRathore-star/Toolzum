@@ -209,7 +209,7 @@ export default function BookmarkPdf() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit max-h-[700px] overflow-y-auto">
+        <div className="space-y-6 h-fit max-h-[700px] overflow-y-auto">
           <div className="flex items-center justify-between">
             <h4 className="text-[var(--text-primary)] font-medium">Bookmarks</h4>
             <button
@@ -308,7 +308,7 @@ export default function BookmarkPdf() {
 
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+            <div className="space-y-6 animate-in zoom-in-95 duration-300">
               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">Bookmarks Applied</h4>
               </div>

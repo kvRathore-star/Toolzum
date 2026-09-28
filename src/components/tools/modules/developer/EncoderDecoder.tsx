@@ -87,7 +87,7 @@ export function EncoderDecoder() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
+      <div className="space-y-6">
         <h2 className="text-2xl font-bold">Encoder / Decoder</h2>
         <p className="text-sm text-[var(--text-secondary)]">Encode or decode text using various schemes</p>
         <div className="flex gap-2">

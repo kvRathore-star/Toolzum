@@ -278,7 +278,7 @@ export default function XmlSitemapGenerator() {
   return (
     <div className="max-w-6xl mx-auto space-y-6">
       {/* Input Section */}
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-5">
+      <div className="space-y-5">
         <div className="flex items-center gap-3 mb-1">
           <Globe className="w-5 h-5 text-emerald-500" />
           <h2 className="text-lg font-bold text-[var(--text-primary)]">XML Sitemap Generator</h2>
@@ -389,7 +389,7 @@ export default function XmlSitemapGenerator() {
 
       {/* Detecting state */}
       {state.status === 'detecting' && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-8 flex items-center justify-center gap-3">
+        <div className="flex items-center justify-center gap-3">
           <div className="w-5 h-5 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
           <span className="text-sm text-[var(--text-secondary)]">Detecting site type…</span>
         </div>
@@ -462,7 +462,7 @@ export default function XmlSitemapGenerator() {
       {/* Complete — results */}
       {state.status === 'complete' && (
         <>
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
+          <div className="">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-4 text-sm">
                 <span className="text-[var(--text-primary)]"><strong className="text-lg">{state.pages.length}</strong> URLs</span>
@@ -514,7 +514,7 @@ export default function XmlSitemapGenerator() {
           </div>
 
           {/* SEO Insights */}
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
+          <div className="space-y-3">
             <h3 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-amber-500" />
               SEO Health Check
@@ -578,7 +578,7 @@ export default function XmlSitemapGenerator() {
           </details>
 
           {/* Next Steps */}
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-5">
+          <div className="space-y-5">
             <h3 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
               <CheckCircle className="w-4 h-4 text-emerald-500" />
               What to do next
@@ -632,7 +632,7 @@ export default function XmlSitemapGenerator() {
           </div>
 
           {/* FAQ */}
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
+          <div className="space-y-3">
             <h3 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
               <FileText className="w-4 h-4 text-[var(--text-muted)]" />
               Frequently Asked Questions

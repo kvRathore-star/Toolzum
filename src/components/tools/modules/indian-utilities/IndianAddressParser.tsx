@@ -252,7 +252,7 @@ export default function IndianAddressParser() {
           animate={{ opacity: 1, x: 0 }}
           className="space-y-4"
         >
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 shadow-xl space-y-4">
+          <div className="space-y-4">
             <label htmlFor="lbl-indianaddressparser-enter-indian-address" className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
               <MapPin className="w-4 h-4" style={{ color: ACCENT }} />
               Enter Indian Address

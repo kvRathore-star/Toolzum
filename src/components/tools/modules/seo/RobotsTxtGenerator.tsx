@@ -59,7 +59,7 @@ export default function RobotsTxtGenerator() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Config panel */}
-        <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+        <div className="lg:col-span-5 space-y-4">
           <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-[var(--border-subtle)] pb-2">Directives</h3>
           
           <div className="space-y-2">
@@ -97,7 +97,7 @@ export default function RobotsTxtGenerator() {
         </div>
 
         {/* Output Panel */}
-        <div className="lg:col-span-7 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col justify-between min-h-[400px]">
+        <div className="lg:col-span-7 flex flex-col justify-between min-h-[400px]">
           <div className="space-y-2 flex-1 flex flex-col">
             <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
               <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Generated Robots.txt</span>

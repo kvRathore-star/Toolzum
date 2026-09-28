@@ -37,7 +37,7 @@ export function EtaCalculator() {
         <h2 className="text-2xl font-bold">ETA Calculator</h2>
         <p className="text-sm text-[var(--text-secondary)] mt-1">Estimate travel time from distance and speed — with optional arrival time.</p>
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label htmlFor="lbl-mathtoolswidgets-distance-unit-km-km-mi" className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Distance ({unit === 'km' ? 'km' : 'mi'})</label>

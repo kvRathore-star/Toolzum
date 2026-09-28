@@ -232,7 +232,7 @@ export default function CsvToSqlite() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left sidebar - Schema */}
-        <div className="lg:col-span-3 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-4">
+        <div className="lg:col-span-3 space-y-4">
           <div className="flex items-center justify-between">
             <span className="text-xs text-[var(--text-muted)] font-bold uppercase flex items-center gap-1.5"><Table className="w-3.5 h-3.5" /> Schema</span>
             {db && <button onClick={handleReset} className="text-xs text-red-700 dark:text-red-400 hover:text-red-300 flex items-center gap-1"><Trash2 className="w-3 h-3" /> Reset</button>}
@@ -307,7 +307,7 @@ export default function CsvToSqlite() {
         {/* Right main area - Query editor + Results */}
         <div className="lg:col-span-9 space-y-6">
           {/* Query Editor */}
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
+          <div className="">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs text-[var(--text-muted)] font-bold uppercase flex items-center gap-1.5"><Terminal className="w-3.5 h-3.5" /> SQL Query</span>
               {db && (
@@ -341,7 +341,7 @@ export default function CsvToSqlite() {
           </div>
 
           {/* Results */}
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
+          <div className="">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs text-[var(--text-muted)] font-bold uppercase flex items-center gap-1.5"><FileText className="w-3.5 h-3.5" /> Results</span>
               <div className="flex items-center gap-3">

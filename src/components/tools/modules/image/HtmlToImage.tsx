@@ -37,7 +37,7 @@ export default function HtmlToImage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
+      <div className="space-y-6">
          <div className="text-center">
            <h2 className="text-2xl font-bold">HTML to Image Converter</h2>
            <p className="text-[var(--text-secondary)]">Render custom HTML/CSS directly into a downloadable image (PNG, JPG, SVG). Paste HTML markup below — screenshots from a URL are not possible fully client-side (cross-origin pages cannot be rasterized in the browser).</p>

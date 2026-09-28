@@ -102,7 +102,7 @@ export default function AadhaarWalletCropper() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+        <div className="space-y-4">
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-3">
             <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5">
               <Crop className="w-3.5 h-3.5 text-[#0d9488]" />
@@ -226,7 +226,7 @@ export default function AadhaarWalletCropper() {
           )}
         </div>
 
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col justify-between items-center min-h-[300px]">
+        <div className="flex flex-col justify-between items-center min-h-[300px]">
           {croppedUrl ? (
             <div className="flex-1 flex flex-col items-center justify-between w-full h-full space-y-4">
               <div className="flex-1 flex items-center justify-center w-full p-4 bg-[var(--bg-overlay)] dark:bg-zinc-950 border border-[var(--border-subtle)] rounded-xl">

@@ -14,7 +14,7 @@ export function CounterTool() {
   const handleCopy = () => { clipboardWrite(`Count: ${count}\nHistory: ${history.join(', ')}`).then(ok => ok && toast.success('Copied!')); };
   const handleDownload = () => { const blob = new Blob([`Count: ${count}\nHistory: ${history.join(', ')}`], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='counter-log.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); };
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+    <div className="space-y-4">
       <h2 className="text-lg font-bold text-[var(--text-primary)]">Counter</h2>
       <div className="text-4xl font-bold text-center text-[var(--text-primary)]">{count}</div>
       <div className="flex gap-2 justify-center">
@@ -60,7 +60,7 @@ export function ListRandomizer() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">List Randomizer</h2>
         <Input label="Enter items (one per line)" value={input} onChange={setInput} rows={5} />
         <button className={btnClass(clr!)} onClick={randomize}>Randomize</button>
@@ -95,7 +95,7 @@ export function ListSorter() {
   const handleCopy = () => { clipboardWrite(resultText).then(ok => ok && toast.success('Copied!')); };
   const handleDownload = () => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='sorted-list.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); };
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+    <div className="space-y-4">
       <h2 className="text-lg font-bold text-[var(--text-primary)]">List Sorter</h2>
       <div className="flex flex-wrap gap-2">
         {presets.map((p) => (
@@ -174,7 +174,7 @@ export function NumberGuessingGame() {
     else setHints(h => [...h, n + ' - ' + (n < target.current ? 'Too low' : 'Too high')]);
   };
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+    <div className="space-y-4">
       <h2 className="text-lg font-bold text-[var(--text-primary)]">Number Guessing Game</h2>
       <p className="text-sm text-[var(--text-secondary)]">Guess a number between 1 and 100</p>
       <div className="flex gap-2">
@@ -202,7 +202,7 @@ export function RockPaperScissors() {
     else setResult('Computer Wins');
   };
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+    <div className="space-y-4">
       <h2 className="text-lg font-bold text-[var(--text-primary)]">Rock Paper Scissors</h2>
       <div className="flex gap-2 justify-center">
         {choices.map(c => <button className={btnClass(clr!)} key={c} onClick={() => play(c)}>{c}</button>)}
@@ -226,7 +226,7 @@ export function HangmanGame() {
   };
   const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+    <div className="space-y-4">
       <h2 className="text-lg font-bold text-[var(--text-primary)]">Hangman Game</h2>
       <div className="text-2xl font-mono tracking-widest text-center mb-4">{display}</div>
       <div className="text-sm text-red-500 mb-2">Wrong: {wrong}/6</div>

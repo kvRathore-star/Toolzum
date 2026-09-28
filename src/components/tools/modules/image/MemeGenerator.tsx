@@ -136,7 +136,7 @@ export default function MemeGenerator() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Editor Settings */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 max-h-[600px] overflow-y-auto pr-1">
+        <div className="space-y-6 max-h-[600px] overflow-y-auto pr-1">
           {/* Template Selector */}
           <div className="space-y-3">
             <span className="text-xs font-bold text-[var(--text-secondary)] block">Meme Templates</span>

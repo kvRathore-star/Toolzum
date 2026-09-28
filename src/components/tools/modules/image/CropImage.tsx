@@ -124,7 +124,7 @@ export default function CropImage() {
         </div>
 
         {/* Control toolbar */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+        <div className="space-y-6">
           <div className="space-y-3">
             <h4 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider">Aspect Presets</h4>
             <div className="grid grid-cols-2 gap-2 text-xs">

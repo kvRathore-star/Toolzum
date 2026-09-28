@@ -147,7 +147,7 @@ export default function BulkUrlStatusChecker() {
         </div>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-6">
+      <div className="space-y-6">
         {urls.length === 0 ? (
           <div
             role="button"

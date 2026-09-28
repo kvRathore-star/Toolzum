@@ -219,7 +219,7 @@ export default function QrCodeGenerator() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl space-y-6 max-h-[600px] overflow-y-auto pr-1">
+        <div className="space-y-6 max-h-[600px] overflow-y-auto pr-1">
           <h2 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1 border-b border-[var(--border-subtle)] pb-2">
             <Sliders className="w-4 h-4 text-[var(--accent)]" />
             Content

@@ -177,7 +177,7 @@ export default function TempEmailInbox() {
   return (
     <div className="max-w-3xl mx-auto space-y-5 animate-in fade-in duration-500">
       {!address || expired ? (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-10 text-center space-y-5">
+        <div className="sm:p-10 text-center space-y-5">
           <div className="inline-flex items-center justify-center w-12 h-12 bg-[var(--accent-ink)]/10 rounded-2xl">
             <Mail className="w-5 h-5 text-[var(--accent)]" />
           </div>
@@ -199,7 +199,7 @@ export default function TempEmailInbox() {
         </div>
       ) : (
         <>
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-5 space-y-4">
+          <div className="space-y-4">
             <div className="flex flex-wrap items-center gap-3">
               <code className="flex-1 min-w-[200px] bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--accent)] break-all">
                 {address}
@@ -228,14 +228,14 @@ export default function TempEmailInbox() {
             </div>
           </div>
 
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-5 space-y-3">
+          <div className="space-y-3">
             <p className="text-xs text-[var(--text-secondary)] text-center">
               Want a different address? Complete the check, then press <strong>New address</strong> — your current inbox stays live until the fresh one lands.
             </p>
             {verifyBlock}
           </div>
 
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-5">
+          <div className="">
             <h3 className="text-sm font-bold text-[var(--text-primary)] mb-3 inline-flex items-center gap-2">
               <Inbox className="w-4 h-4 text-[var(--accent)]" /> Inbox {messages.length > 0 && <span className="text-[var(--text-muted)] font-mono">({messages.length})</span>}
             </h3>

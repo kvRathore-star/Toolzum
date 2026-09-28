@@ -49,7 +49,7 @@ export default function ResumeBuilder() {
         
         {/* Editor (Left) */}
         <div className="space-y-6 no-print">
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+          <div className="space-y-4">
             <h3 className="text-xl font-bold text-[var(--text-primary)] mb-4">Personal Info</h3>
             <input aria-label="Full Name" value={personal.name} className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Full Name *" onChange={(e) => setPersonal({...personal, name: e.target.value})} />
             <input aria-label="Professional Title" value={personal.title} className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Professional Title" onChange={(e) => setPersonal({...personal, title: e.target.value})} />
@@ -60,7 +60,7 @@ export default function ResumeBuilder() {
             <textarea aria-label="Professional Summary" value={personal.summary} className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] h-24" placeholder="Professional Summary" onChange={(e) => setPersonal({...personal, summary: e.target.value})} />
           </div>
 
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+          <div className="space-y-4">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-bold text-[var(--text-primary)]">Experience</h3>
               <button onClick={addExperience} className="text-sm text-[var(--accent)] hover:text-blue-300 px-3 py-1 bg-[var(--accent)]/10 rounded-lg">+ Add</button>
@@ -77,7 +77,7 @@ export default function ResumeBuilder() {
             ))}
           </div>
 
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+          <div className="space-y-4">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-bold text-[var(--text-primary)]">Education</h3>
               <button onClick={addEducation} className="text-sm text-[var(--accent)] hover:text-blue-300 px-3 py-1 bg-[var(--accent)]/10 rounded-lg">+ Add</button>

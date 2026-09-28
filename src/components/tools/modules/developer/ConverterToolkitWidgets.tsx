@@ -56,7 +56,7 @@ export function Base32Encoder() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Base32 Encode / Decode</h2>
         <DualPanel
           input={<>
@@ -104,7 +104,7 @@ export function Base64ToJsonDecoder() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Base64 to JSON Decoder</h2>
         <DualPanel
           input={<>
@@ -199,7 +199,7 @@ export function SvgToBase64Converter() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">SVG to Base64 Converter</h2>
         <DualPanel
           input={<>
@@ -246,7 +246,7 @@ export function CharacterEncodingConverter() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Character Encoding Converter</h2>
         <DualPanel
           input={<>
@@ -294,7 +294,7 @@ export function UnicodeConverter() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Unicode Converter</h2>
         <DualPanel
           input={<>
@@ -341,7 +341,7 @@ export function MarkdownToSlackConverter() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Markdown to Slack Converter</h2>
         <DualPanel
           input={<>
@@ -401,7 +401,7 @@ export function PxRemConverter() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">PX &lt;-&gt; REM Converter</h2>
         <DualPanel
           input={<>
@@ -463,7 +463,7 @@ export function SvgOptimizer() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">SVG Optimizer</h2>
         <DualPanel
           input={<>

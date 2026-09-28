@@ -24,7 +24,7 @@ export function ApiKeyGenerator() {
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">API Key Generator</h2>
         <div className="flex flex-wrap gap-1.5">
           {presets.map(p => (
@@ -69,7 +69,7 @@ export function ApiKeyHasher() {
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">API Key Hasher</h2>
         <div>
           <label htmlFor="lbl-apisecuritytools-api-key" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">API Key</label>
@@ -133,7 +133,7 @@ export function ApiKeyValidator() {
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">API Key Hygiene Check</h2>
         <p className="text-[11px] text-[var(--text-secondary)]">Checks format, provider prefix, and randomness offline. No offline check can confirm a key works with its issuer — only a real API call can.</p>
         <div>
@@ -185,7 +185,7 @@ export function ApiCostEstimator() {
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">API Cost Estimator</h2>
         <div className="flex flex-wrap gap-1.5">
           {presets.map(p => (
@@ -252,7 +252,7 @@ export function ApiGatewayRateCalculator() {
   const maxVal = result ? Math.max(result.maxPerWindow, result.sustainedRate * wSec, result.throttledRate * wSec) || 1 : 1;
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">API Gateway Rate Calculator</h2>
         <div className="grid grid-cols-3 gap-3">
           <div>
@@ -314,7 +314,7 @@ export function ApiRateLimiterCalculator() {
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">API Rate Limiter Calculator</h2>
         <div className="grid grid-cols-3 gap-3">
           <div>

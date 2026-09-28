@@ -28,7 +28,7 @@ export default function CsvJsonRowGenerator() {
   };
   const downloadFile = type === 'csv' ? 'output.csv' : 'output.json';
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+    <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">CSV Row / JSON Generator</h2>
       <div className="flex gap-2 mb-3">
         {[{ v: 'csv', l: 'CSV Row' }, { v: 'json', l: 'JSON' }].map(({ v, l }) => (

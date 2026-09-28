@@ -291,7 +291,7 @@ export default function VcfCsvConverter() {
       </div>
 
       {direction === 'vcf-to-csv' && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+        <div className="space-y-4">
           <h4 className="text-[var(--text-primary)] font-medium">Fields to Export</h4>
           <div className="flex flex-wrap gap-2">
             {VCF_FIELDS.map(f => (
@@ -309,7 +309,7 @@ export default function VcfCsvConverter() {
       )}
 
       {direction === 'csv-to-vcf' && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+        <div className="space-y-4">
           <h4 className="text-[var(--text-primary)] font-medium">Column Mapping</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {csvHeaders.map(h => (
@@ -333,7 +333,7 @@ export default function VcfCsvConverter() {
       )}
 
       {preview.length > 0 && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-3">
+        <div className="space-y-3">
           <h4 className="text-[var(--text-primary)] font-medium">Preview ({preview.length} of {contacts.length})</h4>
           <div className="overflow-x-auto max-h-64 overflow-y-auto">
             <table className="w-full text-sm">
@@ -364,7 +364,7 @@ export default function VcfCsvConverter() {
       )}
 
       {outputUrl ? (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
+        <div className="space-y-4 animate-in zoom-in-95 duration-300">
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
             <h4 className="font-bold text-emerald-500">Conversion Ready</h4>
           </div>

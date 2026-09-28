@@ -25,7 +25,7 @@ export default function SlopeCalculator() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Slope Calculator</h2>
         <div className="flex gap-2">
           <div><label className={labelClass}>x1</label><Input label="x1" type="number" value={x1} onChange={setX1} /></div>

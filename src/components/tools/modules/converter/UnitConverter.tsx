@@ -111,7 +111,7 @@ export function UnitConverter() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
+      <div className="space-y-6">
         <h2 className="text-2xl font-bold">Unit Converter</h2>
         <p className="text-sm text-[var(--text-secondary)]">Convert between measurement units</p>
         <div>

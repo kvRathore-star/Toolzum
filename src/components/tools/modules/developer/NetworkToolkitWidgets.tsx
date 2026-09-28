@@ -103,7 +103,7 @@ export function IpAddressConverter() {
           );
         })}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-5">
+      <div className="space-y-5">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">IPv4 Address Converter</h2>
         <DualPanel
           input={<>
@@ -155,7 +155,7 @@ export function IpRangeExpander() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-5">
+      <div className="space-y-5">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">IP Range Expander</h2>
         <DualPanel
           input={<>
@@ -217,7 +217,7 @@ export function Ipv6UlaGenerator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-5">
+      <div className="space-y-5">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">IPv6 ULA Generator</h2>
         <button onClick={generate} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-all">Generate New ULA</button>
         {ula.full && (

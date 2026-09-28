@@ -167,7 +167,7 @@ export default function UpiValidator() {
         </p>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-5">
+      <div className="space-y-5">
         <div className="space-y-2">
           <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1.5">
             <CreditCard className="w-3.5 h-3.5 text-[#0d9488]" />
@@ -311,7 +311,7 @@ export default function UpiValidator() {
       </div>
 
       {history.length > 0 && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 shadow-xl space-y-3 animate-in fade-in duration-500">
+        <div className="space-y-3 animate-in fade-in duration-500">
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1.5">
               <History className="w-3.5 h-3.5 text-[#0d9488]" />

@@ -237,7 +237,7 @@ export function BulkToolShell({
         <span><strong>Zero-trust processing:</strong> All files processed locally in your browser. Nothing uploaded. Corporate IT safe.</span>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-6">
+      <div className="space-y-6">
         {/* Header */}
         <div className="flex items-start justify-between">
           <div>

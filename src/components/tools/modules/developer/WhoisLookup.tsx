@@ -174,7 +174,7 @@ export default function WhoisLookup() {
         <p className="text-[var(--text-secondary)]">Look up domain registration information. Uses public RDAP/whois APIs.</p>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 space-y-5">
+      <div className="space-y-5">
         <div className="flex flex-col sm:flex-row gap-3">
                       <input type="text" value={domain} aria-label="Domain" onChange={e => setDomain(e.target.value)} onKeyDown={e => e.key === 'Enter' && lookup()} placeholder="example.com" className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
           <button onClick={() => lookup()} disabled={isProcessing} className="px-6 py-2.5 bg-[var(--accent-ink)] hover:opacity-90 disabled:bg-[var(--accent-ink)]/50 text-white text-sm font-bold rounded-xl transition-colors flex items-center gap-2 cursor-pointer justify-center">

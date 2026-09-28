@@ -182,7 +182,7 @@ export default function PasswordGenerator() {
       )}
 
       {/* Password display */}
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 shadow-[var(--shadow-card)] space-y-4">
+      <div className="space-y-4">
         <div className="relative">
           <input aria-label="Generated password"
             type="text"
@@ -221,7 +221,7 @@ export default function PasswordGenerator() {
 
       {/* Options */}
       {mode === 'random' && (
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-5 space-y-5">
+      <div className="rounded-[var(--radius-xl)] space-y-5">
         {/* Length slider */}
         <div className="space-y-2">
           <div className="flex justify-between items-center">
@@ -273,7 +273,7 @@ export default function PasswordGenerator() {
 
       {/* Passphrase options */}
       {mode === 'passphrase' && (
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-5 space-y-5">
+      <div className="rounded-[var(--radius-xl)] space-y-5">
         {/* Word count */}
         <div className="space-y-2">
           <div className="flex justify-between items-center">

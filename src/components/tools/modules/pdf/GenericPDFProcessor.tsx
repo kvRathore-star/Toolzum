@@ -153,7 +153,7 @@ export default function GenericPDFProcessor() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+        <div className="space-y-6">
           <div className="space-y-4">
             <h4 className="text-[var(--text-primary)] font-bold text-base flex items-center gap-2 border-b border-[var(--border-subtle)] pb-2">
               <Settings className="w-5 h-5 text-[var(--accent)]" />
@@ -239,7 +239,7 @@ export default function GenericPDFProcessor() {
 
         <div className="flex flex-col justify-center">
           {outputUrl ? (
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300 h-full flex flex-col justify-center">
+            <div className="space-y-6 animate-in zoom-in-95 duration-300 h-full flex flex-col justify-center">
               <div className="bg-emerald-700/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
                 <Download className="w-16 h-16 mb-4" />
                 <p className="font-bold text-center">{file.name.replace('.pdf', `_${operation}`)}.pdf</p>

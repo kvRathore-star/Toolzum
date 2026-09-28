@@ -136,7 +136,7 @@ export default function AudioCutter() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         
         {/* Settings Panel */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+        <div className="space-y-6 h-fit">
           <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Trim Settings</h4>
           
           <div className="space-y-4">
@@ -208,7 +208,7 @@ export default function AudioCutter() {
         {/* Output Panel */}
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
+            <div className="space-y-6 animate-in zoom-in-95 duration-300">
                <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                   <h4 className="font-bold text-emerald-500">Audio Trimmed</h4>
                </div>

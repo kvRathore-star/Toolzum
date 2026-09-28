@@ -594,7 +594,7 @@ export default function AiThumbnailMaker() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Design Toolbar - Left Column */}
-        <div className="lg:col-span-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-md space-y-6 max-h-[80vh] overflow-y-auto">
+        <div className="lg:col-span-4 space-y-6 max-h-[80vh] overflow-y-auto">
           
           {/* Presets & Aspect Ratios */}
           <div className="space-y-3">
@@ -839,7 +839,7 @@ export default function AiThumbnailMaker() {
         </div>
 
         {/* Selected Element Customizer - Right Column */}
-        <div className="lg:col-span-3 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-md space-y-6 max-h-[80vh] overflow-y-auto">
+        <div className="lg:col-span-3 space-y-6 max-h-[80vh] overflow-y-auto">
           
           {selectedId ? (
             <div className="space-y-5 animate-in fade-in slide-in-from-right-3 duration-300">

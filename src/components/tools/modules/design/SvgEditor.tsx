@@ -92,7 +92,7 @@ export default function SvgEditor() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         {/* Editor Code Panel */}
-        <div className="lg:col-span-6 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl flex flex-col justify-between h-[600px]">
+        <div className="lg:col-span-6 flex flex-col justify-between h-[600px]">
           <div className="space-y-4 flex-1 flex flex-col">
             <div className="flex justify-between items-center border-b border-[var(--border-subtle)] dark:border-zinc-800 pb-2">
                <h3 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-1.5">

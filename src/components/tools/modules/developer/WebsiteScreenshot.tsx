@@ -282,7 +282,7 @@ export default function WebsiteScreenshot() {
           may not load — results work best on simple or text-based pages.
         </div>
 
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-5">
+        <div className="space-y-5">
           <div className="flex items-center gap-3">
             <input aria-label="Website URL"
               type="url"

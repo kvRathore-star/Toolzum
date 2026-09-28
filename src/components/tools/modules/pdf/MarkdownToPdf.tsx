@@ -450,7 +450,7 @@ export default function MarkdownToPdf() {
         </div>
 
         <div className="space-y-4">
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-5">
+          <div className="space-y-5">
             <h4 className="text-[var(--text-primary)] font-medium text-sm border-b border-[var(--border-subtle)] pb-2">Options</h4>
 
             <div>
@@ -527,7 +527,7 @@ export default function MarkdownToPdf() {
             </button>
           </div>
 
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
+          <div className="">
             <h4 className="text-[var(--text-primary)] font-medium text-sm border-b border-[var(--border-subtle)] pb-2 mb-3">Import .md</h4>
             <FileUploader
               accept=".md,.markdown,text/markdown"

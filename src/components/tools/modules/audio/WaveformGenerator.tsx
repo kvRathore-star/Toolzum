@@ -269,7 +269,7 @@ export default function WaveformGenerator() {
         </svg>
         <h3 className="text-lg font-bold text-[var(--text-primary)]">Waveform Generator</h3>
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="overflow-hidden space-y-5">
         <p className="text-xs text-[var(--text-secondary)]">Generate beautiful waveform visualizations from any audio file. All processing happens locally.</p>
 
         {!file ? (

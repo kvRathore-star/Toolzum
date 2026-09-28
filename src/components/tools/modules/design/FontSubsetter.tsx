@@ -365,7 +365,7 @@ export default function FontSubsetter() {
         </p>
       </div>
 
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 space-y-5">
+      <div className="space-y-5">
         <div
           onDrop={handleDrop}
           onDragOver={(e) => e.preventDefault()}
@@ -491,7 +491,7 @@ export default function FontSubsetter() {
       </div>
 
       {parsedFont && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 space-y-4">
+        <div className="space-y-4">
           <div className="flex items-center gap-2">
             <Type className="w-5 h-5 text-[var(--accent)]" />
             <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Font Preview</h3>

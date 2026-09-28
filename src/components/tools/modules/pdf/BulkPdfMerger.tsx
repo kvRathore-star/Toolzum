@@ -82,7 +82,7 @@ export default function BulkPdfMerger() {
         <FileText className="w-4 h-4 shrink-0" />
         <span><strong>Zero-trust processing:</strong> All PDF merging happens locally. Nothing uploaded.</span>
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-6">
+      <div className="space-y-6">
         <div role="button" tabIndex={0} ref={dropRef} onClick={() => { armReturn(); fileRef.current?.click(); }} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); armReturn(); fileRef.current?.click(); } }} className="flex flex-col items-center justify-center p-10 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors bg-[var(--bg-overlay)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] focus-visible:border-[var(--accent)]">
           <Upload className="w-10 h-10 text-[var(--text-muted)] mb-3" />
           <p className="text-sm text-[var(--text-primary)] font-medium">Drop PDF files here</p>

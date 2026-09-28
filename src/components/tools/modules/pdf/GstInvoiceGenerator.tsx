@@ -261,7 +261,7 @@ export default function GstInvoiceGenerator() {
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-        <div className="lg:col-span-3 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 sm:p-8 rounded-2xl shadow-xl space-y-8">
+        <div className="lg:col-span-3 space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label htmlFor="lbl-gstinvoicegenerator-invoice-number" className="text-sm font-semibold text-[var(--text-primary)]">Invoice Number</label>

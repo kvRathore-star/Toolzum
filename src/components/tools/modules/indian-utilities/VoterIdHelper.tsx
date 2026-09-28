@@ -205,7 +205,7 @@ export default function VoterIdHelper() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 space-y-6 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl">
+        <div className="lg:col-span-2 space-y-6">
           <div className="space-y-2">
             <span className="text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider inline-block border"
               style={{ backgroundColor: '#ff6b0015', color: '#ff6b00', borderColor: '#ff6b0025' }}>

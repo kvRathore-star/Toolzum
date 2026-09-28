@@ -28,7 +28,7 @@ export default function ApiPayloadAnalyzer() {
   const maxKey = result ? Math.max(result.size, result.keys * 10, result.depth * 50, result.topKeys * 50) : 1;
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">API Payload Analyzer</h2>
         <div className="flex flex-wrap gap-1.5">
           {presets.map(p => (

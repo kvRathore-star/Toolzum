@@ -58,7 +58,7 @@ export default function UnicodeViewer() {
 
       <div className="grid gap-4">
         {/* Code Points */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-2">
+        <div className="space-y-2">
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Code Points (U+XXXX)</h3>
             <button
@@ -74,7 +74,7 @@ export default function UnicodeViewer() {
         </div>
 
         {/* HTML Entities */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-2">
+        <div className="space-y-2">
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">HTML Entities (&#XXXX;)</h3>
             <button
@@ -90,7 +90,7 @@ export default function UnicodeViewer() {
         </div>
 
         {/* Percent-encoded */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-2">
+        <div className="space-y-2">
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Percent-encoded (%XX)</h3>
             <button
@@ -107,7 +107,7 @@ export default function UnicodeViewer() {
       </div>
 
       {chars.length > 0 && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3 overflow-x-auto">
+        <div className="space-y-3 overflow-x-auto">
           <h3 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Character Breakdown</h3>
           <table className="w-full text-sm">
             <thead>

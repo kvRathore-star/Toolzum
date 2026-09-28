@@ -199,7 +199,7 @@ export default function RawImageConverter() {
             </div>
           </div>
 
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+          <div className="space-y-6">
             <h4 className="text-[var(--text-primary)] font-medium text-sm border-b border-[var(--border-subtle)] pb-2">Settings</h4>
 
             <div>
@@ -248,7 +248,7 @@ export default function RawImageConverter() {
         </div>
 
         <div className="lg:col-span-3 space-y-6">
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl">
+          <div className="">
             <h4 className="text-[var(--text-primary)] font-medium text-sm border-b border-[var(--border-subtle)] pb-2 mb-4">Preview</h4>
             {isSupported ? (
               <div className="bg-[var(--bg-surface)] rounded-xl overflow-hidden flex items-center justify-center min-h-[250px]">
@@ -265,7 +265,7 @@ export default function RawImageConverter() {
           </div>
 
           {outputUrl ? (
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
+            <div className="space-y-4 animate-in zoom-in-95 duration-300">
               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">Complete</h4>
               </div>

@@ -86,7 +86,7 @@ export function PdfBackgroundColor() {
         {isProcessing ? 'Processing...' : 'Apply Background Color'}
       </button>
       {outputUrl ? (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+        <div className="space-y-4">
           <h4 className="font-bold text-emerald-500">Done</h4>
           <button onClick={() => downloadOrShare(outputUrl, `bg_${file.name}`)}
             className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg">Download PDF</button>
@@ -208,7 +208,7 @@ export function PdfAddBlankPage() {
         {isProcessing ? 'Processing...' : 'Add Blank Pages'}
       </button>
       {outputUrl ? (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+        <div className="space-y-4">
           <h4 className="font-bold text-emerald-500">Done</h4>
           <button onClick={() => downloadOrShare(outputUrl, `blank_${file.name}`)}
             className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg">Download PDF</button>

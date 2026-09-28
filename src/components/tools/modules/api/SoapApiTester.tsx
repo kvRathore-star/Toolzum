@@ -52,7 +52,7 @@ export default function SoapApiTester() {
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">SOAP API Tester</h2>
         <div>
           <label htmlFor="lbl-soapapitester-wsdl-url" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Service Endpoint URL</label>

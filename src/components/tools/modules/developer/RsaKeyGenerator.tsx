@@ -65,7 +65,7 @@ export default function RsaKeyGenerator() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <div className="flex items-center gap-4 flex-wrap">
           <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
             {[2048, 4096].map(n => (

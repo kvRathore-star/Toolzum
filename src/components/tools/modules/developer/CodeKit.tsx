@@ -66,7 +66,7 @@ export function CodeObfuscator() {
   };
 
   return (
-    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
+    <div className="w-full space-y-3">
         <DualPanel
           input={<>
       <PresetBar presets={presets} />
@@ -159,7 +159,7 @@ export function CodeToCurlParser() {
   };
 
   return (
-    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
+    <div className="w-full space-y-3">
         <DualPanel
           input={<>
       <PresetBar presets={presets} />
@@ -254,7 +254,7 @@ export function JsSyntaxChecker() {
   };
 
   return (
-    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
+    <div className="w-full space-y-3">
         <DualPanel
           input={<>
       <PresetBar presets={presets} />
@@ -384,7 +384,7 @@ export function PugToHtml() {
   };
 
   return (
-    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
+    <div className="w-full space-y-3">
         <DualPanel
           input={<>
       <PresetBar presets={presets} />

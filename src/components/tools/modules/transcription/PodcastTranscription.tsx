@@ -94,7 +94,7 @@ export default function PodcastTranscription() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+        <div className="space-y-6">
           <h4 className="text-[var(--text-primary)] font-medium">Original Podcast</h4>
           <audio src={URL.createObjectURL(file)} controls className="w-full" />
 
@@ -107,7 +107,7 @@ export default function PodcastTranscription() {
           </button>
         </div>
 
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col">
+        <div className="flex flex-col">
           <div className="flex justify-between items-center mb-4">
             <h4 className="text-[var(--text-primary)] font-medium">Full Transcript</h4>
             {output && (

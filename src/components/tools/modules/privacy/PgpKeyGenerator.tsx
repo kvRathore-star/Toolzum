@@ -66,7 +66,7 @@ export default function PgpKeyGenerator() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Settings */}
-        <div className="lg:col-span-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 text-xs">
+        <div className="lg:col-span-4 space-y-4 text-xs">
           <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-[var(--border-subtle)] pb-2">User Identity</h3>
           
           <div className="space-y-1">
@@ -95,7 +95,7 @@ export default function PgpKeyGenerator() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             
             {/* Public Key */}
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl flex flex-col justify-between">
+            <div className="flex flex-col justify-between">
               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2 mb-2">
                 <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Public Key Block</span>
                 {publicKey && (
@@ -109,7 +109,7 @@ export default function PgpKeyGenerator() {
             </div>
 
             {/* Private Key */}
-            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl flex flex-col justify-between">
+            <div className="flex flex-col justify-between">
               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2 mb-2">
                 <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Private Key Block</span>
                 {privateKey && (

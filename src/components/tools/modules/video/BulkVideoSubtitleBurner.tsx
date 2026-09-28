@@ -138,7 +138,7 @@ export default function BulkVideoSubtitleBurner() {
         <Subtitles className="w-4 h-4 inline mr-1.5" />
         <strong>Burn subtitles permanently</strong> into your videos using browser-based FFmpeg WASM.
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-6">
+      <div className="space-y-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div role="button" tabIndex={0} ref={dropRef} onClick={() => { armReturn(); videoRef.current?.click(); }} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); armReturn(); videoRef.current?.click(); } }} className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors bg-[var(--bg-overlay)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] focus-visible:border-[var(--accent)]">
             <Film className="w-8 h-8 text-[var(--text-muted)] mb-2" />

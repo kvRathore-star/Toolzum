@@ -314,7 +314,7 @@ export default function SshKeyGenerator() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
+      <div className="space-y-4">
         <div className="flex items-center gap-4 flex-wrap">
           <div className="flex bg-[var(--bg-surface)] rounded-xl p-1 flex-wrap">
             {(Object.entries(ALGO_LABELS) as [KeyAlgo, typeof ALGO_LABELS[KeyAlgo]][]).map(([k, v]) => (
@@ -349,7 +349,7 @@ export default function SshKeyGenerator() {
       </div>
 
       {pubKeyStr && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-2">
+        <div className="space-y-2">
           <h3 className="text-[11px] font-bold text-[var(--text-secondary)] uppercase">Verify with</h3>
           <pre className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-[11px] text-[var(--text-primary)] dark:text-emerald-400 font-mono overflow-x-auto">
 {`# Save private key and verify:
@@ -367,7 +367,7 @@ ssh-keygen -l -f ~/.ssh/id_test.pub`}
 
 function KeySection({ title, pem, onCopy }: { title: string; pem: string; onCopy: () => void }) {
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-2">
+    <div className="space-y-2">
       <div className="flex justify-between items-center">
         <h3 className="text-[11px] font-bold text-[var(--text-secondary)] uppercase">{title}</h3>
         {pem && <button onClick={onCopy} className="text-[10px] text-[var(--accent)] hover:underline flex items-center gap-1"><Copy className="w-3 h-3" /> Copy</button>}

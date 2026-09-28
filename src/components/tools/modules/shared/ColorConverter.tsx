@@ -95,7 +95,7 @@ export default function ColorConverter({ slug }: { slug: string }) {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">{mode.name}</h2>
         <p className="text-xs text-[var(--text-secondary)]">{mode.description}</p>
         <input type="text" value={input} onChange={e => setInput(e.target.value)} aria-label="Color value"

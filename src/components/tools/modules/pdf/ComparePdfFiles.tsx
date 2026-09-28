@@ -228,7 +228,7 @@ export default function ComparePdfFiles() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         
         {/* Navigation / Sidebar */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-md space-y-4 h-fit">
+        <div className="space-y-4 h-fit">
           <h4 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider pb-2 border-b border-[var(--border-subtle)]">
             Page Selection
           </h4>

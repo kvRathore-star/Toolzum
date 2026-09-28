@@ -258,7 +258,7 @@ export default function GifEditor() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
+        <div className="space-y-6 h-fit">
           <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Operations</h4>
 
           <div className="space-y-2">
@@ -364,7 +364,7 @@ export default function GifEditor() {
       </div>
 
       {extractedFrameUrls.length > 0 && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 space-y-4">
+        <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h4 className="text-sm font-bold text-[var(--text-primary)]">{extractedFrameUrls.length} Frames Extracted</h4>
             <button onClick={() => { extractedFrameUrls.forEach(u => URL.revokeObjectURL(u)); setExtractedFrameUrls([]); }} className="text-[10px] text-red-500 hover:underline">Clear</button>

@@ -48,7 +48,7 @@ export default function FontGenerator() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Side settings */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+        <div className="space-y-6">
           <div className="space-y-2">
             <label htmlFor="lbl-fontgenerator-preview-text" className="block text-sm font-bold text-[var(--text-primary)]">Preview Text</label>
             <input id="lbl-fontgenerator-preview-text" aria-label="Preview Text"
@@ -93,7 +93,7 @@ export default function FontGenerator() {
           </div>
 
           {/* CSS output panel */}
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
+          <div className="space-y-4">
             <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
               <span className="text-xs font-bold text-[var(--text-secondary)] uppercase">CSS Integration Code</span>
               <button

@@ -42,7 +42,7 @@ export default function Md5HashGenerator() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Input Column */}
-        <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl flex flex-col justify-between">
+        <div className="lg:col-span-5 flex flex-col justify-between">
           <div className="space-y-3">
             <span className="text-xs text-[var(--text-muted)] font-bold uppercase block">Input Text Data</span>
             <textarea aria-label="Input Text Data"
@@ -58,7 +58,7 @@ export default function Md5HashGenerator() {
         </div>
 
         {/* Output Column */}
-        <div className="lg:col-span-7 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-4">
+        <div className="lg:col-span-7 space-y-4">
           <span className="text-xs text-[var(--text-muted)] font-bold uppercase block border-b border-[var(--border-subtle)] pb-2">Cryptographic Hash Digest List</span>
           
           <div className="space-y-3">

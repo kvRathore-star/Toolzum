@@ -65,7 +65,7 @@ export function ColorPaletteGenerator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Color Palette Generator</h2>
         <input aria-label="Color Palette Generator" type="color" value={base} onChange={e => setBase(e.target.value)} className="w-full h-10 rounded-lg cursor-pointer" />
         <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm">Generate Palette</button>
@@ -96,7 +96,7 @@ export function ColorShadesTints() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Color Shades &amp; Tints</h2>
         <input aria-label="Color Shades &amp; Tints" type="color" value={base} onChange={e => setBase(e.target.value)} className="w-full h-10 rounded-lg cursor-pointer" />
         <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm">Generate Shades</button>
@@ -124,7 +124,7 @@ export function ContrastRatioChecker() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Contrast Ratio Checker</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
@@ -163,7 +163,7 @@ export function MediaQueryGenerator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Media Query Generator</h2>
         <div className="grid grid-cols-2 gap-3">
           <select aria-label="Media feature" value={type} onChange={e => setType(e.target.value)}
@@ -196,7 +196,7 @@ export function ConventionalCommitGenerator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Conventional Commit Generator</h2>
         <select aria-label="Commit type" value={type} onChange={e => setType(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm">
@@ -229,7 +229,7 @@ export function MarkdownTableGenerator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Markdown Table Generator</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
@@ -260,7 +260,7 @@ export function NginxConfigGenerator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Nginx Config Generator</h2>
         <textarea aria-label="Nginx Config Generator" rows={4} value={options} onChange={e => setOptions(e.target.value)} placeholder="One directive per line"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
@@ -316,7 +316,7 @@ export function IpAllowlistGenerator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">IP Allowlist Generator</h2>
         <p className="text-xs text-[var(--text-secondary)]">Generate firewall rules for Nginx, Apache, iptables, AWS Security Groups, or Cloudflare WAF from CIDR ranges.</p>
                   <textarea aria-label="CIDR ranges" rows={4} value={list} onChange={e => setList(e.target.value)} placeholder="One CIDR per line (e.g. 192.168.1.0/24)"

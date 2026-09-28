@@ -143,7 +143,7 @@ export default function ImportToCsvConverter({ slug }: { slug: string }) {
           </Link>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <div className="space-y-4">
         {mode.reverse && (
           <div className="flex bg-white dark:bg-black p-1 rounded-xl border border-[var(--border-subtle)] w-fit">
             {[mode, mode.reverse].map(opt => (

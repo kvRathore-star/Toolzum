@@ -317,7 +317,7 @@ export default function RentalAgreementGenerator() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-        <div className="lg:col-span-3 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
+        <div className="lg:col-span-3">
           <div className="space-y-4 max-h-[75vh] overflow-y-auto pr-2 custom-scrollbar">
             {formContent}
           </div>

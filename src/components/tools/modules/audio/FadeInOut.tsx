@@ -259,7 +259,7 @@ export default function FadeInOut() {
         <Volume2 className="w-5 h-5 text-emerald-500" />
         <h3 className="text-lg font-bold text-[var(--text-primary)]">Audio Fade In/Out</h3>
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
+      <div className="overflow-hidden space-y-5">
         <p className="text-xs text-[var(--text-secondary)]">
           Apply smooth volume fade in and/or fade out effects to your audio. All processing happens locally.
         </p>

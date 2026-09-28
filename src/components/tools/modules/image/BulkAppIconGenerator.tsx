@@ -118,7 +118,7 @@ export default function BulkAppIconGenerator() {
 
   return (
     <div className="w-full max-w-3xl mx-auto">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8">
+      <div className="">
         {/* Source toggle */}
         <div className="flex items-center gap-2 mb-6 p-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] w-fit">
           <button onClick={() => setSource('svg')} className={`px-4 py-2 text-sm font-medium rounded-[var(--radius-md)] transition-all ${source === 'svg' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}>

@@ -164,7 +164,7 @@ export default function MuteVideo() {
         </div>
 
         <div className="space-y-6">
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+          <div className="space-y-6">
             <h4 className="text-[var(--text-primary)] font-medium">Audio Settings</h4>
 
             <div className="grid grid-cols-3 gap-2">
