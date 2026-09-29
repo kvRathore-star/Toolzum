@@ -237,7 +237,7 @@ export default function AccountPage() {
                 <div className="flex-1 min-w-0">
                   {editingName ? (
                     <div className="flex items-center gap-2">
-                      <input
+                      <input aria-label="Name"
                         type="text"
                         value={nameValue}
                         onChange={(e) => setNameValue(e.target.value)}
@@ -382,7 +382,7 @@ export default function AccountPage() {
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none transition-all duration-150 focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] px-4 pr-10 h-11 text-sm"
                   style={{ borderRadius: "var(--radius-md)" }}
                 />
-                <button
+                <button aria-label={showCurrentPassword ? "Hide current password" : "Show current password"}
                   type="button"
                   onClick={() => setShowCurrentPassword(!showCurrentPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
@@ -407,7 +407,7 @@ export default function AccountPage() {
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none transition-all duration-150 focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] px-4 pr-10 h-11 text-sm"
                   style={{ borderRadius: "var(--radius-md)" }}
                 />
-                <button
+                <button aria-label={showNewPassword ? "Hide new password" : "Show new password"}
                   type="button"
                   onClick={() => setShowNewPassword(!showNewPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"

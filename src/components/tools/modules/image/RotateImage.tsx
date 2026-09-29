@@ -142,11 +142,11 @@ export default function RotateImage() {
              {/* Arbitrary rotation slider */}
              <div className="flex items-center gap-3 px-4">
                <span className="text-xs text-[var(--text-secondary)] whitespace-nowrap">0°</span>
-               <input type="range" min={0} max={359} value={rotation}
+               <input aria-label="Rotation angle" type="range" min={0} max={359} value={rotation}
                  onChange={(e) => setRotation(Number(e.target.value))}
                  className="flex-1 accent-[var(--accent)]" />
                <span className="text-xs text-[var(--text-secondary)] whitespace-nowrap">359°</span>
-               <input type="number" min={0} max={359} value={rotation}
+               <input aria-label="Rotation angle" type="number" min={0} max={359} value={rotation}
                  onChange={(e) => setRotation((Number(e.target.value) % 360 + 360) % 360)}
                  className="w-16 text-center text-sm border border-[var(--border-subtle)] rounded px-1 py-0.5 bg-[var(--bg-surface)]" />
              </div>

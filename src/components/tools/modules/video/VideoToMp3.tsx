@@ -115,7 +115,7 @@ export default function VideoToMp3() {
 
          {!file ? (
            <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer relative mt-8">
-             <input type="file" accept="video/*" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
+             <input aria-label="Select video file" type="file" accept="video/*" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
              <div className="text-[var(--text-secondary)] flex flex-col items-center">
                 <Upload className="w-12 h-12 text-[var(--text-muted)] mb-2" />
                 Select Video File (MP4, WEBM, MOV)

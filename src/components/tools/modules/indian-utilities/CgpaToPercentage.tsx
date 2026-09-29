@@ -209,7 +209,7 @@ export default function CgpaToPercentage() {
                       <span className="text-[10px] font-bold uppercase tracking-wider block" style={{ color: '#8b5cf6' }}>Formula Used</span>
                       <span className="text-sm text-[var(--text-secondary)]">{result.description}</span>
                     </div>
-                    <button onClick={handleCopyResult}
+                    <button aria-label="Copy result" onClick={handleCopyResult}
                       className="p-2 rounded-lg transition-colors ml-3 cursor-pointer" style={{ backgroundColor: copiedResult ? '#10b98120' : '#8b5cf615', color: copiedResult ? '#10b981' : '#8b5cf6' }}>
                       {copiedResult ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                     </button>

@@ -55,7 +55,7 @@ export default function CsvHubConverter({ slug }: { slug: string }) {
             </button>
           ))}
         </div>
-        <textarea
+        <textarea aria-label="Input"
           rows={6}
           value={input}
           onChange={e => setInput(e.target.value)}

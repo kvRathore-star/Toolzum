@@ -56,11 +56,11 @@ function MessageLinkTab() {
       {whatsappUrl && (
         <div className="flex items-center gap-2 p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl">
           <code className="flex-1 text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] truncate">{whatsappUrl}</code>
-          <button onClick={handleCopy}
+          <button aria-label="Copy WhatsApp link" onClick={handleCopy}
             className="p-2 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-lg transition-colors">
             {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
           </button>
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer"
+          <a aria-label="Open in WhatsApp" href={whatsappUrl} target="_blank" rel="noopener noreferrer"
             className="p-2 bg-[var(--accent-ink)] text-white rounded-lg hover:opacity-90 transition-colors">
             <MessageCircle className="w-4 h-4" />
           </a>
@@ -97,7 +97,7 @@ function GroupLinkTab() {
       {groupUrl && (
         <div className="flex items-center gap-2 p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl">
           <code className="flex-1 text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] truncate">{groupUrl}</code>
-          <button onClick={handleCopy}
+          <button aria-label="Copy group link" onClick={handleCopy}
             className="p-2 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-lg transition-colors">
             {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
           </button>

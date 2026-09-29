@@ -54,7 +54,7 @@ export default function HtmlToImage() {
                placeholder="Enter HTML here..."
              />
              <div className="flex gap-4">
-               <select value={format} onChange={(e) => setFormat(e.target.value as any)} className="bg-[var(--bg-surface)] border-none rounded-lg px-4 py-2 flex-1 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+               <select aria-label="Output format" value={format} onChange={(e) => setFormat(e.target.value as any)} className="bg-[var(--bg-surface)] border-none rounded-lg px-4 py-2 flex-1 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
                  <option value="png">PNG</option>
                  <option value="jpeg">JPEG</option>
                  <option value="svg">SVG</option>

@@ -316,7 +316,7 @@ export default function VideoFilters() {
           };
           return (
             <div className="flex items-center gap-2">
-              <input
+              <input aria-label={cfg.paramLabel ? `${cfg.label} ${cfg.paramLabel}` : cfg.label}
                 type="range"
                 min={cfg.key === 'brightness' || cfg.key === 'contrast' || cfg.key === 'saturation' ? 0 : mn}
                 max={cfg.key === 'brightness' ? 200 : cfg.key === 'contrast' || cfg.key === 'saturation' ? 300 : mx}

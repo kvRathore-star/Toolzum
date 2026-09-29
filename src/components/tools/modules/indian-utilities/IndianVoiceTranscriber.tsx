@@ -283,7 +283,7 @@ export default function IndianVoiceTranscriber() {
               {audioUrl && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)]">
                   <div className="flex items-center gap-3">
-                    <button onClick={() => {
+                    <button aria-label={isPlaying ? "Pause" : "Play"} onClick={() => {
                       if (audioRef.current) {
                         if (isPlaying) {
                           audioRef.current.pause();

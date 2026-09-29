@@ -399,7 +399,7 @@ const copyOutput = useCallback(() => {
             </svg>
           </button>
 
-          <select
+          <select aria-label="Target format"
             value={dstFormat}
             onChange={(e) => { setDstFormat(e.target.value as FormatKey); setOutput(''); }}
             className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"

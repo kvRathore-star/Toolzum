@@ -164,7 +164,7 @@ export default function PdfAnnotator() {
             <label className="text-xs text-[var(--text-secondary)] font-medium mb-1.5 block">Color</label>
             <div className="flex flex-wrap gap-2 mb-2">
               {SWATCHES.map((c) => (
-                <button key={c} onClick={() => setSelectedColor(c)}
+                <button aria-label={`Set color ${c}`} key={c} onClick={() => setSelectedColor(c)}
                   className={`w-7 h-7 rounded-full border-2 ${selectedColor === c ? 'border-[var(--accent)] scale-110' : 'border-transparent'} transition-all`}
                   style={{ backgroundColor: c }}
                 />

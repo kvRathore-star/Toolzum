@@ -65,7 +65,7 @@ export default function CssPreprocessorHub({ slug: defaultSlug }: { slug: string
       <div className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">{config.name}</h2>
         <p className="text-xs text-[var(--text-secondary)]">{config.description}</p>
-        <textarea rows={6} value={input} onChange={e => setInput(e.target.value)}
+        <textarea aria-label="Input" rows={6} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y min-h-[80px]" />
         <button onClick={handleConvert}
           className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm transition-all active:scale-[0.98]">

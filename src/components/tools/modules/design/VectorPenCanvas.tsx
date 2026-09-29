@@ -277,7 +277,7 @@ export default function VectorPenCanvas() {
           {/* Stroke width */}
           <div className="flex items-center gap-2">
             <span className="text-[10px] text-[var(--text-secondary)]">{strokeWidth}px</span>
-            <input
+            <input aria-label="Stroke width"
               type="range" min="1" max="20" value={strokeWidth}
               onChange={e => setStrokeWidth(parseInt(e.target.value))}
               className="w-20 h-1 accent-[var(--accent)]"

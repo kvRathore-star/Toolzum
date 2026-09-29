@@ -166,7 +166,7 @@ export default function SocialMediaImageCreator() {
                  <label htmlFor="lbl-addtexttophoto-text" className="block text-sm font-semibold">Text</label>
                  <input id="lbl-addtexttophoto-text" aria-label="Text" type="text" value={text} onChange={e => setText(e.target.value)} className="w-full p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm" />
                  <div className="flex gap-2">
-                   <input type="color" value={color} onChange={e => setColor(e.target.value)} className="h-10 w-10 rounded cursor-pointer border-0 p-0 shrink-0" />
+                   <input aria-label="Text color" type="color" value={color} onChange={e => setColor(e.target.value)} className="h-10 w-10 rounded cursor-pointer border-0 p-0 shrink-0" />
                     <input type="text" value={color} onChange={e => setColor(e.target.value)} aria-label="Text color hex" className="flex-1 p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 uppercase font-mono text-xs" />
                  </div>
                  <div><label className="text-xs font-semibold flex justify-between"><span>Size</span><span className="text-[var(--text-secondary)]">{fontSize}px</span></label><input aria-label="Size" type="range" min="10" max="300" value={fontSize} onChange={e => setFontSize(Number(e.target.value))} className="w-full accent-violet-500" /></div>

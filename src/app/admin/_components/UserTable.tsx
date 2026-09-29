@@ -76,7 +76,7 @@ export const UserTable = forwardRef<HTMLDivElement, UserTableProps>(function Use
             <thead>
               <tr className="border-b border-[var(--border-subtle)]">
                 <th className="text-left px-4 py-3 w-10">
-                  <input type="checkbox" checked={selectedIds.size === users.length && users.length > 0} onChange={onSelectAll} className="rounded cursor-pointer accent-[var(--accent)]" />
+                  <input aria-label="Select all users" type="checkbox" checked={selectedIds.size === users.length && users.length > 0} onChange={onSelectAll} className="rounded cursor-pointer accent-[var(--accent)]" />
                 </th>
                 <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">User</th>
                 <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Email</th>
@@ -101,7 +101,7 @@ export const UserTable = forwardRef<HTMLDivElement, UserTableProps>(function Use
                   onKeyUp={(e) => buttonKeyUp(e, () => onSelectUser(user.id))}
                 >
                   <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
-                    <input
+                    <input aria-label={`Select ${user.name}`}
                       type="checkbox"
                       checked={selectedIds.has(user.id)}
                       onChange={() => onToggleSelect(user.id)}
@@ -126,7 +126,7 @@ export const UserTable = forwardRef<HTMLDivElement, UserTableProps>(function Use
                   <td className="px-4 py-3 text-[var(--text-muted)] text-xs tabular-nums">{relativeTime(user.lastLoginAt)}</td>
                   <td className="px-4 py-3 text-[var(--text-secondary)] text-xs tabular-nums">{new Date(user.createdAt * 1000).toLocaleDateString()}</td>
                   <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
-                    <select
+                    <select aria-label={`Role for ${user.name}`}
                       value={user.role}
                       onChange={(e) => onRoleSelect(user.id, user.name, user.email, user.role, e.target.value)}
                       disabled={updatingRole === user.id}

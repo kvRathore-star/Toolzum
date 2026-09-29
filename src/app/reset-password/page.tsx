@@ -108,7 +108,7 @@ function ResetPasswordForm() {
             className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none transition-all duration-150 focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] pl-10 pr-10 h-11 text-sm"
             style={{ borderRadius: "var(--radius-md)" }}
           />
-          <button
+          <button aria-label={showPassword ? "Hide password" : "Show password"}
             type="button"
             onClick={() => setShowPassword(!showPassword)}
             className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"

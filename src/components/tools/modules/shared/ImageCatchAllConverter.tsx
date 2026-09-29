@@ -381,7 +381,7 @@ export default function ImageFormatConverter({ slug }: ImageFormatConverterProps
   return (
     <div className="max-w-3xl mx-auto space-y-5 animate-in fade-in duration-500">
       <div className="flex items-center justify-center gap-3 flex-wrap">
-        <select value={inputKey} onChange={(e) => handleFormatChange("input", e.target.value)}
+        <select aria-label="Input format" value={inputKey} onChange={(e) => handleFormatChange("input", e.target.value)}
           className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer">
           {FORMAT_KEYS.map(k => <option key={k} value={k}>{FORMATS[k]!.label} (.{FORMATS[k]!.ext})</option>)}
         </select>
@@ -394,7 +394,7 @@ export default function ImageFormatConverter({ slug }: ImageFormatConverterProps
           </svg>
         </button>
 
-        <select value={outputKey} onChange={(e) => handleFormatChange("output", e.target.value)}
+        <select aria-label="Output format" value={outputKey} onChange={(e) => handleFormatChange("output", e.target.value)}
           className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer">
           {FORMAT_KEYS.map(k => <option key={k} value={k}>{FORMATS[k]!.label} (.{FORMATS[k]!.ext})</option>)}
         </select>

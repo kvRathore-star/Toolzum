@@ -34,7 +34,7 @@ export default function TextTransformConverter({ slug }: { slug: string; descrip
           {config.name}
         </h2>
         <p className="text-xs text-[var(--text-secondary)]">{config.description}</p>
-        <textarea
+        <textarea aria-label="Input"
           rows={6}
           value={input}
           onChange={e => setInput(e.target.value)}

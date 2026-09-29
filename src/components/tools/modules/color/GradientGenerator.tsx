@@ -57,8 +57,8 @@ export default function GradientGenerator() {
           <div className="flex flex-wrap gap-2 items-center">
             {colors.map((c, i) => (
               <div key={i} className="flex items-center gap-1">
-                <input type="color" value={c} onChange={e => updateColor(i, e.target.value)} className="w-8 h-8 rounded cursor-pointer border border-[var(--border-subtle)]" />
-                <input type="range" min={0} max={100} value={positions[i]} onChange={e => updatePosition(i, Number(e.target.value))}
+                <input aria-label={`Color stop ${i + 1}`} type="color" value={c} onChange={e => updateColor(i, e.target.value)} className="w-8 h-8 rounded cursor-pointer border border-[var(--border-subtle)]" />
+                <input aria-label={`Position of color stop ${i + 1}`} type="range" min={0} max={100} value={positions[i]} onChange={e => updatePosition(i, Number(e.target.value))}
                   className="w-24 accent-pink-500" />
                 <span className="text-xs text-[var(--text-muted)] w-10 text-right">{positions[i]}%</span>
                 {colors.length > 2 && <button className="text-xs text-red-500 hover:text-red-600" onClick={() => removeColor(i)}>×</button>}
@@ -79,9 +79,9 @@ export default function GradientGenerator() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
               {colors.map((c, i) => (
                 <div key={i} className="p-2 rounded-lg text-center flex flex-col items-center" style={{ backgroundColor: c, color: '#ffffff' }}>
-                  <input type="color" value={c} onChange={e => updateColor(i, e.target.value)} className="w-8 h-8 rounded cursor-pointer border-none bg-transparent" />
+                  <input aria-label={`Color stop ${i + 1}`} type="color" value={c} onChange={e => updateColor(i, e.target.value)} className="w-8 h-8 rounded cursor-pointer border-none bg-transparent" />
                   <div className="font-mono">{c.toUpperCase()}</div>
-                  <input type="range" min={0} max={100} value={positions[i]} onChange={e => updatePosition(i, Number(e.target.value))}
+                  <input aria-label={`Position of color stop ${i + 1}`} type="range" min={0} max={100} value={positions[i]} onChange={e => updatePosition(i, Number(e.target.value))}
                     className="w-full accent-pink-500 mt-1" />
                   <span className="text-[10px]">{positions[i]}%</span>
                 </div>

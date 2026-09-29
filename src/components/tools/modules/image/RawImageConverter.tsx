@@ -218,7 +218,7 @@ export default function RawImageConverter() {
             {showQuality && (
               <div>
                 <p className="text-xs text-[var(--text-secondary)] mb-2 uppercase tracking-wider font-semibold">Quality: {Math.round(quality * 100)}%</p>
-                <input type="range" min="0.1" max="1" step="0.01" value={quality} onChange={e => setQuality(parseFloat(e.target.value))} className="w-full accent-blue-600" />
+                <input aria-label="Quality" type="range" min="0.1" max="1" step="0.01" value={quality} onChange={e => setQuality(parseFloat(e.target.value))} className="w-full accent-blue-600" />
               </div>
             )}
 

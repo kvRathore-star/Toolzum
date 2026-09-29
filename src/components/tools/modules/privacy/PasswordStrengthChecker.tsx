@@ -41,7 +41,7 @@ export default function PasswordStrengthChecker() {
                 placeholder="Type passwords to analyze entropy..."
                 className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 pr-10"
               />
-              <button 
+              <button aria-label={showPassword ? "Hide password" : "Show password"} 
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-3 text-[var(--text-muted)] hover:text-white cursor-pointer"
               >
