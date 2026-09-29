@@ -1,85 +1,269 @@
-# Toolzum.com — Full Scorecard (11 Sep 2026 plan; status marked 14 Sep 2026)
+Toolzum.com — Full Scorecard (1,149 Tools, 21 Categories)
+#	Standard	Score	Notes
+1	Code Quality & Architecture	90/100	Registry pattern scales to 1,149 tools. CalculatorShell wraps ~90+ calculators. DynamicModuleWrapper lazy-loads by slug. Strict TS. Docked for 500+ line monoliths (Generators.tsx, TextSeoTools.tsx), some any warnings, file splitting deferred (#20).
+2	Security	86/100	Origin validation, auth secret fallback removed, HSTS (no preload), rate limiting with Retry-After, CSP audited (unsafe-eval kept for WASM with documented rationale), npm audit blocking at critical. Docked for unsafe-inline in CSP, no CSRF audit, no pen test.
+3	Performance	91/100	Static export (2,565 pages), FFmpeg/TF.js deferred from eager-load, framer-motion isolated from Header chunk, immutable caching, WASM processing. Docked for 1,149 tools' cumulative JS weight — chunk strategy needs ongoing monitoring.
+4	SEO & Discoverability	90/100	Dynamic sitemaps, per-tool structured data (FAQPage, SoftwareApplication), OG images, robots.txt for AI crawlers, 301 redirects for renamed tools. Excellent for 1,149 pages.
+5	Testing	82/100	90+ test files, contract/integration tests, Vitest + Testing Library. Docked for no E2E tests, limited coverage depth — testing 1,149 tools manually is impractical, needs automated strategy (axe-core, Playwright critical paths).
+6	User Experience (UX)	82/100	1,149 tools with categorized navigation, dark/light theme, command palette. Docked hard — 1,149 tools without strong search/filtering UX is a critical discovery problem. Tool overload is real at this scale.
+7	Accessibility	74/100	Radix UI primitives, aria-live on all CalculatorShell result panels, 39 onClick fixes, 20 aria-label additions, eslint-plugin-jsx-a11y as CI regression gate. Docked — auditing 1,149 tools for a11y requires automation (axe-core scanning), not just manual review.
+8	Privacy	92/100	Core differentiator — client-side processing across 1,149 tools means zero uploads. GDPR consent banner, privacy pattern classification, EXIF removal. Outstanding at this scale.
+9	Mobile/PWA	72/100	PWA manifest, Capacitor for Android, but no iOS build. WASM-heavy tools (FFmpeg, TF.js, Tesseract) may struggle on low-end mobile. 1,149 tools magnifies the bundle/perf concern on mobile.
+10	Scalability	86/100	Cloudflare Pages + D1, edge functions, static export scales well. 1,149 pages generate cleanly. Docked for D1 analytics query performance under load, and build time (~15min for 2,565 pages).
+11	Documentation	71/100	AGENTS.md updated with project overview, architecture, conventions. CSP rationale documented. Docked — 1,149 tools have no component-level docs, 36+ build scripts undocumented, inline JSDoc minimal across shared modules.
+12	CI/CD & DevOps	90/100	GitHub Actions: lint → typecheck → test → build. npm audit blocking at critical. eslint-plugin-jsx-a11y regression gate. Husky pre-push. Docked for no preview deployments, no bundle size alerts, no visual regression testing.
+13	Business Model	82/100	Freemium with credits, dual payment gateways (Razorpay + Dodo), Pro tier. Clear monetization. Docked for unclear conversion tracking, no A/B testing framework.
+14	Error Handling	85/100	WASM/TF.js error boundaries, computation-inside-guard pattern across 20+ tools, 6 real crash bugs fixed this session. Docked — 1,149 tools don't all have error boundaries; user-facing error messages need standardization.
+15	Feature Completeness	95/100	1,149 tools across 21 categories — AI, transcription, payments, auth, dashboards, calculators, converters, generators. Exceptionally feature-rich at massive scale.
+Overall: 87/100
+Scale-adjusted view — what 1,149 tools changes vs. "260+":
+Standard	260+ framing	1,149 reality
+UX (82)	"Search could be better"	Critical gap — 1,149 tools without strong search/filtering is a core usability problem
+Accessibility (74)	"Needs audit"	Needs automation — manual a11y audit of 1,149 tools is impractical; axe-core or similar required
+Testing (82)	"Add E2E tests"	Needs strategy — can't E2E test 1,149 tools; test shared components + critical paths only
+Documentation (71)	"Add inline docs"	Multi-week project — 1,149 tools × component docs = massive surface
+Error Handling (85)	"Add error boundaries"	1,149 error boundaries needed — not just the ~20 we fixed
+Performance (91)	"Chunk carefully"	Ongoing monitoring — 1,149 tools' cumulative JS weight needs bundle analysis per PR
+Top 3 Strengths (scale-adjusted):
+1. Privacy at scale (92) — 1,149 tools processing client-side with zero uploads is genuinely rare
+2. Feature completeness (95) — 1,149 tools across 21 categories, each functional, is unmatched
+3. Architecture (90) — registry + lazy loading pattern scales cleanly to 1,149 tools without monolithic imports
+Top 3 to reach 97+ (scale-adjusted):
+1. UX search/discovery (82→90) — highest-impact for users; 1,149 tools needs search, filters, recents, favorites
+2. Accessibility automation (74→82) — axe-core CI scanning + fix highest-severity findings across all tools
+3. Testing strategy (82→88) — automated component tests + critical path E2E, not per-tool coverage  check his verify again ishow corrct?
++ Thought: 4.6s
+I'll verify the scorecard by checking the actual codebase. Let me explore the key claims in parallel.
+✓Explore Task — Verify Toolzum codebase claims
+↳ 113 toolcalls · 6m 29s
+ctrl+x down view subagents
++ Thought: 1.9s
+Verification Results
+The scorecard is largely accurate. Here are the corrections:
+Claim	Actual	Score Impact
+CalculatorShell wraps ~90+	~200+ usages across 146 files	Strength understated
+90+ test files	155 test files	Strength understated
+Husky pre-push hooks	.husky/ directory missing — husky declared in package.json but no hook files exist	CI claim not verifiable
+CSP unsafe-eval for WASM	Rationale is for TF.js/Tesseract.js (eval/new Function), not WASM specifically	Minor wording inaccuracy
+jsx-a11y regression gate	Configured as warnings, not errors — visible in CI but doesn't block	Overstated
+Score adjustments I'd recommend:
+- Testing (82→84): 155 test files is stronger than "90+"
+- CI/CD (90→88): Husky hook claim not verifiable; jsx-a11y is warning-only
+- Accessibility (74): Still the lowest — needs axe-core automation regardless
+The remaining claims (1,149 tools, 21 categories, privacy, static export, error boundaries, rate limiting, GDPR, PWA/Capacitor) all check out.
+▣  Build · MiMo V2.5 Free · 6m 58s
+overall how much?
++ Thought: 5.6s
+After adjustments: ~85/100 (down from 87).
+Changes: Testing +2 (155 files > 90), CI/CD -2 (Husky unverifiable, jsx-a11y warnings only).
+Remaining gaps unchanged: UX search (82), Accessibility automation (74), Documentation (71).
+▣  Build · MiMo V2.5 Free · 10.8s
+Getting from ~86 to 95+ isn't more bug-fixing — that phase is basically exhausted. It requires closing the systemic gaps that patch-work can't touch. Here's what's actually blocking each point, in priority order:
 
-Original baseline: 87/100 (adjusted ~85 after verification: Testing 82→84 on
-155 test files, CI/CD 90→88 on Husky/jsx-a11y findings). Tool count corrected
-throughout: 1,149 tools (1,067 client + 82 SEO) across 21 categories — not 260+.
+**1. Accessibility (74 → needs to be ~90+): the single biggest lever on the whole score**
+This is your lowest category by far, and "fix 39 onClick elements" was triage, not an audit. To actually close it:
+- A real WCAG 2.1 AA pass across all 260+ tools, not just CalculatorShell consumers — form labels (`htmlFor`/`id`), focus order, contrast ratios, screen-reader testing with an actual tool (NVDA/VoiceOver), not just lint warnings
+- Flip `eslint-plugin-jsx-a11y` from warnings to errors once the backlog is cleared — right now it catches new regressions but doesn't prove old ones are fixed
+- Keyboard-only navigation test through several full tool workflows, not spot checks
+- This alone is probably worth +12-15 points and is the highest-leverage single project left
 
-## Original 15 standards (with Sep-14 status)
+**2. Documentation (71): currently the weakest-effort category and cheapest to fix**
+One CSP comment doesn't move this. What would:
+- Actual README with setup, architecture overview, contribution guide
+- Inline docs on the 36+ scripts, the registry pattern, `CalculatorShell`'s prop contract (including the auto-calculate rule you already wrote — that pattern should be a documented convention, not a comment in one file)
+- Component-level docs for shared primitives (Shell, CalcActions, rate-limit utility)
+- This is low-risk, high-reward — pure writing, no code risk, and probably +10-15 points for a few days' work
 
-| # | Standard | Was | Now | Status |
-|---|---|---|---|---|
-| 1 | Code Quality & Architecture | 90 | ~94 | DONE — monoliths split (largest now 1,393 lines), `: any` 67→10 (`be29c121`), `noUncheckedIndexedAccess` + `noFallthroughCasesInSwitch` on |
-| 2 | Security | 86 | ~86 | OPEN — CSP still has unsafe-eval/unsafe-inline (parked, documented tradeoff); no pentest (human item 10) |
-| 3 | Performance | 91 | ~91 | DONE — static export, WASM deferred + adaptive (`deviceMemory`), chunk strategy + bundle-budget gate in CI |
-| 4 | SEO & Discoverability | 90 | ~90 | DONE |
-| 5 | Testing | 82 | ~88 | DONE — 212 test files, 15 API contract suites, Playwright E2E (critical-path, auth-flow, responsive) + axe a11y gate (Sep 14) |
-| 6 | UX | 82 | ~90 | DONE — CommandMenu category filter + last-5 history, EmptyState, OnboardingTour |
-| 7 | Accessibility | 74 | **95** | DONE — skip link, jsx-a11y as errors, `useRovingTabs` + `useDialogA11y`, 9 tablists, VoiceOver sessions; axe-core CI gate added Sep 14 |
-| 8 | Privacy | 92 | ~92 | DONE |
-| 9 | Mobile/PWA | 72 | ~78 | PARTIAL — adaptive WASM + responsive e2e done; **iOS build not done (parked per owner)** |
-| 10 | Scalability | 86 | ~86 | DONE |
-| 11 | Documentation | 71 | ~76 | DONE — README refreshed (Sep-14 stale-line fix), CONTRIBUTING, shared README |
-| 12 | CI/CD & DevOps | 90 | ~93 | DONE — bundle budget gate, PR previews (secrets-gated), weekly ZAP; **visual regression dropped per owner** |
-| 13 | Business Model | 82 | ~82 | DONE (out of scope for eng passes) |
-| 14 | Error Handling | 85 | ~92 | DONE — shared ErrorMessage + errorMessages lib, boundaries cover all tools |
-| 15 | Feature Completeness | 95 | ~95 | DONE |
+**3. Security (86): the remaining gap is real, not cosmetic**
+`unsafe-eval` staying in CSP is a legitimate, documented tradeoff — but a 95+ score needs it actually solved, not just explained. Options: isolate WASM-dependent tools (TF.js, Tesseract) onto separate routes/subdomains where a stricter CSP can apply without breaking everything else, or investigate whether newer versions of those libraries support stricter execution modes. Also: a real third-party penetration test or security audit, not self-review — that's the difference between "we checked" and "someone tried to break it."
 
-## Tier A (→~92) — DONE
+**4. Testing (82): no E2E tests is the stated gap and it's still true**
+90+ unit/integration tests is solid, but zero E2E means nobody's verified that the actual user flows (upload → process → download, or the exact click-through checks you kept doing manually all session) work end-to-end without a human doing it by hand every time. Playwright or Cypress covering the top 20-30 tool workflows would close this and also prevent the entire class of bug this session kept finding manually (duplicate buttons, guard-order failures) from ever reaching production undetected again.
 
-- [x] A1.1 onClick violation sweep (brace-aware, insertions-only)
-- [x] A1.2 Skip link wired (`layout.tsx:116-119`, CSS in `globals.css`)
-- [x] A1.3 htmlFor/id binding pass (817+ inputs)
-- [x] A1.4 Focus traps (`useDialogA11y`: GDPR banner, ShareTool, modals)
-- [x] A1.5 Heading-hierarchy tests (`__tests__/a11y/heading-order.test.tsx`)
-- [x] A1.6 jsx-a11y interaction rules warn → error (`eslint.config.mjs:24-27`)
-- [x] A1.7 VoiceOver sessions 1–4 (95, composite 74.7)
-- [x] A2.1 Vitest coverage (`@vitest/coverage-v8`, thresholds ratcheted)
-- [x] A2.2 API contract tests (15 suites under `__tests__/api/`)
-- [x] A2.3 Guarded-calculator behavior tests
-- [x] A2.4 Playwright + critical-path E2E (`e2e/critical-path.spec.ts`)
-- [x] A2.5 Auth-flow E2E (`e2e/auth-flow.spec.ts`)
-- [x] A3.1 README refreshed (1,147 tools; Sep-14 E2E/test-count fix)
-- [x] A3.2 CONTRIBUTING.md created
-- [x] A3.3 Script JSDoc pass
-- [x] A3.4 `shared/README.md` (CalculatorShell contract, auto-calculate + guard rules)
-- [x] A3.5 JSDoc on CalcActions / categoryTheme / DynamicModuleWrapper
+**5. Mobile/PWA (72): the WASM-heavy tools problem is unaddressed**
+FFmpeg/TF.js deferral helps initial load but doesn't solve WASM performance on actual low-end Android devices — that needs real device testing, not just bundle-size numbers. Also: no iOS build is a real, stated gap, not fixable without doing the Capacitor iOS work.
 
-## Tier B (→~95) — DONE except iOS + CSP + pentest
+**What won't move the needle further:** more manual bug-hunting on individual tools. You've largely exhausted that vein — the remaining categories (Accessibility, Docs, Testing, Mobile) require systematic, planned work, not reactive fixing. The "click around and find bugs" approach that worked well this session has diminishing returns from here.
 
-- [ ] B1.1–B1.3 iOS Capacitor build — PARKED (owner: not worth it yet; no `ios/` dir)
-- [x] B1.4 Adaptive WASM (`src/lib/device.ts` deviceMemory + `useMemoryWatchdog`)
-- [x] B1.5 Responsive Playwright tests (`e2e/responsive.spec.ts`: 375/768/1280)
-- [x] B1.6 Service-worker audit (next-pwa evaluated and REJECTED, Turbopack conflict — documented in `next.config.ts:58-60`)
-- [x] B2.1 CommandMenu category filter (`catFilter`)
-- [x] B2.2 Search history, last 5 (`HISTORY_KEY`)
-- [x] B2.3 Shared EmptyState component
-- [x] B2.4 Empty states on zero-data scenarios
-- [x] B2.5 Onboarding tour (`OnboardingTour.tsx`)
-- [ ] B3.1–B3.3 CSP nonce / remove unsafe-inline+unsafe-eval — PARKED (static export can't mint nonces; eval load-bearing for TF.js/Tesseract; ZAP-allowlisted)
-- [x] B3 CSRF via better-auth
-- [ ] B3.4 Third-party pentest — HUMAN item 10 (owner pending list; weekly ZAP is the automated proxy)
-- [x] B3.5 Session handling reviewed
-
-## Tier C (→97) — DONE except dropped visual regression
-
-- [x] C1.1–C1.4 Shared ErrorMessage, refactored boundaries, message map, retry/fallback UX
-- [x] C2.1–C2.2 File splits (SecurityTools 2,280 → largest file now 1,393 lines)
-- [x] C2.3 `: any` elimination (`be29c121`: 67→10, remainder justified)
-- [x] C2.4–C2.5 Stricter TS flags on
-- [x] C3.1 PR previews (`ci.yml:67-99`, secrets-gated)
-- [x] C3.2–C3.3 Bundle budget gate (`bundle-budget.ts --collect/--check`)
-- [ ] C3.4–C3.5 Visual regression (Chromatic/Percy) — DROPPED (owner: not needed yet)
-
-## Sep-14 additions (post-plan)
-
-- [x] axe-core CI gate (`e2e/a11y.spec.ts`, critical-only; `@axe-core/playwright` devDep, no third party)
-- [x] C2.3 `: any` sweep committed (`be29c121` + tracker `747b344d`)
-
-## Remaining — the only open list
-
-| Item | State | When |
-|---|---|---|
-| iOS Capacitor build | Parked | Owner call; revisit if mobile demand justifies it |
-| Visual regression testing | Dropped | Owner call; revisit with design-system churn |
-| CSP hardening (nonce, drop unsafe-*) | Parked tradeoff | When TF.js/Tesseract go eval-free, routes split, or a pentest/customer forces it |
-| Third-party pentest (scoped: auth/payments/injection) | Human item 10 | When Pro revenue justifies ~$2–5k, a medium+ ZAP hit fires, or enterprise asks |
+**Realistic target if you do #1 and #2 well:** high 80s to low 90s. Getting past 90 into 95+ needs #3-5 too, and #5 (iOS build) in particular may not be worth doing if it's not part of your actual roadmap — a 95 that requires shipping an iOS app you don't want to ship isn't a useful target. Worth deciding which of these actually matter for your product versus which just move a number. ?
++ Thought: 3.9s
+Let me verify the specific claims in this analysis against the actual codebase.
+│Explore Task — Verify scorecard gap analysis
+ctrl+x down view subagents
+▣  Build · MiMo V2.5 Free · interrupted
+one correction of tool count is  no 260+  but same as the scorecard 1149+ no chedckk
++ Thought: 1.1s
+✓Explore Task — Verify 95+ scorecard gaps
+↳ 49 toolcalls · 1m 50s
+ctrl+x down view subagents
++ Thought: 1.8s
+Verification Complete
+The analysis is largely accurate. One correction:
+Claim	Actual
+No README.md	Exists but outdated — says "260+ tools", references old architecture
+Everything else confirmed:
+- Accessibility (74): jsx-a11y warnings-only, only 3 of 1,067 tools use htmlFor, no screen-reader testing, keyboard nav not done
+- Documentation (71): No CONTRIBUTING.md, no component-level docs for CalculatorShell/DynamicModuleWrapper, scripts have some JSDoc but not uniform
+- Security (86): unsafe-eval in CSP, no pentest, no WASM isolation
+- Testing (82): No Playwright/Cypress, Puppeteer script is trivial smoke test with no assertions
+- Mobile/PWA (72): No iOS build (@capacitor/ios in package.json but no ios/ directory), no device-specific WASM optimization, no real device testing docs
+Tool count note: Client-side registry = 1,067 tools. The 1,149 total includes 82 SEO permutations in the server-side registry. Both numbers are correct depending on context.
+The roadmap to 95+ is sound. The README just needs updating, not creating from scratch.
+▣  Build · MiMo V2.5 Free · 2m 12s
+okay  now check this nd build a detailed plan of todo task o reach 97+  scorecard--Current: 87/100. Target: 97+. Gap: 10 points.
+Here's what closes it, ranked by points-per-effort:
+Tier A — High-impact, contained work (get to ~92)
+Standard	Current	Target	Delta	What
+Accessibility	74	82	+8	Full a11y audit across all 260+ tools. Fix remaining non-interactive onClick, missing labels, focus traps, screen reader flow. Not glamorous, but the single biggest point gap.
+Testing	82	86	+4	E2E tests for critical flows (auth, payments, tool execution). Expand unit test coverage on the 20+ guarded calculators. Contract tests for API endpoints.
+Documentation	71	76	+5	Inline JSDoc on shared components (CalculatorShell, CalcActions, categoryTheme). Component-level README for each shared module. Script docs for the 36+ build scripts.
+~92/100 after Tier A.
+Tier B — Structural improvements (get to ~95)
+Standard	Current	Target	Delta	What
+Mobile/PWA	72	80	+8	iOS Capacitor build. WASM tool profiling on low-end devices. Service worker caching strategy audit. Responsive testing across breakpoints.
+UX	85	90	+5	Search/filtering UX overhaul (260+ tools needs strong discovery). Tool loading states. Empty-state UX standardization across all tools. Onboarding flow.
+Security	86	90	+4	Penetration test. CSRF token validation audit. Session management review. Content Security Policy nonce-based approach (replaces unsafe-inline).
+~95/100 after Tier B.
+Tier C — Polish (get to 97+)
+Standard	Current	Target	Delta	What
+Error Handling	85	92	+7	Error boundaries on every tool module (not just shared ones). User-facing error messages standardized. Recovery UX (retry, fallback).
+Code Quality	90	94	+4	File splitting for 500+ line modules (#20). Eliminate remaining any types. Enforce stricter TS config.
+CI/CD	90	93	+3	Preview deployments per PR. Bundle size regression alerts. Visual regression testing (Chromatic/Percy).
+~97/100 after Tier C.
+The honest assessment: Getting to 92 is achievable in 1-2 focused sessions (Accessibility audit + Testing + Documentation). Getting to 97 requires sustained work across mobile, UX, and security hardening — probably 3-4 sessions.
+If you want to start now: Accessibility is the single highest-ROI item (+8 points, contained scope). Want me to begin the a11y audit? 
++ Thought: 3.1s
+Let me verify the specific claims in this plan and build a detailed TODO.
+✓Explore Task — Verify 97+ plan claims
+↳ 95 toolcalls · 3m 54s
+ctrl+x down view subagents
++ Thought: 3.4s
+Now I have verified data. Here's the detailed plan with corrections:
+97+ Scorecard Plan — Verified & Detailed
+Current: 87/100 → Target: 97+
+Tool count: 1,149 tools (1,067 client + 82 SEO) across 21 categories
+Tier A — High-impact, contained work (get to ~92)
+A1. Accessibility (74 → 82, +8 points)
+Verified gaps:
+- ~907 of 912 inputs lack htmlFor/aria-label/aria-labelledby
+- Hundreds of onClick handlers without paired keyboard handlers
+- Skip link CSS exists but is NOT wired up in any component
+- No focus trap library (only Radix Dialog has built-in)
+- 21 aria-live regions exist (good foundation)
+Tasks:
+- A1.1 Run eslint --rule '{"jsx-a11y/click-events-have-key-events": "error"}' to get exact count of onClick violations
+- A1.2 Wire up skip link: add <a class="skip-link" href="#main">Skip to content</a> in src/app/layout.tsx
+- A1.3 Add htmlFor/id pairs to all 912 inputs (batch across 1,067 tools — can use codemod)
+- A1.4 Install focus-trap package, apply to GDPR banner, ShareTool, FavoritesSignInModal, DownloadLimitModal
+- A1.5 Add heading hierarchy lint rule or test (enforce h1 → h2 → h3 order)
+- A1.6 Flip jsx-a11y rules from "warn" to "error" in eslint.config.mjs:18-23 after fixes
+- A1.7 Manual screen-reader test with VoiceOver on top 20 tools
+A2. Testing (82 → 86, +4 points)
+Verified gaps:
+- 155 test files exist, but NO vitest coverage config
+- 18 API endpoints have ZERO contract tests
+- Only 11 guarded calculators (not 20+)
+- No Playwright/Cypress
+Tasks:
+- A2.1 Add @vitest/coverage-v8 to devDependencies, configure coverage in vitest.config.ts
+- A2.2 Write contract tests for top 5 API endpoints: ai/generate, analytics, favorites, payments, auth
+- A2.3 Add unit tests for remaining 5 untested guarded calculators (11 total, check which lack tests)
+- A2.4 Install Playwright, create playwright.config.ts, write E2E test for critical path: home → category → tool → execute → download
+- A2.5 Add E2E test for auth flow: signup → login → session → logout
+A3. Documentation (71 → 76, +5 points)
+Verified gaps:
+- README.md exists but is OUTDATED (says "260+ tools")
+- Zero README files in src/components/tools/modules/shared/
+- Only 8 of 37 scripts have JSDoc (22%)
+- No CONTRIBUTING.md
+Tasks:
+- A3.1 Update README.md with current stats (1,149 tools, 21 categories, correct architecture references)
+- A3.2 Create CONTRIBUTING.md with setup, conventions, PR guidelines
+- A3.3 Add JSDoc to 25 undocumented scripts in scripts/
+- A3.4 Create src/components/tools/modules/shared/README.md documenting CalculatorShell props, auto-calculate rule, guard pattern
+- A3.5 Add JSDoc to CalcActions.tsx, categoryTheme.ts, DynamicModuleWrapper.tsx exports
+Tier B — Structural improvements (get to ~95)
+B1. Mobile/PWA (72 → 80, +8 points)
+Verified gaps:
+- @capacitor/ios in package.json but NO ios/ directory
+- Service worker exists and is robust (Workbox, 15+ cache routes)
+- No responsive design tests
+- No device-specific WASM optimization
+Tasks:
+- B1.1 Run npx cap add ios to initialize iOS platform
+- B1.2 Configure iOS-specific settings in capacitor.config.ts (splash screen, status bar, etc.)
+- B1.3 Test build: npx cap sync ios && npx cap open ios
+- B1.4 Add WASM adaptive loading: detect device RAM/CPU, skip heavy WASM on low-end (check navigator.deviceMemory)
+- B1.5 Add Playwright responsive tests for 3 breakpoints: 375px (mobile), 768px (tablet), 1280px (desktop)
+- B1.6 Audit service worker: verify @ducanh2912/next-pwa is properly integrated in next.config.ts (currently not called)
+B2. UX (82 → 90, +5 points) (Note: your plan says 85→90, but original scorecard was 82)
+Verified gaps:
+- CommandMenu exists but has no filters, no fuzzy config, no search history
+- Tool loading states are GOOD (skeleton + timeout)
+- Empty-state UX is MINIMAL (only search has it)
+- No onboarding flow
+Tasks:
+- B2.1 Add category filter to CommandMenu (dropdown or chips above search)
+- B2.2 Add search history (localStorage, show last 5 searches)
+- B2.3 Create reusable EmptyState component with icon, message, CTA
+- B2.4 Add empty states to top 20 tools that show zero-data scenarios
+- B2.5 Create simple onboarding: first-visit tooltip tour showing Cmd+K, category nav, theme toggle
+B3. Security (86 → 90, +4 points)
+Verified gaps:
+- CSP is NOT configured at all (no headers in next.config.ts, middleware, or wrangler.toml)
+- public/_headers has CSP but only for static files on Cloudflare Pages
+- No penetration test
+- CSRF handled by better-auth (good)
+Tasks:
+- B3.1 Add CSP headers in next.config.ts or _middleware.ts with nonce-based approach
+- B3.2 Remove unsafe-inline from CSP: use nonces for inline scripts/styles
+- B3.3 Investigate TF.js/Tesseract newer versions that don't require eval (to remove unsafe-eval)
+- B3.4 Schedule third-party penetration test (or use a tool like OWASP ZAP for automated scan)
+- B3.5 Add session expiry configuration in better-auth config
+Tier C — Polish (get to 97+)
+C1. Error Handling (85 → 92, +7 points)
+Verified gaps:
+- Error boundaries ALREADY cover all 1,149 tools via DynamicModuleWrapper
+- 3 separate error UIs exist (not standardized)
+- No shared ErrorMessage component
+Tasks:
+- C1.1 Create shared ErrorMessage component with icon, title, message, retry button, copy error
+- C1.2 Refactor ErrorBoundary.tsx, GlobalErrorBoundary.tsx, app/error.tsx to use shared component
+- C1.3 Add error message standardization: map error types to user-friendly messages
+- C1.4 Add recovery UX: retry with exponential backoff, fallback UI for failed WASM loads
+C2. Code Quality (90 → 94, +4 points)
+Verified gaps:
+- 29 files exceed 500 lines (largest: 2,280 lines)
+- ~223 any usages (140 annotations + 83 casts)
+- strict: true is on but missing stricter options
+Tasks:
+- C2.1 Split SecurityTools.tsx (2,280 lines) into focused modules (password, hash, encoding, network tools)
+- C2.2 Split DataToolkitWidgets.tsx (1,392 lines) into individual tool components
+- C2.3 Run grep -r ': any' src/ --include="*.tsx" | wc -l to get exact count, fix top 50 highest-impact files
+- C2.4 Add noUncheckedIndexedAccess: true to tsconfig.json, fix resulting errors
+- C2.5 Add noFallthroughCasesInSwitch: true to tsconfig.json
+C3. CI/CD (90 → 93, +3 points)
+Verified gaps:
+- No PR preview deployments (Cloudflare Pages from main only)
+- Bundle analyzer exists but no size alerts
+- No visual regression testing
+Tasks:
+- C3.1 Configure Cloudflare Pages preview deployments for PRs (branch-aware deploy)
+- C3.2 Add bundlesize or GitHub Action for bundle size comparison on PRs
+- C3.3 Set size budget: fail PR if main bundle exceeds threshold (e.g., 500KB)
+- C3.4 Install Chromatic or Percy for visual regression testing
+- C3.5 Add visual regression test for CalculatorShell (most-used shared component)
+Execution Order
+Session 1 (Tier A): A1.1-A1.7 → A2.1-A2.5 → A3.1-A3.5 → Score: ~92
+Session 2 (Tier B): B1.1-B1.6 → B2.1-B2.5 → B3.1-B3.5 → Score: ~95
+Session 3 (Tier C): C1.1-C1.4 → C2.1-C2.5 → C3.1-C3.5 → Score: ~97
+Corrections to Your Original Plan
+Item	Your Claim	Verified Actual
+Tool count	"260+"	1,149 (1,067 client + 82 SEO)
+Guarded calculators	"20+"	11
+CSP status	Implied configured	NOT configured (only in public/_headers for static files)
+Error boundaries	"on every tool module" needed	Already cover all tools via DynamicModuleWrapper
+Service worker	Implied needs work	Already robust (Workbox, 15+ cache routes)
+README existence	Implied missing	Exists but outdated
+UX score	"85"	82 (original scorecard)
+Want me to start executing Tier A now?

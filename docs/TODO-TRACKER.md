@@ -21,7 +21,7 @@ Last updated: 2026-08-23
 
 ## Business decisions (separate thread)
 - [x] 9. Email capture — where do signups go? → answered Sep 19 2026: `notify_waitlist` D1 table via POST /api/notify-me (ComingSoon pages + extension waitlist); launch broadcast via GET /api/admin/notify-broadcast
-- [x] 10. Annual plan / credit pack — what price/credit size? → answered Sep 26 2026 (annual already shipped `1a398f0c`; packs): 100/500/1,000 credits at ₹249/$7.99, ₹899/$29.99, ₹1,499/$49.99, valid 12 months, spent after monthly allowance (partial OK), FIFO earliest-expiry. New `credit_grants` table (migration 0027), `src/lib/creditPacks.ts`, spend sites rewired, PricingCards "AI credit packs" section, webhook grants on `pack_*` plans, `packCredits` in `/api/account/credits`. Blocked on: Dodo dashboard product IDs in `DODO_PRODUCTS` + applying migration 0027 to D1.
+- [ ] 10. Annual plan / credit pack — what price/credit size?
 
 ## Save for Focus Time
 - [ ] 11. FAQ rollout (~1,060 tools) — multi-day
@@ -90,52 +90,32 @@ toolzum.com/developer/css-generator — 39 controls
 toolzum.com/utility/qr-code-generator — 33 controls
 Same drill as Session 4: VoiceOver on (Cmd+F5), arrow through each page, write down anything that announces wrong or nothing (page + control). If these 5 are clean, the eyes queue is effectively closed — everything else is sparser than what's already verified.
 
+OPENAI_API_KEY + GROQ_API_KEY in Pages secrets — without them transcription 500s in production
+#36 test purchase (also proves receipt emails), billing SMTP/gateway access
+Visual QA — still the one unverified layer
 
-Each was left for a specific reason — not skipped, judged:
-6. Fingerprint — fixing it would cost privacy credibility. Making anon quotas unbypassable means canvas/WebGL/font fingerprinting or IP-locking. That directly contradicts the "privacy-first, nothing uploaded" promise on the homepage. The anon quota is a speed bump by design; the real anti-abuse layer is already server-side (IP rate limiters on both endpoints). A stronger client fingerprint buys almost nothing — incognito clears it anyway — while weakening the brand claim.
-7. UTC skew — nothing user-visible to fix. The local counts are a display-only mirror; every allow/block comes from the server (UTC). The badge shows server values. Aligning the mirror to UTC would churn code + tests to change a number no user ever sees differ. Negative value.
-8. Expired cookie — self-healing transient. The window is minutes between expiry and next login, and during it the server is correct (session genuinely invalid → anon limits). Any client-side fix means a session-validation roundtrip on every tool open — a performance cost on 1,148 pages to polish a minutes-long cosmetic mismatch that resolves itself.
-Common thread: each "fix" costs more (privacy, churn, performance) than its nuance. That said — your call overrides my judgment on any of them. Say which and I'll implement it the same careful way as 3–5.
-
-
-Live — carry these three out before deleting:
-
-One rescue — the "Important Notes" honesty block (~15 lines): the coverage-definition warning ("test-file coverage, not statement coverage — clarify externally"), the dependency≠tool-tests gap, and the revenue-critical-first rule. Still true, still load-bearing judgment, and it lives nowhere else.
-
-Contact form — FIXED Sep 19 2026: functions/api/contact.ts relays via Cloudflare Email Sending; success gated on res.ok && data.ok; honest 503/502 fallbacks. Suggest-a-tool boxes (homepage, contact, roadmap) deep-link into it.
-
-  Clipboard honesty long tail: DONE Sep 2026 (commit `1b23e6bc`). Actual scope was 67 unchecked sites (not 154+137 — recount proved it), all converted to checked returns with fallback toasts; 6 direct navigator.clipboard uses were already-guarded reads. Scanner-verified zero remaining.
+Temp-mail receipt test: open /privacy/temp-email-generator/, generate an address, send it an email from your Gmail, watch it land
+Billing live test: buy the $3.99 Pass yourself → confirm Pro grant + receipt email → refund yourself in Dodo → confirm downgrade
+PageSpeed check post-deploy (static audit is clean; real numbers need a browser)
 
 
+Existing notifications — complete list, all verified in code:
+- Signup verification, password reset, contact→team, sitemap-completion (opt-in) — all live
+- Receipts + payment-failure emails — coded in the webhook, unproven (needs the #36 test purchase)
+- Waitlist capture — stores interest, sends nothing (correct)
+- Missing: welcome email. That's it for honest transactional mail.
+
+(2) Top-ups need a schema change: refills overwrite balance to the allowance, so purchased credits would be wiped at reset — they need a separate bonus_credits column (or ledger), spent alongside allowance, with an expiry policy.
+
+Top-up build (if you want it): Dodo pack products → webhook credits bonus column → balance UI already exists → 403 path already surfaces → and then low-credit warnings become legitimate. Moderate lift, mostly backend. Build it?
+
+Fix How-to-use, description, FAQs (honest claims
+
+PDF Editor (the flagship gap) — v1 as specced: toolbar + canvas + thumbs + pdf-lib export, free, local.
+Shelf structure on /pdf — regroup existing tools into their shelves (Page Management, Edit & Annotate, Create, Convert, Security) instead of one long list.
+Gap tools — the ~18 missing, starting with the trust-differentiators (Auto-Redact PII, Fingerprint, Chat with PDF), then edit-adjacent.
 
 
-  Todos — SUPERSEDED Sep 2026, do not action as written:
-  (Audit batches below were agent findings, never hand-verified. Spot-checks
-  against files actually read disproved 5/5 sampled integrity fires:
-  youtube-transcripts DO fetch captions, KeywordDensity multi-word fixed,
-  Nickname out-of-bounds guarded, GstinLookup does real Luhn mod-36,
-  QrCodeReader shows only real decoded data. Treat the lists below as
-  unverified leads, not findings.)
-[✓] Audit batch 1: calculator, finance, health, converters
-[✓] Audit batch 2: text, developer, seo, image
-[✓] Audit batch 3: pdf, video, audio, ai
-[✓] Audit batch 4: design, utility, productivity, branding
-[✓] Audit batch 5: remaining categories + compile offender list
-All 21 categories swept, ~120 offenders. Ranked by trust damage, not count:
-Integrity fires — fake output sold as real (fix or delist first):
- 1. GstinLookup — fabricates business identity + random dates behind ₹499/mo upsell (indian-utilities/GstinLookup.tsx:22-40).
- 2. AppleMusicPreviewExtractor — downloads Blob(['APPLE_MUSIC_PREVIEW_PAYLOAD']) after fake progress (audio/AppleMusicPreviewExtractor.tsx:30).
- 3. BulkAudioConverter — non-WAV path returns 100ms of recorded silence labeled .mp3/.ogg (audio/BulkAudioConverter.tsx:51).
- 4. BulkFaceAnonymizer (Pro) — "detector" blurs 3 hardcoded rectangles (image/BulkFaceAnonymizer.tsx:24-28).
- 5. BulkExifStripperInjector (Pro) — "inject" mode runs the strip path (image/BulkExifStripperInjector.tsx:12-22).
- 6. BulkEbookConverter (Pro) — PDF is a filename-only cover page (converter/BulkEbookConverter.tsx:19-30).
- 7. BulkInvoiceReceiptParser (Pro) — PDF branch discarded, vendor = first OCR line (finance/BulkInvoiceReceiptParser.tsx:17-33).
- 8. youtube-transcript-generator (Pro) — hallucinates analysis from URL string, never fetches captions (transcription/YoutubeTranscriptGenerator.tsx:25).
- 9. audio/video-to-text-transcription (both Pro) — accept no media, just rephrase pasted text (transcription/AudioToTextTranscription.tsx:17-26).
-10. QrCodeReader — hardcoded fake version metadata, single-decode despite "multiple" claim (developer/QrCodeReader.tsx:72-77).
-11. API stubs returning canned data: GraphqlTester (John mock), openapi-to-postman (hardcoded /users), openapi-mock-generator, openapi-validator (substring checks), api-key-validator, DomainAvailabilityChecker (no DNS = "available").
-12. PDF liars: PdfToPdfa (metadata-only "conversion"), RepairPdf (theatrical logs, no repair), FlattenPdf (never calls form.flatten()), BulkPdfSizeReducer (ignores quality config), pdf-table-of-contents (canned rows), eml-to-pdf (silently aborts .msg).
-Corrupt/wrong output (real code, wrong results): BulkImageResizer contain-crop coords, JsMinifier regex mangles URLs/strings, JwtDebugger base64url fail, BrailleTranslator digit-overwrite, KeywordDensityChecker multi-word never matches, PpiCalculator wrong formula, BabyGrowthPercentile fake LMS, BulkVideoSizeReducer hardcoded 30s duration, NicknameGenerator out-of-bounds crash, WheelOfNames/NatoPhonetic/BarcodeGenerator logic bugs, guard-missing NaNs (TestScore, Ltv, Exponent, Logarithm, SigFigs, Coordinate, Dpi clamps).
-Thin-for-name + Pro-gating without pro value: ai-face-swap (manual overlay), ai-image-upscaler (Lanczos, undisclosed), vocal-remover (phase trick), translate-pdf (outputs .txt), subtitle-generator (no auto-transcribe), url-to-pdf (iframe print), video-to-mp3/crop-video/BulkQrCodeGenerator (count-gated thin wrappers), cgpa-to-percentage (crown badge but isPro:false — inverted bug).
-Quick wins (labels/gaps): ~15 mislabeled aria-labels (SvgEditor, ToDoList, MacAddressGenerator, PodcastTranscription...), DuplicateWordRemover literal ${}, hardcoded quality label, UrlShortener breaking the client-side claim, ComingSoonTool/browser-extension placeholder pages.
-Two caveats: these are agent findings with file:line evidence, not hand-verified — spot-check before fixing. And the count (~10% of catalog) is actually good news: ~90% met the bar. Suggested order: integrity fires (delist-or-fix) → wrong-output math → Pro-gate honesty → quick wins. Want me to start with the top integrity batch?
+Temp mail → verification loop. The old flow destroyed your live address first, then asked the server for a new one — but Turnstile tokens are single-use and already spent, so you always landed back at the verification screen with no inbox. Now: mint first, retire after — your current inbox stays live until the fresh address actually lands, and the verification widget now sits in the live view too (it used to exist only on the empty screen, so a fresh check was impossible without losing your address).
+2. QR reader → "no image found". The old code only recognized png/jpeg/webp, and — the real trap — copying a file is not copying an image: a file from Finder/Explorer puts a file reference on the clipboard, not pixels. Now the tool reads whatever image types the clipboard actually holds (gif/bmp/avif/tiff included) and, when there's no pixel data, names what it found ("clipboard holds text/uri-list… open the image and copy the picture itself, not the file").
+3. Screenshot → proxies failed. We were depending on three free public proxies as the only path — all flaky, rate-limited, Shields-flagged. Now there's a first-party fetcher (/api/fetch-page): same-origin, no CORS, no third-party limits, with SSRF guards, HTML-only check, size cap, and per-IP rate limiting. Public proxies are fallback only. Bonus honesty: refusals now say which failure (site blocks bots / not a web page / too large) instead of one generic blob.

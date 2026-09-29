@@ -82,3 +82,6 @@ Requires literal 100s in craft areas (zero warnings, minute-long builds, proven-
 - Full i18n/l10n (#30/#48) — parked per owner Sep 16 2026. Rationale: the Indian audience operates in English for productivity domains (GST/UPI/banking/API terminology is English-official); Hindi chrome would double content costs without unlocking a blocked audience. Hindi *content* (transcription output, voice) already exists where it matters. English-only is deliberate. Revisit only on geo/behavior evidence of a bouncing Hindi-preferring segment. Rows stay 35/30.
 - A/B infra at scale, team workspaces beyond lite — revisit past 96.
 - ~~English-only assumption lifts in Phase 3 deliberately, not before.~~ Superseded: English-only is permanent policy per the #30/#48 park above.
+
+
+
