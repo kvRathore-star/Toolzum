@@ -22,8 +22,8 @@ export const TOOL_COUNT = 1143;
 export const SITE_STATS = {
   totalImplemented: 1060,
   freeTierTotal: 995,
-  localTools: 1020,
-  cloudTools: 34,
+  localTools: 1021,
+  cloudTools: 33,
   hybridTools: 2,
 } as const;
 
@@ -98,7 +98,7 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
         "href": "/pdf/jpg-to-pdf"
       }
     ],
-    "allCount": 63,
+    "allCount": 73,
     "allHref": "/pdf",
     "isIndia": false
   },
