@@ -36,6 +36,36 @@ export default function ContactPage() {
   });
   const [suggestText, setSuggestText] = useState("");
 
+  // Per-category on-page acknowledgment (mirrors CATEGORY_COPY in
+  // functions/api/contact.ts). This is the RELIABLE ack: outbound email to
+  // arbitrary recipients isn't available on the account's Free plan, so the
+  // page itself must thank the sender by category — never claim an inbox
+  // email was delivered.
+  const THANKS = {
+    suggestion: {
+      heading: "Thanks for suggesting a tool",
+      body: "Great idea — suggestions shape our roadmap. We read every suggestion and follow up if we need one detail before building. 1,000+ tools are already live in your browser in the meantime.",
+    },
+    bug: {
+      heading: "Thanks for the report",
+      body: "We're on it — reports like yours keep Toolzum trustworthy. Security reports are acknowledged within 72 hours, per our published security policy.",
+    },
+    licensing: {
+      heading: "Thanks for reaching out about licensing",
+      body: "A real person reads every licensing inquiry and replies to this address, usually within 24 hours.",
+    },
+    api: {
+      heading: "Thanks for writing in about the API",
+      body: "Your message is with the right people — we'll reply to this address with answers or next steps.",
+    },
+    general: {
+      heading: "We got your message",
+      body: "Thanks for writing in — it landed with our team. We usually reply within 24 hours. Nothing you process in our tools ever leaves your browser.",
+    },
+  } satisfies Record<string, { heading: string; body: string }>;
+  const thanks =
+    THANKS[formData.subject as keyof typeof THANKS] ?? THANKS.general;
+
   // Deep-link prefill: /contact?subject=suggestion&message=... (from
   // homepage "Suggest a tool"). Read once on mount via location.search
   // (avoids the useSearchParams Suspense requirement).
@@ -182,9 +212,12 @@ export default function ContactPage() {
                   <Check className="w-8 h-8" />
                 </div>
                 
-                <h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold mb-2">Message Sent!</h3>
-                <p className="text-sm text-[var(--text-secondary)] max-w-sm mx-auto mb-6">
-                  Thank you, <strong>{formData.name}</strong>. Your message is in our support queue and a branded confirmation just went to your inbox. We usually reply within 24 hours.
+                <h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold mb-2">
+                  {thanks.heading}
+                </h3>
+                <p className="text-sm text-[var(--text-secondary)] max-w-md mx-auto mb-6">
+                  {formData.name ? <strong>{formData.name}</strong> : null}{formData.name ? ", " : ""}
+                  {thanks.body}
                 </p>
                 <Button 
                   variant="secondary" 

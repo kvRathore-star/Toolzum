@@ -135,6 +135,20 @@ pipeline, so correspondence never depends on Gmail's send-as:
 
 ## Caveats
 
+- **Workers Free confirmed (checked dashboard + API, Oct 1 2026):** the
+  account has **no Workers Paid subscription** (zone plan "Free Website",
+  `GET /accounts/…/subscriptions` → auth error, billing scope unavailable to
+  the wrangler OAuth token). Per Cloudflare's pricing (Jun 2026), Email
+  Sending on Workers Free can only send to **verified destination
+  addresses** — arbitrary-recipient sends require Workers Paid (3,000/mo
+  included, then $0.35/1,000). In practice this means: the **relay to the
+  owner's verified Gmail works** (the form's success gate), but the
+  **acknowledgment to an arbitrary sender address is likely rejected at the
+  API boundary** — it is deliberately best-effort, so the submission still
+  succeeds. **The on-page per-category thank-you in `src/app/contact/page.tsx`
+  is therefore the reliable acknowledgment**; the "Test end-to-end" step 1
+  below only fully passes when the test address is a verified destination.
+  Upgrade path if ack emails are wanted for all senders: Workers Paid.
 - **Jan 2027:** Google is retiring consumer-Gmail "Send mail as" for
   third-party addresses. A custom-domain SMTP relay may fall under that. If
   it goes away, the fallback is already live: **Reply** in the admin
