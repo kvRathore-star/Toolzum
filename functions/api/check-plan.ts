@@ -61,12 +61,12 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     recordRateLimit(DB, "check-plan", ip, "/check-plan");
 
     return new Response(JSON.stringify({ plan, ...limits }), {
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
     });
   } catch {
     return new Response(JSON.stringify({ error: 'Service unavailable' }), {
       status: 503,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
     });
   }
 }

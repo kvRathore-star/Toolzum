@@ -1,11 +1,13 @@
 "use client";
 
 import { PostHogProvider } from "@/components/PostHogProvider";
+import { SessionSync } from "@/components/SessionSync";
 import { Toaster } from "react-hot-toast";
 
 export function ClientProviders({ children }: { children: React.ReactNode }) {
   return (
     <PostHogProvider>
+      <SessionSync />
       {children}
       <Toaster
         position="bottom-center"

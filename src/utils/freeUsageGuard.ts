@@ -1,4 +1,7 @@
 import { proSlugs } from "@/registry/tools-constants";
+import { getSignedInStatus } from "@/lib/session-state";
+
+export { getSignedInStatus };
 
 const PRO_SLUG_SET = new Set(proSlugs);
 
@@ -57,20 +60,6 @@ function writeCount(key: string, value: number) {
     localStorage.setItem(key, String(value));
   } catch (e) {
     console.error("[toolzum]", e);
-  }
-}
-
-export function getSignedInStatus(): boolean {
-  if (typeof window === "undefined") return false;
-  try {
-    const cookies = document.cookie.split("; ");
-    for (const c of cookies) {
-      if (c.startsWith("better-auth.session_token=") || c.startsWith("__Secure-better-auth.session_token=") || c.startsWith("next-auth.session-token=")) return true;
-    }
-    return !!localStorage.getItem("better-auth.session");
-  } catch (e) {
-    console.error("[toolzum]", e);
-    return false;
   }
 }
 
@@ -147,6 +136,7 @@ interface PlanLimits {
 interface ServerCheckResponse {
   allowed: boolean;
   remaining: number;
+  plan?: string | null;
 }
 
 interface ServerRecordResponse {
@@ -220,15 +210,6 @@ export async function checkAndRecordDownload(options?: { fileSizeMB?: number; ba
 
   const isProTool = isCurrentToolPro();
 
-  // Pro tools: block anonymous users immediately
-  if (isProTool) {
-    const isSignedIn = getSignedInStatus();
-    if (!isSignedIn) {
-      try { window.dispatchEvent(new CustomEvent("toolzum:plan-limit", { detail: { reason: "pro_tool_anon", limit: 0, actual: 1 } })); } catch {}
-      return false;
-    }
-  }
-
   // 0. Check plan limits from server (defensive: block if server unreachable)
   const plan = await callPlanCheck();
   if (!plan) {
@@ -256,6 +237,18 @@ export async function checkAndRecordDownload(options?: { fileSizeMB?: number; ba
     return false;
   }
   if (!server.allowed) {
+    // Pro tool + anonymous session: the server rejected the download. The
+    // old client-side pre-gate (getSignedInStatus cookie sniffing) blocked
+    // EVERYONE here — including signed-in Pro users. The server has the
+    // httpOnly cookie, so its verdict is authoritative.
+    if (isProTool && (server.plan === "anon" || server.plan === null || server.plan === undefined)) {
+      try {
+        window.dispatchEvent(new CustomEvent("toolzum:plan-limit", { detail: { reason: "pro_tool_anon", limit: 0, actual: 1 } }));
+      } catch (e) {
+        console.error("[toolzum]", e);
+      }
+      return false;
+    }
     try {
       window.dispatchEvent(new CustomEvent("toolzum:download-blocked"));
     } catch (e) {

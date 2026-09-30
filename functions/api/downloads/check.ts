@@ -49,13 +49,13 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     const limit = downloadLimit(plan, isProTool);
     if (limit === Infinity) {
       return new Response(JSON.stringify({ allowed: true, remaining: 999, plan }), {
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
       });
     }
 
     if (limit === 0) {
       return new Response(JSON.stringify({ allowed: false, remaining: 0, plan }), {
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
       });
     }
 
@@ -72,14 +72,14 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     recordRateLimit(DB, "dl-check", ip, "/downloads/check");
 
     return new Response(JSON.stringify({ allowed: remaining > 0, remaining, plan }), {
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
     });
   } catch {
     // Unknown state (not exhaustion): plan null tells the badge/modal to
     // render "unavailable", never "used up".
     return new Response(JSON.stringify({ allowed: false, remaining: 0, plan: null }), {
       status: 503,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
     });
   }
 }

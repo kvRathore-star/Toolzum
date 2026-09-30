@@ -46,6 +46,9 @@ const reasonCopy: Record<PlanLimitReason, { title: string; body: string }> = {
 
 export function DownloadLimitModal() {
   const [event, setEvent] = useState<BlockEvent | null>(null);
+  // Bumped on auth change so the signedIn-derived copy below re-evaluates
+  // (getSignedInStatus() is a plain module read, not reactive).
+  const [, setAuthTick] = useState(0);
 
   const close = useCallback(() => setEvent(null), []);
   const dialogRef = useDialogA11y<HTMLDivElement>(event !== null, close);
@@ -59,14 +62,17 @@ export function DownloadLimitModal() {
       if (!detail || !detail.reason) return;
       setEvent({ type: "plan", detail });
     };
+    const onAuth = () => setAuthTick((t) => t + 1);
 
     window.addEventListener("toolzum:download-blocked", onQuota);
     window.addEventListener("toolzum:download-unavailable", onUnavailable);
     window.addEventListener("toolzum:plan-limit", onPlan);
+    window.addEventListener("toolzum:auth-changed", onAuth);
     return () => {
       window.removeEventListener("toolzum:download-blocked", onQuota);
       window.removeEventListener("toolzum:download-unavailable", onUnavailable);
       window.removeEventListener("toolzum:plan-limit", onPlan);
+      window.removeEventListener("toolzum:auth-changed", onAuth);
     };
   }, []);
 

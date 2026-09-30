@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { DownloadLimitModal } from '@/components/tools/DownloadLimitModal';
+import { setSignedIn } from '@/lib/session-state';
 
 // Mock Next.js Link
 vi.mock('next/link', () => ({
@@ -24,6 +25,11 @@ vi.mock('@/components/ui/button', () => ({
 describe('DownloadLimitModal', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    setSignedIn(false);
+  });
+
+  afterEach(() => {
+    setSignedIn(false);
   });
 
   it('renders nothing when no event', () => {
@@ -105,5 +111,29 @@ describe('DownloadLimitModal', () => {
     fireEvent(window, new CustomEvent('toolzum:download-blocked'));
     
     expect(screen.getByText('Maybe later')).toBeDefined();
+  });
+
+  it('signed-in users see no sign-in CTA (Sep 2026 cookie-sniff bug)', () => {
+    setSignedIn(true);
+    render(<DownloadLimitModal />);
+
+    fireEvent(window, new CustomEvent('toolzum:download-blocked'));
+
+    expect(screen.getByText('Daily download limit reached')).toBeDefined();
+    expect(screen.queryByText(/Sign in free/)).toBeNull();
+    expect(screen.queryByText('Maybe later')).toBeDefined();
+  });
+
+  it('re-evaluates copy when auth changes while open', () => {
+    render(<DownloadLimitModal />);
+
+    fireEvent(window, new CustomEvent('toolzum:download-blocked'));
+    expect(screen.getByText("You've used your 3 free downloads")).toBeDefined();
+
+    setSignedIn(true);
+    fireEvent(window, new CustomEvent('toolzum:auth-changed'));
+
+    expect(screen.getByText('Daily download limit reached')).toBeDefined();
+    expect(screen.queryByText(/Sign in free/)).toBeNull();
   });
 });

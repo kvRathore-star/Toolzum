@@ -20,7 +20,7 @@ import {
 } from '@/data/homepage';
 import { useIsIndia } from '@/hooks/useIsIndia';
 import { useSession } from '@/lib/auth-client';
-import { getSignedInStatus, getRemainingDownloads } from '@/utils/freeUsageGuard';
+import { getRemainingDownloads } from '@/utils/freeUsageGuard';
 import { resolvePlan, fileCaps } from '@/lib/planTiers';
 import { detectFileType, heroRouteFor, heroToolName, type HeroFileType } from '@/lib/fileRoute';
 import { useFavorites } from '@/hooks/useFavorites';
@@ -781,10 +781,10 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
   const [quota, setQuota] = useState<{ signedIn: boolean; remaining: number } | null>(null);
   useEffect(() => {
     try {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate quota hint from local counters on mount
-      setQuota({ signedIn: getSignedInStatus(), remaining: getRemainingDownloads() });
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate quota hint from local counters; re-run when the session resolves
+      setQuota({ signedIn: !!session?.user, remaining: getRemainingDownloads() });
     } catch { /* stays neutral */ }
-  }, []);
+  }, [session?.user]);
   // Drag-enter/leave counter: crossing child elements fires leave events
   // without the pointer actually exiting (classic highlight flicker).
   const dragDepth = useRef(0);

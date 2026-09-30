@@ -88,7 +88,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
         ).bind(userId, fingerprint, userType, toolSlug, category).run();
       }
       return new Response(JSON.stringify({ allowed: true, remaining: 999 }), {
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
       });
     }
 
@@ -102,7 +102,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
         ).bind(userId, fingerprint, userType, toolSlug, category).run();
       }
       return new Response(JSON.stringify({ allowed: false, remaining: 0 }), {
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
       });
     }
 
@@ -122,7 +122,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
         ).bind(userId, fingerprint, userType, toolSlug, category, currentCount, limit).run();
       }
       return new Response(JSON.stringify({ allowed: false, remaining: 0 }), {
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
       });
     }
 
@@ -147,12 +147,12 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     recordRateLimit(DB, "dl-record", ip, "/downloads/record");
     return new Response(JSON.stringify({ allowed: true, remaining: limit - currentCount - 1 }), {
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
     });
   } catch {
     return new Response(JSON.stringify({ allowed: false, remaining: 0 }), {
       status: 503,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
     });
   }
 }

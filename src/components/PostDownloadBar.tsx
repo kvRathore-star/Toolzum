@@ -5,9 +5,14 @@ import Link from "next/link";
 import { AnimatePresence, MotionDiv } from "@/components/LazyMotion";
 import { Sparkles, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { getSignedInStatus, AUTH_CHANGED_EVENT } from "@/lib/session-state";
 
 export function PostDownloadBar() {
   const [show, setShow] = useState(false);
+  // Signed-in visitors never need a "sign in" prompt (Sep 2026 bug: the bar
+  // used to show "Sign In Free" to Pro admins because it had no session check).
+  // Lazy init: mounted ssr:false, so this reads the resolved session state.
+  const [signedIn, setSignedIn] = useState(() => getSignedInStatus());
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -16,17 +21,20 @@ export function PostDownloadBar() {
       if (timerRef.current) clearTimeout(timerRef.current);
       timerRef.current = setTimeout(() => setShow(false), 8000);
     };
+    const onAuth = () => setSignedIn(getSignedInStatus());
 
     window.addEventListener("toolzum:download-completed", handler);
+    window.addEventListener(AUTH_CHANGED_EVENT, onAuth);
     return () => {
       window.removeEventListener("toolzum:download-completed", handler);
+      window.removeEventListener(AUTH_CHANGED_EVENT, onAuth);
       if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, []);
 
   return (
     <AnimatePresence>
-      {show && (
+      {show && !signedIn && (
         <MotionDiv
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}

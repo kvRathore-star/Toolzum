@@ -57,12 +57,17 @@ export function DownloadQuotaBadge() {
   useEffect(() => {
     const timer = setTimeout(() => refresh(), 0);
     const onDownload = () => refresh();
+    // Sign-in/sign-out changes the server's plan verdict — refetch so the
+    // badge doesn't linger (or vanish) on stale pre-auth state.
+    const onAuth = () => refresh();
     window.addEventListener("toolzum:download-completed", onDownload);
     window.addEventListener("toolzum:download-blocked", onDownload);
+    window.addEventListener("toolzum:auth-changed", onAuth);
     return () => {
       clearTimeout(timer);
       window.removeEventListener("toolzum:download-completed", onDownload);
       window.removeEventListener("toolzum:download-blocked", onDownload);
+      window.removeEventListener("toolzum:auth-changed", onAuth);
     };
   }, [refresh]);
 
