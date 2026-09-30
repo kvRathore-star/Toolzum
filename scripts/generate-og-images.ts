@@ -49,6 +49,10 @@ function categoryHash(category: string, count: number): string {
   return sha1(`${TEMPLATE_VERSION}|cat:${category}|${count}`);
 }
 
+function homeHash(): string {
+  return sha1(`${TEMPLATE_VERSION}|home`);
+}
+
 function loadCache(cachePath: string): Map<string, string> {
   if (!existsSync(cachePath)) return new Map();
   try {
@@ -267,8 +271,8 @@ export function toolOG(tool: ToolInfo) {
   );
 }
 
-export function categoryOG(category: string, count: number) {
-  const accent = accentFor(category);
+/** Shared card chrome: accent bar + wordmark header + centered body + footer. */
+function ogCard(accent: string, body: any, footerText: string) {
   return h(
     "div",
     {
@@ -343,59 +347,7 @@ export function categoryOG(category: string, count: number) {
         )
       )
     ),
-    h(
-      "div",
-      {
-        style: {
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 16,
-        },
-      },
-      h(
-        "div",
-        {
-          style: {
-            fontSize: 72,
-            fontWeight: 600,
-            letterSpacing: "-1.5px",
-            textAlign: "center",
-            lineHeight: 1.1,
-          },
-        },
-        // No flag emoji: satori fetches emoji glyphs from a CDN at render
-        // time, and one failed fetch used to abort the whole batch.
-        category === "indian-utilities" ? "India Tools" : category === "E-commerce" ? "E-Commerce" : category
-      ),
-      h(
-        "div",
-        {
-          style: {
-            fontSize: 22,
-            color: "#71717a",
-            fontWeight: 400,
-            textAlign: "center",
-          },
-        },
-        `${count} Free Browser-Based Tools`
-      ),
-      h(
-        "div",
-        {
-          style: {
-            fontSize: 18,
-            color: "#52525b",
-            fontWeight: 400,
-            textAlign: "center",
-            marginTop: 8,
-          },
-        },
-        "100% free \u2022 No install \u2022 Privacy-first"
-      )
-    ),
+    body,
     h(
       "div",
       {
@@ -409,11 +361,96 @@ export function categoryOG(category: string, count: number) {
           fontWeight: 400,
         },
       },
-      // Manual round number, bumped a few times a year. MUST NOT reference
-      // toolsRegistry.length — that would regenerate every category image on
-      // any registry change (the 1140-file diff bug this script used to cause).
-      "toolzum.com \u2014 1,000+ free browser utilities"
+      footerText
     )
+  );
+}
+
+function ogBody(headline: string, subline: string, tagline: string) {
+  return h(
+    "div",
+    {
+      style: {
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 16,
+      },
+    },
+    h(
+      "div",
+      {
+        style: {
+          fontSize: 72,
+          fontWeight: 600,
+          letterSpacing: "-1.5px",
+          textAlign: "center",
+          lineHeight: 1.1,
+        },
+      },
+      headline
+    ),
+    h(
+      "div",
+      {
+        style: {
+          fontSize: 22,
+          color: "#71717a",
+          fontWeight: 400,
+          textAlign: "center",
+        },
+      },
+      subline
+    ),
+    h(
+      "div",
+      {
+        style: {
+          fontSize: 18,
+          color: "#52525b",
+          fontWeight: 400,
+          textAlign: "center",
+          marginTop: 8,
+        },
+      },
+      tagline
+    )
+  );
+}
+
+// Manual round number, bumped a few times a year. MUST NOT reference
+// toolsRegistry.length — that would regenerate every category image on
+// any registry change (the 1140-file diff bug this script used to cause).
+const FOOTER_TEXT = "toolzum.com \u2014 1,000+ free browser utilities";
+
+export function categoryOG(category: string, count: number) {
+  // No flag emoji: satori fetches emoji glyphs from a CDN at render
+  // time, and one failed fetch used to abort the whole batch.
+  const headline =
+    category === "indian-utilities" ? "India Tools" : category === "E-commerce" ? "E-Commerce" : category;
+  return ogCard(
+    accentFor(category),
+    ogBody(headline, `${count} Free Browser-Based Tools`, "100% free \u2022 No install \u2022 Privacy-first"),
+    FOOTER_TEXT
+  );
+}
+
+/**
+ * Homepage card — the default share image for toolzum.com itself (root layout
+ * + src/app/page.tsx). Distinct from any category card so shared links never
+ * preview as e.g. the Branding category.
+ */
+export function homeOG() {
+  return ogCard(
+    "#818CF8",
+    ogBody(
+      "Privacy-First Web Tools",
+      "1,000+ free tools \u2022 PDF, images, video, AI & more",
+      "100% free \u2022 No install \u2022 Nothing uploaded"
+    ),
+    FOOTER_TEXT
   );
 }
 
@@ -497,7 +534,10 @@ export async function generateAll(
     console.log(`  Category: ${cat} (${count} tools)`);
   }
 
-  const total = tools.length + categories.length;
+  // Homepage / default share card (root layout + homepage metadata).
+  addJob(homeOG(), `${outDir}/home/index.png`, homeHash());
+
+  const total = tools.length + categories.length + 1;
   const skipped = total - jobs.length;
   const start = Date.now();
   let done = 0;

@@ -49,11 +49,11 @@ export const metadata: Metadata = {
     title: "Toolzum – Privacy-First Web Tools",
     description:
       `${toolCount}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Most run fully in your browser with nothing uploaded; cloud AI tools are clearly marked.`,
-    images: [{ url: "/og/branding/index.webp", width: 1200, height: 630 }],
+    images: [{ url: "/og/home/index.webp", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/og/branding/index.webp"],
+    images: ["/og/home/index.webp"],
   },
 };
 

@@ -125,7 +125,7 @@ describe('OG image generation: per-tool images are decoupled from the global too
       const tools = [mkTool('Alpha Tool', 'alpha', 'Converter', 'A')];
       await generateAll(tools, ['Converter'], dir);
       const cacheAfterCold = JSON.parse(readFileSync(cacheFile, 'utf8'));
-      expect(Object.keys(cacheAfterCold).length).toBe(2); // alpha.png + index.png
+      expect(Object.keys(cacheAfterCold).length).toBe(3); // alpha.png + index.png + home/index.png
 
       await generateAll(tools, ['Converter'], dir);
       const cacheAfterWarm = JSON.parse(readFileSync(cacheFile, 'utf8'));
@@ -175,6 +175,27 @@ describe('OG image generation: per-tool images are decoupled from the global too
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }
+  });
+});
+
+describe('Homepage share card', () => {
+  it('root layout + homepage metadata point at the dedicated home card, not a category card', () => {
+    const layout = readFileSync(join(process.cwd(), 'src/app/layout.tsx'), 'utf8');
+    const home = readFileSync(join(process.cwd(), 'src/app/page.tsx'), 'utf8');
+    for (const [file, src] of [
+      ['src/app/layout.tsx', layout],
+      ['src/app/page.tsx', home],
+    ] as const) {
+      expect(src, `${file} must use /og/home/index.webp as its OG image`).toContain('/og/home/index.webp');
+      // Scoped to og/twitter image arrays — the JSON-LD Organization logo is a
+      // separate field (allowed to reference the branding art).
+      expect(src, `${file} must not fall back to a category card`).not.toMatch(/images:.*og\/branding/);
+    }
+  });
+
+  it('the home card image actually exists in public/og', () => {
+    expect(existsSync(join(process.cwd(), 'public/og/home/index.png'))).toBe(true);
+    expect(existsSync(join(process.cwd(), 'public/og/home/index.webp'))).toBe(true);
   });
 });
 
