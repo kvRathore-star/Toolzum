@@ -66,6 +66,7 @@ export async function onRequestPost(context: { request: Request; env: AdminEnv }
   const emailed = await sendEmail(context.env, {
     to: target.email,
     subject: "Your Toolzum password was reset",
+    fromName: "Toolzum Security",
     text: `An administrator reset your Toolzum password.\n\nTemporary password: ${tempPw}\n\nSign in and change it immediately from your account page. If you didn't request this, contact us at contact@toolzum.com.`,
     html: renderEmail({
       heading: "Your password was reset by an administrator",

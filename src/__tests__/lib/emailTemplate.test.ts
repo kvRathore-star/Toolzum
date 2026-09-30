@@ -135,6 +135,16 @@ describe('sendEmail', () => {
     expect(body.html).toContain('https://x.test/r');
   });
 
+  it('sends a per-type display name without changing the verified address', async () => {
+    const fetchMock = vi.fn(async () => new Response('{}', { status: 200 }));
+    vi.stubGlobal('fetch', fetchMock);
+
+    await sendEmail(env, { to: 'a@b.com', subject: 'Receipt', text: 't', fromName: 'Toolzum Billing' });
+
+    const body = JSON.parse((fetchMock.mock.calls[0]![1] as RequestInit).body as string);
+    expect(body.from).toEqual({ address: 'contact@toolzum.com', name: 'Toolzum Billing' });
+  });
+
   it('no-ops without API credentials (never throws in production)', async () => {
     const fetchMock = vi.fn();
     vi.stubGlobal('fetch', fetchMock);

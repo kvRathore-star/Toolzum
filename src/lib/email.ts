@@ -19,6 +19,12 @@ interface EmailOptions {
   text: string;
   html?: string;
   replyTo?: string;
+  /**
+   * Sender display name only — the address stays contact@toolzum.com (single
+   * verified sender, replies forward to the owner). Per-type names like
+   * "Toolzum Billing" help recipients sort signal from noise at a glance.
+   */
+  fromName?: string;
 }
 
 export async function sendEmail(
@@ -39,7 +45,7 @@ export async function sendEmail(
         },
         body: JSON.stringify({
           to: [{ address: opts.to }],
-          from: { address: "contact@toolzum.com", name: "Toolzum" },
+          from: { address: "contact@toolzum.com", name: opts.fromName || "Toolzum" },
           ...(opts.replyTo ? { reply_to: { address: opts.replyTo } } : {}),
           subject: opts.subject,
           text: opts.text,

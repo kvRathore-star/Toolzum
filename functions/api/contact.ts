@@ -115,6 +115,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     {
       to,
       subject: `[${copy.label}] ${name}`,
+      fromName: "Toolzum Contact",
       text: `From: ${name} <${email}>\nCategory: ${copy.label}\n\n${message}`,
       html: renderEmail({
         heading: `New message: ${copy.label}`,
@@ -144,6 +145,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     {
       to: email,
       subject: copy.ackHeading,
+      fromName: "Toolzum Support",
       text: [
         copy.ackGreeting,
         ``,

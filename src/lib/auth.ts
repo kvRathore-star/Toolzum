@@ -178,6 +178,7 @@ export function createAuth(env: AuthEnv) {
         await sendEmail(env, {
           to: user.email,
           subject: "Reset your Toolzum password",
+          fromName: "Toolzum Security",
           text: `You requested a password reset. Click the link to set a new password:\n\n${url}\n\nThis link expires in 1 hour. If you didn't request this, ignore this email.`,
           html: renderEmail({
             heading: "Reset your Toolzum password",

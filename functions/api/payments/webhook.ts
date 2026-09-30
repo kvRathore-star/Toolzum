@@ -268,6 +268,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
         await sendEmail(context.env, {
           to: user.email,
           subject: "Your Toolzum AI credit pack",
+          fromName: "Toolzum Billing",
           text: [
             `Hi${name ? ` ${name}` : ""},`,
             ``,
@@ -324,6 +325,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
         await sendEmail(context.env, {
           to: user.email,
           subject: "Receipt for your Toolzum 7-Day Pass",
+          fromName: "Toolzum Billing",
           text: [
             `Hi${name ? ` ${name}` : ""},`,
             ``,
@@ -381,6 +383,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       await sendEmail(context.env, {
         to: user.email,
         subject: `You're Pro — receipt for ${planLabel}`,
+        fromName: "Toolzum Billing",
         text: [
           `Hi${name ? ` ${name}` : ""},`,
           ``,
@@ -428,6 +431,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     await sendEmail(context.env, {
       to: user.email,
       subject: "Your Toolzum Pro subscription ended",
+      fromName: "Toolzum Billing",
       text: [
         `Your Toolzum Pro subscription has ended (${type}).`,
         `You're back on the Free plan — all free tools keep working.`,
@@ -457,6 +461,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
         await sendEmail(context.env, {
           to: user.email,
           subject: "Action needed: your Toolzum Pro payment failed",
+          fromName: "Toolzum Billing",
           text: [
             `We couldn't charge your Toolzum Pro subscription.`,
             `Update your payment method to keep Pro active: https://toolzum.com/billing`,
