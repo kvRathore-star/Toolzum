@@ -30,6 +30,7 @@ import { checkRateLimit, recordRateLimit } from './rate-limit';
 import { createAuth } from '../../src/lib/auth';
 import { effectivePlanForUser } from '../../src/lib/planTiers';
 import { sendEmail } from '../../src/lib/email';
+import { renderEmail } from '../../src/lib/emailTemplate';
 import {
   SITEMAP_URLS_PER_FILE,
   sitemapFileCount,
@@ -212,6 +213,23 @@ async function sendCrawlNotification(
     to,
     subject: `Sitemap complete: ${baseUrl} (${pages.length} pages)`,
     text,
+    html: renderEmail({
+      heading: `Sitemap crawl complete: ${baseUrl}`,
+      greeting: "The crawl finished — here are the numbers at a glance.",
+      paragraphs: [
+        `Your sitemap crawl for ${baseUrl} finished in ${duration}s. Open the tool to view, download, or copy the generated XML sitemap.`,
+      ],
+      details: [
+        { label: "Pages crawled", value: String(pages.length) },
+        { label: "Healthy", value: String(healthy) },
+        { label: "Broken", value: String(broken) },
+        { label: "Missing meta description", value: String(insights.missingMeta) },
+        { label: "Duplicate titles", value: String(insights.duplicateTitles) },
+        { label: "Duration", value: `${duration}s` },
+      ],
+      cta: { label: "Open the sitemap tool", url: "https://toolzum.com/seo/xml-sitemap-generator" },
+      note: "This is an operational notification for the crawl you started.",
+    }),
   });
 }
 /** Pages crawled per invocation — keeps free-plan subrequests (~pages + a few

@@ -1,6 +1,7 @@
 import { requireAdmin, json } from "../../../src/lib/admin-auth";
 import { checkRateLimit, recordRateLimit } from "../rate-limit";
 import { sendEmail } from "../../../src/lib/email";
+import { renderEmail } from "../../../src/lib/emailTemplate";
 
 interface AdminEnv {
   DB: D1Database;
@@ -66,6 +67,19 @@ export async function onRequestPost(context: { request: Request; env: AdminEnv }
     to: target.email,
     subject: "Your Toolzum password was reset",
     text: `An administrator reset your Toolzum password.\n\nTemporary password: ${tempPw}\n\nSign in and change it immediately from your account page. If you didn't request this, contact us at contact@toolzum.com.`,
+    html: renderEmail({
+      heading: "Your password was reset by an administrator",
+      greeting: "Sign in with the temporary password below, then change it immediately.",
+      paragraphs: [
+        "A temporary password was issued for your Toolzum account. Sign in with it and change it immediately from your account page.",
+      ],
+      details: [
+        { label: "Account", value: target.email },
+        { label: "Temporary password", value: tempPw },
+      ],
+      cta: { label: "Sign in", url: "https://toolzum.com/login" },
+      note: "If you didn't request this, contact us at contact@toolzum.com right away.",
+    }),
   });
 
   return json({ success: true, tempPassword: tempPw, email: target.email, emailed });

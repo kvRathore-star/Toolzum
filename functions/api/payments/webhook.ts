@@ -1,4 +1,5 @@
 import { sendEmail } from "../../../src/lib/email";
+import { renderEmail } from "../../../src/lib/emailTemplate";
 import { grantPass } from "../../../src/lib/planTiers";
 import { grantPack } from "../../../src/lib/creditPacks";
 
@@ -279,6 +280,24 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
             `Pack credits are valid for 12 months and are used only after your monthly allowance runs out.`,
             `Balance: https://toolzum.com/dashboard/account`,
           ].join("\n"),
+          html: renderEmail({
+            heading: "Your AI credit pack is live",
+            greeting: `Thanks for topping up${name ? `, ${name.split(" ")[0]}` : ""} — the credits are already in your balance.`,
+            paragraphs: [
+              `Your ${packCredits}-credit pack has been added to your account. Pack credits are valid for 12 months and are spent only after your monthly allowance runs out.`,
+            ],
+            details: [
+              amount !== null
+                ? {
+                    label: "Charged",
+                    value: `${amount}${currency ? ` ${currency}` : ""}`,
+                  }
+                : { label: "Credits", value: String(packCredits) },
+              { label: "Payment", value: prod.paymentId || id },
+            ],
+            cta: { label: "View balance", url: "https://toolzum.com/dashboard/account" },
+            note: "Need more? Top up any time from your dashboard — packs never auto-renew.",
+          }),
         });
       }
       return json({ ok: true, granted: granted ? "pack" : false });
@@ -316,6 +335,23 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
             ``,
             `You get 7 days of Pro-level limits plus 70 bonus AI credits.`,
           ].join("\n"),
+          html: renderEmail({
+            heading: "Your Toolzum 7-Day Pass is active",
+            greeting: `Thanks for your purchase${name ? `, ${name.split(" ")[0]}` : ""} — you're all set.`,
+            paragraphs: [
+              "You now have 7 days of Pro-level limits plus 70 bonus AI credits. It's a one-time charge — nothing auto-renews.",
+            ],
+            details: [
+              amount !== null
+                ? {
+                    label: "Charged",
+                    value: `${amount}${currency ? ` ${currency}` : ""}`,
+                  }
+                : { label: "Plan", value: "Toolzum 7-Day Pass" },
+              { label: "Payment", value: prod.paymentId || id },
+            ],
+            cta: { label: "View your pass", url: "https://toolzum.com/billing" },
+          }),
         });
       }
       return json({ ok: true, granted: charged ? "pass" : false });
@@ -357,6 +393,21 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
           `Pro includes 500-page sitemap crawls, unlimited downloads, and 200 AI credits/month.`,
           `Manage or cancel anytime from https://toolzum.com/billing`,
         ].join("\n"),
+        html: renderEmail({
+          heading: `You're Pro — receipt for ${planLabel}`,
+          greeting: `You're officially Pro${name ? `, ${name.split(" ")[0]}` : ""} — everything is unlocked.`,
+          paragraphs: [
+            `Your ${planLabel} subscription is active. Pro includes 500-page sitemap crawls, unlimited downloads, and 200 AI credits/month.`,
+          ],
+          details: [
+            amount !== null
+              ? { label: "Charged", value: `${amount}${currency ? ` ${currency}` : ""}` }
+              : { label: "Plan", value: planLabel },
+            { label: "Payment", value: prod.paymentId || id },
+          ],
+          cta: { label: "Manage subscription", url: "https://toolzum.com/billing" },
+          note: "Manage or cancel anytime — no emails, no calls, self-serve.",
+        }),
       });
     }
     return json({ ok: true, granted: charged });
@@ -382,6 +433,16 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
         `You're back on the Free plan — all free tools keep working.`,
         `Resubscribe anytime: https://toolzum.com/pricing`,
       ].join("\n"),
+      html: renderEmail({
+        heading: "Your Toolzum Pro subscription ended",
+        greeting: "Just so you're in the loop — no action needed.",
+        paragraphs: [
+          "You're back on the Free plan — every free tool keeps working, and your account data stays exactly where it was.",
+        ],
+        details: [{ label: "Reason", value: type }],
+        cta: { label: "See plans", url: "https://toolzum.com/pricing" },
+        note: "Changed your mind? Resubscribing takes one click and restores Pro instantly.",
+      }),
     });
     return json({ ok: true, downgraded: true });
   }
@@ -401,6 +462,14 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
             `Update your payment method to keep Pro active: https://toolzum.com/billing`,
             `Your current Pro access continues while we retry.`,
           ].join("\n"),
+          html: renderEmail({
+            heading: "Action needed: your payment failed",
+            greeting: "Heads up — this needs a minute of your time.",
+            paragraphs: [
+              "We couldn't charge your Toolzum Pro subscription. Update your payment method to keep Pro active — your current access continues while we retry.",
+            ],
+            cta: { label: "Update payment method", url: "https://toolzum.com/billing" },
+          }),
         });
       }
     }

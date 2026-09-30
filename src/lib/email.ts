@@ -2,9 +2,16 @@
  * Shared email sender via Cloudflare Email Sending REST API.
  * Used by contact form, password reset, and email verification.
  *
+ * Every message ships branded HTML (dark Toolzum card, accent bar, wordmark,
+ * footer) — callers that omit `html` get it via brandFromText(subject, text);
+ * callers that want a CTA button or detail rows pass `html: renderEmail(...)`.
+ * The plain `text` twin is always sent as the fallback part.
+ *
  * Requires CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID as Pages secrets.
  * Without them, calls silently succeed (fire-and-forget best-effort).
  */
+
+import { brandFromText } from "./emailTemplate";
 
 interface EmailOptions {
   to: string;
@@ -36,7 +43,7 @@ export async function sendEmail(
           ...(opts.replyTo ? { reply_to: { address: opts.replyTo } } : {}),
           subject: opts.subject,
           text: opts.text,
-          ...(opts.html ? { html: opts.html } : {}),
+          html: opts.html ?? brandFromText(opts.subject, opts.text),
         }),
       }
     );

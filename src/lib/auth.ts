@@ -6,6 +6,7 @@ import { scryptSync, randomBytes, timingSafeEqual } from "node:crypto";
 import * as schema from "@/db/schema";
 import { deleteUserAppData } from "@/lib/userErasure";
 import { sendEmail } from "@/lib/email";
+import { renderEmail } from "@/lib/emailTemplate";
 import { FREE_TRIAL_CREDITS } from "@/lib/planTiers";
 
 interface AuthEnv {
@@ -107,6 +108,16 @@ export function createAuth(env: AuthEnv) {
                   ``,
                   `Browse tools: https://toolzum.com/tools`,
                 ].join("\n"),
+                html: renderEmail({
+                  heading: `Welcome to Toolzum${first ? `, ${first}` : ""}!`,
+                  greeting: `You're in${first ? `, ${first}` : ""} — your workspace is ready.`,
+                  paragraphs: [
+                    "Your account is ready — sign in from any device and your favorites, history, and credits follow you.",
+                    "Free plan includes 5 trial AI credits (one-time) plus 1,000+ free tools that run entirely in your browser — nothing is uploaded.",
+                  ],
+                  cta: { label: "Browse tools", url: "https://toolzum.com/tools" },
+                  note: "You're receiving this because you just created a Toolzum account.",
+                }),
               });
             } catch {
               // signup proceeds; welcome mail is best-effort
@@ -168,7 +179,15 @@ export function createAuth(env: AuthEnv) {
           to: user.email,
           subject: "Reset your Toolzum password",
           text: `You requested a password reset. Click the link to set a new password:\n\n${url}\n\nThis link expires in 1 hour. If you didn't request this, ignore this email.`,
-          html: `<p>You requested a password reset.</p><p><a href="${url}">Click here to reset your password</a></p><p>This link expires in 1 hour. If you didn't request this, ignore this email.</p>`,
+          html: renderEmail({
+            heading: "Reset your Toolzum password",
+            greeting: "Let's get you back in — this takes about 30 seconds.",
+            paragraphs: [
+              "We got a request to reset the password for this account. Choose a new one from the button below.",
+            ],
+            cta: { label: "Reset password", url },
+            note: "This link expires in 1 hour. If you didn't request this, you can safely ignore this email — your password stays unchanged.",
+          }),
         });
       },
     },
@@ -178,7 +197,15 @@ export function createAuth(env: AuthEnv) {
           to: user.email,
           subject: "Verify your Toolzum account",
           text: `Welcome to Toolzum! Verify your email address by clicking the link below:\n\n${url}\n\nThis link expires in 1 hour.`,
-          html: `<p>Welcome to Toolzum!</p><p><a href="${url}">Click here to verify your email</a></p><p>This link expires in 1 hour.</p>`,
+          html: renderEmail({
+            heading: "Verify your email address",
+            greeting: "One quick check and your account is fully activated.",
+            paragraphs: [
+              "One last step: confirm this address so we can protect your account and reach you about sign-in issues.",
+            ],
+            cta: { label: "Verify email", url },
+            note: "This link expires in 1 hour. Verifying unlocks your account; free tools stay available either way.",
+          }),
         });
       },
       expiresIn: 3600,

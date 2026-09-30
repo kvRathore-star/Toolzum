@@ -1,4 +1,5 @@
 import { sendEmail } from "../../../src/lib/email";
+import { renderEmail } from "../../../src/lib/emailTemplate";
 import { requireAdmin } from "../../../src/lib/admin-auth";
 
 /**
@@ -86,6 +87,15 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       to: row.email,
       subject,
       text: `Good news — the wait is over.\n\n${subject}\n\nOpen it here: ${link}\n\nYou're receiving this because you joined the launch waitlist on toolzum.com.`,
+      html: renderEmail({
+        heading: subject,
+        greeting: "The wait is over — the tool you asked for is live.",
+        paragraphs: [
+          "Good news — the wait is over. The tool you asked us to build is live and ready.",
+        ],
+        cta: { label: "Open the tool", url: link },
+        note: "You're receiving this because you joined the launch waitlist on toolzum.com.",
+      }),
     });
     if (ok) {
       sent++;

@@ -184,7 +184,7 @@ export default function ContactPage() {
                 
                 <h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold mb-2">Message Sent!</h3>
                 <p className="text-sm text-[var(--text-secondary)] max-w-sm mx-auto mb-6">
-                  Thank you, <strong>{formData.name}</strong>. Your query has been dispatched to our support queue. We usually reply within 24 hours.
+                  Thank you, <strong>{formData.name}</strong>. Your message is in our support queue and a branded confirmation just went to your inbox. We usually reply within 24 hours.
                 </p>
                 <Button 
                   variant="secondary" 
