@@ -1,16 +1,21 @@
 #!/usr/bin/env node
 /**
  * Generates src/lib/downloadProducingSlugs.ts from static analysis:
- * 1. Finds all module files that import downloadOrShare
+ * 1. Finds all module files containing download logic (downloadOrShare,
+ *    BulkToolShell, JSZip, URL.createObjectURL)
  * 2. Excludes files that import but never call it (dead imports)
- * 3. Maps file paths to their DynamicModuleWrapper slugs
+ * 3. Maps slugs to their component (DynamicModuleWrapper entry + optional
+ *    `.then(m => …)` selector), following re-export chains behind thin entry
+ *    shims; download logic is attributed when the component body contains
+ *    markers, references an in-body helper that does, passes CalculatorShell's
+ *    downloadData/downloadFilename props, or re-exports a file that does
  * 4. Writes a Set constant used by ToolLayout for download badge visibility
  *
  * Run: npx tsx scripts/generate-download-slugs.ts
  * Wired into: npm run build (via gen:download-slugs)
  */
-import { readFileSync, writeFileSync, readdirSync } from 'fs';
-import { join } from 'path';
+import { existsSync, readFileSync, writeFileSync, readdirSync } from 'fs';
+import { dirname, join } from 'path';
 
 const ROOT = join(import.meta.dirname, '..');
 const WRAPPER_PATH = join(ROOT, 'src/components/tools/modules/DynamicModuleWrapper.tsx');
@@ -172,36 +177,352 @@ function findDownloadFiles(): string[] {
   return walk(MODULES_DIR);
 }
 
-function mapSlugs(filePaths: string[]): string[] {
-  const wrapper = readFileSync(WRAPPER_PATH, 'utf8');
-  const lines = wrapper.split('\n');
-  const slugs = new Set<string>();
+// --- Import-graph resolution -------------------------------------------------
+// The old mapping (a marker file's path appearing on a DynamicModuleWrapper
+// line) only sees TOP-LEVEL module files. Two wrapper patterns broke it:
+//  1. Thin entry shims re-exporting logic from a subdirectory
+//     (pdf/PdfEditor -> export * from './editor/PdfEditorCore'): invisible,
+//     silently dropping slugs on every regeneration (pdf-editor went missing).
+//  2. Barrel modules with a component selector
+//     (import('…/MiscellaneousTools1').then(m => ({ default: m.CounterTool }))):
+//     one barrel path appears on 22 slugs' lines, so barrel-granular mapping
+//     either misses real downloads or badges all 22 for one file's handlers.
+// Resolution: slug -> wrapper module (+ selector) -> the file that DEFINES
+// the selected component (following export * / export {…} from edges) -> that
+// file (and its re-export closure) must contain download logic. Plain `import`
+// edges are deliberately not followed for closure: shared infra files
+// (CalculatorShell, PdfActionBase, …) are imported by hundreds of modules and
+// would balloon the set past the audited list.
 
-  for (const filePath of filePaths) {
-    // Extract relative path from modules/ (e.g. "ai/AiArticleWriter")
-    const relPath = filePath
-      .replace(MODULES_DIR + '/', '')
-      .replace(/\.tsx?$/, '');
+const readCache = new Map<string, string>();
+function readModule(path: string): string {
+  let c = readCache.get(path);
+  if (c === undefined) {
+    c = readFileSync(path, 'utf8');
+    readCache.set(path, c);
+  }
+  return c;
+}
 
-    // Skip dead imports
-    if (DEAD_IMPORTS.has(relPath)) continue;
+/** Resolve an extension-less module path to an actual file, or null. */
+function resolveFile(base: string): string | null {
+  for (const cand of [base, `${base}.tsx`, `${base}.ts`, `${base}.jsx`, `${base}.mts`, join(base, 'index.tsx'), join(base, 'index.ts')]) {
+    if (existsSync(cand) && !cand.endsWith('/')) return cand;
+  }
+  return null;
+}
 
-    // Find DynamicModuleWrapper lines referencing this exact module path
-    for (const line of lines) {
-      if (line.includes(relPath)) {
-        const slugMatch = line.match(/'([\w-]+)'/);
-        if (slugMatch) {
-          const slug = slugMatch[1];
-          // Skip trivial downloads (calculators, text generators, dev tools)
-          if (!TRIVIAL_DOWNLOADS.has(slug!)) {
-            slugs.add(slug!);
-          }
-        }
-      }
+function resolveSpecifier(spec: string, fromFile: string): string | null {
+  if (spec.startsWith('@/')) return resolveFile(join(ROOT, 'src', spec.slice(2)));
+  if (spec.startsWith('.')) return resolveFile(join(dirname(fromFile), spec));
+  return null;
+}
+
+interface ModuleExports {
+  stars: string[];                      // export * from './x'
+  namedFrom: { target: string; names: string[] }[]; // export { A as B } from './x'
+  localNames: Set<string>;              // export { A } (no from)
+  defines: Set<string>;                 // export function|const|class … A
+  hasDefault: boolean;
+  importedNames: { name: string; target: string }[]; // import { A } from './x'
+}
+
+const exportCache = new Map<string, ModuleExports>();
+function exportsOf(file: string): ModuleExports {
+  const hit = exportCache.get(file);
+  if (hit) return hit;
+  const content = readModule(file);
+  const out: ModuleExports = { stars: [], namedFrom: [], localNames: new Set(), defines: new Set(), hasDefault: false, importedNames: [] };
+
+  for (const m of content.matchAll(/export\s+\*\s+from\s*['"]([^'"]+)['"]/g)) {
+    const t = resolveSpecifier(m[1]!, file);
+    if (t) out.stars.push(t);
+  }
+  for (const m of content.matchAll(/export\s*\{([^}]+)\}\s*from\s*['"]([^'"]+)['"]/g)) {
+    const t = resolveSpecifier(m[2]!, file);
+    if (t) out.namedFrom.push({ target: t, names: splitExportNames(m[1]!) });
+  }
+  for (const m of content.matchAll(/export\s+(?:type\s+)?\{([^}]+)\}(?!\s*from)/g)) {
+    for (const n of splitExportNames(m[1]!)) out.localNames.add(n);
+  }
+  for (const m of content.matchAll(/export\s+(?:declare\s+)?(?:async\s+)?(?:function\*?|class|const|let|var|interface|type|enum)\s+(\w+)/g)) {
+    out.defines.add(m[1]!);
+  }
+  out.hasDefault = /export\s+default\b/.test(content);
+  for (const m of content.matchAll(/import\s+(?:type\s+)?\{([^}]+)\}\s*from\s*['"]([^'"]+)['"]/g)) {
+    const t = resolveSpecifier(m[2]!, file);
+    if (t) for (const n of splitExportNames(m[1]!)) out.importedNames.push({ name: n, target: t });
+  }
+  exportCache.set(file, out);
+  return out;
+}
+
+/** `A, B as C` -> ['A', 'C'] (exported identity = right side of `as`). */
+function splitExportNames(clause: string): string[] {
+  return clause.split(',').map((p) => {
+    const s = p.trim().replace(/^type\s+/, '');
+    const as = s.match(/\bas\s+(\w+)$/);
+    return as ? as[1]! : s;
+  }).filter(Boolean);
+}
+
+/**
+ * Which file(s) define `name` for the given entry module? Follows
+ * `export * from` and `export {…} from` edges (BFS). A local
+ * `import {X} from './src'; export {X}` resolves back to the import source.
+ */
+function findComponentHomes(root: string, name: string): string[] {
+  const homes: string[] = [];
+  const seen = new Set<string>();
+  const queue: { file: string; acceptDefault: boolean }[] = [{ file: root, acceptDefault: false }];
+  while (queue.length > 0) {
+    const { file, acceptDefault } = queue.shift()!;
+    if (seen.has(file)) continue;
+    seen.add(file);
+    const ex = exportsOf(file);
+    if (ex.defines.has(name)) {
+      homes.push(file);
+      continue;
     }
+    if (ex.localNames.has(name)) {
+      // Local export: definition is in this file (defines() would have hit) or
+      // it was imported then re-exported — chase the import source.
+      const sources = ex.importedNames.filter((i) => i.name === name);
+      if (sources.length === 0) homes.push(file);
+      else for (const s of sources) queue.push({ file: s.target, acceptDefault: false });
+      continue;
+    }
+    if (acceptDefault && ex.hasDefault) {
+      homes.push(file);
+      continue;
+    }
+    for (const nf of ex.namedFrom.filter((c) => c.names.includes(name))) {
+      queue.push({ file: nf.target, acceptDefault: false });
+    }
+    for (const s of ex.stars) queue.push({ file: s, acceptDefault: false });
+  }
+  return homes;
+}
+
+/** Does `file` (or its re-export closure) contain download logic? */
+function reachesMarker(start: string, markers: Set<string>): boolean {
+  const visited = new Set<string>();
+  const queue = [start];
+  while (queue.length > 0) {
+    const file = queue.pop()!;
+    if (visited.has(file)) continue;
+    visited.add(file);
+    if (markers.has(file)) return true;
+    const ex = exportsOf(file);
+    queue.push(...ex.stars, ...ex.namedFrom.map((n) => n.target));
+  }
+  return false;
+}
+
+/** Closure only — does anything `file` RE-EXPORTS contain download logic? */
+function closureReachesMarker(start: string, markers: Set<string>): boolean {
+  const visited = new Set<string>([start]);
+  const queue = [...exportsOf(start).stars, ...exportsOf(start).namedFrom.map((n) => n.target)];
+  while (queue.length > 0) {
+    const file = queue.pop()!;
+    if (visited.has(file)) continue;
+    visited.add(file);
+    if (markers.has(file)) return true;
+    const ex = exportsOf(file);
+    queue.push(...ex.stars, ...ex.namedFrom.map((n) => n.target));
+  }
+  return false;
+}
+
+const DOWNLOAD_MARKERS = ['downloadOrShare', 'BulkToolShell', 'JSZip', 'URL.createObjectURL'];
+function hasDownloadMarker(text: string): boolean {
+  return DOWNLOAD_MARKERS.some((m) => text.includes(m));
+}
+
+/**
+ * Source text of a `function|class|const Name …` definition in `file`.
+ * - Declarations (`function f(…) {…}`, `class C {…}`): body = first `{`
+ *   outside parameter parens.
+ * - Arrow/function expressions (`const f = (…) => {…}`): body after `=>`.
+ * - Plain value consts (`const a = document.createElement('a');`): the
+ *   statement up to `;` — critically NOT the next function's body (an earlier
+ *   version scanned ahead and swallowed unrelated markers, mis-attrributing
+ *   e.g. `HangmanGame` to `const a` inside CounterTool's download handler).
+ * Returns null when the body can't be isolated (callers fall back to
+ * file-level checks). Brace/semicolon matching is heuristic.
+ */
+function componentSource(file: string, name: string): DefSource | null {
+  const content = readModule(file);
+  const def = new RegExp(`(?:export\\s+)?(?:declare\\s+)?(?:async\\s+)?(function\\*?|class|const|let|var)\\s+${name}\\b`).exec(content);
+  if (!def) return null;
+  const kw = def[1]!;
+  const start = def.index;
+  let i = start + def[0].length;
+  const skipWs = () => { while (i < content.length && /\s/.test(content[i]!)) i++; };
+
+  if (kw === 'function' || kw === 'class') {
+    // First `{` outside parameter parens, then brace-match.
+    let paren = 0;
+    for (; i < content.length; i++) {
+      const ch = content[i];
+      if (ch === '(') paren++;
+      else if (ch === ')') paren--;
+      else if (ch === '{' && paren === 0) break;
+    }
+    if (i >= content.length) return null;
+    const bodyStart = i;
+    let depth = 0;
+    for (; i < content.length; i++) {
+      if (content[i] === '{') depth++;
+      else if (content[i] === '}') { depth--; if (depth === 0) return { start, text: content.slice(start, i + 1) }; }
+    }
+    return null;
+  }
+
+  // const/let/var: scan the initializer statement with depth tracking.
+  skipWs();
+  if (content[i] !== '=') return null;
+  i++;
+  let paren = 0, bracket = 0, brace = 0;
+  let seenArrow = false;
+  for (; i < content.length; i++) {
+    const ch = content[i]!;
+    if (content.startsWith('=>', i) && paren === 0 && brace === 0 && bracket === 0) {
+      seenArrow = true;
+      i++; // step into '>' (loop's i++ lands after '=>')
+      skipWs();
+      if (content[i] === '{') {
+        const bodyStart = i;
+        let depth = 0;
+        for (; i < content.length; i++) {
+          if (content[i] === '{') depth++;
+          else if (content[i] === '}') { depth--; if (depth === 0) return { start, text: content.slice(start, i + 1) }; }
+        }
+        return null;
+      }
+      // expression-bodied arrow: run to `;` at depth 0
+      paren = bracket = brace = 0;
+      continue;
+    }
+    if (ch === '(') paren++;
+    else if (ch === ')') paren--;
+    else if (ch === '[') bracket++;
+    else if (ch === ']') bracket--;
+    else if (ch === '{' && !seenArrow) brace++;
+    else if (ch === '}' && !seenArrow) brace--;
+    else if (ch === ';' && paren === 0 && bracket === 0 && brace === 0) return { start, text: content.slice(start, i + 1) };
+  }
+  return null;
+}
+
+interface DefSource { start: number; text: string }
+
+/** name -> all `function|class|const Name …` definitions in `file` (incl. nested helpers). */
+function definitionsOf(file: string): Map<string, DefSource[]> {
+  const hit = definitionCache.get(file);
+  if (hit) return hit;
+  const content = readModule(file);
+  const defs = new Map<string, DefSource[]>();
+  const re = /(?:^|\n)\s*(?:export\s+)?(?:declare\s+)?(?:async\s+)?(?:function\*?|class|const|let|var|enum)\s+(\w+)/g;
+  for (const m of content.matchAll(re)) {
+    const name = m[1]!;
+    const src = componentSource(file, name);
+    if (src !== null) {
+      const list = defs.get(name) ?? [];
+      list.push(src);
+      defs.set(name, list);
+    }
+  }
+  definitionCache.set(file, defs);
+  return defs;
+}
+const definitionCache = new Map<string, Map<string, DefSource[]>>();
+
+/**
+ * Does the component (or a module-scope helper it references, transitively
+ * up to `maxDepth`) contain download logic? Helpers only count when their
+ * definition is POSITIONALLY INSIDE the checked slice — names like `clr` or
+ * `handleCopy` repeat across sibling components, and name-only lookup crosses
+ * component boundaries (previously hung Hangman → Counter's `clr` →
+ * CounterTool's download handler). Shared widget files keep downloads in
+ * helpers between components (ConfigValidatorWidgets) — those components
+ * download via CalculatorShell's downloadData prop, caught above.
+ */
+function sliceReachesMarker(file: string, start: number, end: number, maxDepth = 3): boolean {
+  const content = readModule(file);
+  const slice = content.slice(start, end);
+  if (hasDownloadMarker(slice)) return true;
+  if (/\bdownload(?:Data|Filename)\b/.test(slice)) return true;
+  if (maxDepth === 0) return false;
+  const defs = definitionsOf(file);
+  const referenced = new Set([...slice.matchAll(/\b([A-Za-z_$][\w$]*)\b/g)].map((m) => m[1]!));
+  for (const [name, list] of defs) {
+    if (!referenced.has(name)) continue;
+    for (const d of list) {
+      if (d.start < start || d.start + d.text.length > end) continue; // outside this slice
+      if (process.env.DOWNLOAD_SLUGS_TRACE) console.log(`[trace] helper '${name}' @${d.start} in ${relPath(file)}`);
+      if (sliceReachesMarker(file, d.start, d.start + d.text.length, maxDepth - 1)) return true;
+    }
+  }
+  return false;
+}
+
+interface WrapperEntry { slug: string; modPath: string; selector?: string }
+
+/** slug -> wrapper module path (+ optional `.then(m => ({ default: m.X }))` selector). */
+function parseWrapperEntries(): WrapperEntry[] {
+  const wrapper = readFileSync(WRAPPER_PATH, 'utf8');
+  const entries: WrapperEntry[] = [];
+  const re = /['"]([\w-]+)['"]\s*:\s*dynamic\(\s*\(\)\s*=>\s*import\(\s*['"]@\/components\/tools\/modules\/([^'"]+)['"]\)\s*(?:\.then\(\s*m\s*=>\s*\(\s*\{\s*default:\s*m\.(\w+)\s*\}\s*\)\s*\))?/g;
+  for (const m of wrapper.matchAll(re)) entries.push({ slug: m[1]!, modPath: m[2]!, selector: m[3] });
+  return entries;
+}
+
+function mapSlugs(files: string[]): string[] {
+  const markerFiles = new Set(files.filter((f) => !DEAD_IMPORTS.has(relPath(f))));
+  const entries = parseWrapperEntries();
+  const slugs = new Set<string>();
+  let unresolved = 0;
+
+  for (const { slug, modPath, selector } of entries) {
+    // Skip trivial downloads (calculators, text generators, dev tools)
+    if (TRIVIAL_DOWNLOADS.has(slug)) continue;
+    const file = resolveFile(join(MODULES_DIR, modPath));
+    if (!file) {
+      unresolved++;
+      continue;
+    }
+    if (!selector) {
+      // Single-component module: the module file IS the component.
+      if (reachesMarker(file, markerFiles) || /\bdownload(?:Data|Filename)\b/.test(readModule(file))) slugs.add(slug);
+      continue;
+    }
+    const homes = selector ? findComponentHomes(file, selector) : [file];
+    if (homes.length === 0) unresolved++;
+    const debug = process.env.DOWNLOAD_SLUGS_DEBUG && process.env.DOWNLOAD_SLUGS_DEBUG.split(',').includes(slug);
+    if (debug) console.log(`[debug] ${slug}: module=${relPath(file)} selector=${selector ?? '-'} homes=${homes.map(relPath).join('|') || 'NONE'}`);
+    // Shared barrel files host many components; attribute download logic to
+    // the SELECTED component's body (or its re-export closure), not the file.
+    const attributed = homes.some((h) => {
+      const src = componentSource(h, selector);
+      const bodyOk = src !== null && (sliceReachesMarker(h, src.start, src.start + src.text.length) || closureReachesMarker(h, markerFiles));
+      const fallback = src === null && reachesMarker(h, markerFiles);
+      if (debug) console.log(`[debug] ${slug}: home=${relPath(h)} slice=${src === null ? 'NULL' : src.text.length} bodyOk=${bodyOk} fallback=${fallback}`);
+      return bodyOk || fallback;
+    });
+    if (debug) console.log(`[debug] ${slug}: attributed=${attributed}`);
+    if (attributed) slugs.add(slug);
+  }
+  if (unresolved > 0) console.warn(`  warning: ${unresolved} entry/entries had unresolved module/component paths`);
+  if (process.env.DOWNLOAD_SLUGS_DEBUG) {
+    console.log(`  parsed ${entries.length} wrapper entries, ${markerFiles.size} marker files`);
   }
 
   return [...slugs].sort();
+}
+
+function relPath(abs: string): string {
+  return abs.replace(MODULES_DIR + '/', '').replace(/\.tsx?$/, '');
 }
 
 function generateFile(slugs: string[]): string {
@@ -231,7 +552,7 @@ const files = findDownloadFiles();
 console.log(`Found ${files.length} files importing downloadOrShare`);
 
 const slugs = mapSlugs(files);
-console.log(`Mapped to ${slugs.length} DynamicModuleWrapper slugs`);
+console.log(`Mapped to ${slugs.length} DynamicModuleWrapper slugs (download markers, downloadData props, or re-export closure)`);
 
 const content = generateFile(slugs);
 writeFileSync(OUTPUT_PATH, content);

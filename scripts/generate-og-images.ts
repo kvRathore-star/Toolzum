@@ -12,6 +12,7 @@ import {
 import { resolve } from "path";
 import { fileURLToPath } from "url";
 import { toolsRegistry } from "../src/registry/tools";
+import { categorySlug } from "../src/lib/categorySlugs";
 import sharp from "sharp";
 
 const require = createRequire(import.meta.url);
@@ -523,13 +524,13 @@ export async function generateAll(
   };
 
   for (const tool of tools) {
-    const outPath = `${outDir}/${tool.category.toLowerCase()}/${tool.slug}.png`;
+    const outPath = `${outDir}/${categorySlug(tool.category)}/${tool.slug}.png`;
     addJob(toolOG(tool), outPath, toolHash(tool));
   }
 
   for (const cat of categories) {
     const count = tools.filter((t) => t.category === cat).length;
-    const outPath = `${outDir}/${cat.toLowerCase()}/index.png`;
+    const outPath = `${outDir}/${categorySlug(cat)}/index.png`;
     addJob(categoryOG(cat, count), outPath, categoryHash(cat, count));
     console.log(`  Category: ${cat} (${count} tools)`);
   }

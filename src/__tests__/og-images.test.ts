@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { generateAll, type ToolInfo } from '../../scripts/generate-og-images';
 import { toolsRegistry } from '@/registry/tools';
+import { categorySlug } from '@/lib/categorySlugs';
 
 const PNG_MAGIC = '89504e470d0a1a0a';
 
@@ -110,7 +111,7 @@ describe('OG image generation: per-tool images are decoupled from the global too
       const tool = mkTool(real.name, real.slug, real.category, real.description);
       await generateAll([tool], [tool.category], dir);
 
-      const png = readFileSync(join(dir, tool.category.toLowerCase(), `${tool.slug}.png`));
+      const png = readFileSync(join(dir, categorySlug(tool.category), `${tool.slug}.png`));
       expect(png.length).toBeGreaterThan(1000);
       expect(png.subarray(0, 8).toString('hex')).toBe(PNG_MAGIC);
     } finally {

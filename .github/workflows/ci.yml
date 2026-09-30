@@ -55,6 +55,13 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Verify built output (sitemap crawl gate)
+        # Tier-1 QA gate: every sitemap URL must emit a real page with title,
+        # self-canonical, one h1, parseable JSON-LD, resolvable og:image, and
+        # tool pages whose FAQ schema matches the visible DOM. Catches what
+        # unit tests cannot see pre-build (see scripts/verify-out.ts).
+        run: npx tsx scripts/verify-out.ts
+
       - name: Collect bundle stats
         run: npx tsx scripts/bundle-budget.ts --collect
 

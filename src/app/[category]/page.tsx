@@ -3,6 +3,7 @@ import { toolsRegistry } from "@/registry/tools";
 import type { ToolCategory } from "@/registry/tools";
 import { CategoryPageClient } from "@/components/tools/CategoryPageClient";
 import { CATEGORY_SECTIONS, CATEGORY_INTROS } from "@/data/categorySections";
+import { categorySlug } from "@/lib/categorySlugs";
 
 const VALID_CATEGORIES = new Set<string>(toolsRegistry.map(t => t.category));
 
@@ -54,7 +55,7 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
     'Growth & Marketing': { title: 'Free Growth & Marketing Tools – SaaS & Performance', description: 'Free growth and marketing tools — ARR, MRR, LTV, CAC, churn, runway, CPM, ROAS, NPS, A/B testing, and SaaS analytics. All calculations happen locally in your browser.' },
   };
   const seo = SEO[categoryKey] ?? { title: `${categoryKey} Tools – Free | Toolzum`, description: `Free ${categoryKey.toLowerCase()} tools — most processed locally in your browser with nothing uploaded for local tools.` };
-  const ogImage = `https://toolzum.com/og/${categoryKey.toLowerCase()}/index.webp`;
+  const ogImage = `https://toolzum.com/og/${categorySlug(categoryKey)}/index.webp`;
   return {
     title: seo.title,
     description: seo.description,

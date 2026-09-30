@@ -6,6 +6,18 @@ import { clientToolsRegistry } from '@/registry/tools-client-index';
 import { deriveSeoInstructionType, categoryFaqTemplates, deriveInputAnswer } from '@/components/tools/ToolPageSEOContent';
 import { UNIT_FAMILIES } from '@/components/tools/modules/shared/unitFamilies';
 
+/**
+ * Lenient description/seoDescription clone check (item #5): compares against
+ * the seoDescription with its "Free online … — " prefix stripped. Shared by
+ * the warn test and the FAQ metrics ratchet (baseline.descSeoIdentical).
+ */
+function descSeoDuplicates() {
+  return toolsRegistry.filter(t => t.seoDescription && t.description === t.seoDescription
+    .replace(/^Free online .*? (—|\\u2014) /, '')
+    .replace(/\. $/, '.')
+    .trim());
+}
+
 const stopwords = new Set([
   'to', 'and', 'the', 'in', 'for', 'of', 'a', 'an', 'is', 'it', 'its', 'on', 'or', 'with',
   'by', 'at', 'as', 'be', 'but', 'from', 'not', 'so', 'up', 'you', 'your', 'other', 'do',
@@ -173,16 +185,18 @@ describe('tool description content integrity', () => {
   });
 
   it('seoDescription content and description content are not identical (descriptions should complement, not duplicate)', () => {
-    const failures = toolsRegistry
-      .filter(t => t.seoDescription && t.description === t.seoDescription
-        .replace(/^Free online .*? (—|\\u2014) /, '')
-        .replace(/\. $/, '.')
-        .trim())
+    const failures = descSeoDuplicates()
       .map(t => `${t.name} (${t.slug}): "${t.description}"`);
     if (failures.length > 0) {
       console.warn(`\n⚠ WARNING: ${failures.length} tools have description identical to seoDescription content.`);
-      console.warn(`  This is tracked as content-opportunity work (item #5), not a regression.\n`);
+      console.warn(`  Tracked as content-opportunity work (item #5) — ratcheted via baseline.descSeoIdentical.\n`);
     }
+    if (process.env.UPDATE_BASELINE) return; // baseline written by the FAQ metrics ratchet below
+    const baseline = JSON.parse(fs.readFileSync(BASELINE_PATH, 'utf8'));
+    expect(
+      failures.length,
+      `description identical to seoDescription (ratchet ${baseline.descSeoIdentical}):\n${failures.join('\n')}`
+    ).toBeLessThanOrEqual(baseline.descSeoIdentical);
   });
 
   it('deriveSeoInstructionType returns correct type for all SEO-category tools', () => {
@@ -326,14 +340,23 @@ describe('content integrity gate: registry copy + FAQ ratchet (item 26)', () => 
   it('FAQ metrics do not regress vs baseline', () => {
     const qCount = new Map<string, number>();
     let missing = 0;
+    let under4 = 0;
     for (const t of toolsRegistry) {
       const faqs = (t as { faqs?: { question: string; answer: string }[] }).faqs || [];
       if (faqs.length === 0) missing++;
+      else if (faqs.length < 4) under4++;
       for (const f of faqs) qCount.set(f.question, (qCount.get(f.question) || 0) + 1);
     }
     const dupGroups = [...qCount.values()].filter((n) => n > 1).length;
     const dupInstances = [...qCount.values()].filter((n) => n > 1).reduce((a, n) => a + n, 0);
-    const current = { dupGroups, dupInstances, missingFaqs: missing, toolCount: toolsRegistry.length };
+    const current = {
+      dupGroups,
+      dupInstances,
+      missingFaqs: missing,
+      under4Faqs: under4,
+      descSeoIdentical: descSeoDuplicates().length,
+      toolCount: toolsRegistry.length,
+    };
     if (process.env.UPDATE_BASELINE) {
       fs.writeFileSync(BASELINE_PATH, JSON.stringify(current, null, 2) + '\n');
       console.info('baseline written:', current);
@@ -343,6 +366,10 @@ describe('content integrity gate: registry copy + FAQ ratchet (item 26)', () => 
     expect(current.dupGroups, 'duplicate FAQ groups').toBeLessThanOrEqual(baseline.dupGroups);
     expect(current.dupInstances, 'duplicate FAQ instances').toBeLessThanOrEqual(baseline.dupInstances);
     expect(current.missingFaqs, 'tools missing FAQs').toBeLessThanOrEqual(baseline.missingFaqs);
+    // Tier-1 depth ratchet: a tool that started FAQs but stopped at 1-3, and
+    // description/seoDescription clones, must never grow. See TODO #28.
+    expect(current.under4Faqs, 'tools with a partial FAQ set (1-3 entries)').toBeLessThanOrEqual(baseline.under4Faqs);
+    expect(current.descSeoIdentical, 'description identical to seoDescription').toBeLessThanOrEqual(baseline.descSeoIdentical);
   });
 
   it('reports one-way converters (non-failing)', () => {
