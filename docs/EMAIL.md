@@ -7,7 +7,7 @@ Everything Toolzum sends and receives by email. Last verified **Sep 30 2026**
 
 Every message is rendered by `src/lib/emailTemplate.ts` (`renderEmail`) and
 sent through `src/lib/email.ts` (`sendEmail` → Cloudflare Email Sending REST
-API). One shell for all 13 emails:
+API). One shell for all 14 emails:
 
 - dark card, indigo accent bar, **logo + wordmark in header AND footer**
 - hidden inbox preheader, unique greeting per email type, detail rows
@@ -33,7 +33,7 @@ API). One shell for all 13 emails:
 sender.** Display name is per-message (`fromName`), so nothing new needs
 verifying in Cloudflare when a new email type is added.
 
-## Call sites (all 13)
+## Call sites (all 14)
 
 | Email | Where |
 |---|---|
@@ -43,6 +43,7 @@ verifying in Cloudflare when a new email type is added.
 | Admin temporary password | `functions/api/admin/reset-password.ts` |
 | Waitlist launch broadcast | `functions/api/admin/notify-broadcast.ts` |
 | Sitemap crawl complete | `functions/api/sitemap-crawl.ts` |
+| Owner reply / compose (admin dashboard) | `functions/api/admin/reply.ts` |
 
 ## Contact form: relay + auto-ack
 
@@ -112,12 +113,33 @@ DKIM/SPF — no third-party relay, no alignment problems.
 Outbound path: Gmail → `smtp.mx.cloudflare.net:465` → Cloudflare signs
 DKIM/SPF for `toolzum.com` → same pipeline as the app's sends.
 
+## In-app reply — the Gmail-independent path
+
+`/admin/reply` (sidebar: **Reply**) sends any message through the same
+pipeline, so correspondence never depends on Gmail's send-as:
+
+- **UI:** `src/app/admin/reply/page.tsx` — To / Subject / Message form,
+  capability banner when email secrets are missing, success + error states.
+- **Endpoint:** `POST /api/admin/reply` — admin session **or**
+  `Bearer ALERT_TOKEN`, validates `{ to, subject, message }` (email format,
+  HTML stripped, 120/5000 char caps), rate limit **10/min per IP**
+  (`admin-reply`), then `sendEmail(…, { fromName: "Toolzum Support" })`
+  with auto-branded HTML. `GET` returns `{ configured, from, fromName }`
+  for the UI probe.
+- Failures are honest: `503 email_unconfigured` (no secrets), `502
+  email_failed` (Cloudflare said no), `429` over the limit. Tests:
+  `src/__tests__/api/admin-reply-api.test.ts` (11 cases).
+- **Curl with the Bearer token:** `functions/api/_middleware.ts` rejects any
+  mutation with no Origin/Referer (403) — add `-H 'Origin: https://toolzum.com'`.
+  The browser UI sends Origin automatically; GET (the probe) is exempt.
+
 ## Caveats
 
 - **Jan 2027:** Google is retiring consumer-Gmail "Send mail as" for
   third-party addresses. A custom-domain SMTP relay may fall under that. If
-  it goes away, the future-proof fallback is replying from inside Toolzum
-  (admin Reply button → existing `sendEmail`), not from Gmail. Not built yet.
+  it goes away, the fallback is already live: **Reply** in the admin
+  dashboard (`/admin/reply` → `POST /api/admin/reply` → `sendEmail`), the
+  Gmail-independent path documented above.
 - **Shared quota:** Gmail's relay and the app's API sends consume the same
   Email Sending quota. Volume here is trivial (receipts, acks, alerts).
 - **Outbound From is always `contact@toolzum.com`.** `support@toolzum.com`
@@ -144,5 +166,5 @@ DKIM/SPF for `toolzum.com` → same pipeline as the app's sends.
 | `CLOUDFLARE_API_TOKEN` | Pages env | all outbound sends (Email Sending: Edit) |
 | `CLOUDFLARE_ACCOUNT_ID` | Pages env | send endpoint account scoping |
 | `CONTACT_TO` | Pages env (optional) | relay target; defaults to the owner's Gmail |
-| `ALERT_TOKEN` | Pages env + repo secret | alert workflow auth (see `docs/ALERTS.md`) |
+| `ALERT_TOKEN` | Pages env + repo secret | alert workflow auth + `/api/admin/reply` bearer path (see `docs/ALERTS.md`) |
 | Gmail send-as token | Gmail settings only | owner replies as contact@ (step 1 above) |
