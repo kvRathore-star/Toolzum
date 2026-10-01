@@ -19,9 +19,13 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 **Standard flow — Cloudflare Pages auto-deploys from GitHub:**
 
-1. `npm run build` (generates OG images, sitemap, static export — ~15min for 2,565 pages)
-2. `git push origin main`
-3. Cloudflare Pages auto-deploys from `main`
+1. `git push origin main`
+2. Cloudflare Pages auto-deploys from `main`
+
+**No local build before push** (decided Oct 2026): the pre-push hook
+already runs lint + typecheck + full tests, and GitHub Actions runs
+`npm run build` in CI — skip the ~15-min local build in the push routine.
+Run it locally only when you need to inspect page/OG output yourself.
 
 **macOS 12.6 workaround (local testing only):**
 
