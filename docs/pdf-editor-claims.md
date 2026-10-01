@@ -23,6 +23,8 @@ a claim with no backing is a bug. Status meanings:
 | 10 | Maximum pixel gate: "UNVERIFIED … Export blocked" | `PdfEditorCore.tsx` pixel verify block | Behavior: `regionDarkness` fail-closed tests; impl: claims-test pins | BACKED (gate fn) + SOURCE-REGEX (wiring) |
 | 11 | FAQ: two modes, "burned into the pixels and the export re-checks that they are dark", "Rasterized pages do not keep links or form fields" | `registry/tools-chunk-1.ts` | `pdfEditorClaims.test.ts` "maximum redaction raster" | SOURCE-REGEX |
 | 12 | Site-wide "100% local" (e.g. `VectorPenCanvas.tsx:239`, `BulkImageConverter.tsx:39`) | various | pending site-wide sweep | PENDING |
+| 13 | Replace toast: "original font substituted, size and bold kept; verify placement" | `PdfEditorCore.tsx` findReplace | Behavior: `matchBoxes` geometry + composition tests ("Hello world"→"Hello there") in `pdfEditorLogic.test.ts`; impl pins in `pdfEditorClaims.test.ts` "find/replace sub-rect fix" (incl. NOT-pins: whole-item whiteout, "Helvetica retypeset") | BACKED (geometry) + SOURCE-REGRESSION (wiring) |
+| 14 | PII sweep covers only items that can hold the needle (no short/whitespace avalanche) | `piiItemHit` guard in findSensitive | `pdfEditorLogic.test.ts` "piiItemHit" (4 tests) + claims pin `piiItemHit(it.str, lowered)` | BACKED |
 
 ## Required behavior tests (from the corrected order)
 
@@ -32,7 +34,11 @@ a claim with no backing is a bug. Status meanings:
       *Partial (no canvas impl in vitest): geometry + gate covered by
       `pdfRedactRaster.test.ts` (rotation:0 frame, exact point↔pixel mapping,
       fail-closed gate); render→toBlob→JPEG re-embed = MANUAL checklist below.*
-- [ ] Replace substring: "Hello world", replace "world" → "Hello there".
+- [x] Replace substring: "Hello world", replace "world" → "Hello there".
+      *Unit-level (Oct 2026): `matchBoxes` sub-rect tests + explicit
+      composition test in `pdfEditorLogic.test.ts`; wiring pinned by
+      `pdfEditorClaims.test.ts` "find/replace sub-rect fix". Full export
+      render still = browser pass.*
 - [ ] Hindi (Devanagari) and Tamil annotation export — no blank boxes.
 - [ ] Export with zero annotations after a page op succeeds.
 - [ ] "Original bytes never touched" — export leaves `fileBytes` unchanged.
@@ -47,3 +53,17 @@ a claim with no backing is a bug. Status meanings:
    "Maximum redaction UNVERIFIED" toast; remove it → export passes.
 4. Links + form fields on a rasterized page → confirm they are gone (FAQ
    says so) and the flagged toast names the page.
+
+### Reviewer-added cases (Oct 2026)
+
+5. Rotated page (90° and 270°) with a redaction AND a text annotation —
+   box over the right words, annotation where it appeared on screen, page
+   orientation matches the original.
+6. Highlight overlapping a redaction — confirm the pixel gate catches the
+   lightened box (or explain why it does not).
+7. Redaction near the page edge + a tiny one-word redaction — rounding in
+   the pixel/point conversion shows up here first.
+8. Multi-page doc with only pages 2 and 4 redacted — `removePage`/
+   `insertPage` index shift: right pages replaced, others untouched.
+9. Cropped page (non-zero MediaBox/CropBox origin) — unit tests cover
+   rotation, not crop; visual check required.
