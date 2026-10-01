@@ -1011,7 +1011,8 @@ export default function PdfEditorCore() {
         } else if (a.kind === 'image' || a.kind === 'highlight' || a.kind === 'whiteout' || a.kind === 'shape' || a.kind === 'redact') {
           ctx.strokeRect(px(a.x) - 2, px(a.y) - 2, px(a.w) + 4, px(a.h) + 4);
         } else if (a.kind === 'flow') {
-          const lines = wrapLines(a.text || 'x', a.w, (s) => s.length * a.size * 0.55);
+          ctx.font = canvasFont(px(a.size), a.bold, !!a.italic, a.font);
+          const lines = wrapLines(a.text || 'x', px(a.w), (s) => ctx.measureText(s).width);
           ctx.strokeRect(px(a.x) - 4, px(a.y) - px(a.size) - 4, px(a.w) + 8, lines.length * px(a.size) * 1.25 + 8);
         } else if (a.kind === 'note') {
           ctx.strokeRect(px(a.x) - 2, px(a.y) - 2, 26, 26);
@@ -2531,6 +2532,10 @@ export default function PdfEditorCore() {
           libPages.push(...pdfDocLib.getPages());
         }
       }
+      // Per-annotation failures BLOCK the export with page + kind + reason —
+      // a half-drawn page must never download behind a generic toast.
+      const drawFailures: { page: number; kind: string; why: string }[] = [];
+
       for (const [pageNum, list] of Object.entries(clean)) {
         const lp = libPages[Number(pageNum) - 1];
         if (!lp) continue;
@@ -2541,137 +2546,148 @@ export default function PdfEditorCore() {
         // matches what the user saw.
         const pageAngle = ((lp.getRotation().angle % 360) + 360) % 360;
         for (const a of list) {
-          if (a.kind === 'text') {
-            const c = hexToRgb(a.color);
-            const base = await libFontFor(a.font, a.bold, !!a.italic);
-            const runs = splitFontRuns(a.text);
-            const layout = measureRuns(runs, (t, cls) => fontForRun(cls, !!a.bold, base).widthOfTextAtSize(t, a.size));
-            const tw = layout.total;
-            const tx = a.align === 'center' ? a.x - tw / 2 : a.align === 'right' ? a.x - tw : a.x;
-            const ty = pageH - a.y;
-            for (const rb of layout.boxes) {
-              lp.drawText(rb.text, {
-                x: tx + rb.x,
-                y: ty,
-                size: a.size,
-                font: fontForRun(rb.cls, !!a.bold, base),
-                color: rgb(c.r, c.g, c.b),
-                ...(pageAngle ? { rotate: degrees(pageAngle) } : {}),
-              });
-            }
-            const decoPdf = (dy: number) => {
-              lp.drawLine({ start: { x: tx, y: dy }, end: { x: tx + tw, y: dy }, thickness: Math.max(0.75, a.size / 14), color: rgb(c.r, c.g, c.b) });
-            };
-            if (a.underline) decoPdf(ty - 2);
-            if (a.strike) decoPdf(ty + a.size * 0.3);
-          } else if (a.kind === 'flow') {
-            // Same wrapLines as the preview (export measures approximately;
-            // a per-line fit pass replaces maxWidth now that each run can
-            // carry its own font — maxWidth would rescale a single run only).
-            const c = hexToRgb(a.color);
-            const base = await libFontFor(a.font, a.bold, !!a.italic);
-            const approx = (s: string) => s.length * a.size * 0.55;
-            const lines = wrapLines(a.text, a.w, approx);
-            lines.forEach((line, li) => {
-              const layout = measureRuns(splitFontRuns(line), (t, cls) =>
-                fontForRun(cls, !!a.bold, base).widthOfTextAtSize(t, a.size),
-              );
-              const scale = layout.total > a.w && layout.total > 0 ? a.w / layout.total : 1;
-              const lw = layout.total * scale;
-              const x = a.align === 'center' ? a.x + (a.w - lw) / 2 : a.align === 'right' ? a.x + a.w - lw : a.x;
-              const ly = pageH - (a.y + li * a.size * 1.25);
+          try {
+            if (a.kind === 'text') {
+              const c = hexToRgb(a.color);
+              const base = await libFontFor(a.font, a.bold, !!a.italic);
+              const runs = splitFontRuns(a.text);
+              const layout = measureRuns(runs, (t, cls) => fontForRun(cls, !!a.bold, base).widthOfTextAtSize(t, a.size));
+              const tw = layout.total;
+              const tx = a.align === 'center' ? a.x - tw / 2 : a.align === 'right' ? a.x - tw : a.x;
+              const ty = pageH - a.y;
               for (const rb of layout.boxes) {
                 lp.drawText(rb.text, {
-                  x: x + rb.x * scale,
-                  y: ly,
-                  size: a.size * scale,
+                  x: tx + rb.x,
+                  y: ty,
+                  size: a.size,
                   font: fontForRun(rb.cls, !!a.bold, base),
                   color: rgb(c.r, c.g, c.b),
+                  ...(pageAngle ? { rotate: degrees(pageAngle) } : {}),
                 });
               }
-              const decoFlow = (dy: number) => {
-                lp.drawLine({ start: { x, y: dy }, end: { x: x + lw, y: dy }, thickness: Math.max(0.75, a.size / 14), color: rgb(c.r, c.g, c.b) });
+              const decoPdf = (dy: number) => {
+                lp.drawLine({ start: { x: tx, y: dy }, end: { x: tx + tw, y: dy }, thickness: Math.max(0.75, a.size / 14), color: rgb(c.r, c.g, c.b) });
               };
-              if (a.underline) decoFlow(ly - 2);
-              if (a.strike) decoFlow(ly + a.size * 0.3);
-            });
-          } else if (a.kind === 'highlight') {
-            const c = hexToRgb(a.color);
-            lp.drawRectangle({
-              x: a.x, y: pageH - (a.y + a.h),
-              width: a.w, height: a.h,
-              color: rgb(c.r, c.g, c.b), opacity: a.opacity ?? 0.4,
-            });
-          } else if (a.kind === 'whiteout') {
-            lp.drawRectangle({
-              x: a.x, y: pageH - (a.y + a.h),
-              width: a.w, height: a.h,
-              color: rgb(1, 1, 1),
-            });
-          } else if (a.kind === 'redact') {
-            lp.drawRectangle({
-              x: a.x, y: pageH - (a.y + a.h),
-              width: a.w, height: a.h,
-              color: rgb(0, 0, 0),
-            });
-          } else if (a.kind === 'draw') {
-            const pts = a.points;
-            let d = '';
-            for (let j = 0; j + 1 < pts.length; j += 2) {
-              const x = pts[j]!.toFixed(1);
-              const y = (pageH - pts[j + 1]!).toFixed(1);
-              d += j === 0 ? `M ${x} ${y} ` : `L ${x} ${y} `;
-            }
-            const c = hexToRgb(a.color);
-            lp.drawSvgPath(d, { borderColor: rgb(c.r, c.g, c.b), borderWidth: a.width });
-          } else if (a.kind === 'shape') {
-            const c = hexToRgb(a.color);
-            const col = rgb(c.r, c.g, c.b);
-            const sy = pageH - (a.y + a.h);
-            if (a.shape === 'rect') {
-              lp.drawRectangle({ x: a.x, y: sy, width: a.w, height: a.h, borderColor: col, borderWidth: a.width });
-            } else if (a.shape === 'ellipse') {
-              lp.drawEllipse({ x: a.x + a.w / 2, y: sy + a.h / 2, xScale: Math.abs(a.w) / 2, yScale: Math.abs(a.h) / 2, borderColor: col, borderWidth: a.width });
-            } else {
-              const x2 = a.x + a.w;
-              const y2 = pageH - a.y;
-              const y1 = pageH - (a.y + a.h);
-              lp.drawLine({ start: { x: a.x, y: y1 }, end: { x: x2, y: y2 }, thickness: a.width, color: col });
-              if (a.shape === 'arrow') {
-                const ang = Math.atan2(y2 - y1, x2 - a.x);
-                const head = Math.min(10, Math.hypot(x2 - a.x, y2 - y1) / 4);
-                lp.drawLine({ start: { x: x2, y: y2 }, end: { x: x2 - head * Math.cos(ang - 0.4), y: y2 - head * Math.sin(ang - 0.4) }, thickness: a.width, color: col });
-                lp.drawLine({ start: { x: x2, y: y2 }, end: { x: x2 - head * Math.cos(ang + 0.4), y: y2 - head * Math.sin(ang + 0.4) }, thickness: a.width, color: col });
+              if (a.underline) decoPdf(ty - 2);
+              if (a.strike) decoPdf(ty + a.size * 0.3);
+            } else if (a.kind === 'flow') {
+              // Same per-run metrics as the draw (preview: ctx.measureText);
+              // per-line fit replaces maxWidth — one run must not rescale.
+              const c = hexToRgb(a.color);
+              const base = await libFontFor(a.font, a.bold, !!a.italic);
+              const lines = wrapLines(a.text, a.w, (s) =>
+                measureRuns(splitFontRuns(s), (t, cls) => fontForRun(cls, !!a.bold, base).widthOfTextAtSize(t, a.size)).total,
+              );
+              lines.forEach((line, li) => {
+                const layout = measureRuns(splitFontRuns(line), (t, cls) =>
+                  fontForRun(cls, !!a.bold, base).widthOfTextAtSize(t, a.size),
+                );
+                const scale = layout.total > a.w && layout.total > 0 ? a.w / layout.total : 1;
+                const lw = layout.total * scale;
+                const x = a.align === 'center' ? a.x + (a.w - lw) / 2 : a.align === 'right' ? a.x + a.w - lw : a.x;
+                const ly = pageH - (a.y + li * a.size * 1.25);
+                for (const rb of layout.boxes) {
+                  lp.drawText(rb.text, {
+                    x: x + rb.x * scale,
+                    y: ly,
+                    size: a.size * scale,
+                    font: fontForRun(rb.cls, !!a.bold, base),
+                    color: rgb(c.r, c.g, c.b),
+                  });
+                }
+                const decoFlow = (dy: number) => {
+                  lp.drawLine({ start: { x, y: dy }, end: { x: x + lw, y: dy }, thickness: Math.max(0.75, a.size / 14), color: rgb(c.r, c.g, c.b) });
+                };
+                if (a.underline) decoFlow(ly - 2);
+                if (a.strike) decoFlow(ly + a.size * 0.3);
+              });
+            } else if (a.kind === 'highlight') {
+              const c = hexToRgb(a.color);
+              lp.drawRectangle({
+                x: a.x, y: pageH - (a.y + a.h),
+                width: a.w, height: a.h,
+                color: rgb(c.r, c.g, c.b), opacity: a.opacity ?? 0.4,
+              });
+            } else if (a.kind === 'whiteout') {
+              lp.drawRectangle({
+                x: a.x, y: pageH - (a.y + a.h),
+                width: a.w, height: a.h,
+                color: rgb(1, 1, 1),
+              });
+            } else if (a.kind === 'redact') {
+              lp.drawRectangle({
+                x: a.x, y: pageH - (a.y + a.h),
+                width: a.w, height: a.h,
+                color: rgb(0, 0, 0),
+              });
+            } else if (a.kind === 'draw') {
+              const pts = a.points;
+              let d = '';
+              for (let j = 0; j + 1 < pts.length; j += 2) {
+                const x = pts[j]!.toFixed(1);
+                const y = (pageH - pts[j + 1]!).toFixed(1);
+                d += j === 0 ? `M ${x} ${y} ` : `L ${x} ${y} `;
               }
+              const c = hexToRgb(a.color);
+              lp.drawSvgPath(d, { borderColor: rgb(c.r, c.g, c.b), borderWidth: a.width });
+            } else if (a.kind === 'shape') {
+              const c = hexToRgb(a.color);
+              const col = rgb(c.r, c.g, c.b);
+              const sy = pageH - (a.y + a.h);
+              if (a.shape === 'rect') {
+                lp.drawRectangle({ x: a.x, y: sy, width: a.w, height: a.h, borderColor: col, borderWidth: a.width });
+              } else if (a.shape === 'ellipse') {
+                lp.drawEllipse({ x: a.x + a.w / 2, y: sy + a.h / 2, xScale: Math.abs(a.w) / 2, yScale: Math.abs(a.h) / 2, borderColor: col, borderWidth: a.width });
+              } else {
+                const x2 = a.x + a.w;
+                const y2 = pageH - a.y;
+                const y1 = pageH - (a.y + a.h);
+                lp.drawLine({ start: { x: a.x, y: y1 }, end: { x: x2, y: y2 }, thickness: a.width, color: col });
+                if (a.shape === 'arrow') {
+                  const ang = Math.atan2(y2 - y1, x2 - a.x);
+                  const head = Math.min(10, Math.hypot(x2 - a.x, y2 - y1) / 4);
+                  lp.drawLine({ start: { x: x2, y: y2 }, end: { x: x2 - head * Math.cos(ang - 0.4), y: y2 - head * Math.sin(ang - 0.4) }, thickness: a.width, color: col });
+                  lp.drawLine({ start: { x: x2, y: y2 }, end: { x: x2 - head * Math.cos(ang + 0.4), y: y2 - head * Math.sin(ang + 0.4) }, thickness: a.width, color: col });
+                }
+              }
+            } else if (a.kind === 'note') {
+              // Wrapped lines: export must never silently drop note text.
+              const words = a.text.split(/\s+/).filter(Boolean);
+              const lines: string[] = [];
+              let cur = '';
+              for (const w of words) {
+                if ((cur + ' ' + w).trim().length > 28) { lines.push(cur.trim()); cur = w; }
+                else cur += ' ' + w;
+              }
+              if (cur.trim()) lines.push(cur.trim());
+              const shown = lines.slice(0, 8);
+              const boxH = 14 + shown.length * 11;
+              lp.drawRectangle({ x: a.x, y: pageH - (a.y + boxH), width: 190, height: boxH, color: rgb(1, 0.95, 0.64), borderColor: rgb(0.85, 0.75, 0.2), borderWidth: 0.75 });
+              shown.forEach((line, li) => {
+                lp.drawText(line, { x: a.x + 5, y: pageH - (a.y + 22 + li * 11), size: 9, font: helv, color: rgb(0, 0, 0), maxWidth: 180, lineHeight: 11 });
+              });
+            } else if (a.kind === 'image') {
+              const bytes = await fetch(a.dataUrl).then((r) => r.arrayBuffer());
+              const img = a.dataUrl.startsWith('data:image/jpeg') || a.dataUrl.startsWith('data:image/jpg')
+                ? await pdfDocLib.embedJpg(bytes)
+                : await pdfDocLib.embedPng(bytes);
+              lp.drawImage(img, {
+                x: a.x, y: pageH - (a.y + a.h),
+                width: a.w, height: a.h,
+              });
             }
-          } else if (a.kind === 'note') {
-            // Wrapped lines: export must never silently drop note text.
-            const words = a.text.split(/\s+/).filter(Boolean);
-            const lines: string[] = [];
-            let cur = '';
-            for (const w of words) {
-              if ((cur + ' ' + w).trim().length > 28) { lines.push(cur.trim()); cur = w; }
-              else cur += ' ' + w;
-            }
-            if (cur.trim()) lines.push(cur.trim());
-            const shown = lines.slice(0, 8);
-            const boxH = 14 + shown.length * 11;
-            lp.drawRectangle({ x: a.x, y: pageH - (a.y + boxH), width: 190, height: boxH, color: rgb(1, 0.95, 0.64), borderColor: rgb(0.85, 0.75, 0.2), borderWidth: 0.75 });
-            shown.forEach((line, li) => {
-              lp.drawText(line, { x: a.x + 5, y: pageH - (a.y + 22 + li * 11), size: 9, font: helv, color: rgb(0, 0, 0), maxWidth: 180, lineHeight: 11 });
-            });
-          } else if (a.kind === 'image') {
-            const bytes = await fetch(a.dataUrl).then((r) => r.arrayBuffer());
-            const img = a.dataUrl.startsWith('data:image/jpeg') || a.dataUrl.startsWith('data:image/jpg')
-              ? await pdfDocLib.embedJpg(bytes)
-              : await pdfDocLib.embedPng(bytes);
-            lp.drawImage(img, {
-              x: a.x, y: pageH - (a.y + a.h),
-              width: a.w, height: a.h,
-            });
+          } catch (e) {
+            drawFailures.push({ page: Number(pageNum), kind: a.kind, why: (e instanceof Error ? e.message : String(e)).slice(0, 90) });
           }
         }
       }
+      if (drawFailures.length > 0) {
+        const shown = drawFailures.slice(0, 3).map((f) => `page ${f.page} ${f.kind}: ${f.why}`).join('; ');
+        toast.error(`Export blocked — ${drawFailures.length} annotation${drawFailures.length === 1 ? '' : 's'} failed to draw (${shown}${drawFailures.length > 3 ? '…' : ''}). Remove or re-add them and retry.`, { duration: 9000 });
+        setExporting(false);
+        return;
+      }
+
       const out = await pdfDocLib.save();
       // Verify gate: re-extract the EXPORTED bytes and assert every removed
       // string is actually gone. A redaction that fails verification fails

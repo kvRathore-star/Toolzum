@@ -894,4 +894,44 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
       expect(t).toMatch(/mixed Latin\+Hindi run-split exports both parts/);
     });
   });
+
+  describe('flow metrics + per-annotation failure gate (Phase 1, Oct 2026)', () => {
+    /**
+     * Flow wrapped on a 0.55/char heuristic while the preview wrapped on
+     * ctx.measureText — parity broke and long lines double-adjusted
+     * (wrap + maxWidth). Export now wraps with the same per-run font
+     * metrics it draws with; selection outline matches too. Per-anno
+     * try/catch collects failures and BLOCKS the export with page/kind/
+     * reason — a half-drawn page must never download.
+     */
+    it('impl: export flow wraps with the per-run metrics the draw uses', () => {
+      expect(editor).toMatch(/wrapLines\(a\.text, a\.w, \(s\) =>\s*measureRuns\(splitFontRuns\(s\)/);
+      expect(editor).not.toMatch(/const approx = /);
+      expect(editor).toMatch(/const scale = layout\.total > a\.w/);
+    });
+    it('impl: selection outline for flow measures like the render (px units)', () => {
+      expect(editor).toMatch(
+        /\} else if \(a\.kind === 'flow'\) \{\s*ctx\.font = canvasFont\(px\(a\.size\), a\.bold, !!a\.italic, a\.font\);\s*const lines = wrapLines\(a\.text \|\| 'x', px\(a\.w\), \(s\) => ctx\.measureText\(s\)\.width\)/,
+      );
+    });
+    it('impl: every annotation draw runs inside try/catch into drawFailures', () => {
+      expect(editor).toMatch(/const drawFailures: \{ page: number; kind: string; why: string \}\[\]/);
+      expect(editor).toMatch(/for \(const a of list\) \{\s*try \{/);
+      expect(editor).toMatch(
+        /drawFailures\.push\(\{ page: Number\(pageNum\), kind: a\.kind, why: \(e instanceof Error \? e\.message : String\(e\)\)\.slice\(0, 90\) \}\)/,
+      );
+    });
+    it('claim: failures BLOCK export with page/kind/reason before download', () => {
+      expect(editor).toMatch(/if \(drawFailures\.length > 0\) \{/);
+      expect(editor).toMatch(/failed to draw \(\$\{shown\}/);
+      expect(editor).toMatch(/Remove or re-add them and retry/);
+      expect(editor).toMatch(/setExporting\(false\);\s*return;/);
+    });
+    it('impl: failure gate sits before pdfDocLib.save, not after', () => {
+      const gate = editor.indexOf('if (drawFailures.length > 0)');
+      const save = editor.indexOf('pdfDocLib.save()');
+      expect(gate).toBeGreaterThan(-1);
+      expect(save).toBeGreaterThan(gate);
+    });
+  });
 });
