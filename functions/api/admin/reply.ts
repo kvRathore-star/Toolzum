@@ -1,27 +1,29 @@
-import { sendEmail } from "../../../src/lib/email";
+import { sendEmail, emailConfigured } from "../../../src/lib/email";
 import { requireAdmin } from "../../../src/lib/admin-auth";
 import { checkRateLimit, recordRateLimit } from "../rate-limit";
 
 /**
  * In-app reply / compose endpoint — the fallback for Gmail's Jan-2027
  * "Send mail as" retirement (docs/EMAIL.md). The owner replies from the
- * admin dashboard and the message goes through the same Cloudflare Email
- * Sending pipeline as every other Toolzum email: From Toolzum Support
- * <contact@toolzum.com>, branded HTML via brandFromText (html omitted).
+ * admin dashboard and the message goes through the same send pipeline
+ * (Resend primary, Cloudflare fallback) as every other Toolzum email:
+ * From Toolzum Support <contact@toolzum.com>, branded HTML via
+ * brandFromText (html omitted).
  *
  * Auth: admin session (browser UI) OR Bearer ALERT_TOKEN (curl/automation).
  * GET  → capability probe for the UI ({ configured, from }).
  * POST → { to, subject, message }.
  *
  * Secrets (Pages env, owner-set per docs/ALERTS.md):
- * - CLOUDFLARE_API_TOKEN (Email Sending: Edit)
- * - CLOUDFLARE_ACCOUNT_ID
- * Without them: 503 email_unconfigured — never a fake success.
+ * - RESEND_API_KEY (primary transport)
+ * - CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID (fallback)
+ * No transport configured: 503 email_unconfigured — never a fake success.
  */
 
 interface Env {
   DB: D1Database;
   ALERT_TOKEN?: string;
+  RESEND_API_KEY?: string;
   CLOUDFLARE_API_TOKEN?: string;
   CLOUDFLARE_ACCOUNT_ID?: string;
   GOOGLE_CLIENT_ID: string;
@@ -58,13 +60,13 @@ export async function onRequestGet(context: { request: Request; env: Env }): Pro
     ok: true,
     from: "contact@toolzum.com",
     fromName: "Toolzum Support",
-    configured: !!(env.CLOUDFLARE_API_TOKEN && env.CLOUDFLARE_ACCOUNT_ID),
+    configured: emailConfigured(env),
   });
 }
 
 export async function onRequestPost(context: { request: Request; env: Env }): Promise<Response> {
   const { request, env } = context;
-  const { DB, CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID } = env;
+  const { DB } = env;
 
   if (!(await isAuthed(request, env))) return json({ error: "unauthorized" }, 401);
 
@@ -87,12 +89,12 @@ export async function onRequestPost(context: { request: Request; env: Env }): Pr
   if (rl.limited) return rl.response ?? json({ error: "rate_limited" }, 429);
   recordRateLimit(DB, "admin-reply", ip, "/api/admin/reply");
 
-  if (!CLOUDFLARE_API_TOKEN || !CLOUDFLARE_ACCOUNT_ID) {
+  if (!emailConfigured(env)) {
     return json({ error: "email_unconfigured" }, 503);
   }
 
   const sent = await sendEmail(
-    { CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID },
+    env,
     { to, subject, text: message, fromName: "Toolzum Support" }
   );
   if (!sent) return json({ error: "email_failed" }, 502);

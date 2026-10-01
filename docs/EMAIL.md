@@ -1,13 +1,25 @@
 # Email system — send, receive, and reply as contact@
 
-Everything Toolzum sends and receives by email. Last verified **Sep 30 2026**
-(DNS + Email Routing rules + SMTP endpoint checked live).
+Everything Toolzum sends and receives by email. Last verified **Oct 1 2026**
+(Resend domain verified live + DNS + Email Routing rules checked).
 
 ## What ships
 
 Every message is rendered by `src/lib/emailTemplate.ts` (`renderEmail`) and
-sent through `src/lib/email.ts` (`sendEmail` → Cloudflare Email Sending REST
-API). One shell for all 14 emails:
+sent through `src/lib/email.ts` (`sendEmail`), which tries two transports:
+
+1. **Resend (primary)** — free tier, **3,000 emails/month, 100/day, no card**.
+   Domain `toolzum.com` verified in Resend (Oct 1 2026, region
+   `ap-northeast-1`/Tokyo) with **DKIM-only auth** at
+   `resend._domainkey.toolzum.com`. Chosen because Cloudflare Email Sending
+   on the Workers Free plan can only reach *verified destination*
+   addresses — Resend's REST API reaches arbitrary recipients.
+   ⚠️ Resend does **not** use an SPF include (`spf.resend.com` has no TXT
+   record — adding it would cause SPF permerror; DMARC passes via DKIM).
+2. **Cloudflare Email Sending (fallback)** — used when Resend is missing or
+   a send fails; still correct for the owner's verified relay address.
+
+One shell for all 14 emails:
 
 - dark card, indigo accent bar, **logo + wordmark in header AND footer**
 - hidden inbox preheader, unique greeting per email type, detail rows
@@ -31,7 +43,8 @@ API). One shell for all 14 emails:
 
 **The address never changes — `contact@toolzum.com` is the single verified
 sender.** Display name is per-message (`fromName`), so nothing new needs
-verifying in Cloudflare when a new email type is added.
+verifying when a new email type is added (the *domain* is verified once,
+in Resend's dashboard).
 
 ## Call sites (all 14)
 
@@ -58,8 +71,10 @@ verifying in Cloudflare when a new email type is added.
    `suggestion` / `bug` / `licensing` / `api` / `general`
    (`CATEGORY_COPY` in `functions/api/contact.ts`).
    Best-effort: if it fails, the user's submission still succeeds.
-3. **No `CLOUDFLARE_API_TOKEN`** → `503 email_unconfigured` before either
-   send — no acknowledgment goes out, no fake receipt.
+3. **No transport configured** (no `RESEND_API_KEY` and no
+   `CLOUDFLARE_API_TOKEN`+`CLOUDFLARE_ACCOUNT_ID` pair) →
+   `503 email_unconfigured` before either send — no acknowledgment goes
+   out, no fake receipt.
 
 ## Receiving (Email Routing — verified live)
 
@@ -126,46 +141,46 @@ pipeline, so correspondence never depends on Gmail's send-as:
   (`admin-reply`), then `sendEmail(…, { fromName: "Toolzum Support" })`
   with auto-branded HTML. `GET` returns `{ configured, from, fromName }`
   for the UI probe.
-- Failures are honest: `503 email_unconfigured` (no secrets), `502
-  email_failed` (Cloudflare said no), `429` over the limit. Tests:
-  `src/__tests__/api/admin-reply-api.test.ts` (11 cases).
+- Failures are honest: `503 email_unconfigured` (no transport secrets), `502
+  email_failed` (the transport said no), `429` over the limit. Tests:
+  `src/__tests__/api/admin-reply-api.test.ts` (12 cases) +
+  `src/__tests__/lib/email-send.test.ts` (transport routing, 12 cases).
 - **Curl with the Bearer token:** `functions/api/_middleware.ts` rejects any
   mutation with no Origin/Referer (403) — add `-H 'Origin: https://toolzum.com'`.
   The browser UI sends Origin automatically; GET (the probe) is exempt.
 
 ## Caveats
 
-- **Workers Free confirmed (checked dashboard + API, Oct 1 2026):** the
-  account has **no Workers Paid subscription** (zone plan "Free Website",
-  `GET /accounts/…/subscriptions` → auth error, billing scope unavailable to
-  the wrangler OAuth token). Per Cloudflare's pricing (Jun 2026), Email
-  Sending on Workers Free can only send to **verified destination
-  addresses** — arbitrary-recipient sends require Workers Paid (3,000/mo
-  included, then $0.35/1,000). In practice this means: the **relay to the
-  owner's verified Gmail works** (the form's success gate), but the
-  **acknowledgment to an arbitrary sender address is likely rejected at the
-  API boundary** — it is deliberately best-effort, so the submission still
-  succeeds. **The on-page per-category thank-you in `src/app/contact/page.tsx`
-  is therefore the reliable acknowledgment**; the "Test end-to-end" step 1
-  below only fully passes when the test address is a verified destination.
-  Upgrade path if ack emails are wanted for all senders: Workers Paid.
+- **Workers Free → Resend migration (Oct 1 2026):** the account has **no
+  Workers Paid subscription** (dashboard check), and Cloudflare Email
+  Sending on Workers Free can only send to *verified destination*
+  addresses — arbitrary-recipient sends were being rejected. Resolved by
+  moving all sends to **Resend's free tier** (primary) with Cloudflare kept
+  as fallback; `RESEND_API_KEY` is the Pages secret that activates it.
+  Until that secret is set, behavior is unchanged (Cloudflare-only: owner
+  relay works, arbitrary-recipient sends fail best-effort — the on-page
+  per-category thank-you in `src/app/contact/page.tsx` remains the
+  guaranteed user-facing acknowledgment either way).
 - **Jan 2027:** Google is retiring consumer-Gmail "Send mail as" for
   third-party addresses. A custom-domain SMTP relay may fall under that. If
   it goes away, the fallback is already live: **Reply** in the admin
   dashboard (`/admin/reply` → `POST /api/admin/reply` → `sendEmail`), the
   Gmail-independent path documented above.
-- **Shared quota:** Gmail's relay and the app's API sends consume the same
-  Email Sending quota. Volume here is trivial (receipts, acks, alerts).
+- **Quotas:** app sends consume the Resend free tier (3,000/mo, 100/day —
+  current volume is a few hundred/month, ample headroom). Gmail's send-as
+  relay still shares the Cloudflare Email Sending quota; volume there is
+  trivial (owner replies only).
 - **Outbound From is always `contact@toolzum.com`.** `support@toolzum.com`
   is receive-only (a routing rule, not a verified sender). To send *from* it
-  later, it needs its own verified sender in Email Sending — deliberately not
-  done: one address, one promise, matches the privacy/terms/security pages.
+  later it needs its own identity in Resend — deliberately not done: one
+  address, one promise, matches the privacy/terms/security pages.
 
 ## Testing end-to-end
 
-1. Submit `/contact` with a real address → two messages arrive:
-   `[General Support] Your Name` (to you) and `We got your message` (to the
-   sender), both branded, both From the right display name.
+1. Submit `/contact` with an **outside** address (any real inbox) → two
+   messages arrive: `[General Support] Your Name` (to you) and
+   `We got your message` (to the sender), both branded, both From the right
+   display name. Works for arbitrary recipients once `RESEND_API_KEY` is set.
 2. Reply to the acknowledgment → lands in your Gmail (via `contact forwarding`).
 3. Once Gmail send-as is configured, reply from Gmail → sender sees
    `Toolzum <contact@toolzum.com>`, and `openssl s_client`/mail-tester show
@@ -177,8 +192,9 @@ pipeline, so correspondence never depends on Gmail's send-as:
 
 | Name | Where | Needed for |
 |---|---|---|
-| `CLOUDFLARE_API_TOKEN` | Pages env | all outbound sends (Email Sending: Edit) |
-| `CLOUDFLARE_ACCOUNT_ID` | Pages env | send endpoint account scoping |
+| `RESEND_API_KEY` | Pages env | **primary transport** — all outbound sends (Resend free tier) |
+| `CLOUDFLARE_API_TOKEN` | Pages env | fallback transport (Email Sending: Edit) |
+| `CLOUDFLARE_ACCOUNT_ID` | Pages env | fallback transport account scoping |
 | `CONTACT_TO` | Pages env (optional) | relay target; defaults to the owner's Gmail |
 | `ALERT_TOKEN` | Pages env + repo secret | alert workflow auth + `/api/admin/reply` bearer path (see `docs/ALERTS.md`) |
 | Gmail send-as token | Gmail settings only | owner replies as contact@ (step 1 above) |

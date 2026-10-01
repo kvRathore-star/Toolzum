@@ -1,5 +1,8 @@
 /**
- * Shared email sender via Cloudflare Email Sending REST API.
+ * Shared email sender. Primary transport: Resend REST API (free tier —
+ * Workers Free cannot send to arbitrary recipients via Cloudflare Email
+ * Sending, only to verified destinations). Fallback: Cloudflare Email
+ * Sending REST API (still works for the owner's verified relay address).
  * Used by contact form, password reset, and email verification.
  *
  * Every message ships branded HTML (dark Toolzum card, accent bar, wordmark,
@@ -7,8 +10,9 @@
  * callers that want a CTA button or detail rows pass `html: renderEmail(...)`.
  * The plain `text` twin is always sent as the fallback part.
  *
- * Requires CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID as Pages secrets.
- * Without them, calls silently succeed (fire-and-forget best-effort).
+ * Requires RESEND_API_KEY (Pages secret) — or the legacy pair
+ * CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID — as Pages secrets.
+ * With neither: returns false, callers surface honest failures.
  */
 
 import { brandFromText } from "./emailTemplate";
@@ -27,9 +31,51 @@ interface EmailOptions {
   fromName?: string;
 }
 
-export async function sendEmail(
-  env: { CLOUDFLARE_API_TOKEN?: string; CLOUDFLARE_ACCOUNT_ID?: string },
-  opts: EmailOptions
+export interface EmailEnv {
+  RESEND_API_KEY?: string;
+  CLOUDFLARE_API_TOKEN?: string;
+  CLOUDFLARE_ACCOUNT_ID?: string;
+}
+
+/** True when any transport is configured (Resend alone is enough). */
+export function emailConfigured(env: EmailEnv): boolean {
+  return !!(
+    env.RESEND_API_KEY ||
+    (env.CLOUDFLARE_API_TOKEN && env.CLOUDFLARE_ACCOUNT_ID)
+  );
+}
+
+async function sendViaResend(
+  apiKey: string,
+  opts: EmailOptions,
+  html: string
+): Promise<boolean> {
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: `${opts.fromName || "Toolzum"} <contact@toolzum.com>`,
+        to: [opts.to],
+        ...(opts.replyTo ? { reply_to: opts.replyTo } : {}),
+        subject: opts.subject,
+        text: opts.text,
+        html,
+      }),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+async function sendViaCloudflare(
+  env: EmailEnv,
+  opts: EmailOptions,
+  html: string
 ): Promise<boolean> {
   const { CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID } = env;
   if (!CLOUDFLARE_API_TOKEN || !CLOUDFLARE_ACCOUNT_ID) return false;
@@ -49,7 +95,7 @@ export async function sendEmail(
           ...(opts.replyTo ? { reply_to: { address: opts.replyTo } } : {}),
           subject: opts.subject,
           text: opts.text,
-          html: opts.html ?? brandFromText(opts.subject, opts.text),
+          html,
         }),
       }
     );
@@ -57,4 +103,21 @@ export async function sendEmail(
   } catch {
     return false;
   }
+}
+
+export async function sendEmail(
+  env: EmailEnv,
+  opts: EmailOptions
+): Promise<boolean> {
+  const html = opts.html ?? brandFromText(opts.subject, opts.text);
+
+  // Resend first (works for arbitrary recipients on the free tier). On
+  // failure fall back to Cloudflare — harmless: it either succeeds (owner's
+  // verified address) or rejects (arbitrary recipient) and we report false.
+  if (env.RESEND_API_KEY) {
+    const ok = await sendViaResend(env.RESEND_API_KEY, opts, html);
+    if (ok) return true;
+  }
+
+  return sendViaCloudflare(env, opts, html);
 }

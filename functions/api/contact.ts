@@ -1,22 +1,25 @@
 import { checkRateLimit, recordRateLimit } from "./rate-limit";
-import { sendEmail } from "../../src/lib/email";
+import { sendEmail, emailConfigured } from "../../src/lib/email";
 import { renderEmail } from "../../src/lib/emailTemplate";
 
 /**
  * Contact form backend (#contact-honesty). The form used to write to
  * localStorage and fake success — messages went nowhere. Now: validate,
- * rate-limit, honeypot-check, relay via Cloudflare Email Service, then send
- * the sender a branded acknowledgment (each category gets its own greeting).
+ * rate-limit, honeypot-check, relay via Resend (Cloudflare fallback), then
+ * send the sender a branded acknowledgment (each category gets its own
+ * greeting).
  *
  * Secrets (Pages env, owner-set per docs/ALERTS.md):
- * - CLOUDFLARE_API_TOKEN (Email Sending permission)
+ * - RESEND_API_KEY (primary transport — free tier, arbitrary recipients)
+ * - CLOUDFLARE_API_TOKEN (legacy/fallback: Email Sending permission)
  * - CONTACT_TO (optional, defaults to kirtivardhan1996@gmail.com)
- * Without a token: 503 + the client shows a direct-mail fallback.
+ * No transport configured: 503 + the client shows a direct-mail fallback.
  * Never a fake success.
  */
 
 interface Env {
   DB: D1Database;
+  RESEND_API_KEY?: string;
   CLOUDFLARE_API_TOKEN?: string;
   CLOUDFLARE_ACCOUNT_ID?: string;
   CONTACT_TO?: string;
@@ -78,7 +81,7 @@ const DEFAULT_COPY: CategoryCopy = {
 };
 
 export async function onRequestPost(context: { request: Request; env: Env }) {
-  const { DB, CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID, CONTACT_TO } = context.env;
+  const { DB, CONTACT_TO } = context.env;
   const ip = context.request.headers.get("cf-connecting-ip") || "unknown";
 
   const rl = await checkRateLimit(DB, "contact", ip, 5);
@@ -104,14 +107,14 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     return json({ error: "invalid_params — send { name, email, subject?, message }" }, 400);
   }
 
-  if (!CLOUDFLARE_API_TOKEN || !CLOUDFLARE_ACCOUNT_ID) {
+  if (!emailConfigured(context.env)) {
     return json({ error: "email_unconfigured", to: CONTACT_TO || "kirtivardhan1996@gmail.com" }, 503);
   }
 
   const to = CONTACT_TO || "kirtivardhan1996@gmail.com";
   const copy = CATEGORY_COPY[subject] ?? DEFAULT_COPY;
   const sent = await sendEmail(
-    { CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID },
+    context.env,
     {
       to,
       subject: `[${copy.label}] ${name}`,
@@ -141,7 +144,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
   // Branded receipt to the sender. Best-effort: the relay above is what gates
   // success, so a failed acknowledgment never fails the user's submission.
   await sendEmail(
-    { CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID },
+    context.env,
     {
       to: email,
       subject: copy.ackHeading,

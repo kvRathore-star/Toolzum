@@ -6,6 +6,13 @@ vi.mock('../../../src/lib/admin-auth', () => ({
 
 vi.mock('../../../src/lib/email', () => ({
   sendEmail: vi.fn(async () => true),
+  // Same rule as the real helper: Resend alone is enough; Cloudflare needs the pair.
+  emailConfigured: (env: {
+    RESEND_API_KEY?: string;
+    CLOUDFLARE_API_TOKEN?: string;
+    CLOUDFLARE_ACCOUNT_ID?: string;
+  }) =>
+    !!(env.RESEND_API_KEY || (env.CLOUDFLARE_API_TOKEN && env.CLOUDFLARE_ACCOUNT_ID)),
 }));
 
 import { onRequestGet as probe, onRequestPost as send } from '../../../functions/api/admin/reply';
@@ -174,6 +181,15 @@ describe('GET /api/admin/reply capability probe', () => {
     const { db } = mockDb();
     const res = await probe({ request: new Request('https://toolzum.com/api/admin/reply'), env: ENV(db) });
     expect(await res.json()).toMatchObject({ configured: false });
+  });
+
+  it('reports configured: true with only RESEND_API_KEY', async () => {
+    const { db } = mockDb();
+    const res = await probe({
+      request: new Request('https://toolzum.com/api/admin/reply'),
+      env: ENV(db, { RESEND_API_KEY: 're_x' }),
+    });
+    expect(await res.json()).toMatchObject({ configured: true });
   });
 
   it('is 401 without a session', async () => {
