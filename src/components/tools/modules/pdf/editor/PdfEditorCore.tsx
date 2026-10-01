@@ -13,8 +13,8 @@ import { useAiProvider } from '@/hooks/useAiProvider';
 import { useProStatus } from '@/hooks/useProStatus';
 import { useSession } from '@/lib/auth-client';
 import { Turnstile } from '@marsidev/react-turnstile';
-import type { PdfFont } from '@/lib/pdfFonts';
-import { fontCss, detectFontFamily, detectBold, loadFontBytes, ensurePreviewFont, classicFonts } from '@/lib/pdfFonts';
+import type { PdfFont, FontRunCls } from '@/lib/pdfFonts';
+import { fontCss, detectFontFamily, detectBold, loadFontBytes, loadIndicFontBytes, splitFontRuns, measureRuns, uncoveredGlyphChars, ensurePreviewFont, classicFonts } from '@/lib/pdfFonts';
 import Link from 'next/link';
 import { OnboardingTour, type TourStep } from '@/components/OnboardingTour';
 import { PdfEditorCtx, type PdfEditorApi } from './pdfEditorContext';
@@ -2277,9 +2277,13 @@ export default function PdfEditorCore() {
       const base14 = (bold: boolean, italic: boolean) =>
         italic ? (bold ? helvBoldItalic : helvItalic) : (bold ? helvBold : helv);
       // One entry per face. Null marks a settled offline miss (never
-      // retried mid-export — the fallback is deterministic).
-      const embeddedFaces = new Map<string, PDFFont | null>();
+      // retried mid-export — the fallback is deterministic). Entries carry
+      // hasRupee: the fontsource latin subsets omit U+20B9 (₹), so the
+      // draw path must know whether the face can show it or the run has
+      // to route to Noto Devanagari (which has it).
+      const embeddedFaces = new Map<string, { font: PDFFont; hasRupee: boolean } | null>();
       let fontkitRegistered = false;
+      let fontkitMod: Parameters<typeof pdfDocLib.registerFontkit>[0] | null = null;
       const registerFontkitOnce = async () => {
         if (fontkitRegistered) return;
         // @pdf-lib/fontkit ships types only as a UMD global (no ESM
@@ -2293,26 +2297,98 @@ export default function PdfEditorCore() {
         if (!fk || typeof (fk as { create?: unknown }).create !== 'function') {
           throw new Error('fontkit shape mismatch');
         }
+        fontkitMod = fk;
         pdfDocLib.registerFontkit(fk);
         fontkitRegistered = true;
       };
-      const libFontFor = async (font: PdfFont | undefined, bold: boolean, italic: boolean) => {
+      const libFontFor = async (
+        font: PdfFont | undefined,
+        bold: boolean,
+        italic: boolean,
+      ): Promise<{ font: PDFFont; hasRupee: boolean }> => {
         const fam = font || 'sans';
         const key = `${fam}|${bold ? 1 : 0}|${italic ? 1 : 0}`;
         const hit = embeddedFaces.get(key);
-        if (hit !== undefined) return hit ?? base14(bold, italic);
+        if (hit !== undefined) return hit ?? { font: base14(bold, italic), hasRupee: false };
         try {
           await registerFontkitOnce();
           const bytes = await loadFontBytes(fam, bold, italic);
           const face = await pdfDocLib.embedFont(bytes);
-          embeddedFaces.set(key, face);
-          return face;
+          // Probe ₹ once per face (the latin subsets omit it — verified
+          // against Arimo). A probe failure defaults to "no rupee", which
+          // routes the run to Noto — safe in either direction.
+          let hasRupee = false;
+          try {
+            hasRupee = !!(
+              fontkitMod as unknown as {
+                create: (_b: Uint8Array) => { hasGlyphForCodePoint: (_cp: number) => boolean };
+              }
+            )?.create(new Uint8Array(bytes)).hasGlyphForCodePoint(0x20b9);
+          } catch {
+            hasRupee = false;
+          }
+          const entry = { font: face, hasRupee };
+          embeddedFaces.set(key, entry);
+          return entry;
         } catch {
           noteOfflineFonts();
           embeddedFaces.set(key, null);
-          return base14(bold, italic);
+          return { font: base14(bold, italic), hasRupee: false };
         }
       };
+      // Glyph check — release gate for the Hindi/Tamil market (Oct 2026).
+      // The 10 picker faces are latin-subset only: Devanagari/Tamil would
+      // encode as blank .notdef boxes (or throw on base-14). Script runs
+      // route to Noto (OFL, same CDN+IDB cache as the picker faces);
+      // offline+uncached BLOCKS with the fix named — a silent blank export
+      // is the failure we don't ship. Other uncovered scripts (CJK, Arabic,
+      // Greek, …) only warn with the affected pages.
+      const indicFaces = new Map<string, PDFFont>();
+      const ensureIndic = async (script: 'devanagari' | 'tamil', bold: boolean): Promise<boolean> => {
+        const key = `${script}|${bold ? 700 : 400}`;
+        if (indicFaces.has(key)) return true;
+        try {
+          const bytes = await loadIndicFontBytes(script, bold);
+          indicFaces.set(key, await pdfDocLib.embedFont(bytes));
+          return true;
+        } catch {
+          return false;
+        }
+      };
+      const fontForRun = (
+        cls: FontRunCls,
+        bold: boolean,
+        base: { font: PDFFont; hasRupee: boolean },
+      ): PDFFont => {
+        if (cls === 'devanagari' || cls === 'tamil') return indicFaces.get(`${cls}|${bold ? 700 : 400}`)!;
+        if (cls === 'rupee' && !base.hasRupee) return indicFaces.get(`devanagari|${bold ? 700 : 400}`)!;
+        return base.font;
+      };
+      const gapPages = new Set<number>();
+      for (const [pnum, list] of Object.entries(clean)) {
+        for (const a of list) {
+          if (a.kind !== 'text' && a.kind !== 'flow') continue;
+          const runs = splitFontRuns(a.text);
+          const base = await libFontFor(a.font, a.bold, !!a.italic);
+          for (const r of runs) {
+            const needScript: 'devanagari' | 'tamil' | null =
+              r.cls === 'devanagari' || r.cls === 'tamil'
+                ? r.cls
+                : r.cls === 'rupee' && !base.hasRupee
+                  ? 'devanagari'
+                  : null;
+            if (needScript && !(await ensureIndic(needScript, !!a.bold))) {
+              toast.error('Hindi/Tamil text needs the Noto font once — connect to the internet, then export again.', { duration: 8000 });
+              setExporting(false);
+              return;
+            }
+          }
+          if (uncoveredGlyphChars(a.text).length > 0) gapPages.add(Number(pnum));
+        }
+      }
+      if (gapPages.size > 0) {
+        toast(`Some characters may not render in the export (fonts cover Latin; Hindi and Tamil included) — check page(s) ${[...gapPages].sort((x, y) => x - y).join(', ')}.`, { duration: 9000 });
+      }
       const libPages = pdfDocLib.getPages();
       if (!pdfDoc) throw new Error('PDF not loaded');
       // Rotated pages: annotations live in the *viewport* frame (what you
@@ -2467,18 +2543,22 @@ export default function PdfEditorCore() {
         for (const a of list) {
           if (a.kind === 'text') {
             const c = hexToRgb(a.color);
-            const font = await libFontFor(a.font, a.bold, !!a.italic);
-            const tw = font.widthOfTextAtSize(a.text, a.size);
+            const base = await libFontFor(a.font, a.bold, !!a.italic);
+            const runs = splitFontRuns(a.text);
+            const layout = measureRuns(runs, (t, cls) => fontForRun(cls, !!a.bold, base).widthOfTextAtSize(t, a.size));
+            const tw = layout.total;
             const tx = a.align === 'center' ? a.x - tw / 2 : a.align === 'right' ? a.x - tw : a.x;
             const ty = pageH - a.y;
-            lp.drawText(a.text, {
-              x: tx,
-              y: ty,
-              size: a.size,
-              font,
-              color: rgb(c.r, c.g, c.b),
-              ...(pageAngle ? { rotate: degrees(pageAngle) } : {}),
-            });
+            for (const rb of layout.boxes) {
+              lp.drawText(rb.text, {
+                x: tx + rb.x,
+                y: ty,
+                size: a.size,
+                font: fontForRun(rb.cls, !!a.bold, base),
+                color: rgb(c.r, c.g, c.b),
+                ...(pageAngle ? { rotate: degrees(pageAngle) } : {}),
+              });
+            }
             const decoPdf = (dy: number) => {
               lp.drawLine({ start: { x: tx, y: dy }, end: { x: tx + tw, y: dy }, thickness: Math.max(0.75, a.size / 14), color: rgb(c.r, c.g, c.b) });
             };
@@ -2486,23 +2566,29 @@ export default function PdfEditorCore() {
             if (a.strike) decoPdf(ty + a.size * 0.3);
           } else if (a.kind === 'flow') {
             // Same wrapLines as the preview (export measures approximately;
-            // maxWidth scales any over-wide line down so nothing overflows).
+            // a per-line fit pass replaces maxWidth now that each run can
+            // carry its own font — maxWidth would rescale a single run only).
             const c = hexToRgb(a.color);
-            const font = await libFontFor(a.font, a.bold, !!a.italic);
+            const base = await libFontFor(a.font, a.bold, !!a.italic);
             const approx = (s: string) => s.length * a.size * 0.55;
             const lines = wrapLines(a.text, a.w, approx);
             lines.forEach((line, li) => {
-              const lw = font.widthOfTextAtSize(line, a.size);
+              const layout = measureRuns(splitFontRuns(line), (t, cls) =>
+                fontForRun(cls, !!a.bold, base).widthOfTextAtSize(t, a.size),
+              );
+              const scale = layout.total > a.w && layout.total > 0 ? a.w / layout.total : 1;
+              const lw = layout.total * scale;
               const x = a.align === 'center' ? a.x + (a.w - lw) / 2 : a.align === 'right' ? a.x + a.w - lw : a.x;
               const ly = pageH - (a.y + li * a.size * 1.25);
-              lp.drawText(line, {
-                x,
-                y: ly,
-                size: a.size,
-                font,
-                color: rgb(c.r, c.g, c.b),
-                maxWidth: a.w,
-              });
+              for (const rb of layout.boxes) {
+                lp.drawText(rb.text, {
+                  x: x + rb.x * scale,
+                  y: ly,
+                  size: a.size * scale,
+                  font: fontForRun(rb.cls, !!a.bold, base),
+                  color: rgb(c.r, c.g, c.b),
+                });
+              }
               const decoFlow = (dy: number) => {
                 lp.drawLine({ start: { x, y: dy }, end: { x: x + lw, y: dy }, thickness: Math.max(0.75, a.size / 14), color: rgb(c.r, c.g, c.b) });
               };

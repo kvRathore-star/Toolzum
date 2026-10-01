@@ -849,4 +849,49 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
       expect(editor).toMatch(/export function isEmbeddableImageDataUrl/);
     });
   });
+
+  describe('Hindi/Tamil glyph gate (release gate for the market, Oct 2026)', () => {
+    /**
+     * The 10 picker faces are latin-subset only: Devanagari/Tamil used to
+     * encode as blank .notdef boxes (or throw on base-14). Runs route to
+     * Noto; offline+uncached blocks with the fix named; other uncovered
+     * scripts warn with pages. Round-trip proof lives in
+     * indicExport.test.ts (Hindi, Tamil, mixed — pdf-lib → pdf.js).
+     */
+    it('impl: Indic runs load + embed Noto and route through fontForRun', () => {
+      expect(editor).toMatch(/loadIndicFontBytes\(script, bold\)/);
+      expect(editor).toMatch(/indicFaces\.set\(key, await pdfDocLib\.embedFont\(bytes\)\)/);
+      expect(editor).toMatch(/fontForRun\(rb\.cls, !!a\.bold, base\)/);
+    });
+    it('impl: both draw sites split runs (text annos + flow lines)', () => {
+      expect((editor.match(/splitFontRuns\(a\.text\)/g) || []).length).toBeGreaterThanOrEqual(2);
+      expect((editor.match(/splitFontRuns\(line\)/g) || []).length).toBeGreaterThanOrEqual(1);
+      expect(editor).toMatch(/measureRuns\(/);
+      // The old whole-string draws must stay dead (they blanked one script).
+      expect(editor).not.toMatch(/lp\.drawText\(a\.text,/);
+    });
+    it('claim: offline+uncached Indic BLOCKS with the fix named — never a blank export', () => {
+      expect(editor).toMatch(/Hindi\/Tamil text needs the Noto font once — connect to the internet, then export again/);
+    });
+    it('claim: other uncovered scripts warn with the pages to re-check', () => {
+      expect(editor).toMatch(/uncoveredGlyphChars\(a\.text\)/);
+      expect(editor).toMatch(/check page\(s\)/);
+    });
+    it('impl: ₹ probes each face and routes to Noto when absent (Arimo lacks it)', () => {
+      expect(editor).toMatch(/hasGlyphForCodePoint\(0x20b9\)/);
+      expect(editor).toMatch(/cls === 'rupee' && !base\.hasRupee/);
+    });
+    it('claim: FAQ states the routes, the offline pause, and the page warning', () => {
+      expect(registry).toMatch(/fetched once and cached offline like the ten picker families/);
+      expect(registry).toMatch(/split per script so neither part goes blank/);
+      expect(registry).toMatch(/pauses with a message instead of shipping blank boxes/);
+      expect(registry).toMatch(/names the pages to check/);
+    });
+    it('impl: round-trip proof exists (Hindi + Tamil + mixed run-split fixtures)', () => {
+      const t = read('src/__tests__/lib/indicExport.test.ts');
+      expect(t).toMatch(/draws a Hindi annotation and extraction returns every character/);
+      expect(t).toMatch(/draws a Tamil annotation and extraction returns every character/);
+      expect(t).toMatch(/mixed Latin\+Hindi run-split exports both parts/);
+    });
+  });
 });

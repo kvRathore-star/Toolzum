@@ -25,6 +25,7 @@ a claim with no backing is a bug. Status meanings:
 | 12 | Site-wide "100% local" (e.g. `VectorPenCanvas.tsx:239`, `BulkImageConverter.tsx:39`) | various | pending site-wide sweep | PENDING |
 | 13 | Replace toast: "original font substituted, size and bold kept; verify placement" | `PdfEditorCore.tsx` findReplace | Behavior: `matchBoxes` geometry + composition tests ("Hello world"→"Hello there") in `pdfEditorLogic.test.ts`; impl pins in `pdfEditorClaims.test.ts` "find/replace sub-rect fix" (incl. NOT-pins: whole-item whiteout, "Helvetica retypeset") | BACKED (geometry) + SOURCE-REGRESSION (wiring) |
 | 14 | PII sweep covers only items that can hold the needle (no short/whitespace avalanche) | `piiItemHit` guard in findSensitive | `pdfEditorLogic.test.ts` "piiItemHit" (4 tests) + claims pin `piiItemHit(it.str, lowered)` | BACKED |
+| 15 | FAQ: "Hindi and Tamil annotations export with Noto Sans, fetched once and cached offline… split per script… pauses with a message instead of shipping blank boxes… names the pages to check" | `tools-chunk-1.ts` (fonts FAQ sibling) | Round-trip: `indicExport.test.ts` (Hindi, Tamil, mixed run-split — pdf-lib → pdf.js extraction, fixture fonts); routing/₹/offline-block/warn pins in `pdfEditorClaims.test.ts` "Hindi/Tamil glyph gate" | BACKED (round-trip + wiring) |
 
 ## Required behavior tests (from the corrected order)
 
@@ -39,7 +40,12 @@ a claim with no backing is a bug. Status meanings:
       composition test in `pdfEditorLogic.test.ts`; wiring pinned by
       `pdfEditorClaims.test.ts` "find/replace sub-rect fix". Full export
       render still = browser pass.*
-- [ ] Hindi (Devanagari) and Tamil annotation export — no blank boxes.
+- [x] Hindi (Devanagari) and Tamil annotation export — no blank boxes.
+      *Round-trip proven (Oct 2026): `indicExport.test.ts` draws both +
+      a mixed Latin+Hindi run-split through pdf-lib subset embed and
+      asserts pdf.js extraction returns every character (fixture fonts,
+      char-multiset compare — matra reordering safe). Runtime wiring
+      pinned by "Hindi/Tamil glyph gate" claims block.*
 - [ ] Export with zero annotations after a page op succeeds.
 - [ ] "Original bytes never touched" — export leaves `fileBytes` unchanged.
 

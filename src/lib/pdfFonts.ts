@@ -119,6 +119,10 @@ function idb(): Promise<IDBDatabase> {
  */
 export async function loadFontBytes(fam: PdfFont, bold: boolean, italic: boolean): Promise<ArrayBuffer> {
   const key = `font-${VER}-${fam}-${bold ? '700' : '400'}-${italic ? 'italic' : 'normal'}`;
+  return cachedFontFetch(faceUrl(fam, bold, italic), key);
+}
+
+async function cachedFontFetch(url: string, key: string): Promise<ArrayBuffer> {
   try {
     const db = await idb();
     const hit = await new Promise<ArrayBuffer | null>((resolve, reject) => {
@@ -131,7 +135,7 @@ export async function loadFontBytes(fam: PdfFont, bold: boolean, italic: boolean
       db.close();
       return hit;
     }
-    const res = await fetch(faceUrl(fam, bold, italic));
+    const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const buf = await res.arrayBuffer();
     if (buf.byteLength < 1000) throw new Error('truncated font');
@@ -146,6 +150,41 @@ export async function loadFontBytes(fam: PdfFont, bold: boolean, italic: boolean
   } catch (e) {
     throw e instanceof Error ? e : new Error('font load failed');
   }
+}
+
+/**
+ * Indic scripts (Hindi/Marathi/Nepali = Devanagari, Tamil) — the release
+ * gate for the Indian market. The 10 picker families ship LATIN SUBSETS
+ * ONLY: Devanagari/Tamil text encodes as .notdef (blank boxes) or throws
+ * on base-14. These two Noto faces (OFL, fontsource CDN + the same IDB
+ * cache) are fetched on demand at export — never shown in the picker;
+ * mixed text is run-split against them (the Noto subset files carry no
+ * Latin glyphs, so a whole-string swap would blank the English).
+ */
+export type IndicScript = 'devanagari' | 'tamil';
+
+const INDIC_SLUG: Record<IndicScript, string> = {
+  devanagari: 'noto-sans-devanagari',
+  tamil: 'noto-sans-tamil',
+};
+
+/** First supported Indic script present in the text (code-point scan). */
+export function detectIndicScript(text: string): IndicScript | null {
+  for (const ch of text) {
+    const cp = ch.codePointAt(0) ?? 0;
+    if ((cp >= 0x0900 && cp <= 0x097f) || (cp >= 0xa8e0 && cp <= 0xa8ff)) return 'devanagari';
+    if (cp >= 0x0b80 && cp <= 0x0bff) return 'tamil';
+  }
+  return null;
+}
+
+export function indicFaceUrl(script: IndicScript, bold: boolean): string {
+  return `${CDN}/${INDIC_SLUG[script]}@latest/${script}-${bold ? 700 : 400}-normal.ttf`;
+}
+
+/** Same IDB-cached fetch as the picker families. Throws offline-uncached. */
+export async function loadIndicFontBytes(script: IndicScript, bold: boolean): Promise<ArrayBuffer> {
+  return cachedFontFetch(indicFaceUrl(script, bold), `font-${VER}-indic-${script}-${bold ? '700' : '400'}`);
 }
 
 /**
@@ -168,4 +207,97 @@ export async function ensurePreviewFont(fam: PdfFont, bold: boolean, italic: boo
   } catch {
     /* preview fallback — export path handles its own fallback */
   }
+}
+
+/** Font class for one run of text (see splitFontRuns). */
+export type FontRunCls = 'default' | 'devanagari' | 'tamil' | 'rupee';
+
+/**
+ * Split text into maximal same-font runs for export drawing. The Noto
+ * subset files carry NO Latin, and the picker faces carry NO Indic and
+ * (typically) no ₹ (U+20B9) — drawing a mixed string with any single
+ * font blanks the other part. Pure — tested.
+ */
+export function splitFontRuns(text: string): { text: string; cls: FontRunCls }[] {
+  const cls = (ch: string): FontRunCls => {
+    const cp = ch.codePointAt(0) ?? 0;
+    if ((cp >= 0x0900 && cp <= 0x097f) || (cp >= 0xa8e0 && cp <= 0xa8ff)) return 'devanagari';
+    if (cp >= 0x0b80 && cp <= 0x0bff) return 'tamil';
+    if (cp === 0x20b9) return 'rupee';
+    return 'default';
+  };
+  const runs: { text: string; cls: FontRunCls }[] = [];
+  for (const ch of text) {
+    const c = cls(ch);
+    const last = runs[runs.length - 1];
+    if (last && last.cls === c) last.text += ch;
+    else runs.push({ text: ch, cls: c });
+  }
+  return runs;
+}
+
+/**
+ * Sequential advance across runs with a per-class width measure — the
+ * layout the export draw loop uses (alignment off `total`, underline
+ * spans `total`). Pure — tested with a fake measure.
+ */
+export function measureRuns(
+  runs: readonly { text: string; cls: FontRunCls }[],
+  widthOf: (_text: string, _cls: FontRunCls) => number,
+): { boxes: { text: string; cls: FontRunCls; x: number; w: number }[]; total: number } {
+  let x = 0;
+  const boxes = runs.map((r) => {
+    const w = widthOf(r.text, r.cls);
+    const box = { text: r.text, cls: r.cls, x, w };
+    x += w;
+    return box;
+  });
+  return { boxes, total: x };
+}
+
+/**
+ * Chars the fetched latin-subset faces cannot show (scripts outside the
+ * fontsource `latin` unicode range). Devanagari/Tamil are excluded —
+ * they route to Noto — and so is ₹, which routes as its own run when the
+ * chosen face lacks it (Arimo's latin subset does). Callers WARN with
+ * the affected pages; these chars would otherwise encode as blank .notdef
+ * boxes. Pure — tested.
+ */
+const GAP_RANGES: ReadonlyArray<readonly [number, number]> = [
+  [0x0370, 0x03ff], // Greek
+  [0x0400, 0x052f], // Cyrillic
+  [0x0590, 0x05ff], // Hebrew
+  [0x0600, 0x06ff], // Arabic
+  [0x0750, 0x077f], // Arabic Supplement
+  [0x0980, 0x09ff], // Bengali (no font routed)
+  [0x0a00, 0x0a7f], // Gurmukhi
+  [0x0a80, 0x0aff], // Gujarati
+  [0x0b00, 0x0b7f], // Oriya
+  [0x0c00, 0x0c7f], // Telugu
+  [0x0c80, 0x0cff], // Kannada
+  [0x0d00, 0x0d7f], // Malayalam
+  [0x0d80, 0x0dff], // Sinhala
+  [0x0e00, 0x0e7f], // Thai
+  [0x0e80, 0x0eff], // Lao
+  [0x1000, 0x109f], // Myanmar
+  [0x1100, 0x11ff], // Hangul jamo
+  [0x2e80, 0x9fff], // CJK radicals, kana, Han
+  [0xac00, 0xd7af], // Hangul syllables
+  [0xf900, 0xfaff], // CJK compatibility
+  [0xff00, 0xffef], // Fullwidth forms
+  [0xfe00, 0xfe0f], // Variation selectors
+  [0x1f000, 0x1fbff], // Emoji planes
+  [0x2600, 0x27bf], // Dingbats
+  [0x2b00, 0x2bff], // Miscellaneous symbols-and-arrows
+];
+
+export function uncoveredGlyphChars(text: string): string[] {
+  const seen = new Set<string>();
+  for (const ch of text) {
+    const cp = ch.codePointAt(0) ?? 0;
+    if (cp === 0x20b9) continue; // routed, never a gap
+    if (GAP_RANGES.some(([lo, hi]) => cp >= lo && cp <= hi)) seen.add(ch);
+    if (seen.size >= 8) break;
+  }
+  return [...seen];
 }
