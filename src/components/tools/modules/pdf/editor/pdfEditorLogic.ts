@@ -548,6 +548,20 @@ export function bytesEqual(a: Uint8Array, b: Uint8Array): boolean {
   return true;
 }
 
+/**
+ * Formats pdf-lib embeds directly (embedPng/embedJpg). Everything else —
+ * WebP/GIF/SVG/BMP, HEIC where decoded — must be normalized to PNG through
+ * a canvas at INSERT time, or the whole export dies mid-loop on a format
+ * error the user never sees. Pure — tested.
+ */
+export function isEmbeddableImageDataUrl(dataUrl: string): boolean {
+  return (
+    dataUrl.startsWith('data:image/png') ||
+    dataUrl.startsWith('data:image/jpeg') ||
+    dataUrl.startsWith('data:image/jpg')
+  );
+}
+
 /** Map OCR words (image px) to page points. Pure — tested. */
 export function mapOcrWords(
   words: { text: string; confidence: number; bbox: { x0: number; y0: number; x1: number; y1: number } }[],

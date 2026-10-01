@@ -823,4 +823,30 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
       expect(editor).toMatch(/export function bytesEqual/);
     });
   });
+
+  describe('image format normalization (Phase 1, Oct 2026)', () => {
+    /**
+     * WebP/GIF/SVG/BMP picks stored raw used to hit embedPng at export and
+     * kill the whole download with a generic toast. Normalization happens at
+     * INSERT so preview and export agree, and a decode failure names the fix.
+     */
+    it('impl: non-embeddable picks are canvas-normalized before storage', () => {
+      expect(editor).toMatch(/isEmbeddableImageDataUrl\(raw\)/);
+      expect(editor).toMatch(/await normalizeToPng\(raw\)/);
+      // Raw-store of whatever FileReader produced must stay dead.
+      expect(editor).not.toMatch(/pendingImageRef\.current = String\(reader\.result\)/);
+    });
+    it('claim: decode failure names the fix instead of dying at export', () => {
+      expect(editor).toMatch(/convert it to PNG or JPG first/);
+    });
+    it('claim: picker accepts the formats we normalize (not just png/jpeg)', () => {
+      expect(editor).toMatch(/accept="image\/png,image\/jpeg,image\/webp/);
+    });
+    it('claim: conversion is disclosed, never silent', () => {
+      expect(editor).toMatch(/Image converted to PNG/);
+    });
+    it('impl: format helper is exported for behavior tests', () => {
+      expect(editor).toMatch(/export function isEmbeddableImageDataUrl/);
+    });
+  });
 });

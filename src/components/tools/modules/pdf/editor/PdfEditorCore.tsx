@@ -39,6 +39,7 @@ import {
   inlineEditBox,
   isResizableAnno,
   bytesEqual,
+  isEmbeddableImageDataUrl,
   mapOcrWords,
   matchBoxes,
   moveAnnosPage,
@@ -2184,13 +2185,47 @@ export default function PdfEditorCore() {
     toast.success('Emoji ready — click on the page to stamp it.');
   };
 
+  // Non-PNG/JPEG picks (WebP/GIF/SVG/BMP, HEIC where the OS decodes it)
+  // render in <img> but pdf-lib only embeds PNG/JPEG — the old path stored
+  // them raw and the ENTIRE export failed on a generic toast. Normalize at
+  // insert: decode → canvas → PNG. A decode failure gets an honest per-file
+  // error naming the fix, not a mid-export crash.
+  const normalizeToPng = async (dataUrl: string): Promise<string | null> => {
+    try {
+      const img = new Image();
+      img.src = dataUrl;
+      await img.decode();
+      const w = img.naturalWidth || img.width;
+      const h = img.naturalHeight || img.height;
+      if (!w || !h) return null;
+      const c = document.createElement('canvas');
+      c.width = w;
+      c.height = h;
+      c.getContext('2d')!.drawImage(img, 0, 0);
+      return c.toDataURL('image/png');
+    } catch {
+      return null;
+    }
+  };
+
   const onPickImage = (f: File | null) => {
     if (!f) return;
     if (!f.type.startsWith('image/')) { toast.error('Pick an image file (PNG or JPG).'); return; }
     const reader = new FileReader();
-    reader.onload = () => {
-      pendingImageRef.current = String(reader.result);
-      toast.success('Image ready — click on the page to stamp it.');
+    reader.onload = async () => {
+      const raw = String(reader.result);
+      if (isEmbeddableImageDataUrl(raw)) {
+        pendingImageRef.current = raw;
+        toast.success('Image ready — click on the page to stamp it.');
+        return;
+      }
+      const png = await normalizeToPng(raw);
+      if (!png) {
+        toast.error('This image could not be decoded in your browser — convert it to PNG or JPG first.');
+        return;
+      }
+      pendingImageRef.current = png;
+      toast.success('Image converted to PNG — click on the page to stamp it.');
     };
     reader.readAsDataURL(f);
   };
@@ -3137,7 +3172,7 @@ export default function PdfEditorCore() {
         </div>
       )}
 
-      <input ref={imagePickRef} type="file" accept="image/png,image/jpeg" className="hidden" aria-label="Pick stamp image" onChange={(e) => onPickImage(e.target.files?.[0] || null)} />
+      <input ref={imagePickRef} type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,image/bmp,image/heic,image/heif" className="hidden" aria-label="Pick stamp image" onChange={(e) => onPickImage(e.target.files?.[0] || null)} />
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
         <LeftPanel />
 

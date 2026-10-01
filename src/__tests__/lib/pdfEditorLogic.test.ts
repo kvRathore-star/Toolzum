@@ -22,6 +22,7 @@ import {
   matchBoxes,
   piiItemHit,
   bytesEqual,
+  isEmbeddableImageDataUrl,
   MAX_VERSIONS,
   MAX_STRUCTURAL_UNDO,
   type Anno,
@@ -605,5 +606,24 @@ describe('bytesEqual (export gate "did the file change?")', () => {
     const original = new Uint8Array([137, 80, 78, 71, 13, 10]);
     const afterRotate = new Uint8Array([137, 80, 78, 71, 13, 11]);
     expect(bytesEqual(original, afterRotate)).toBe(false);
+  });
+});
+
+// Image normalization (Phase 1: WebP/GIF/SVG/HEIC used to reach embedPng
+// and killed the whole export with a generic toast).
+describe('isEmbeddableImageDataUrl (formats pdf-lib accepts raw)', () => {
+  it('PNG and JPEG pass through untouched', () => {
+    expect(isEmbeddableImageDataUrl('data:image/png;base64,iVBOR')).toBe(true);
+    expect(isEmbeddableImageDataUrl('data:image/jpeg;base64,/9j')).toBe(true);
+    expect(isEmbeddableImageDataUrl('data:image/jpg;base64,/9j')).toBe(true);
+  });
+
+  it('everything else needs canvas normalization', () => {
+    expect(isEmbeddableImageDataUrl('data:image/webp;base64,UklGR')).toBe(false);
+    expect(isEmbeddableImageDataUrl('data:image/gif;base64,R0lGOD')).toBe(false);
+    expect(isEmbeddableImageDataUrl('data:image/svg+xml;base64,PHN2')).toBe(false);
+    expect(isEmbeddableImageDataUrl('data:image/bmp;base64,Qk0')).toBe(false);
+    expect(isEmbeddableImageDataUrl('data:image/heic;base64,AAAA')).toBe(false);
+    expect(isEmbeddableImageDataUrl('')).toBe(false);
   });
 });
