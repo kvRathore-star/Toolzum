@@ -21,6 +21,7 @@ import {
   isResizableAnno,
   matchBoxes,
   piiItemHit,
+  bytesEqual,
   MAX_VERSIONS,
   MAX_STRUCTURAL_UNDO,
   type Anno,
@@ -574,5 +575,35 @@ describe('piiItemHit (sweep match guard)', () => {
   it('sub-4-char needles are ignored (AI noise like “a”, “12”)', () => {
     expect(piiItemHit('The quick brown fox', ['a'])).toBe(false);
     expect(piiItemHit('Invoice 12345', ['12'])).toBe(false);
+  });
+});
+
+// Export-gate equality (Phase 1: page-only edits must export with 0 annos).
+describe('bytesEqual (export gate "did the file change?")', () => {
+  it('identical content from different objects → true', () => {
+    expect(bytesEqual(new Uint8Array([1, 2, 3]), new Uint8Array([1, 2, 3]))).toBe(true);
+  });
+
+  it('same reference → true', () => {
+    const a = new Uint8Array([9]);
+    expect(bytesEqual(a, a)).toBe(true);
+  });
+
+  it('different length → false (no OOB read)', () => {
+    expect(bytesEqual(new Uint8Array([1, 2]), new Uint8Array([1, 2, 3]))).toBe(false);
+    expect(bytesEqual(new Uint8Array([]), new Uint8Array([1]))).toBe(false);
+  });
+
+  it('differs only at the LAST byte → false (loop must reach the end)', () => {
+    const a = new Uint8Array(1000).fill(7);
+    const b = new Uint8Array(1000).fill(7);
+    b[999] = 8;
+    expect(bytesEqual(a, b)).toBe(false);
+  });
+
+  it('page-op output vs original → false (gate opens)', () => {
+    const original = new Uint8Array([137, 80, 78, 71, 13, 10]);
+    const afterRotate = new Uint8Array([137, 80, 78, 71, 13, 11]);
+    expect(bytesEqual(original, afterRotate)).toBe(false);
   });
 });

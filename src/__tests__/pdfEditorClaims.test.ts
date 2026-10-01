@@ -801,4 +801,26 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
       expect(editor).toMatch(/Find & replace \(Ctrl\+F\)/);
     });
   });
+
+  describe('zero-annotation export gate (page-only edits, Oct 2026)', () => {
+    /**
+     * The old gate blocked EVERY 0-annotation export — so rotate/delete/
+     * duplicate/reorder (which rewrite fileBytes and touch no annos) could
+     * never be downloaded. The gate must compare against the loaded bytes.
+     */
+    it('impl: 0-annotation export opens only when bytes actually changed', () => {
+      expect(editor).toMatch(/total === 0 && !bytesEdited/);
+      expect(editor).toMatch(/bytesEqual\(fileBytes, originalBytesRef\.current\)/);
+    });
+    it('impl: original bytes are captured at load', () => {
+      expect(editor).toMatch(/originalBytesRef\.current = bytes;/);
+    });
+    it('claim: block toast covers both, success toast names the page-only path', () => {
+      expect(editor).toMatch(/add some annotations or change pages first/);
+      expect(editor).toMatch(/Exported — page changes applied \(no annotations\)/);
+    });
+    it('impl: bytesEqual is exported for behavior tests', () => {
+      expect(editor).toMatch(/export function bytesEqual/);
+    });
+  });
 });

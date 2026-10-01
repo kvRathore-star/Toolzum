@@ -534,6 +534,20 @@ export function piiItemHit(itemStr: string, loweredNeedles: string[]): boolean {
   return loweredNeedles.some((s) => s.length >= 4 && (t.includes(s) || s.includes(t)));
 }
 
+/**
+ * Byte-for-byte equality — the export gate's "did anything actually change?"
+ * check. Page-only edits rewrite fileBytes with zero annotations; comparing
+ * against the initially loaded bytes lets those export while still blocking
+ * a no-op download (including undo-back-to-original). Early-exit on first
+ * difference. Pure — tested.
+ */
+export function bytesEqual(a: Uint8Array, b: Uint8Array): boolean {
+  if (a === b) return true;
+  if (a.length !== b.length) return false;
+  for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false;
+  return true;
+}
+
 /** Map OCR words (image px) to page points. Pure — tested. */
 export function mapOcrWords(
   words: { text: string; confidence: number; bbox: { x0: number; y0: number; x1: number; y1: number } }[],

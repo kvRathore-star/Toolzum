@@ -38,6 +38,7 @@ import {
   hitTestText,
   inlineEditBox,
   isResizableAnno,
+  bytesEqual,
   mapOcrWords,
   matchBoxes,
   moveAnnosPage,
@@ -667,6 +668,11 @@ export default function PdfEditorCore() {
   const viewportRef = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const imagePickRef = useRef<HTMLInputElement>(null);
   const pendingImageRef = useRef<string | null>(null);
+  // Initially-loaded bytes, kept for the export gate: page-only edits
+  // rewrite fileBytes with zero annotations, and content-comparing against
+  // this reference tells a real edit from a no-op download. Never mutated
+  // in place — every consumer slices before handing bytes to pdf.js/pdf-lib.
+  const originalBytesRef = useRef<Uint8Array | null>(null);
 
   const openBytes = async (bytes: Uint8Array, name: string) => {
     const toastId = toast.loading('Opening PDF…');
@@ -688,6 +694,7 @@ export default function PdfEditorCore() {
       }
       setFile(new File([bytes as unknown as BlobPart], name, { type: 'application/pdf' }));
       setFileBytes(bytes);
+      originalBytesRef.current = bytes;
       setPdfDoc(doc);
       setPageCount(doc.numPages);
       setPage(1);
@@ -2198,7 +2205,16 @@ export default function PdfEditorCore() {
     const clean: Record<number, Anno[]> = {};
     for (const [p, list] of Object.entries(annos)) clean[Number(p)] = pruneEmpty(list);
     const total = Object.values(clean).reduce((n, l) => n + l.length, 0);
-    if (total === 0) { toast.error('Nothing to export yet — add some annotations first.'); return; }
+    // Page-only edits (rotate/delete/duplicate/reorder) rewrite fileBytes
+    // with zero annotations — those are still a real export. Content-compare
+    // against the initially loaded bytes so a no-op download (and undo back
+    // to the original) keeps blocking.
+    const bytesEdited =
+      !!fileBytes && !!originalBytesRef.current && !bytesEqual(fileBytes, originalBytesRef.current);
+    if (total === 0 && !bytesEdited) {
+      toast.error('Nothing to export yet — add some annotations or change pages first.');
+      return;
+    }
     setExporting(true);
     try {
       let pdfDocLib;
@@ -2609,6 +2625,8 @@ export default function PdfEditorCore() {
         const extractNote = redactOutcome.removedTexts.length > 0 ? ` Extract re-check: removed strings not recoverable on ${redactOutcome.pagesTouched} page(s).` : '';
         const modeNote = maxRasterPages.length > 0 ? ` Rasterized pages: black regions verified dark on ${maxRasterPages.length} page(s).` : '';
         toast.success(`Exported — redaction checks passed.${extractNote}${modeNote}${extra}`, { duration: 8000 });
+      } else if (total === 0) {
+        toast.success('Exported — page changes applied (no annotations).');
       } else {
         toast.success(`Exported with ${total} annotation${total === 1 ? '' : 's'} — additions only, original content untouched.`);
       }
