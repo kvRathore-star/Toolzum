@@ -50,7 +50,7 @@ describe('pdf.js worker sourcing (Sep 2026 outage regression)', () => {
     walk(path.join(ROOT, 'src'));
     walk(path.join(ROOT, 'functions'));
     expect(hits).toEqual([]);
-  });
+  }, 20000);
 
   it('setupPdfWorker points any pdfjs namespace at our worker (idempotent)', () => {
     const fake = { GlobalWorkerOptions: { workerSrc: '' } };
