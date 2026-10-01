@@ -89,13 +89,17 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
   });
 
   describe('find & replace commit seam (P1 — toast lied, checkpoint skipped)', () => {
-    it('impl: total is computed outside the setAnnos updater (React has not run the updater yet)', () => {
-      expect(editor).toMatch(
-        /const total = pages\.reduce\(\(sum, pg\) => sum \+ \(hitsByPage\[pg\]\?\.length \|\| 0\), 0\)/,
-      );
-      expect(editor, 'counting inside the updater reads 0 — React runs it later').not.toMatch(
-        /total \+= hits\.length/,
-      );
+    it('impl: total is finalized outside the setAnnos updater (React has not run the updater yet)', () => {
+      // Form moved from `pages.reduce` to a pre-pass accumulation loop
+      // (Oct 2026 sub-rect fix) — the invariant is ORDER, not expression:
+      // counting must finish before commitAnnos is even called.
+      const fn = editor.match(/const findReplace = async \(\) => \{[\s\S]*?\n  \};/)?.[0];
+      expect(fn).toBeTruthy();
+      const countAt = fn!.indexOf('total += hits.length');
+      const commitAt = fn!.indexOf('commitAnnos(');
+      expect(countAt, 'counting expression present').toBeGreaterThan(-1);
+      expect(commitAt).toBeGreaterThan(-1);
+      expect(countAt, 'counting inside the updater reads 0 — React runs it later').toBeLessThan(commitAt);
     });
     it('impl: no-match replace snapshots no junk undo entry', () => {
       expect(editor).toMatch(/if \(total > 0\) \{\s*\n\s*commitAnnos\(/);
@@ -749,6 +753,52 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
       expect(editor).toMatch(/black regions verified dark on/);
       // The old overclaim must not come back.
       expect(editor).not.toMatch(/VERIFIED clean/);
+    });
+  });
+
+  describe('find/replace sub-rect fix (release-blocking data loss, Oct 2026)', () => {
+    /**
+     * The pre-fix path whited out the ENTIRE text item and retypeset only
+     * the replacement: "Hello world" + replace "world" with "there" lost
+     * "Hello " forever, once per item regardless of how many matches it
+     * held. Geometry behavior lives in pdfEditorLogic.test.ts
+     * (matchBoxes); these greps keep the export path from drifting back.
+     */
+    const findReplaceFn = editor.match(
+      /const findReplace = async \(\) => \{[\s\S]*?\n  \};/,
+    )?.[0];
+
+    it('regex finds the real findReplace body (guards itself)', () => {
+      expect(findReplaceFn).toBeTruthy();
+    });
+    it('impl: splits each match with matchBoxes — prefix/suffix survive', () => {
+      expect(findReplaceFn).toMatch(/matchBoxes\(it, needle, measure\)/);
+    });
+    it('impl: whiteout covers only the match span (old whole-item pattern dead)', () => {
+      expect(findReplaceFn).not.toMatch(/h\.w \+ 4/);
+      expect(findReplaceFn).not.toMatch(/x: h\.x - 2/);
+      expect(findReplaceFn).toMatch(/w: box\.w \+ 2/);
+    });
+    it('impl: counts matches, not items — every occurrence is replaced', () => {
+      expect(findReplaceFn).toMatch(/total \+= hits\.length/);
+    });
+    it('impl: preserves size, bold, and detected family from the source item', () => {
+      expect(findReplaceFn).toMatch(/bold, font/);
+      expect(findReplaceFn).toMatch(/detectFontFamily\(it\.fontName\)/);
+      expect(findReplaceFn).toMatch(/size: Math\.round\(box\.size\)/);
+    });
+    it('claim: toast discloses font substitution (copy cannot overclaim)', () => {
+      expect(findReplaceFn).toMatch(/original font substituted/);
+      // The old wording that promised a specific font must stay dead.
+      expect(findReplaceFn).not.toMatch(/Helvetica retypeset/);
+    });
+    it('impl: PII sweep routes through the short-item guard', () => {
+      expect(editor).toMatch(/piiItemHit\(it\.str, lowered\)/);
+      expect(editor).toMatch(/export function piiItemHit/);
+      expect(editor).toMatch(/export function matchBoxes/);
+    });
+    it('claim: the Find & replace entry point is still advertised', () => {
+      expect(editor).toMatch(/Find & replace \(Ctrl\+F\)/);
     });
   });
 });

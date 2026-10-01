@@ -19,6 +19,8 @@ import {
   hitHandle,
   resizeRect,
   isResizableAnno,
+  matchBoxes,
+  piiItemHit,
   MAX_VERSIONS,
   MAX_STRUCTURAL_UNDO,
   type Anno,
@@ -484,5 +486,93 @@ describe('resize handles (eight-way bbox geometry)', () => {
     expect(isResizableAnno({ kind: 'highlight', x: 0, y: 0, w: 1, h: 1, color: '#ff0' })).toBe(false);
     expect(isResizableAnno({ kind: 'flow', x: 0, y: 0, w: 1, text: 'x', size: 12, color: '#000', bold: false })).toBe(false);
     expect(isResizableAnno(undefined)).toBe(false);
+  });
+});
+
+// Find/replace sub-rects (release-blocking data-loss fix, Oct 2026):
+// the old code whited out the ENTIRE text item and retypeset only the
+// replacement, so "Hello world" → replace "world" with "there" destroyed
+// "Hello " as well. Every test here pins the split-by-offset contract.
+describe('matchBoxes (find/replace sub-rects)', () => {
+  const item = { x: 100, yTop: 200, w: 110, size: 12, str: 'Hello world' };
+  const measure10 = (s: string) => s.length * 10; // "Hello world" → 110 == item.w
+
+  it('“world” gets only its own sub-rect — prefix “Hello ” stays untouched', () => {
+    const boxes = matchBoxes(item, 'world', measure10);
+    expect(boxes).toHaveLength(1);
+    const b = boxes[0]!;
+    expect(b.x).toBeCloseTo(160); // 100 + measure("Hello ") ratio
+    expect(b.w).toBeCloseTo(50); // measure("world")
+    expect(b.start).toBe(6);
+    expect(b.x + b.w).toBeCloseTo(item.x + item.w); // right edge lands on the item edge
+  });
+
+  it('regression: box never spans the whole item (old whiteout did)', () => {
+    const b = matchBoxes(item, 'world', measure10)[0]!;
+    expect(b.x).not.toBeCloseTo(item.x);
+    expect(b.w).not.toBeCloseTo(item.w);
+  });
+
+  it('every occurrence in one item gets a box (old code replaced once)', () => {
+    const boxes = matchBoxes({ x: 0, yTop: 0, w: 130, size: 10, str: 'aa aa aa' }, 'aa', measure10);
+    expect(boxes).toHaveLength(3);
+    expect(boxes.map((bx) => bx.start)).toEqual([0, 3, 6]);
+  });
+
+  it('case-insensitive needle, original-casing geometry', () => {
+    const b = matchBoxes({ x: 0, yTop: 0, w: 110, size: 10, str: 'Hello World' }, 'world', measure10)[0]!;
+    expect(b.start).toBe(6);
+    expect(b.x).toBeCloseTo(60);
+    expect(b.w).toBeCloseTo(50);
+  });
+
+  it('degenerate measure falls back to char-count ratio (no NaN, no slide)', () => {
+    const b = matchBoxes(item, 'world', () => 0)[0]!;
+    expect(b.x).toBeCloseTo(item.x + (6 / 11) * 110);
+    expect(b.w).toBeCloseTo((5 / 11) * 110);
+    expect(Number.isFinite(b.x)).toBe(true);
+    expect(Number.isFinite(b.w)).toBe(true);
+  });
+
+  it('no match → empty list; empty needle → empty list', () => {
+    expect(matchBoxes(item, 'zzz', measure10)).toEqual([]);
+    expect(matchBoxes(item, '', measure10)).toEqual([]);
+  });
+
+  it('semantic: "Hello world" − "world" + "there" composes to "Hello there"', () => {
+    const [b] = matchBoxes(item, 'world', measure10);
+    expect(b).toBeTruthy();
+    const prefix = item.str.slice(0, b!.start); // untouched head
+    const suffix = item.str.slice(b!.start + 'world'.length); // untouched tail
+    expect(prefix + 'there' + suffix).toBe('Hello there');
+  });
+});
+
+// PII sweep false-positive guard: a one-char or whitespace item used to
+// satisfy s.includes(t) for nearly every needle, whiting out whole pages.
+describe('piiItemHit (sweep match guard)', () => {
+  const needles = ['john@x.com', '+1-555-0100'];
+
+  it('short items never match (old s.includes(t) avalanche)', () => {
+    expect(piiItemHit('a', needles)).toBe(false);
+    expect(piiItemHit(' 1', needles)).toBe(false);
+    expect(piiItemHit('   ', needles)).toBe(false);
+    expect(piiItemHit('', needles)).toBe(false);
+  });
+
+  it('needle inside item → hit', () => {
+    expect(piiItemHit('My email is john@x.com here', needles)).toBe(true);
+    expect(piiItemHit('call +1-555-0100 now', needles)).toBe(true);
+  });
+
+  it('item inside needle → hit only when item is substantial', () => {
+    expect(piiItemHit('john@', needles)).toBe(true); // 5 chars, prefix of needle
+    expect(piiItemHit('555-0100', needles)).toBe(true);
+    expect(piiItemHit('+1-', needles)).toBe(false); // 3 chars — too brittle
+  });
+
+  it('sub-4-char needles are ignored (AI noise like “a”, “12”)', () => {
+    expect(piiItemHit('The quick brown fox', ['a'])).toBe(false);
+    expect(piiItemHit('Invoice 12345', ['12'])).toBe(false);
   });
 });

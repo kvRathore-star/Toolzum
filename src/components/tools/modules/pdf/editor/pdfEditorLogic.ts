@@ -257,6 +257,55 @@ export interface TextItem {
   fontName: string;
 }
 
+export interface MatchBox {
+  x: number;
+  yTop: number;
+  w: number;
+  size: number;
+  start: number;
+}
+
+/**
+ * Sub-rects for every case-insensitive occurrence of `needle` inside one
+ * text item. Replaces the old whole-item whiteout that destroyed the
+ * prefix/suffix ("Hello world" → replace "world" wiped "Hello " too).
+ *
+ * `measure` must be width in the same units as `item.w` (the text layer
+ * built `w` as `measureText(str).width * 1.1` — pass the same formula).
+ * Offsets are normalized by the full-string measurement so a drift in
+ * `measure` rescales instead of sliding boxes sideways; a zero/degenerate
+ * measurement falls back to a char-count ratio. Pure — tested.
+ */
+export function matchBoxes(
+  item: { x: number; yTop: number; w: number; size: number; str: string },
+  needle: string,
+  measure?: (_s: string) => number,
+): MatchBox[] {
+  const hay = item.str.toLowerCase();
+  const target = needle.toLowerCase();
+  if (!target || !item.str) return [];
+  const m = measure ?? ((s: string) => s.length);
+  const full = m(item.str);
+  const boxes: MatchBox[] = [];
+  let i = hay.indexOf(target);
+  while (i !== -1) {
+    const prefix = item.str.slice(0, i);
+    const match = item.str.slice(i, i + target.length);
+    let xOff: number;
+    let matchW: number;
+    if (full > 0 && Number.isFinite(full)) {
+      xOff = (m(prefix) / full) * item.w;
+      matchW = (m(match) / full) * item.w;
+    } else {
+      xOff = item.str.length > 0 ? (prefix.length / item.str.length) * item.w : 0;
+      matchW = item.str.length > 0 ? (match.length / item.str.length) * item.w : item.w;
+    }
+    boxes.push({ x: item.x + xOff, yTop: item.yTop, w: matchW, size: item.size, start: i });
+    i = hay.indexOf(target, i + target.length);
+  }
+  return boxes;
+}
+
 /**
  * Resize handles (P1): eight-way bbox resize for shape + image annos,
  * Select tool only. All geometry is pure so the contract lives in tests,
@@ -470,6 +519,19 @@ export function parseSensitiveList(out: string): string[] {
   } catch {
     return [];
   }
+}
+
+/**
+ * PII-sweep match guard. The old `s.includes(t) || t.includes(s)` let a
+ * one-char or whitespace item satisfy almost every needle — one stray "a"
+ * whited out whole pages. Both sides now need ≥4 chars: the needle must be
+ * substantial enough to be PII, and the item must be able to hold it.
+ * Pure — tested.
+ */
+export function piiItemHit(itemStr: string, loweredNeedles: string[]): boolean {
+  const t = itemStr.toLowerCase();
+  if (t.trim().length < 4) return false;
+  return loweredNeedles.some((s) => s.length >= 4 && (t.includes(s) || s.includes(t)));
 }
 
 /** Map OCR words (image px) to page points. Pure — tested. */

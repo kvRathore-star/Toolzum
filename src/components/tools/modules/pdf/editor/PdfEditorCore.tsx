@@ -39,9 +39,11 @@ import {
   inlineEditBox,
   isResizableAnno,
   mapOcrWords,
+  matchBoxes,
   moveAnnosPage,
   moveLayerIndex,
   parseSensitiveList,
+  piiItemHit,
   pruneEmptyAnnos,
   pushVersion,
   restructureAnnos,
@@ -53,6 +55,7 @@ import {
   type EditorVersion,
   type FlowAnno,
   type HistEntry,
+  type MatchBox,
   type ResizeHandleId,
   type TextAnno,
   type TextItem,
@@ -1687,10 +1690,7 @@ export default function PdfEditorCore() {
         return;
       }
       const lowered = found.map((s) => s.toLowerCase());
-      const hits = items.filter((it) => {
-        const t = it.str.toLowerCase();
-        return lowered.some((s) => s && (s.includes(t) || t.includes(s)));
-      });
+      const hits = items.filter((it) => piiItemHit(it.str, lowered));
       if (hits.length === 0) {
         toast.success('AI flagged items, but none matched on-page text exactly — review manually.');
         return;
@@ -1727,13 +1727,25 @@ export default function PdfEditorCore() {
       const pages = replaceScope === 'all'
         ? Array.from({ length: pageCount }, (_, i) => i + 1)
         : [page];
-      const needleLower = needle.toLowerCase();
-      const hitsByPage: Record<number, { x: number; yTop: number; w: number; size: number; bold: boolean }[]> = {};
+      const meas = document.createElement('canvas').getContext('2d')!;
+      const hitsByPage: Record<number, { box: MatchBox; bold: boolean; font: PdfFont }[]> = {};
+      let total = 0;
       for (const pg of pages) {
         const items = await ensureTextLayer(pg);
-        hitsByPage[pg] = items.filter((it) => it.str.toLowerCase().includes(needleLower));
+        const hits: { box: MatchBox; bold: boolean; font: PdfFont }[] = [];
+        for (const it of items) {
+          if (!it.str.toLowerCase().includes(needle.toLowerCase())) continue;
+          // Same measurement the text layer builder used for item.w
+          // (ensureTextLayer: measureText * 1.1) — ratios stay honest.
+          meas.font = `${it.size}px Helvetica, Arial, sans-serif`;
+          const measure = (s: string) => meas.measureText(s).width * 1.1;
+          for (const box of matchBoxes(it, needle, measure)) {
+            hits.push({ box, bold: it.bold, font: detectFontFamily(it.fontName) });
+          }
+        }
+        hitsByPage[pg] = hits;
+        total += hits.length;
       }
-      const total = pages.reduce((sum, pg) => sum + (hitsByPage[pg]?.length || 0), 0);
       if (total > 0) {
         commitAnnos((prev) => {
           const next = { ...prev };
@@ -1742,9 +1754,12 @@ export default function PdfEditorCore() {
             if (hits.length === 0) continue;
             next[pg] = [
               ...(next[pg] || []),
-              ...hits.flatMap((h) => ([
-                { kind: 'whiteout', x: h.x - 2, y: h.yTop - 2, w: h.w + 4, h: h.size + 5, color: '#ffffff' },
-                { kind: 'text', x: h.x, y: h.yTop + h.size * 0.85, text: replaceText, size: Math.round(h.size), color: '#000000', bold: h.bold },
+              ...hits.flatMap(({ box, bold, font }) => ([
+                // Cover ONLY the matched span — prefix and suffix of the
+                // original item stay on the page (old code whited out the
+                // entire item and lost them).
+                { kind: 'whiteout', x: box.x - 1, y: box.yTop - 2, w: box.w + 2, h: box.size + 5, color: '#ffffff' },
+                { kind: 'text', x: box.x, y: box.yTop + box.size * 0.85, text: replaceText, size: Math.round(box.size), color: '#000000', bold, font },
               ] as Anno[])),
             ];
           }
@@ -1752,7 +1767,7 @@ export default function PdfEditorCore() {
         });
       }
       toast.success(total > 0
-        ? `Replaced ${total} match${total === 1 ? '' : 'es'}${replaceScope === 'all' ? ' across the document' : ''} — Helvetica retypeset, verify placement.`
+        ? `Replaced ${total} match${total === 1 ? '' : 'es'}${replaceScope === 'all' ? ' across the document' : ''} — original font substituted, size and bold kept; verify placement.`
         : `No matches for “${needle}”.`);
       if (total > 0) takeVersion(`replace “${needle.slice(0, 24)}”`);
     } catch {
