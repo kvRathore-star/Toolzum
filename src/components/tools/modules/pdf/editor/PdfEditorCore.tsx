@@ -220,8 +220,11 @@ export default function PdfEditorCore() {
   const [ocrProgress, setOcrProgress] = useState(0);
   const [ocrLang, setOcrLang] = useState('eng');
   // Redaction mode: Selective strips text bytes (keeps the page live);
-  // Maximum rasterizes redacted pages to images (nothing extractable at
-  // all, but text selection dies with it). Explicit user choice, stated.
+  // Maximum rasterizes redacted pages to images. Maximum is RELEASE-BLOCKED
+  // and unreachable from the UI (Oct 2026): the raster came from pdf.js,
+  // which never sees pdf-lib's redaction edits, and pages were reinserted at
+  // pixel size. Do not re-enable until the proper fix + pixel verify gate
+  // land (docs/pdf-editor-master-prompt.md addendum).
   const [redactMode, setRedactMode] = useState<'selective' | 'maximum'>('selective');
   const redactCount = Object.values(annos).reduce((n, l) => n + l.filter((a) => a.kind === 'redact').length, 0);
   const [showShortcuts, setShowShortcuts] = useState(false);
@@ -2521,7 +2524,7 @@ export default function PdfEditorCore() {
       if (redactOutcome && redactOutcome.removedTexts.length > 0) {
         const extra = redactOutcome.flagged.length > 0 ? ` Flagged (verify manually): ${redactOutcome.flagged.slice(0, 3).join('; ')}${redactOutcome.flagged.length > 3 ? '…' : ''}` : '';
         const modeNote = redactMode === 'maximum' ? ' Redacted pages rasterized (no selectable text remains).' : '';
-        toast.success(`Exported — redaction VERIFIED clean on ${redactOutcome.pagesTouched} page(s).${modeNote}${extra}`, { duration: 8000 });
+        toast.success(`Exported — redaction re-checked by text extraction: removed strings are not recoverable on ${redactOutcome.pagesTouched} page(s).${modeNote}${extra}`, { duration: 8000 });
       } else {
         toast.success(`Exported with ${total} annotation${total === 1 ? '' : 's'} — additions only, original content untouched.`);
       }
@@ -3143,7 +3146,7 @@ export default function PdfEditorCore() {
             {tool === 'shape' && 'Drag to draw a rectangle, ellipse, line, or arrow.'}
             {tool === 'note' && 'Click to drop a sticky note.'}
             {tool === 'whiteout' && 'Drag over an area to cover it with white (visual cover only).'}
-            {tool === 'redact' && 'Drag over text to PERMANENTLY remove it — verified on export. Images underneath are not wiped.'}
+            {tool === 'redact' && 'Drag over text to PERMANENTLY remove it — the export re-checks that the text is gone. Images underneath are not wiped.'}
             {tool === 'image' && 'Pick an image, then click to stamp it.'}
             {tool === 'sign' && 'Draw a signature above, then click to place it.'}
           </p>

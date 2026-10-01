@@ -138,10 +138,7 @@ export function LeftPanel() {
                     <span className="block font-bold text-[var(--text-primary)]">Selective</span>
                     <span className="block text-[var(--text-muted)] mt-0.5">Strips text bytes, keeps pages live and selectable.</span>
                   </button>
-                  <button onClick={() => setRedactMode('maximum')} aria-pressed={redactMode === 'maximum'} role="radio" aria-checked={redactMode === 'maximum'} className={`w-full text-left px-3 py-2 rounded-xl border text-xs ${redactMode === 'maximum' ? 'border-[var(--accent)] bg-[var(--accent-ink)]/5' : 'border-[var(--border-subtle)]'}`}>
-                    <span className="block font-bold text-[var(--text-primary)]">Maximum</span>
-                    <span className="block text-[var(--text-muted)] mt-0.5">Rasterizes redacted pages — nothing extractable, text selection dies too.</span>
-                  </button>
+                  <p className="text-xs text-[var(--text-muted)] px-1">Maximum (raster) mode is temporarily disabled while it is reworked — Selective stays active and verified on export.</p>
                 </div>
               </div>
             )}
