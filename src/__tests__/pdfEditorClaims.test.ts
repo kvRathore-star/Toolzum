@@ -704,4 +704,51 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
       expect(editor).toMatch(/e\.key === 'Escape'\) setTextDraft\(null\)/);
     });
   });
+
+  describe('maximum redaction raster (release-blocking fix, Oct 2026)', () => {
+    /**
+     * The pre-fix path rendered the rotated view at 200 DPI, reinserted at
+     * PIXEL size, encoded an untouched render, and let text extraction wave
+     * the image through with a false "VERIFIED" toast. Each invariant of the
+     * corrected path is pinned here — geometry behavior lives in
+     * pdfRedactRaster.test.ts; these greps stop the export path from
+     * silently drifting back.
+     */
+    it('impl: renders the RAW frame (rotation: 0) so rects and pixels share one space', () => {
+      expect(editor).toMatch(/getViewport\(\{ scale: 200 \/ 72, rotation: 0 \}\)/);
+    });
+    it('impl: burns rects into the render canvas BEFORE encoding', () => {
+      expect(editor).toMatch(/burnRects\(ctx,/);
+      const burnAt = editor.indexOf('burnRects(ctx,');
+      const encodeAt = editor.indexOf("toBlob(res, 'image/jpeg', 0.92)");
+      expect(burnAt).toBeGreaterThan(-1);
+      expect(encodeAt).toBeGreaterThan(burnAt);
+    });
+    it('impl: reinserts at ORIGINAL point size and preserves /Rotate', () => {
+      expect(editor).toMatch(/insertPage\(pn - 1, \[origW, origH\]\)/);
+      expect(editor).toMatch(/setRotation\(degrees\(origAngle\)\)/);
+      // The pixel-size regression must stay dead: no scaleToFit into insertPage.
+      expect(editor).not.toMatch(/insertPage\(pn - 1, \[dims\.width, dims\.height\]\)/);
+    });
+    it('impl: pixel gate renders the EXPORTED bytes and blocks unverified regions', () => {
+      expect(editor).toMatch(/Maximum redaction UNVERIFIED/);
+      expect(editor).toMatch(/pixel-verify failed — export blocked/);
+      expect(editor).toMatch(/getDocument\(\{ data: out\.slice\(\) \}\)/);
+    });
+    it('claim: mode picker states burned-in boxes AND the links/form-fields loss', () => {
+      expect(editor).toMatch(/boxes are burned into the pixels and re-checked after export/);
+      expect(editor).toMatch(/Links and form fields on rasterized pages are not kept/);
+    });
+    it('claim: FAQ states both modes, pixel re-check, and the block-on-failure gate', () => {
+      expect(registry).toMatch(/burned into the pixels and the export re-checks that they are dark/);
+      expect(registry).toMatch(/block the download if verification fails/);
+      expect(registry).toMatch(/Rasterized pages do not keep links or form fields/);
+    });
+    it('impl: success toast claims only what the gates actually checked', () => {
+      expect(editor).toMatch(/redaction checks passed/);
+      expect(editor).toMatch(/black regions verified dark on/);
+      // The old overclaim must not come back.
+      expect(editor).not.toMatch(/VERIFIED clean/);
+    });
+  });
 });

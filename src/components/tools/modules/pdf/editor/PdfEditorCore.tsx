@@ -220,11 +220,10 @@ export default function PdfEditorCore() {
   const [ocrProgress, setOcrProgress] = useState(0);
   const [ocrLang, setOcrLang] = useState('eng');
   // Redaction mode: Selective strips text bytes (keeps the page live);
-  // Maximum rasterizes redacted pages to images. Maximum is RELEASE-BLOCKED
-  // and unreachable from the UI (Oct 2026): the raster came from pdf.js,
-  // which never sees pdf-lib's redaction edits, and pages were reinserted at
-  // pixel size. Do not re-enable until the proper fix + pixel verify gate
-  // land (docs/pdf-editor-master-prompt.md addendum).
+  // Maximum rasterizes redacted pages to images. Maximum re-enabled Oct
+  // 2026 after the release-blocking fix: rotation-0 render + burn into the
+  // SAME canvas + point-size reinsert with /Rotate preserved + pixel verify
+  // gate on the exported bytes. See docs/pdf-editor-master-prompt.md.
   const [redactMode, setRedactMode] = useState<'selective' | 'maximum'>('selective');
   const redactCount = Object.values(annos).reduce((n, l) => n + l.filter((a) => a.kind === 'redact').length, 0);
   const [showShortcuts, setShowShortcuts] = useState(false);
@@ -2311,6 +2310,10 @@ export default function PdfEditorCore() {
         }
       }
       let redactOutcome: { removedTexts: string[]; flagged: string[]; pagesTouched: number } | null = null;
+      // Maximum-mode pages that rasterized successfully — remembered for the
+      // pixel verify gate after save(): text extraction cannot see into an
+      // image, so raster regions get their own check on the exported bytes.
+      const maxRasterPages: { pn: number; rects: { x: number; y: number; w: number; h: number }[]; pageH: number }[] = [];
       if (Object.keys(redactRects).length > 0) {
         const { applyRedactions, stripAnnotations, sanitizeMetadata, flipRectForPdf } = await import('@/lib/pdfRedact');
         const pdfRects: Record<number, { x: number; y: number; w: number; h: number }[]> = {};
@@ -2336,23 +2339,47 @@ export default function PdfEditorCore() {
         // in the mode picker, not discovered at export).
         if (!pdfDoc) throw new Error('PDF not loaded');
         if (redactMode === 'maximum') {
+          const { pageRectToCanvasRect, burnRects } = await import('@/lib/pdfRedactRaster');
           const targets = Object.keys(redactRects).map(Number).sort((a, b) => b - a);
           for (const pn of targets) {
             try {
+              const lp0 = libPages[pn - 1];
+              if (!lp0) continue;
+              const origW = lp0.getWidth();
+              const origH = lp0.getHeight();
+              const origAngle = ((lp0.getRotation().angle % 360) + 360) % 360;
               const vpg = await pdfDoc.getPage(pn);
-              const vp = vpg.getViewport({ scale: 200 / 72 });
+              // rotation: 0 renders the RAW page frame — the same unrotated
+              // top-down space the redact rects (and every annotation) live
+              // in, whatever /Rotate says. The old path rendered the rotated
+              // view at pixel scale and reinserted at pixel size, so boxes
+              // landed off-target.
+              const vp = vpg.getViewport({ scale: 200 / 72, rotation: 0 });
               const cnv = document.createElement('canvas');
               cnv.width = Math.floor(vp.width);
               cnv.height = Math.floor(vp.height);
-              await vpg.render({ canvasContext: cnv.getContext('2d')!, viewport: vp }).promise;
+              const ctx = cnv.getContext('2d');
+              if (!ctx) throw new Error('no 2d context');
+              await vpg.render({ canvasContext: ctx, viewport: vp }).promise;
+              // Burn the boxes INTO the render before encoding: the pixels
+              // the boxes cover and the pixels that ship are the same
+              // pixels (the old path encoded an untouched render — the
+              // original text survived as picture, then a false "VERIFIED"
+              // toast waved it through text extraction).
+              burnRects(ctx, (redactRects[pn] || []).map((r) => pageRectToCanvasRect(r, origH, vp)));
               const blob = await new Promise<Blob | null>((res) => cnv.toBlob(res, 'image/jpeg', 0.92));
               if (!blob) throw new Error('rasterize failed');
               const bytes = new Uint8Array(await blob.arrayBuffer());
               const img = await pdfDocLib.embedJpg(bytes);
-              const dims = img.scaleToFit(vp.width, vp.height);
               pdfDocLib.removePage(pn - 1);
-              const fresh = pdfDocLib.insertPage(pn - 1, [dims.width, dims.height]);
-              fresh.drawImage(img, { x: 0, y: 0, width: dims.width, height: dims.height });
+              // Reinsert at ORIGINAL point size (not pixel size) and keep
+              // /Rotate — the annotation loop below then lands exactly as
+              // it does in selective mode.
+              const fresh = pdfDocLib.insertPage(pn - 1, [origW, origH]);
+              fresh.setRotation(degrees(origAngle));
+              fresh.drawImage(img, { x: 0, y: 0, width: origW, height: origH });
+              maxRasterPages.push({ pn, rects: redactRects[pn]!, pageH: origH });
+              redactOutcome.flagged.push(`page ${pn}: rasterized — links and form fields on this page are not preserved`);
             } catch {
               redactOutcome.flagged.push(`page ${pn}: rasterize failed — kept selective stripping`);
             }
@@ -2520,11 +2547,53 @@ export default function PdfEditorCore() {
           return;
         }
       }
+      // Pixel verify: text extraction cannot see into a rasterized page, so
+      // maximum-mode regions get their own gate — render the EXPORTED page
+      // and require every redact region to be near-black. Same block-on-
+      // failure contract as the text gate.
+      if (maxRasterPages.length > 0) {
+        const { pageRectToCanvasRect, regionDarkness, REDACT_PIXEL_MIN_RATIO } = await import('@/lib/pdfRedactRaster');
+        try {
+          const pcheck = await pdfjsLib.getDocument({ data: out.slice() }).promise;
+          let pixelFail: string | null = null;
+          for (const mr of maxRasterPages) {
+            if (pixelFail) break;
+            const ppage = await pcheck.getPage(mr.pn);
+            const pvp = ppage.getViewport({ scale: 100 / 72, rotation: 0 });
+            const pcnv = document.createElement('canvas');
+            pcnv.width = Math.floor(pvp.width);
+            pcnv.height = Math.floor(pvp.height);
+            const pctx = pcnv.getContext('2d');
+            if (!pctx) throw new Error('no 2d context');
+            await ppage.render({ canvasContext: pctx, viewport: pvp }).promise;
+            const img = pctx.getImageData(0, 0, pcnv.width, pcnv.height);
+            for (const r of mr.rects) {
+              const cr = pageRectToCanvasRect(r, mr.pageH, pvp);
+              const dark = regionDarkness(img.data, pcnv.width, pcnv.height, cr);
+              if (dark < REDACT_PIXEL_MIN_RATIO) {
+                pixelFail = `page ${mr.pn} redact region is only ${(dark * 100).toFixed(1)}% black in the export`;
+                break;
+              }
+            }
+          }
+          try { await pcheck.destroy(); } catch { /* ignore */ }
+          if (pixelFail) {
+            toast.error(`Maximum redaction UNVERIFIED — ${pixelFail}. Export blocked; remove annotations over redacted areas and retry.`, { duration: 8000 });
+            setExporting(false);
+            return;
+          }
+        } catch {
+          toast.error('Maximum redaction pixel-verify failed — export blocked rather than shipping unverified.', { duration: 8000 });
+          setExporting(false);
+          return;
+        }
+      }
       downloadOrShare(URL.createObjectURL(new Blob([out as unknown as BlobPart], { type: 'application/pdf' })), `edited-${file?.name || 'document.pdf'}`);
-      if (redactOutcome && redactOutcome.removedTexts.length > 0) {
+      if (redactOutcome && (redactOutcome.removedTexts.length > 0 || maxRasterPages.length > 0)) {
         const extra = redactOutcome.flagged.length > 0 ? ` Flagged (verify manually): ${redactOutcome.flagged.slice(0, 3).join('; ')}${redactOutcome.flagged.length > 3 ? '…' : ''}` : '';
-        const modeNote = redactMode === 'maximum' ? ' Redacted pages rasterized (no selectable text remains).' : '';
-        toast.success(`Exported — redaction re-checked by text extraction: removed strings are not recoverable on ${redactOutcome.pagesTouched} page(s).${modeNote}${extra}`, { duration: 8000 });
+        const extractNote = redactOutcome.removedTexts.length > 0 ? ` Extract re-check: removed strings not recoverable on ${redactOutcome.pagesTouched} page(s).` : '';
+        const modeNote = maxRasterPages.length > 0 ? ` Rasterized pages: black regions verified dark on ${maxRasterPages.length} page(s).` : '';
+        toast.success(`Exported — redaction checks passed.${extractNote}${modeNote}${extra}`, { duration: 8000 });
       } else {
         toast.success(`Exported with ${total} annotation${total === 1 ? '' : 's'} — additions only, original content untouched.`);
       }
