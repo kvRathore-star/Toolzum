@@ -75,6 +75,13 @@ in Resend's dashboard).
    `CLOUDFLARE_API_TOKEN`+`CLOUDFLARE_ACCOUNT_ID` pair) →
    `503 email_unconfigured` before either send — no acknowledgment goes
    out, no fake receipt.
+4. **Inbox archive** — after the relay, the message is stored in
+   `contact_messages` (migration `0028`; best-effort insert — a D1 hiccup
+   never fails the form) and shows up in the admin **Inbox**
+   (`/admin/inbox` → `GET`/`PATCH /api/admin/messages`): read, reply, and
+   archive from one screen. The Gmail relay keeps flowing as before; the
+   archive is a second copy, deliberately **not** retention-purged (it's
+   correspondence, mirrors the owner's Gmail, no telemetry).
 
 ## Receiving (Email Routing — verified live)
 
@@ -139,16 +146,29 @@ pipeline, so correspondence never depends on Gmail's send-as:
 
 - **UI:** `src/app/admin/reply/page.tsx` — To / Subject / Message form,
   capability banner when email secrets are missing, success + error states.
+  Deep-links from the Inbox (`?to=…&subject=…&messageId=…`) prefill the
+  form and show a "marked replied on send" note.
 - **Endpoint:** `POST /api/admin/reply` — admin session **or**
-  `Bearer ALERT_TOKEN`, validates `{ to, subject, message }` (email format,
-  HTML stripped, 120/5000 char caps), rate limit **10/min per IP**
-  (`admin-reply`), then `sendEmail(…, { fromName: "Toolzum Support" })`
-  with auto-branded HTML. `GET` returns `{ configured, from, fromName }`
-  for the UI probe.
+  `Bearer ALERT_TOKEN`, validates `{ to, subject, message, messageId? }`
+  (email format, HTML stripped, 120/5000 char caps), rate limit **10/min
+  per IP** (`admin-reply`), then `sendEmail(…, { fromName: "Toolzum Support" })`
+  with `brandFromText` HTML — subject as headline plus an **Open Toolzum**
+  CTA button and a "reply reaches the same inbox" note, so owner replies
+  wear the same branded card as every other Toolzum email. A successful
+  send with `messageId` flips that
+  `contact_messages` row to `replied` (best-effort). `GET` returns
+  `{ configured, from, fromName }` for the UI probe.
+- **Inbox endpoint:** `GET /api/admin/messages` (`?status=` filter → list +
+  `unread` count; missing table answers an empty inbox, never a 500) and
+  `PATCH /api/admin/messages` (`{ id, status: new|replied|archived }`,
+  404 on unknown id, 30/min) — same auth pair as reply. UI:
+  `src/app/admin/inbox/page.tsx` (sidebar **Inbox**).
 - Failures are honest: `503 email_unconfigured` (no transport secrets), `502
   email_failed` (the transport said no), `429` over the limit. Tests:
-  `src/__tests__/api/admin-reply-api.test.ts` (12 cases) +
-  `src/__tests__/lib/email-send.test.ts` (transport routing, 12 cases).
+  `src/__tests__/api/admin-reply-api.test.ts` (14 cases),
+  `src/__tests__/api/admin-messages.test.ts` (11 cases),
+  `src/__tests__/api/contact-api.test.ts` (archive, 7 cases) +
+  `src/__tests__/lib/email-send.test.ts` (transport routing, 15 cases).
 - **Curl with the Bearer token:** `functions/api/_middleware.ts` rejects any
   mutation with no Origin/Referer (403) — add `-H 'Origin: https://toolzum.com'`.
   The browser UI sends Origin automatically; GET (the probe) is exempt.

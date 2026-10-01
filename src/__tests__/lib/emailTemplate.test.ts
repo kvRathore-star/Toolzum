@@ -102,6 +102,18 @@ describe('brandFromText', () => {
     const html = brandFromText('Ended', 'Resubscribe anytime: https://toolzum.com/pricing');
     expect(html).toContain('<a href="https://toolzum.com/pricing"');
   });
+
+  it('renders an optional CTA button and note (owner replies) without changing defaults', () => {
+    const html = brandFromText('Re: bug report', 'Fixed in the next build.', {
+      cta: { label: 'Open Toolzum', url: 'https://toolzum.com/tools' },
+      note: 'Just reply to this email to continue the conversation.',
+    });
+    // ctaHtml's button style marker (footer links use different styling)
+    expect(html).toContain('padding:14px 28px');
+    expect(html).toContain('Just reply to this email');
+    // plain callers keep a buttonless shell (footer links exist either way)
+    expect(brandFromText('Hi', 'Short note.')).not.toContain('padding:14px 28px');
+  });
 });
 
 describe('sendEmail', () => {

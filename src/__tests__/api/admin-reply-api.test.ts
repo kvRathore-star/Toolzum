@@ -20,16 +20,22 @@ import { requireAdmin } from '../../../src/lib/admin-auth';
 import { sendEmail } from '../../../src/lib/email';
 
 function mockDb(rateCount = 0) {
+  const sqls: string[] = [];
+  const binds: unknown[][] = [];
   const prepare = vi.fn((sql: string) => ({
-    bind: vi.fn(() => ({
-      first: vi.fn(async () => (sql.includes('FROM analytics_event') ? { c: rateCount } : null)),
-      all: vi.fn(async () => ({ results: [] })),
-      run: vi.fn(async () => ({})),
-    })),
+    bind: vi.fn((...args: unknown[]) => {
+      sqls.push(sql);
+      binds.push(args);
+      return {
+        first: vi.fn(async () => (sql.includes('FROM analytics_event') ? { c: rateCount } : null)),
+        all: vi.fn(async () => ({ results: [] })),
+        run: vi.fn(async () => ({})),
+      };
+    }),
     first: vi.fn(async () => null),
     run: vi.fn(async () => ({})),
   }));
-  return { db: { prepare } as unknown as D1Database };
+  return { db: { prepare } as unknown as D1Database, sqls, binds };
 }
 
 const ENV = (db: D1Database, extras: Record<string, string | undefined> = {}) =>
@@ -64,7 +70,7 @@ beforeEach(() => {
 });
 
 describe('POST /api/admin/reply (in-app reply fallback)', () => {
-  it('sends as Toolzum Support with auto-branded HTML', async () => {
+  it('sends as Toolzum Support with branded HTML, CTA button, and reply note', async () => {
     const { db } = mockDb();
     const res = await send({
       request: post({ to: 'user@example.com', subject: 'Re: your message', message: 'Thanks for writing in.' }),
@@ -73,12 +79,19 @@ describe('POST /api/admin/reply (in-app reply fallback)', () => {
     expect(res.status).toBe(200);
     expect(await res.json()).toEqual({ ok: true, to: 'user@example.com' });
     expect(sendEmail).toHaveBeenCalledTimes(1);
-    expect(vi.mocked(sendEmail).mock.calls[0]![1]).toEqual({
+    const arg = vi.mocked(sendEmail).mock.calls[0]![1];
+    expect(arg).toMatchObject({
       to: 'user@example.com',
       subject: 'Re: your message',
       text: 'Thanks for writing in.',
       fromName: 'Toolzum Support',
     });
+    // branded shell: heading, Open Toolzum button (ctaHtml style marker), reply note
+    expect(arg.html).toContain('Re: your message');
+    expect(arg.html).toContain('Open Toolzum');
+    expect(arg.html).toContain('padding:14px 28px');
+    expect(arg.html).toContain('reply to this email');
+    expect(arg.html).toContain('contact@toolzum.com');
   });
 
   it('rejects an invalid recipient, missing subject, or HTML in fields', async () => {
@@ -161,6 +174,37 @@ describe('POST /api/admin/reply (in-app reply fallback)', () => {
     const { db } = mockDb();
     const res = await send({ request: post('nope{'), env: ENV(db, CONFIGURED) });
     expect(res.status).toBe(400);
+  });
+
+  it('marks the contact-inbox row replied when messageId is passed', async () => {
+    const { db, sqls, binds } = mockDb();
+    const res = await send({
+      request: post({ to: 'user@example.com', subject: 'Re: x', message: 'y', messageId: 'msg-7' }),
+      env: ENV(db, CONFIGURED),
+    });
+    expect(res.status).toBe(200);
+    expect(sqls.some((s) => s.includes("UPDATE contact_messages SET status = 'replied'"))).toBe(true);
+    expect(binds.some((b) => b[0] === 'msg-7')).toBe(true);
+  });
+
+  it('never touches the inbox when the send fails or messageId is absent', async () => {
+    // failing send with messageId
+    vi.mocked(sendEmail).mockResolvedValue(false);
+    const failed = mockDb();
+    const res1 = await send({
+      request: post({ to: 'user@example.com', subject: 'x', message: 'y', messageId: 'msg-7' }),
+      env: ENV(failed.db, CONFIGURED),
+    });
+    expect(res1.status).toBe(502);
+    expect(failed.sqls.some((s) => s.includes('contact_messages'))).toBe(false);
+
+    // successful send without messageId
+    const plain = mockDb();
+    await send({
+      request: post({ to: 'user@example.com', subject: 'x', message: 'y' }),
+      env: ENV(plain.db, CONFIGURED),
+    });
+    expect(plain.sqls.some((s) => s.includes('contact_messages'))).toBe(false);
   });
 });
 

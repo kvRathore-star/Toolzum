@@ -35,6 +35,28 @@ function isEmail(s: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
 }
 
+/** Idempotent fallback — source of truth is src/db/migrations/0028_contact_messages.sql. */
+async function ensureTable(DB: D1Database) {
+  try {
+    await DB.prepare("SELECT 1 FROM contact_messages LIMIT 1").first();
+  } catch {
+    await DB.prepare(`
+      CREATE TABLE IF NOT EXISTS "contact_messages" (
+        "id" text PRIMARY KEY,
+        "name" text NOT NULL,
+        "email" text NOT NULL,
+        "category" text NOT NULL,
+        "label" text NOT NULL,
+        "message" text NOT NULL,
+        "status" text NOT NULL DEFAULT 'new',
+        "createdAt" integer NOT NULL
+      )
+    `).run();
+    await DB.prepare('CREATE INDEX IF NOT EXISTS "contact_messages_status_idx" ON "contact_messages" ("status")').run();
+    await DB.prepare('CREATE INDEX IF NOT EXISTS "contact_messages_createdAt_idx" ON "contact_messages" ("createdAt")').run();
+  }
+}
+
 interface CategoryCopy {
   label: string;
   ackHeading: string;
@@ -139,6 +161,27 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
   if (!sent) {
     return json({ error: "email_failed", to }, 502);
+  }
+
+  // Inbox archive (best-effort): relay success already gates the request —
+  // a D1 hiccup must never fail the user's submission.
+  try {
+    await ensureTable(DB);
+    await DB.prepare(
+      "INSERT INTO contact_messages (id, name, email, category, label, message, status, createdAt) VALUES (?, ?, ?, ?, ?, ?, 'new', ?)"
+    )
+      .bind(
+        crypto.randomUUID(),
+        name,
+        email,
+        CATEGORY_COPY[subject] ? subject : "general",
+        copy.label,
+        message,
+        Math.floor(Date.now() / 1000)
+      )
+      .run();
+  } catch {
+    /* archive best-effort — Gmail copy still exists */
   }
 
   // Branded receipt to the sender. Best-effort: the relay above is what gates

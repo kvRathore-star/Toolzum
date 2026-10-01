@@ -33,7 +33,7 @@ Writers must use the documented format; readers must tolerate history.
 |---|---|---|
 | `user`, `session`, `account` | `createdAt` | unix **millis** (better-auth) |
 | `user_tool_usage` | `usedAt` | unix **seconds** |
-| `download_event`, `ai_credit_event`, `error_log` | `createdAt` | unix **seconds** |
+| `download_event`, `ai_credit_event`, `error_log`, `contact_messages` | `createdAt` | unix **seconds** |
 | `analytics_event` | `createdAt` | `datetime('now')` **text** (rate-limit comparisons depend on it — do not "fix" to integer without updating `rate-limit.ts`) |
 | `download_usage` | `createdAt`/`updatedAt` | `datetime('now')` **text** |
 | `download_usage` | `date` | `YYYY-M-D` text (non-padded — string comparison unreliable, use `updatedAt`) |

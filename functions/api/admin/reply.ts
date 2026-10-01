@@ -1,4 +1,5 @@
 import { sendEmail, emailConfigured } from "../../../src/lib/email";
+import { brandFromText } from "../../../src/lib/emailTemplate";
 import { requireAdmin } from "../../../src/lib/admin-auth";
 import { checkRateLimit, recordRateLimit } from "../rate-limit";
 
@@ -8,11 +9,13 @@ import { checkRateLimit, recordRateLimit } from "../rate-limit";
  * admin dashboard and the message goes through the same send pipeline
  * (Resend primary, Cloudflare fallback) as every other Toolzum email:
  * From Toolzum Support <contact@toolzum.com>, branded HTML via
- * brandFromText (html omitted).
+ * brandFromText — subject as headline, plus an "Open Toolzum" CTA button
+ * and a "reply reaches the same inbox" note.
  *
  * Auth: admin session (browser UI) OR Bearer ALERT_TOKEN (curl/automation).
  * GET  → capability probe for the UI ({ configured, from }).
- * POST → { to, subject, message }.
+ * POST → { to, subject, message, messageId? } — an optional messageId ties
+ * the send to a contact-inbox row, which flips to `replied` on success.
  *
  * Secrets (Pages env, owner-set per docs/ALERTS.md):
  * - RESEND_API_KEY (primary transport)
@@ -80,6 +83,7 @@ export async function onRequestPost(context: { request: Request; env: Env }): Pr
   const to = clean(body.to, 320);
   const subject = clean(body.subject, MAX_SUBJECT);
   const message = clean(body.message, MAX_BODY);
+  const messageId = clean(body.messageId, 64);
   if (!isEmail(to) || !subject || !message) {
     return json({ error: "invalid_params — send { to, subject, message }" }, 400);
   }
@@ -95,9 +99,32 @@ export async function onRequestPost(context: { request: Request; env: Env }): Pr
 
   const sent = await sendEmail(
     env,
-    { to, subject, text: message, fromName: "Toolzum Support" }
+    {
+      to,
+      subject,
+      text: message,
+      fromName: "Toolzum Support",
+      // Branded with the action button + reply note so owner replies look
+      // like every other Toolzum email instead of a bare text blob.
+      html: brandFromText(subject, message, {
+        cta: { label: "Open Toolzum", url: "https://toolzum.com/tools" },
+        note: "Just reply to this email to continue the conversation — it reaches the same inbox.",
+      }),
+    }
   );
   if (!sent) return json({ error: "email_failed" }, 502);
+
+  // Inbox triage (best-effort): when this reply came from the inbox UI the
+  // row flips to `replied` — a stamp failure never fails a delivered send.
+  if (messageId) {
+    try {
+      await DB.prepare("UPDATE contact_messages SET status = 'replied' WHERE id = ?")
+        .bind(messageId)
+        .run();
+    } catch {
+      /* no table / stamp best-effort */
+    }
+  }
 
   return json({ ok: true, to });
 }

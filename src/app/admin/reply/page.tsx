@@ -19,6 +19,7 @@ export default function AdminReplyPage() {
   const [to, setTo] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [messageId, setMessageId] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
   const [sent, setSent] = useState("");
@@ -27,6 +28,20 @@ export default function AdminReplyPage() {
   useEffect(() => {
     if (!isPending && !session) router.push("/login");
   }, [session, isPending, router]);
+
+  // Inbox deep-link: /admin/reply?to=…&subject=…&messageId=… prefills the
+  // form (manual param read — no useSearchParams, keeps static export simple).
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const toParam = params.get("to");
+    const subjectParam = params.get("subject");
+    const idParam = params.get("messageId");
+    // Mount-once deep-link prefill from the inbox; intentionally not reactive.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (toParam) setTo(toParam);
+    if (subjectParam) setSubject(subjectParam);
+    if (idParam) setMessageId(idParam);
+  }, []);
 
   useEffect(() => {
     if (!session) return;
@@ -70,6 +85,7 @@ export default function AdminReplyPage() {
           to: to.trim(),
           subject: subject.trim(),
           message: message.trim(),
+          ...(messageId ? { messageId } : {}),
         }),
       });
       const data = (await res.json()) as { ok?: boolean; error?: string; to?: string };
@@ -78,6 +94,10 @@ export default function AdminReplyPage() {
       setTo("");
       setSubject("");
       setMessage("");
+      if (messageId) {
+        setMessageId("");
+        router.replace("/admin/reply");
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to send reply");
     } finally {
@@ -96,15 +116,22 @@ export default function AdminReplyPage() {
           </div>
           <p className="text-sm text-[var(--text-secondary)]">
             Answer contact-form messages and other correspondence from inside Toolzum —
-            sends through Cloudflare Email Service as{" "}
+            sends through the email pipeline (Resend primary) as{" "}
             <span className="text-[var(--text-primary)]">Toolzum Support &lt;contact@toolzum.com&gt;</span>.
             This is the Gmail-independent path: replies from users still reach your forwarded inbox.
           </p>
 
+          {messageId && (
+            <div role="status" className="rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] text-xs px-4 py-3">
+              Replying from the inbox — on success this message is marked{" "}
+              <span className="text-[var(--text-primary)]">replied</span> automatically.
+            </div>
+          )}
+
           {configured === false && (
             <div role="alert" className="rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 text-xs px-4 py-3">
-              Email sending is not configured — set the CLOUDFLARE_API_TOKEN and
-              CLOUDFLARE_ACCOUNT_ID Pages secrets (docs/ALERTS.md). Sending will return 503 until then.
+              Email sending is not configured — set the RESEND_API_KEY Pages secret
+              (primary transport; docs/EMAIL.md). Sending will return 503 until then.
             </div>
           )}
 

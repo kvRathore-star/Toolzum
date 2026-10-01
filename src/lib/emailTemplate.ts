@@ -237,8 +237,14 @@ export function renderEmail(opts: BrandEmailOptions): string {
  * Fallback branding for callers that only supply plain text: subject becomes
  * the headline, blank-line-separated blocks become paragraphs (lines split
  * further when a block has no blank lines — receipt-style bodies join with \n).
+ * Optional `cta`/`note` render the action button and muted closing line
+ * (used by owner replies from the admin panel).
  */
-export function brandFromText(subject: string, text: string): string {
+export function brandFromText(
+  subject: string,
+  text: string,
+  opts: { cta?: EmailCta; note?: string } = {}
+): string {
   const blocks = text
     .split(/\n{2,}/)
     .map((b) => b.trim())
@@ -260,5 +266,7 @@ export function brandFromText(subject: string, text: string): string {
     heading: subject,
     preheader: summary.length > 140 ? `${summary.slice(0, 137)}…` : summary,
     paragraphs,
+    ...(opts.cta ? { cta: opts.cta } : {}),
+    ...(opts.note ? { note: opts.note } : {}),
   });
 }
