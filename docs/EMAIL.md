@@ -103,30 +103,34 @@ curl -s -H "Authorization: Bearer $TOK" \
 
 ## Replying as contact@toolzum.com from Gmail
 
-Cloudflare exposes SMTP submission, so Gmail relays through your own domain's
-DKIM/SPF — no third-party relay, no alignment problems.
+Gmail relays through **Resend's SMTP** (`smtp.resend.com`), which signs
+DKIM/SPF for `toolzum.com` — the same identity as every app send. Cloudflare
+SMTP is deliberately *not* used: Email Sending on the Workers Free plan can
+only reach verified destinations, so Gmail replies to arbitrary recipients
+would be rejected at submission.
 
 **One-time setup (~5 min):**
 
-1. **Scoped API token** — Cloudflare → My Profile → API Tokens →
-   Create Token → Custom → Account · **Email Sending: Edit** only.
-   Copy it (it is the SMTP password). Do **not** reuse the Pages production
-   secret `CLOUDFLARE_API_TOKEN`.
+1. **SMTP password** — the same `RESEND_API_KEY` value (`re_…`, Resend
+   dashboard → API Keys). A second dedicated key works too if you prefer
+   rotation hygiene. No Cloudflare token is needed.
 2. **Gmail → Settings ⚙️ → See all settings → Accounts and Import →
    "Send mail as" → Add another email address**
    - Name: `Toolzum` (or `Kirti (Toolzum)`)
    - Email: `contact@toolzum.com` → Next Step
-   - SMTP Server: **`smtp.mx.cloudflare.net`**
+   - SMTP Server: **`smtp.resend.com`**
    - Port: **465**, connection: **SSL**
-   - Username: **`api_token`** ← the literal string, not an email address
-   - Password: the token from step 1 → Add Account
+   - Username: **`resend`** ← the literal string, not an email address
+   - Password: the `RESEND_API_KEY` from step 1 → Add Account
 3. **Verify** — Gmail emails a code to `contact@toolzum.com`; Email Routing
-   forwards it to your Gmail; paste it back.
+   forwards it to your Gmail; paste it back. (Changing the SMTP server on an
+   already-added address can re-trigger this code — same forward path.)
 4. **Make default** (optional) — Accounts and Import → "Make default", so
    every Reply uses it. Otherwise pick per-message from the **From** dropdown.
 
-Outbound path: Gmail → `smtp.mx.cloudflare.net:465` → Cloudflare signs
-DKIM/SPF for `toolzum.com` → same pipeline as the app's sends.
+Outbound path: Gmail → `smtp.resend.com:465` → Resend signs DKIM/SPF for
+`toolzum.com` → delivered under the same free tier as the app (counts
+against 100/day; owner replies only — negligible).
 
 ## In-app reply — the Gmail-independent path
 
@@ -168,8 +172,14 @@ pipeline, so correspondence never depends on Gmail's send-as:
   Gmail-independent path documented above.
 - **Quotas:** app sends consume the Resend free tier (3,000/mo, 100/day —
   current volume is a few hundred/month, ample headroom). Gmail's send-as
-  relay still shares the Cloudflare Email Sending quota; volume there is
-  trivial (owner replies only).
+  relay now shares that same Resend quota; volume there is trivial
+  (owner replies only).
+- **Failure visibility (Oct 1 2026):** every transport failure logs
+  `[email] …` with HTTP status + response-body snippet to Pages function
+  logs; auth's reset/verification sends **throw** when `sendEmail` returns
+  false, so better-auth logs `Failed to run background task: …` instead of
+  the send vanishing. Resend-verification endpoints return an honest error;
+  forget-password keeps its deliberate generic message (anti-enumeration).
 - **Outbound From is always `contact@toolzum.com`.** `support@toolzum.com`
   is receive-only (a routing rule, not a verified sender). To send *from* it
   later it needs its own identity in Resend — deliberately not done: one
@@ -197,4 +207,4 @@ pipeline, so correspondence never depends on Gmail's send-as:
 | `CLOUDFLARE_ACCOUNT_ID` | Pages env | fallback transport account scoping |
 | `CONTACT_TO` | Pages env (optional) | relay target; defaults to the owner's Gmail |
 | `ALERT_TOKEN` | Pages env + repo secret | alert workflow auth + `/api/admin/reply` bearer path (see `docs/ALERTS.md`) |
-| Gmail send-as token | Gmail settings only | owner replies as contact@ (step 1 above) |
+| Gmail send-as SMTP password | Gmail settings only | owner replies as contact@ (`smtp.resend.com` / user `resend` / key from step 1) |

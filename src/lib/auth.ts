@@ -175,7 +175,7 @@ export function createAuth(env: AuthEnv) {
         verify: verifyPassword,
       },
       sendResetPassword: async ({ user, url }: { user: { email: string }; url: string; token: string }) => {
-        await sendEmail(env, {
+        const ok = await sendEmail(env, {
           to: user.email,
           subject: "Reset your Toolzum password",
           fromName: "Toolzum Security",
@@ -190,11 +190,17 @@ export function createAuth(env: AuthEnv) {
             note: "This link expires in 1 hour. If you didn't request this, you can safely ignore this email — your password stays unchanged.",
           }),
         });
+        // better-auth wraps this in runInBackgroundOrAwait: a rejection is
+        // logged ("Failed to run background task"), not returned — the API
+        // keeps its deliberate generic message (anti-enumeration). Throwing
+        // still makes failed sends visible in Pages logs instead of fully
+        // silent, so an outage shows up in `wrangler pages deployment tail`.
+        if (!ok) throw new Error(`password-reset email failed to send to ${user.email}`);
       },
     },
     emailVerification: {
       sendVerificationEmail: async ({ user, url }: { user: { email: string }; url: string }) => {
-        await sendEmail(env, {
+        const ok = await sendEmail(env, {
           to: user.email,
           subject: "Verify your Toolzum account",
           text: `Welcome to Toolzum! Verify your email address by clicking the link below:\n\n${url}\n\nThis link expires in 1 hour.`,
@@ -208,6 +214,11 @@ export function createAuth(env: AuthEnv) {
             note: "This link expires in 1 hour. Verifying unlocks your account; free tools stay available either way.",
           }),
         });
+        // Signup runs this inside runInBackgroundOrAwait (reject → logged,
+        // signup still completes); the resend-verification endpoints await
+        // it directly, so a throw there gives the user an honest error
+        // instead of a fake "check your email".
+        if (!ok) throw new Error(`verification email failed to send to ${user.email}`);
       },
       expiresIn: 3600,
     },

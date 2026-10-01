@@ -2,6 +2,7 @@ import { describe, it, expect, vi, afterEach } from 'vitest';
 import { sendEmail, emailConfigured } from '@/lib/email';
 
 afterEach(() => {
+  vi.restoreAllMocks();
   vi.unstubAllGlobals();
 });
 
@@ -181,5 +182,64 @@ describe('sendEmail — Cloudflare fallback', () => {
 
     expect(ok).toBe(false);
     expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+});
+
+describe('sendEmail — failure logging', () => {
+  it('logs status, body snippet, to and subject when Resend rejects', async () => {
+    const errSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const fetchMock = vi.fn(async () => ({
+      ok: false,
+      status: 401,
+      text: async () => '{"message":"API key is invalid"}',
+    }));
+    vi.stubGlobal('fetch', fetchMock);
+
+    const ok = await sendEmail(
+      { RESEND_API_KEY: 're_bad' },
+      { to: 'a@b.com', subject: 'Reset link', text: 't' }
+    );
+
+    expect(ok).toBe(false);
+    const logged = errSpy.mock.calls.map((c) => String(c[0])).join('\n');
+    expect(logged).toContain('[email] resend rejected');
+    expect(logged).toContain('HTTP 401');
+    expect(logged).toContain('API key is invalid');
+    expect(logged).toContain('to=a@b.com');
+    expect(logged).toContain('subject="Reset link"');
+  });
+
+  it('logs when Cloudflare rejects on the fallback path', async () => {
+    const errSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const fetchMock = vi.fn(async () => ({
+      ok: false,
+      status: 500,
+      text: async () => 'upstream failure',
+    }));
+    vi.stubGlobal('fetch', fetchMock);
+
+    const ok = await sendEmail(
+      { CLOUDFLARE_API_TOKEN: 't', CLOUDFLARE_ACCOUNT_ID: 'a' },
+      { to: 'a@b.com', subject: 'S', text: 't' }
+    );
+
+    expect(ok).toBe(false);
+    const logged = errSpy.mock.calls.map((c) => String(c[0])).join('\n');
+    expect(logged).toContain('[email] cloudflare rejected');
+    expect(logged).toContain('HTTP 500');
+    expect(logged).toContain('upstream failure');
+  });
+
+  it('logs when no transport is configured at all', async () => {
+    const errSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock);
+
+    const ok = await sendEmail({}, { to: 'a@b.com', subject: 'S', text: 't' });
+
+    expect(ok).toBe(false);
+    expect(fetchMock).not.toHaveBeenCalled();
+    const logged = errSpy.mock.calls.map((c) => String(c[0])).join('\n');
+    expect(logged).toContain('[email] no transport configured');
   });
 });

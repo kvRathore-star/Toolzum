@@ -12,7 +12,9 @@
  *
  * Requires RESEND_API_KEY (Pages secret) — or the legacy pair
  * CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID — as Pages secrets.
- * With neither: returns false, callers surface honest failures.
+ * With neither: returns false and logs why, callers surface honest failures.
+ * Every transport failure is logged to Pages function logs (status + body
+ * snippet) — a revoked key or quota wall is never invisible.
  */
 
 import { brandFromText } from "./emailTemplate";
@@ -45,6 +47,28 @@ export function emailConfigured(env: EmailEnv): boolean {
   );
 }
 
+/**
+ * Failure visibility: transports log status + truncated response body to
+ * Pages function logs (console.error) so a revoked key or quota wall shows
+ * up somewhere instead of failing silently — callers still get `false` to
+ * surface their own honest error.
+ */
+async function logFailure(
+  transport: "resend" | "cloudflare",
+  opts: EmailOptions,
+  res: Response
+): Promise<void> {
+  let detail = "";
+  try {
+    detail = await res.text();
+  } catch {
+    /* body unavailable (mocked/test responses) — status still identifies it */
+  }
+  console.error(
+    `[email] ${transport} rejected: HTTP ${res.status} — to=${opts.to} subject="${opts.subject}"${detail ? ` detail=${detail.slice(0, 300)}` : ""}`
+  );
+}
+
 async function sendViaResend(
   apiKey: string,
   opts: EmailOptions,
@@ -66,8 +90,13 @@ async function sendViaResend(
         html,
       }),
     });
-    return res.ok;
-  } catch {
+    if (res.ok) return true;
+    await logFailure("resend", opts, res);
+    return false;
+  } catch (err) {
+    console.error(
+      `[email] resend threw: ${String(err)} — to=${opts.to} subject="${opts.subject}"`
+    );
     return false;
   }
 }
@@ -99,8 +128,13 @@ async function sendViaCloudflare(
         }),
       }
     );
-    return res.ok;
-  } catch {
+    if (res.ok) return true;
+    await logFailure("cloudflare", opts, res);
+    return false;
+  } catch (err) {
+    console.error(
+      `[email] cloudflare threw: ${String(err)} — to=${opts.to} subject="${opts.subject}"`
+    );
     return false;
   }
 }
@@ -110,6 +144,13 @@ export async function sendEmail(
   opts: EmailOptions
 ): Promise<boolean> {
   const html = opts.html ?? brandFromText(opts.subject, opts.text);
+
+  if (!emailConfigured(env)) {
+    console.error(
+      `[email] no transport configured (missing RESEND_API_KEY) — to=${opts.to} subject="${opts.subject}"`
+    );
+    return false;
+  }
 
   // Resend first (works for arbitrary recipients on the free tier). On
   // failure fall back to Cloudflare — harmless: it either succeeds (owner's
