@@ -48,7 +48,10 @@ jobs:
           path: |
             .next/cache
             out
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/*.ts', '**/*.tsx', '**/*.js', '**/*.json') }}
+          # Scope the hash to tracked build inputs — the old
+          # '**/*.ts, **/*.js, **/*.json' walked node_modules after npm ci
+          # and hashFiles hit its 120s cap, failing the job outright.
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json', 'src/**', 'scripts/**', 'public/**/*.html', '*.ts', '*.js', '*.mjs', '*.json') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-
 
