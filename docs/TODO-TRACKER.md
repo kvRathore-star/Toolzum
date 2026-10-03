@@ -12,8 +12,11 @@ Last updated: 2026-10-03
 
 **Phase 2 gate** (all three required before any Phase 2 work starts):
 - [x] E2E suite green in a **full serial run** — all cases incl. 10c and the font-DB-blocked variant. Isolated passes don't count (case 2 passed alone while failing in serial once). **DONE Oct 3 2026: 13/13 in 11.9m (`/tmp/pdf-serial2.log`); case 2/5 got session-count-scaled `test.setTimeout` (300s/240s) after the 120s ceiling starved iteration 3.**
-- [ ] Manual browser checklist done, **including Maximum mode**.
+- [ ] Manual browser checklist done, **including Maximum mode** — run `docs/pdf-editor-manual-checklist.md` (13 cases, fixtures in `docs/fixtures/pdf-editor-manual/`, verify helper `scripts/pdf-find.mjs`).
 - [ ] Beta label **stays** on the tool until both of the above pass.
+
+**Phase 3 list (a11y & i18n):**
+- [ ] Editor open latency on slow devices — full serial e2e showed each editor session (goto → upload → render ready) taking ~50s under machine load ~50; case 2 needed a 300s ceiling for 3 sessions. A budget phone may hit the same slowness (cold chunk fetch + font preloads + IDB recovery). Profile on a throttled CPU + a low-end Android before Phase 3 sign-off. (Filed as product work, not just a test-timeout issue — owner instruction Oct 2026.)
 
 **Don't deploy:** a green browser run is NOT release approval. Ship only after the manual checklist + scorecard re-score + explicit owner sign-off.
 

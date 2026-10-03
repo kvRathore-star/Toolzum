@@ -6,6 +6,10 @@ so correctness gains are provisional until it passes.
 
 **Re-score Oct 2026 (post Phase-1):** category 1 moved 60 → 78 after the
 full serial e2e gate went 13/13 (`/tmp/pdf-serial2.log`, 11.9m). See row 1.
+**Treat 78 as a progress marker, not a measurement** (owner instruction):
+the two things that still move this score are the manual checklist
+(`docs/pdf-editor-manual-checklist.md`) and the real-producer fixtures
+(Word/Chrome/LibreOffice — tracked as follow-up in TODO-TRACKER).
 
 Scoring: evidence only — file:line from this repo. "Unverified" = not read,
 not assumed good or bad.
