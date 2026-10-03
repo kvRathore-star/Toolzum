@@ -29,6 +29,18 @@
 | 12 | Second tab | Same editor URL in a second tab; edit in tab A, then interact in tab B | Record what the app does/warns about concurrent tabs; note anything that loses work | ☐ | |
 | 13 | Wording audit | Read **every** toast + FAQ line in the editor that claims something (export gate, "verified", autosave, fonts, privacy, limits) | Each claim backed by code/behavior — cross-check `docs/pdf-editor-claims.md`. **Any unbacked claim = FAIL** (list in Notes) | ☐ | |
 
+## Before merge (record, don't assume)
+
+- [ ] Full unit suite on the **exact merge-candidate commit**: `npm test` → `___ pass, ___ fail` — sha: `__________`
+- [ ] Full **serial** e2e on that same sha (`npx playwright test e2e/pdf-editor.spec.ts` against dev): `13/13` ☐ — logged in: `____________`
+- [ ] GitHub Actions green on that sha — quality + build + e2e all run (not a 0s "workflow file issue"). CI was schema-broken Sep 10–Oct 3 2026; the fix must be verified by a real run, not by reading the YAML.
+
+## After merge (before beta comes off)
+
+- [ ] **Env parity**: preview vs production Cloudflare Pages environment variables match (Turnstile keys, AI keys, credit checks — dashboard → toolzum → Settings → Environment variables). A missing prod var fails only at runtime.
+- [ ] **Rollback plan**: locate the previous production deployment in the Cloudflare Pages dashboard (Deployments → previous → Rollback) before merging, not during an incident.
+- [ ] **Production smoke**: re-run cases **1, 3 (Maximum), 10** against live toolzum.com after deploy; then remove the beta label.
+
 ## Sign-off
 
 - Date: `____________`  Reviewer: `____________`

@@ -81,6 +81,12 @@ jobs:
     if: github.event_name == 'pull_request'
     needs: [quality, build]
     runs-on: ubuntu-latest
+    env:
+      # `secrets` is NOT a legal context in `if` (workflow-schema error) —
+      # the original `${{ secrets.X != '' }}` guards here zeroed every
+      # workflow run with a 0s "workflow file issue" from Sep 10 2026.
+      # Materialize booleans into env (legal) and branch on those.
+      HAS_CLOUDFLARE: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -91,7 +97,7 @@ jobs:
       - run: npm run build
 
       - name: Deploy PR preview
-        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+        if: ${{ env.HAS_CLOUDFLARE == 'true' }}
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -99,11 +105,15 @@ jobs:
           command: pages deploy out --project-name=toolzum --branch=${{ github.head_ref }}
 
       - name: Preview skipped (no secrets)
-        if: ${{ secrets.CLOUDFLARE_API_TOKEN == '' }}
+        if: ${{ env.HAS_CLOUDFLARE != 'true' }}
         run: echo "No CLOUDFLARE_API_TOKEN secret — preview deploy skipped. Add the secrets or enable native PR previews in the Pages dashboard."
 
       - name: Preview URL
-        run: echo "Preview should be live at https://${{ github.head_ref }}.toolzum.pages.dev (Pages sanitizes branch characters)"
+        # head_ref via env, not inline ${{ }} — branch names are PR-author
+        # controlled (script-injection hardening; actionlint secure-use).
+        env:
+          PR_BRANCH: ${{ github.head_ref }}
+        run: echo "Preview should be live at https://$PR_BRANCH.toolzum.pages.dev (Pages sanitizes branch characters)"
 
   migrate:
     # #27: apply versioned D1 migrations on every main push. Pages does
@@ -115,6 +125,9 @@ jobs:
     if: github.event_name == 'push'
     needs: [quality, build]
     runs-on: ubuntu-latest
+    env:
+      # Same schema fix as the preview job — secrets can't appear in `if`.
+      HAS_CLOUDFLARE: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -123,13 +136,13 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - name: Apply D1 migrations
-        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+        if: ${{ env.HAS_CLOUDFLARE == 'true' }}
         run: npx wrangler d1 migrations apply toolhub-db --remote
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       - name: Migrations skipped (no secrets)
-        if: ${{ secrets.CLOUDFLARE_API_TOKEN == '' }}
+        if: ${{ env.HAS_CLOUDFLARE != 'true' }}
         run: echo "No CLOUDFLARE_API_TOKEN secret — run 'npx wrangler d1 migrations apply toolhub-db --remote' manually after deploy (see docs/DATA-MIGRATIONS.md)."
 
   e2e:
@@ -145,7 +158,10 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
+      # All three engines — playwright.config.ts (CI branch) defines
+      # chromium + firefox + webkit projects; chromium-only left firefox/
+      # webkit missing and failed the job.
+      - run: npx playwright install --with-deps
       - run: npm run build
       - run: npx serve out -l 3000 &
       - run: PLAYWRIGHT_BASE_URL=http://localhost:3000 npm run test:e2e

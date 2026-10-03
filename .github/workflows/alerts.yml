@@ -9,10 +9,17 @@ on:
 jobs:
   check-and-relay:
     runs-on: ubuntu-latest
+    env:
+      # `secrets` is not a legal context in `if` (workflow-schema error,
+      # actionlint-verified) — these guards zeroed every cron run from
+      # Sep 16 2026 until fixed. Booleans in env; `if` reads env.
+      HAS_ALERT_TOKEN: ${{ secrets.ALERT_TOKEN != '' }}
+      HAS_CLOUDFLARE: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+      HAS_ALERT_TO: ${{ secrets.ALERT_TO != '' }}
     steps:
       - name: Evaluate alert thresholds
         id: check
-        if: ${{ secrets.ALERT_TOKEN != '' }}
+        if: ${{ env.HAS_ALERT_TOKEN == 'true' }}
         run: |
           RESP=$(curl -sS -m 30 -H "Authorization: Bearer ${{ secrets.ALERT_TOKEN }}" \
             https://toolzum.com/api/admin/alerts-check)
@@ -27,7 +34,7 @@ jobs:
         # REST API: POST /accounts/{id}/email/sending/send. Requires
         # toolzum.com onboarded to Email Sending + a token with email
         # permissions (see docs/ALERTS.md setup). Transactional only.
-        if: ${{ steps.check.outputs.triggered == 'true' && secrets.CLOUDFLARE_API_TOKEN != '' && secrets.ALERT_TO != '' }}
+        if: ${{ steps.check.outputs.triggered == 'true' && env.HAS_CLOUDFLARE == 'true' && env.HAS_ALERT_TO == 'true' }}
         run: |
           BODY=$(jq -n \
             --arg to "${{ secrets.ALERT_TO }}" \
@@ -40,5 +47,5 @@ jobs:
             -d "$BODY"
 
       - name: Alerting skipped (no secrets)
-        if: ${{ secrets.ALERT_TOKEN == '' }}
+        if: ${{ env.HAS_ALERT_TOKEN != 'true' }}
         run: echo "No ALERT_TOKEN secret — see docs/ALERTS.md setup (token + Email Sending onboarding + ALERT_TO)."

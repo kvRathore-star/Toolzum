@@ -10,6 +10,11 @@ on:
 jobs:
   probe:
     runs-on: ubuntu-latest
+    env:
+      # secrets can't appear in `if` (workflow-schema error) — this pattern
+      # killed all cron runs from Sep 16 2026. Booleans in env; `if` reads env.
+      HAS_CLOUDFLARE: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+      HAS_ALERT_TO: ${{ secrets.ALERT_TO != '' }}
     steps:
       - name: Probe home + tool page
         id: probe
@@ -29,7 +34,7 @@ jobs:
           echo "failed=$([ -n "$fail" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
 
       - name: Relay outage via email (Cloudflare Email Service)
-        if: ${{ steps.probe.outputs.failed == 'true' && secrets.CLOUDFLARE_API_TOKEN != '' && secrets.ALERT_TO != '' }}
+        if: ${{ steps.probe.outputs.failed == 'true' && env.HAS_CLOUDFLARE == 'true' && env.HAS_ALERT_TO == 'true' }}
         run: |
           BODY=$(jq -n \
             --arg to "${{ secrets.ALERT_TO }}" \
@@ -42,5 +47,5 @@ jobs:
             -d "$BODY"
 
       - name: Uptime relay skipped (no secrets)
-        if: ${{ secrets.CLOUDFLARE_API_TOKEN == '' || secrets.ALERT_TO == '' }}
+        if: ${{ env.HAS_CLOUDFLARE != 'true' || env.HAS_ALERT_TO != 'true' }}
         run: echo "No email secrets — probes still run in Actions logs; add secrets for email relay (docs/ALERTS.md)."
