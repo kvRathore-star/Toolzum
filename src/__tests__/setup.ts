@@ -1,6 +1,12 @@
 import '@testing-library/jest-dom';
 
-// Mock navigator.clipboard
+// Mock navigator.clipboard.
+// 24 suites run `@vitest-environment node`; on CI's Node 20 there is no
+// global navigator (added in Node 21 — local dev runs 24, so without this
+// guard setup only ever crashed in CI). Stub a minimal one there.
+if (typeof navigator === 'undefined') {
+  Object.assign(globalThis, { navigator: {} });
+}
 Object.assign(navigator, {
   clipboard: {
     writeText: vi.fn().mockResolvedValue(undefined),

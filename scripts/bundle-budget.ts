@@ -67,18 +67,23 @@ function chunksOf(htmlPath: string): Set<string> {
   return set;
 }
 
-function collect(outDir: string): BundleStats {
+export function collect(outDir: string): BundleStats {
   const files = listHtml(outDir);
   if (files.length === 0) throw new Error(`no HTML pages found under ${outDir}`);
   let shared: Set<string> | null = null;
   const perPage: { route: string; chunks: Set<string> }[] = [];
   for (const f of files) {
     const chunks = chunksOf(f);
+    // Zero-JS pages (out/offline.html — the PWA fallback) reference no
+    // chunks; their empty set would empty the intersection and abort the
+    // gate. Excluded from shared/heaviest, still counted in pageCount.
+    if (chunks.size === 0) continue;
     perPage.push({ route: f.slice(outDir.length), chunks });
     shared = shared === null ? chunks : new Set([...shared].filter((c: string) => chunks.has(c)));
   }
-  const sharedList = [...shared!].sort();
-  if (sharedList.length === 0) throw new Error('empty shared-chunk intersection — check CHUNK_RE');
+  if (shared === null) throw new Error(`no page under ${outDir} references any JS chunk — check CHUNK_RE`);
+  const sharedList = [...shared].sort();
+  if (sharedList.length === 0) throw new Error('shared-chunk intersection is empty — entry chunks diverge across pages');
   const sizes: Record<string, number> = {};
   const sizeOf = (c: string): number =>
     (sizes[c] ??= gzipSync(readFileSync(join(outDir, '_next', 'static', 'chunks', c))).length);
