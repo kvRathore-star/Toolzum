@@ -22,12 +22,16 @@ test('no cross-origin isolation: single-threaded WASM baseline everywhere', asyn
 });
 
 test('local tool executes end-to-end (word counter)', async ({ page }) => {
+  // The tool body is a lazy chunk (DynamicModuleWrapper): under suite
+  // contention the mount lands well after first paint — allow for it.
+  test.setTimeout(60_000);
   await page.goto('/text/word-counter');
   const input = page.getByLabel('Text', { exact: true });
-  await expect(input).toBeVisible({ timeout: 15000 });
+  await expect(input).toBeVisible({ timeout: 30000 });
   await input.fill('hello brave new world');
   // Result reflects the input without any server round-trip.
-  await expect(page.getByText(/5 words,/i).first()).toBeVisible({
+  // "hello brave new world" = 4 tokens (21 chars incl. spaces).
+  await expect(page.getByText(/4 words,/i).first()).toBeVisible({
     timeout: 15000,
   });
 });
@@ -35,5 +39,5 @@ test('local tool executes end-to-end (word counter)', async ({ page }) => {
 test('offline fallback page is reachable', async ({ page }) => {
   const res = await page.goto('/offline.html');
   expect(res?.status()).toBe(200);
-  await expect(page.getByText(/you're offline/i)).toBeVisible();
+  await expect(page.getByText(/you.re offline/i)).toBeVisible();
 });

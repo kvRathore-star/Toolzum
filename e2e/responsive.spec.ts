@@ -20,14 +20,20 @@ for (const bp of BREAKPOINTS) {
   test(`homepage renders cleanly at ${bp.name} (${bp.width}px)`, async ({ page }) => {
     await page.setViewportSize({ width: bp.width, height: bp.height });
     await page.goto('/');
-    await expect(page.getByRole('navigation').first()).toBeVisible();
+    // Desktop exposes the <nav>; below md the nav is display:none and the
+    // mobile drawer (role=dialog, inert until opened) has no nav landmark —
+    // the header is "present" iff either the nav or the Open-menu button is.
+    await expect(
+      page.getByRole('navigation').first().or(page.getByRole('button', { name: /open menu/i })),
+    ).toBeVisible();
     await noHorizontalOverflow(page);
   });
 
   test(`tool page usable at ${bp.name} (${bp.width}px)`, async ({ page }) => {
     await page.setViewportSize({ width: bp.width, height: bp.height });
     await page.goto('/finance/emi-calculator');
-    await expect(page.getByLabel(/loan amount/i)).toBeVisible();
+    // Lazy tool chunk: mount can trail first paint under SW-install load.
+    await expect(page.getByLabel(/loan amount/i)).toBeVisible({ timeout: 25000 });
     await noHorizontalOverflow(page);
   });
 }

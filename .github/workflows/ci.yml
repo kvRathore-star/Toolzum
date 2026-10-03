@@ -71,50 +71,6 @@ jobs:
         # on breach — blocks PRs and skips e2e until fixed.
         run: npx tsx scripts/bundle-budget.ts --check
 
-  preview:
-    # C3.1 branch-aware PR previews via Cloudflare Pages direct upload.
-    # Requires repo secrets CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID
-    # (Cloudflare dashboard → My Profile → API Tokens). Skips cleanly without
-    # them. Alternative with no secrets: Pages dashboard → toolzum project →
-    # Settings → Builds & deployments → enable "Preview deployments for pull
-    # requests" (native integration). Use ONE path, not both.
-    if: github.event_name == 'pull_request'
-    needs: [quality, build]
-    runs-on: ubuntu-latest
-    env:
-      # `secrets` is NOT a legal context in `if` (workflow-schema error) —
-      # the original `${{ secrets.X != '' }}` guards here zeroed every
-      # workflow run with a 0s "workflow file issue" from Sep 10 2026.
-      # Materialize booleans into env (legal) and branch on those.
-      HAS_CLOUDFLARE: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run build
-
-      - name: Deploy PR preview
-        if: ${{ env.HAS_CLOUDFLARE == 'true' }}
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy out --project-name=toolzum --branch=${{ github.head_ref }}
-
-      - name: Preview skipped (no secrets)
-        if: ${{ env.HAS_CLOUDFLARE != 'true' }}
-        run: echo "No CLOUDFLARE_API_TOKEN secret — preview deploy skipped. Add the secrets or enable native PR previews in the Pages dashboard."
-
-      - name: Preview URL
-        # head_ref via env, not inline ${{ }} — branch names are PR-author
-        # controlled (script-injection hardening; actionlint secure-use).
-        env:
-          PR_BRANCH: ${{ github.head_ref }}
-        run: echo "Preview should be live at https://$PR_BRANCH.toolzum.pages.dev (Pages sanitizes branch characters)"
-
   migrate:
     # #27: apply versioned D1 migrations on every main push. Pages does
     # NOT apply migrations_dir automatically — without this job, the

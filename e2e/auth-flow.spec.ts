@@ -5,7 +5,9 @@ import { test, expect } from '@playwright/test';
 test('login page renders and validates', async ({ page }) => {
   await page.goto('/login');
   await expect(page.getByLabel(/email/i)).toBeVisible();
-  await expect(page.getByLabel(/password/i)).toBeVisible();
+  // exact: the "Show password" button's aria-label also matches /password/i
+  // (strict-mode violation since the toggle button shipped).
+  await expect(page.getByLabel('Password', { exact: true })).toBeVisible();
 });
 
 test('homepage shows sign-in entry when logged out', async ({ page }) => {

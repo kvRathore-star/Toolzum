@@ -20,9 +20,22 @@ export default defineConfig({
   outputDir: process.env.PLAYWRIGHT_OUTPUT_DIR || path.join(os.tmpdir(), 'toolzum-pw-out'),
   fullyParallel: true,
   retries: process.env.CI ? 2 : 0,
+  // One SW install saturates `serve` (27MB / 781 files over HTTP/1.1) and
+  // parallel installs starve sibling page loads past the 30s navigation
+  // default. Two workers everywhere: CI matches the 4-vCPU runner, local
+  // stays calm enough for 'load' to land under install storms.
+  workers: 2,
+  // Default 5s expect timeout flakes under load: SW installs (27MB precache)
+  // saturate `serve` while sibling specs hydrate — a slow chunk parse there
+  // blows the label check. 10s absorbs contention without masking real fails.
+  expect: { timeout: 10_000 },
   use: {
     baseURL: process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:3000',
     trace: 'on-first-retry',
+    // 'load' waits on every resource; behind an SW install storm (27MB
+    // precache through one `serve`) the default 30s navigation timeout
+    // fails healthy pages.
+    navigationTimeout: 45_000,
   },
   projects: localOnly
     ? [
