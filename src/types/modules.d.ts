@@ -32,3 +32,8 @@ declare module "vcard-parser" {
   }
   export function parse(vcf: string): VCardData[];
 }
+
+// regenerator-runtime ships no types. Only the side-effect polyfill entry is
+// imported (registerFontkitOnce in PdfEditorCore — @pdf-lib/fontkit's Babel
+// generated StateMachine.match calls the global regeneratorRuntime).
+declare module "regenerator-runtime/runtime";
