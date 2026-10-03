@@ -27,20 +27,38 @@ describe("PWA offline + install contract (#10)", () => {
   });
 
   it("service worker serves the fallback for navigations (never for APIs)", () => {
-    const sw = fs.readFileSync(path.join(ROOT, "scripts/gen-sw.js"), "utf8");
+    const src = fs.readFileSync(path.join(ROOT, "scripts/sw-source.js"), "utf8");
+    const gen = fs.readFileSync(path.join(ROOT, "scripts/gen-sw.js"), "utf8");
     // Canonical /offline: /offline.html 308-redirects on Pages pretty URLs
     // and a redirected precache-put throws — the fallback must be the 200 URL.
-    expect(sw.includes("navigateFallback: '/offline'")).toBe(true);
-    expect(sw.includes("additionalManifestEntries")).toBe(true);
-    expect(sw.includes("navigateFallbackDenylist")).toBe(true);
-    expect(sw.includes("/api/")).toBe(true);
+    expect(src.includes("createHandlerBoundToURL('/offline')")).toBe(true);
+    // Fallback is a *catch* handler guarded to navigations: a route that
+    // intercepts navigations first (workbox navigateFallback's
+    // NavigationRoute) serves /offline even while online — never again.
+    expect(src.includes("setCatchHandler")).toBe(true);
+    expect(src.includes("request.mode === 'navigate'")).toBe(true);
+    expect(src.includes("new NavigationRoute")).toBe(false);
+    // APIs must fail honestly — never HTML: excluded from the fallback,
+    // same-origin API path kept in the route set.
+    expect(src.includes("Response.error()")).toBe(true);
+    expect(src.includes("/api/")).toBe(true);
+    expect(gen.includes("additionalManifestEntries")).toBe(true);
+  });
+
+  it("precache install cannot hang forever on a stalled fetch", () => {
+    const src = fs.readFileSync(path.join(ROOT, "scripts/sw-source.js"), "utf8");
+    // Prod measured install stalling forever (759/782) with no fetch
+    // timeout in the stock workbox template — every fetch is raced
+    // against a timeout with retries.
+    expect(src.includes("sw fetch timeout")).toBe(true);
+    expect(src.includes("attempt(3)")).toBe(true);
   });
 
   it("versioned CDN engines get a long-lived cache (offline tools)", () => {
-    const sw = fs.readFileSync(path.join(ROOT, "scripts/gen-sw.js"), "utf8");
-    expect(sw.includes("immutable-cdn")).toBe(true);
+    const src = fs.readFileSync(path.join(ROOT, "scripts/sw-source.js"), "utf8");
+    expect(src.includes("immutable-cdn")).toBe(true);
     for (const origin of ["cdn\\.jsdelivr\\.net", "unpkg\\.com", "storage\\.googleapis\\.com"]) {
-      expect(sw.includes(origin)).toBe(true);
+      expect(src.includes(origin)).toBe(true);
     }
   });
 

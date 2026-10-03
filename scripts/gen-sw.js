@@ -3,139 +3,44 @@
  *
  * Why not @ducanh2912/next-pwa: it injects a webpack config, which
  * hard-errors under this repo's Turbopack-default Next 16 build. This script
- * uses workbox-build directly (same Workbox engine, same route set as the
- * previously committed sw.js) with zero build-pipeline coupling.
+ * uses workbox-build directly with zero build-pipeline coupling.
+ *
+ * Pipeline (since Oct 2026 — see scripts/sw-source.js header for the two
+ * bugs this shape fixes): injectManifest injects the precache manifest into
+ * scripts/sw-source.js, then esbuild bundles the result (workbox modules
+ * inlined) into a single classic worker script.
  *
  * Run: node scripts/gen-sw.js (wired as the last step of `npm run build`).
- * Reads: out/ (built site). Writes: out/sw.js + out/workbox-*.js.
+ * Reads: out/ (built site), public/offline.html, scripts/sw-source.js.
+ * Writes: out/sw.js (+ intermediate under node_modules/.cache/gen-sw/).
  * Registration: src/components/ServiceWorkerRegister.tsx (prod only).
  */
-const { generateSW } = require('workbox-build');
-const { readFileSync, existsSync } = require('node:fs');
+const { injectManifest } = require('workbox-build');
+const esbuild = require('esbuild');
+const { readFileSync, existsSync, mkdirSync } = require('node:fs');
 const { createHash } = require('node:crypto');
-
-const DAY = 86400;
-
-const runtimeCaching = [
-  { urlPattern: '/', handler: 'NetworkFirst', options: { cacheName: 'start-url' } },
-  {
-    // #10 pre-emptive: versioned library/model CDNs are immutable
-    // (pinned versions in URLs) — cache them for months, not the 1h
-    // cross-origin default. This is what keeps FFmpeg/MediaPipe/TF.js
-    // tools working offline instead of evicting mid-week.
-    urlPattern: /^https:\/\/(cdn\.jsdelivr\.net|unpkg\.com|cdnjs\.cloudflare\.com|storage\.googleapis\.com)\/.*/i,
-    handler: 'CacheFirst',
-    options: { cacheName: 'immutable-cdn', expiration: { maxEntries: 48, maxAgeSeconds: 90 * DAY } },
-  },
-  {
-    urlPattern: /^https:\/\/fonts\.(?:gstatic)\.com\/.*/i,
-    handler: 'CacheFirst',
-    options: { cacheName: 'google-fonts-webfonts', expiration: { maxEntries: 4, maxAgeSeconds: 365 * DAY } },
-  },
-  {
-    urlPattern: /^https:\/\/fonts\.(?:googleapis)\.com\/.*/i,
-    handler: 'StaleWhileRevalidate',
-    options: { cacheName: 'google-fonts-stylesheets', expiration: { maxEntries: 4, maxAgeSeconds: 7 * DAY } },
-  },
-  {
-    urlPattern: /\.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i,
-    handler: 'StaleWhileRevalidate',
-    options: { cacheName: 'static-font-assets', expiration: { maxEntries: 4, maxAgeSeconds: 7 * DAY } },
-  },
-  {
-    urlPattern: /\.(?:jpg|jpeg|gif|png|svg|ico|webp)$/i,
-    handler: 'StaleWhileRevalidate',
-    options: { cacheName: 'static-image-assets', expiration: { maxEntries: 64, maxAgeSeconds: 30 * DAY } },
-  },
-  {
-    urlPattern: /\/_next\/static.+\.js$/i,
-    handler: 'CacheFirst',
-    options: { cacheName: 'next-static-js-assets', expiration: { maxEntries: 64, maxAgeSeconds: DAY } },
-  },
-  {
-    urlPattern: /\/_next\/image\?url=.+$/i,
-    handler: 'StaleWhileRevalidate',
-    options: { cacheName: 'next-image', expiration: { maxEntries: 64, maxAgeSeconds: DAY } },
-  },
-  {
-    urlPattern: /\.(?:mp3|wav|ogg)$/i,
-    handler: 'CacheFirst',
-    options: {
-      cacheName: 'static-audio-assets',
-      rangeRequests: true,
-      expiration: { maxEntries: 32, maxAgeSeconds: DAY },
-    },
-  },
-  {
-    urlPattern: /\.(?:mp4|webm)$/i,
-    handler: 'CacheFirst',
-    options: {
-      cacheName: 'static-video-assets',
-      rangeRequests: true,
-      expiration: { maxEntries: 32, maxAgeSeconds: DAY },
-    },
-  },
-  {
-    urlPattern: /\.(?:js)$/i,
-    handler: 'StaleWhileRevalidate',
-    options: { cacheName: 'static-js-assets', expiration: { maxEntries: 48, maxAgeSeconds: DAY } },
-  },
-  {
-    urlPattern: /\.(?:css|less)$/i,
-    handler: 'StaleWhileRevalidate',
-    options: { cacheName: 'static-style-assets', expiration: { maxEntries: 32, maxAgeSeconds: DAY } },
-  },
-  {
-    urlPattern: /\/_next\/data\/.+\/.+\.json$/i,
-    handler: 'StaleWhileRevalidate',
-    options: { cacheName: 'next-data', expiration: { maxEntries: 32, maxAgeSeconds: DAY } },
-  },
-  {
-    urlPattern: /\.(?:json|xml|csv)$/i,
-    handler: 'NetworkFirst',
-    options: { cacheName: 'static-data-assets', expiration: { maxEntries: 32, maxAgeSeconds: DAY } },
-  },
-  {
-    // Same-origin API calls except the auth callback (mirrors previous sw.js).
-    urlPattern: ({ sameOrigin, url }) =>
-      sameOrigin && url.pathname.startsWith('/api/') && !url.pathname.startsWith('/api/auth/callback'),
-    handler: 'NetworkFirst',
-    options: { cacheName: 'apis', networkTimeoutSeconds: 10, expiration: { maxEntries: 16, maxAgeSeconds: DAY } },
-  },
-  {
-    // Next.js RSC prefetch + navigations (same-origin, non-API).
-    urlPattern: ({ request, url, sameOrigin }) =>
-      request.headers.get('RSC') === '1' && request.headers.get('Next-Router-Prefetch') === '1' && sameOrigin && !url.pathname.startsWith('/api/'),
-    handler: 'NetworkFirst',
-    options: { cacheName: 'pages-rsc-prefetch', expiration: { maxEntries: 32, maxAgeSeconds: DAY } },
-  },
-  {
-    urlPattern: ({ request, url, sameOrigin }) =>
-      request.headers.get('RSC') === '1' && sameOrigin && !url.pathname.startsWith('/api/'),
-    handler: 'NetworkFirst',
-    options: { cacheName: 'pages-rsc', expiration: { maxEntries: 32, maxAgeSeconds: DAY } },
-  },
-  {
-    urlPattern: ({ url, sameOrigin }) => sameOrigin && !url.pathname.startsWith('/api/'),
-    handler: 'NetworkFirst',
-    options: { cacheName: 'pages', expiration: { maxEntries: 32, maxAgeSeconds: DAY } },
-  },
-  {
-    urlPattern: ({ sameOrigin }) => !sameOrigin,
-    handler: 'NetworkFirst',
-    options: { cacheName: 'cross-origin', networkTimeoutSeconds: 10, expiration: { maxEntries: 16, maxAgeSeconds: 3600 } },
-  },
-];
+const path = require('node:path');
 
 async function main() {
   // #10 recheck: the canonical URL is /offline (/offline.html 308s to it
   // on Pages pretty URLs, and a redirected precache-put throws). Hash the
-  // file so the fallback entry invalidates on change.
+  // file so the fallback entry invalidates on change. The SW source binds
+  // createHandlerBoundToURL('/offline') at load — without the entry the
+  // worker would throw on install, so missing file = hard failure here.
   const offlineHtml = 'public/offline.html';
-  const offlineRevision = existsSync(offlineHtml)
-    ? createHash('sha256').update(readFileSync(offlineHtml)).digest('hex').slice(0, 16)
-    : null;
-  const { count, size, warnings } = await generateSW({
+  if (!existsSync(offlineHtml)) {
+    throw new Error(`${offlineHtml} missing — the SW offline fallback requires it`);
+  }
+  const offlineRevision = createHash('sha256')
+    .update(readFileSync(offlineHtml))
+    .digest('hex')
+    .slice(0, 16);
+
+  const cacheDir = path.join('node_modules', '.cache', 'gen-sw');
+  mkdirSync(cacheDir, { recursive: true });
+  const injectedPath = path.join(cacheDir, 'sw-injected.js');
+
+  const { count, warnings } = await injectManifest({
     globDirectory: 'out/',
     globPatterns: [
       '_next/static/**/*.{js,css}',
@@ -144,7 +49,8 @@ async function main() {
       'offline.html',
       'robots.txt',
       'sitemap.xml',
-      '_redirects',
+      // Note: '_redirects' is NOT precached — Cloudflare Pages consumes it
+      // and serves 404 for the URL, which fails workbox install outright.
       '*.png',
       '*.svg',
       '*.ico',
@@ -154,31 +60,32 @@ async function main() {
       // offline open fails even though everything else is cached.
       'pdf.worker.min.mjs',
     ],
-    // #10: uncached navigations fall back to the offline page instead of
-    // the browser error screen. API calls are excluded (JSON must 404/503
-    // honestly, never serve HTML to a fetch()).
-    navigateFallback: '/offline',
-    navigateFallbackDenylist: [/^\/api\//],
-    ...(offlineRevision
-      ? { additionalManifestEntries: [
-          { url: '/offline', revision: offlineRevision },
-          // Shell routes: always revalidate on SW install (revision null),
-          // so first offline launch after install has the boot set even if
-          // the user never revisits. Three small pages, not 2,563.
-          { url: '/', revision: null },
-          { url: '/tools/', revision: null },
-        ] }
-      : {}),
-    swDest: 'out/sw.js',
-    skipWaiting: true,
-    clientsClaim: true,
-    cleanupOutdatedCaches: true,
-    runtimeCaching,
+    additionalManifestEntries: [
+      { url: '/offline', revision: offlineRevision },
+      // Shell routes: always revalidate on SW install (revision null),
+      // so first offline launch after install has the boot set even if
+      // the user never revisits. Three small pages, not 2,563.
+      { url: '/', revision: null },
+      { url: '/tools/', revision: null },
+    ],
+    swSrc: path.join('scripts', 'sw-source.js'),
+    swDest: injectedPath,
   });
   for (const w of warnings) console.warn('[gen-sw]', w);
-  if (count === 0) throw new Error('precached 0 files — out/ build output missing or empty, refusing to write sw.js');
+  if (count === 0) {
+    throw new Error('precached 0 files — out/ build output missing or empty, refusing to write sw.js');
+  }
+
+  await esbuild.build({
+    entryPoints: [injectedPath],
+    bundle: true,
+    minify: true,
+    format: 'iife',
+    target: 'es2020',
+    outfile: path.join('out', 'sw.js'),
+    logLevel: 'warning',
+  });
   console.log(`[gen-sw] precached ${count} files, out/sw.js written`);
-  void size;
 }
 
 main().catch((e) => {
