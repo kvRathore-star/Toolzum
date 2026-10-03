@@ -5,7 +5,7 @@
 
 | | |
 |---|---|
-| **Preview URL** | `___________________` (Cloudflare Pages preview of branch `preview/pdf-editor-manual` — fill in from the Pages dashboard / PR after push. **Phone cases run here, never on production.**) |
+| **Preview URL** | **https://preview-pdf-editor-manual.tool-hub-a86.pages.dev** (Cloudflare Pages preview of branch `preview/pdf-editor-manual`, PR #9 — commit URL `https://6b4a894d.tool-hub-a86.pages.dev`. **Phone cases run here, never on production.**) |
 | **Fixtures** | `docs/fixtures/pdf-editor-manual/` — every file contains the literal word `SECRET` |
 | **Text search** | `node scripts/pdf-find.mjs <file> SECRET` → per-page counts, exit 1 = absent. pdftotext equivalent: `pdftotext <file> - \| grep SECRET` |
 | **Two-viewer rule** | Every exported PDF opens in **Preview or Acrobat** *and* **Chrome or Firefox** — viewers disagree on page boxes/rotation, so one viewer never counts. In each, Cmd+F `SECRET` must find nothing (after redaction). |
