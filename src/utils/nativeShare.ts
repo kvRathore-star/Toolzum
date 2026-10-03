@@ -58,22 +58,41 @@ export async function downloadOrShare(blobUrl: string, fileName: string): Promis
     }
     return true;
   } else {
-    // Mobile (esp. iOS Safari) ignores <a download> — it just navigates.
-    // Prefer the native share sheet with a real File when supported.
-    try {
-      const nav = navigator as Navigator & { canShare?: (d: { files: File[] }) => boolean; share?: (d: { files: File[]; title?: string }) => Promise<void> };
-      if (nav.canShare) {
-        const response = await fetch(blobUrl);
-        const blob = await response.blob();
-        const file = new File([blob], fileName, { type: blob.type || 'application/octet-stream' });
-        if (nav.canShare({ files: [file] }) && nav.share) {
-          await nav.share({ files: [file], title: fileName });
-          setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
-          return true;
+    // iOS/iPadOS Safari ignores <a download> on blob URLs (it navigates
+    // instead), so those need the native share sheet. Every OTHER browser
+    // takes the anchor path: on desktop Chrome, navigator.share({files})
+    // can RESOLVE without sharing or downloading anywhere — a "successful"
+    // share that silently drops the file (e2e: export toast fires, no
+    // download event ever arrives), and when it doesn't resolve it can
+    // hang for seconds first.
+    const isIOS =
+      /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && (navigator.maxTouchPoints || 0) > 1);
+    if (isIOS) {
+      try {
+        const nav = navigator as Navigator & { canShare?: (d: { files: File[] }) => boolean; share?: (d: { files: File[]; title?: string }) => Promise<void> };
+        if (nav.canShare) {
+          const response = await fetch(blobUrl);
+          const blob = await response.blob();
+          const file = new File([blob], fileName, { type: blob.type || 'application/octet-stream' });
+          if (nav.canShare({ files: [file] }) && nav.share) {
+            // share() can hang forever (no sheet handler, locked-down
+            // headless/browser policy) — the old unconditional await left
+            // "Exporting…" with no download and no error. Race it against a
+            // short timeout and fall through to the anchor download.
+            const shared = await Promise.race([
+              nav.share({ files: [file], title: fileName }).then(() => true),
+              new Promise<boolean>((r) => setTimeout(() => r(false), 3000)),
+            ]);
+            if (shared) {
+              setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+              return true;
+            }
+          }
         }
+      } catch {
+        /* user dismissed or share failed — fall through to anchor */
       }
-    } catch {
-      /* user dismissed or share failed — fall through to anchor */
     }
     const a = document.createElement('a');
     a.href = blobUrl;

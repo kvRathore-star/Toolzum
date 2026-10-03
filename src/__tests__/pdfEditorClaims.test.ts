@@ -373,9 +373,26 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
       expect(registry).toMatch(/block the download if verification fails/);
     });
     it('impl: failed verification blocks export with an explicit toast', () => {
+      // The UNVERIFIED toast was reworded Oct 2026 (page-blind includes()
+      // → per-page occurrence counts). These assertions follow the toast
+      // change; what they still guard: an explicit, non-vague block —
+      // export must stop, and the message must say WHY (page + counts),
+      // not a generic failure.
       expect(editor).toMatch(/Redaction UNVERIFIED/);
-      expect(editor).toMatch(/Export blocked; adjust regions and retry/);
+      expect(editor).toMatch(/export blocked; adjust the redaction region and retry/);
       expect(editor).toMatch(/export blocked rather than shipping unverified/);
+      // Pin the toast's substance: names the page, found/expected counts.
+      expect(editor).toMatch(/page \$\{occ\.page\}: found \$\{actual\}× /);
+      expect(editor).toMatch(/expected ≤\$\{expected\}/);
+      // Stays until dismissed (role=alert announces it; no auto-dismiss),
+      // with a keyboard-reachable dismiss path.
+      expect(editor).toMatch(/role="alert"/);
+      expect(editor).toMatch(/duration: Infinity/);
+      expect(editor).toMatch(/toast\.dismiss\(dismissId\)/);
+      // False-assurance ban: exact phrase (word-context, so "UNVERIFIED"
+      // neither trips the ban nor matches it). "VERIFIED clean" in a toast
+      // must still fail this test.
+      expect(editor).not.toMatch(/VERIFIED clean/);
     });
   });
 
@@ -860,7 +877,12 @@ describe('pdf-editor: documented claims vs actual behavior', () => {
      */
     it('impl: Indic runs load + embed Noto and route through fontForRun', () => {
       expect(editor).toMatch(/loadIndicFontBytes\(script, bold\)/);
-      expect(editor).toMatch(/indicFaces\.set\(key, await pdfDocLib\.embedFont\(bytes\)\)/);
+      expect(editor).toMatch(/indicFaces\.set\(key, await pdfDocLib\.embedFont\(bytes, \{ subset: true \}\)\)/);
+      // subset:true is load-bearing: pdf-lib's default (subset:false) writes
+      // wrong ToUnicode for Devanagari conjuncts — नमस्ते extracts as
+      // नमĀते (caught by e2e case 10b, Oct 2026). Both custom-font embed
+      // sites (latin faces + Noto) must keep the option.
+      expect((editor.match(/embedFont\(bytes, \{ subset: true \}\)/g) || []).length).toBeGreaterThanOrEqual(2);
       expect(editor).toMatch(/fontForRun\(rb\.cls, !!a\.bold, base\)/);
     });
     it('impl: both draw sites split runs (text annos + flow lines)', () => {

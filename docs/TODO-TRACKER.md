@@ -1,6 +1,30 @@
 # Toolzum TODO Tracker
 
-Last updated: 2026-08-23
+Last updated: 2026-10-03
+
+## PDF editor — release gates & phase order (Oct 2026)
+
+**Phase order** (reason: small and high-impact first, riskiest last):
+1. **Phase 4** — performance & storage (stabilizes daily use; carries the wipe-local-data requirements below)
+2. **Phase 3** — accessibility & i18n
+3. **Phase 2a** — pro editing features
+4. **Phase 2b** — smart redaction heuristics — riskiest, LAST
+
+**Phase 2 gate** (all three required before any Phase 2 work starts):
+- [x] E2E suite green in a **full serial run** — all cases incl. 10c and the font-DB-blocked variant. Isolated passes don't count (case 2 passed alone while failing in serial once). **DONE Oct 3 2026: 13/13 in 11.9m (`/tmp/pdf-serial2.log`); case 2/5 got session-count-scaled `test.setTimeout` (300s/240s) after the 120s ceiling starved iteration 3.**
+- [ ] Manual browser checklist done, **including Maximum mode**.
+- [ ] Beta label **stays** on the tool until both of the above pass.
+
+**Don't deploy:** a green browser run is NOT release approval. Ship only after the manual checklist + scorecard re-score + explicit owner sign-off.
+
+**Claims-ledger rule:** user-facing copy may not say "verified" / "never leaves" / "100% local" unless `docs/pdf-editor-claims.md` has a backing test row for that exact claim. New claim ⇒ new test row in the same commit.
+
+**Phase 4 wipe-local-data requirements** (learned from the Oct 2026 split-brain IndexedDB bug):
+- Delete **both** databases: `toolzum-pdf-editor` (drafts) and `toolzum-fonts` (cache).
+- Close open connections first and handle `onblocked` — `indexedDB.deleteDatabase` silently stays pending while any connection is open.
+- The orphaned `fonts` store inside existing `toolzum-pdf-editor` DBs: leave it (harmless; fonts re-download once). No migration.
+
+**Phase 1 follow-up:** real-producer fixtures (Flate-compressed output from Word, Chrome, LibreOffice) for the redaction verify gate — synthetic PDFs hid that bug once already.
 
 ## Quick Wins (do now)
 - [x] 1. Generate OG images for 4 new tools + fix default /og-image.png 404 — Ran `npx tsx scripts/generate-og-images.ts`, fixed layout/page.tsx to use `/og/branding/index.png`
@@ -114,8 +138,47 @@ Fix How-to-use, description, FAQs (honest claims
 PDF Editor (the flagship gap) — v1 as specced: toolbar + canvas + thumbs + pdf-lib export, free, local.
 Shelf structure on /pdf — regroup existing tools into their shelves (Page Management, Edit & Annotate, Create, Convert, Security) instead of one long list.
 Gap tools — the ~18 missing, starting with the trust-differentiators (Auto-Redact PII, Fingerprint, Chat with PDF), then edit-adjacent.
-
+send file browser too browser, motion vido by promp,
+cvparser
 
 Temp mail → verification loop. The old flow destroyed your live address first, then asked the server for a new one — but Turnstile tokens are single-use and already spent, so you always landed back at the verification screen with no inbox. Now: mint first, retire after — your current inbox stays live until the fresh address actually lands, and the verification widget now sits in the live view too (it used to exist only on the empty screen, so a fresh check was impossible without losing your address).
 2. QR reader → "no image found". The old code only recognized png/jpeg/webp, and — the real trap — copying a file is not copying an image: a file from Finder/Explorer puts a file reference on the clipboard, not pixels. Now the tool reads whatever image types the clipboard actually holds (gif/bmp/avif/tiff included) and, when there's no pixel data, names what it found ("clipboard holds text/uri-list… open the image and copy the picture itself, not the file").
 3. Screenshot → proxies failed. We were depending on three free public proxies as the only path — all flaky, rate-limited, Shields-flagged. Now there's a first-party fetcher (/api/fetch-page): same-origin, no CORS, no third-party limits, with SSRF guards, HTML-only check, size cap, and per-IP rate limiting. Public proxies are fallback only. Bonus honesty: refusals now say which failure (site blocks bots / not a web page / too large) instead of one generic blob.
+
+
+Still open:
+- #19 IndexNow — scripts/submit-indexnow.ts exists but is not in package.json/CI and has never been wired; GSC re-validate not done
+- #11/#13 FAQ rollout — only 371 / 1,061 tools have faqs: (~35%)
+- #28 FAQ depth audit for ~120 Formula tools — no script or test
+- SEO — meta descriptions for top-50 tools (no script)
+- Gap tools — Auto-Redact PII, Fingerprint, Chat with PDF absent from registry
+- #18 Productivity category decision
+- Manual QA — 5-page VoiceOver pass, temp-mail receipt test, test purchase (Dodo secrets present, so unblocked), PageSpeed, PR-preview secrets, ZAP, video WASM check, device-audit checklist
+- GSC 2-week / 4-week checks (time-gated)
+- Action plan — #15 build/perf, #42 load testing, #43 brand (unblocked now that email ships)
+- Untracked — .axe-ctl/d bg/full/scan.mjs (4 scripts) need commit or gitignore
+?
+
+
+
+Where you can NOT currently know
+1. FAQs — the ratchet baseline (content-integrity-baseline.json) allows 783 tools missing FAQs + 77 duplicate FAQ groups forever, green forever. Only ~31% have custom FAQs. No quality check (length, worked examples, ≥4 FAQs — TODO #28 open).
+2. How-to-use — only 12/1,141 (~1%) have custom instructions; the other 99% are derived templates, never asserted as correct or non-generic.
+3. SEO per tool — generator logic is unit-tested with synthetic tools, but no per-tool title/description length or duplicate check; zero tests of the FAQPage/SoftwareApplication JSON-LD actually emitted.
+4. OG images — generator tested, but existence per tool isn't; 8 known missing.
+5. Built output — nothing crawls out/'s 2,565 pages for 200s, <title>, canonical, internal links.
+6. Visual/UX — no screenshot regression anywhere; a11y automation covers 3 of 1,141 URLs (0.3%); axe scripts are manual/hardcoded.
+7. Full function — ~92% of tools only prove "doesn't throw on render" (effect-phase crashes not caught); quality-audit.js never fails (exit 0 always); gen:parallel failures don't fail builds (bare wait returns 0).
+
+How to actually "know" — recommended ladder
+Tier 1 — cheap, high-leverage gates (add to CI):
+1. out/ crawl test — after build, walk out/sitemap.xml → assert every URL has file, title, canonical, one <h1>, FAQ JSON-LD parses. Kills blind spot #5 wholesale.
+2. FAQ depth gate — ratchet on quality not just count: flag <4 FAQs, identical duplicate hashes; flip description === seoDescription from warn → fail (TODO #25/#26/#28).
+3. JSON-LD validator — parse emitted FAQPage/SoftwareApplication, assert it matches visible FAQs + is valid schema shape.
+4. Per-tool OG existence — assert public/og/<category>/<slug>.webp for all 1,141 (fixes the 8 known-missing + finding 6c).
+5. Fix gen:parallel bare wait — generators can currently fail silently.
+Tier 2 — sampling, not exhaustive:
+6. Stratified axe sweep — one tool per category × 21 categories in Playwright (not 3 URLs), critical+serious only.
+7. Screenshot baselines for ~20 representative tools (one per shell variant) at 375/1280 — cheap visual-regression beachhead.
+8. Oracle tests by archetype — for formula-type calculators (~120), add independent-value oracles like the existing traffic-top tests; converters get round-trip invariants (already exist as *-pairs, extend coverage).
+Tier 3 — accepted as manual (per scorecard.md:150, depth-audit-followups:175): full 1,141-tool human functional audit was deliberately ruled not cost-justified; FAQ custom-content rollout (~1,060 tools) is content work, not testing.

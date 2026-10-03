@@ -4,12 +4,15 @@ Baseline: **62/100** (target: 95). Measured after `2b51eb7c` (hotfix) +
 `4621043f` (Maximum-redaction fix); manual fixture checklist still pending,
 so correctness gains are provisional until it passes.
 
+**Re-score Oct 2026 (post Phase-1):** category 1 moved 60 → 78 after the
+full serial e2e gate went 13/13 (`/tmp/pdf-serial2.log`, 11.9m). See row 1.
+
 Scoring: evidence only — file:line from this repo. "Unverified" = not read,
 not assumed good or bad.
 
 | # | Category | Score | Evidence (file:line) | Main gaps |
 |---|----------|-------|----------------------|-----------|
-| 1 | Correctness & reliability | 60 | `pdfRedact.ts:468` strip engine (18 tests); pixel gate `PdfEditorCore.tsx` exportPdf (claims-pinned); BUT replace whites out whole item `:1743-1745`; export blocked with 0 annos `:2184`; image accept `:3035`; flow `0.55` + `maxWidth` `:2396-2408`; all-or-nothing catch `:2528` | Find/Replace data loss, 5 open Phase-1 items, no manual fixture run yet |
+| 1 | Correctness & reliability | **78** | Was 60. Phase-1 items now closed w/ evidence: find/replace sub-rect (claims-pinned, NOT-pins whole-item whiteout `pdfEditorClaims.test.ts`); 0-anno export when bytes changed `PdfEditorCore.tsx:2867`; image accept widened `:3378`; flow per-line fit replaces maxWidth `:2638`; per-annotation export errors `:2742-2748`; Maximum raster + point-size reinsert + /Rotate + pixel verify `:2548-2590` (e2e case 2b burns black); rotation conversion for boxes `:2450` (e2e cases 2/5); orphan form fields `pdfRedact.ts:770` (e2e case 4); regenerator crash `PdfEditorCore.tsx:2317`; subset ToUnicode `:2349`,`:2386` (e2e 10b/10c). Gate: **full serial e2e 13/13**. | Manual browser checklist incl. Maximum still open (tracker); real-producer Flate fixtures follow-up |
 | 2 | Pro-level editing | 55 | Full annotation set + OCR word-insert `:2921` + AI assist + PII sweep w/ review boxes `:1703`; signatures draw-only (`SIG_KEY` `:2089`); forms = separate tool (`PdfFormFiller.tsx`); editable annos explicitly deferred `:2174`; in-editor crop/split/bookmarks/links absent (separate tools) | editable annotations, in-editor forms, PDF/A, true searchable layer, pattern redaction |
 | 3 | Mobile-first | 48 | `MobileActionBar.tsx` w/ `touch-manipulation`; BUT `TODO(mobile): touch-none blocks native pinch-zoom` `:3124`; no `visualViewport`/`deviceMemory` hits; no quick-task landing; share-target unverified | pinch-zoom, viewport-safe toolbars, editor share-target, editor offline SW unverified |
 | 4 | Performance & storage | 55 | Autosave → IndexedDB `:265`, `saveNow` `:324`, `beforeunload` guard `:1096`; BUT `structuredClone` of all annos per commit/undo `:1780`,`:349` and per version `:349`; render+export on main thread; no perf tests (bundle-budget covers scripts only); quota-failure UX unverified | worker rendering, incremental undo, quota surfacing, perf budgets |

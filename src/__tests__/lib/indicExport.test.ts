@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
-// fontkit's dist references regeneratorRuntime (Next.js polyfills it for
-// the browser; vitest does not) — the subset/embed paths need the global.
+// fontkit's dist references regeneratorRuntime (a Babel-generated DFA in
+// the Indic shaper) — Next.js ≥13 injects NO polyfills: the browser gets
+// the global via PdfEditorCore.registerFontkitOnce, vitest needs this import.
 import 'regenerator-runtime/runtime';
 import fs from 'node:fs';
 import path from 'node:path';

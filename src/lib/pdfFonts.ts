@@ -101,11 +101,19 @@ export function detectBold(fontName: string | null | undefined): boolean {
   return /bold|black|heavy|demi|extra bold/i.test(fontName || '');
 }
 
+// Fonts live in their OWN database. They used to share
+// 'toolzum-pdf-editor' with the draft store — whichever module opened it
+// first created the schema, so the editor's mount-time open (which only
+// creates 'sessions') could win and leave no 'fonts' store; every later
+// cache access then threw NotFoundError and, because the error escaped
+// before fetch(), killed export instead of degrading. Separate name =
+// no shared schema, no opener race, no migration.
+const FONT_DB = 'toolzum-fonts';
+
 function idb(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
-    const req = indexedDB.open('toolzum-pdf-editor', 1);
+    const req = indexedDB.open(FONT_DB, 1);
     req.onupgradeneeded = () => {
-      if (!req.result.objectStoreNames.contains('sessions')) req.result.createObjectStore('sessions');
       if (!req.result.objectStoreNames.contains('fonts')) req.result.createObjectStore('fonts');
     };
     req.onsuccess = () => resolve(req.result);
@@ -115,7 +123,9 @@ function idb(): Promise<IDBDatabase> {
 
 /**
  * Fetch one face with IndexedDB caching (keyed with version so future
- * swaps invalidate). Throws on network failure — callers fall back.
+ * swaps invalidate). Throws on NETWORK failure — callers fall back.
+ * Cache problems (private mode, missing store, quota) never throw: they
+ * degrade to a plain fetch, so a broken store can't block an export.
  */
 export async function loadFontBytes(fam: PdfFont, bold: boolean, italic: boolean): Promise<ArrayBuffer> {
   const key = `font-${VER}-${fam}-${bold ? '700' : '400'}-${italic ? 'italic' : 'normal'}`;
@@ -123,29 +133,47 @@ export async function loadFontBytes(fam: PdfFont, bold: boolean, italic: boolean
 }
 
 async function cachedFontFetch(url: string, key: string): Promise<ArrayBuffer> {
+  let db: IDBDatabase | null = null;
   try {
-    const db = await idb();
+    db = await idb();
+    const database = db;
     const hit = await new Promise<ArrayBuffer | null>((resolve, reject) => {
-      const tx = db.transaction('fonts', 'readonly');
+      const tx = database.transaction('fonts', 'readonly');
       const req = tx.objectStore('fonts').get(key);
       req.onsuccess = () => resolve((req.result as ArrayBuffer) || null);
       req.onerror = () => reject(req.error);
     });
     if (hit && hit.byteLength > 1000) {
-      db.close();
+      database.close();
       return hit;
     }
+  } catch {
+    db = null; // absent/broken cache → plain fetch below
+  }
+  try {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const buf = await res.arrayBuffer();
     if (buf.byteLength < 1000) throw new Error('truncated font');
-    const tx2 = db.transaction('fonts', 'readwrite');
-    tx2.objectStore('fonts').put(buf, key);
-    await new Promise<void>((resolve, reject) => {
-      tx2.oncomplete = () => resolve();
-      tx2.onerror = () => reject(tx2.error);
-    });
-    db.close();
+    if (db) {
+      try {
+        const database = db;
+        const tx2 = database.transaction('fonts', 'readwrite');
+        tx2.objectStore('fonts').put(buf, key);
+        await new Promise<void>((resolve, reject) => {
+          tx2.oncomplete = () => resolve();
+          tx2.onerror = () => reject(tx2.error);
+          tx2.onabort = () => reject(tx2.error);
+        });
+      } catch {
+        /* cache write is best-effort */
+      }
+      try {
+        db.close();
+      } catch {
+        /* ignore */
+      }
+    }
     return buf;
   } catch (e) {
     throw e instanceof Error ? e : new Error('font load failed');

@@ -17,4 +17,10 @@ scripts/precise-audit.js
 .DS_Store
 docs/toolzum.com-*/
 backups/
+# Playwright artifacts — streaming traces here during a run also makes
+# Next dev's watcher hot-reload mid-test unless the dir is ignored.
+test-results/
+playwright-report/
+# Ad-hoc a11y scan helpers from the Sep 2026 session — local only.
+.axe-*.mjs
 

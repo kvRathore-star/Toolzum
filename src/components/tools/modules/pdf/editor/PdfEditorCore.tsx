@@ -382,6 +382,16 @@ export default function PdfEditorCore() {
   const tabId = useRef(`${Date.now().toString(36)}-${Math.floor(Math.random() * 1e6).toString(36)}`);
   const [conflict, setConflict] = useState(false);
   const externalWriteRef = useRef(0);
+  // Set synchronously by every load (file pick, blank doc, create-handoff,
+  // external draft) BEFORE its awaits — mount-time draft recovery checks it
+  // after its IndexedDB read so a stale draft can never clobber a file that
+  // was just set via <input type=file> (e2e case 2: iteration 180 exported
+  // iteration 90's draft instead).
+  const docLoadedRef = useRef(false);
+  // Monotonic load token: whichever openBytes call ENTERS last owns the
+  // editor, even if an earlier one (mount draft recovery) finishes later —
+  // completion order between two in-flight loads is not guaranteed.
+  const loadSeqRef = useRef(0);
   const saveStampRef = useRef(0);
 
   useEffect(() => {
@@ -424,6 +434,7 @@ export default function PdfEditorCore() {
         toast.error('No saved version found.');
         return;
       }
+      docLoadedRef.current = true;
       await openBytes(new Uint8Array(row.bytes), row.name || 'document.pdf');
       setAnnos(row.annos || {});
       if (row.page) setPage(row.page);
@@ -500,8 +511,9 @@ export default function PdfEditorCore() {
           get.onerror = () => reject(get.error);
         });
         db.close();
-        if (!row || !row.bytes || cancelled) return;
-        await openBytes(new Uint8Array(row.bytes), row.name || 'created.pdf');
+      if (!row || !row.bytes || cancelled) return;
+      docLoadedRef.current = true;
+      await openBytes(new Uint8Array(row.bytes), row.name || 'created.pdf');
         if (!cancelled) toast.success('Created document loaded — annotate away.');
       } catch {
         /* no handoff — normal direct visit */
@@ -525,11 +537,11 @@ export default function PdfEditorCore() {
           req.onerror = () => reject(req.error);
         });
         db.close();
-        if (!row || !row.bytes || cancelled) return;
+        if (!row || !row.bytes || cancelled || docLoadedRef.current) return;
         const ageMin = Math.round((Date.now() - (row.updatedAt || Date.now())) / 60000);
         if (Date.now() - (row.updatedAt || 0) > 7 * 24 * 3600 * 1000) return; // stale
         await openBytes(new Uint8Array(row.bytes), row.name || 'recovered.pdf');
-        if (cancelled) return;
+        if (cancelled || docLoadedRef.current) return;
         setAnnos(row.annos || {});
         if (row.page) setPage(row.page);
         lastSaved.current = { annos: row.annos || {}, page: row.page || 1 };
@@ -676,6 +688,7 @@ export default function PdfEditorCore() {
   const originalBytesRef = useRef<Uint8Array | null>(null);
 
   const openBytes = async (bytes: Uint8Array, name: string) => {
+    const seq = ++loadSeqRef.current;
     const toastId = toast.loading('Opening PDF…');
     // NOTE: isPro/isSignedIn read live here (not cached) so a mid-session
     // upgrade applies to the next file opened, no refresh needed.
@@ -688,6 +701,13 @@ export default function PdfEditorCore() {
         pdfjsLib.getDocument({ data: bytes.slice() }).promise,
         new Promise<never>((_, reject) => setTimeout(() => reject(new Error('timeout')), 45000)),
       ]);
+      if (seq !== loadSeqRef.current) {
+        // A newer load (e.g. the file the user just picked) superseded this
+        // one while it parsed — discard silently, it owns the editor now.
+        toast.dismiss(toastId);
+        try { await doc.destroy(); } catch { /* ignore */ }
+        return;
+      }
       if (doc.numPages > pageCap) {
         toast.error(`This PDF has ${doc.numPages} pages (limit ${pageCap}${isPro ? '' : ' — Pro opens up to 500'}) — split it first, then edit in parts.`, { id: toastId });
         try { await doc.destroy(); } catch { /* ignore */ }
@@ -740,6 +760,7 @@ export default function PdfEditorCore() {
       toast.error(`File exceeds the ${FREE_MAX_MB} MB limit — compress or split it first. Pro has no size limit.`);
       return;
     }
+    docLoadedRef.current = true;
     await openBytes(new Uint8Array(await f.arrayBuffer()), f.name);
   };
 
@@ -750,6 +771,7 @@ export default function PdfEditorCore() {
       const doc = await Lib.create();
       doc.addPage(size === 'a4' ? [595.28, 841.89] : [612, 792]);
       const bytes = new Uint8Array(await doc.save());
+      docLoadedRef.current = true;
       await openBytes(bytes, size === 'a4' ? 'blank-a4.pdf' : 'blank-letter.pdf');
     } catch {
       toast.error('Could not create a blank document.');
@@ -2287,6 +2309,12 @@ export default function PdfEditorCore() {
       let fontkitMod: Parameters<typeof pdfDocLib.registerFontkit>[0] | null = null;
       const registerFontkitOnce = async () => {
         if (fontkitRegistered) return;
+        // @pdf-lib/fontkit's dist keeps a Babel-generated DFA (the Indic
+        // shaper's StateMachine.match) that calls regeneratorRuntime at
+        // layout() time. Next.js ≥13 no longer injects polyfills, so the
+        // global must be installed here — before ANY fontkit layout runs
+        // (widthOfTextAtSize/drawText on Devanagari/Tamil throw without it).
+        await import('regenerator-runtime/runtime');
         // @pdf-lib/fontkit ships types only as a UMD global (no ESM
         // typings): resolve the default export dynamically and narrow to
         // pdf-lib's Fontkit interface. A mismatch throws here and falls
@@ -2314,7 +2342,11 @@ export default function PdfEditorCore() {
         try {
           await registerFontkitOnce();
           const bytes = await loadFontBytes(fam, bold, italic);
-          const face = await pdfDocLib.embedFont(bytes);
+          // subset:true is REQUIRED, not an optimization: pdf-lib's default
+          // (subset:false) writes wrong ToUnicode for complex-script glyphs
+          // (नमस्ते extracts as नमĀते) — proven Oct 2026; unit round-trips pin
+          // the subset path, claims test pins this call shape.
+          const face = await pdfDocLib.embedFont(bytes, { subset: true });
           // Probe ₹ once per face (the latin subsets omit it — verified
           // against Arimo). A probe failure defaults to "no rupee", which
           // routes the run to Noto — safe in either direction.
@@ -2350,7 +2382,8 @@ export default function PdfEditorCore() {
         if (indicFaces.has(key)) return true;
         try {
           const bytes = await loadIndicFontBytes(script, bold);
-          indicFaces.set(key, await pdfDocLib.embedFont(bytes));
+          // subset:true — see libFontFor: the default corrupts ToUnicode.
+          indicFaces.set(key, await pdfDocLib.embedFont(bytes, { subset: true }));
           return true;
         } catch {
           return false;
@@ -2365,6 +2398,27 @@ export default function PdfEditorCore() {
         if (cls === 'rupee' && !base.hasRupee) return indicFaces.get(`devanagari|${bold ? 700 : 400}`)!;
         return base.font;
       };
+      // Fail early: Indic/₹ runs need fontkit registered before ANY drawing
+      // or stripping starts. Registering up-front means a fontkit problem
+      // aborts visibly before partial work, and ensureIndic's embedFont is
+      // guaranteed a registered fontkit (it used to depend on libFontFor
+      // happening to register first).
+      const needsIndic = Object.values(clean).some((list) =>
+        list.some(
+          (a) =>
+            (a.kind === 'text' || a.kind === 'flow') &&
+            splitFontRuns(a.text).some((r) => r.cls === 'devanagari' || r.cls === 'tamil' || r.cls === 'rupee'),
+        ),
+      );
+      if (needsIndic) {
+        try {
+          await registerFontkitOnce();
+        } catch {
+          toast.error('Export could not start — the font engine failed to initialize. Reload the page and retry.', { duration: 8000 });
+          setExporting(false);
+          return;
+        }
+      }
       const gapPages = new Set<number>();
       for (const [pnum, list] of Object.entries(clean)) {
         for (const a of list) {
@@ -2392,18 +2446,19 @@ export default function PdfEditorCore() {
       }
       const libPages = pdfDocLib.getPages();
       if (!pdfDoc) throw new Error('PDF not loaded');
-      // Rotated pages: annotations live in the *viewport* frame (what you
-      // saw while editing). Map them once into unrotated top-down page
-      // space so every later draw/flip (which assumes pageH − y) lands on
-      // the right region. Identity for angle 0 — zero behavior change on
-      // the common path.
+      // Annotations live in the *viewport* frame (what you saw while
+      // editing). Map them once into unrotated top-down page space so every
+      // later draw/flip (which assumes pageH − y) lands on the right
+      // region. convertToPdfPoint also bakes in the MediaBox/CropBox
+      // origin, so origin ≠ 0 pages go through it too — the result is
+      // absolute top-down, exactly what flipRectForPdf/draw expect.
+      // Identity whenever the origin is (0,0): vp maps (x,y) → (x, H−y),
+      // then y ← H − (H−y) = y — zero behavior change on the common path.
       for (const [p, list] of Object.entries(clean)) {
         if (!list.length) continue;
         const n = Number(p);
         const lp = libPages[n - 1];
         if (!lp) continue;
-        const angle = ((lp.getRotation().angle % 360) + 360) % 360;
-        if (angle === 0) continue;
         const vp1 = await (await pdfDoc.getPage(n)).getViewport({ scale: 1 });
         const pageH = lp.getHeight();
         const toTop = (x: number, y: number) => {
@@ -2452,7 +2507,7 @@ export default function PdfEditorCore() {
           });
         }
       }
-      let redactOutcome: { removedTexts: string[]; flagged: string[]; pagesTouched: number } | null = null;
+      let redactOutcome: { removedTexts: string[]; occurrences: { page: number; text: string; before: number; removed: number }[]; flagged: string[]; pagesTouched: number } | null = null;
       // Maximum-mode pages that rasterized successfully — remembered for the
       // pixel verify gate after save(): text extraction cannot see into an
       // image, so raster regions get their own check on the exported bytes.
@@ -2491,6 +2546,7 @@ export default function PdfEditorCore() {
               const origW = lp0.getWidth();
               const origH = lp0.getHeight();
               const origAngle = ((lp0.getRotation().angle % 360) + 360) % 360;
+              const mb = lp0.getMediaBox();
               const vpg = await pdfDoc.getPage(pn);
               // rotation: 0 renders the RAW page frame — the same unrotated
               // top-down space the redact rects (and every annotation) live
@@ -2521,7 +2577,14 @@ export default function PdfEditorCore() {
               const fresh = pdfDocLib.insertPage(pn - 1, [origW, origH]);
               fresh.setRotation(degrees(origAngle));
               fresh.drawImage(img, { x: 0, y: 0, width: origW, height: origH });
-              maxRasterPages.push({ pn, rects: redactRects[pn]!, pageH: origH });
+              maxRasterPages.push({
+                pn,
+                // Rects are absolute (MediaBox origin baked in) while the
+                // fresh page starts at (0,0) — shift so the pixel gate
+                // checks the same physical region (no-op at origin 0).
+                rects: redactRects[pn]!.map((r) => ({ x: r.x - mb.x, y: r.y + mb.y, w: r.w, h: r.h })),
+                pageH: origH,
+              });
               redactOutcome.flagged.push(`page ${pn}: rasterized — links and form fields on this page are not preserved`);
             } catch {
               redactOutcome.flagged.push(`page ${pn}: rasterize failed — kept selective stripping`);
@@ -2688,24 +2751,62 @@ export default function PdfEditorCore() {
         return;
       }
 
+      if (maxRasterPages.length > 0) {
+        // Raster mode replaced whole pages: their widgets left the page
+        // tree but the field dicts stay in /AcroForm, so readers would
+        // still report fields whose widgets no longer exist. Drop exactly
+        // those (fields on surviving pages are kept).
+        const { stripOrphanFormFields } = await import('@/lib/pdfRedact');
+        stripOrphanFormFields(pdfDocLib);
+      }
       const out = await pdfDocLib.save();
-      // Verify gate: re-extract the EXPORTED bytes and assert every removed
-      // string is actually gone. A redaction that fails verification fails
-      // the whole export loudly — never ships a black box over live text.
-      if (redactOutcome && redactOutcome.removedTexts.length > 0) {
+      // Verify gate: re-extract the EXPORTED bytes and compare per-page
+      // occurrence counts against what the engine removed from THAT page.
+      // A string legitimately living elsewhere (same page outside the rect,
+      // or a page that was never redacted) is not a leak — only MORE
+      // occurrences than `before - removed` on the string's own page are.
+      // A failing gate blocks the export loudly and stays until dismissed.
+      if (redactOutcome && redactOutcome.occurrences.length > 0) {
         try {
+          const { countOccurrences } = await import('@/lib/pdfRedact');
           const check = await pdfjsLib.getDocument({ data: out.slice() }).promise;
+          const textCache = new Map<number, Promise<string>>();
+          const pageText = (n: number) => {
+            let p = textCache.get(n);
+            if (!p) {
+              p = (async () => {
+                const tc = await (await check.getPage(n)).getTextContent();
+                return tc.items.map((it) => ('str' in it ? String(it.str) : '')).join(' ');
+              })();
+              textCache.set(n, p);
+            }
+            return p;
+          };
           const leaked: string[] = [];
-          for (let n = 1; n <= check.numPages; n++) {
-            const tc = await (await check.getPage(n)).getTextContent();
-            const pageText = tc.items.map((it) => ('str' in it ? String(it.str) : '')).join(' ');
-            for (const s of redactOutcome.removedTexts) {
-              if (s && pageText.includes(s)) leaked.push(s);
+          for (const occ of redactOutcome.occurrences) {
+            if (occ.page < 1 || occ.page > check.numPages) continue; // redacted page later removed
+            const actual = countOccurrences(await pageText(occ.page), occ.text);
+            const expected = occ.before - occ.removed;
+            if (actual > expected) {
+              leaked.push(`page ${occ.page}: found ${actual}× ${JSON.stringify(occ.text)}, expected ≤${expected}`);
             }
           }
           try { await check.destroy(); } catch { /* ignore */ }
           if (leaked.length > 0) {
-            toast.error(`Redaction UNVERIFIED — ${leaked.length} removed string(s) still extractable. Export blocked; adjust regions and retry.`, { duration: 8000 });
+            let dismissId = '';
+            dismissId = toast.error(
+              <span role="alert">
+                {`Redaction UNVERIFIED — export blocked; adjust the redaction region and retry. ${leaked.join('; ')} `}
+                <button
+                  type="button"
+                  onClick={() => toast.dismiss(dismissId)}
+                  style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', font: 'inherit', padding: 0, textDecoration: 'underline' }}
+                >
+                  Dismiss
+                </button>
+              </span>,
+              { duration: Infinity },
+            );
             setExporting(false);
             return;
           }

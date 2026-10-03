@@ -6,12 +6,14 @@ import {
   serialize,
   decodeBytes,
   applyRedactions,
+  countOccurrences,
   stripAnnotations,
   sanitizeMetadata,
   flipRectForPdf,
+  stripOrphanFormFields,
   type Token,
 } from '@/lib/pdfRedact';
-import { PDFDocument, StandardFonts, rgb, PDFArray } from 'pdf-lib';
+import { PDFDocument, StandardFonts, rgb, PDFArray, PDFRawStream, decodePDFRawStream } from 'pdf-lib';
 
 const STREAM = `BT /F1 12 Tf 72 720 Td (Hello World) Tj ET
 BT /F1 12 Tf 72 700 Td [(Sec) 20 (ret Data)] TJ ET`;
@@ -129,8 +131,8 @@ describe('applyRedactions (real pdf-lib document)', () => {
     return doc;
   }
 
-  async function streamText(doc: PDFDocument): Promise<string> {
-    const lp = doc.getPages()[0]!;
+  async function streamText(doc: PDFDocument, idx = 0): Promise<string> {
+    const lp = doc.getPages()[idx]!;
     const contents = lp.node.Contents();
     if (!contents) return '';
     const resolved = doc.context.lookup(contents);
@@ -139,6 +141,10 @@ describe('applyRedactions (real pdf-lib document)', () => {
       if (!o) return;
       const anyObj = o as { getContentsString?: unknown; getContents?: unknown };
       try {
+        if (o instanceof PDFRawStream) {
+          parts.push(new TextDecoder('latin1').decode(decodePDFRawStream(o).decode()));
+          return;
+        }
         if (typeof anyObj.getContentsString === 'function') {
           parts.push((anyObj.getContentsString as () => string)());
         }
@@ -177,6 +183,108 @@ describe('applyRedactions (real pdf-lib document)', () => {
     expect(out.removedTexts).toEqual([]);
     const text = await streamText(doc);
     expect(text).toContain('Secret');
+  });
+
+  // Regression (Oct 2026): saved+reloaded docs have Flate-compressed
+  // PDFRawStream contents. Reading them as latin1 handed the tokenizer
+  // compressed bytes → no Tj ops → redaction silently removed nothing
+  // (e2e case 1 exported with SECRET still extractable).
+  it('strips text from a SAVED and reloaded document (Flate content streams)', async () => {
+    const doc = await makeDoc();
+    const reloaded = await PDFDocument.load(await doc.save());
+    const out = await applyRedactions(reloaded, { 1: [{ x: 60, y: 680, w: 300, h: 40 }] });
+    expect(out.pagesTouched).toBe(1);
+    expect(out.removedTexts.join(' ')).toContain('Secret');
+    const text = await streamText(reloaded);
+    expect(text).not.toContain('123-45-6789');
+    expect(text).toContain('Public header');
+  });
+  // Verify-gate attribution (Oct 2026): the export gate must check a
+  // removed string ONLY against the page it was removed from, and by
+  // occurrence count — the old page-blind includes() check flagged copies
+  // legitimately living on other pages / elsewhere on the same page and
+  // blocked legitimate exports (e2e case 8 hung behind an UNVERIFIED
+  // toast the test could not see).
+  it('attributes removals to their own page (cross-page copy is not a leak)', async () => {
+    const doc = await PDFDocument.create();
+    const font = await doc.embedFont(StandardFonts.Helvetica);
+    for (let i = 0; i < 2; i++) {
+      const page = doc.addPage([595, 842]);
+      page.drawText('SECRET', { x: 72, y: 700, size: 14, font, color: rgb(0, 0, 0) });
+    }
+    const out = await applyRedactions(doc, { 2: [{ x: 60, y: 695, w: 200, h: 25 }] });
+    expect(out.occurrences).toHaveLength(1);
+    expect(out.occurrences[0]).toEqual({ page: 2, text: 'SECRET', before: 1, removed: 1 });
+    expect(out.removedTexts).toContain('SECRET');
+    expect(await streamText(doc, 0)).toContain('SECRET');
+    expect(await streamText(doc, 1)).not.toContain('SECRET');
+    // Gate arithmetic: page 2 expected = before - removed = 0; page 1 has no
+    // occurrence entry, so its surviving copy can never flag a leak.
+    const occ = out.occurrences[0]!;
+    expect(countOccurrences(await streamText(doc, 1), occ.text)).toBeLessThanOrEqual(occ.before - occ.removed);
+  });
+
+  it('counts same-page occurrences (covered copy may coexist with a kept one)', async () => {
+    const doc = await PDFDocument.create();
+    const font = await doc.embedFont(StandardFonts.Helvetica);
+    const page = doc.addPage([595, 842]);
+    page.drawText('SECRET', { x: 72, y: 700, size: 14, font, color: rgb(0, 0, 0) });
+    page.drawText('SECRET', { x: 72, y: 600, size: 14, font, color: rgb(0, 0, 0) });
+    const out = await applyRedactions(doc, { 1: [{ x: 60, y: 695, w: 200, h: 25 }] });
+    expect(out.occurrences).toEqual([{ page: 1, text: 'SECRET', before: 2, removed: 1 }]);
+    const text = await streamText(doc, 0);
+    // The kept copy: expected (2 - 1) = 1 — the old includes() gate saw
+    // 'SECRET' still present and blocked the export regardless.
+    expect(countOccurrences(text, 'SECRET')).toBe(1);
+  });
+
+  it('split runs: "SEC"+"RET" as separate runs — only the covered one counts', async () => {
+    const doc = await PDFDocument.create();
+    const font = await doc.embedFont(StandardFonts.Helvetica);
+    const page = doc.addPage([595, 842]);
+    page.drawText('SEC', { x: 72, y: 700, size: 14, font, color: rgb(0, 0, 0) });
+    page.drawText('RET', { x: 140, y: 700, size: 14, font, color: rgb(0, 0, 0) });
+    page.drawText('SEC', { x: 72, y: 600, size: 14, font, color: rgb(0, 0, 0) }); // kept
+    const out = await applyRedactions(doc, { 1: [{ x: 60, y: 695, w: 40, h: 25 }] });
+    // 'RET' untouched → no occurrence entry for it; 'SEC' before counts BOTH
+    // runs (covered + kept) so expected = 2 - 1 = 1, matching the kept copy.
+    expect(out.occurrences).toEqual([{ page: 1, text: 'SEC', before: 2, removed: 1 }]);
+    const text = await streamText(doc, 0);
+    expect(countOccurrences(text, 'SEC')).toBe(1);
+    expect(countOccurrences(text, 'RET')).toBe(1);
+  });
+
+  it('line-break split: covered "SEC"/"RET" on two lines, kept "SECRET" intact', async () => {
+    const doc = await PDFDocument.create();
+    const font = await doc.embedFont(StandardFonts.Helvetica);
+    const page = doc.addPage([595, 842]);
+    page.drawText('SEC', { x: 72, y: 700, size: 14, font, color: rgb(0, 0, 0) }); // line 1
+    page.drawText('RET', { x: 72, y: 680, size: 14, font, color: rgb(0, 0, 0) }); // line 2
+    page.drawText('SECRET', { x: 72, y: 600, size: 14, font, color: rgb(0, 0, 0) }); // kept
+    const out = await applyRedactions(doc, { 1: [{ x: 60, y: 675, w: 60, h: 50 }] });
+    // Substring trap done right: 'SEC' and 'RET' also occur INSIDE the kept
+    // 'SECRET' — before counts those too, so expected = 2 - 1 = 1 each and
+    // the surviving 'SECRET' satisfies the gate instead of tripping it.
+    const byText = Object.fromEntries(out.occurrences.map((o) => [o.text, o]));
+    expect(out.occurrences).toHaveLength(2);
+    expect(byText.SEC).toEqual({ page: 1, text: 'SEC', before: 2, removed: 1 });
+    expect(byText.RET).toEqual({ page: 1, text: 'RET', before: 2, removed: 1 });
+    const text = await streamText(doc, 0);
+    expect(countOccurrences(text, 'SEC')).toBe(1);
+    expect(countOccurrences(text, 'RET')).toBe(1);
+    for (const occ of out.occurrences) {
+      expect(countOccurrences(text, occ.text)).toBeLessThanOrEqual(occ.before - occ.removed);
+    }
+  });
+});
+
+describe('countOccurrences (verify-gate arithmetic)', () => {
+  it('counts non-overlapping occurrences', () => {
+    expect(countOccurrences('', 'SECRET')).toBe(0);
+    expect(countOccurrences('SECRET', 'SECRET')).toBe(1);
+    expect(countOccurrences('SECRET and SECRET and SECRETX', 'SECRET')).toBe(3);
+    expect(countOccurrences('aaaa', 'aa')).toBe(2);
+    expect(countOccurrences('x', '')).toBe(0);
   });
 });
 
@@ -240,5 +348,140 @@ describe('stripAnnotations + sanitizeMetadata (step 3)', () => {
     doc.addPage([595, 842]);
     // No embedded files → no flag.
     expect(stripAnnotations(doc, {}).flaggedAttachments).toBe(false);
+  });
+});
+
+describe('e2e case 7: EDGE (top-right trim) + TINY (6pt bottom-left)', () => {
+  it('strips both, keeps the center SECRET', async () => {
+    const doc = await PDFDocument.create();
+    const font = await doc.embedFont(StandardFonts.Helvetica);
+    const page = doc.addPage([612, 792]);
+    page.drawText('SECRET', { x: 273, y: 388, size: 20, font });
+    page.drawText('EDGE', { x: 556, y: 766, size: 10, font });
+    page.drawText('TINY', { x: 80, y: 60, size: 6, font });
+    const reloaded = await PDFDocument.load(await doc.save());
+    const lp = reloaded.getPages()[0];
+    const rects = [
+      flipRectForPdf({ x: 0.9 * 612, y: 0.01 * 792, w: 0.1 * 612, h: 0.035 * 792 }, lp.getHeight()),
+      flipRectForPdf({ x: 0.11 * 612, y: 0.9 * 792, w: 0.08 * 612, h: 0.04 * 792 }, lp.getHeight()),
+    ];
+    const out = await applyRedactions(reloaded, { 1: rects });
+    expect(out.removedTexts).toContain('EDGE');
+    expect(out.removedTexts).toContain('TINY');
+    expect(out.removedTexts).not.toContain('SECRET');
+  });
+});
+
+describe('e2e case 9: MediaBox origin (50,40,300,200) pipeline', () => {
+  // The export-time conversion in PdfEditorCore maps every annotation
+  // through the pdf.js viewport once (angle 0 included) so coordinates
+  // become absolute top-down. For rotation 0 the viewport is
+  //   convertToPdfPoint(vx, vy) = (ox + vx, mediaTop − vy)
+  // and the converter returns y ← pageH − (mediaTop − vy), i.e. vy − oy.
+  // This pins that math end-to-end: converted rect → flip → redact.
+  const OX = 50;
+  const OY = 40;
+  const PAGE_H = 200;
+  const MEDIA_TOP = OY + PAGE_H;
+
+  const toTop = (vx: number, vy: number) => ({
+    x: OX + vx,
+    y: PAGE_H - (MEDIA_TOP - vy),
+  });
+
+  it('converts viewport box to absolute top-down coords', () => {
+    const c0 = toTop(120, 80); // centerBox on the 300×200 view
+    const c1 = toTop(180, 120);
+    expect({
+      x: Math.min(c0.x, c1.x),
+      y: Math.min(c0.y, c1.y),
+      w: Math.abs(c1.x - c0.x),
+      h: Math.abs(c1.y - c0.y),
+    }).toEqual({ x: 170, y: 40, w: 60, h: 40 });
+  });
+
+  it('flips + strips SECRET; MediaBox untouched', async () => {
+    const doc = await PDFDocument.create();
+    const font = await doc.embedFont(StandardFonts.Helvetica);
+    const page = doc.addPage([300, 200]);
+    page.setMediaBox(50, 40, 300, 200);
+    page.drawText('SECRET', { x: 170, y: 130, size: 20, font });
+    const reloaded = await PDFDocument.load(await doc.save());
+    const lp = reloaded.getPages()[0];
+    expect(lp.getMediaBox()).toEqual({ x: 50, y: 40, width: 300, height: 200 });
+    const c0 = toTop(120, 80);
+    const c1 = toTop(180, 120);
+    const rect = {
+      x: Math.min(c0.x, c1.x),
+      y: Math.min(c0.y, c1.y),
+      w: Math.abs(c1.x - c0.x),
+      h: Math.abs(c1.y - c0.y),
+    };
+    const out = await applyRedactions(reloaded, { 1: [flipRectForPdf(rect, lp.getHeight())] });
+    expect(out.removedTexts).toContain('SECRET');
+    expect(reloaded.getPages()[0].getMediaBox()).toEqual({ x: 50, y: 40, width: 300, height: 200 });
+  });
+
+  it('identity mapping when origin is (0,0) — no behavior change on common path', () => {
+    const pageH = 792;
+    const convert = (vx: number, vy: number) => ({ x: vx, y: pageH - vy });
+    for (const vy of [0, 100.1, 400, 791.5]) {
+      const c = convert(123.4, vy);
+      expect(pageH - c.y).toBeCloseTo(vy, 9);
+    }
+  });
+});
+
+describe('stripOrphanFormFields (e2e case 4: raster replaces the page)', () => {
+  async function docWithField(): Promise<PDFDocument> {
+    const doc = await PDFDocument.create();
+    const font = await doc.embedFont(StandardFonts.Helvetica);
+    const page = doc.addPage([612, 792]);
+    page.drawText('SECRET', { x: 273, y: 388, size: 20, font });
+    const form = doc.getForm();
+    const tf = form.createTextField('secretfield');
+    tf.setText('FORMDATA');
+    tf.addToPage(page, { x: 100, y: 600, width: 220, height: 24, font, borderWidth: 1 });
+    return doc;
+  }
+
+  it('reports the orphaned field, then a reload reports none', async () => {
+    const bytes = await (await docWithField()).save();
+    const doc = await PDFDocument.load(bytes);
+    expect(doc.getForm().getFields()).toHaveLength(1);
+    // What raster mode does: unlink the page leaf, insert a blank one.
+    doc.removePage(0);
+    doc.insertPage(0, [612, 792]);
+    expect(doc.getForm().getFields(), 'orphan still reported before the strip').toHaveLength(1);
+    expect(stripOrphanFormFields(doc)).toBe(1);
+    const out = await doc.save();
+    const reloaded = await PDFDocument.load(out);
+    expect(reloaded.getForm().getFields()).toHaveLength(0);
+    expect(reloaded.getPageCount()).toBe(1);
+  });
+
+  it('keeps fields whose widgets sit on surviving pages', async () => {
+    const doc = await PDFDocument.create();
+    const font = await doc.embedFont(StandardFonts.Helvetica);
+    const p1 = doc.addPage([612, 792]);
+    const p2 = doc.addPage([612, 792]);
+    const form = doc.getForm();
+    const f1 = form.createTextField('keepme');
+    f1.addToPage(p1, { x: 50, y: 700, width: 100, height: 20, font });
+    const f2 = form.createTextField('goneme');
+    f2.addToPage(p2, { x: 50, y: 700, width: 100, height: 20, font });
+    const reloaded = await PDFDocument.load(await doc.save());
+    expect(reloaded.getForm().getFields()).toHaveLength(2);
+    reloaded.removePage(1);
+    expect(stripOrphanFormFields(reloaded)).toBe(1);
+    const out = await reloaded.save();
+    const final = await PDFDocument.load(out);
+    expect(final.getForm().getFields().map((f) => f.getName())).toEqual(['keepme']);
+  });
+
+  it('is a no-op on docs without a form', async () => {
+    const doc = await PDFDocument.create();
+    doc.addPage([612, 792]);
+    expect(stripOrphanFormFields(doc)).toBe(0);
   });
 });

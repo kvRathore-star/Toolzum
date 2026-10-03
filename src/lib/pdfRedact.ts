@@ -19,7 +19,7 @@
  * Each reports instead of pretending — see RedactReport.
  */
 
-import { PDFDocument, PDFName, PDFArray, PDFDict } from 'pdf-lib';
+import { PDFDocument, PDFName, PDFArray, PDFDict, PDFRawStream, decodePDFRawStream } from 'pdf-lib';
 
 export type Token =
   | { kind: 'str'; value: string }
@@ -435,12 +435,41 @@ export function flipRectForPdf(
   return { x: r.x, y: pageHeightPt - (r.y + r.h), w: r.w, h: r.h };
 }
 
+export interface RemovedOccurrence {
+  page: number;
+  text: string;
+  /** Occurrences of `text` on this page before redaction. */
+  before: number;
+  /** Occurrences removed from this page by the engine. */
+  removed: number;
+}
+
 export interface EngineOutcome {
   /** Exact removed strings (for the verify gate). */
   removedTexts: string[];
+  /**
+   * Per-page attribution with occurrence counts. The verify gate must only
+   * check a string against the page it was removed FROM, and by count:
+   * a string legitimately remaining elsewhere (same page outside the rect,
+   * or on a non-redacted page) is not a leak — only MORE occurrences than
+   * `before - removed` on that page are.
+   */
+  occurrences: RemovedOccurrence[];
   /** Runs/images the engine could not map — surfaced, never hidden. */
   flagged: string[];
   pagesTouched: number;
+}
+
+/** Non-overlapping occurrence count (verify-gate arithmetic). Pure — tested. */
+export function countOccurrences(haystack: string, needle: string): number {
+  if (!needle) return 0;
+  let n = 0;
+  let i = haystack.indexOf(needle);
+  while (i !== -1) {
+    n++;
+    i = haystack.indexOf(needle, i + needle.length);
+  }
+  return n;
 }
 
 function bytesToLatin1(bytes: Uint8Array): string {
@@ -470,6 +499,7 @@ export async function applyRedactions(
   rectsByPage: Record<number, EngineRect[]>,
 ): Promise<EngineOutcome> {
   const removedTexts: string[] = [];
+  const occurrences: RemovedOccurrence[] = [];
   const flagged: string[] = [];
   let pagesTouched = 0;
 
@@ -490,8 +520,19 @@ export async function applyRedactions(
     const resolved = doc.context.lookup(contents);
     const readString = (o: unknown): string | null => {
       if (!o) return null;
-      const anyObj = o as { getContentsString?: unknown; getContents?: unknown };
       try {
+        // Saved+reloaded documents store /Contents as Flate-compressed
+        // PDFRawStream objects. getContentsString() on those returns the
+        // *compressed* bytes as latin1 — the tokenizer then finds no Tj/TJ
+        // ops and redaction silently removes nothing (e2e case 1: export
+        // succeeded with "additions only" and SECRET still extractable).
+        // Decode through pdf-lib's filter chain first; in-memory documents
+        // (uncompressed PDFContentStream) keep the fast path below.
+        if (o instanceof PDFRawStream) {
+          const decoded = decodePDFRawStream(o).decode();
+          return bytesToLatin1(decoded);
+        }
+        const anyObj = o as { getContentsString?: unknown; getContents?: unknown };
         if (typeof anyObj.getContentsString === 'function') {
           return (anyObj.getContentsString as () => string)();
         }
@@ -530,6 +571,9 @@ export async function applyRedactions(
     }
 
     let pageRemoved = 0;
+    const pageRunTexts: string[] = [];
+    const droppedRunTexts: string[] = [];
+    const droppedTexts = new Set<string>();
     for (const s of streams) {
       const decodedStr = s.get();
       if (!decodedStr) {
@@ -540,26 +584,49 @@ export async function applyRedactions(
       // Skip streams with no text ops (vector-only pages) cheaply.
       if (!tokens.some((t) => t.kind === 'op' && (t.value === 'Tj' || t.value === 'TJ'))) continue;
       const runs = mapTextRuns(tokens);
+      // Original run texts for the occurrence baseline (pre-strip; runs are
+      // never mutated by stripping — only the keep flags are).
+      for (const r of runs) if (r.text) pageRunTexts.push(r.text);
       const keep = tokens.map(() => true);
       for (const rect of rects) {
         const { keep: k2, report } = stripRunsInRect(tokens, runs, rect);
         for (let i = 0; i < k2.length; i++) {
-          if (!k2[i]) {
-            keep[i] = false;
-            const run = runs.find((r) => r.from <= i && i <= r.to);
-            if (run && run.text && !removedTexts.includes(run.text)) removedTexts.push(run.text);
-          }
+          if (!k2[i]) keep[i] = false;
         }
         pageRemoved += report.removed;
         for (const f of report.flaggedUnmapped) {
           if (!flagged.includes(f)) flagged.push(`page ${pageNum}: ${f}`);
         }
       }
+      // Record drops once per run AFTER all rects, so overlapping rects
+      // never double-count an occurrence (the old in-loop recording could).
+      for (const r of runs) {
+        if (!r.text) continue;
+        let runDropped = false;
+        for (let k = r.from; k <= r.to; k++) {
+          if (!keep[k]) {
+            runDropped = true;
+            break;
+          }
+        }
+        if (!runDropped) continue;
+        droppedRunTexts.push(r.text);
+        droppedTexts.add(r.text);
+        if (!removedTexts.includes(r.text)) removedTexts.push(r.text);
+      }
       if (pageRemoved > 0) {
         s.replace(latin1ToBytes(serialize(tokens, keep)));
       }
     }
     if (pageRemoved > 0) pagesTouched++;
+    if (droppedTexts.size > 0) {
+      const pageOrig = pageRunTexts.join(' ');
+      for (const str of droppedTexts) {
+        let removed = 0;
+        for (const t of droppedRunTexts) removed += countOccurrences(t, str);
+        occurrences.push({ page: pageNum, text: str, before: countOccurrences(pageOrig, str), removed });
+      }
+    }
 
     // XObject images under a redact rect keep pixels — flag honestly.
     try {
@@ -576,7 +643,7 @@ export async function applyRedactions(
       /* best-effort inspection only */
     }
   }
-  return { removedTexts, flagged, pagesTouched };
+  return { removedTexts, occurrences, flagged, pagesTouched };
 }
 
 /* ------------------------------------------------------------------ */
@@ -684,4 +751,92 @@ export function sanitizeMetadata(doc: PDFDocument): void {
   try {
     doc.setProducer('Toolzum');
   } catch { /* ignore */ }
+}
+
+/**
+ * Drop /AcroForm /Fields entries whose widgets no longer sit on a live
+ * page. pdf-lib's removePage() only unlinks the page leaf from the page
+ * tree — the field dict stays in /AcroForm, so readers (and
+ * doc.getForm().getFields()) keep reporting a field whose widget is gone
+ * (e2e case 4: raster mode replaced the page, form field must not survive).
+ *
+ * Conservative by design: a field is KEPT when it resolves, appears on a
+ * surviving page (directly or via a Kids widget), or cannot be resolved.
+ * Deliberately never calls doc.getForm() — populating pdf-lib's form cache
+ * makes save() re-render every field appearance.
+ *
+ * @returns how many orphaned field entries were removed.
+ */
+export function stripOrphanFormFields(doc: PDFDocument): number {
+  try {
+    const lookup = (o: unknown) => {
+      try {
+        return doc.context.lookup(o as never);
+      } catch {
+        return null;
+      }
+    };
+    const acro = lookup(doc.catalog.get(PDFName.of('AcroForm')));
+    if (!(acro instanceof PDFDict)) return 0;
+    const fields = lookup(acro.get(PDFName.of('Fields')));
+    if (!(fields instanceof PDFArray) || fields.size() === 0) return 0;
+
+    // Widget refs reachable from every live page's /Annots. Walk the page
+    // TREE, not doc.getPages(): that list is cached and goes stale after
+    // removePage() (pdf-lib only invalidates on insertPage) — exactly the
+    // moment this helper must be correct.
+    const liveKeys = new Set<string>();
+    const liveObjs = new Set<object>();
+    const collectAnnots = (annotsObj: unknown) => {
+      const annots = lookup(annotsObj);
+      if (!(annots instanceof PDFArray)) return;
+      for (let i = 0; i < annots.size(); i++) {
+        const entry = annots.get(i);
+        liveKeys.add(String(entry));
+        const d = lookup(entry);
+        if (d) liveObjs.add(d as object);
+      }
+    };
+    const pagesNode = doc.catalog.Pages() as unknown as
+      | { traverse?: (visitor: (_node: { get: (_k: PDFName) => unknown }) => void) => void }
+      | undefined;
+    if (pagesNode && typeof pagesNode.traverse === 'function') {
+      pagesNode.traverse((node) => collectAnnots(node.get(PDFName.of('Annots'))));
+    } else {
+      for (const page of doc.getPages()) collectAnnots(page.node.Annots());
+    }
+
+    const isLive = (entry: unknown, depth: number): boolean => {
+      if (depth > 8) return false;
+      if (liveKeys.has(String(entry))) return true;
+      const d = lookup(entry);
+      if (!d) return true; // unresolvable — never strip by guesswork
+      if (liveObjs.has(d)) return true;
+      if (d instanceof PDFDict) {
+        const kids = lookup(d.get(PDFName.of('Kids')));
+        if (kids instanceof PDFArray) {
+          for (let i = 0; i < kids.size(); i++) {
+            if (isLive(kids.get(i), depth + 1)) return true;
+          }
+        }
+      }
+      return false;
+    };
+
+    const kept: unknown[] = [];
+    let removed = 0;
+    for (let i = 0; i < fields.size(); i++) {
+      const entry = fields.get(i);
+      if (isLive(entry, 0)) kept.push(entry);
+      else removed++;
+    }
+    if (removed > 0) {
+      const fresh = PDFArray.withContext(doc.context);
+      for (const k of kept) fresh.push(k as never);
+      acro.set(PDFName.of('Fields'), fresh);
+    }
+    return removed;
+  } catch {
+    return 0;
+  }
 }
