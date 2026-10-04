@@ -4,22 +4,14 @@ jobs:
   diag:
     runs-on: ubuntu-latest
     steps:
-      - name: Diagnose Cloudflare token vs account
+      - name: Pages + workers + D1 probes with secret token/account
         env:
           TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           ACC: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          echo "== token self-verify =="
-          curl -s -H "Authorization: Bearer $TOKEN" \
-            https://api.cloudflare.com/client/v4/user/tokens/verify | head -c 500
-          echo
-          echo "== accounts this token can see =="
-          curl -s -H "Authorization: Bearer $TOKEN" \
-            "https://api.cloudflare.com/client/v4/memberships?per_page=10" | head -c 800
-          echo
-          echo "== ACCOUNT_ID secret value =="
-          echo "$ACC"
-          echo "== d1 database list with secret token+account =="
-          curl -s -H "Authorization: Bearer $TOKEN" \
-            "https://api.cloudflare.com/client/v4/accounts/$ACC/d1/database" | head -c 600
-          echo
+          for ep in pages/projects workers/scripts d1/database; do
+            echo "== /accounts/\$ACC/$ep =="
+            curl -s -H "Authorization: Bearer $TOKEN" \
+              "https://api.cloudflare.com/client/v4/accounts/$ACC/$ep" | head -c 300
+            echo
+          done
