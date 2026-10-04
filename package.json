@@ -11,6 +11,7 @@
     "build": "npm run gen:parallel && next build && node scripts/gen-sw.js",
     "gen:parallel": "node scripts/gen-parallel.mjs",
     "verify:out": "npx tsx scripts/verify-out.ts",
+    "submit:indexnow": "npx tsx scripts/submit-indexnow.ts",
     "start": "npx serve out",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --strict",

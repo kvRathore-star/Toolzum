@@ -4,33 +4,39 @@ import { toolsRegistry, TOOL_REDIRECTS, SEO_PERMUTATIONS } from '@/registry/tool
 export const dynamic = 'force-static';
 
 const baseUrl = 'https://toolzum.com';
-const LAUNCH_DATE = new Date('2025-01-01');
+// lastmod = build time (this route is force-static, so it regenerates every
+// build). Every URL said 2025-01-01 for ~9 months — an obviously stale
+// lastmod that search engines discount, and tool pages had no <lastmod> at
+// all. A uniform build date is at worst neutral and honest about when the
+// sitemap was produced; per-page git dates would be better but the registry
+// carries no per-tool change date.
+const BUILD_DATE = new Date();
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
-    { url: baseUrl, lastModified: LAUNCH_DATE, changeFrequency: 'weekly' as const, priority: 1 },
-    { url: `${baseUrl}/tools`, lastModified: LAUNCH_DATE, changeFrequency: 'weekly' as const, priority: 0.9 },
-    { url: `${baseUrl}/pricing`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.7 },
-    { url: `${baseUrl}/contact`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.5 },
-    { url: `${baseUrl}/about`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.5 },
-    { url: `${baseUrl}/blog`, lastModified: LAUNCH_DATE, changeFrequency: 'weekly' as const, priority: 0.6 },
-    { url: `${baseUrl}/changelog`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.4 },
-    { url: `${baseUrl}/extension`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.4 },
-    { url: `${baseUrl}/careers`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
-    { url: `${baseUrl}/product`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
-    { url: `${baseUrl}/roadmap`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
-    { url: `${baseUrl}/status`, lastModified: LAUNCH_DATE, changeFrequency: 'weekly' as const, priority: 0.3 },
-    { url: `${baseUrl}/terms`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.2 },
-    { url: `${baseUrl}/privacy-policy`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.2 },
-    { url: `${baseUrl}/cookies`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.2 },
-    { url: `${baseUrl}/security`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.2 },
-    { url: `${baseUrl}/faq`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
-    { url: `${baseUrl}/billing`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.2 },
-    { url: `${baseUrl}/premium-tools`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
-    { url: `${baseUrl}/login`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.6 },
-    { url: `${baseUrl}/sign-in`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.6 },
-    { url: `${baseUrl}/sign-up`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.6 },
-    { url: `${baseUrl}/forgot-password`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
+    { url: baseUrl, lastModified: BUILD_DATE, changeFrequency: 'weekly' as const, priority: 1 },
+    { url: `${baseUrl}/tools`, lastModified: BUILD_DATE, changeFrequency: 'weekly' as const, priority: 0.9 },
+    { url: `${baseUrl}/pricing`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.7 },
+    { url: `${baseUrl}/contact`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.5 },
+    { url: `${baseUrl}/about`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.5 },
+    { url: `${baseUrl}/blog`, lastModified: BUILD_DATE, changeFrequency: 'weekly' as const, priority: 0.6 },
+    { url: `${baseUrl}/changelog`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.4 },
+    { url: `${baseUrl}/extension`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.4 },
+    { url: `${baseUrl}/careers`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
+    { url: `${baseUrl}/product`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
+    { url: `${baseUrl}/roadmap`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
+    { url: `${baseUrl}/status`, lastModified: BUILD_DATE, changeFrequency: 'weekly' as const, priority: 0.3 },
+    { url: `${baseUrl}/terms`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.2 },
+    { url: `${baseUrl}/privacy-policy`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.2 },
+    { url: `${baseUrl}/cookies`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.2 },
+    { url: `${baseUrl}/security`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.2 },
+    { url: `${baseUrl}/faq`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
+    { url: `${baseUrl}/billing`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.2 },
+    { url: `${baseUrl}/premium-tools`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
+    { url: `${baseUrl}/login`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${baseUrl}/sign-in`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${baseUrl}/sign-up`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${baseUrl}/forgot-password`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
   ];
 
   function catSlug(cat: string): string {
@@ -41,7 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const categoryPages = categories.map(cat => ({
     url: `${baseUrl}/${cat}/`,
-    lastModified: LAUNCH_DATE,
+    lastModified: BUILD_DATE,
     changeFrequency: 'weekly' as const,
     priority: 0.8,
   }));
@@ -62,6 +68,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
     .map((tool) => ({
       url: `${baseUrl}/${tool.category ? catSlug(tool.category) : 'tools'}/${tool.slug}/`,
+      lastModified: BUILD_DATE,
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     }));

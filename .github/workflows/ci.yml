@@ -74,6 +74,16 @@ jobs:
         # on breach — blocks PRs and skips e2e until fixed.
         run: npx tsx scripts/bundle-budget.ts --check
 
+      - name: Submit sitemap URLs to IndexNow
+        # P0 (Oct 2026): scripts/submit-indexnow.ts existed but was never
+        # called, so Bing/Yandex/ChatGPT-search never heard about months of
+        # fixes. It fetches the LIVE sitemap, hence push-only — a PR run
+        # would announce production URLs unrelated to the branch build.
+        # continue-on-error: an SEO nudge must not fail a green build.
+        if: github.event_name == 'push'
+        continue-on-error: true
+        run: npm run submit:indexnow
+
   migrate:
     # #27: apply versioned D1 migrations on every main push. Pages does
     # NOT apply migrations_dir automatically — without this job, the
