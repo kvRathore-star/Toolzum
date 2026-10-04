@@ -34,6 +34,11 @@ const BULK_PRESET_SLUGS = new Set([
   'image-compressor', 'image-resizer',
 ]);
 
+// Tools shipping with a visible Beta chip — the owner release gate in
+// docs/TODO-TRACKER.md ("beta label stays until checklist + sign-off").
+// Removing the slug IS the switch: delete it here when beta comes off.
+const BETA_SLUGS = new Set(['pdf-editor']);
+
 interface ToolLayoutProps {
   title: string;
   description: string;
@@ -250,6 +255,14 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
 
           <h1 className="font-[family-name:var(--font-serif)] text-5xl sm:text-6xl text-[var(--text-primary)] mb-4">
             {title}
+            {BETA_SLUGS.has(slug) && (
+              <span
+                className="ml-3 align-middle text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border text-warning border-warning/40 bg-warning/10"
+                title="Beta: core features work, edge cases may not — report anything odd via the contact form."
+              >
+                Beta
+              </span>
+            )}
           </h1>
           <p className="text-lg text-[var(--text-secondary)] mb-6 max-w-[600px]">
             {description}
