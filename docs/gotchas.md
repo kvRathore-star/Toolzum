@@ -71,3 +71,13 @@ Hard-won knowledge from debugging production issues. Read before modifying relat
 **Fix (done Sep 20 2026):** `!n.includes('speech')` guard added to both "X to Y" branches so text-to-speech/speech-to-text fall through to the `ai-generate` branch, plus a `converter + hasFileInput → upload-convert-download` rule after the calculator early-return (audio-converter was falling to `other`). Verified by full-registry dump: exactly 3 tools changed routing (audio-converter, text-to-speech-tts, speech-to-text); value-based converters (unit, currency, yaml-json, xlsx-csv…) still `enter-values-result`. Regression test at `src/__tests__/interaction-pattern.test.ts`.
 
 **Discovered:** 2026-08-23 during classifier audit. Pre-existing, not caused by any session changes.
+
+## 8. Playwright page.route dies once a Service Worker controls the page
+
+**What's wrong:** e2e route mocks (`page.route('**/api/...')`) silently stop intercepting after SW activation — the page's fetch goes through the SW's runtime route to the real server. Proven Oct 2026: mocked `fetch('/api/check-plan')` returned serve's 404 with `routeHits=0` after `controlled:true`.
+
+**Symptoms:** tests that mock API contracts pass while short and fail when they get long enough for the SW install to finish (781-file precache ≈ 40–160s). pdf-editor CI failed exactly the multi-session cases (2, 3+6, 5, 7) and all of slow webkit — every failure the same modal: "Downloads temporarily unavailable" behind a 150s download timeout.
+
+**Fix (done Oct 4 2026):** `openEditor()` init script stubs `navigator.serviceWorker.register` to a rejected promise for specs that don't test the SW (`e2e/pdf-editor.spec.ts`). Specs that DO test the SW (`offline.spec.ts`) must not use route mocks. Rule: a spec either mocks APIs **or** exercises the SW, never both.
+
+**Discovered:** 2026-10-04 during CI pdf-editor failure triage (artifacts upload was the unlock — error-context.md showed the modal the logs never named).
