@@ -205,7 +205,72 @@ pipeline, so correspondence never depends on Gmail's send-as:
   later it needs its own identity in Resend — deliberately not done: one
   address, one promise, matches the privacy/terms/security pages.
 
+## Scope decision: inbound replies are NOT tickets (owner decision, Oct 2026)
+
+**Decision: Email Routing is a *copy* channel only. The admin panel
+(Inbox + Reply) is the system of record. Parsing user email replies back
+into the app — "tickets" — is scoped out until contact volume justifies it.**
+
+This came out of a live test on toolzum.com plus the owner's experience
+running the same flow on a second app.
+
+### What a user's reply actually does today
+
+```
+User replies to the ACK (From: Toolzum Support <contact@toolzum.com>)
+  → contact@toolzum.com → Email Routing → a COPY lands in owner's Gmail
+  → nothing else. The app never sees it:
+      ✗ contact_messages row does not gain the reply
+      ✗ status stays manual (new → replied → archived are owner-set)
+      ✗ no thread, no new ticket, no attachment capture
+
+Owner replies from Gmail (Reply-To: user on the relay)
+  → goes DIRECTLY to the user, bypassing the app entirely.
+
+Owner replies via /admin/reply
+  → sends fresh through sendEmail and marks the row `replied`,
+     but cannot see/quote the user's Gmail reply — compose-from-scratch.
+```
+
+### Evidence (Oct 4 2026, live)
+
+- **Relay → owner: proven.** Gated send returned 200 and the owner
+  received `[General Support] …` in Gmail.
+- **Owner reply to that relay: bounced "no address exist" — expected,
+  not a defect.** The test used a synthetic sender
+  (`pipeline-audit@t.toolzum.com`) with no inbox; Reply-To worked as
+  coded (`contact.ts:158`).
+- **User → ack → reply → contact@: still UNTESTED live** (needs a real
+  receiving inbox as the form sender). The owner's second app showed
+  this leg never arriving there — hence copy-only posture here too
+  until this repo proves otherwise.
+- Attachments: the contact form is text-only (no file input, JSON body);
+  admin/reply is text-only. Gmail-to-Gmail forwarding preserves
+  attachments for the owner's eyes only — the app never ingests them.
+
+### If/when inbound tickets get built (scope sketch)
+
+1. Email Routing → Worker MIME parser (pattern already exists in the
+   `toolzum-temp-inbox` worker): From/subject/body, strip quoted history,
+   handle multipart + quoted-printable + UTF-8 subjects.
+2. Thread match → attach to the originating `contact_messages` row
+   (match on the submitter address + a thread key in the ack's
+   References/subject); inbound flips status to `replied`.
+3. Attachments → R2 with a size cap (or v1 ships explicitly
+   "screenshots stay in Gmail" — a product call, not an oversight).
+4. Conversation view in `/admin/inbox` (thread + inline reply).
+5. Tests: MIME fixtures (multipart, encodings, long quoted threads) +
+   one live round-trip with a real inbox before declaring it works.
+
 ## Testing end-to-end
+
+> **Status (Oct 4, 2026, live):** Step 1 *relay leg* proven — owner
+> received the relay in Gmail (gated send, HTTP 200). Everything below is
+> untested except step 4's code path (503 branch exists; not probed this
+> round). The ack leg, step 2, and step 3 all need a **real outside
+> inbox** as the form sender — the first live test used a synthetic
+> address, so the ack went to a nonexistent mailbox and the owner's reply
+> to the relay correctly bounced. See the scope decision above.
 
 1. Submit `/contact` with an **outside** address (any real inbox) → two
    messages arrive: `[General Support] Your Name` (to you) and
