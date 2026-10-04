@@ -4,21 +4,26 @@ Last updated: 2026-10-03
 
 ## PDF editor — release gates & phase order (Oct 2026)
 
-**Phase order** (reason: small and high-impact first, riskiest last):
-1. **Phase 4** — performance & storage (stabilizes daily use; carries the wipe-local-data requirements below)
-2. **Phase 3** — accessibility & i18n
+**Phase order** (reason: small and high-impact first, riskiest last; labels corrected Oct 4 to match the master plan):
+1. **Phase 4** — performance, storage & draft privacy (stabilizes daily use; carries the wipe-local-data requirements below)
+2. **Phase 3** — mobile-first: touch, memory, PWA, share target (growth case is phones; owns the ~50s editor cold-start problem)
 3. **Phase 2a** — pro editing features
 4. **Phase 2b** — smart redaction heuristics — riskiest, LAST
+5. **Phase 5** — accessibility & i18n (after the numbered phases; was mislabeled "Phase 3" in earlier tracker text)
 
 **Phase 2 gate** (all three required before any Phase 2 work starts):
 - [x] E2E suite green in a **full serial run** — all cases incl. 10c and the font-DB-blocked variant. Isolated passes don't count (case 2 passed alone while failing in serial once). **DONE Oct 3 2026: 13/13 in 11.9m (`/tmp/pdf-serial2.log`); case 2/5 got session-count-scaled `test.setTimeout` (300s/240s) after the 120s ceiling starved iteration 3.**
-- [ ] Manual browser checklist done, **including Maximum mode** — run `docs/pdf-editor-manual-checklist.md` (13 cases, fixtures in `docs/fixtures/pdf-editor-manual/`, verify helper `scripts/pdf-find.mjs`).
+- [ ] Manual browser checklist done, **including Maximum mode** — run `docs/pdf-editor-manual-checklist.md` (13 cases, fixtures in `docs/fixtures/pdf-editor-manual/`, verify helper `scripts/pdf-find.mjs`). Stop at first FAIL, paste row + pdf-find output. After production deploys, **re-run cases 1, 3 (Maximum) and 10 on the live site before removing beta** — preview and production have separate environment variables, so a preview pass doesn't prove production.
 - [ ] Beta label **stays** on the tool until both of the above pass.
+- [ ] **App-code diff gate before sign-off** — a manual pass only certifies the code it ran against: `git diff <preview-tested-sha> <merge-sha> -- src/` (plus build config) must be empty; any difference invalidates the affected rows → rerun them.
 - [ ] **CI release blocker (Oct 2026)** — GitHub Actions was schema-broken Sep 10 → Oct 3 2026: `secrets` used in step `if` (illegal context) made **every** run fail in 0s with "workflow file issue" (no jobs, no logs); cron **alerts.yml + uptime.yml dead since Sep 16** — no site monitoring for 2.5 weeks. Fix = env-boolean guards in ci.yml/alerts.yml/uptime.yml + playwright install all 3 engines (actionlint-clean). **Gate: one green `quality` + `build` + `e2e` run on the exact merge sha before pushing `main`; record sha in the checklist. Once green, make `quality` (lint+typecheck+tests) a required status check on `main` (Settings → Branches).**
 - [ ] **PWA release blocker (Oct 2026)** — two prod service-worker bugs found while fixing offline e2e: (1) workbox `navigateFallback` registers NavigationRoute *before* all runtime routes → every non-precached navigation served the `/offline` page **even online** once the SW activated (SPA-shell recipe, wrong for the MPA export); (2) stock precache install has no per-fetch timeout — prod measured **759/782 then hung forever**, and `_redirects` 404s on Cloudflare Pages (install-fatal), so the SW **never activated in prod** — bug 1 stayed dormant and #10 offline never worked live. Fix = `scripts/sw-source.js` (navigate-guarded `setCatchHandler` fallback, 30s fetch timeout ×3 retries, no NavigationRoute, `_redirects` dropped) built via injectManifest+esbuild. **Gate after deploy: prod sw.js activates (controller true on toolzum.com) and a hard navigation to a tool URL renders the tool, not the offline page.**
+- [ ] **PWA update-path + rollback readiness (before beta off)** — an existing user on the old build must get the new editor on reload with **no manual cache clear** (load old version → deploy → reload). Keep a kill switch ready: a sw.js that unregisters itself, deployable as the one-click fix if the first release misbehaves. **Record the current production deployment id in Cloudflare before merging** so rollback is one click.
 
-**Phase 3 list (a11y & i18n):**
+**Phase 3 list (mobile-first: touch, memory, PWA, share target):**
 - [ ] Editor open latency on slow devices — full serial e2e showed each editor session (goto → upload → render ready) taking ~50s under machine load ~50; case 2 needed a 300s ceiling for 3 sessions. A budget phone may hit the same slowness (cold chunk fetch + font preloads + IDB recovery). Profile on a throttled CPU + a low-end Android before Phase 3 sign-off. (Filed as product work, not just a test-timeout issue — owner instruction Oct 2026.)
+
+**Phase 5 list (a11y & i18n):** — after 2a/2b; owner to populate.
 
 **Don't deploy:** a green browser run is NOT release approval. Ship only after the manual checklist + scorecard re-score + explicit owner sign-off.
 
