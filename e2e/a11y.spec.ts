@@ -21,6 +21,14 @@ async function expectNoCriticalViolations(page: Page, url: string) {
   );
 }
 
+test.beforeEach(({}, testInfo) => {
+  // axe injects + walks the full DOM inside page.evaluate — under local
+  // machine load that single call can exceed the 30s default test budget
+  // (observed Oct 2026: timeout, not violations). Genuine critical
+  // violations still fail the assertion immediately.
+  testInfo.setTimeout(120_000);
+});
+
 test('home has no critical a11y violations', async ({ page }) => {
   await expectNoCriticalViolations(page, '/');
 });

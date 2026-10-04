@@ -118,6 +118,20 @@ async function openEditor(page: Page, file: string): Promise<void> {
   await page.addInitScript(() => {
     localStorage.setItem('toolzum_onboarded', '1');
     localStorage.setItem('toolzum_pdf_editor_toured', '1');
+    // The quota mocks below are page.route()s — and page.route STOPS
+    // seeing page fetches once a service worker controls the page
+    // (proved Oct 2026: mocked fetch('/api/check-plan') returned serve's
+    // 404 with routeHits=0 after SW activation). The SW's NetworkFirst
+    // then hits the static server's 404 and every export dies behind
+    // "Downloads temporarily unavailable" — that's exactly the 4 long
+    // cases (SW activates mid-test) and all of slow webkit. pdf-editor
+    // doesn't exercise the SW; offline.spec.ts owns that.
+    try {
+      if (navigator.serviceWorker) {
+        navigator.serviceWorker.register = () =>
+          Promise.reject(new Error('e2e: SW disabled for pdf-editor specs'));
+      }
+    } catch { /* engine without SW */ }
   });
   // The download quota gate calls /api/check-plan + /api/downloads/* which
   // need server bindings — 500/404 in plain `next dev`, so every export would
