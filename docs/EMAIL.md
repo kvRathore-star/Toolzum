@@ -240,10 +240,10 @@ Owner replies via /admin/reply
   not a defect.** The test used a synthetic sender
   (`pipeline-audit@t.toolzum.com`) with no inbox; Reply-To worked as
   coded (`contact.ts:158`).
-- **User → ack → reply → contact@: still UNTESTED live** (needs a real
-  receiving inbox as the form sender). The owner's second app showed
-  this leg never arriving there — hence copy-only posture here too
-  until this repo proves otherwise.
+- **User → ack → reply → contact@: proven.** Real Gmail reply received
+  via Email Routing 2026-10-04 16:48 UTC (contact@ rule temporarily
+  pointed at a readable mailbox for observation, then restored; the
+  owner's second app showed this leg failing there — not here).
 - Attachments: the contact form is text-only (no file input, JSON body);
   admin/reply is text-only. Gmail-to-Gmail forwarding preserves
   attachments for the owner's eyes only — the app never ingests them.
@@ -264,13 +264,14 @@ Owner replies via /admin/reply
 
 ## Testing end-to-end
 
-> **Status (Oct 4, 2026, live):** Step 1 *relay leg* proven — owner
-> received the relay in Gmail (gated send, HTTP 200). Everything below is
-> untested except step 4's code path (503 branch exists; not probed this
-> round). The ack leg, step 2, and step 3 all need a **real outside
-> inbox** as the form sender — the first live test used a synthetic
-> address, so the ack went to a nonexistent mailbox and the owner's reply
-> to the relay correctly bounced. See the scope decision above.
+> **Status (Oct 4, 2026, live):** Steps 1–2 PROVEN end-to-end — relay
+> reached the owner; a real Gmail reply to the ack
+> (`Re: We got your message`, 16:48 UTC) was received via Email Routing
+> (verified by temporarily pointing the contact@ rule at a readable
+> mailbox, then restoring). Step 3 (Gmail send-as DKIM) and step 4's live
+> 503 probe remain untested. Synthetic-sender test earlier that day
+> bounced as expected — Reply-To worked (`contact.ts:158`). See the
+> scope decision above.
 
 1. Submit `/contact` with an **outside** address (any real inbox) → two
    messages arrive: `[General Support] Your Name` (to you) and
