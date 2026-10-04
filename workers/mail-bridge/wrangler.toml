@@ -1,0 +1,21 @@
+name = "toolzum-mail-bridge"
+main = "src/index.ts"
+compatibility_date = "2026-07-10"
+compatibility_flags = ["nodejs_compat"]
+
+# Inbound contact/support email → parse (postal-mime), store the reply +
+# attachments in D1/KV for the admin inbox thread, then forward the copy
+# to the owner's Gmail (routing rules point contact@ + support@ here).
+# Also serves signed attachment downloads at GET /att/{key}?t=…
+
+[vars]
+FORWARD_TO = "kirtivardhan1996@gmail.com"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "toolhub-db"
+database_id = "be7bd039-a6e8-45fd-a6fd-df56e6a20469"
+
+[[kv_namespaces]]
+binding = "MAIL_KV"
+id = "1608474e39a0449dbee6e2c1c3ff2ea8"

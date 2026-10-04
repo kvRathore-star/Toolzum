@@ -18,6 +18,12 @@ interface DbOpts {
   row?: { id: string } | null;
   rate?: number;
   failList?: boolean;
+  /** Row returned by the thread-mode contact lookup (WHERE id = ?). */
+  msgRow?: Record<string, unknown> | null;
+  /** Rows for the contact_thread_messages query. */
+  threadRows?: Record<string, unknown>[];
+  /** Simulate the thread table not existing yet. */
+  failThread?: boolean;
 }
 
 function mockDb(opts: DbOpts = {}) {
@@ -31,9 +37,14 @@ function mockDb(opts: DbOpts = {}) {
         first: vi.fn(async () => {
           if (sql.includes('FROM analytics_event')) return { c: opts.rate ?? 0 };
           if (sql.includes('SELECT id FROM contact_messages')) return opts.row ?? null;
+          if (sql.includes('FROM contact_messages WHERE id = ?')) return opts.msgRow ?? null;
           return null;
         }),
         all: vi.fn(async () => {
+          if (sql.includes('contact_thread_messages')) {
+            if (opts.failThread) throw new Error('no such table: contact_thread_messages');
+            return { results: opts.threadRows ?? [] };
+          }
           if (opts.failList) throw new Error('no such table: contact_messages');
           return { results: opts.results ?? [] };
         }),
@@ -140,6 +151,104 @@ describe('GET /api/admin/messages', () => {
       env: ENV(db, { ALERT_TOKEN: 'secret-token' }),
     });
     expect(allowed.status).toBe(200);
+  });
+});
+
+describe('GET /api/admin/messages — thread mode (?id=)', () => {
+  const MSG = { ...MESSAGE };
+  const IN_ROW = {
+    id: 'th-1',
+    direction: 'in',
+    sender: 'priya@example.com',
+    body: 'The PDF merger stalls at 90%.',
+    attachments: JSON.stringify([
+      { key: 'c/tt-1/0', name: 'shot.png', mime: 'image/png', size: 1234 },
+    ]),
+    createdAt: 1759300100,
+  };
+  const OUT_ROW = {
+    id: 'th-2',
+    direction: 'out',
+    sender: 'contact@toolzum.com',
+    body: 'Trying a fix now.',
+    attachments: '[]',
+    createdAt: 1759300200,
+  };
+
+  it('returns the contact row plus thread with signed attachment URLs', async () => {
+    const { db, sqls } = mockDb({ msgRow: MSG, threadRows: [IN_ROW, OUT_ROW] });
+    const res = await list({
+      request: new Request('https://toolzum.com/api/admin/messages?id=msg-1'),
+      env: ENV(db, { ATTACH_SECRET: 'test-secret', MAIL_BRIDGE_URL: 'https://bridge.example' }),
+    });
+    expect(res.status).toBe(200);
+    const data = (await res.json()) as {
+      ok: boolean;
+      message: { id: string };
+      thread: { id: string; direction: string; attachments: { url: string | null }[] }[];
+    };
+    expect(data.ok).toBe(true);
+    expect(data.message.id).toBe('msg-1');
+    expect(data.thread).toHaveLength(2);
+    expect(data.thread[0]!.direction).toBe('in');
+    expect(data.thread[1]!.direction).toBe('out');
+    expect(data.thread[0]!.attachments[0]!.url).toMatch(
+      /^https:\/\/bridge\.example\/att\/c%2Ftt-1%2F0\?t=[0-9a-f]{64}$/
+    );
+    expect(data.thread[1]!.attachments).toEqual([]);
+    // Thread query must keep chronological insertion order (rowid tiebreak).
+    expect(sqls.some((s) => s.includes('ORDER BY createdAt ASC, rowid ASC'))).toBe(true);
+  });
+
+  it('signs with the default bridge URL when MAIL_BRIDGE_URL is unset', async () => {
+    const { db } = mockDb({ msgRow: MSG, threadRows: [IN_ROW] });
+    const res = await list({
+      request: new Request('https://toolzum.com/api/admin/messages?id=msg-1'),
+      env: ENV(db, { ATTACH_SECRET: 'test-secret' }),
+    });
+    const data = (await res.json()) as { thread: { attachments: { url: string | null }[] }[] };
+    expect(data.thread[0]!.attachments[0]!.url).toMatch(
+      /^https:\/\/toolzum-mail-bridge\.[a-z0-9]+\.workers\.dev\/att\// 
+    );
+  });
+
+  it('returns url: null for attachments when ATTACH_SECRET is missing', async () => {
+    const { db } = mockDb({ msgRow: MSG, threadRows: [IN_ROW] });
+    const res = await list({
+      request: new Request('https://toolzum.com/api/admin/messages?id=msg-1'),
+      env: ENV(db),
+    });
+    const data = (await res.json()) as { thread: { attachments: { url: string | null }[] }[] };
+    expect(data.thread[0]!.attachments[0]!.url).toBeNull();
+  });
+
+  it('404s for an unknown id', async () => {
+    const { db } = mockDb({ msgRow: null });
+    const res = await list({
+      request: new Request('https://toolzum.com/api/admin/messages?id=nope'),
+      env: ENV(db),
+    });
+    expect(res.status).toBe(404);
+  });
+
+  it('degrades to an empty thread when the thread table does not exist yet', async () => {
+    const { db } = mockDb({ msgRow: MSG, failThread: true });
+    const res = await list({
+      request: new Request('https://toolzum.com/api/admin/messages?id=msg-1'),
+      env: ENV(db),
+    });
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ ok: true, message: MSG, thread: [] });
+  });
+
+  it('requires admin', async () => {
+    const { db } = mockDb({ msgRow: MSG });
+    vi.mocked(requireAdmin).mockResolvedValue({ error: new Response('no', { status: 401 }) } as never);
+    const res = await list({
+      request: new Request('https://toolzum.com/api/admin/messages?id=msg-1'),
+      env: ENV(db),
+    });
+    expect(res.status).toBe(401);
   });
 });
 

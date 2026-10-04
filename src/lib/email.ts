@@ -19,6 +19,13 @@
 
 import { brandFromText } from "./emailTemplate";
 
+export interface EmailAttachment {
+  filename: string;
+  /** Base64-encoded file bytes (Resend wire format). */
+  content: string;
+  mime?: string;
+}
+
 interface EmailOptions {
   to: string;
   subject: string;
@@ -31,6 +38,8 @@ interface EmailOptions {
    * "Toolzum Billing" help recipients sort signal from noise at a glance.
    */
   fromName?: string;
+  /** Base64 attachments (admin replies from the inbox). Resend only. */
+  attachments?: EmailAttachment[];
 }
 
 export interface EmailEnv {
@@ -88,6 +97,15 @@ async function sendViaResend(
         subject: opts.subject,
         text: opts.text,
         html,
+        ...(opts.attachments && opts.attachments.length
+          ? {
+              attachments: opts.attachments.map((a) => ({
+                filename: a.filename,
+                content: a.content,
+                ...(a.mime ? { content_type: a.mime } : {}),
+              })),
+            }
+          : {}),
       }),
     });
     if (res.ok) return true;
@@ -158,6 +176,16 @@ export async function sendEmail(
   if (env.RESEND_API_KEY) {
     const ok = await sendViaResend(env.RESEND_API_KEY, opts, html);
     if (ok) return true;
+  }
+
+  // Attachments are Resend-only: the Cloudflare fallback has no attachment
+  // support, and silently dropping files from a delivered reply would be a
+  // lie to the recipient. Fail honestly instead — caller surfaces email_failed.
+  if (opts.attachments && opts.attachments.length) {
+    console.error(
+      `[email] resend failed with attachments — refusing attachment-less fallback — to=${opts.to} subject="${opts.subject}"`
+    );
+    return false;
   }
 
   return sendViaCloudflare(env, opts, html);

@@ -185,6 +185,70 @@ describe('sendEmail — Cloudflare fallback', () => {
   });
 });
 
+describe('sendEmail — attachments', () => {
+  it('passes Resend-format attachments through on the primary transport', async () => {
+    const fetchMock = vi.fn(async () => ({ ok: true }));
+    vi.stubGlobal('fetch', fetchMock);
+
+    const ok = await sendEmail(
+      { RESEND_API_KEY: 're_test' },
+      {
+        to: 'user@example.com',
+        subject: 'Re: your message',
+        text: 'see attached',
+        attachments: [
+          { filename: 'screenshot.png', content: 'aGVsbG8=', mime: 'image/png' },
+          { filename: 'notes.txt', content: 'd29ybGQ=' },
+        ],
+      }
+    );
+
+    expect(ok).toBe(true);
+    const body = bodyOf(lastCall(fetchMock).init);
+    expect(body.attachments).toEqual([
+      { filename: 'screenshot.png', content: 'aGVsbG8=', content_type: 'image/png' },
+      { filename: 'notes.txt', content: 'd29ybGQ=' },
+    ]);
+  });
+
+  it('omits the attachments key entirely when none are given', async () => {
+    const fetchMock = vi.fn(async () => ({ ok: true }));
+    vi.stubGlobal('fetch', fetchMock);
+
+    await sendEmail({ RESEND_API_KEY: 're_test' }, { to: 'a@b.com', subject: 'S', text: 't' });
+
+    expect('attachments' in bodyOf(lastCall(fetchMock).init)).toBe(false);
+  });
+
+  it('refuses the Cloudflare fallback when attachments were requested (no silent strip)', async () => {
+    const fetchMock = vi.fn(async (input: unknown) => ({
+      ok: !String(input).includes('resend'),
+    }));
+    vi.stubGlobal('fetch', fetchMock);
+    const errSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    const ok = await sendEmail(
+      {
+        RESEND_API_KEY: 're_x',
+        CLOUDFLARE_API_TOKEN: 'cf_tok',
+        CLOUDFLARE_ACCOUNT_ID: 'cf_acct',
+      },
+      {
+        to: 'a@b.com',
+        subject: 'S',
+        text: 't',
+        attachments: [{ filename: 'a.txt', content: 'aGk=' }],
+      }
+    );
+
+    expect(ok).toBe(false);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(lastCall(fetchMock).url).toBe(RESEND_URL);
+    const logged = errSpy.mock.calls.map((c) => String(c[0])).join('\n');
+    expect(logged).toContain('refusing attachment-less fallback');
+  });
+});
+
 describe('sendEmail — failure logging', () => {
   it('logs status, body snippet, to and subject when Resend rejects', async () => {
     const errSpy = vi.spyOn(console, 'error').mockImplementation(() => {});

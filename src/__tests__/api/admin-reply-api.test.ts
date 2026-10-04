@@ -38,7 +38,7 @@ function mockDb(rateCount = 0) {
   return { db: { prepare } as unknown as D1Database, sqls, binds };
 }
 
-const ENV = (db: D1Database, extras: Record<string, string | undefined> = {}) =>
+const ENV = (db: D1Database, extras: Record<string, unknown> = {}) =>
   ({
     DB: db,
     GOOGLE_CLIENT_ID: 'x',
@@ -205,6 +205,161 @@ describe('POST /api/admin/reply (in-app reply fallback)', () => {
       env: ENV(plain.db, CONFIGURED),
     });
     expect(plain.sqls.some((s) => s.includes('contact_messages'))).toBe(false);
+  });
+});
+
+describe('POST /api/admin/reply — attachments', () => {
+  const VALID = { filename: 'shot.png', content: 'aGVsbG8=', mime: 'image/png' };
+
+  function mockKv() {
+    const puts: { key: string; value: unknown }[] = [];
+    return {
+      puts,
+      kv: {
+        put: vi.fn(async (key: string, value: unknown) => {
+          puts.push({ key, value });
+        }),
+      } as unknown as KVNamespace,
+    };
+  }
+
+  it('passes validated attachments through to sendEmail', async () => {
+    const { db } = mockDb();
+    const res = await send({
+      request: post({
+        to: 'user@example.com',
+        subject: 'Re: x',
+        message: 'see attached',
+        attachments: [VALID],
+      }),
+      env: ENV(db, CONFIGURED),
+    });
+    expect(res.status).toBe(200);
+    const arg = vi.mocked(sendEmail).mock.calls[0]![1];
+    expect(arg.attachments).toEqual([{ filename: 'shot.png', content: 'aGVsbG8=', mime: 'image/png' }]);
+  });
+
+  it('omits the attachments key when none were sent', async () => {
+    const { db } = mockDb();
+    await send({
+      request: post({ to: 'user@example.com', subject: 'x', message: 'y' }),
+      env: ENV(db, CONFIGURED),
+    });
+    const arg = vi.mocked(sendEmail).mock.calls[0]![1];
+    expect(arg.attachments).toBeUndefined();
+  });
+
+  it('rejects more than 5 attachments with 400 before sending', async () => {
+    const { db } = mockDb();
+    const res = await send({
+      request: post({
+        to: 'user@example.com',
+        subject: 'x',
+        message: 'y',
+        attachments: Array.from({ length: 6 }, () => VALID),
+      }),
+      env: ENV(db, CONFIGURED),
+    });
+    expect(res.status).toBe(400);
+    const body = (await res.json()) as { error: string };
+    expect(body.error).toContain('invalid_attachments');
+    expect(sendEmail).not.toHaveBeenCalled();
+  });
+
+  it('rejects malformed base64 (bad char or bad length) with 400', async () => {
+    const { db } = mockDb();
+    for (const content of ['not*base64', 'abc']) {
+      const res = await send({
+        request: post({
+          to: 'user@example.com',
+          subject: 'x',
+          message: 'y',
+          attachments: [{ filename: 'a.txt', content }],
+        }),
+        env: ENV(db, CONFIGURED),
+      });
+      expect(res.status).toBe(400);
+    }
+    expect(sendEmail).not.toHaveBeenCalled();
+  });
+
+  it('rejects a single file over the 8 MB per-file limit with 400', async () => {
+    const { db } = mockDb();
+    // base64 "AAAA".repeat(N) decodes to 3N bytes — N just over 8 MB / 3.
+    const oversized = 'AAAA'.repeat(2_796_203);
+    const res = await send({
+      request: post({
+        to: 'user@example.com',
+        subject: 'x',
+        message: 'y',
+        attachments: [{ filename: 'big.bin', content: oversized }],
+      }),
+      env: ENV(db, CONFIGURED),
+    });
+    expect(res.status).toBe(400);
+    const body = (await res.json()) as { error: string };
+    expect(body.error).toContain('8 MB per-file');
+    expect(sendEmail).not.toHaveBeenCalled();
+  }, 30_000);
+
+  it('rejects a combined payload over the 12 MB total limit with 400', async () => {
+    const { db } = mockDb();
+    // 4 files × 3.3 MB decoded — each under 8 MB, total over 12 MB.
+    const chunk = 'AAAA'.repeat(1_100_000);
+    const res = await send({
+      request: post({
+        to: 'user@example.com',
+        subject: 'x',
+        message: 'y',
+        attachments: Array.from({ length: 4 }, (_, i) => ({ filename: `p${i}.bin`, content: chunk })),
+      }),
+      env: ENV(db, CONFIGURED),
+    });
+    expect(res.status).toBe(400);
+    const body = (await res.json()) as { error: string };
+    expect(body.error).toContain('12 MB total');
+    expect(sendEmail).not.toHaveBeenCalled();
+  }, 30_000);
+
+  it('stores sent attachments in MAIL_KV and records thread refs on messageId', async () => {
+    const { db, sqls, binds } = mockDb();
+    const { kv, puts } = mockKv();
+    const res = await send({
+      request: post({
+        to: 'user@example.com',
+        subject: 'Re: x',
+        message: 'here it is',
+        messageId: 'msg-9',
+        attachments: [VALID, { filename: 'b.txt', content: 'd29ybGQ=' }],
+      }),
+      env: ENV(db, { ...CONFIGURED, MAIL_KV: kv }),
+    });
+    expect(res.status).toBe(200);
+    expect(puts).toHaveLength(2);
+    expect(puts[0]!.key).toMatch(/^c\/[0-9a-f-]{36}\/0$/);
+    const insert = sqls.find((s) => s.includes('INSERT INTO contact_thread_messages'));
+    expect(insert).toBeTruthy();
+    const refs = binds.find((b) => typeof b[3] === 'string' && (b[3] as string).startsWith('['));
+    expect(refs).toBeTruthy();
+    const parsedRefs = JSON.parse(refs![3] as string) as { name: string; mime: string }[];
+    expect(parsedRefs.map((r) => r.name)).toEqual(['shot.png', 'b.txt']);
+    expect(parsedRefs[0]!.mime).toBe('image/png');
+  });
+
+  it('still appends the thread row with empty refs when MAIL_KV is missing', async () => {
+    const { db, sqls } = mockDb();
+    const res = await send({
+      request: post({
+        to: 'user@example.com',
+        subject: 'Re: x',
+        message: 'here it is',
+        messageId: 'msg-9',
+        attachments: [VALID],
+      }),
+      env: ENV(db, CONFIGURED),
+    });
+    expect(res.status).toBe(200);
+    expect(sqls.some((s) => s.includes('INSERT INTO contact_thread_messages'))).toBe(true);
   });
 });
 

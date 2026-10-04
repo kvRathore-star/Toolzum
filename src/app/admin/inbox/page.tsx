@@ -3,8 +3,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/lib/auth-client";
-import { Archive, ArchiveRestore, Inbox, Loader2, Reply } from "lucide-react";
+import { Archive, ArchiveRestore, Inbox, Loader2, Paperclip, Send, X } from "lucide-react";
 import { AdminSidebar } from "../_components/AdminSidebar";
+import { filesToAttachments } from "@/lib/attachClient";
 
 type MessageStatus = "new" | "replied" | "archived";
 
@@ -17,6 +18,22 @@ interface StoredMessage {
   message: string;
   status: string;
   createdAt: number;
+}
+
+interface ThreadAtt {
+  name: string;
+  mime: string;
+  size: number;
+  url: string | null;
+}
+
+interface ThreadMsg {
+  id: string;
+  direction: "in" | "out";
+  sender: string;
+  body: string;
+  createdAt: number;
+  attachments: ThreadAtt[];
 }
 
 type Filter = "all" | MessageStatus;
@@ -45,6 +62,12 @@ function formatDate(unixSeconds: number): string {
   }
 }
 
+function formatBytes(n: number): string {
+  if (n < 1024) return `${n} B`;
+  if (n < 1024 * 1024) return `${(n / 1024).toFixed(0)} KB`;
+  return `${(n / (1024 * 1024)).toFixed(1)} MB`;
+}
+
 export default function AdminInboxPage() {
   const router = useRouter();
   const { data: session, isPending } = useSession();
@@ -56,6 +79,11 @@ export default function AdminInboxPage() {
   const [loadError, setLoadError] = useState("");
   const [busyId, setBusyId] = useState<string | null>(null);
   const [actionError, setActionError] = useState("");
+  const [thread, setThread] = useState<ThreadMsg[] | null>(null);
+  const [threadLoading, setThreadLoading] = useState(false);
+  const [replyText, setReplyText] = useState("");
+  const [replyFiles, setReplyFiles] = useState<File[]>([]);
+  const [sending, setSending] = useState(false);
 
   useEffect(() => {
     if (!isPending && !session) router.push("/login");
@@ -115,13 +143,51 @@ export default function AdminInboxPage() {
     }
   };
 
-  const openReply = (m: StoredMessage) => {
-    const params = new URLSearchParams({
-      to: m.email,
-      subject: `Re: ${m.label}`,
-      messageId: m.id,
-    });
-    router.push(`/admin/reply?${params.toString()}`);
+  const loadThread = useCallback(async (id: string) => {
+    setThreadLoading(true);
+    try {
+      const res = await fetch(`/api/admin/messages?id=${encodeURIComponent(id)}`);
+      if (res.status === 401 || res.status === 403) return;
+      const data = (await res.json()) as { ok?: boolean; thread?: ThreadMsg[] };
+      setThread(data.ok ? (data.thread ?? []) : []);
+    } catch {
+      setThread([]);
+    } finally {
+      setThreadLoading(false);
+    }
+  }, []);
+
+  const sendReply = async (m: StoredMessage) => {
+    const text = replyText.trim();
+    if (!text) {
+      setActionError("Write a reply first.");
+      return;
+    }
+    setSending(true);
+    setActionError("");
+    try {
+      const attachments = await filesToAttachments(replyFiles);
+      const res = await fetch("/api/admin/reply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          to: m.email,
+          subject: `Re: ${m.label || m.name}`,
+          message: text,
+          messageId: m.id,
+          ...(attachments.length ? { attachments } : {}),
+        }),
+      });
+      const data = (await res.json()) as { ok?: boolean; error?: string };
+      if (!res.ok || !data.ok) throw new Error(data.error || `Send failed: ${res.status}`);
+      setReplyText("");
+      setReplyFiles([]);
+      await Promise.all([loadThread(m.id), load(filter)]);
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : "Failed to send reply");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -209,7 +275,16 @@ export default function AdminInboxPage() {
                     <button
                       type="button"
                       aria-expanded={expanded}
-                      onClick={() => setExpandedId(expanded ? null : m.id)}
+                      onClick={() => {
+                        const next = expanded ? null : m.id;
+                        setExpandedId(next);
+                        if (next) {
+                          setThread(null);
+                          setReplyText("");
+                          setReplyFiles([]);
+                          void loadThread(next);
+                        }
+                      }}
                       className="w-full text-left px-4 py-3 flex items-start gap-3 hover:bg-[var(--bg-elevated)] transition-colors"
                     >
                       <div className="min-w-0 flex-1">
@@ -243,14 +318,129 @@ export default function AdminInboxPage() {
                         <p className="text-sm text-[var(--text-primary)] whitespace-pre-wrap">
                           {m.message}
                         </p>
+
+                        {threadLoading ? (
+                          <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
+                            <Loader2 className="w-3.5 h-3.5 animate-spin" /> Loading conversation…
+                          </div>
+                        ) : (
+                          thread &&
+                          thread.length > 0 && (
+                            <div className="space-y-2" aria-label={`Conversation with ${m.name}`}>
+                              {thread.map((t) => (
+                                <div
+                                  key={t.id}
+                                  className={`rounded-xl px-3 py-2 border ${
+                                    t.direction === "out"
+                                      ? "ml-6 sm:ml-12 bg-[var(--accent)]/10 border-[var(--accent)]/25"
+                                      : "mr-6 sm:mr-12 bg-[var(--bg-elevated)] border-[var(--border-subtle)]"
+                                  }`}
+                                >
+                                  <div className="flex justify-between gap-2 text-[11px] text-[var(--text-muted)]">
+                                    <span className="truncate">
+                                      {t.direction === "out" ? "You · Toolzum Support" : t.sender}
+                                    </span>
+                                    <span className="shrink-0">{formatDate(t.createdAt)}</span>
+                                  </div>
+                                  <p className="mt-1 text-sm text-[var(--text-primary)] whitespace-pre-wrap">
+                                    {t.body}
+                                  </p>
+                                  {t.attachments.length > 0 && (
+                                    <div className="mt-2 flex flex-wrap gap-2">
+                                      {t.attachments.map((a, i) =>
+                                        a.url ? (
+                                          <a
+                                            key={i}
+                                            href={a.url}
+                                            download={a.name}
+                                            className="inline-flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                                          >
+                                            <Paperclip className="w-3 h-3" />
+                                            {a.name}
+                                            <span className="text-[var(--text-muted)]">
+                                              {formatBytes(a.size)}
+                                            </span>
+                                          </a>
+                                        ) : (
+                                          <span
+                                            key={i}
+                                            className="inline-flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-muted)]"
+                                          >
+                                            <Paperclip className="w-3 h-3" />
+                                            {a.name} (signing unavailable)
+                                          </span>
+                                        )
+                                      )}
+                                    </div>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          )
+                        )}
+
+                        <div className="space-y-2 pt-2 border-t border-[var(--border-subtle)]">
+                          <label htmlFor={`reply-${m.id}`} className="sr-only">
+                            Reply to {m.name}
+                          </label>
+                          <textarea
+                            id={`reply-${m.id}`}
+                            value={replyText}
+                            onChange={(e) => setReplyText(e.target.value)}
+                            rows={3}
+                            placeholder={`Reply to ${m.name}…`}
+                            className="w-full rounded-xl bg-[var(--bg-elevated)] border border-[var(--border-subtle)] px-3 py-2 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/40 resize-y"
+                          />
+                          <div className="flex flex-wrap items-center gap-2">
+                            <label className="inline-flex items-center gap-1.5 cursor-pointer text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                              <Paperclip className="w-3.5 h-3.5" /> Attach files
+                              <input
+                                type="file"
+                                multiple
+                                className="sr-only"
+                                onChange={(e) =>
+                                  setReplyFiles(e.target.files ? Array.from(e.target.files) : [])
+                                }
+                              />
+                            </label>
+                            {replyFiles.map((f, i) => (
+                              <span
+                                key={`${f.name}-${i}`}
+                                className="inline-flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-secondary)]"
+                              >
+                                {f.name}
+                                <button
+                                  type="button"
+                                  aria-label={`Remove ${f.name}`}
+                                  onClick={() =>
+                                    setReplyFiles((prev) => prev.filter((_, j) => j !== i))
+                                  }
+                                  className="hover:text-[var(--text-primary)]"
+                                >
+                                  <X className="w-3 h-3" />
+                                </button>
+                              </span>
+                            ))}
+                            <button
+                              type="button"
+                              disabled={sending || !replyText.trim()}
+                              onClick={() => void sendReply(m)}
+                              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-xl bg-[var(--accent-ink)] text-white hover:bg-[var(--accent-hover)] disabled:opacity-50 transition-all"
+                            >
+                              {sending ? (
+                                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                              ) : (
+                                <Send className="w-3.5 h-3.5" />
+                              )}
+                              Send reply
+                            </button>
+                            <span className="text-[11px] text-[var(--text-muted)]">
+                              ≤8 MB per file, max 5 · 12 MB total
+                            </span>
+                          </div>
+                        </div>
+
                         <div className="flex flex-wrap items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => openReply(m)}
-                            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-xl bg-[var(--accent-ink)] text-white hover:bg-[var(--accent-hover)] transition-all"
-                          >
-                            <Reply className="w-3.5 h-3.5" /> Reply
-                          </button>
                           {m.status !== "archived" ? (
                             <button
                               type="button"

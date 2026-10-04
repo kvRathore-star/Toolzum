@@ -205,32 +205,68 @@ pipeline, so correspondence never depends on Gmail's send-as:
   later it needs its own identity in Resend — deliberately not done: one
   address, one promise, matches the privacy/terms/security pages.
 
-## Scope decision: inbound replies are NOT tickets (owner decision, Oct 2026)
+## Inbound replies are tickets now (built Oct 2026 — pending deploy)
 
-**Decision: Email Routing is a *copy* channel only. The admin panel
-(Inbox + Reply) is the system of record. Parsing user email replies back
-into the app — "tickets" — is scoped out until contact volume justifies it.**
+**Original decision (Oct 4): Email Routing is a *copy* channel only —
+parsing user replies back into the app was scoped out until volume
+justified it.** Owner reversed this the same week: the mail pipeline
+infra gaps got filled (code complete, pending deploy + live e2e).
 
-This came out of a live test on toolzum.com plus the owner's experience
-running the same flow on a second app.
-
-### What a user's reply actually does today
+### Before the bridge (what the Oct 4 audit documented)
 
 ```
 User replies to the ACK (From: Toolzum Support <contact@toolzum.com>)
   → contact@toolzum.com → Email Routing → a COPY lands in owner's Gmail
   → nothing else. The app never sees it:
       ✗ contact_messages row does not gain the reply
-      ✗ status stays manual (new → replied → archived are owner-set)
-      ✗ no thread, no new ticket, no attachment capture
-
-Owner replies from Gmail (Reply-To: user on the relay)
-  → goes DIRECTLY to the user, bypassing the app entirely.
-
-Owner replies via /admin/reply
-  → sends fresh through sendEmail and marks the row `replied`,
-     but cannot see/quote the user's Gmail reply — compose-from-scratch.
+      ✗ no thread, no attachment capture
+      ✗ admin had to compose from scratch (/admin/reply)
 ```
+
+### After deploy (toolzum-mail-bridge)
+
+```
+User replies to contact@ or support@
+  → Email Routing rules (both → Worker toolzum-mail-bridge)
+  → worker buffers message.raw, parses with postal-mime:
+      · matches contact_messages by lower(email), newest non-archived
+        (else auto-creates a ticket; replied → new re-alerts,
+         archived stays archived)
+      · strips quoted history (Gmail/Outlook markers)
+      · attachments (≤10, ≤20 MB total) → MAIL_KV as c/{threadId}/{i}
+      · appends contact_thread_messages row (direction 'in')
+  → forwards the COPY to owner's Gmail (last step, independent
+    try/catch per stage — a broken panel never eats the owner's mail)
+
+Owner replies from /admin/inbox (inline composer, ≤5 files × 8 MB,
+12 MB total — total is a Workers-memory guard: the base64 body exists
+in ~3 copies at send time against the 128 MB ceiling)
+  → POST /api/admin/reply (+ attachments) → Resend carries them
+    (Cloudflare fallback refused when attachments present — no silent
+    strip) → thread row 'out' + row flips to `replied` (the inbound
+    flip is `replied → new` only; archived threads stay archived)
+
+Attachment downloads: /admin/inbox renders HMAC-signed URLs
+  (src/lib/mailBridge.ts, shared ATTACH_SECRET) → worker serves
+  GET /att/{key}?t=… from KV with constant-time signature check.
+```
+
+- Migration: `src/db/migrations/0029_contact_thread.sql` (applies manually
+  via local wrangler; CI warn-and-continues until the GH token gets D1).
+- Bindings: worker has D1 + `MAIL_KV` (`toolzum-mail-att`,
+  `1608474e39a0449dbee6e2c1c3ff2ea8`); Pages functions gained `MAIL_KV`
+  (root wrangler.toml) + `ATTACH_SECRET` Pages secret (same value as the
+  worker's).
+- Design notes: ticket matching is **email-only** — a reply from a
+  different address than the submitter opens a *new* ticket (honest,
+  no guessing); malformed-sender mail threads into one catch-all row
+  (email ''). Stored attachments live in KV indefinitely — same retention
+  class as the D1 message rows themselves. Owner replies sent directly
+  from Gmail still bypass the panel thread (inherent to the copy channel).
+- Tests: sign/verify round-trip + tamper cases, quoted-history fixtures,
+  Resend attachment payload + no-silent-strip fallback refusal,
+  attachment validation. **Live e2e (inbound with a real attachment,
+  outbound with a file) still pending — needs the owner's inbox.**
 
 ### Evidence (Oct 4 2026, live)
 
@@ -244,23 +280,6 @@ Owner replies via /admin/reply
   via Email Routing 2026-10-04 16:48 UTC (contact@ rule temporarily
   pointed at a readable mailbox for observation, then restored; the
   owner's second app showed this leg failing there — not here).
-- Attachments: the contact form is text-only (no file input, JSON body);
-  admin/reply is text-only. Gmail-to-Gmail forwarding preserves
-  attachments for the owner's eyes only — the app never ingests them.
-
-### If/when inbound tickets get built (scope sketch)
-
-1. Email Routing → Worker MIME parser (pattern already exists in the
-   `toolzum-temp-inbox` worker): From/subject/body, strip quoted history,
-   handle multipart + quoted-printable + UTF-8 subjects.
-2. Thread match → attach to the originating `contact_messages` row
-   (match on the submitter address + a thread key in the ack's
-   References/subject); inbound flips status to `replied`.
-3. Attachments → R2 with a size cap (or v1 ships explicitly
-   "screenshots stay in Gmail" — a product call, not an oversight).
-4. Conversation view in `/admin/inbox` (thread + inline reply).
-5. Tests: MIME fixtures (multipart, encodings, long quoted threads) +
-   one live round-trip with a real inbox before declaring it works.
 
 ## Testing end-to-end
 
@@ -271,7 +290,7 @@ Owner replies via /admin/reply
 > mailbox, then restoring). Step 3 (Gmail send-as DKIM) and step 4's live
 > 503 probe remain untested. Synthetic-sender test earlier that day
 > bounced as expected — Reply-To worked (`contact.ts:158`). See the
-> scope decision above.
+> inbound-thread section above (bridge worker built, live e2e pending).
 
 1. Submit `/contact` with an **outside** address (any real inbox) → two
    messages arrive: `[General Support] Your Name` (to you) and

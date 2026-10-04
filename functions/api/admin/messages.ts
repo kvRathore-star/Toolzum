@@ -1,5 +1,10 @@
 import { requireAdmin, json } from "../../../src/lib/admin-auth";
 import { checkRateLimit, recordRateLimit } from "../rate-limit";
+import {
+  MAIL_BRIDGE_DEFAULT_URL,
+  parseAttachmentList,
+  signAttachmentKey,
+} from "../../../src/lib/mailBridge";
 
 /**
  * Contact inbox API (#contact-inbox) — read and triage the messages
@@ -11,16 +16,24 @@ import { checkRateLimit, recordRateLimit } from "../rate-limit";
  *
  * Auth: admin session (browser UI) OR Bearer ALERT_TOKEN (curl/automation),
  * same as /api/admin/reply.
- * GET    → { ok, messages: [...], unread }         (optional ?status=filter)
- * PATCH  → { id, status: new|replied|archived }    (triage from the inbox UI)
+ * GET          → { ok, messages: [...], unread }   (optional ?status=filter)
+ * GET ?id=X    → { ok, message, thread: [...] }    (conversation view)
+ * PATCH        → { id, status: new|replied|archived } (triage from the inbox UI)
  *
- * Reply flow: the inbox UI opens /admin/reply?to=…&messageId=…, and the
- * reply endpoint marks the row `replied` after a successful send.
+ * Thread rows carry attachment refs stored in MAIL_KV by the mail-bridge
+ * worker (inbound) or /api/admin/reply (outbound); their download URLs are
+ * HMAC-signed with ATTACH_SECRET so raw KV bytes are never reachable
+ * unauthenticated via the bridge worker.
+ *
+ * Reply flow: the inbox UI composes inline and POSTs /api/admin/reply with
+ * messageId — the row flips to `replied` after a successful send.
  */
 
 interface Env {
   DB: D1Database;
   ALERT_TOKEN?: string;
+  ATTACH_SECRET?: string;
+  MAIL_BRIDGE_URL?: string;
   GOOGLE_CLIENT_ID: string;
   GOOGLE_CLIENT_SECRET: string;
   BETTER_AUTH_SECRET: string;
@@ -55,7 +68,72 @@ export async function onRequestGet(context: { request: Request; env: Env }): Pro
   const { request, env } = context;
   if (!(await isAuthed(request, env))) return json({ error: "unauthorized" }, 401);
 
-  const status = new URL(request.url).searchParams.get("status");
+  const url = new URL(request.url);
+  const id = clean(url.searchParams.get("id"), MAX_ID);
+
+  // Thread mode: one contact row + its conversation (form message is the
+  // first entry's context; thread rows are the replies after it).
+  if (id) {
+    let message;
+    try {
+      message = await env.DB.prepare(
+        "SELECT id, name, email, category, label, message, status, createdAt FROM contact_messages WHERE id = ?"
+      )
+        .bind(id)
+        .first();
+    } catch {
+      return json({ error: "not_found" }, 404);
+    }
+    if (!message) return json({ error: "not_found" }, 404);
+    let rows: { results: unknown[] } | null = null;
+    try {
+      rows = await env.DB.prepare(
+        "SELECT id, direction, sender, body, attachments, createdAt FROM contact_thread_messages WHERE contact_id = ? ORDER BY createdAt ASC, rowid ASC"
+      )
+        .bind(id)
+        .all();
+    } catch {
+      // Thread table absent (migration not applied yet) — the contact row
+      // still exists, so the thread view degrades to empty, honestly.
+      rows = null;
+    }
+    const base = (env.MAIL_BRIDGE_URL || MAIL_BRIDGE_DEFAULT_URL).replace(/\/+$/, "");
+    const secret = env.ATTACH_SECRET;
+    const thread = await Promise.all(
+      (rows?.results ?? []).map(async (r) => {
+        const row = r as {
+          id: string;
+          direction: string;
+          sender: string;
+          body: string;
+          attachments: string;
+          createdAt: number;
+        };
+        const refs = parseAttachmentList(row.attachments);
+        const attachments = await Promise.all(
+          refs.map(async (ref) => ({
+            name: ref.name,
+            mime: ref.mime,
+            size: ref.size,
+            url: secret
+              ? `${base}/att/${encodeURIComponent(ref.key)}?t=${await signAttachmentKey(ref.key, secret)}`
+              : null,
+          }))
+        );
+        return {
+          id: row.id,
+          direction: row.direction,
+          sender: row.sender,
+          body: row.body,
+          createdAt: row.createdAt,
+          attachments,
+        };
+      })
+    );
+    return json({ ok: true, message, thread });
+  }
+
+  const status = url.searchParams.get("status");
   const filter = isStatus(status) ? status : null;
 
   try {
