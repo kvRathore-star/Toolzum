@@ -73,6 +73,9 @@ test.describe('offline resilience', () => {
     // A never-visited deep URL: must serve /offline, not the browser error.
     // /you.re/ — offline.html spells it "You&rsquo;re" (curly apostrophe).
     await page.goto('/pdf/pdf-merger/');
-    await expect(page.getByText(/you.re offline/i)).toBeVisible({ timeout: 20000 });
+    // 45s, not 20s: firefox under CI contention needed longer for the
+    // NetworkFirst rejection → catch-handler → /offline chain (passed
+    // locally, failed only in the 3-engine run).
+    await expect(page.getByText(/you.re offline/i)).toBeVisible({ timeout: 45_000 });
   });
 });

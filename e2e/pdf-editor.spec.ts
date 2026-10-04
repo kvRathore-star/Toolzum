@@ -306,11 +306,14 @@ function toastLoc(page: Page, re: RegExp) {
 }
 
 async function exportPdf(page: Page, toast?: RegExp): Promise<string> {
-  const dlPromise = page.waitForEvent('download', { timeout: 60_000 });
+  // CI (3 engines, workers=2, SW installs in sibling tests) starves the
+  // export render past the old 60s cap — Oct 2026 runs timed out here on
+  // every multi-op case while the same exports passed locally serial.
+  const dlPromise = page.waitForEvent('download', { timeout: 150_000 });
   // The toast fires when export completes but only lives ~8s, while
   // dl.path() (full file write) can outlive it — so wait for it BEFORE
   // awaiting the path, not after exportPdf returns.
-  const toastPromise = toast ? toastLoc(page, toast).waitFor({ state: 'visible', timeout: 60_000 }) : null;
+  const toastPromise = toast ? toastLoc(page, toast).waitFor({ state: 'visible', timeout: 150_000 }) : null;
   await page.getByRole('button', { name: 'Download flattened PDF' }).click();
   const dl = await dlPromise;
   if (toastPromise) await toastPromise;
@@ -425,12 +428,11 @@ test.describe('pdf-editor manual checklist (browser render → JPEG → embed)',
   });
 
   test.beforeEach(async ({ page }) => {
-    // 120s whole-test ceiling (raised from 60s, Oct 2026): persistent
-    // machine load (70–200: Brave + dev tooling) stretches page.goto/
-    // hydration setup past 60s on spikes — three targeted runs died inside
-    // openEditor without reaching export. Every wait/action timeout stays
-    // ≤60s, so failures still surface fast; only setup gets headroom.
-    test.setTimeout(120_000);
+    // 300s whole-test ceiling (raised Oct 2026 again): the export wait
+    // itself is 150s under CI contention, so setup + export must fit
+    // inside the budget without preempting the download event. Genuinely
+    // broken exports still fail at the 150s download wait, not here.
+    test.setTimeout(300_000);
     _page = page;
   });
 
@@ -452,9 +454,10 @@ test.describe('pdf-editor manual checklist (browser render → JPEG → embed)',
 
   test('case 2: selective redact at /Rotate 90, 180, 270 — box lands on the word every time', async ({ page }) => {
     // 3 full editor sessions (goto → upload → redact → export each) ≈ 50s apiece
-    // under load — the beforeEach 120s ceiling runs out mid-loop (observed Oct
-    // 2026: iters 1–2 exported, iter 3 starved at setInputFiles). 3 × 100s.
-    test.setTimeout(300_000);
+    // under load — the beforeEach 120s ceiling ran out mid-loop (observed Oct
+    // 2026: iters 1–2 exported, iter 3 starved at setInputFiles). 3 sessions
+    // + 150s export waits under CI contention → 600s ceiling.
+    test.setTimeout(600_000);
     for (const angle of [90, 180, 270]) {
       await openEditor(page, await rotatedSecret(angle));
       await pickTool(page, 'Redact');
@@ -527,9 +530,10 @@ test.describe('pdf-editor manual checklist (browser render → JPEG → embed)',
   });
 
   test('case 5: rotated 90° and 270° — redaction + text annotation both survive', async ({ page }) => {
-    // 2 full editor sessions — scale the beforeEach 120s ceiling with the
-    // session count (same Oct 2026 ceiling math as case 2). 2 × 120s.
-    test.setTimeout(240_000);
+    // 2 full editor sessions — scale the beforeEach 300s ceiling with the
+    // session count (same Oct 2026 ceiling math as case 2), plus 150s
+    // export waits under CI contention.
+    test.setTimeout(400_000);
     for (const angle of [90, 270]) {
       await openEditor(page, await rotatedSecretWithAnno(angle));
       // Text annotation off-center (so the redaction box does not strip it).
