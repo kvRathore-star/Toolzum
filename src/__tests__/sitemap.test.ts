@@ -25,11 +25,12 @@ describe('sitemap', () => {
   });
 
   it('lists canonical trailing-slash URLs (server 308s non-slashed variants)', () => {
-    // Scoped to tool + category URLs: static pages carry their own mixed
-    // canonicals (see per-route layouts) and are a separate cleanup.
+    // Static pages were the last holdout: this test was deliberately scoped
+    // to deep URLs on Sep 15 ("statics = separate cleanup") and the cleanup
+    // never landed until Oct 5. Now covers everything — only the bare origin
+    // (which serves 200 directly) may omit the slash.
     const urls = sitemap().map((e) => e.url);
-    const deep = urls.filter((u) => u.slice(BASE.length + 1).split('/').length > 1);
-    expect(deep.filter((u) => !u.endsWith('/'))).toEqual([]);
+    expect(urls.filter((u) => u !== BASE && !u.endsWith('/'))).toEqual([]);
   });
 
   it('lists every non-redirect registry tool exactly once', async () => {
