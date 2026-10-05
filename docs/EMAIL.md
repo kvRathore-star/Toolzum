@@ -294,10 +294,14 @@ Attachment downloads: /admin/inbox renders HMAC-signed URLs
   not a code defect.** Resend accepted (202, `out` row written after),
   sent 11:09, Gmail bounced: *"Blocked due to content: the message was
   rejected because it contained content that the recipient's server
-  doesn't allow"* — the differentiator vs. proven-working plain acks
-  was the `Toolzum.app.zip` attachment (Gmail content-scans archives
-  with executables from external senders). Isolation probes (plain
-  reply / benign file) pending.
+  doesn't allow."* **Isolated: plain-text reply with no attachment was
+  delivered afterward — the `Toolzum.app.zip` (executable-bearing
+  archive) is the trigger.** Gmail hard-rejects archives containing
+  executables from external/low-reputation senders rather than
+  spam-foldering them. Recipient-side policy: ship app bundles as a
+  Drive link, never as an email attachment. Benign-attachment outbound
+  (e.g. a screenshot) still unverified — one panel reply with an image
+  closes it.
 - **Owner BCC: implemented** (`OWNER_COPY` Pages secret), ships with
   the same deploy as this entry.
 
