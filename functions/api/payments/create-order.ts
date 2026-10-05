@@ -21,8 +21,8 @@ const DODO_PRODUCTS: Record<string, string> = {
 const PRICES: Record<string, { INR: number; USD: number }> = {
   // Advertised prices, single-sourced with PricingCards + pricing/layout.
   // A previous revision charged ₹1999 for the ₹99 pass — amounts below
-  // MUST match the UI or checkout lies. Razorpay takes paise, Dodo takes
-  // major units: convert at the gateway call (VERIFY with test keys, #36).
+  // MUST match the UI or checkout lies. Dodo takes major units (verify
+  // per-country prices match the Dodo dashboard, #36).
   pass: { INR: 99, USD: 3.99 },
   monthly: { INR: 299, USD: 9.99 },
   yearly: { INR: 2990, USD: 99 },
@@ -33,7 +33,10 @@ const PRICES: Record<string, { INR: number; USD: number }> = {
   pack_1000: { INR: 1499, USD: 49.99 },
 };
 
-const VALID_GATEWAYS = ['razorpay', 'dodo'];
+// Dodo is the only integrated gateway. A legacy 'razorpay' gateway value
+// from an old client is coerced to dodo — the old razorpay branch created
+// 'created' orders that could never complete (no checkout ever existed).
+const VALID_GATEWAYS = ['dodo'];
 
 const RATE_LIMIT = 5;
 
@@ -52,15 +55,13 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     const formData = await context.request.formData();
     const plan = (formData.get('plan') as string) || 'pass';
-    // Dodo is the only integrated gateway (UPI + INR + global). Razorpay
-    // remains accepted for backward-compat rows but is never the default —
-    // defaulting to it created 'created' orders that could never complete.
     let gateway = (formData.get('gateway') as string) || 'dodo';
     if (!VALID_GATEWAYS.includes(gateway)) gateway = 'dodo';
     // Unknown plans previously fell through to the pass price — a pricing
-    // lie by typo. Reject instead. Currency follows buyer country on the
-    // Dodo path (cf-ipcountry → INR localized price or USD); the Dodo
-    // webhook is the source of truth for upgrades (#36, built).
+    // lie by typo. Reject instead. Currency follows the buyer's country
+    // (cf-ipcountry): India gets the INR localized price, rest of world
+    // gets USD. Must match the per-country prices set in Dodo dashboard;
+    // the Dodo webhook is the source of truth for upgrades (#36, built).
     const tier = PRICES[plan];
     if (!tier) {
       return new Response(JSON.stringify({ error: 'invalid_plan' }), {
@@ -68,11 +69,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
         headers: { 'Content-Type': 'application/json' },
       });
     }
-    // Currency: Razorpay is INR-only. Dodo follows the buyer's country
-    // (cf-ipcountry): India gets the INR localized price, rest of world
-    // gets USD. Must match the per-country prices set in Dodo dashboard.
     const buyerCountry = (context.request.headers.get("cf-ipcountry") || "US").toUpperCase();
-    const currency = gateway === "dodo" ? (buyerCountry === "IN" ? "INR" : "USD") : "INR";
+    const currency = buyerCountry === "IN" ? "INR" : "USD";
     const price = { amount: tier[currency], currency };
 
     const orderId = `ord_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
@@ -184,20 +182,12 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       return Response.redirect(checkout.checkout_url, 303);
     }
 
-    const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0;url=/pricing?order=${orderId}">
-  <title>Order Created</title>
-</head>
-<body>
-  <p>Order created. Redirecting...</p>
-  <script>window.location.href = '/pricing?order=${orderId}';</script>
-</body>
-</html>`;
-    return new Response(html, {
-      headers: { 'Content-Type': 'text/html; charset=utf-8' },
+    // Unreachable after the VALID_GATEWAYS coercion above (dodo is the
+    // only value that survives) — a loud 503 instead of resurrecting the
+    // old dead-end "Order Created" page that could never be paid.
+    return new Response(JSON.stringify({ error: "checkout_unconfigured" }), {
+      status: 503,
+      headers: { "Content-Type": "application/json" },
     });
   } catch {
     return new Response(JSON.stringify({ error: "Internal server error" }), { status: 500, headers: { "Content-Type": "application/json" } });

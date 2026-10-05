@@ -33,7 +33,7 @@ describe('POST /api/payments/create-order contract', () => {
   it('redirects anonymous callers to sign-in (no order row written)', async () => {
     const db = mockDb({ hasSession: false });
     const res = await onRequestPost({
-      request: req({ plan: 'monthly', gateway: 'razorpay' }, ''),
+      request: req({ plan: 'monthly', gateway: 'dodo' }, ''),
       env: { DB: db },
     });
     const html = await res.text();
@@ -51,6 +51,16 @@ describe('POST /api/payments/create-order contract', () => {
       env: { DB: db },
     });
     // No DODO_API_KEY in test env → loud 503, never a dead-end local order.
+    expect(res.status).toBe(503);
+    expect(await res.json()).toEqual({ error: 'checkout_unconfigured' });
+  });
+
+  it('coerces the legacy razorpay gateway to the dodo path (no dead-end order page)', async () => {
+    const db = mockDb();
+    const res = await onRequestPost({
+      request: req({ plan: 'monthly', gateway: 'razorpay' }),
+      env: { DB: db },
+    });
     expect(res.status).toBe(503);
     expect(await res.json()).toEqual({ error: 'checkout_unconfigured' });
   });

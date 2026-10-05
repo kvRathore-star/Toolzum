@@ -64,7 +64,7 @@ export const verifications = sqliteTable("verification", {
 export const payments = sqliteTable("payment", {
   id: text("id").primaryKey(),
   userId: text("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
-  gateway: text("gateway").notNull(), // 'razorpay' | 'dodo'
+  gateway: text("gateway").notNull(), // 'dodo' (live) | 'razorpay' (legacy rows only)
   orderId: text("orderId").notNull(),
   amount: real("amount").notNull(),
   currency: text("currency").notNull(),
