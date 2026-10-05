@@ -1,45 +1,60 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
-
-// Mock the component
-vi.mock('@/components/tools/ToolPaywall', () => ({
-  ToolPaywall: ({ toolName, featureName }: any) => (
-    <div data-testid="paywall">
-      <h2 data-testid="tool-name">{toolName}</h2>
-      <p data-testid="feature-name">{featureName}</p>
-      <button data-testid="upgrade-button">Upgrade to Pro</button>
-    </div>
-  ),
-}));
-
+import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
 import { ToolPaywall } from '@/components/tools/ToolPaywall';
+import { FREE_SINGLE_ALTERNATIVE, proSlugs } from '@/registry/tools-constants';
+import { clientToolsRegistry } from '@/registry/tools-client-index';
 
-describe('ToolPaywall', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
+describe('ToolPaywall free-alt mapping', () => {
+  it('every key is a Pro tool and every value is a real non-Pro tool', () => {
+    const pro = new Set(proSlugs as string[]);
+    const bySlug = new Map(clientToolsRegistry.map((t) => [t.slug, t]));
+    const bad: string[] = [];
+    for (const [bulk, single] of Object.entries(FREE_SINGLE_ALTERNATIVE)) {
+      if (!pro.has(bulk)) bad.push(`${bulk}: not a Pro tool`);
+      const target = bySlug.get(single);
+      if (!target) bad.push(`${bulk}: target ${single} missing from client registry`);
+      else if (pro.has(single)) bad.push(`${bulk}: target ${single} is also Pro`);
+    }
+    expect(Object.keys(FREE_SINGLE_ALTERNATIVE).length).toBeGreaterThan(10);
+    expect(bad).toEqual([]);
+  });
+});
+
+describe('ToolPaywall free-alt render', () => {
+  const base = {
+    isLocked: true,
+    showSignInPrompt: true,
+    proToolCount: 65,
+    toolCount: 1100,
+    title: 'Bulk Image Resizer',
+  };
+
+  it('shows the free single-file link when locked with freeAlt', () => {
+    render(
+      <ToolPaywall {...base} freeAlt={{ name: 'Image Resizer', href: '/image/image-resizer/' }}>
+        <div>tool body</div>
+      </ToolPaywall>
+    );
+    const link = screen.getByRole('link', { name: /try image resizer free, no signup/i });
+    expect(link.getAttribute('href')).toContain('/image/image-resizer');
   });
 
-  it('renders paywall', () => {
-    render(<ToolPaywall toolName="PDF Tools" featureName="Batch Processing" />);
-    
-    expect(screen.getByTestId('paywall')).toBeDefined();
+  it('shows no free-alt link when locked without freeAlt', () => {
+    render(
+      <ToolPaywall {...base} freeAlt={null}>
+        <div>tool body</div>
+      </ToolPaywall>
+    );
+    expect(screen.queryByRole('link', { name: /try .* free, no signup/i })).toBeNull();
   });
 
-  it('displays tool name', () => {
-    render(<ToolPaywall toolName="Video Compressor" featureName="4K Export" />);
-    
-    expect(screen.getByTestId('tool-name')).toHaveTextContent('Video Compressor');
-  });
-
-  it('displays feature name', () => {
-    render(<ToolPaywall toolName="Tools" featureName="Premium Feature" />);
-    
-    expect(screen.getByTestId('feature-name')).toHaveTextContent('Premium Feature');
-  });
-
-  it('has upgrade button', () => {
-    render(<ToolPaywall toolName="Tools" featureName="Feature" />);
-    
-    expect(screen.getByTestId('upgrade-button')).toBeDefined();
+  it('renders children unlocked', () => {
+    render(
+      <ToolPaywall {...base} isLocked={false} freeAlt={{ name: 'Image Resizer', href: '/image/image-resizer/' }}>
+        <div>tool body</div>
+      </ToolPaywall>
+    );
+    expect(screen.getByText('tool body')).toBeTruthy();
+    expect(screen.queryByRole('link', { name: /try .* free, no signup/i })).toBeNull();
   });
 });

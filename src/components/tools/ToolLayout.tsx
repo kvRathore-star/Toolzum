@@ -7,6 +7,9 @@ import { GlobalErrorBoundary } from '../GlobalErrorBoundary';
 import { CategorySidebar, type SidebarGroup } from './CategorySidebar';
 import { ChevronRight, Shield, Zap, Info, ArrowLeft, Sparkles, LayoutGrid } from 'lucide-react';
 import type { RelatedTool, ToolMetadata } from '@/registry/tools';
+import { FREE_SINGLE_ALTERNATIVE } from '@/registry/tools-constants';
+import { clientToolsRegistry } from '@/registry/tools-client-index';
+import { categorySlug } from '@/lib/categorySlugs';
 import { PerToolBadge } from '@/components/privacy-claims';
 import { useSession } from '@/lib/auth-client';
 import { useFreeUsage } from '@/hooks/useFreeUsage';
@@ -110,6 +113,15 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
   // content flash for anon.
   const isAnonResolved = !isPending && !sessionData?.user;
   const isLocked = isPro && isAnonResolved;
+  // Free single-file escape hatch for locked Pro bulk tools (Oct 5 trust
+  // program): anonymous users bounce to a working free tool instead of exiting.
+  const freeAltSlug = FREE_SINGLE_ALTERNATIVE[slug];
+  const freeAltTool = freeAltSlug
+    ? clientToolsRegistry.find((t) => t.slug === freeAltSlug)
+    : undefined;
+  const freeAlt = freeAltTool
+    ? { name: freeAltTool.name, href: `/${categorySlug(freeAltTool.category)}/${freeAltTool.slug}/` }
+    : null;
   const displayCategory = category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   // Layout option: sidebar rail vs classic wide. Persisted per browser;
   // defaults to the rail. Pure presentation — same content, same URLs.
@@ -144,7 +156,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": tool.name,
-    "description": tool.description,
+    "description": tool ? getShortDescription(tool) : undefined,
     "applicationCategory": "WebApplication",
     "operatingSystem": "Web Browser",
     "offers": {
@@ -337,6 +349,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
                     proToolCount={proToolCount}
                     toolCount={toolCount}
                     title={title}
+                    freeAlt={freeAlt}
                   >
                     {children}
                   </ToolPaywall>
@@ -348,6 +361,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
                   proToolCount={proToolCount}
                   toolCount={toolCount}
                   title={title}
+                  freeAlt={freeAlt}
                 >
                   {children}
                 </ToolPaywall>

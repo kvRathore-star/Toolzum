@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { toolsRegistry } from "@/registry/tools";
 import type { ToolCategory } from "@/registry/tools";
 import { CategoryPageClient } from "@/components/tools/CategoryPageClient";
-import { CATEGORY_SECTIONS, CATEGORY_INTROS } from "@/data/categorySections";
+import { CATEGORY_SECTIONS, CATEGORY_INTROS, CATEGORY_FAQS } from "@/data/categorySections";
 import { categorySlug } from "@/lib/categorySlugs";
 
 const VALID_CATEGORIES = new Set<string>(toolsRegistry.map(t => t.category));
@@ -110,14 +110,35 @@ export default async function CategoryPage(props: { params: Promise<{ category: 
   // allTools (incl. cross-listed section tools) so the About line always
   // agrees with the All/Free/Pro tab counts.
   const intro = rawIntro.replace('{count}', String(allTools.length));
+  const faqs = CATEGORY_FAQS[categoryKey] || [];
+  const faqJsonLd = faqs.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.question,
+          acceptedAnswer: { "@type": "Answer", text: f.answer },
+        })),
+      }
+    : null;
 
   return (
-    <CategoryPageClient
-      category={categoryKey as ToolCategory}
-      tools={allTools}
-      sections={sectionedTools}
-      uncategorized={uncategorized}
-      intro={intro}
-    />
+    <>
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
+      <CategoryPageClient
+        category={categoryKey as ToolCategory}
+        tools={allTools}
+        sections={sectionedTools}
+        uncategorized={uncategorized}
+        intro={intro}
+        faqs={faqs}
+      />
+    </>
   );
 }

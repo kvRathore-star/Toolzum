@@ -22,7 +22,7 @@ export const TOOL_COUNT = 1143;
 export const SITE_STATS = {
   totalImplemented: 1060,
   freeTierTotal: 995,
-  localTools: 1021,
+  localTools: 1024,
   cloudTools: 33,
   hybridTools: 2,
 } as const;

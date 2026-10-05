@@ -12,9 +12,10 @@ interface ToolPaywallProps {
   toolCount: number;
   title: string;
   children: React.ReactNode;
+  freeAlt?: { name: string; href: string } | null;
 }
 
-export function ToolPaywall({ isLocked, showSignInPrompt, proToolCount, title, children }: ToolPaywallProps) {
+export function ToolPaywall({ isLocked, showSignInPrompt, proToolCount, title, children, freeAlt }: ToolPaywallProps) {
   if (!isLocked) return <>{children}</>;
 
   // Anonymous visitors hit the sign-in variant: free accounts get 2 Pro
@@ -90,6 +91,11 @@ export function ToolPaywall({ isLocked, showSignInPrompt, proToolCount, title, c
                   <Link href="/pricing" className="block w-full text-center text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] underline transition-colors">
                     Or upgrade to Pro for unlimited
                   </Link>
+                  {freeAlt && (
+                    <Link href={freeAlt.href} className="block w-full text-center text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] underline transition-colors">
+                      Only need one file? Try {freeAlt.name} free, no signup
+                    </Link>
+                  )}
                 </>
               ) : (
                 <>
@@ -98,6 +104,11 @@ export function ToolPaywall({ isLocked, showSignInPrompt, proToolCount, title, c
                       Upgrade to Pro <Crown className="w-4 h-4 ml-1.5" />
                     </Button>
                   </Link>
+                  {freeAlt && (
+                    <Link href={freeAlt.href} className="block w-full text-center text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] underline transition-colors">
+                      Only need one file? Try {freeAlt.name} free, no signup
+                    </Link>
+                  )}
                   <div className="text-xs text-[var(--text-muted)] pt-1 text-center">
                     Already subscribed?{' '}
                     <Link href="/dashboard" className="text-[var(--accent)] hover:underline font-semibold">

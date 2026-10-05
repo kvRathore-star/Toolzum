@@ -394,3 +394,32 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string; so
 };
 
 
+
+/**
+ * Free single-file alternative for Pro bulk tools (Oct 5 trust program).
+ * Shown on the Pro lock screen so anonymous users bounce to a working free
+ * tool instead of exiting: "Only need one file? Try X free, no signup".
+ * Keys must be Pro tools with real pages; values must exist in
+ * clientToolsRegistry and must NOT be Pro. Guarded by
+ * ToolPaywall.test.tsx mapping test.
+ */
+export const FREE_SINGLE_ALTERNATIVE: Record<string, string> = {
+  "bulk-bg-changer": "bg-changer",
+  "bulk-qr-code-generator": "qr-code-generator",
+  "bulk-audio-converter": "audio-converter",
+  "bulk-svg-to-png": "svg-to-png",
+  "bulk-image-compressor": "image-compressor",
+  "bulk-image-resizer": "image-resizer",
+  "bulk-video-compressor": "video-compressor",
+  "bulk-pdf-merger": "pdf-merger",
+  "bulk-image-converter": "image-converter",
+  "bulk-font-subsetter": "font-subsetter",
+  "bulk-regex-extractor-replacer": "regex-tester",
+  "bulk-ebook-converter": "epub-to-pdf",
+  "bulk-heic-to-jpg": "heic-to-jpg",
+  "bulk-url-shortener": "url-shortener",
+  "bulk-image-upscaler": "image-enhancer",
+  "bulk-avif-optimizer": "image-compressor",
+  "image-bulk-converter": "image-converter",
+  "batch-image-editor": "image-compressor",
+};

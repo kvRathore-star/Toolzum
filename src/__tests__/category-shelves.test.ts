@@ -68,4 +68,26 @@ describe('category shelves integrity', () => {
     expect(mismatched).toEqual([]);
     expect(Object.values(CATEGORY_INTROS).some((i) => i.includes('{count}'))).toBe(true);
   });
+
+  it('every category hub has >=4 unique FAQs', async () => {
+    const { CATEGORY_FAQS } = await import('@/data/categorySections');
+    const bad: string[] = [];
+    const cats = [...new Set(toolsRegistry.map((t) => t.category))];
+    for (const cat of cats) {
+      const faqs = CATEGORY_FAQS[cat] || [];
+      if (faqs.length < 4) {
+        bad.push(`${cat}: only ${faqs.length} FAQs`);
+        continue;
+      }
+      const seen = new Set<string>();
+      for (const f of faqs) {
+        if (!f.question.endsWith('?')) bad.push(`${cat}: question lacks '?': ${f.question.slice(0, 40)}`);
+        if (f.answer.length < 40) bad.push(`${cat}: answer too short: ${f.question.slice(0, 40)}`);
+        const key = f.question.toLowerCase();
+        if (seen.has(key)) bad.push(`${cat}: duplicate question: ${f.question.slice(0, 40)}`);
+        seen.add(key);
+      }
+    }
+    expect(bad).toEqual([]);
+  });
 });

@@ -41,3 +41,14 @@
 # (next.config headers() is ignored under output:export, so this is the rule that applies)
 /og/*
   Cache-Control: public, max-age=2592000
+
+# Agent discovery manifests (Oct 5 agent-readiness) — explicit types so
+# scanners and agents parse them instead of sniffing octet-stream.
+/.well-known/api-catalog
+  Content-Type: application/linkset+json
+/.well-known/agent-skills/*
+  Content-Type: application/json
+/.well-known/ai-catalog.json
+  Content-Type: application/json
+/llms.txt
+  Content-Type: text/markdown; charset=utf-8

@@ -6,7 +6,7 @@ import { ToolMetadata, ToolCategory } from "@/registry/tools";
 import { Search, ChevronRight, Grid3X3, List, ChevronDown, Image, FileText, Code2, Briefcase, Wrench, Compass, Sun, Sparkles, Crown, ArrowUpDown, PanelLeft, X } from "lucide-react";
 import { getCategoryTheme, getCategoryGroup } from "@/lib/categoryTheme";
 import { FavoriteStarButton } from "@/components/FavoriteStarButton";
-import type { CategorySection } from "@/data/categorySections";
+import type { CategorySection, CategoryFaq } from "@/data/categorySections";
 
 interface CategoryPageClientProps {
   category: ToolCategory;
@@ -14,6 +14,7 @@ interface CategoryPageClientProps {
   sections?: (CategorySection & { tools: ToolMetadata[] })[];
   uncategorized?: ToolMetadata[];
   intro?: string;
+  faqs?: CategoryFaq[];
 }
 
 const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
@@ -247,7 +248,7 @@ function SectionToolRow({ tool }: { tool: ToolMetadata }) {
   );
 }
 
-export function CategoryPageClient({ category, tools, sections = [], uncategorized = [], intro = '' }: CategoryPageClientProps) {
+export function CategoryPageClient({ category, tools, sections = [], uncategorized = [], intro = '', faqs = [] }: CategoryPageClientProps) {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [activeSubcategory, setActiveSubcategory] = React.useState<string | null>(null);
   const [viewMode, setViewMode] = React.useState<'grid' | 'list'>('grid');
@@ -777,6 +778,23 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
               </section>
             )}
           </div>
+        )}
+
+        {/* Category FAQ — indexable editorial layer, hidden while searching */}
+        {!searchQuery && faqs.length > 0 && (
+          <section aria-labelledby="hub-faq-heading" className="mt-12 max-w-3xl">
+            <h2 id="hub-faq-heading" className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-widest mb-4">
+              {displayName} FAQs
+            </h2>
+            <div className="space-y-5">
+              {faqs.map((faq) => (
+                <div key={faq.question}>
+                  <h3 className="font-semibold text-[var(--text-primary)] mb-1">{faq.question}</h3>
+                  <p className="text-sm leading-relaxed text-[var(--text-secondary)]">{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          </section>
         )}
 
         {/* Empty state */}

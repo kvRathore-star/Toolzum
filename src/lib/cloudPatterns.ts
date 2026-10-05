@@ -231,6 +231,9 @@ const LOCAL_SAFE_PATTERNS: readonly string[] = [
   "sql-formatter",
   "Terser",
   "clean-css",
+  "marked",
+  "turndown",
+  "fast-xml-parser",
   "html-minifier",
   "highlight.js",
   "Prism",
@@ -277,6 +280,45 @@ export type DependencyVerdict = "cloud" | "local" | "hybrid" | "unverified";
 export const LOCAL_TRUST_CLAIM = "Everything runs locally in your browser — nothing is uploaded.";
 export const CLOUD_TRUST_CLAIM = "Uses cloud-based processing.";
 export const HYBRID_TRUST_CLAIM = "Most processing runs locally; specific features use cloud AI.";
+
+/**
+ * Per-category local trust claims (Oct 5 Tier A dedup). The uniform
+ * LOCAL_TRUST_CLAIM sentence was appended verbatim to 691 tool pages —
+ * template repetition at exactly the scale the classifier filters.
+ * These say the same true thing with category-specific mechanics.
+ * Keys are lowercase category slugs; localTrustClaim() falls back to the
+ * uniform sentence for unknown categories. ONLY for local-verdict tools —
+ * cloud/hybrid/unverified must never receive one (see trustClaimFor in
+ * generateToolDescription.ts).
+ */
+export const LOCAL_TRUST_CLAIM_BY_CATEGORY: Record<string, string> = {
+  'ai': "On-device AI features process in your browser; cloud AI features are marked and cost credits.",
+  'audio': "Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM.",
+  'branding': "Designs never leave your device — everything renders locally in your browser.",
+  'calculator': "Numbers never leave your device — every calculation runs locally in your browser.",
+  'converter': "Files are converted locally in your browser — nothing is uploaded.",
+  'design': "Work never leaves your device — everything renders locally in your browser.",
+  'developer': "Code never leaves your device — formatting and validation run locally in your browser.",
+  'extension': "Code never leaves your device — scaffolding generates locally in your browser.",
+  'finance': "Figures never leave your device — every calculation runs locally in your browser.",
+  'growth & marketing': "Numbers never leave your device — every calculation runs locally in your browser.",
+  'health': "Health data never leaves your device — every calculation runs locally in your browser.",
+  'image': "Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+  'pdf': "Documents stay on your device — editing and conversion run locally in your browser.",
+  'privacy': "Sensitive data never leaves your device — encryption runs locally in your browser.",
+  'productivity': "Tasks never leave your device — everything stores locally in your browser.",
+  'seo': "Analysis runs locally in your browser — nothing you enter is uploaded.",
+  'text': "Text never leaves your device — everything processes locally in your browser.",
+  'transcription': "Short clips transcribe on-device in your browser; longer audio uses the transcription API with costs shown upfront.",
+  'utility': "Input never leaves your device — everything runs locally in your browser.",
+  'video': "Videos never leave your device — compression and conversion run locally in your browser with FFmpeg WASM.",
+  'indian-utilities': "Details never leave your device — validation and generation run locally in your browser.",
+};
+
+export function localTrustClaim(category?: string): string {
+  const key = (category || '').toLowerCase();
+  return LOCAL_TRUST_CLAIM_BY_CATEGORY[key] || LOCAL_TRUST_CLAIM;
+}
 
 /**
  * Classifies a tool's dependencies into one of four verdicts.

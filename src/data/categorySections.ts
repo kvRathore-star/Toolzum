@@ -5,6 +5,11 @@ export interface CategorySection {
   slugs: string[];
 }
 
+export interface CategoryFaq {
+  question: string;
+  answer: string;
+}
+
 export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
   Developer: [
     {
@@ -1277,5 +1282,390 @@ export const CATEGORY_INTROS: Record<string, string> = {
     "SaaS metrics calculators — MRR with net-new breakout, ARR, LTV, CAC, churn, runway, CPM, ROAS, and NPS. Worked examples included (e.g., 120 customers × $49 = $5,880 MRR). All math runs in your browser.",
   Productivity:
     "Productivity tools — Pomodoro with void-on-interrupt discipline, to-do lists, countdowns, and world clock. Session counts persist locally; no account, no uploads.",
+};
+
+// Per-hub FAQs — 4 unique questions per category, rendered on the category
+// page with FAQPage JSON-LD. These are the hub's indexable editorial layer:
+// every answer must mention concrete formats, tools, or numbers from this
+// category (no template filler — that's what the classifier filters).
+export const CATEGORY_FAQS: Record<string, CategoryFaq[]> = {
+  Image: [
+    {
+      question: "How much can I compress a JPG without visible quality loss?",
+      answer: "Photos typically shrink 60–80% before artifacts show. Use the quality slider around 70–80 for web uploads, and compare the before/after preview — flat graphics and screenshots compress better as PNG instead.",
+    },
+    {
+      question: "Should I use PNG, JPG, or WebP?",
+      answer: "JPG for photos, PNG when you need transparency or crisp text, WebP for the smallest web delivery (about 30% smaller than JPG). The converters here switch between all three in one click.",
+    },
+    {
+      question: "Are my photos uploaded anywhere?",
+      answer: "No. Resizing, compression, background removal previews, and format conversion all run in your browser via Canvas and WebAssembly — your images never leave your device.",
+    },
+    {
+      question: "What size should a passport photo be?",
+      answer: "India uses 3.5 × 4.5 cm (51 × 51 mm for the US visa). Set exact pixel dimensions for print DPI — e.g., 413 × 531 px at 300 DPI for 3.5 × 4.5 cm — and crop to the required aspect ratio first.",
+    },
+  ],
+  PDF: [
+    {
+      question: "How do I merge PDFs in a specific page order?",
+      answer: "Add your files, then drag the thumbnails into order before merging — the editor supports 20+ files at once. Splitting works the same way: pick page ranges like 1–5, 8, 12–15.",
+    },
+    {
+      question: "How do I shrink a PDF for email attachments?",
+      answer: "Compression targets the heaviest parts first: downsampling embedded images and stripping duplicate fonts. A scanned 25 MB document usually lands under the 10 MB Gmail limit with text still selectable.",
+    },
+    {
+      question: "Can I edit existing text inside a PDF?",
+      answer: "Yes — the in-browser editor lets you click any text block and retype it in place, preserving fonts and layout. For scanned pages, run OCR first so the page gains a real text layer.",
+    },
+    {
+      question: "What stays private when I use the AI features?",
+      answer: "Editing, merging, compression, and conversion run locally via pdf-lib. Only the optional AI actions — summarize, translate, PII sweep — send page text to our server, and each one asks before it runs.",
+    },
+  ],
+  Developer: [
+    {
+      question: "Which regex flavor does the tester use?",
+      answer: "JavaScript (the same engine as your browser), with live match highlighting and capture-group inspection. Patterns you validate here behave identically in Node.js and frontend code.",
+    },
+    {
+      question: "Is it safe to paste a JWT or API key into the decoders?",
+      answer: "Yes — decoding and validation happen entirely in your browser; nothing is transmitted. Still, prefer test tokens over production secrets out of habit.",
+    },
+    {
+      question: "Why is my Base64 output ~33% larger than the input?",
+      answer: "That's inherent to the encoding: every 3 input bytes become 4 ASCII characters. Use the converter for data URIs, basic-auth headers, and embedding small assets in CSS.",
+    },
+    {
+      question: "How do I read a cron expression like */15 9-17 * * MON-FRI?",
+      answer: "Field by field: every 15 minutes, hours 9–17, any day of month/month, weekdays only. The cron parser expands any expression into plain-English schedules and next-run times.",
+    },
+  ],
+  Audio: [
+    {
+      question: "MP3 vs WAV vs FLAC — which should I choose?",
+      answer: "MP3 for portable listening (320 kbps is transparent for most ears), WAV for editing masters, FLAC for lossless archiving at half the WAV size. OGG/Opus wins for voice streaming at low bitrates.",
+    },
+    {
+      question: "What bitrate should I convert to?",
+      answer: "128 kbps for podcasts and voice, 192–256 kbps for music sharing, 320 kbps for maximum quality. Re-encoding an already-compressed MP3 to a higher bitrate can't restore lost detail.",
+    },
+    {
+      question: "How does browser audio conversion work?",
+      answer: "Files are decoded and re-encoded locally with FFmpeg compiled to WebAssembly — an M4A to MP3 or FLAC to OGG conversion never uploads your audio to any server.",
+    },
+    {
+      question: "Which languages does speech-to-text support?",
+      answer: "Major Indian languages plus English, with transcription billed at 1 credit per minute. Everything else on this hub — conversion, trimming, synthesis — is free and unlimited.",
+    },
+  ],
+  Converter: [
+    {
+      question: "How do I convert CSV to JSON?",
+      answer: "Paste or drop the CSV — the first row becomes object keys by default. Nested fields, custom delimiters, and arrays are configurable before you copy or download the result.",
+    },
+    {
+      question: "Can I convert Markdown to HTML and back?",
+      answer: "Yes, both directions. Markdown to HTML renders tables, code blocks, and task lists; HTML to Markdown strips tags back to clean text you can edit anywhere.",
+    },
+    {
+      question: "How do number-base conversions handle large values?",
+      answer: "Binary, octal, decimal, and hex convert with arbitrary precision — long bit strings and 64-bit values stay exact, unlike spreadsheet functions that round past 15 digits.",
+    },
+    {
+      question: "How do I combine images into one PDF?",
+      answer: "Add JPG or PNG files in order, set page size and margins, and export — each image becomes one page. Reorder by dragging before converting.",
+    },
+  ],
+  Calculator: [
+    {
+      question: "How do I calculate a percentage increase?",
+      answer: "Subtract old from new, divide by old, multiply by 100. Going from 40 to 50 is a 25% increase — the percentage calculator handles increase, decrease, and reverse-percentage in one place.",
+    },
+    {
+      question: "How are weighted grades averaged?",
+      answer: "Multiply each score by its weight, sum those products, and divide by total weight. A 90 on a 60%-weighted exam plus 70 on 40% coursework averages 82, not 80.",
+    },
+    {
+      question: "How do I count days between two dates?",
+      answer: "Enter both dates to get exact days, weeks, and months between them — useful for notice periods, warranties, and age calculations. Results account for leap years automatically.",
+    },
+    {
+      question: "Are the calculations precise for money?",
+      answer: "Yes — decimal math avoids the floating-point errors that make 0.1 + 0.2 equal 0.30000000000000004 in spreadsheets. Financial figures round correctly to paise and cents.",
+    },
+  ],
+  Utility: [
+    {
+      question: "How long should a strong password be?",
+      answer: "At least 16 random characters mixing upper/lowercase, digits, and symbols — roughly 95 bits of entropy, uncrackable by brute force. The generator uses your browser's cryptographic randomness, never a predictable pattern.",
+    },
+    {
+      question: "What QR error-correction level should I pick?",
+      answer: "Medium (M) for clean screen display, High (H) for printed codes that may get dirty or partially covered — H survives up to 30% damage. Higher levels make denser, harder-to-scan codes.",
+    },
+    {
+      question: "How do I clean a messy CSV?",
+      answer: "Trim whitespace, normalize delimiters, drop empty rows, and fix inconsistent quoting in one pass — then preview the table before downloading the cleaned file.",
+    },
+    {
+      question: "Do utility tools work offline?",
+      answer: "Most do. Password generation, unit conversion, timers, and QR codes run entirely in-page — once loaded, they keep working with no connection.",
+    },
+  ],
+  Text: [
+    {
+      question: "What counts as a word in the word counter?",
+      answer: "Whitespace-separated tokens, with separate tallies for characters (with and without spaces), sentences, paragraphs, and estimated reading time at 200 words per minute.",
+    },
+    {
+      question: "How does Title Case handle small words?",
+      answer: "Articles, short prepositions, and conjunctions (a, an, the, of, and) stay lowercase unless they lead the title — matching book-title conventions rather than capitalizing everything.",
+    },
+    {
+      question: "Word-level or line-level diff?",
+      answer: "Both: line-level shows which lines changed, word-level highlights the exact edited words inside them — paste two drafts to see insertions in green and deletions in red.",
+    },
+    {
+      question: "Can I preview Markdown as I type?",
+      answer: "Yes — the editor renders headings, tables, code blocks with highlighting, and task lists live beside your source, with one-click HTML or file export.",
+    },
+  ],
+  Finance: [
+    {
+      question: "How is EMI calculated?",
+      answer: "On a reducing balance: EMI = P × r × (1+r)^n / ((1+r)^n − 1), where r is the monthly rate. Early payments are mostly interest — the amortization table shows the principal/interest split per month.",
+    },
+    {
+      question: "How does compounding frequency change returns?",
+      answer: "More frequent compounding earns slightly more: 8% compounded quarterly beats 8% annual by about 0.2 percentage points a year. The calculators let you compare monthly, quarterly, and annual side by side.",
+    },
+    {
+      question: "How do I make a GST-compliant invoice?",
+      answer: "Add line items with HSN codes and GST slabs (5/12/18/28%), plus CGST+SGST for intra-state or IGST for inter-state sales. The GST invoice generator outputs a formatted, printable invoice with totals.",
+    },
+    {
+      question: "SIP vs lump sum — which grows more?",
+      answer: "It depends on market timing, which no one controls. SIP smooths entry price through volatility; lump sum wins in steady uptrends. Model both with the same expected return to compare fairly.",
+    },
+  ],
+  Health: [
+    {
+      question: "Is BMI accurate for muscular people?",
+      answer: "Not always — BMI can't distinguish muscle from fat, so athletes can read as overweight. Pair it with body-fat estimate and waist-to-height ratio (keep under 0.5) for a fuller picture.",
+    },
+    {
+      question: "How is BMR calculated?",
+      answer: "With the Mifflin-St Jeor equation from weight, height, age, and sex — currently the most validated formula for resting calorie burn. Multiply by an activity factor (1.2–1.9) for TDEE.",
+    },
+    {
+      question: "What are heart-rate zones for cardio?",
+      answer: "Zone 2 (60–70% of max) builds aerobic base and burns fat efficiently; Zone 4–5 (80–100%) builds speed. Max is roughly 220 minus age — the calculators derive all five zones from it.",
+    },
+    {
+      question: "Is my health data sent anywhere?",
+      answer: "No. Every health calculator runs its math locally in your browser — weight, age, and measurements never leave your device.",
+    },
+  ],
+  AI: [
+    {
+      question: "What can I generate with the AI image tools?",
+      answer: "Concept art, product mockups, avatars, and backgrounds from text prompts — plus upscaling that adds detail to low-resolution photos. Generations are marked as AI-made in the output metadata.",
+    },
+    {
+      question: "How long a document can the summarizer handle?",
+      answer: "Multi-page PDFs and long articles condense to key points, with adjustable summary length. Anything you don't want transmitted should use the on-device options instead.",
+    },
+    {
+      question: "Which features cost credits?",
+      answer: "Cloud AI features — image generation, transcription, summarization — are marked with their cost before you run them. Browser-local tools are free and unlimited.",
+    },
+    {
+      question: "Can the grammar checker handle Indian English?",
+      answer: "Yes — it flags spelling, agreement, and punctuation while respecting common Indian-English usage rather than forcing US phrasing on every sentence.",
+    },
+  ],
+  SEO: [
+    {
+      question: "What is a good keyword density?",
+      answer: "There is no magic number — the checker shows your term distribution so you can spot stuffing (same phrase every sentence) or dilution. Natural coverage across headings matters more than any percentage.",
+    },
+    {
+      question: "How long should meta titles and descriptions be?",
+      answer: "Titles display fully up to ~60 characters; descriptions truncate around 155–160. The snippet preview shows exactly where Google cuts each one off.",
+    },
+    {
+      question: "What does the robots.txt validator check?",
+      answer: "Syntax errors, contradictory Allow/Disallow rules, unreachable sitemap URLs, and whether a given user-agent path is actually crawlable — the three mistakes that accidentally deindex sites.",
+    },
+    {
+      question: "Why does the sitemap crawler run on a server?",
+      answer: "It must fetch the target site, which a browser page can't do across origins at scale. Everything else on this hub — density, snippets, validators — analyzes locally.",
+    },
+  ],
+  Privacy: [
+    {
+      question: "What EXIF data should I strip before posting photos?",
+      answer: "GPS coordinates first — phones embed exact latitude/longitude — plus timestamps and device serials. The EXIF stripper removes location and device tags while keeping the image itself untouched.",
+    },
+    {
+      question: "How does Aadhaar masking work?",
+      answer: "The first 8 digits become Xs, showing only the last 4 (XXXX-XXXX-1234) per UIDAI's masked-Aadhaar convention — done on a copy, so your original stays intact.",
+    },
+    {
+      question: "What size PGP key should I generate?",
+      answer: "RSA 4096 for maximum compatibility with older clients, or Ed25519/Curve25519 for modern, faster keys. Generation uses cryptographic randomness in your browser — the private key never travels.",
+    },
+    {
+      question: "How do self-destructing notes work?",
+      answer: "Write a note to get a one-time link: it decrypts on first open and is then destroyed server-side, so forwarding the link later shows nothing.",
+    },
+  ],
+  Productivity: [
+    {
+      question: "What is the standard Pomodoro split?",
+      answer: "25 minutes of focused work, 5-minute break, and a 15–30 minute break after four sessions. The timer voids the session if you interrupt it — that's the discipline mechanism.",
+    },
+    {
+      question: "Where are my to-dos stored?",
+      answer: "In your browser's local storage — lists survive refreshes and restarts on the same device, with no account and nothing synced to any server.",
+    },
+    {
+      question: "Does the world clock handle daylight saving?",
+      answer: "Yes — zones follow the IANA database, so New York, London, and Sydney shift automatically on their DST dates without manual adjustment.",
+    },
+    {
+      question: "How precise are the countdowns?",
+      answer: "Second-level precision with day/hour/minute breakdowns — set a deadline once and the display ticks down live, even across tab switches.",
+    },
+  ],
+  Design: [
+    {
+      question: "Which color format should I copy — HEX, RGB, or HSL?",
+      answer: "HEX for CSS shorthand (#3B82F6), RGB when you need alpha transparency (rgba), HSL when adjusting lightness/saturation systematically. The picker outputs all three plus CSS variables.",
+    },
+    {
+      question: "What contrast ratio passes WCAG?",
+      answer: "4.5:1 for normal text (AA), 3:1 for large text and UI components, 7:1 for AAA. The checker tests foreground/background pairs and suggests the nearest passing shade.",
+    },
+    {
+      question: "How do I get CSS for a gradient?",
+      answer: "Build it visually with color stops, then copy the linear-gradient or radial-gradient declaration — with fallbacks — straight into your stylesheet.",
+    },
+    {
+      question: "Can I export a palette for Figma?",
+      answer: "Yes — palettes export as swatch lists and CSS custom properties you can paste into design tokens, plus PNG strips for mood boards.",
+    },
+  ],
+  Branding: [
+    {
+      question: "What file formats should a logo kit include?",
+      answer: "SVG for infinite scaling (web, print), PNG at 1024px+ with transparency for documents, and ICO/favicon sizes for browser tabs. Export all three from one design.",
+    },
+    {
+      question: "What size should Open Graph images be?",
+      answer: "1200 × 630 px — the size WhatsApp, X, and LinkedIn all crop link previews to. Keep key text inside the center 1000 × 500 safe zone.",
+    },
+    {
+      question: "Which favicon sizes do browsers need?",
+      answer: "16 × 16 and 32 × 32 ICO for tabs, 180 × 180 Apple touch icon, and 192/512 px PNGs for the web manifest. The generator emits the full set plus the HTML tags.",
+    },
+    {
+      question: "How do I compare two campaign variants?",
+      answer: "Run the A/B calculator with visitors and conversions per variant — it reports whether the lift is statistically significant or just noise at 95% confidence.",
+    },
+  ],
+  Video: [
+    {
+      question: "How do I compress a video for WhatsApp?",
+      answer: "WhatsApp caps sharing around 16–100 MB depending on version. Target 720p with moderate bitrate — a 5-minute 1080p clip typically drops from ~400 MB to under 50 MB with no visible loss on phones.",
+    },
+    {
+      question: "Why are my GIFs so large?",
+      answer: "GIF stores every frame uncompressed-ish: cut frame rate to 10–15 fps, shrink dimensions, and limit colors. A 10-second 480p clip lands around 3–8 MB — use muted MP4 instead for longer clips.",
+    },
+    {
+      question: "How do I extract MP3 audio from MP4?",
+      answer: "Drop the video in — the audio track is demuxed and re-encoded to MP3 without reprocessing the video, so extraction takes seconds even for long files.",
+    },
+    {
+      question: "SRT or VTT subtitles?",
+      answer: "SRT for maximum player compatibility, VTT for web players (it supports styling and positioning). The tools convert between both and shift timings in bulk.",
+    },
+  ],
+  Transcription: [
+    {
+      question: "How accurate is the speech-to-text?",
+      answer: "Whisper-grade models hit 90–95% on clear audio; heavy accents, crosstalk, and background noise lower that. Review the editable transcript — timestamps make corrections fast.",
+    },
+    {
+      question: "What is the maximum audio length?",
+      answer: "Long files are chunked automatically — hour-long meetings and lectures transcribe in segments that stitch into one timestamped document.",
+    },
+    {
+      question: "How are transcription credits used?",
+      answer: "1 credit per minute of audio, counted after processing completes. Failed or empty uploads don't consume credits.",
+    },
+    {
+      question: "Can I transcribe a YouTube video from its URL?",
+      answer: "Yes — paste the link to pull captions or transcribe the audio track directly, then export as text, SRT, or meeting minutes.",
+    },
+  ],
+  Extension: [
+    {
+      question: "What does the extension generator produce?",
+      answer: "A ready-to-load project: manifest, icons, popup page, and background boilerplate following current store requirements — load it unpacked in developer mode and extend from there.",
+    },
+    {
+      question: "Can I scaffold a screen-recorder extension?",
+      answer: "Yes — the template wires tab capture, recording controls, and WebM download, which you can see working in the screen-recorder-extension reference build.",
+    },
+    {
+      question: "How do I publish to the Chrome Web Store?",
+      answer: "Zip the project folder and upload it in the developer dashboard with store icons and screenshots. The scaffold already structures files the way reviewers expect.",
+    },
+    {
+      question: "Do generated extensions phone home?",
+      answer: "No — templates contain zero analytics or remote code. Everything they do happens in the browser; add only the permissions your feature actually needs.",
+    },
+  ],
+  "Growth & Marketing": [
+    {
+      question: "How do I calculate MRR?",
+      answer: "Sum this month's recurring revenue: e.g., 120 customers × $49 = $5,880 MRR. Track net-new separately from expansion, contraction, and churned revenue to see true growth.",
+    },
+    {
+      question: "What is a healthy LTV to CAC ratio?",
+      answer: "3:1 or better — each customer returns at least three times their acquisition cost. Below 1:1 you lose money on every signup; above 5:1 you're likely under-investing in growth.",
+    },
+    {
+      question: "How does churn compound over a year?",
+      answer: "Brutally: 5% monthly churn leaves only ~54% of customers after 12 months (0.95^12). Cutting churn from 5% to 3% keeps ~70% — the calculator shows the retention curve.",
+    },
+    {
+      question: "ROAS vs ROI — what's the difference?",
+      answer: "ROAS measures gross revenue per ad dollar (4:1 = $4 back per $1 spent); ROI subtracts all costs including product and overhead. Profitable ROAS can still mean negative ROI — compute both.",
+    },
+  ],
+  "indian-utilities": [
+    {
+      question: "How do I mask an Aadhaar number?",
+      answer: "Replace the first 8 digits with Xs, keeping the last 4 visible (XXXX-XXXX-1234) per UIDAI convention. Masking happens on a copy — never overwrite your original scan.",
+    },
+    {
+      question: "What is the PAN card number format?",
+      answer: "10 characters: 5 letters, 4 digits, 1 letter (e.g., ABCDE1234F). The 4th letter reveals holder type — P for individual, C for company — which the validator checks.",
+    },
+    {
+      question: "What goes on a GST invoice?",
+      answer: "Seller and buyer GSTINs, HSN-coded line items with the right slab (5/12/18/28%), then CGST+SGST split for intra-state or IGST for inter-state sales. The GST invoice generator formats all of it print-ready.",
+    },
+    {
+      question: "How do I find a bank branch from an IFSC?",
+      answer: "The 11-character code splits as 4-letter bank code + 0 + 6-character branch code. Enter it to resolve the exact branch, or search any 6-digit pincode with the pincode finder.",
+    },
+  ],
 };
 

@@ -32,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/faq/`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
     { url: `${baseUrl}/billing/`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.2 },
     { url: `${baseUrl}/premium-tools/`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
+    { url: `${baseUrl}/press/`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
     { url: `${baseUrl}/login/`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.6 },
     { url: `${baseUrl}/sign-in/`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.6 },
     { url: `${baseUrl}/sign-up/`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.6 },
