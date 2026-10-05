@@ -299,11 +299,12 @@ Attachment downloads: /admin/inbox renders HMAC-signed URLs
   archive) is the trigger.** Gmail hard-rejects archives containing
   executables from external/low-reputation senders rather than
   spam-foldering them. Recipient-side policy: ship app bundles as a
-  Drive link, never as an email attachment. Benign-attachment outbound
-  (e.g. a screenshot) still unverified — one panel reply with an image
-  closes it.
-- **Owner BCC: implemented** (`OWNER_COPY` Pages secret), ships with
-  the same deploy as this entry.
+  Drive link, never as an email attachment. Benign attachments proven
+  after: a 366 KB JPG panel reply was delivered to the recipient with
+  the file intact and the OWNER_COPY BCC arrived alongside it.
+- **Owner BCC: proven live** (`OWNER_COPY` Pages secret) — plain and
+  attachment replies both arrived as a copy in
+  `kirtivardhan1996@gmail.com`.
 
 ## Testing end-to-end
 
