@@ -90,7 +90,52 @@ def window_totals(start_days: int, end_days: int) -> dict:
     return {"clicks": clicks, "impressions": impr, "active_days": keys}
 
 
+def inspect_one(u: str) -> dict:
+    r = call("https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
+             {"inspectionUrl": u, "siteUrl": SITE, "languageCode": "en"})
+    if "_http_error" in r:
+        if r["_http_error"] == 429:
+            time.sleep(10)
+            r = call("https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
+                     {"inspectionUrl": u, "siteUrl": SITE, "languageCode": "en"})
+        if "_http_error" in r:
+            return {"url": u, "error": r["_http_error"]}
+    ist = r.get("inspectionResult", {}).get("indexStatusResult", {})
+    return {"url": u, "coverage": ist.get("coverageState"), "verdict": ist.get("verdict"),
+            "lastCrawl": ist.get("lastCrawlTime"), "page": ist.get("pageState")}
+
+
+def sweep(outfile: str):
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    _, sm = curl("https://toolzum.com/sitemap.xml")
+    urls = re.findall(r"<loc>(.*?)</loc>", sm)
+    allu = list(dict.fromkeys(["https://toolzum.com/", "https://toolzum.com/pricing"] + urls))
+    total = len(allu)
+    get_token()
+    print(f"sweep {total} urls -> {outfile}", file=sys.stderr, flush=True)
+    done = errs = 0
+    with open(outfile, "w") as f:
+        f.write("url,coverage,verdict,lastCrawl\n")
+        with ThreadPoolExecutor(max_workers=4) as ex:
+            futs = {ex.submit(inspect_one, u): u for u in allu}
+            for fut in as_completed(futs):
+                r = fut.result()
+                done += 1
+                if "error" in r:
+                    errs += 1
+                    f.write(f'{r["url"]},ERROR-{r["error"]},,\n')
+                else:
+                    f.write(f'{r["url"]},{r["coverage"]},{r.get("verdict","")},{r.get("lastCrawl","")}\n')
+                f.flush()
+                if done % 50 == 0:
+                    print(f"{done}/{total} (errs={errs})", file=sys.stderr, flush=True)
+    print(f"done {total} (errs={errs}) -> {outfile}", file=sys.stderr, flush=True)
+
+
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "--sweep":
+        sweep(sys.argv[2] if len(sys.argv) > 2 else "gsc-inspection.csv")
+        return
     out = {}
 
     # 1. Sites the SA can see (proves the SA was added to the property)
@@ -111,11 +156,11 @@ def main():
     sample = ["https://toolzum.com/", "https://toolzum.com/pricing"]
     if tools:
         random.seed(42)
-        sample += random.sample(tools, min(12, len(tools)))
+        sample += random.sample(tools, min(20, len(tools)))
     inspections = []
     for u in sample:
         r = call("https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
-                 {"inspectionUrl": u, "languageCode": "en"})
+                 {"inspectionUrl": u, "siteUrl": SITE, "languageCode": "en"})
         if "_http_error" in r:
             inspections.append({"url": u, "error": r})
             continue
