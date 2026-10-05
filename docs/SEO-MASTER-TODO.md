@@ -83,3 +83,16 @@
 
 - Indexed 4 → 50+ (Nov) → 300+ (Q1) · hubs 0/21 → 21/21 · DR +10/90d ·
   AI citations 0 → 10 queries · traffic beats July peak by December.
+
+## I. Why the site felt chaotic (honest diagnosis, Oct 5 — keep this visible)
+
+1. Scale without a single source of truth (1,059 tools but docs say 1,145;
+   65 vs 66 pro tools; GSC 1,084 vs sitemap 1,085) — re-verify cadence: monthly.
+2. History of changes without reasons (11 sitemap commits, quota flips, Sep 15
+   "separate cleanup" sat 3 weeks) — every change now gets reason + date.
+3. Overlapping docs — THIS file is the single entrance; everything hangs off it.
+4. Two wars one front (product + SEO in same deploys) — small guarded deploys only.
+5. Laggy instruments (GSC withholds breakdowns, stale reads) — one number rules:
+   indexed count, Oct 13 re-sweep.
+Antidotes in force: routes frozen · quotas frozen 90d · one queue (this file) ·
+decision records · daily/weekly/monthly rhythm.

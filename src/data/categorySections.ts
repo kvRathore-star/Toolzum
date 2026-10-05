@@ -1263,11 +1263,11 @@ export const CATEGORY_INTROS: Record<string, string> = {
   AI:
     "{count} AI tools — generate images, transcribe audio, summarize documents, check grammar, and upscale photos. Cloud AI features are clearly marked; everything else runs on-device with nothing uploaded.",
   Text:
-    "{count} text tools — live word counts with Flesch-Kincaid readability, case conversion, fancy Unicode fonts, handwriting rendering, diff checking, and lorem ipsum. All processing happens locally with no sign-up and no limits.",
+    "{count} text tools — live word counts with Flesch-Kincaid readability, case conversion, fancy Unicode fonts, handwriting rendering, diff checking, and lorem ipsum. All processing happens locally — free to start with no signup, fair daily limits apply.",
   Branding:
     "{count} branding tools — logo maker, business cards, email signatures, link-in-bio pages, and social calendars. Every tool runs locally in your browser; your brand assets stay yours.",
   Design:
-    "Design utilities — pick colors with eyedropper precision, generate harmonious palettes, preview typography, edit SVG, and subset fonts. All processing happens locally — no uploads, no accounts.",
+    "Design utilities — pick colors with eyedropper precision, generate harmonious palettes, preview typography, edit SVG, and subset fonts. All processing happens locally — free to start with no signup, fair daily limits apply.",
   Finance:
     "{count} financial tools — EMI with reducing-balance math, SIP projections with worked examples, margin vs markup solver, GST invoices, salary take-home, and CAGR. Every calculation runs in your browser; no financial data is transmitted.",
   Privacy:
@@ -1358,7 +1358,7 @@ export const CATEGORY_FAQS: Record<string, CategoryFaq[]> = {
     },
     {
       question: "Which languages does speech-to-text support?",
-      answer: "Major Indian languages plus English, with transcription billed at 1 credit per minute. Everything else on this hub — conversion, trimming, synthesis — is free and unlimited.",
+      answer: "Major Indian languages plus English, with transcription billed at 1 credit per minute. Everything else on this hub — conversion, trimming, synthesis — is free within fair daily limits.",
     },
   ],
   Converter: [
@@ -1480,7 +1480,7 @@ export const CATEGORY_FAQS: Record<string, CategoryFaq[]> = {
     },
     {
       question: "Which features cost credits?",
-      answer: "Cloud AI features — image generation, transcription, summarization — are marked with their cost before you run them. Browser-local tools are free and unlimited.",
+      answer: "Cloud AI features — image generation, transcription, summarization — are marked with their cost before you run them. Browser-local tools are free within fair daily limits.",
     },
     {
       question: "Can the grammar checker handle Indian English?",
