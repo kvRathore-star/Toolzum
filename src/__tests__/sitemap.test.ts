@@ -33,6 +33,14 @@ describe('sitemap', () => {
     expect(urls.filter((u) => u !== BASE && !u.endsWith('/'))).toEqual([]);
   });
 
+  it('contains no duplicate URLs (static + category can collide)', () => {
+    // /extension existed as both a static entry and the Extension category
+    // page — slash alignment on Oct 5 turned the pair into an exact dupe.
+    const urls = sitemap().map((e) => e.url);
+    const dupes = urls.filter((u, i) => urls.indexOf(u) !== i);
+    expect(dupes).toEqual([]);
+  });
+
   it('lists every non-redirect registry tool exactly once', async () => {
     const { toolsRegistry } = await import('@/registry/tools');
     const urls = new Set(sitemap().map((e) => e.url));

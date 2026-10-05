@@ -21,7 +21,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/about/`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.5 },
     { url: `${baseUrl}/blog/`, lastModified: BUILD_DATE, changeFrequency: 'weekly' as const, priority: 0.6 },
     { url: `${baseUrl}/changelog/`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.4 },
-    { url: `${baseUrl}/extension/`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.4 },
     { url: `${baseUrl}/careers/`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
     { url: `${baseUrl}/product/`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
     { url: `${baseUrl}/roadmap/`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
