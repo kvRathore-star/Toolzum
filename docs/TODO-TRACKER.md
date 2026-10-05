@@ -72,10 +72,11 @@ Last updated: 2026-10-03
 - [ ] 18. Productivity category — build out (habit trackers, focus timers, note tools?)
 
 ## GSC monitoring (time-gated)
-- [ ] 19. Submit IndexNow / re-validate GSC for this round of fixes (classifier, trust bugs, related-tools, FAQ content) — free nudge, do now
+- [x] 19. Submit IndexNow / re-validate GSC for this round of fixes (classifier, trust bugs, related-tools, FAQ content) — done Oct 5: 1,086 URLs, HTTP 200 (`npm run submit:indexnow`)
 - [ ] 20. GSC check at 2 weeks (early signal) — pull crawled-not-indexed list, check Validate Fix progress bars, per-URL indexing status on the174/220 flagged tools
 - [ ] 21. GSC check at 4 weeks (real assessment) — same checks, compare against 2-week data. Recovery is often uneven across pages
 - [ ] 22. GSC monthly check-in after 4 weeks — light monitoring cadence
+  - API results (2026-10-05, `scripts/gsc-check.py`, SA as `siteRestrictedUser` on `sc-domain:toolzum.com`): search trend **7 clicks/51 impr → 0/17** (prev28 → recent28), last 7d 0/3; homepage 14 impr @ pos 1.36 (branded), scattered category/tool impr at pos 1–3. Blocked from API: URL Inspection (403 — SA needs **Full** permission in GSC UI), sitemaps endpoint (404 — sitemap likely never submitted in GSC UI), Validate-Fix buckets + the174/220 list (GSC-UI only, not stored locally).
 
 ## Immediate actions
 - [x] 23. ~~Improve 6 category FAQ templates in ToolPageSEOContent.tsx~~ — Templates now personalized per tool (name, description in first2 questions). All818 tools get unique FAQ text, breaking duplicate content pattern. (commit 296e435)
