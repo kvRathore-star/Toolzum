@@ -249,6 +249,26 @@ describe('POST /api/admin/reply — attachments', () => {
     expect(arg.attachments).toBeUndefined();
   });
 
+  it('BCCs OWNER_COPY on the reply when configured', async () => {
+    const { db } = mockDb();
+    await send({
+      request: post({ to: 'user@example.com', subject: 'x', message: 'y' }),
+      env: ENV(db, { ...CONFIGURED, OWNER_COPY: 'owner@gmail.com' }),
+    });
+    const arg = vi.mocked(sendEmail).mock.calls[0]![1];
+    expect(arg.bcc).toBe('owner@gmail.com');
+  });
+
+  it('omits bcc when OWNER_COPY is not configured', async () => {
+    const { db } = mockDb();
+    await send({
+      request: post({ to: 'user@example.com', subject: 'x', message: 'y' }),
+      env: ENV(db, CONFIGURED),
+    });
+    const arg = vi.mocked(sendEmail).mock.calls[0]![1];
+    expect(arg.bcc).toBeUndefined();
+  });
+
   it('rejects more than 5 attachments with 400 before sending', async () => {
     const { db } = mockDb();
     const res = await send({

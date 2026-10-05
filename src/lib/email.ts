@@ -40,6 +40,13 @@ interface EmailOptions {
   fromName?: string;
   /** Base64 attachments (admin replies from the inbox). Resend only. */
   attachments?: EmailAttachment[];
+  /**
+   * Blind copy — the owner's copy of admin-panel replies. Gmail's
+   * "Send mail as" retirement moved sending out of the owner's Sent
+   * folder; the BCC restores a copy in their inbox without telling
+   * the recipient.
+   */
+  bcc?: string;
 }
 
 export interface EmailEnv {
@@ -94,6 +101,7 @@ async function sendViaResend(
         from: `${opts.fromName || "Toolzum"} <contact@toolzum.com>`,
         to: [opts.to],
         ...(opts.replyTo ? { reply_to: opts.replyTo } : {}),
+        ...(opts.bcc ? { bcc: [opts.bcc] } : {}),
         subject: opts.subject,
         text: opts.text,
         html,
@@ -140,6 +148,7 @@ async function sendViaCloudflare(
           to: [{ address: opts.to }],
           from: { address: "contact@toolzum.com", name: opts.fromName || "Toolzum" },
           ...(opts.replyTo ? { reply_to: { address: opts.replyTo } } : {}),
+          ...(opts.bcc ? { bcc: [{ address: opts.bcc }] } : {}),
           subject: opts.subject,
           text: opts.text,
           html,

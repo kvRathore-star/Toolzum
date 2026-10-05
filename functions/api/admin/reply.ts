@@ -28,6 +28,8 @@ import type { StoredAttachment } from "../../../src/lib/mailBridge";
  * - RESEND_API_KEY (primary transport)
  * - CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID (fallback)
  * - ATTACH_SECRET (attachment URL signing for the admin thread view)
+ * - OWNER_COPY (optional BCC — the owner's copy of every panel reply,
+ *   replacing what Gmail's Sent folder used to hold)
  * No transport configured: 503 email_unconfigured — never a fake success.
  */
 
@@ -39,6 +41,7 @@ interface Env {
   CLOUDFLARE_API_TOKEN?: string;
   CLOUDFLARE_ACCOUNT_ID?: string;
   ATTACH_SECRET?: string;
+  OWNER_COPY?: string;
   GOOGLE_CLIENT_ID: string;
   GOOGLE_CLIENT_SECRET: string;
   BETTER_AUTH_SECRET: string;
@@ -162,6 +165,7 @@ export async function onRequestPost(context: { request: Request; env: Env }): Pr
       subject,
       text: message,
       fromName: "Toolzum Support",
+      ...(env.OWNER_COPY ? { bcc: env.OWNER_COPY } : {}),
       ...(attachments.length ? { attachments } : {}),
       // Branded with the action button + reply note so owner replies look
       // like every other Toolzum email instead of a bare text blob.

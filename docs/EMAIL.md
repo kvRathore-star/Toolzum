@@ -205,12 +205,12 @@ pipeline, so correspondence never depends on Gmail's send-as:
   later it needs its own identity in Resend — deliberately not done: one
   address, one promise, matches the privacy/terms/security pages.
 
-## Inbound replies are tickets now (built Oct 2026 — pending deploy)
+## Inbound replies are tickets now (deployed Oct 5 2026 — live e2e proven)
 
 **Original decision (Oct 4): Email Routing is a *copy* channel only —
 parsing user replies back into the app was scoped out until volume
 justified it.** Owner reversed this the same week: the mail pipeline
-infra gaps got filled (code complete, pending deploy + live e2e).
+infra gaps got filled (code complete, deployed Oct 5, live e2e below).
 
 ### Before the bridge (what the Oct 4 audit documented)
 
@@ -245,6 +245,8 @@ in ~3 copies at send time against the 128 MB ceiling)
     (Cloudflare fallback refused when attachments present — no silent
     strip) → thread row 'out' + row flips to `replied` (the inbound
     flip is `replied → new` only; archived threads stay archived)
+    → BCCs OWNER_COPY when the Pages secret is set — the owner's copy
+      of every panel reply (Gmail's Sent folder no longer holds one)
 
 Attachment downloads: /admin/inbox renders HMAC-signed URLs
   (src/lib/mailBridge.ts, shared ATTACH_SECRET) → worker serves
@@ -265,8 +267,7 @@ Attachment downloads: /admin/inbox renders HMAC-signed URLs
   from Gmail still bypass the panel thread (inherent to the copy channel).
 - Tests: sign/verify round-trip + tamper cases, quoted-history fixtures,
   Resend attachment payload + no-silent-strip fallback refusal,
-  attachment validation. **Live e2e (inbound with a real attachment,
-  outbound with a file) still pending — needs the owner's inbox.**
+  attachment validation, owner-BCC pass-through.
 
 ### Evidence (Oct 4 2026, live)
 
@@ -281,6 +282,25 @@ Attachment downloads: /admin/inbox renders HMAC-signed URLs
   pointed at a readable mailbox for observation, then restored; the
   owner's second app showed this leg failing there — not here).
 
+### Evidence (Oct 5 2026, live — full pipeline)
+
+- **Inbound with attachment: proven.** Email to contact@ (7877.jpg,
+  374 KB) → bridge created ticket + thread row `direction 'in'`,
+  attachment in KV at `c/{threadId}/0`, signed chip downloads in
+  `/admin/inbox`; worker tail clean (only logs failures).
+- **Forward to owner's Gmail: proven.** Copy of the same message
+  arrived in `kirtivardhan1996@gmail.com`.
+- **Panel reply: accepted then recipient-bounced — content policy,
+  not a code defect.** Resend accepted (202, `out` row written after),
+  sent 11:09, Gmail bounced: *"Blocked due to content: the message was
+  rejected because it contained content that the recipient's server
+  doesn't allow"* — the differentiator vs. proven-working plain acks
+  was the `Toolzum.app.zip` attachment (Gmail content-scans archives
+  with executables from external senders). Isolation probes (plain
+  reply / benign file) pending.
+- **Owner BCC: implemented** (`OWNER_COPY` Pages secret), ships with
+  the same deploy as this entry.
+
 ## Testing end-to-end
 
 > **Status (Oct 4, 2026, live):** Steps 1–2 PROVEN end-to-end — relay
@@ -290,7 +310,8 @@ Attachment downloads: /admin/inbox renders HMAC-signed URLs
 > mailbox, then restoring). Step 3 (Gmail send-as DKIM) and step 4's live
 > 503 probe remain untested. Synthetic-sender test earlier that day
 > bounced as expected — Reply-To worked (`contact.ts:158`). See the
-> inbound-thread section above (bridge worker built, live e2e pending).
+> inbound-thread section (bridge live Oct 5; inbound + forward proven,
+> attachment-content bounce isolated in the Oct 5 evidence).
 
 1. Submit `/contact` with an **outside** address (any real inbox) → two
    messages arrive: `[General Support] Your Name` (to you) and
@@ -312,4 +333,6 @@ Attachment downloads: /admin/inbox renders HMAC-signed URLs
 | `CLOUDFLARE_ACCOUNT_ID` | Pages env | fallback transport account scoping |
 | `CONTACT_TO` | Pages env (optional) | relay target; defaults to the owner's Gmail |
 | `ALERT_TOKEN` | Pages env + repo secret | alert workflow auth + `/api/admin/reply` bearer path (see `docs/ALERTS.md`) |
+| `ATTACH_SECRET` | Pages env + worker env | HMAC signing of `/att/` download URLs (same value both sides) |
+| `OWNER_COPY` | Pages env (optional) | BCC on every panel reply — owner's copy of what Gmail's Sent used to hold |
 | Gmail send-as SMTP password | Gmail settings only | owner replies as contact@ (`smtp.resend.com` / user `resend` / key from step 1) |

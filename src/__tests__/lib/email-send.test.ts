@@ -106,6 +106,24 @@ describe('sendEmail — Resend primary', () => {
     expect(bodyOf(lastCall(fetchMock).init).html).toBe('<p>custom</p>');
   });
 
+  it('includes bcc as a one-element array when provided, omits it otherwise', async () => {
+    const fetchMock = vi.fn(async () => ({ ok: true }));
+    vi.stubGlobal('fetch', fetchMock);
+
+    await sendEmail(
+      { RESEND_API_KEY: 're_test' },
+      { to: 'a@b.com', subject: 'S', text: 't', bcc: 'owner@gmail.com' }
+    );
+    expect(bodyOf(lastCall(fetchMock).init).bcc).toEqual(['owner@gmail.com']);
+
+    fetchMock.mockClear();
+    await sendEmail(
+      { RESEND_API_KEY: 're_test' },
+      { to: 'a@b.com', subject: 'S', text: 't' }
+    );
+    expect(bodyOf(lastCall(fetchMock).init).bcc).toBeUndefined();
+  });
+
   it('returns false when Resend rejects and no fallback exists', async () => {
     const fetchMock = vi.fn(async () => ({ ok: false, status: 401 }));
     vi.stubGlobal('fetch', fetchMock);
