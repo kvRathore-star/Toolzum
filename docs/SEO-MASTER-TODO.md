@@ -53,6 +53,8 @@
 
 ## E. Queued builds (agent, in priority order)
 
+- [ ] Pro-tool Batch 1 (30 credit-urgent, §10.7 28-pt + premium bar) — Oct 6–7
+- [ ] Pro-tool Batch 2 (35 bulk/moat, same bar) — Oct 6–7 / next slot
 - [ ] Next-30 tools batch (§10.7 checklist applies from §F: same machinery)
 - [ ] Titles batch 2 (defend-3 + India/format pairs)
 - [ ] Hub upgrades per teardown spec (badges, category wheel, trust strip)
