@@ -209,6 +209,16 @@ on generic category templates anywhere in the FAQ'd set.
 Gates: tsc 0 · eslint 0 · 23 tests green · faq-gate 0 new · quality-audit 0.
 Registry: 605 tools with custom instructions.
 
+## CWV + AI baselines (Oct 6 — partial, honestly labeled)
+
+Server-side measured (production, mobile UA): 200s everywhere, 24–47 KB
+compressed HTML, TTFB 0.7–1.3s (weak signal — re-measure from India).
+Static audit clean: self-hosted fonts, zero blocking third-party scripts,
+immutable caching, lazy tool modules, no LCP/CLS bombs in shell.
+Lab (Lighthouse) + field (CrUX) impossible from here — owner/CI step.
+AI citations: 12-query tracking sheet created, baseline unmeasured
+(manual monthly run). Full detail: `docs/CWV-AI-BASELINE-2026-10-06.md`.
+
 ## Parked P1 DONE (Oct 6 — 30/30, gates green)
 
 18 calculators + inflation + 4 video + 4 text + live-transcription,
