@@ -199,7 +199,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Can I set a custom date range?", answer: "Yes. Define start and end dates to generate random dates within any range. This is useful for creating test datasets, filling placeholder content, or generating time-series mock data." },
       { question: "Can I generate multiple dates at once?", answer: "Yes. Generate 1 to 100 random dates in a single batch. Each date is independently random within your specified range." },
       { question: "Does it handle leap years correctly?", answer: "Yes. The generator respects calendar rules including leap years, varying month lengths, and valid day ranges for each month." },
-      { question: "Is the generation done locally?", answer: "Yes. All date generation runs in your browser. No data is sent to any server." },
+      { question: "Is generation done locally in Random Date Generator?", answer: "Yes. All date generation runs in your browser. No data is sent to any server." },
     ],
   },
   {
@@ -224,9 +224,9 @@ export const entries_chunk_5: ToolMetadata[] = [
     faqs: [
       { question: "What IP versions are supported?", answer: "Both IPv4 (e.g., 192.168.1.1) and IPv6 (e.g., 2001:db8::1) addresses are generated. Choose the version or generate both." },
       { question: "Can I restrict to specific IP ranges?", answer: "Yes. Set CIDR prefixes or specific first octets to generate IPs within a range (e.g., only 192.168.x.x for private networks)." },
-      { question: "What are common use cases?", answer: "Network testing, firewall rule testing, penetration testing, load balancer configuration, and development environments that need diverse IP inputs." },
+      { question: "When using Random IP Generator, what are common use cases?", answer: "Network testing, firewall rule testing, penetration testing, load balancer configuration, and development environments that need diverse IP inputs." },
       { question: "Can I generate private or reserved IPs?", answer: "Yes. Generate IPs in private ranges (10.x.x.x, 172.16-31.x.x, 192.168.x.x), loopback (127.x.x.x), or any public range." },
-      { question: "Is the generation done locally?", answer: "Yes. All generation runs in your browser. No data is transmitted." },
+      { question: "Is generation done locally in Random IP Generator?", answer: "Yes. All generation runs in your browser. No data is transmitted." },
     ],
 },
   {
@@ -243,7 +243,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Why would I need random user agents?", answer: "Web scraping, API testing, load testing, and browser compatibility testing. Random UAs help distribute requests and simulate diverse client traffic." },
       { question: "Are these real user agent strings?", answer: "Yes. The strings are taken from real browser releases and updated regularly. They include the full UA header format with browser version, OS, and rendering engine." },
       { question: "Can I generate bulk user agents?", answer: "Yes. Generate 1 to 100 random user agents at once. Each generation produces a different random selection from the database." },
-      { question: "Is the generation done locally?", answer: "Yes. All generation runs in your browser. No data is transmitted." },
+      { question: "Is generation done locally in Random User-Agent Generator?", answer: "Yes. All generation runs in your browser. No data is transmitted." },
     ],
   },
   {
@@ -403,7 +403,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online Avro to JSON Sample Generator — Generate sample JSON data from an Avro schema. Auto-generates values based on field types. ',
     dependencies: "Vanilla JS",
     faqs: [
-      { question: "What does this tool do?", answer: "It reads an Apache Avro schema and generates realistic sample JSON data based on field types. String fields get sample text, numbers get realistic values, enums get random options, and arrays get populated entries." },
+      { question: "When using Avro to JSON Sample Generator, what does this tool do?", answer: "It reads an Apache Avro schema and generates realistic sample JSON data based on field types. String fields get sample text, numbers get realistic values, enums get random options, and arrays get populated entries." },
       { question: "How many sample records can I generate?", answer: "You can generate 1 to 1000 sample records in a single batch. Each record conforms to the Avro schema structure with type-appropriate values." },
       { question: "Does it handle union and nullable types?", answer: "Yes. Union types (nullable fields) are handled correctly — null values appear with realistic frequency, and non-null values match the expected type." },
       { question: "Can I use this for testing Kafka consumers?", answer: "Yes. Generate sample records that match your Avro schema and feed them into a Kafka test consumer to validate deserialization and processing logic." },
@@ -464,7 +464,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Can I deduplicate based on multiple columns?", answer: "Some deduplicators support compound keys. If not, combine columns into a single key first using the CSV tools, then deduplicate." },
       { question: "Does it preserve the original row order?", answer: "Yes. The first occurrence of each duplicate is kept. Subsequent duplicates are removed. The output maintains the original order of first appearances." },
       { question: "How are duplicates detected?", answer: "Exact string matching by default. Whitespace differences may cause false non-matches. Trim spaces before deduplicating for best results." },
-      { question: "Is my CSV data stored?", answer: "No. All processing happens locally in your browser. No CSV data is sent to any server." },
+      { question: "When using CSV Deduplicator, is my CSV data stored?", answer: "No. All processing happens locally in your browser. No CSV data is sent to any server." },
     ],
   },
   {
@@ -501,7 +501,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "What fill options are available?", answer: "Replace with a custom text value, zero (0), empty string, the column mean/median (for numeric columns), or forward-fill from the previous row." },
       { question: "Can I fill only specific columns?", answer: "Yes. Select which columns to process. Leave other columns untouched to preserve their original data." },
       { question: "Does it handle different CSV delimiters?", answer: "Yes. The handler detects and processes CSV with comma, semicolon, tab, or pipe delimiters." },
-      { question: "Is my CSV data stored?", answer: "No. All processing happens locally in your browser. No CSV data is sent to any server." },
+      { question: "When using Null Value Handler, is my CSV data stored?", answer: "No. All processing happens locally in your browser. No CSV data is sent to any server." },
     ],
   },
   {
@@ -576,7 +576,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Does it handle quoted CSV fields?", answer: "Yes. Quoted fields containing commas or newlines are parsed correctly. The output preserves the full cell content in each table column." },
       { question: "Can I adjust column alignment?", answer: "The default alignment is left-aligned. Some converters offer center or right alignment options for numeric columns." },
       { question: "What about large CSV files?", answer: "Files up to 1MB are processed smoothly. Very large CSVs may slow the browser. For huge datasets, split the CSV first or use a command-line tool." },
-      { question: "Is my CSV data stored?", answer: "No. All conversion happens locally in your browser. No CSV data is sent to any server." },
+      { question: "When using CSV to Markdown Table, is my CSV data stored?", answer: "No. All conversion happens locally in your browser. No CSV data is sent to any server." },
     ],
   },
   {
@@ -623,7 +623,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     faqs: [
       { question: "What does JSON flattening do?", answer: "It converts nested JSON objects into a flat key-value structure using dot notation. For example, {a: {b: 1}} becomes {'a.b': 1}. This makes nested data suitable for CSV export and database imports." },
       { question: "How are arrays handled?", answer: "Arrays can be flattened with indexed keys (items.0, items.1) or with bracket notation (items[0]). Choose the style that matches your downstream processing requirements." },
-      { question: "What are common use cases?", answer: "Exporting nested API responses to CSV, importing JSON into flat databases, transforming data for spreadsheet analysis, and preparing data for tools that require tabular input." },
+      { question: "When using JSON Flattener, what are common use cases?", answer: "Exporting nested API responses to CSV, importing JSON into flat databases, transforming data for spreadsheet analysis, and preparing data for tools that require tabular input." },
       { question: "Is there a depth limit?", answer: "No hard limit. Deeply nested structures (10+ levels) are flattened correctly, though very deep hierarchies may produce long key names that are harder to read." },
       { question: "Is my JSON data stored or transmitted?", answer: "No. All flattening happens locally in your browser. No JSON data is sent to any server." },
     ],
@@ -642,7 +642,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "What schema types are supported?", answer: "All schema.org types: Article, Product, FAQPage, HowTo, LocalBusiness, Event, Recipe, VideoObject, BreadcrumbList, and more." },
       { question: "How do I use the output?", answer: "Paste the generated JSON-LD into a <script type='application/ld+json'> tag in your HTML <head>. Google and other search engines parse it for rich snippets and knowledge panels." },
       { question: "Does it validate the output?", answer: "Yes. The generator produces valid JSON-LD syntax and optionally validates against Google's structured data requirements." },
-      { question: "Is my data stored?", answer: "No. All generation happens locally in your browser. No structured data is transmitted." },
+      { question: "When using JSON-LD Generator, is my data stored?", answer: "No. All generation happens locally in your browser. No structured data is transmitted." },
     ],
 },
   {
@@ -689,7 +689,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "How does the generator work?", answer: "Paste sample JSON and the tool analyzes its structure to generate corresponding Zod schemas. Objects become z.object(), arrays become z.array(), strings/numbers/booleans map to z.string()/z.number()/z.boolean()." },
       { question: "Does it handle nested objects?", answer: "Yes. Nested objects generate nested z.object() schemas. Arrays of objects create z.array(z.object({...})) with the correct inner structure." },
       { question: "Can I customize the output?", answer: "Some generators offer options like optional vs required fields, nullable types, and custom validation messages." },
-      { question: "Is my JSON data stored?", answer: "No. All generation happens locally in your browser. No JSON data is sent to any server." },
+      { question: "When using JSON to Zod Schema, is my JSON data stored?", answer: "No. All generation happens locally in your browser. No JSON data is sent to any server." },
     ],
   },
   {
@@ -788,7 +788,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Does it extract variables?", answer: "Repeated color values and spacing constants can be extracted as SCSS variables ($variable). This makes stylesheets more maintainable and themeable." },
       { question: "Will the compiled CSS be identical?", answer: "Yes. The SCSS output compiles to the exact same CSS as the original. The converter adds organization without changing behavior." },
       { question: "Can I control the nesting depth?", answer: "The converter uses logical nesting based on selector hierarchy. Deeply nested selectors (4+ levels) may be flattened to keep the SCSS readable." },
-      { question: "Is my CSS data stored?", answer: "No. All conversion happens locally in your browser. No CSS data is sent to any server." },
+      { question: "When using CSS to SCSS Converter, is my CSS data stored?", answer: "No. All conversion happens locally in your browser. No CSS data is sent to any server." },
     ],
   },
   {
@@ -1065,8 +1065,8 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Why convert MP4 to AVI?", answer: "AVI is required by legacy media players, older video editing software, and some Windows applications that don't support MP4. Converting ensures compatibility with older systems." },
       { question: "What video codecs does the AVI output use?", answer: "The converter typically outputs AVI with MJPEG or MPEG-4 codecs. Choose the codec based on your compatibility needs — MJPEG is most widely supported but produces larger files." },
       { question: "Will the quality change?", answer: "If re-encoding occurs, quality depends on the chosen bitrate and codec. Selecting high quality settings preserves visual fidelity. Direct stream copy (no re-encode) is possible if codecs are compatible." },
-      { question: "What is the maximum file size?", answer: "Videos up to 30MB as guest, 150MB signed in, and 2GB on Pro are supported. Larger files may cause memory issues in the browser. For very long videos, consider trimming first." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No video files are uploaded to any server." },
+      { question: "When using MP4 to AVI, what is the maximum file size?", answer: "Videos up to 30MB as guest, 150MB signed in, and 2GB on Pro are supported. Larger files may cause memory issues in the browser. For very long videos, consider trimming first." },
+      { question: "Is MP4 to AVI conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No video files are uploaded to any server." },
     ],
     showInCategory: false
   },
@@ -1091,10 +1091,10 @@ export const entries_chunk_5: ToolMetadata[] = [
     dependencies: "FFmpeg",
     faqs: [
       { question: "Why convert MOV to AVI?", answer: "AVI is required by legacy media players, older video editing software, and Windows applications that don't support QuickTime MOV format." },
-      { question: "What quality settings are available?", answer: "Choose between quality-preserved encoding and compressed output. Higher quality produces larger files. Codec selection (MPEG-4, MJPEG) affects compatibility." },
+      { question: "What quality settings does MOV to AVI offer?", answer: "Choose between quality-preserved encoding and compressed output. Higher quality produces larger files. Codec selection (MPEG-4, MJPEG) affects compatibility." },
       { question: "Does it preserve audio?", answer: "Yes. The audio track from the MOV file is converted and included in the AVI output. Both stereo and mono audio are supported." },
-      { question: "What is the maximum file size?", answer: "Videos up to 30MB as guest, 150MB signed in, and 2GB on Pro are supported. Larger files may cause memory issues in the browser." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg. No video files are uploaded." },
+      { question: "When using MOV to AVI, what is the maximum file size?", answer: "Videos up to 30MB as guest, 150MB signed in, and 2GB on Pro are supported. Larger files may cause memory issues in the browser." },
+      { question: "Is MOV to AVI conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg. No video files are uploaded." },
     ],
 
     showInCategory: false
@@ -1156,8 +1156,8 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Why convert AVI to MKV?", answer: "MKV supports more modern codecs (H.264, H.265), multiple audio tracks, subtitles, and chapter markers. Converting from legacy AVI to MKV enables these advanced features." },
       { question: "Does it preserve video quality?", answer: "If re-encoding with the same codec, quality depends on bitrate settings. Stream copy (no re-encode) preserves exact quality when the codec is compatible." },
       { question: "Can I add subtitles during conversion?", answer: "The basic converter transcodes the video stream. For subtitle addition, use a dedicated MKV muxing tool after conversion." },
-      { question: "What is the maximum file size?", answer: "Videos up to 30MB as guest, 150MB signed in, and 2GB on Pro are supported. Larger files may cause memory issues in the browser." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg. No video files are uploaded to any server." },
+      { question: "When using AVI to MKV, what is the maximum file size?", answer: "Videos up to 30MB as guest, 150MB signed in, and 2GB on Pro are supported. Larger files may cause memory issues in the browser." },
+      { question: "Is AVI to MKV conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg. No video files are uploaded to any server." },
     ],
     showInCategory: false
   },
@@ -1191,7 +1191,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Does it support VP9 encoding?", answer: "The converter typically uses VP8 for faster encoding. VP9 may be available for higher quality at smaller file sizes, but encoding is slower." },
       { question: "Will the quality change?", answer: "WEBM encoding introduces small quality differences depending on bitrate. Choose high quality settings for best visual fidelity." },
       { question: "Can I embed WEBM in HTML?", answer: "Yes. <video src='video.webm'> works in all modern browsers. WEBM is the recommended format for HTML5 video alongside MP4." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg. No video files are uploaded." },
+      { question: "Is AVI to WEBM conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg. No video files are uploaded." },
     ],
 
     showInCategory: false
@@ -1286,10 +1286,10 @@ export const entries_chunk_5: ToolMetadata[] = [
     showInCategory: false,
     faqs: [
       { question: "Why convert JPG to AVIF?", answer: "AVIF offers 50% better compression than JPG at the same visual quality. Converting to AVIF reduces file sizes significantly while maintaining or improving image clarity — ideal for web performance." },
-      { question: "What quality settings are available?", answer: "You can adjust the AVIF compression quality from 1-100. Higher values preserve more detail but produce larger files. The default (80) provides a good balance of quality and size." },
+      { question: "What quality settings does JPG to AVIF offer?", answer: "You can adjust the AVIF compression quality from 1-100. Higher values preserve more detail but produce larger files. The default (80) provides a good balance of quality and size." },
       { question: "Will my JPG lose quality in conversion?", answer: "AVIF is more efficient than JPG, so you often get better quality at smaller file sizes. However, since JPG is lossy, the source quality limits the output. Very low-quality JPGs won't improve by converting." },
       { question: "Which browsers support AVIF?", answer: "Chrome, Firefox, Safari 16.4+, and Edge all support AVIF. For older browsers, provide a JPG fallback using the <picture> element." },
-      { question: "Is the conversion done locally?", answer: "Yes. The JPG to AVIF conversion runs entirely in your browser using Canvas API. No images are uploaded to any server." },
+      { question: "Is JPG to AVIF conversion done locally?", answer: "Yes. The JPG to AVIF conversion runs entirely in your browser using Canvas API. No images are uploaded to any server." },
     ],
   },
   {
@@ -1325,8 +1325,8 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Why convert PNG to TIFF?", answer: "TIFF is preferred for print publishing, archival storage, and professional photography. It supports higher bit depths, lossless compression, and is accepted by most print services and publishing workflows." },
       { question: "Does TIFF support transparency like PNG?", answer: "Yes. TIFF supports alpha channel transparency, preserving any transparent areas from your PNG source. You can also choose to flatten transparency to a white background." },
       { question: "What compression options does the TIFF output use?", answer: "The converter produces uncompressed or LZW-compressed TIFF files. LZW is lossless and reduces file size without any quality loss." },
-      { question: "Will the file size increase?", answer: "TIFF files are generally larger than PNG because TIFF uses less aggressive compression. This is expected — the tradeoff is better compatibility with print and professional tools." },
-      { question: "Is the conversion done locally?", answer: "Yes. All PNG to TIFF conversion runs in your browser. No images are uploaded to any server." },
+      { question: "When using PNG to TIFF, will the file size increase?", answer: "TIFF files are generally larger than PNG because TIFF uses less aggressive compression. This is expected — the tradeoff is better compatibility with print and professional tools." },
+      { question: "Is PNG to TIFF conversion done locally?", answer: "Yes. All PNG to TIFF conversion runs in your browser. No images are uploaded to any server." },
     ],
   },
   {
@@ -1352,8 +1352,8 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Why convert JPG to HEIC?", answer: "HEIC offers 50% better compression than JPG at similar visual quality. Converting JPGs to HEIC saves storage on Apple devices and iCloud." },
       { question: "Will quality improve from JPG to HEIC?", answer: "No. Both are lossy formats. HEIC is more efficient, so you get similar quality at smaller file sizes. It does not restore detail lost in the original JPG compression." },
       { question: "Can I open HEIC on non-Apple devices?", answer: "Windows requires the HEIF Image Extension from Microsoft Store. Android support varies. For cross-platform sharing, consider keeping JPG as a fallback." },
-      { question: "What quality settings are available?", answer: "Adjust HEIC compression quality from 1-100. Higher values produce larger files with more detail. The default provides a good balance." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser. No images are uploaded." },
+      { question: "What quality settings does JPG to HEIC offer?", answer: "Adjust HEIC compression quality from 1-100. Higher values produce larger files with more detail. The default provides a good balance." },
+      { question: "Is JPG to HEIC conversion done locally?", answer: "Yes. All conversion runs in your browser. No images are uploaded." },
     ],
   },
   {
@@ -1377,10 +1377,10 @@ export const entries_chunk_5: ToolMetadata[] = [
     showInCategory: false,
     faqs: [
       { question: "Why convert JPG to BMP?", answer: "BMP is uncompressed and supported by virtually all image software. Converting JPG to BMP is useful for legacy applications, medical imaging, or when you need lossless output for further editing." },
-      { question: "Will the file size increase?", answer: "Yes, significantly. BMP is uncompressed, so a 500KB JPG may become 5-15MB as BMP. The tradeoff is lossless quality for editing workflows." },
+      { question: "When using JPG to BMP, will the file size increase?", answer: "Yes, significantly. BMP is uncompressed, so a 500KB JPG may become 5-15MB as BMP. The tradeoff is lossless quality for editing workflows." },
       { question: "Does BMP support transparency?", answer: "No. Standard BMP does not support alpha channels. Any JPG content (which also lacks transparency) is preserved as-is in the BMP output." },
       { question: "Can I then edit the BMP without quality loss?", answer: "Yes. BMP is lossless, so editing (cropping, resizing, color adjustment) does not introduce additional compression artifacts like repeated JPG saves would." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
+      { question: "Is JPG to BMP conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
   },
   {
@@ -1423,8 +1423,8 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Why convert WEBP to HEIC?", answer: "HEIC is the default format for Apple devices and offers excellent compression. Converting to HEIC is useful for importing WEBP images into Apple Photos, iOS apps, or macOS workflows." },
       { question: "Does HEIC support transparency?", answer: "HEIC supports alpha channel transparency, so transparent WEBP images will preserve their transparency in the converted output." },
       { question: "Can I open HEIC files on Windows?", answer: "Windows 10/11 requires the HEIF Image Extension from the Microsoft Store. Most modern systems support HEIC natively. For maximum compatibility, consider converting to JPG instead." },
-      { question: "What quality settings are available?", answer: "You can adjust the HEIC compression quality. Higher values produce larger files with more detail. The default provides a good balance for most use cases." },
-      { question: "Is the conversion done locally?", answer: "Yes. All WEBP to HEIC conversion runs entirely in your browser. No images are uploaded to any server." },
+      { question: "What quality settings does WEBP to HEIC offer?", answer: "You can adjust the HEIC compression quality. Higher values produce larger files with more detail. The default provides a good balance for most use cases." },
+      { question: "Is WEBP to HEIC conversion done locally?", answer: "Yes. All WEBP to HEIC conversion runs entirely in your browser. No images are uploaded to any server." },
     ],
   },
   {
@@ -1441,7 +1441,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Will the SVG be truly vector?", answer: "The converter embeds the WEBP image as a raster element inside the SVG wrapper. For true vectorization (tracing), use a dedicated vector tracing tool. This conversion is useful for embedding in SVG-only contexts." },
       { question: "Can I edit the SVG output?", answer: "Yes. The output is a valid SVG file that you can open in Inkscape, Illustrator, or any SVG editor. If the image is raster-embedded, you can edit the SVG container but not individual pixels." },
       { question: "What are the size implications?", answer: "SVG files with embedded raster images may be larger than the original WEBP. SVG is most efficient for simple shapes and icons, not photographic content." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser. No images are uploaded to any server." },
+      { question: "Is WEBP to SVG conversion done locally?", answer: "Yes. All conversion runs in your browser. No images are uploaded to any server." },
     ],
   },
   {
@@ -1458,7 +1458,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Will the file size increase significantly?", answer: "Yes. BMP is uncompressed, so expect 5-20x larger files than WEBP. A 200KB WEBP may become 2-4MB as BMP. This is the tradeoff for uncompressed, lossless output." },
       { question: "Does BMP support transparency?", answer: "Standard BMP does not support alpha transparency. Transparent areas in WEBP will be rendered against a white background in the BMP output." },
       { question: "Can I edit the BMP output?", answer: "Yes. BMP is universally supported by image editors (Paint, GIMP, Photoshop). You can open, crop, resize, and apply effects to the converted file." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
+      { question: "Is WEBP to BMP conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
   },
   {
@@ -1482,10 +1482,10 @@ export const entries_chunk_5: ToolMetadata[] = [
     showInCategory: false,
     faqs: [
       { question: "Why convert WEBP to ICO?", answer: "WEBP is not supported as favicon format by browsers. ICO is the standard format for favicons and Windows icons. Converting WEBP to ICO makes your image usable as a favicon." },
-      { question: "What sizes are included in the ICO?", answer: "Multiple sizes: 16x16 (favicon), 32x32 (taskbar), 48x48 (desktop), and 256x256 (high-DPI). The converter generates all standard sizes." },
+      { question: "When using WEBP to ICO, what sizes are included in the ICO?", answer: "Multiple sizes: 16x16 (favicon), 32x32 (taskbar), 48x48 (desktop), and 256x256 (high-DPI). The converter generates all standard sizes." },
       { question: "Does WEBP transparency survive?", answer: "WEBP supports alpha transparency. The converter renders transparent areas against a white background in the ICO, since ICO has limited transparency support." },
       { question: "Can I customize which sizes are included?", answer: "Some converters offer size selection. Check if this tool allows picking specific sizes to reduce the final ICO file size." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
+      { question: "Is WEBP to ICO conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
     ],
   },
   {
@@ -1500,9 +1500,9 @@ export const entries_chunk_5: ToolMetadata[] = [
     faqs: [
       { question: "Why convert WEBP to JXL?", answer: "JXL offers better compression than WEBP with faster decode times and progressive rendering. It's the next-generation format designed to replace both JPEG and PNG with superior quality-to-size ratios." },
       { question: "Does JXL support transparency?", answer: "Yes. JXL supports alpha channel transparency, preserving any transparent areas from the WEBP source. It also supports 16-bit color for HDR content." },
-      { question: "What browsers support JXL?", answer: "Chrome 117+, Firefox 113+, and Safari 17+ support JXL. For older browsers, use WEBP or JPG fallbacks with the <picture> element." },
-      { question: "What quality settings are available?", answer: "You can adjust compression quality from 1-100. JXL's lossy mode is more efficient than WEBP at the same quality level, often producing smaller files with better visual fidelity." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
+      { question: "When using WEBP to JXL, what browsers support JXL?", answer: "Chrome 117+, Firefox 113+, and Safari 17+ support JXL. For older browsers, use WEBP or JPG fallbacks with the <picture> element." },
+      { question: "What quality settings does WEBP to JXL offer?", answer: "You can adjust compression quality from 1-100. JXL's lossy mode is more efficient than WEBP at the same quality level, often producing smaller files with better visual fidelity." },
+      { question: "Is WEBP to JXL conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
   },
   {
@@ -1529,7 +1529,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Does HEIC transparency carry over to BMP?", answer: "No. Standard BMP does not support alpha channels. Any transparent areas in the HEIC source will be rendered against a white background." },
       { question: "What about HEIC's multiple image support?", answer: "HEIC files can contain multiple images (bursts, Live Photos). The converter exports the primary image. For multi-image HEIC files, extract individual frames first." },
       { question: "How large will the BMP file be?", answer: "BMP is uncompressed, so expect significantly larger files. A 1MB HEIC may become 10-20MB as BMP depending on resolution and color depth." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser. No HEIC files are uploaded to any server." },
+      { question: "Is HEIC to BMP conversion done locally?", answer: "Yes. All conversion runs in your browser. No HEIC files are uploaded to any server." },
     ],
   },
   {
@@ -1661,10 +1661,10 @@ export const entries_chunk_5: ToolMetadata[] = [
     showInCategory: false,
     faqs: [
       { question: "Why convert AVIF to ICO?", answer: "ICO is the required format for Windows application icons and website favicons. AVIF is not supported as favicon format. Converting lets you use modern AVIF content as traditional icons." },
-      { question: "What sizes are included in the ICO?", answer: "The output ICO typically includes 16x16, 32x32, 48x48, and 256x256 pixel variants. This covers favicon, taskbar, and desktop icon requirements across Windows." },
+      { question: "When using AVIF to ICO, what sizes are included in the ICO?", answer: "The output ICO typically includes 16x16, 32x32, 48x48, and 256x256 pixel variants. This covers favicon, taskbar, and desktop icon requirements across Windows." },
       { question: "Does the ICO support AVIF quality?", answer: "ICO uses embedded bitmaps (BMP/PNG). The AVIF is rendered at each required size and embedded as PNG frames in the ICO container." },
       { question: "Can I use this for web favicons?", answer: "Yes. Link the ICO in your HTML with <link rel='icon' href='/favicon.ico'>. Browsers automatically select the appropriate size." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
+      { question: "Is AVIF to ICO conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
     ],
   },
   {
@@ -1748,7 +1748,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Will quality be lost in conversion?", answer: "HEIC supports lossless mode, so you can preserve original BMP quality. Lossy mode provides much smaller files with visually imperceptible quality loss for most content." },
       { question: "What about BMP's lack of transparency?", answer: "BMP does not support alpha channels, so the HEIC output will also lack transparency. The conversion is purely about compression efficiency." },
       { question: "Can I open HEIC on non-Apple devices?", answer: "Windows requires the HEIF Image Extension from Microsoft Store. Android support varies by manufacturer. For maximum compatibility, consider converting to JPG or WebP instead." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser. No images are uploaded to any server." },
+      { question: "Is BMP to HEIC conversion done locally?", answer: "Yes. All conversion runs in your browser. No images are uploaded to any server." },
     ],
   },
   {
@@ -1782,10 +1782,10 @@ export const entries_chunk_5: ToolMetadata[] = [
     showInCategory: false,
     faqs: [
       { question: "Why convert BMP to ICO?", answer: "ICO is the required format for Windows application icons and website favicons. BMP is not supported as favicon format. Converting lets you use BMP content as traditional icons." },
-      { question: "What sizes are included in the ICO?", answer: "The output ICO typically includes 16x16, 32x32, 48x48, and 256x256 pixel variants, covering favicon, taskbar, and desktop icon requirements." },
+      { question: "When using BMP to ICO, what sizes are included in the ICO?", answer: "The output ICO typically includes 16x16, 32x32, 48x48, and 256x256 pixel variants, covering favicon, taskbar, and desktop icon requirements." },
       { question: "Does BMP transparency carry over?", answer: "Standard BMP supports 1-bit transparency in some variants. The converter renders transparent areas against a white background in the ICO output." },
       { question: "Can I use this for web favicons?", answer: "Yes. Link the ICO with <link rel='icon' href='/favicon.ico'>. Browsers automatically select the appropriate size for tabs and bookmarks." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
+      { question: "Is BMP to ICO conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
     ],
   },
   {
@@ -1857,8 +1857,8 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Why convert TIFF to JXL?", answer: "JXL offers 50-60% better compression than TIFF while maintaining visual quality. Archival TIFF files can be dramatically reduced in size for web distribution and storage." },
       { question: "Does JXL preserve TIFF quality?", answer: "JXL supports lossless mode, preserving exact TIFF quality. Lossy mode provides much smaller files with visually imperceptible differences for most content." },
       { question: "Does JXL support multi-page TIFFs?", answer: "JXL supports multiple frames. Multi-page TIFFs are converted to multi-frame JXL files, preserving the page sequence." },
-      { question: "What browsers support JXL?", answer: "Chrome 117+, Firefox 113+, and Safari 17+. For older browsers, provide TIFF or PNG fallbacks." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser. No images are uploaded." },
+      { question: "When using TIFF to JXL, what browsers support JXL?", answer: "Chrome 117+, Firefox 113+, and Safari 17+. For older browsers, provide TIFF or PNG fallbacks." },
+      { question: "Is TIFF to JXL conversion done locally?", answer: "Yes. All conversion runs in your browser. No images are uploaded." },
     ],
   },
   {
@@ -1902,7 +1902,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Does it handle animated GIFs?", answer: "Animated GIFs are converted frame-by-frame. The first frame is extracted and converted to BMP. For animated output, use other format converters." },
       { question: "Will file size increase?", answer: "Yes. BMP is uncompressed, so expect 5-20x larger files. A 100KB GIF may become 1-2MB as BMP. This is the tradeoff for lossless, uncompressed output." },
       { question: "Does BMP support GIF's 256-color palette?", answer: "BMP supports millions of colors (24/32-bit). The converter expands GIF's 256-color palette to full color depth, though no new color information is created." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
+      { question: "Is GIF to BMP conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
   },
   {
@@ -1927,9 +1927,9 @@ export const entries_chunk_5: ToolMetadata[] = [
     faqs: [
       { question: "Why convert GIF to ICO?", answer: "ICO is the required format for website favicons and Windows application icons. Converting a GIF to ICO lets you use your animated or static graphic as a favicon or desktop icon." },
       { question: "Does it preserve GIF animation in ICO?", answer: "ICO files support multiple frames at different sizes. The converter can embed multiple resolution variants (16x16, 32x32, 48x48, 256x256) but does not preserve GIF frame animation." },
-      { question: "What sizes are included in the ICO?", answer: "The output ICO typically includes 16x16, 32x32, 48x48, and 256x256 pixel variants. This covers favicon, taskbar, and desktop icon requirements across Windows." },
+      { question: "When using GIF to ICO, what sizes are included in the ICO?", answer: "The output ICO typically includes 16x16, 32x32, 48x48, and 256x256 pixel variants. This covers favicon, taskbar, and desktop icon requirements across Windows." },
       { question: "Can I use the ICO as a favicon?", answer: "Yes. Link it in your HTML with <link rel='icon' href='/favicon.ico'> and browsers will automatically select the appropriate size for tabs, bookmarks, and taskbars." },
-      { question: "Is the conversion done locally?", answer: "Yes. All GIF to ICO conversion runs in your browser. No images are uploaded to any server." },
+      { question: "Is GIF to ICO conversion done locally?", answer: "Yes. All GIF to ICO conversion runs in your browser. No images are uploaded to any server." },
     ],
   },
   {
@@ -2012,7 +2012,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Does it handle multi-size ICO files?", answer: "Multi-size ICO files contain multiple resolution variants. The converter exports the largest available size as a single GIF frame." },
       { question: "Does GIF support ICO transparency?", answer: "ICO supports 1-bit transparency (fully transparent/opaque). GIF also supports 1-bit transparency, so the transparency is preserved in the conversion." },
       { question: "What color depth is used?", answer: "GIF is limited to 256 colors. The converter uses an optimal palette to represent the ICO's color data with minimal visual quality loss." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
+      { question: "Is ICO to GIF conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
   },
   {
@@ -2027,9 +2027,9 @@ export const entries_chunk_5: ToolMetadata[] = [
     faqs: [
       { question: "Why convert ICO to JXL?", answer: "JXL (JPEG XL) offers superior compression and quality compared to ICO's embedded bitmap formats. It's useful for archival or web use where you want modern compression for icon imagery." },
       { question: "Does JXL support multiple sizes like ICO?", answer: "JXL supports multiple resolution layers, but the converter exports a single image. For multi-size icons, convert each ICO size separately or use a dedicated icon tool." },
-      { question: "What browsers support JXL?", answer: "Chrome 117+, Firefox 113+, and Safari 17+ support JXL natively. For older browsers, provide a fallback format using the <picture> element." },
+      { question: "When using ICO to JXL, what browsers support JXL?", answer: "Chrome 117+, Firefox 113+, and Safari 17+ support JXL natively. For older browsers, provide a fallback format using the <picture> element." },
       { question: "Can I use JXL for web favicons?", answer: "JXL is not supported as a favicon format by browsers. Keep ICO or PNG for favicons and use JXL for decorative icon imagery on supported pages." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser. No images are uploaded to any server." },
+      { question: "Is ICO to JXL conversion done locally?", answer: "Yes. All conversion runs in your browser. No images are uploaded to any server." },
     ],
   },
   {
@@ -2137,7 +2137,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "How are JSON strings formatted in YAML?", answer: "Simple strings are unquoted. Strings with special characters, colons, or hashes are quoted. Multi-line strings use YAML block scalars (| or >)." },
       { question: "Does it handle large JSON files?", answer: "Files up to 1MB convert instantly. Larger files may slow the browser. For very large JSON, consider streaming YAML converters." },
       { question: "Can I convert back from YAML to JSON?", answer: "Yes. Use the YAML to JSON Converter tool for the reverse direction." },
-      { question: "Is my JSON data stored?", answer: "No. All conversion happens locally in your browser. No JSON data is sent to any server." },
+      { question: "When using JSON to YAML Converter, is my JSON data stored?", answer: "No. All conversion happens locally in your browser. No JSON data is sent to any server." },
     ],
   },
   {
@@ -2164,7 +2164,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "How are JSON types mapped to TOML?", answer: "Strings, numbers, booleans, arrays, and objects map directly. Nested objects become TOML sections ([section]). Arrays of objects become [[array-of-tables]]." },
       { question: "Does it handle nested JSON?", answer: "Yes. Deeply nested JSON objects are converted to properly nested TOML sections. Arrays of objects are converted to TOML array-of-tables syntax." },
       { question: "Can I use this for Cargo.toml or pyproject.toml?", answer: "Yes. The output is valid TOML that can be used directly in Cargo.toml, pyproject.toml, or any TOML-based configuration file." },
-      { question: "Is my JSON data stored?", answer: "No. All conversion happens locally in your browser. No JSON data is sent to any server." },
+      { question: "When using JSON to TOML Converter, is my JSON data stored?", answer: "No. All conversion happens locally in your browser. No JSON data is sent to any server." },
     ],
   },
   {
@@ -2181,7 +2181,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Does it handle nested CSS?", answer: "Yes. If your CSS uses native nesting (a recent CSS feature), the converter preserves the nesting structure while converting variables to Less syntax." },
       { question: "Can I convert back from Less to CSS?", answer: "Use the Less to CSS Converter tool for the reverse direction. Compile Less files to standard CSS with the Less compiler." },
       { question: "Will the output work with Less?", answer: "Yes. The generated Less code uses standard Less syntax and can be compiled with the Less compiler (npm install -g less && lessc style.less)." },
-      { question: "Is my CSS data stored?", answer: "No. All conversion happens locally in your browser. No CSS data is sent to any server." },
+      { question: "When using CSS to Less Converter, is my CSS data stored?", answer: "No. All conversion happens locally in your browser. No CSS data is sent to any server." },
     ],
   },
   {
@@ -2207,6 +2207,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Where do my URLs go?", answer: "Each URL is sent to our shortening API one by one. Destination URLs are visible to the shortening service by design — don't bulk-shorten private links with secrets or tokens." },
       { question: "Why does a big list take a while?", answer: "The API allows about 10 per minute, so large lists process sequentially with automatic retries. Progress is shown live and you can stop anytime." },
       { question: "What do I get at the end?", answer: "A per-URL status list with copy buttons, copy-all, and CSV export of originals, shortened links, and statuses." },
+      { question: "CSV in, CSV out?", answer: "Yes — paste a list or upload a CSV, then copy all shortened links or export the result CSV back." },
     ],
 },
   {
@@ -2303,8 +2304,8 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "What is the NATO phonetic alphabet?", answer: "The NATO phonetic alphabet assigns a word to each letter: Alpha (A), Bravo (B), Charlie (C), Delta (D), through Zulu (Z). It is the international standard for spelling out letters clearly over radio and电话." },
       { question: "Can I convert both ways?", answer: "Yes. Convert text to NATO phonetic words (A -> Alpha) and NATO words back to letters (Alpha -> A). The bidirectional converter handles both directions." },
       { question: "Does it handle numbers and special characters?", answer: "Numbers are spoken as digits (1 = 'One', 0 = 'Zero'). Special characters like @ and # are not part of the NATO standard and are skipped or noted in the output." },
-      { question: "What are common use cases?", answer: "Aviation and military radio communication, spelling verification over phone calls, clarifying ambiguous letters (B vs D, M vs N), and educational purposes for learning the phonetic alphabet." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs locally in your browser. No text data is sent to any server." },
+      { question: "When using NATO Phonetic Converter, what are common use cases?", answer: "Aviation and military radio communication, spelling verification over phone calls, clarifying ambiguous letters (B vs D, M vs N), and educational purposes for learning the phonetic alphabet." },
+      { question: "When using NATO Phonetic Converter, is the conversion done locally?", answer: "Yes. All conversion runs locally in your browser. No text data is sent to any server." },
     ],
 },
   {

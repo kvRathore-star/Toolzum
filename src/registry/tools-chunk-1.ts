@@ -14,7 +14,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "How many feet are in a meter?", answer: "1 meter = 3.28084 feet. All conversions use internationally standardized factors." },
       { question: "How many inches in a centimeter?", answer: "1 inch = 2.54 cm exactly. This is a defined international agreement, not an approximation." },
       { question: "How far is a marathon?", answer: "A marathon is 42.195 km (26.2 miles). The exact distance was standardized by the IAAF in 1921." },
-      { question: "Does this converter work offline?", answer: "Yes. All conversions run locally in your browser using JavaScript. No data is sent to any server." },
+      { question: "When using Unit Converter, does this converter work offline?", answer: "Yes. All conversions run locally in your browser using JavaScript. No data is sent to any server." },
     ],
   },
   {
@@ -133,6 +133,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Is my search sent anywhere?", answer: "Yes. Lookups query the live postal API, so the pincode or name you search is transmitted for the lookup. Nothing is stored — there is no search history beyond your own browser session." },
       { question: "How current is the data?", answer: "Results come live from the official postal API on every search — no stale built-in database. For critical address verification, cross-check with India Post." },
       { question: "What counts against the daily limit?", answer: "Each successful lookup counts once. Failed validations (wrong length, non-numeric input) never count." },
+      { question: "What does each pincode digit mean?", answer: "Digit 1 is the region, 2–3 the sub-region, 4–6 the sorting district and post office — e.g., 110001 routes through Delhi." },
     ],
   },
   {
@@ -249,8 +250,8 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "How does face detection work?", answer: "The tool uses an AI-powered computer vision model to detect faces in the image. It identifies face bounding boxes and applies a configurable Gaussian blur effect to each detected region." },
       { question: "Can I adjust the blur intensity?", answer: "Yes. An adjustable blur slider lets you control the intensity from subtle to completely unrecognizable. Preview the effect before downloading." },
       { question: "How many faces can it detect?", answer: "The tool can detect multiple faces in a single image. All detected faces are blurred simultaneously with the same intensity setting." },
-      { question: "What image formats are supported?", answer: "JPG, PNG, WebP, and BMP inputs are accepted. Output is typically JPG or PNG with the blurred face regions." },
-      { question: "Is my image uploaded to a server?", answer: "Face detection and blurring happen locally in your browser using AI models. No image data is transmitted to external servers." },
+      { question: "When using Blur Face Online, what image formats are supported?", answer: "JPG, PNG, WebP, and BMP inputs are accepted. Output is typically JPG or PNG with the blurred face regions." },
+      { question: "When using Blur Face Online, is my image uploaded to a server?", answer: "Face detection and blurring happen locally in your browser using AI models. No image data is transmitted to external servers." },
     ],
   },
   {
@@ -286,6 +287,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "What URL formats are supported?", answer: "Paste any Apple Music song or album URL (music.apple.com/...). The tool extracts the preview clip ID from the URL and fetches the publicly available 30-90 second preview." },
       { question: "Does this download full songs?", answer: "No. This tool only extracts the publicly available preview clips that Apple Music provides for free. Full song downloads require an Apple Music subscription." },
       { question: "Do I need an Apple Music account?", answer: "No. The preview clips are publicly available and don't require authentication. The tool fetches them directly from Apple's CDN." },
+      { question: "Why only 30–90 seconds?", answer: "Apple publishes short preview clips, not full songs — the tool resolves a store URL to its public preview." },
     ],
   },
   {
@@ -328,7 +330,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "How do click-to-chat links work?", answer: "Enter a phone number (with country code) and a message. The tool generates a wa.me link that opens WhatsApp directly with the message pre-filled." },
       { question: "Can I generate QR codes for WhatsApp?", answer: "Yes. Generate QR codes for phone numbers, group invites, or click-to-chat links. Scan with any phone camera to open WhatsApp directly." },
       { question: "Does the chat analyzer read my messages?", answer: "No. The analyzer works on text you paste locally. It analyzes sentiment, word count, and message patterns without accessing your WhatsApp account." },
-      { question: "Is my data stored?", answer: "No. All generation and analysis happens locally in your browser. No WhatsApp data is transmitted." },
+      { question: "When using WhatsApp Toolkit, is my data stored?", answer: "No. All generation and analysis happens locally in your browser. No WhatsApp data is transmitted." },
     ],
   },
   {
@@ -359,6 +361,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Is my voice recording uploaded?", answer: "Yes. Your recording or file is sent to our server for AI transcription and deleted after processing — it is never stored or shared by us. Note: transcription runs on a third-party speech service whose free tier may retain samples for service improvement — avoid dictating secrets or passwords." },
       { question: "What does voice transcription cost?", answer: "Transcription bills 1 credit per minute of audio (25MB, 30-minute caps). Free plans include a one-time 5-credit trial; Pro gets 200/month." },
       { question: "Which languages work best?", answer: "12 Indian languages plus English: Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Punjabi, Odia, Urdu, and English. Accuracy is highest on clear speech; heavy background noise lowers it." },
+      { question: "Should I record or upload?", answer: "Both work: record a fresh voice note or upload an existing file — uploads suit long recordings, recording suits quick thoughts." },
     ],
   },
   {
@@ -386,6 +389,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     faqs: [
       { question: "Does this post to social media automatically?", answer: "No. This is a planning and scheduling tool that stores posts locally. You manually publish each post at the scheduled time. No API connections to social platforms." },
       { question: "Where is my data stored?", answer: "All posts are stored in your browser's localStorage. No data is sent to any server. Clearing browser data will remove your calendar." },
+      { question: "What do draft and scheduled mean?", answer: "Drafts are ideas in progress; scheduled posts sit on their calendar dates. Only scheduled items count toward your plan." },
+      { question: "Can I see a whole month at once?", answer: "Yes — the visual calendar shows the full month so gaps and pile-ups are obvious before the month starts." },
     ],
   },
   {
@@ -437,12 +442,8 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "What do the AI buttons cost?", answer: "Summarize, Fix grammar, and Translate each cost 1 credit and need a signed-in account (trial credits work) — they act on your drag-selection or the whole page. Find-sensitive-data is Pro-only, 1 credit: it suggests cover-up boxes you must verify, it is not redaction. They read the page's text layer — scanned pages need OCR first." },
       { question: "Is cover-up the same as redaction?", answer: "No. Cover-up paints white pixels but the text stays in the file and can be recovered. The Redact tool is different: two modes. Selective strips text bytes (pages stay live); Maximum rasterizes redacted pages to images — the black regions are burned into the pixels and the export re-checks that they are dark. Both modes verify on export and block the download if verification fails. Images under a region are flagged, never silently kept. Rasterized pages do not keep links or form fields." },
       { question: "Does my PDF leave my device?", answer: "Almost never. Rendering, annotating, OCR, and exporting all happen in your browser. The one exception: AI actions send the page's text (never the file) to our server and cost 1 credit." },
-      { question: "Is there a PDF size or page limit?", answer: "125 MB for everyone, no size limit on Pro; up to 150 pages anonymous, 300 signed in, 500 Pro. Page caps are device memory, not pricing — hundreds of rendered pages will crash mobile browsers on any plan. Larger files: split or compress first." },
       { question: "What fonts can added text use?", answer: "Ten families — the metric-compatible trio Arimo (≈Arial), Tinos (≈Times), Cousine (≈Courier), plus Roboto, Montserrat, Open Sans, Lato, Poppins, Inter and DM Sans — each in regular, bold, italic and bold-italic. Embedded on export, cached offline after first use. Offline first run falls back to built-in Helvetica/Times/Courier. Retype auto-detects the original family (the metric trio). Arbitrary document fonts are not fetched (licensing + offline)." },
       { question: "Can I write in Hindi or Tamil?", answer: "Yes — Hindi (Devanagari) and Tamil annotations export with Noto Sans, fetched once and cached offline like the ten picker families. Mixed lines (English + Hindi) split per script so neither part goes blank, and the ₹ symbol routes the same way when the chosen font lacks it. Offline on first use, the export pauses with a message instead of shipping blank boxes. Other scripts (Chinese, Arabic, Greek, …) may not render — the export names the pages to check." },
-      { question: "Can I upload a photo of my signature?", answer: "Deliberately not. Photo signatures with background removal are the easiest way to lift someone else's signature off a document, so this editor offers draw and type only. If you need your handwritten mark, draw it on the pad." },
-      { question: "Does my saved signature follow me to other devices?", answer: "No — it lives only in this browser, on purpose. Syncing signatures would mean uploading them somewhere, which contradicts the local-first promise. Draw once per device; it takes ten seconds." },
-      { question: "Do annotations stay editable after export?", answer: "No — export flattens everything into the PDF permanently. But your working session autosaves to this browser every few seconds (Save button or Ctrl+S), and reopens after a crash or reload — stated next to the filename. Destructive actions also snapshot into a 10-version history you can restore from. Keep iterating by re-opening the exported file." },
     ],
   },
   {
@@ -557,6 +558,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     faqs: [
       { question: "How much can I reduce PDF size?", answer: "Compression results vary by content. Text-heavy PDFs typically reduce 10-20%. Image-heavy PDFs can reduce 50-80% depending on the compression level chosen." },
       { question: "Does compression reduce quality?", answer: "Low compression preserves quality with minimal size reduction. Medium is balanced. High compression may reduce image quality for maximum size savings." },
+      { question: "What exactly gets removed to shrink files?", answer: "Embedded images are downsampled, metadata stripped, and object streams optimized — text layers stay intact." },
+      { question: "How do Pro limits work for bulk compression?", answer: "Sign in free for 2 bulk reductions a day; Pro unlocks unlimited batches." },
     ],
     },
   {
@@ -570,7 +573,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     faqs: [
       { question: "How many images can I resize at once?", answer: "There is no hard limit. You can select hundreds of images and resize them all in a single batch. Processing time depends on image sizes and your device performance." },
       { question: "What resize options are available?", answer: "Resize by exact pixel dimensions (width x height), by percentage scale, or to preset sizes (thumbnail, medium, large). Aspect ratio lock prevents distortion." },
-      { question: "What output formats are supported?", answer: "Output formats include PNG, JPG, and WebP. You can choose the format and compression quality for the entire batch." },
+      { question: "When using Bulk Image Resizer, what output formats are supported?", answer: "Output formats include PNG, JPG, and WebP. You can choose the format and compression quality for the entire batch." },
       { question: "Are my images uploaded during processing?", answer: "No. All resizing happens locally in your browser using Canvas API. Images are processed in memory and downloaded as a ZIP file when complete." },
       { question: "Will resizing affect image quality?", answer: "Upscaling may introduce pixelation. Downscaling preserves quality well. Use the preview to check results before downloading the batch." },
     ],
@@ -601,6 +604,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     faqs: [
       { question: "Is there a file count limit?", answer: "No enforced limit — merge as many PDFs as your browser memory comfortably handles. Very large batches (hundreds of files) may slow down low-end devices." },
       { question: "Does merging reduce quality?", answer: "No. The merger preserves the original quality, formatting, and embedded fonts of each source PDF." },
+      { question: "Who is bulk merging for?", answer: "Legal teams consolidating contract bundles and discovery sets — dozens of files join in one operation with order preserved." },
+      { question: "How do Pro limits work for bulk merging?", answer: "Sign in free for 2 bulk merges a day; Pro unlocks unlimited batches." },
     ],
   },
   {
@@ -650,6 +655,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "What is LUFS?", answer: "Loudness Units Full Scale — the industry standard for measuring perceived loudness. Streaming platforms (Spotify, YouTube) target –14 LUFS. Podcasts typically use –16 LUFS." },
       { question: "Does normalization change audio quality?", answer: "No. Loudness normalization adjusts the overall volume level without altering the audio content. Dynamic range and frequency balance are preserved." },
       { question: "What audio formats are supported?", answer: "MP3, WAV, OGG, FLAC, and M4A. Output format matches the input format." },
+      { question: "Podcast or streaming target — which?", answer: "Podcasts master to −16 LUFS, music streaming to −14 LUFS. Pick the target matching where listeners will hear it." },
     ],
     },
   {
@@ -856,6 +862,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Where does my complaint text go?", answer: "Your draft is sent to the AI provider you configured for generation. Choose a provider whose privacy policy you trust, and never paste passwords, OTPs, or card numbers into the complaint details." },
       { question: "Is the generated letter legally valid?", answer: "It follows formal Indian consumer-law structure (Consumer Protection Act 2019, RERA, TRAI, RBI), but it is a draft, not legal advice. Review the facts and have an advocate vet it before sending." },
       { question: "Do I need an API key?", answer: "Yes. Generation uses your own configured AI provider key — the tool itself stores nothing." },
+      { question: "Which laws can it cite?", answer: "Consumer Protection Act 2019, RERA, TRAI, or RBI regulations depending on the dispute you describe." },
     ],
   },
   {
@@ -1046,7 +1053,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Can I reorder pages before combining?", answer: "Yes. Drag and drop to reorder pages. Arrange them in the correct sequence before generating the final PDF." },
       { question: "Does it auto-enhance scanned images?", answer: "The basic tool combines images as-is. For scan enhancement (contrast, brightness, skew correction), use the Indian Document Enhancer first." },
       { question: "What is the output quality?", answer: "Images are embedded at their original resolution. The PDF preserves the full quality of each source image without recompression." },
-      { question: "Is my data stored?", answer: "No. All processing happens locally in your browser using pdf-lib. No images or PDFs are uploaded to any server." },
+      { question: "When using Scan to PDF, is my data stored?", answer: "No. All processing happens locally in your browser using pdf-lib. No images or PDFs are uploaded to any server." },
     ],
   },
   {
@@ -1102,6 +1109,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Is my document uploaded?", answer: "Only extracted text (up to 5,000 characters) is transmitted for translation; the PDF itself is never transmitted. Nothing is stored after the translation returns." },
       { question: "Why is output plain text?", answer: "Only extracted text is translated, so PDF layout, fonts, and images do not carry over. For layout-preserving conversion, use a PDF converter instead." },
       { question: "Which target languages are supported?", answer: "20 languages via the translation API. Quality is best between major languages; rare pairs may need a human pass." },
+      { question: "How do I use the translated text?", answer: "Copy it out or download the plain-text file — formatting doesn't survive, so treat output as working text for editing or quoting." },
     ],
   },
   {
@@ -1549,6 +1557,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "What types of errors does this detect?", answer: "Grammar mistakes, spelling errors, punctuation issues, homophone confusion (their/there/they're), misspellings, and run-on sentences." },
       { question: "Does this require an API key?", answer: "No. The grammar checker runs entirely in your browser using local pattern matching. No data is sent to any server." },
       { question: "How accurate is it?", answer: "The checker catches common errors but isn't a replacement for professional editing. It's designed for quick proofreading of everyday text." },
+      { question: "Does the grammar checker work offline?", answer: "Yes — checking runs fully locally in your browser, so it works with no connection and nothing you type is uploaded." },
     ],
   },
   {
@@ -1575,7 +1584,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "What is a burstiness score?", answer: "Burstiness measures variation in sentence length. Human writing has high burstiness (mix of short and long sentences). AI text tends to have uniform sentence length, resulting in low burstiness." },
       { question: "What percentage score is considered AI-written?", answer: "Scores above 70% suggest likely AI authorship. Scores below 30% suggest human authorship. Scores between 30-70% are inconclusive and should be interpreted cautiously." },
       { question: "Can AI-generated text evade detection?", answer: "Yes. Sophisticated prompts, human editing, and paraphrasing can reduce detection accuracy. This tool is one indicator, not a definitive judgment on authorship." },
-      { question: "Is my text stored or transmitted?", answer: "No. All analysis happens locally in your browser. No text is sent to any server." },
+      { question: "When using AI Detector, is my text stored or transmitted?", answer: "No. All analysis happens locally in your browser. No text is sent to any server." },
     ],
   },
   {
@@ -1659,7 +1668,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Does PNG transparency survive?", answer: "PNG supports full alpha transparency. GIF supports only 1-bit transparency (fully on/off). Semi-transparent areas become either transparent or opaque." },
       { question: "Will the file size change?", answer: "PNG uses lossless compression. GIF also uses lossless compression but with a 256-color limit. Simple graphics may be smaller as GIF; complex images may be larger." },
       { question: "Does it handle animated PNGs?", answer: "Animated PNG (APNG) files need the dedicated APNG to GIF converter. This tool handles single-frame PNGs only." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
+      { question: "Is PNG to GIF conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
     ],
   },
   {
@@ -1676,7 +1685,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Does JPG's color depth survive the conversion?", answer: "JPG supports millions of colors (24-bit). GIF is limited to 256 colors. The converter uses an optimal color palette to minimize visible quality loss for photos." },
       { question: "Will the file size change?", answer: "GIF is typically larger than JPG for photos because it uses lossless compression. GIF is better suited for simple graphics with flat colors, not photographic content." },
       { question: "Does GIF support JPG's quality?", answer: "No. GIF is lossless but palette-limited. Photographic JPGs may show color banding in GIF output. For photos, JPG or PNG is generally preferred." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
+      { question: "Is JPG to GIF conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
   },
   {
@@ -1706,10 +1715,10 @@ export const entries_chunk_1: ToolMetadata[] = [
     showInCategory: false,
     faqs: [
       { question: "Why convert BMP to JPG?", answer: "BMP files are uncompressed and very large. Converting to JPG reduces file size by 90%+ while maintaining good visual quality. JPG is universally supported for web, email, and social media." },
-      { question: "What quality settings are available?", answer: "Adjust JPG quality from 1-100. Higher values preserve more detail but produce larger files. 85 is a good default — visually lossless at a fraction of BMP size." },
+      { question: "What quality settings does BMP to JPG offer?", answer: "Adjust JPG quality from 1-100. Higher values preserve more detail but produce larger files. 85 is a good default — visually lossless at a fraction of BMP size." },
       { question: "Does JPG support transparency?", answer: "No. BMP files with transparency will have transparent areas rendered against a white background in the JPG output." },
       { question: "Will repeated JPG saves degrade quality?", answer: "Yes. JPG is lossy, so each re-save introduces small artifacts. Edit the BMP original and convert to JPG only for the final output." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
+      { question: "Is BMP to JPG conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
   },
   {
@@ -1784,7 +1793,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Why does the JPG look better than the GIF?", answer: "GIFs cap at 256 colors (banding in gradients); JPG renders millions. A sunset GIF's stripes become smooth gradients in the export — same pixels, richer palette." },
       { question: "What about transparency?", answer: "Lost — JPG has no alpha channel. Transparent GIF regions become solid (usually white). Export to PNG instead if you need the cutout." },
       { question: "Single frame or all frames?", answer: "Single selected frame by default. For storyboards, export multiple frames individually — batch filmstrip export isn't supported." },
-      { question: "Are my files uploaded?", answer: "No. Conversion runs entirely in your browser via Canvas. Files never leave your device." },
+      { question: "When using GIF to JPG, are my files uploaded?", answer: "No. Conversion runs entirely in your browser via Canvas. Files never leave your device." },
     ],
   },
   {
@@ -1880,7 +1889,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: "html2canvas",
     faqs: [
       { question: "What viewport sizes can I capture?", answer: "Common presets include desktop (1920x1080), tablet (768x1024), and mobile (375x812). You can also enter custom width and height values for any screen size." },
-      { question: "What output formats are supported?", answer: "PNG (lossless, best for sharp text) and JPEG (compressed, smaller file size). Choose based on whether you need quality or smaller downloads." },
+      { question: "When using Website Screenshot, what output formats are supported?", answer: "PNG (lossless, best for sharp text) and JPEG (compressed, smaller file size). Choose based on whether you need quality or smaller downloads." },
       { question: "Why would I need a capture delay?", answer: "Some pages load content dynamically (animations, lazy-loaded images, cookie banners). A delay of 1-5 seconds lets the page fully render before the screenshot is taken." },
       { question: "Does it capture the full page or just the viewport?", answer: "By default it captures the visible viewport. For full-page screenshots, the tool can scroll and stitch the entire page into one image." },
       { question: "Is the website data stored?", answer: "No. The tool renders the page in your browser and captures it using html2canvas. No website content is transmitted to any server." },
@@ -1948,7 +1957,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Does GIF support all BMP colors?", answer: "BMP supports millions of colors (24-bit/32-bit). GIF is limited to 256 colors. The converter uses an optimal color palette to minimize visible quality loss." },
       { question: "Can I convert animated BMP to animated GIF?", answer: "Multi-frame BMPs are not standard. The converter processes the first frame. For animated content, use the GIF-to-other-format converters instead." },
       { question: "What about BMP transparency?", answer: "GIF supports 1-bit transparency (fully transparent or fully opaque). Semi-transparent areas in 32-bit BMPs will be rendered as either transparent or opaque." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
+      { question: "Is BMP to GIF conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
   },
   {
@@ -1963,9 +1972,9 @@ export const entries_chunk_1: ToolMetadata[] = [
     faqs: [
       { question: "How much smaller are WebP files?", answer: "WebP typically produces 25-35% smaller files than BMP at equivalent visual quality. A 5MB BMP may become 1-2MB as WebP." },
       { question: "Does WebP support transparency?", answer: "Yes. WebP supports alpha channel transparency, so any transparent areas in the BMP source are preserved in the WebP output." },
-      { question: "What quality settings are available?", answer: "Adjust lossy compression quality from 1-100. Lossless mode is also available for pixel-perfect output." },
+      { question: "What quality settings does BMP to WebP offer?", answer: "Adjust lossy compression quality from 1-100. Lossless mode is also available for pixel-perfect output." },
       { question: "Which browsers support WebP?", answer: "Chrome, Firefox, Edge, Safari 14+, and all modern browsers. WebP is the recommended format for web images." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
+      { question: "Is BMP to WEBP conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
     ],
   },
   {
@@ -2271,7 +2280,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Which states and UTs are covered?", answer: "All 28 states and 8 union territories. The database includes RTO codes for every registered RTO across India, from major metros to smaller districts." },
       { question: "Does it verify if a registration number is valid?", answer: "It checks if the format follows Indian registration standards (state code + RTO + series + number). It does not verify if the vehicle is currently registered with the transport department." },
       { question: "Can I look up vehicle owner details?", answer: "No. Owner details are protected under the Motor Vehicles Act. This tool only decodes the registration number format and identifies the issuing RTO." },
-      { question: "Is the parsing done locally?", answer: "Yes. All parsing happens in your browser using a local database. No registration numbers are sent to any server." },
+      { question: "When using Vehicle Registration Checker, is the parsing done locally?", answer: "Yes. All parsing happens in your browser using a local database. No registration numbers are sent to any server." },
     ],
   },
   {
@@ -2303,7 +2312,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "What are the current interest rates used?", answer: "The calculator uses the latest announced rates: SIP returns are based on assumed annual returns (typically 10-12%), PPF at 7.1% (as of latest GOI notification), and EPF at 8.25%." },
       { question: "Can I compare SIP vs lumpsum?", answer: "Yes. The SIP calculator shows returns for both monthly SIP and one-time lumpsum investments. You can compare which approach generates higher returns for your investment horizon." },
       { question: "Does PPF include the 15-year lock-in?", answer: "Yes. The PPF calculator accounts for the 15-year mandatory lock-in period, partial withdrawal rules after 7 years, and the compounding structure with annual additions." },
-      { question: "Is my financial data stored?", answer: "No. All calculations run locally in your browser. No investment data is transmitted or stored." },
+      { question: "When using SIP / PPF / EPF Calculator, is my financial data stored?", answer: "No. All calculations run locally in your browser. No investment data is transmitted or stored." },
     ],
   },
   {

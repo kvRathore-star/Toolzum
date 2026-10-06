@@ -211,7 +211,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Does it handle responsive prefixes?", answer: "Yes. sm:, md:, lg:, xl: prefixes are converted to the appropriate @media queries in the output CSS." },
       { question: "Does it support Tailwind v4?", answer: "The converter supports common Tailwind v3 utilities. Some v4-specific features may not be fully supported yet as the ecosystem evolves." },
       { question: "Can I convert custom Tailwind configs?", answer: "Custom theme values from tailwind.config.js are not automatically detected. The converter uses default Tailwind values. Custom colors and spacing may need manual adjustment." },
-      { question: "Is my data stored?", answer: "No. All conversion happens locally in your browser. No data is sent to any server." },
+      { question: "When using Tailwind to CSS Converter, is my data stored?", answer: "No. All conversion happens locally in your browser. No data is sent to any server." },
     ],
   },
   {
@@ -328,7 +328,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can I include regular contributions?", answer: "Yes. Add monthly or annual contributions to see how consistent investing accelerates growth. The tool calculates compound interest on both the principal and accumulated contributions." },
       { question: "What does the growth chart show?", answer: "A visual breakdown of your investment over time: principal contributions (blue), compound interest earned (green), and total value. Hover over any point to see exact values." },
       { question: "Can I compare different scenarios?", answer: "Yes. Adjust interest rate, contribution amount, and compounding frequency to compare scenarios side by side. This helps optimize your savings strategy." },
-      { question: "Is my financial data stored?", answer: "No. All calculations run locally in your browser. No investment data is transmitted." },
+      { question: "When using Compound Interest Calculator, is my financial data stored?", answer: "No. All calculations run locally in your browser. No investment data is transmitted." },
     ],
   },
   {
@@ -479,7 +479,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "What is the 5% rule?", answer: "Unrecoverable buying costs run ≈5% of home value yearly (interest + tax + maintenance, excluding principal). If annual rent is well below 5% of the price, renting wins financially. $400k × 5% = $20k/yr vs $26,400 rent → close call, decided by appreciation." },
       { question: "Does appreciation change the answer?", answer: "Dramatically: 3% yearly appreciation on $400k adds $12k/yr to the buy side. In flat markets renting usually wins under 7 years; in hot markets buying wins sooner. Run both assumptions." },
       { question: "What about the down payment's opportunity cost?", answer: "Counted: a $40k down payment invested at 7% becomes ~$79k in 10 years. Buying must beat renting by more than that foregone growth — the calculator includes it automatically." },
-      { question: "Is my financial data stored?", answer: "No. All calculations run locally in your browser. No amounts leave your device." },
+      { question: "When using Rent vs Buy Calculator, is my financial data stored?", answer: "No. All calculations run locally in your browser. No amounts leave your device." },
     ],
 
   },
@@ -496,7 +496,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Does it account for inflation?", answer: "Yes. Enter an inflation rate to see the real purchasing power of your retirement savings. The tool shows both nominal and inflation-adjusted projections." },
       { question: "Can I model different scenarios?", answer: "Yes. Adjust contribution amounts, return rates, and retirement age to compare scenarios. See how small changes in monthly savings impact your final nest egg." },
       { question: "Does it show monthly income in retirement?", answer: "The calculator projects total savings at retirement. For monthly income estimates, divide by your expected withdrawal period (e.g., 25 years for age 65-90)." },
-      { question: "Is my financial data stored?", answer: "No. All calculations run locally in your browser. No retirement data is transmitted." },
+      { question: "When using Retirement Calculator, is my financial data stored?", answer: "No. All calculations run locally in your browser. No retirement data is transmitted." },
     ],
   },
   {
@@ -866,7 +866,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "How big a deficit for fat loss?", answer: "300–500 kcal/day → ~0.3–0.5kg/week. A 500 kcal deficit on 2,680 TDEE means eating ≈2,180 kcal. Larger deficits cost muscle and stall faster — slow beats heroic." },
       { question: "Why am I not losing at my target?", answer: "Usual suspects: untracked oils/snacks (~200–400 kcal/day), overestimated activity, water retention masking 2–3 weeks of fat loss. Track everything for 2 weeks before adjusting." },
       { question: "Does exercise or diet matter more?", answer: "Diet dominates — you can't outrun intake (an hour of running ≈ 600 kcal ≈ one burger). Use exercise for health and muscle retention, the calorie target for the scale." },
-      { question: "Is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted or stored." },
+      { question: "When using TDEE Calculator, is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted or stored." },
     ],
   },
   {
@@ -882,7 +882,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Which zone burns the most fat?", answer: "Zone 2 (60–70%) burns the highest fat fraction — but higher zones burn more total calories per minute. For fat loss, total weekly volume in Zones 2–3 beats short Zone 5 bursts." },
       { question: "How accurate is 220-minus-age?", answer: "±10–12 bpm for most people; medications (beta blockers), fitness, and genetics shift it. For precise training, do a field test or lab VO2max — formulas are starting points." },
       { question: "What zone for a beginner runner?", answer: "80% of runs in Zone 2 (conversational pace), 20% harder. Beginners going too hard is the top cause of burnout and injury — slow builds the aerobic base." },
-      { question: "Is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted or stored." },
+      { question: "When using Heart Rate Zone Calculator, is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted or stored." },
     ],
   },
   {
@@ -979,7 +979,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "How is this different from compound interest?", answer: "Simple interest is calculated only on the principal. Compound interest is calculated on principal plus accumulated interest. Simple interest produces lower returns over time." },
       { question: "What time units are supported?", answer: "Years, months, and days. The calculator converts all time inputs to years for consistent calculation." },
       { question: "When is simple interest used?", answer: "Short-term loans, car loans, some personal loans, and educational examples. Most mortgages and long-term investments use compound interest." },
-      { question: "Is my data stored?", answer: "No. All calculations run locally in your browser. No financial data is transmitted." },
+      { question: "When using Simple Interest Calculator, is my data stored?", answer: "No. All calculations run locally in your browser. No financial data is transmitted." },
     ],
   },
   {
@@ -1011,7 +1011,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can I compare monthly vs annual pricing?", answer: "Yes. Enter both monthly and annual per-seat prices to see the savings from annual commitments. Most SaaS vendors offer 15-25% discounts for annual billing." },
       { question: "Does it handle tiered pricing?", answer: "For volume discounts, calculate each tier separately and sum the results. The tool shows the linear cost; apply vendor-specific discount tiers manually." },
       { question: "Can I factor in currency conversion?", answer: "Enter the price in your target currency. The calculator handles the arithmetic; use a separate currency converter for exchange rate conversion if needed." },
-      { question: "Is my data stored?", answer: "No. All calculations run locally in your browser. No pricing or budget data is transmitted." },
+      { question: "When using Seat License Calculator, is my data stored?", answer: "No. All calculations run locally in your browser. No pricing or budget data is transmitted." },
     ],
   },
   {
@@ -1333,7 +1333,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online GraphQL Tester — Test GraphQL queries with variables. Format and preview responses for development. ',
     dependencies: "None",
     faqs: [
-      { question: "What does this tool do?", answer: "Paste a GraphQL query and optional JSON variables, then preview the formatted query and expected response structure. It validates syntax and formats the query for readability." },
+      { question: "When using GraphQL Tester, what does this tool do?", answer: "Paste a GraphQL query and optional JSON variables, then preview the formatted query and expected response structure. It validates syntax and formats the query for readability." },
       { question: "Does it execute queries against a real server?", answer: "No. The tester formats and validates queries locally. It does not make network requests to GraphQL servers. Use it for query preparation and debugging." },
       { question: "Can I test queries with variables?", answer: "Yes. Paste JSON variables alongside your query. The tester parses both, validates variable types against the query, and shows the complete request as it would be sent." },
       { question: "Does it format the response?", answer: "Yes. If you paste a sample response JSON, it formats and validates it, showing the structure with proper indentation for easy inspection." },
@@ -1537,7 +1537,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online HTML Formatter — Format and beautify HTML markup with proper indentation and structure. ',
     dependencies: "None",
     faqs: [
-      { question: "What formatting rules does it apply?", answer: "Proper indentation (configurable 2 or 4 spaces), attribute alignment, closing tag consistency, logical nesting hierarchy, and blank line separation between major sections." },
+      { question: "When using HTML Formatter, what formatting rules does it apply?", answer: "Proper indentation (configurable 2 or 4 spaces), attribute alignment, closing tag consistency, logical nesting hierarchy, and blank line separation between major sections." },
       { question: "Does it handle inline styles and scripts?", answer: "Yes. HTML with inline styles, script tags, and embedded CSS is formatted correctly. The content inside script and style tags is preserved without modification." },
       { question: "Can it format minified HTML?", answer: "Yes. Paste minified or compressed HTML and the formatter will expand it with proper indentation and structure for readability." },
       { question: "Will it change my HTML semantics?", answer: "No. The formatter only adjusts whitespace, indentation, and formatting. It does not add, remove, or reorder any HTML elements or attributes." },
@@ -1554,11 +1554,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online CSS Formatter — Format and beautify CSS stylesheets with proper indentation and organization. ',
     dependencies: "None",
     faqs: [
-      { question: "What formatting rules does it apply?", answer: "Consistent 2 or 4 space indentation, property grouping (layout, visual, typography), one property per line, aligned colons, and logical selector hierarchy for readable stylesheets." },
+      { question: "When using CSS Formatter, what formatting rules does it apply?", answer: "Consistent 2 or 4 space indentation, property grouping (layout, visual, typography), one property per line, aligned colons, and logical selector hierarchy for readable stylesheets." },
       { question: "Can it format minified CSS?", answer: "Yes. Paste minified or compressed CSS and the formatter expands it with proper indentation and structure for readability and maintainability." },
       { question: "Does it handle SCSS/LESS syntax?", answer: "The formatter is optimized for standard CSS. For SCSS or LESS with nesting and variables, use the dedicated SCSS Formatter or CSS to Less Converter tools." },
       { question: "Will it change my CSS logic?", answer: "No. The formatter only adjusts whitespace, indentation, and property ordering. It does not merge, remove, or modify any CSS rules or selectors." },
-      { question: "Is my CSS data stored?", answer: "No. All formatting happens locally in your browser. No CSS data is sent to any server." },
+      { question: "When using CSS Formatter, is my CSS data stored?", answer: "No. All formatting happens locally in your browser. No CSS data is sent to any server." },
     ],
 },
   {
@@ -1611,7 +1611,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Python Formatter — Format and beautify Python code with proper indentation and structure. ',
     dependencies: "None",
     faqs: [
-      { question: "What formatting rules does it apply?", answer: "PEP 8 compliant formatting: 4-space indentation, consistent spacing around operators, proper blank lines between functions/classes, trailing commas, and line length awareness." },
+      { question: "When using Python Formatter, what formatting rules does it apply?", answer: "PEP 8 compliant formatting: 4-space indentation, consistent spacing around operators, proper blank lines between functions/classes, trailing commas, and line length awareness." },
       { question: "Does it handle Python 2 and 3 syntax?", answer: "Yes. The formatter understands both Python 2 and Python 3 syntax, including f-strings, type hints, walrus operators, match statements, and other modern constructs." },
       { question: "Can it format partial code or snippets?", answer: "Yes. You can paste code snippets, functions, or complete modules. The formatter works on whatever valid Python syntax you provide." },
       { question: "Will it change my code logic?", answer: "No. The formatter only adjusts whitespace, indentation, and spacing. It does not rename variables, reorder statements, or modify any code logic." },
@@ -1787,7 +1787,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can it detect data types automatically?", answer: "Yes. The analyzer inspects column values and classifies columns as numeric, text, date, or boolean. This helps determine which columns can be used for calculations vs categories." },
       { question: "Does it show unique values?", answer: "Yes. For each column, the analyzer shows the count of unique values and can list them. This identifies cardinality — whether a column has few categories or many unique entries." },
       { question: "Can I use this to validate CSV before import?", answer: "Yes. Check for empty cells, unexpected data types, and encoding issues before importing into databases, spreadsheets, or analysis tools." },
-      { question: "Is my CSV data stored?", answer: "No. All analysis happens locally in your browser. No CSV data is sent to any server." },
+      { question: "When using CSV Analyzer, is my CSV data stored?", answer: "No. All analysis happens locally in your browser. No CSV data is sent to any server." },
     ],
 },
   {
@@ -1814,7 +1814,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can I expand and collapse branches?", answer: "Yes. Click any object or array node to expand or collapse it. This helps navigate large JSON documents by hiding irrelevant branches." },
       { question: "Can I copy values from the tree?", answer: "Yes. Click on any leaf value to copy it to clipboard. The tree preserves the full path for context." },
       { question: "Does it validate the JSON?", answer: "Yes. If the JSON is malformed, the viewer shows an error with the line number and position of the syntax issue." },
-      { question: "Is my JSON data stored?", answer: "No. All visualization happens locally in your browser. No JSON data is sent to any server." },
+      { question: "When using JSON Tree Viewer, is my JSON data stored?", answer: "No. All visualization happens locally in your browser. No JSON data is sent to any server." },
     ],
 },
   {

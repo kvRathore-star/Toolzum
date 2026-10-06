@@ -356,6 +356,23 @@ When 3+ pages serve one intent with near-identical content:
 4. Pilot BEFORE scaling: 1 cluster (audio converters), measure 2 weeks, then decide.
 5. Log every consolidation here with date + URLs (audit trail beats memory).
 
+### 10.6 FAQ + per-tool content standard (Oct 5 agency pass, test-locked)
+
+- **4–7 FAQs per tool with custom sets** (9 is bloat, 3 is thin): flagship/complex
+  tools earn 6–7, standard tools 4–5. Count follows importance, never template.
+  Locked by `tool-content-standard.test.ts`.
+- **No question shared by 3+ tools** (test-locked). Pairs tolerated, trios fail
+  the build. (Oct 5: eliminated a 46x-shared question class.)
+- **Answers ≥40 chars**, tool-specific mechanics named (FFmpeg WASM, pdf-lib,
+  Canvas — never "it processes fast").
+- **Per-tool SEO checklist** (every touched tool, reviewer initials each):
+  how-to pattern verified correct · description unique + carries the target
+  query · meta unique (any length, never truncated for length) · JSON-LD +
+  OG from generated honest text · worked example present · quota/credit
+  disclosure where gated · PoweredBy engines render.
+- Tools without custom FAQs use category templates (gated by `faq-gate.ts`,
+  Jaccard <0.30) — the 690 follow after the 371 prove out.
+
 ## 11. Fixed tracking sets (same queries every check — no moving goalposts)
 
 ### 11.1 Ranking watch (20 queries — GSC UI weekly + monthly CSV)

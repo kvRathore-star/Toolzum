@@ -51,7 +51,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Is there quality loss?", answer: "Both AAC and OGG are lossy formats. Converting between them introduces generation loss. At equivalent bitrates, OGG and AAC have similar quality. Higher OGG bitrates compensate for the re-encoding." },
       { question: "What bitrate is recommended?", answer: "192-256 kbps OGG Vorbis provides quality comparable to 128-192 kbps AAC. For speech, 96-128 kbps is sufficient." },
       { question: "What players support OGG?", answer: "VLC, foobar2000, Chrome, Firefox, and most open-source media players. Windows Media Player and iTunes do not natively support OGG." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded." },
+      { question: "Is AAC to OGG conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded." },
     ],
   },
   {
@@ -65,10 +65,10 @@ export const entries_chunk_2: ToolMetadata[] = [
     showInCategory: false,
     faqs: [
       { question: "Why convert AAC to WAV?", answer: "WAV is uncompressed and universally supported by audio editing software (Audacity, Pro Tools, Logic Pro). Converting AAC to WAV provides lossless output for professional editing and mastering workflows." },
-      { question: "Will the audio quality improve?", answer: "Converting from lossy AAC to lossless WAV does not restore lost quality. The WAV file will be larger but fidelity is limited by the original AAC compression. Useful for editing, not quality enhancement." },
+      { question: "When using AAC to WAV, will the audio quality improve?", answer: "Converting from lossy AAC to lossless WAV does not restore lost quality. The WAV file will be larger but fidelity is limited by the original AAC compression. Useful for editing, not quality enhancement." },
       { question: "How large will the WAV file be?", answer: "WAV is uncompressed, so expect 5-10x the AAC file size. A 5MB AAC may become 30-50MB as WAV. This is normal for lossless audio." },
       { question: "What sample rates are supported?", answer: "The converter preserves the original sample rate and bit depth. AAC at 44.1kHz will output WAV at 44.1kHz with 16-bit or 32-bit depth." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
+      { question: "Is AAC to WAV conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
     ],
   },
   {
@@ -137,7 +137,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "When would I need raw AAC instead of M4A?", answer: "Some audio players, DAWs, and embedded systems require raw .aac files. Streaming services and certain hardware players may not recognize the M4A container but play AAC directly." },
       { question: "Does conversion affect audio quality?", answer: "No quality loss occurs. Both M4A and AAC use the same audio encoding. The conversion only changes the container format, not the audio data itself." },
       { question: "What sample rates are supported?", answer: "The converter preserves the original sample rate. Common values: 44.1kHz (CD quality), 48kHz (standard), 96kHz (high-res). The output matches the source properties." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
+      { question: "Is M4A to AAC conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
     ],
   },
   {
@@ -191,10 +191,10 @@ export const entries_chunk_2: ToolMetadata[] = [
     showInCategory: false,
     faqs: [
       { question: "Why convert MP3 to AIFF?", answer: "AIFF is uncompressed and supported by professional DAWs (Logic Pro, Pro Tools). Converting MP3 to AIFF provides lossless output for editing workflows, though quality is limited by the original MP3 compression." },
-      { question: "Will the audio quality improve?", answer: "No. Converting from lossy MP3 to lossless AIFF does not restore lost data. The AIFF file will be larger but fidelity is limited by the MP3 source." },
+      { question: "When using MP3 to AIFF, will the audio quality improve?", answer: "No. Converting from lossy MP3 to lossless AIFF does not restore lost data. The AIFF file will be larger but fidelity is limited by the MP3 source." },
       { question: "How large will the AIFF file be?", answer: "AIFF is uncompressed, so expect 5-10x the MP3 file size. A 5MB MP3 may become 30-50MB as AIFF." },
       { question: "What sample rates are preserved?", answer: "The converter preserves the original sample rate. Common MP3 rates: 44.1kHz, 48kHz. The AIFF output matches the source properties." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded." },
+      { question: "Is MP3 to AIFF conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded." },
     ],
   },
   {
@@ -440,7 +440,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Why convert APNG to GIF?", answer: "GIF is universally supported by all browsers, messaging apps, and platforms. Converting APNG to GIF ensures your animation plays everywhere." },
       { question: "Will quality decrease?", answer: "GIF is limited to 256 colors and 1-bit transparency. APNG's full-color, full-transparency animation will lose quality. The converter optimizes the palette to minimize visible loss." },
       { question: "Does it preserve animation speed?", answer: "Yes. Frame timing from the APNG source is preserved in the GIF output. The animation plays at the same speed as the original." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg. No files are uploaded." },
+      { question: "Is APNG to GIF conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg. No files are uploaded." },
     ],
   },
   {
@@ -477,7 +477,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can it read multiple QR codes from one image?", answer: "The tool decodes the first QR code it finds. For images with multiple QR codes, crop to the specific code you want to read before uploading." },
       { question: "What data can a QR code contain?", answer: "Text, URLs, phone numbers, email addresses, WiFi credentials, vCards, and other encoded data. The tool displays whatever text was encoded in the QR code." },
       { question: "Does it work with damaged QR codes?", answer: "The jsQR library has built-in error correction and can often read partially damaged or obscured QR codes, especially those encoded with high error correction level." },
-      { question: "Is my image uploaded to a server?", answer: "No. QR code decoding happens entirely in your browser using the jsQR library. Your image never leaves your device." },
+      { question: "When using QR Code Reader, is my image uploaded to a server?", answer: "No. QR code decoding happens entirely in your browser using the jsQR library. Your image never leaves your device." },
     ],
 },
   {
@@ -494,7 +494,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What are the themed variants for?", answer: "Legal, startup, coffee, and pirate themes match mockup context so demos feel intentional — a coffee-shop site mock reads better with coffee-themed filler than Cicero Latin." },
       { question: "How much filler do I need?", answer: "Match the real content's volume: 3 paragraphs where 3 will live. One paragraph under-tests the layout; ten pages of lorem nobody reads wastes review attention." },
       { question: "Never ship lorem to production — right?", answer: "Right. Search engines index it, screen readers read it aloud, and clients screenshot it. Grep your build for 'lorem' before every launch." },
-      { question: "Is anything uploaded?", answer: "No. Generation runs entirely in your browser. Nothing leaves your device." },
+      { question: "When using Lorem Ipsum Generator, is anything uploaded?", answer: "No. Generation runs entirely in your browser. Nothing leaves your device." },
     ],
   },
   {
@@ -595,7 +595,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What YAML features are supported?", answer: "Objects, arrays, strings, numbers, booleans, null, anchors (&), aliases (*), multi-line strings (| and >), and comments. The converter preserves all YAML-specific features." },
       { question: "Can I convert back and forth?", answer: "Yes. The tool is bidirectional. Paste YAML to get JSON, or paste JSON to get YAML. Real-time preview shows the output as you type." },
       { question: "Does it handle large files?", answer: "Files up to 1MB convert instantly. Larger files may slow the browser. For very large config files, consider CLI tools." },
-      { question: "Is my data stored?", answer: "No. All conversion happens locally in your browser. No data is sent to any server." },
+      { question: "When using YAML ↔ JSON Converter, is my data stored?", answer: "No. All conversion happens locally in your browser. No data is sent to any server." },
     ],
   },
   {
@@ -643,7 +643,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Which bitrate should I pick?", answer: "320 kbps for music libraries, 192 kbps for general sharing (transparent to most ears), 128 kbps for speech/podcasts. Below 128, cymbals and stereo imaging audibly degrade." },
       { question: "Will it play everywhere?", answer: "Yes — MP3 is the universal audio format: every phone, car, browser, and speaker supports it. That compatibility is the entire reason to convert from WAV." },
       { question: "Does converting back restore quality?", answer: "No. MP3→WAV inflates file size without recovering discarded detail. Always keep the original WAV if you might need full quality later." },
-      { question: "Are my files uploaded?", answer: "No. Conversion runs entirely in your browser via FFmpeg.wasm. Files never leave your device." },
+      { question: "When using WAV to MP3, are my files uploaded?", answer: "No. Conversion runs entirely in your browser via FFmpeg.wasm. Files never leave your device." },
     ],
   },
   {
@@ -660,7 +660,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I hear the difference?", answer: "On good headphones with quiet recordings, sometimes (reverb tails, cymbals). On Bluetooth earbuds or car speakers, 192+ kbps MP3 is indistinguishable. Convert honestly to your listening chain." },
       { question: "What about tags and artwork?", answer: "Title, artist, album, and cover art carry over automatically. Check compilations afterward — Various Artists albums are the usual metadata casualty." },
       { question: "MP3 or AAC/Opus instead?", answer: "MP3 for universal compatibility; AAC for Apple ecosystems; Opus for voice/low-bitrate streaming. This tool targets MP3 because nothing refuses to play it." },
-      { question: "Are my files uploaded?", answer: "No. Conversion runs entirely in your browser via FFmpeg.wasm. Files never leave your device." },
+      { question: "When using FLAC to MP3, are my files uploaded?", answer: "No. Conversion runs entirely in your browser via FFmpeg.wasm. Files never leave your device." },
     ],
   },
   {
@@ -724,7 +724,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does WMA support multiple channels?", answer: "Yes. WMA supports mono, stereo, and surround sound. The converter preserves the original channel configuration from the OGG source." },
       { question: "Will there be quality loss?", answer: "WMA supports both lossy and lossless modes. Lossy WMA at high bitrates produces quality comparable to OGG. For lossless output, choose WMA Lossless if the tool supports it." },
       { question: "What is the typical file size comparison?", answer: "WMA and OGG have similar compression efficiency. File sizes are generally comparable at equivalent quality settings, though WMA may be slightly larger at low bitrates." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
+      { question: "Is OGG to WMA conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
     ],
   },
   {
@@ -748,10 +748,10 @@ export const entries_chunk_2: ToolMetadata[] = [
     showInCategory: false,
     faqs: [
       { question: "Why convert OGG to AIFF?", answer: "AIFF is an uncompressed audio format widely supported by professional audio software, DAWs (Logic Pro, Pro Tools), and Apple devices. Converting from OGG provides lossless quality for editing and mastering." },
-      { question: "Will the audio quality improve?", answer: "Converting from lossy OGG to lossless AIFF does not restore lost quality. The AIFF file will be larger but the audio fidelity is limited by the original OGG compression. It is useful for editing workflows, not quality enhancement." },
+      { question: "When using OGG to AIFF, will the audio quality improve?", answer: "Converting from lossy OGG to lossless AIFF does not restore lost quality. The AIFF file will be larger but the audio fidelity is limited by the original OGG compression. It is useful for editing workflows, not quality enhancement." },
       { question: "What sample rates and bit depths are supported?", answer: "The converter preserves the original sample rate and bit depth. Common values: 44.1kHz/16-bit (CD quality), 48kHz/24-bit (professional). The output matches the source properties." },
       { question: "How large will the AIFF file be?", answer: "AIFF is uncompressed, so expect roughly 5-10x the OGG file size. A 5MB OGG may become 30-50MB as AIFF. This is normal for lossless audio formats." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
+      { question: "Is OGG to AIFF conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
     ],
   },
   {
@@ -981,7 +981,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     faqs: [
       { question: "Why convert Opus to AAC?", answer: "AAC is the universal standard for music downloads, streaming platforms, and Apple devices. If you need to submit audio to a service that requires AAC, this conversion gets you there." },
       { question: "How does AAC quality compare to Opus?", answer: "At the same bitrate, Opus is generally more efficient than AAC. At 256kbps, most listeners cannot tell the difference. For critical listening, keep your Opus originals." },
-      { question: "Will the file size increase?", answer: "AAC typically needs a slightly higher bitrate than Opus to achieve equivalent quality. A 128kbps Opus file might become a 160-192kbps AAC file of similar perceptual quality." },
+      { question: "When using Opus to AAC, will the file size increase?", answer: "AAC typically needs a slightly higher bitrate than Opus to achieve equivalent quality. A 128kbps Opus file might become a 160-192kbps AAC file of similar perceptual quality." },
       { question: "Does the conversion preserve metadata?", answer: "Standard metadata fields like title, artist, album, and track number transfer from Opus to AAC. Custom or non-standard tags may not survive the conversion." },
       { question: "Can I use the AAC output on iPhone?", answer: "Yes. AAC is Apple's preferred audio format. The converted file plays natively in Apple Music, GarageBand, and any iOS audio app without additional conversion." },
     ],
@@ -1100,7 +1100,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What bitrate should I use?", answer: "64-128 kbps is recommended for music. 32-64 kbps works well for speech. Higher bitrates preserve more detail but produce larger files." },
       { question: "Does Opus support all sample rates?", answer: "Opus supports 8kHz to 48kHz. AIFF files at higher sample rates (96kHz, 192kHz) are resampled to 48kHz maximum during conversion." },
       { question: "What browsers support Opus?", answer: "All modern browsers support Opus natively in WebM containers. For standalone .opus files, most media players (VLC, foobar2000) support them." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded." },
+      { question: "Is AIFF to OPUS conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded." },
     ],
   },
   {
@@ -1117,7 +1117,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What delimiters are supported?", answer: "Space-separated (48 65 6C 6C 6F), colon-separated (48:65:6C:6C:6F), no delimiter (48656C6C6F), and comma-separated. Choose the format that matches your input." },
       { question: "Can I convert in both directions?", answer: "Yes. Paste hex to get ASCII, or paste ASCII text to get its hex representation. The conversion updates in real time as you type." },
       { question: "What happens with non-printable bytes?", answer: "Bytes that don't correspond to printable ASCII characters are shown as dots (.) in the ASCII output. This helps identify binary data embedded in hex strings." },
-      { question: "Is my data uploaded?", answer: "No. All conversion happens in your browser using simple byte manipulation. No data is transmitted to any server." },
+      { question: "When using Hex ↔ ASCII Converter, is my data uploaded?", answer: "No. All conversion happens in your browser using simple byte manipulation. No data is transmitted to any server." },
     ],
 },
   {
@@ -1133,7 +1133,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "When should I encode vs decode?", answer: "Encode when building URLs programmatically — query strings, form data, redirect URLs. Decode when reading encoded URLs you received from APIs or webhooks." },
       { question: "Does it handle UTF-8 characters?", answer: "Yes. Non-ASCII characters like emojis, accented letters, and CJK characters are properly encoded as UTF-8 byte sequences (e.g., é becomes %C3%A9)." },
       { question: "Can I encode just the query string, not the whole URL?", answer: "Yes. Paste a full URL or just the query parameters. The tool can encode/decode the entire string or just specific parts." },
-      { question: "Is the conversion done locally?", answer: "Yes. All encoding and decoding happens in your browser. No data is sent to any server." },
+      { question: "When using URL Encoder / Decoder, is the conversion done locally?", answer: "Yes. All encoding and decoding happens in your browser. No data is sent to any server." },
     ],
 },
   {
@@ -1192,7 +1192,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it handle case-sensitive sorting?", answer: "By default, sorting is case-insensitive. Some implementations offer case-sensitive mode where uppercase letters sort before lowercase." },
       { question: "How does deduplication work?", answer: "Exact string matching removes duplicate lines. The first occurrence of each unique line is kept, subsequent duplicates are removed." },
       { question: "Can I sort numbers in text lines?", answer: "Numeric sorting is available for lines that contain numbers. Alphabetical sorting treats numbers as text (e.g., '10' sorts before '2')." },
-      { question: "Is my data stored?", answer: "No. All processing happens locally in your browser. No text data is transmitted." },
+      { question: "When using Line Sorter & Deduplicator, is my data stored?", answer: "No. All processing happens locally in your browser. No text data is transmitted." },
     ],
 },
   {
@@ -1209,7 +1209,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I parse URLs with query strings?", answer: "Yes. Query parameters are extracted and displayed as key-value pairs. Multiple parameters, encoded values, and complex query strings are all handled correctly." },
       { question: "Does it handle encoded characters?", answer: "Yes. Percent-encoded characters (%20, %E2%80%A6) are decoded and displayed in their readable form. The original encoded form is also shown." },
       { question: "Can I copy individual components?", answer: "Yes. Each parsed component has a copy-to-clipboard button for easy reuse. Copy the full URL or just the hostname, path, or query string." },
-      { question: "Is the parsing done locally?", answer: "Yes. All parsing happens in your browser using the URL API. No URL data is sent to any server." },
+      { question: "When using URL Parser, is the parsing done locally?", answer: "Yes. All parsing happens in your browser using the URL API. No URL data is sent to any server." },
     ],
   },
   {
@@ -1242,7 +1242,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "When should I encode vs decode?", answer: "Encode when building URLs programmatically — query strings, form data, redirect URLs. Decode when reading encoded URLs you received from APIs or webhooks." },
       { question: "Does it handle UTF-8 characters?", answer: "Yes. Non-ASCII characters like emojis, accented letters, and CJK characters are properly encoded as UTF-8 byte sequences (e.g., é becomes %C3%A9)." },
       { question: "Can I encode just the query string, not the whole URL?", answer: "Yes. Paste a full URL or just the query parameters. The tool can encode/decode the entire string or just specific parts." },
-      { question: "Is the conversion done locally?", answer: "Yes. All encoding and decoding happens in your browser. No data is sent to any server." },
+      { question: "When using Unix Time Converter, is the conversion done locally?", answer: "Yes. All encoding and decoding happens in your browser. No data is sent to any server." },
     ],
 },
   {
@@ -1276,7 +1276,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it handle self-closing tags?", answer: "Yes. HTML self-closing tags like <img>, <br>, and <input> are converted to JSX-compatible self-closing syntax with explicit closing slashes." },
       { question: "Are className and htmlFor converted?", answer: "Yes. HTML's 'class' attribute becomes 'className', 'for' becomes 'htmlFor', and other HTML-specific attributes are converted to their JSX equivalents." },
       { question: "Can I convert inline styles?", answer: "Yes. HTML inline style strings (style='color: red') are converted to JSX style objects ({ color: 'red' }) with proper camelCase property names." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion happens in your browser. No HTML data is sent to any server." },
+      { question: "Is HTML to JSX conversion done locally?", answer: "Yes. All conversion happens in your browser. No HTML data is sent to any server." },
     ],
   },
   {
@@ -1293,7 +1293,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What's the difference between serialize and json_encode?", answer: "PHP serialize creates a PHP-specific string format that preserves types (objects, arrays). json_encode creates JSON format for cross-language compatibility." },
       { question: "Can I convert nested PHP arrays?", answer: "Yes. Deeply nested arrays and associative arrays are handled correctly. The tool preserves the complete structure during conversion." },
       { question: "Does it handle PHP objects?", answer: "For JSON conversion, PHP objects are converted to JSON objects. For serialization, object notation (O:4:\"name\":...) is preserved in the serialized string." },
-      { question: "Is my data uploaded?", answer: "No. All conversions happen locally in your browser. No PHP data is sent to any server." },
+      { question: "When using PHP Tools, is my data uploaded?", answer: "No. All conversions happen locally in your browser. No PHP data is sent to any server." },
     ],
   },
   {
@@ -1310,7 +1310,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "When should I use SVG as CSS data URI?", answer: "For small icons, logos, and decorative SVGs embedded in stylesheets. It reduces server requests and allows CSS-based theming (color changes via currentColor). Not ideal for large or complex SVGs." },
       { question: "Can I still style the SVG with CSS?", answer: "Limited. Inline SVG in HTML is fully styleable. Data URI SVGs in CSS backgrounds cannot be styled with CSS selectors. Use currentColor for basic color theming." },
       { question: "Does encoding affect SVG quality?", answer: "No. Base64 or URL-encoded SVGs in CSS are rendered identically to external SVG files. The encoding is transparent to the browser." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversion runs locally in your browser. No SVG data is sent to any server." },
+      { question: "Is SVG to CSS conversion done locally?", answer: "Yes. All conversion runs locally in your browser. No SVG data is sent to any server." },
     ],
 },
   {
@@ -1327,7 +1327,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "How does it handle nested JSON?", answer: "Nested objects generate separate type/class definitions for each level. Arrays of objects create array-typed fields with the correct element type." },
       { question: "Does it infer optional fields?", answer: "Yes. Fields that can be null or missing in the JSON sample are marked as optional (nullable) in the generated types." },
       { question: "Can I customize the output?", answer: "Some generators offer options like naming conventions (camelCase, PascalCase), whether to use interfaces vs types, and whether to include JSDoc comments." },
-      { question: "Is my JSON data stored?", answer: "No. All generation happens locally in your browser. No JSON data is sent to any server." },
+      { question: "When using JSON to Code Generator, is my JSON data stored?", answer: "No. All generation happens locally in your browser. No JSON data is sent to any server." },
     ],
   },
   {
@@ -1378,7 +1378,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What are the common presets?", answer: "Ready-to-use presets for hourly, daily, weekly, monthly, and yearly schedules. Common intervals like every 5 minutes or every Monday are included." },
       { question: "Does it explain each field?", answer: "Yes. Each cron field is parsed and displayed with its meaning. You can see exactly what '0 2 * * 1-5' means (weekdays at 2 AM)." },
       { question: "Can I validate cron expressions?", answer: "Yes. Invalid expressions are flagged with error messages. The tool checks for valid ranges, correct field count, and proper syntax." },
-      { question: "Is the parsing done locally?", answer: "Yes. All parsing happens in your browser. No cron data is sent to any server." },
+      { question: "When using Cron Expression Parser, is the parsing done locally?", answer: "Yes. All parsing happens in your browser. No cron data is sent to any server." },
     ],
   },
   {
@@ -1487,7 +1487,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "How does it handle special characters?", answer: "Special characters, accented letters, and symbols are removed or transliterated. Unicode characters like 'é' become 'e', and symbols are stripped entirely." },
       { question: "Can I convert slugs back to text?", answer: "This tool converts text to slugs, not the reverse. For slug-to-text conversion, use the URL Parser or String Inspector tools." },
       { question: "Is the conversion case-sensitive?", answer: "By default, slugs are lowercased. You can optionally preserve case if your use case requires it (e.g., for anchor IDs)." },
-      { question: "Is my text stored or transmitted?", answer: "No. All slug generation happens locally in your browser. No text data is sent to any server." },
+      { question: "When using Slugify, is my text stored or transmitted?", answer: "No. All slug generation happens locally in your browser. No text data is sent to any server." },
     ],
 },
   {
@@ -1504,7 +1504,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "How is ULID different from UUID?", answer: "ULIDs are lexicographically sortable by creation time. UUIDs (v4) are random and not sortable. ULIDs are shorter (26 chars vs 36) and more database-friendly." },
       { question: "Can I extract the timestamp from a ULID?", answer: "Yes. The first 10 characters encode the Unix timestamp in milliseconds. You can decode them to find the exact creation time of any ULID." },
       { question: "How many ULIDs can I generate?", answer: "Generate 1 to 1000 ULIDs at once. Each ULID is unique even at millisecond granularity due to the 80-bit random component." },
-      { question: "Is the generation done locally?", answer: "Yes. All generation runs in your browser. No data is transmitted." },
+      { question: "Is generation done locally in ULID Generator?", answer: "Yes. All generation runs in your browser. No data is transmitted." },
     ],
 },
   {
@@ -1520,8 +1520,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What is a numeronym?", answer: "A numeronym replaces some letters in a word with a number representing the count of skipped letters. For example, 'accessibility' becomes 'a11y' (a + 11 letters + y). 'Internationalization' becomes 'i18n'." },
       { question: "Can I generate both numeronyms and acronyms?", answer: "Yes. The tool generates numeronyms (letter-number-letter format) and standard acronyms (first letters of each word). Toggle between modes as needed." },
       { question: "How are numeronyms calculated?", answer: "The tool counts the letters between the first and last character. If there are 3+ letters in between, it replaces them with the count. For shorter words, it returns the original or an acronym." },
-      { question: "What are common use cases?", answer: "Numeronyms are widely used in tech: a11y (accessibility), i18n (internationalization), l10n (localization), n11n (normalization). They save space in code, URLs, and variable names." },
-      { question: "Is my text stored or transmitted?", answer: "No. All generation happens locally in your browser. No text data is sent to any server." },
+      { question: "When using Numeronym Generator, what are common use cases?", answer: "Numeronyms are widely used in tech: a11y (accessibility), i18n (internationalization), l10n (localization), n11n (normalization). They save space in code, URLs, and variable names." },
+      { question: "When using Numeronym Generator, is my text stored or transmitted?", answer: "No. All generation happens locally in your browser. No text data is sent to any server." },
     ],
 },
   {
@@ -1592,7 +1592,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What text length works best?", answer: "Short text (1-15 characters) produces the best results. Longer text may wrap or become too small to read in ASCII art format." },
       { question: "Can I copy the output?", answer: "Yes. The generated ASCII art can be copied to clipboard as plain text for use in terminal outputs, text files, code comments, or chat messages." },
       { question: "Does it support special characters?", answer: "Basic Latin letters and numbers work best. Special characters, emojis, and non-Latin scripts may not render correctly in ASCII art styles." },
-      { question: "Is the generation done locally?", answer: "Yes. All generation runs in your browser. No text data is sent to any server." },
+      { question: "Is generation done locally in ASCII Art Generator?", answer: "Yes. All generation runs in your browser. No text data is sent to any server." },
     ],
 },
   {
@@ -1664,7 +1664,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online PDF Background Color \u2014 Add a subtle color tint to all pages in a PDF document. ',
     dependencies: "pdf-lib",
     faqs: [
-      { question: "What does this tool do?", answer: "Adds a colored background layer to every page in a PDF. Choose any color and the tool inserts a full-page colored rectangle behind the existing content." },
+      { question: "When using PDF Background Color, what does this tool do?", answer: "Adds a colored background layer to every page in a PDF. Choose any color and the tool inserts a full-page colored rectangle behind the existing content." },
       { question: "Does it cover the text?", answer: "No. The background color is placed behind the existing content. Text and images remain visible on top of the colored background." },
       { question: "Can I apply different colors to different pages?", answer: "The basic tool applies one color to all pages. For per-page colors, process pages individually or use a PDF editor." },
       { question: "What file size impact does adding color have?", answer: "Minimal. The color layer adds very little data. File size may increase by 1-5% depending on page count." },
@@ -1687,6 +1687,8 @@ export const entries_chunk_2: ToolMetadata[] = [
     faqs: [
       { question: "What page sizes are supported?", answer: "The blank pages inherit the size of the adjacent page by default. You can also choose A4, Letter, or custom dimensions." },
       { question: "Can I add blank pages between specific pages?", answer: "Yes. Enter the page number after which you want to insert blank pages. For example, entering '3' inserts blank pages after page 3." },
+      { question: "Can inserted pages differ in size from the original?", answer: "Yes — choose any page size per insert, useful for adding A4 separator sheets into a Letter document." },
+      { question: "Does inserting shift later pages?", answer: "Yes — everything after the insert point moves down, so page numbers and the table of contents update accordingly." },
     ],
   },
   {
@@ -1859,7 +1861,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "When do I use code_verifier vs code_challenge?", answer: "Generate a code_verifier (random string) and its code_challenge (SHA-256 hash). Send the challenge in the authorization request, then send the verifier during token exchange." },
       { question: "Does it support S256 only?", answer: "Yes. S256 (SHA-256) is the only supported method. It's the recommended and most secure option per the PKCE RFC specification." },
       { question: "Can I verify an existing pair?", answer: "Yes. Paste a code_verifier and code_challenge to verify they match. The tool recalculates the challenge from the verifier and compares them." },
-      { question: "Is the generation done locally?", answer: "Yes. All PKCE generation and verification happens in your browser. No data is transmitted to any server." },
+      { question: "Is generation done locally in PKCE Verifier?", answer: "Yes. All PKCE generation and verification happens in your browser. No data is transmitted to any server." },
     ],
   },
   {
@@ -1997,7 +1999,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "When would I use Base32 vs Base64?", answer: "Use Base32 when you need human-readable encoding (TOTP secrets, QR codes) or systems that only support uppercase letters. Base64 is more compact for general use." },
       { question: "Does it handle UTF-8?", answer: "Yes. UTF-8 text is properly encoded to Base32 and decoded back to the original text, preserving all characters including non-ASCII." },
       { question: "Can I decode Base32 to text?", answer: "Yes. Paste a Base32 string and the tool decodes it to the original text. The tool handles both standard and padded Base32 formats." },
-      { question: "Is the conversion done locally?", answer: "Yes. All encoding and decoding happens in your browser. No data is transmitted to any server." },
+      { question: "When using Base32 Encoder / Decoder, is the conversion done locally?", answer: "Yes. All encoding and decoding happens in your browser. No data is transmitted to any server." },
     ],
   },
   {
@@ -2014,7 +2016,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it auto-detect Base64?", answer: "Yes. Paste any Base64 string and the tool attempts to decode it. If the result is valid JSON, it's automatically pretty-printed." },
       { question: "Can I paste raw JSON?", answer: "Yes. You can paste either Base64-encoded JSON or raw JSON. Raw JSON is directly pretty-printed without Base64 decoding." },
       { question: "Does it pretty-print nested objects?", answer: "Yes. Deeply nested JSON objects and arrays are formatted with proper indentation (2 spaces) and syntax highlighting for easy reading." },
-      { question: "Is my data uploaded?", answer: "No. All decoding and formatting happens locally in your browser. No data is transmitted to any server." },
+      { question: "When using Base64 to JSON Decoder, is my data uploaded?", answer: "No. All decoding and formatting happens locally in your browser. No data is transmitted to any server." },
     ],
   },
   {
@@ -2031,7 +2033,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I convert text to hex?", answer: "Yes. The tool converts in both directions. Enter text to see its hex representation, or enter hex to see the decoded text." },
       { question: "Does it handle UTF-8?", answer: "Yes. Multi-byte UTF-8 characters (emojis, accented letters, CJK) are properly converted to their hex byte sequences and back." },
       { question: "What about non-printable bytes?", answer: "Non-printable bytes are displayed as their hex values with special indicators. Control characters (0x00-0x1F) are shown but not rendered as text." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversions happen in your browser. No data is transmitted to any server." },
+      { question: "When using Hex to Text Converter, is the conversion done locally?", answer: "Yes. All conversions happen in your browser. No data is transmitted to any server." },
     ],
   },
   {
@@ -2058,7 +2060,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it detect encoding issues?", answer: "Yes. The tool identifies characters that may cause encoding problems, including replacement characters (U+FFFD), control characters, and ambiguous encoding." },
       { question: "Can I see Unicode code points?", answer: "Yes. Every character shows its full Unicode code point (U+XXXX), name, and category (letter, number, symbol, etc.)." },
       { question: "Does it identify non-ASCII characters?", answer: "Yes. ASCII (0x00-0x7F) and non-ASCII characters are clearly labeled. Non-ASCII characters are highlighted for easy identification." },
-      { question: "Is my text uploaded?", answer: "No. All analysis happens locally in your browser. No text data is transmitted to any server." },
+      { question: "When using Character Encoding Converter, is my text uploaded?", answer: "No. All analysis happens locally in your browser. No text data is transmitted to any server." },
     ],
   },
   {
@@ -2071,11 +2073,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Unicode Converter \u2014 Get code points, JS escapes, and HTML entities. ',
     dependencies: "None",
     faqs: [
-      { question: "What output formats are supported?", answer: "Unicode code points (U+XXXX), JavaScript escape sequences (backslash uXXXX, backslash u{XXXXX}), HTML entities (&#xXXXX;), and decimal values." },
+      { question: "When using Unicode Converter, what output formats are supported?", answer: "Unicode code points (U+XXXX), JavaScript escape sequences (backslash uXXXX, backslash u{XXXXX}), HTML entities (&#xXXXX;), and decimal values." },
       { question: "Does it handle emojis?", answer: "Yes. Emojis (including multi-codepoint sequences) are converted to their proper Unicode representations. Both simple and compound emojis work." },
       { question: "Can I convert back from code points?", answer: "Yes. Paste code points (U+XXXX format), JS escapes, or HTML entities and convert them back to readable text." },
       { question: "Does it support all Unicode planes?", answer: "Yes. All 17 Unicode planes are supported, including Basic Multilingual Plane (BMP), Supplementary Multilingual Plane (SMP), and others." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversions happen in your browser. No data is transmitted to any server." },
+      { question: "When using Unicode Converter, is the conversion done locally?", answer: "Yes. All conversions happen in your browser. No data is transmitted to any server." },
     ],
   },
   {
@@ -2102,7 +2104,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I convert in both directions?", answer: "Yes. PX to REM and REM to PX conversion are both supported. Enter values in either field and the other updates instantly." },
       { question: "Why use REM instead of PX?", answer: "REM is relative to the root font-size, making designs scalable and accessible. Users who change their browser font-size will see your layout adapt." },
       { question: "Does it handle negative values and decimals?", answer: "Yes. Both positive and negative values, as well as decimal PX and REM values (e.g., 0.75rem, 12.5px), are converted accurately." },
-      { question: "Is the conversion done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
+      { question: "When using PX to REM Converter, is the conversion done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
     ],
 },
   {
@@ -2136,7 +2138,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What is the difference between hp and bhp?", answer: "Horsepower (hp) is mechanical power. Brake horsepower (bhp) is the power at the engine's output shaft before drivetrain losses. bhp is slightly lower than hp in most contexts." },
       { question: "When would I need BTU/hr conversion?", answer: "BTU/hr is used for HVAC systems, heaters, and cooling units. Converting kW to BTU/hr helps size heating/cooling equipment for rooms and buildings." },
       { question: "Are the conversion factors accurate?", answer: "Yes. The converter uses standard SI conversion factors: 1 kW = 1.341 hp, 1 hp = 745.7 W, 1 kW = 3412 BTU/hr." },
-      { question: "Is the conversion done locally?", answer: "Yes. All conversions run in your browser. No data is transmitted." },
+      { question: "When using Power Converter, is the conversion done locally?", answer: "Yes. All conversions run in your browser. No data is transmitted." },
     ],
 },
   {
@@ -2153,7 +2155,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "When would I use each unit?", answer: "kPa: SI standard, meteorology. psi: tire pressure, US hydraulics. bar: industrial, European. atm: chemistry. Torr: vacuum systems. mbar: weather." },
       { question: "What are the conversion factors?", answer: "1 atm = 101.325 kPa = 14.696 psi = 1.01325 bar = 760 Torr = 1013.25 mbar. These are exact SI definitions." },
       { question: "Can I convert gauge pressure?", answer: "The converter uses absolute pressure by default. For gauge pressure, add atmospheric pressure (101.325 kPa) before converting." },
-      { question: "Is the conversion done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
+      { question: "When using Pressure Converter, is the conversion done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
     ],
 },
   {
@@ -2188,7 +2190,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I target specific devices?", answer: "Yes. Add device-type conditions: screen, print, handheld. Combine with orientation (portrait/landscape) and hover capability (hover: none/hover)." },
       { question: "What output format is generated?", answer: "Standard CSS @media rules with your specified conditions. Copy the output directly into your stylesheet." },
       { question: "Does it support modern media features?", answer: "Supports prefers-color-scheme, prefers-reduced-motion, aspect-ratio, and other Level 4 media features for responsive design." },
-      { question: "Is my CSS data stored?", answer: "No. All generation happens locally in your browser. No CSS data is transmitted." },
+      { question: "When using Media Query Generator, is my CSS data stored?", answer: "No. All generation happens locally in your browser. No CSS data is transmitted." },
     ],
 },
   {

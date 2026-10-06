@@ -45,7 +45,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "What happens when the timer reaches zero?", answer: "An alert sound plays and the timer stops. The visual progress bar reaches 100% and the display shows 00:00:00." },
       { question: "Can I pause and resume?", answer: "Yes. Start, pause, resume, and reset controls are available. The timer remembers the remaining time when paused." },
       { question: "Does it work in the background?", answer: "The timer continues running if you switch browser tabs. However, some browsers may throttle JavaScript in background tabs, which could cause slight timing drift." },
-      { question: "Is my data stored?", answer: "No. The timer runs entirely in your browser. No data is transmitted or stored." },
+      { question: "When using Timer, is my data stored?", answer: "No. The timer runs entirely in your browser. No data is transmitted or stored." },
     ],
   },
   {
@@ -62,7 +62,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "How do laps work?", answer: "Hit Lap anytime: the lap time and running total both record into the table. Export or copy the table for training logs and analysis." },
       { question: "Does it run in the background?", answer: "Yes — elapsed time derives from the wall clock, so switching tabs doesn't lose time. Display updates may pause in background tabs; the final reading stays correct." },
       { question: "Stopwatch vs timer — which do I need?", answer: "Stopwatch counts up from zero (measuring how long something took); timer counts down to zero (alerting when time is up). This page is the former." },
-      { question: "Is anything uploaded?", answer: "No. Everything runs locally in your browser. Nothing leaves your device." },
+      { question: "When using Stopwatch, is anything uploaded?", answer: "No. Everything runs locally in your browser. Nothing leaves your device." },
     ],
 },
   {
@@ -79,7 +79,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Does it handle timezones?", answer: "Yes — set the event's timezone explicitly so a New York launch shows the right remaining time in Mumbai. Without this, countdowns drift by the UTC offset." },
       { question: "Will it keep running if I close the tab?", answer: "The target timestamp persists; reopening resumes the correct remaining time. It is a clock reading, not an accumulated timer, so nothing is lost." },
       { question: "Can I share the countdown?", answer: "Yes — the event is encoded in the shareable link, so recipients see the same countdown live on their own devices." },
-      { question: "Is anything uploaded?", answer: "No. Everything runs locally in your browser. Nothing leaves your device." },
+      { question: "When using Countdown Timer, is anything uploaded?", answer: "No. Everything runs locally in your browser. Nothing leaves your device." },
     ],
 },
   {
@@ -96,7 +96,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Tabata vs custom intervals?", answer: "Tabata is fixed 20s/10s × 8 (use the dedicated Tabata timer). Custom intervals suit circuits, EMOM, and pyramid sets where work/rest ratios differ per round." },
       { question: "Will I hear round changes with the screen locked?", answer: "On desktop yes; mobile browsers may silence background audio — keep the tab foreground during workouts or use the device clock app as backup." },
       { question: "Can I save workout presets?", answer: "Yes — named presets (e.g., 'Morning HIIT 20min') persist locally, so one tap starts repeat sessions without re-entering rounds." },
-      { question: "Is anything uploaded?", answer: "No. Everything runs locally in your browser. Nothing leaves your device." },
+      { question: "When using Interval Timer, is anything uploaded?", answer: "No. Everything runs locally in your browser. Nothing leaves your device." },
     ],
 },
   {
@@ -113,7 +113,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "How hard should 'all-out' be?", answer: "≈170% VO2max — unsustainable-beyond-20-seconds effort. If you can chat in round 6, go harder; if form collapses before round 5, scale to 15s work intervals first." },
       { question: "How often per week?", answer: "2–3 true Tabata sessions weekly with rest days between; daily Tabata overtrains most people within 3 weeks. Fill other days with Zone 2 cardio and strength." },
       { question: "Why does the prep countdown matter?", answer: "3 seconds to set position prevents false starts and pulled muscles — most Tabata injuries come from launching cold into round 1." },
-      { question: "Is anything uploaded?", answer: "No. Everything runs locally in your browser. Nothing leaves your device." },
+      { question: "When using Tabata Timer, is anything uploaded?", answer: "No. Everything runs locally in your browser. Nothing leaves your device." },
     ],
 },
   {
@@ -139,7 +139,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Does it handle overnight durations?", answer: "Yes. If end time is before start time (e.g., 10:00 PM to 6:00 AM), it calculates the overnight span correctly as 8 hours." },
       { question: "Can I use it for flight times or travel?", answer: "Yes. Enter departure and arrival times to calculate exact travel duration, accounting for time zone differences if you adjust the times manually." },
       { question: "What precision is the output?", answer: "Results are shown in hours, minutes, and seconds. For example, 3 hours 27 minutes 45 seconds (3:27:45)." },
-      { question: "Is my data stored?", answer: "No. All calculations run locally in your browser. No time data is transmitted." },
+      { question: "When using Time Duration Calculator, is my data stored?", answer: "No. All calculations run locally in your browser. No time data is transmitted." },
     ],
   },
   {
@@ -318,7 +318,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "How many colors does a UI need?", answer: "Five roles: background, surface, primary, text, accent — plus success/warning/error states. Generate the base five here, then derive shades by shifting lightness ±10–20%." },
       { question: "How do I avoid muddy combinations?", answer: "Keep saturation similar across palette members and vary lightness instead. Two highly saturated colors of different hues vibrate; muting one fixes it instantly." },
       { question: "Can I export the palette?", answer: "Yes — copy all HEX codes at once, or individual values per swatch, ready for CSS variables, Tailwind theme extension, or Figma styles." },
-      { question: "Is anything uploaded?", answer: "No. Palette math runs entirely in your browser. Nothing leaves your device." },
+      { question: "When using Color Palette Generator, is anything uploaded?", answer: "No. Palette math runs entirely in your browser. Nothing leaves your device." },
     ],
 },
   {
@@ -456,7 +456,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "How is this different from percentage change?", answer: "Percentage difference compares two values symmetrically. Percentage change compares a new value to an original value: (New - Old) / Old × 100. Use percentage change for before/after comparisons." },
       { question: "When should I use percentage difference?", answer: "Comparing two measurements, prices, or data points where neither is the 'original'. Example: comparing two product prices, test scores, or experimental results." },
       { question: "What does a 0% result mean?", answer: "Both values are identical. The percentage difference is zero when there is no difference between the two numbers." },
-      { question: "Is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
+      { question: "When using Percentage Difference Calculator, is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
     ],
   },
   {
@@ -472,7 +472,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "What tip percentages are available?", answer: "Common presets: 10%, 15%, 18%, 20%, 25%. You can also enter any custom percentage for specific situations like buffets (10%) or exceptional service (25%+)." },
       { question: "Can I round up the per-person amount?", answer: "The calculator shows exact amounts. You can manually round up the per-person figure to make splitting easier — the extra goes toward a larger tip." },
       { question: "Does it handle large groups?", answer: "Yes. Split among any number of people. The calculator handles the arithmetic whether it's 2 people or 20." },
-      { question: "Is my data stored?", answer: "No. All calculations run locally in your browser. No bill amounts or tip data are transmitted." },
+      { question: "When using Tip Calculator, is my data stored?", answer: "No. All calculations run locally in your browser. No bill amounts or tip data are transmitted." },
     ],
   },
   {
@@ -525,7 +525,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Does it handle mixed numbers?", answer: "Yes. Enter mixed numbers (e.g., 3 1/2) and the tool converts them to decimals. It first converts the mixed number to an improper fraction, then divides." },
       { question: "How does it handle repeating decimals?", answer: "The tool identifies repeating decimal patterns (e.g., 1/3 = 0.333...) and displays them with a bar notation or rounded value." },
       { question: "What precision is used?", answer: "Results are displayed to 6-10 decimal places depending on the fraction. You can see both the exact fraction and the decimal approximation." },
-      { question: "Is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
+      { question: "When using Fraction to Decimal Calculator, is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
     ],
   },
   {
@@ -559,7 +559,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "What is the formula used?", answer: "nPr = n! / (n-k)!. The calculator shows each step: the numerator (n factorial), denominator ((n-k) factorial), and the final division result." },
       { question: "Does it show the step-by-step calculation?", answer: "Yes. The tool expands the factorial terms, shows the intermediate values, and demonstrates how the division produces the final count." },
       { question: "How is this different from combinations?", answer: "Permutations count arrangements where order matters (ABC ≠ BCA). Combinations count selections where order doesn't matter (ABC = BCA). Use the Combination Calculator for selections." },
-      { question: "Is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
+      { question: "When using Permutation Calculator, is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
     ],
   },
   {
@@ -575,7 +575,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "How large a number can it handle?", answer: "JavaScript handles numbers up to 2^53. Factorials grow very fast — 18! is the largest exact integer factorial. Beyond that, the tool shows approximate scientific notation." },
       { question: "Does it show the multiplication steps?", answer: "Yes. The tool displays the full expansion (e.g., 6! = 6 × 5 × 4 × 3 × 2 × 1 = 720) so you can follow the calculation." },
       { question: "What are common uses of factorials?", answer: "Permutations, combinations, probability calculations, Taylor series, binomial distribution, and various mathematical formulas in statistics and algebra." },
-      { question: "Is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
+      { question: "When using Factorial Calculator, is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
     ],
   },
   {
@@ -591,7 +591,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Does it show all factors?", answer: "Yes. For non-prime numbers, all factors are listed. For prime numbers, the only factors are 1 and the number itself." },
       { question: "What is the largest number it can check?", answer: "JavaScript handles numbers up to 2^53. The primality test works efficiently for numbers up to about 10^12. Larger numbers may require more time." },
       { question: "Does it identify prime factors?", answer: "Yes. For composite numbers, the tool can show the prime factorization — the product of prime numbers that equals the original." },
-      { question: "Is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
+      { question: "When using Prime Number Checker, is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
     ],
   },
   {
@@ -765,7 +765,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "How many inches are in a centimeter?", answer: "1 inch = 2.54 cm exactly. This is an international agreement — not an approximation." },
       { question: "How far is a marathon in miles?", answer: "A marathon is 42.195 km, which equals approximately 26.2 miles. The exact distance was standardized in 1921." },
       { question: "What can I use this converter for?", answer: "Converting between metric and imperial lengths — for example, feet to meters for construction, inches to centimeters for screen sizes, or miles to kilometers for running distances." },
-      { question: "Does this converter work offline?", answer: "Yes. All conversions run in your browser using JavaScript. No data is sent to any server." },
+      { question: "When using Length Converter, does this converter work offline?", answer: "Yes. All conversions run in your browser using JavaScript. No data is sent to any server." },
     ],
   },
   {
@@ -782,7 +782,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "What weighs about 1 kilogram?", answer: "A bag of sugar, a liter of water, or a small pineapple all weigh approximately 1 kg (2.2 lb)." },
       { question: "How many ounces are in a pound?", answer: "1 pound = 16 ounces exactly. This is the standard avoirdupois weight system used in the US and UK." },
       { question: "What is a stone in weight?", answer: "A stone is a British unit equal to 14 pounds or approximately 6.35 kg. It is commonly used for body weight in the UK and Ireland." },
-      { question: "Does this converter work offline?", answer: "Yes. All conversions run locally in your browser. No data is uploaded or stored." },
+      { question: "When using Weight Converter, does this converter work offline?", answer: "Yes. All conversions run locally in your browser. No data is uploaded or stored." },
     ],
   },
   {
@@ -799,7 +799,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "How many liters are in a gallon?", answer: "1 US gallon = 3.78541 liters. Note: a UK (imperial) gallon is larger at 4.54609 liters." },
       { question: "What can I use this converter for?", answer: "Common uses include converting recipe measurements (cups to mL), fuel tank volumes (gallons to liters), and science lab measurements." },
       { question: "How big is a fluid ounce?", answer: "1 US fluid ounce = 29.5735 mL, roughly the volume of a tablespoon plus a teaspoon. It is a measure of volume, not weight." },
-      { question: "Does this converter work offline?", answer: "Yes. All conversions run in your browser with no server calls." },
+      { question: "When using Volume Converter, does this converter work offline?", answer: "Yes. All conversions run in your browser with no server calls." },
     ],
   },
   {
@@ -816,7 +816,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "What is a hectare?", answer: "A hectare is a metric unit of area equal to 10,000 square meters (about 2.47 acres). It is commonly used for land measurement worldwide." },
       { question: "How big is 1000 square feet?", answer: "1,000 ft² is roughly the size of a studio or small one-bedroom apartment, or about 93 square meters." },
       { question: "How many square meters are in a square foot?", answer: "1 square foot = 0.092903 square meters. Multiply any ft² value by this factor to get m²." },
-      { question: "Does this converter work offline?", answer: "Yes. All calculations run locally in your browser without sending data to any server." },
+      { question: "When using Area Converter, does this converter work offline?", answer: "Yes. All calculations run locally in your browser without sending data to any server." },
     ],
   },
   {
@@ -833,7 +833,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Why 1024 instead of 1000?", answer: "Computers use binary addressing, so memory and storage are measured in powers of 2. 1 KB = 2^10 = 1,024 bytes. The decimal convention (1 KB = 1000 B) is used by some hard drive manufacturers." },
       { question: "How many bytes are in a text email?", answer: "A typical plain-text email is about 10 KB (10,240 bytes). With images or attachments, it can be much larger." },
       { question: "How big is an HD movie file?", answer: "A typical HD movie is about 4–5 GB. A 4K movie can be 15–25 GB depending on length and compression." },
-      { question: "Does this converter work offline?", answer: "Yes. All conversions run locally in your browser. No data is uploaded." },
+      { question: "When using Data Size Converter, does this converter work offline?", answer: "Yes. All conversions run locally in your browser. No data is uploaded." },
     ],
   },
   {
@@ -849,7 +849,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "How accurate is BMI-based estimation?", answer: "Within 3-5% of DEXA scans for most body types. Less accurate for athletes with high muscle mass, elderly, or very lean individuals. Use as a general indicator." },
       { question: "What fitness categories are shown?", answer: "Essential fat, athletes, fitness, acceptable, and obese categories for both men and women. These follow WHO and ACSM guidelines." },
       { question: "What inputs do I need?", answer: "Height, weight, age, and gender. The tool calculates BMI internally and applies the age/gender adjustment." },
-      { question: "Is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted." },
+      { question: "When using Body Fat Estimator, is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted." },
     ],
   },
   {
@@ -865,7 +865,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "What activity levels are available?", answer: "Sedentary (office job), lightly active (1-3 days exercise), moderately active (3-5 days), very active (6-7 days), and extra active (physical job + daily exercise)." },
       { question: "What are maintenance, cutting, and bulking?", answer: "Maintenance = calories to maintain current weight. Cutting = 500 calorie deficit for fat loss (~0.5 kg/week). Bulking = 300-500 surplus for muscle gain." },
       { question: "Does it account for body composition?", answer: "The basic calculator uses weight, height, age, and gender. For more precision based on body fat percentage, use the Katch-McArdle formula variant." },
-      { question: "Is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted." },
+      { question: "When using Daily Calorie Needs, is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted." },
     ],
   },
   {
@@ -1020,7 +1020,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Can I calculate weekly totals?", answer: "Enter daily start/end times for each day of the week and the tool sums total hours. Useful for filling timesheets and calculating weekly pay." },
       { question: "Does it handle overnight shifts?", answer: "Yes. If your end time is earlier than your start time (e.g., 10 PM to 6 AM), the calculator correctly handles the overnight span." },
       { question: "Can I enter decimal hours for breaks?", answer: "Break duration is typically entered in minutes. The tool converts everything to decimal hours for consistent timesheet calculations." },
-      { question: "Is my data stored?", answer: "No. All calculations run locally in your browser. No work hours or timesheet data are transmitted." },
+      { question: "When using Work Hours Calculator, is my data stored?", answer: "No. All calculations run locally in your browser. No work hours or timesheet data are transmitted." },
     ],
   },
   {
@@ -1380,6 +1380,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Where do the results come from?", answer: "Two sources: public certificate records (crt.sh) show names that ever had a certificate, and live DNS checks probe 24 common names (www, api, mail…). A name missing here can still exist — CNAME-only, unlisted, or firewalled names won't show." },
       { question: "Why do I see subdomains that no longer exist?", answer: "Certificate logs are historical: a name stays listed after the certificate expires or the host is retired. The 'Live' section shows only names that resolve right now." },
       { question: "Is this exhaustive like Amass or Sublist3r?", answer: "No — those run wordlists of thousands plus brute-forcing from a server. This tool covers certificate history plus two dozen common names, which catches the usual suspects honestly labeled as such." },
+      { question: "Is scanning my own domain allowed?", answer: "Yes — it uses passive public certificate records plus read-only DNS checks. Nothing intrusive touches your servers." },
     ],
 },
   {
@@ -1646,7 +1647,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "What do the risk categories mean?", answer: "Men: low risk (<0.90), moderate (0.90-0.99), high (1.00+). Women: low risk (<0.80), moderate (0.80-0.84), high (0.85+). Higher WHR indicates greater cardiovascular and diabetes risk." },
       { question: "How does this compare to BMI?", answer: "WHR measures fat distribution (apple vs pear shape). BMI measures overall weight relative to height. WHR is a better predictor of cardiovascular risk than BMI alone." },
       { question: "Should I use cm or inches?", answer: "The ratio is the same regardless of unit. Use whichever measuring tape you have — the WHR value is unit-agnostic." },
-      { question: "Is my data stored?", answer: "No. All calculations run locally in your browser. No measurement data is transmitted." },
+      { question: "When using Waist-to-Hip Ratio Calculator, is my data stored?", answer: "No. All calculations run locally in your browser. No measurement data is transmitted." },
     ],
   },
   {
@@ -1725,6 +1726,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     faqs: [
       { question: "Does this remove duplicate lines or just words?", answer: "Words only. Each line is processed independently — if the same word appears multiple times within a line, only the first occurrence is kept. Duplicate lines are preserved." },
       { question: "Is case-sensitive?", answer: "Yes. 'The' and 'the' are treated as different words. If you want case-insensitive deduplication, convert all text to lowercase first." },
+      { question: "Does it keep the first occurrence?", answer: "Yes — the first instance stays and later repeats go, so sentence structure and emphasis stay intact." },
+      { question: "Why preserve word order?", answer: "Removing words is safe only in place — reordering would scramble meaning, so the tool deletes without rearranging." },
     ],
   },
   {

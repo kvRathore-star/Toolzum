@@ -13,7 +13,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What font options are available for adding text to photos?", answer: "You can choose from a wide selection of web-safe fonts including Arial, Helvetica, Times New Roman, Georgia, and more. Font size, color, opacity, and rotation are all adjustable." },
       { question: "Can I add multiple text layers to a single image?", answer: "Yes. You can add as many text overlays as needed, each with independent font, color, size, position, and rotation settings." },
       { question: "What image formats are supported for input and output?", answer: "Input: PNG, JPG, WebP, GIF, BMP. Output: PNG (with transparency support) or JPG (with quality control)." },
-      { question: "Is my image uploaded to a server?", answer: "No. All text overlay processing happens entirely in your browser using Canvas API. Your image never leaves your device." },
+      { question: "When using Add Text to Photo, is my image uploaded to a server?", answer: "No. All text overlay processing happens entirely in your browser using Canvas API. Your image never leaves your device." },
       { question: "Can I adjust text opacity and rotation?", answer: "Yes. Full control over opacity (0-100%) and rotation angle (0-360°) is available for each text layer." },
     ],
   },
@@ -255,6 +255,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "How is my privacy protected?", answer: "Nothing of yours is uploaded or stored. The test downloads sample files from a CDN to measure throughput — that test traffic is the measurement itself, and no personal data leaves your browser." },
       { question: "What exactly is measured?", answer: "Download speed and latency against CDN test files. Upload speed is not currently measured." },
       { question: "Why do results vary between runs?", answer: "Throughput depends on network congestion, Wi-Fi conditions, VPNs, and device load. Run twice and take the better reading for a fair number." },
+      { question: "Does it measure upload speed too?", answer: "Not currently — it measures download speed and latency using a CDN test file." },
     ],
 },
   {
@@ -269,7 +270,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What target file sizes are supported?", answer: "You can compress images to 50 KB, 100 KB, or 200 KB. The tool automatically adjusts JPEG quality, reduces pixel dimensions, and strips EXIF metadata to hit your target size." },
       { question: "Which image formats can I compress?", answer: "JPG, PNG, WebP, GIF, and BMP inputs are accepted. Output is typically JPEG for maximum compression, but PNG is available when transparency must be preserved." },
       { question: "Will the compressed image look good after resizing to 50KB?", answer: "For most government forms and upload portals, the quality is perfectly acceptable. The tool intelligently balances resolution reduction and compression to maintain readability while meeting strict size limits." },
-      { question: "Is my image uploaded to a server?", answer: "No. All compression happens locally in your browser using the browser-image-compression library. Your image never leaves your device." },
+      { question: "When using Compress Image to 50KB, is my image uploaded to a server?", answer: "No. All compression happens locally in your browser using the browser-image-compression library. Your image never leaves your device." },
       { question: "Can I compress multiple images at once?", answer: "Yes. You can select multiple images and compress them all to your chosen target size in one batch operation." },
     ],
   },
@@ -462,7 +463,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Will it work on all platforms?", answer: "Modern phones, browsers, Instagram, TikTok, Discord, and games: yes. Some old systems and screen readers garble decorative characters — keep critical info (contact, links) in plain text." },
       { question: "Does fancy text hurt accessibility and SEO?", answer: "Screen readers spell out each symbol ('mathematical bold capital a…'), so never use it for body content or headings on your own site. Decoration for names and bios only." },
       { question: "Why do some styles show boxes (□)?", answer: "The device lacks that Unicode block (common with gothic and bubble styles on older Android). Stick to cursive, bold, and small-caps styles for maximum compatibility." },
-      { question: "Is anything uploaded?", answer: "No. Mapping runs entirely in your browser. Text never leaves your device." },
+      { question: "When using Fancy Text Generator, is anything uploaded?", answer: "No. Mapping runs entirely in your browser. Text never leaves your device." },
     ],
   },
   {
@@ -476,10 +477,10 @@ export const entries_chunk_0: ToolMetadata[] = [
     showInCategory: false,
     faqs: [
       { question: "How does background removal work?", answer: "The tool uses a neural network to segment the foreground subject from the background, producing a transparent PNG. It analyzes edges, colors, and textures to identify what to keep and what to remove." },
-      { question: "What image formats are supported?", answer: "JPG, PNG, WebP, and BMP inputs are accepted. Output is always PNG with a transparent background, which preserves the cutout for further editing or compositing." },
+      { question: "When using Background Remover, what image formats are supported?", answer: "JPG, PNG, WebP, and BMP inputs are accepted. Output is always PNG with a transparent background, which preserves the cutout for further editing or compositing." },
       { question: "Is there a file size limit?", answer: "Images up to 20 MB are supported. Larger files may cause slower processing due to the neural network analysis required for foreground segmentation." },
       { question: "Does it work on complex backgrounds?", answer: "The AI handles most backgrounds well, including solid colors, gradients, and moderately busy scenes. Very complex or similarly-colored foreground/background pairs may need manual touch-up in a dedicated editor." },
-      { question: "Is my image uploaded to a server?", answer: "No. Background removal runs locally in your browser using TensorFlow.js. Your image never leaves your device." },
+      { question: "When using Background Remover, is my image uploaded to a server?", answer: "No. Background removal runs locally in your browser using TensorFlow.js. Your image never leaves your device." },
     ],
   },
   {
@@ -587,7 +588,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "How many PDFs can I merge?", answer: "There is no hard limit. You can merge 2, 5, 20, or more PDFs into a single document. The tool processes all files sequentially and outputs one combined PDF." },
       { question: "Can I reorder the pages?", answer: "Yes. The drag-and-drop interface lets you reorder PDFs before merging. You can also mix pages from different PDFs to create a custom document order." },
       { question: "Does it preserve formatting and fonts?", answer: "Yes. PDF formatting, fonts, images, and layout are preserved exactly as in the originals. The merge operation combines pages without re-encoding content." },
-      { question: "What is the maximum file size?", answer: "PDFs up to 50MB each are supported. Very large files may take longer to process depending on page count and your device's available memory." },
+      { question: "When using PDF Merger, what is the maximum file size?", answer: "PDFs up to 50MB each are supported. Very large files may take longer to process depending on page count and your device's available memory." },
       { question: "Is my PDF data stored?", answer: "No. All merging happens locally in your browser using pdf-lib. No PDF files are uploaded to any server." },
     ],
   },
@@ -664,7 +665,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Does it count character and character-no-spaces?", answer: "Yes. The tool provides word count, character count (with and without spaces), sentence count, paragraph count, and syllable count — all updating in real time as you type or paste text." },
       { question: "What is the keyword density feature?", answer: "Enter a keyword or phrase and the tool shows how frequently it appears as a percentage of total words. This helps SEO writers avoid keyword stuffing while maintaining target density." },
       { question: "Is there a speaking time estimate?", answer: "Yes. Based on average speaking rates (typically 130–150 words per minute), the tool estimates how long your text would take to read aloud — useful for presentations and voiceover scripts." },
-      { question: "Is my text stored or transmitted?", answer: "No. All analysis runs locally in your browser. Your text is never sent to any server or stored beyond the current session." },
+      { question: "When using Word Counter, is my text stored or transmitted?", answer: "No. All analysis runs locally in your browser. Your text is never sent to any server or stored beyond the current session." },
     ],
   },
   {
@@ -741,7 +742,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Is it cryptographically secure?", answer: "No — it uses Math.random(), fine for games, raffles, sampling, and testing. For passwords, tokens, or anything adversarial, use the Password Generator (Web Crypto) instead." },
       { question: "How does no-repeat filtering work?", answer: "Generated values are tracked per session and skipped on collision — guaranteed unique draws within the range. Exhausting the range (e.g., 5 unique numbers from 1–5) stops cleanly instead of looping." },
       { question: "Integers or decimals?", answer: "Both: integers for dice, draws, and IDs; decimals for simulations and testing. Decimal precision is configurable to avoid floating-point artifacts like 0.30000000004." },
-      { question: "Is anything uploaded?", answer: "No. Generation runs entirely in your browser. Nothing leaves your device." },
+      { question: "When using Random Number Generator, is anything uploaded?", answer: "No. Generation runs entirely in your browser. Nothing leaves your device." },
     ],
 },
   {
@@ -757,6 +758,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Where do shortened URLs go?", answer: "Your long URL is sent to our shortening API, which returns a compact link. The destination URL is visible to the shortening service by design — don't shorten private URLs containing secrets or tokens." },
       { question: "Do shortened links expire?", answer: "Links persist per the shortening provider's policy. For links that must never break, use your own domain shortener instead." },
       { question: "Is there a rate limit?", answer: "Yes — about 10 per minute per visitor, so pasting huge lists takes a while. Bulk shortening handles lists sequentially with automatic retries." },
+      { question: "Why does shortening need cloud processing?", answer: "Short links must resolve from anywhere on the internet, so the mapping lives on our server — the one part that can't run in your browser." },
     ],
   },
   {
@@ -1031,7 +1033,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What if 25 minutes doesn't fit my work?", answer: "Adjust freely: 50/10 suits deep coding and writing; 15/5 suits admin and email. The protocol matters (single-tasking + breaks), not the exact numbers." },
       { question: "What do I do when interrupted mid-pomodoro?", answer: "Note it and continue ('inform, negotiate, call back' rule). If you switch tasks, void the pomodoro and restart — protecting the 25 minutes is the skill being trained." },
       { question: "Does it track completed sessions?", answer: "Yes — daily pomodoro counts persist locally, so you can see output trends (e.g., 6 focused sessions ≈ a strong deep-work day) without any account." },
-      { question: "Is anything uploaded?", answer: "No. Timing and counts stay in your browser via local storage. Nothing leaves your device." },
+      { question: "When using Pomodoro Timer, is anything uploaded?", answer: "No. Timing and counts stay in your browser via local storage. Nothing leaves your device." },
     ],
   },
   {
@@ -1216,7 +1218,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     faqs: [
       { question: "What does MP4 to MKV Converter do?", answer: "Converts MP4 files to MKV format \u2014 universal video playback on any device to advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file. All conversion happens locally in your browser with no file size limits." },
       { question: "Where does MKV fit best?", answer: "advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file." },
-      { question: "What MP4 files convert best?", answer: "Complete, uncorrupted MP4 files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
+      { question: "When using MP4 to MKV Converter, what MP4 files convert best?", answer: "Complete, uncorrupted MP4 files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
       { question: "Why convert MP4 to MKV?", answer: "MP4 (MPEG-4 Part 14) is lossy compressed \u2014 best for universal video playback on any device \u2014 phones, smart TVs, web browsers, and social media. MKV (Matroska Video) is lossless container \u2014 best for advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file." },
     ],
   },
@@ -1233,7 +1235,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What does MP4 to MOV Converter do?", answer: "Convert MP4 video files to MKV format directly in your browser. 100% free, private \u2014 your files never leave your device." },
       { question: "Why convert MP4 to MOV?", answer: "MP4 (MPEG-4 Part 14) is lossy compressed \u2014 best for universal video playback on any device \u2014 phones, smart TVs, web browsers, and social media. MOV (QuickTime Movie) is lossless or lossy \u2014 best for Apple ecosystem \u2014 Final Cut Pro, iMovie, and macOS video editing workflows." },
       { question: "Where does MOV fit best?", answer: "Apple ecosystem \u2014 Final Cut Pro, iMovie, and macOS video editing workflows." },
-      { question: "What MP4 files convert best?", answer: "Complete, uncorrupted MP4 files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
+      { question: "When using MP4 to MOV Converter, what MP4 files convert best?", answer: "Complete, uncorrupted MP4 files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
     ],
   },
   {
@@ -1322,6 +1324,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Where does the crawl run?", answer: "On our server: pages are fetched and analyzed server-side, then the sitemap is generated for download. Crawled URLs are not retained after your session." },
       { question: "How many pages can it crawl?", answer: "Free crawls go up to 100 URLs; signed-in users up to 200 and Pro up to 2000. Crawls over 500 URLs are split automatically into 500-URL sitemap files plus a sitemap index — upload them all and submit the index to Google." },
       { question: "Does it respect robots.txt?", answer: "Yes. The crawler reads robots.txt first and skips disallowed paths, and seeds from your existing sitemap.xml when available." },
+      { question: "Does it handle JavaScript sites?", answer: "Yes — React, Next.js, and Vue pages render before crawling, and broken links surface in the report." },
     ],
   },
   {
@@ -1448,7 +1451,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Why annualize ROI?", answer: "20% in 3 months (≈107% annualized) beats 20% in 2 years (≈9.5% annualized). Annualized ROI = (1+ROI)^(1/years) − 1. Always attach a horizon or comparisons lie." },
       { question: "ROI vs ROAS vs profit?", answer: "ROAS = revenue ÷ spend ($12k÷$10k = 1.2×) ignores costs beyond ads; ROI subtracts full cost; profit is the dollars. A 300% ROAS campaign can still lose money after product and overhead costs." },
       { question: "What does ROI miss?", answer: "Risk, timing, and intangibles: a 50% ROI bet that can go to zero differs from a 15% certain return. ROI also ignores brand, learning, and customer-lifetime effects — pair it with payback period." },
-      { question: "Is my data stored?", answer: "No. All calculations run locally in your browser. No figures leave your device." },
+      { question: "When using ROI Calculator, is my data stored?", answer: "No. All calculations run locally in your browser. No figures leave your device." },
     ],
   },
   {
@@ -1464,7 +1467,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Which rate applies?", answer: "Standard rates run 17–27% by member state (Germany 19%, France 20%, Hungary 27%); reduced rates cover food, books, and hospitality. Digital services use the CUSTOMER's country rate under EU VAT MOSS rules." },
       { question: "What is reverse charge?", answer: "B2B cross-border sales within the EU shift VAT accounting to the buyer (0% charged, buyer self-assesses). Requires both parties' valid VAT numbers — validate them before invoicing." },
       { question: "How do I verify a VAT number?", answer: "Use the EU VIES database for real-time validation. Invalid numbers mean you must charge your local rate — the calculator can't verify, only compute." },
-      { question: "Is my data stored?", answer: "No. All calculations run locally in your browser. No figures leave your device." },
+      { question: "When using VAT Calculator, is my data stored?", answer: "No. All calculations run locally in your browser. No figures leave your device." },
     ],
 },
   {
@@ -1515,7 +1518,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Why is the output ~33% larger?", answer: "Base64 maps every 3 bytes to 4 ASCII characters by design. A 3MB file becomes ~4MB of text — fine for small assets, wasteful for large ones." },
       { question: "How do data URIs work?", answer: "Prefix the output like data:image/png;base64,iVBOR… and browsers render it inline. Handy for single-file HTML exports and email signatures with tiny logos." },
       { question: "Does it handle Unicode text?", answer: "Yes — text is UTF-8 encoded before conversion, so emoji and non-Latin scripts round-trip correctly, unlike naive btoa() snippets that corrupt them." },
-      { question: "Are my files uploaded?", answer: "No. Encoding runs entirely in your browser. Files and text never leave your device." },
+      { question: "When using Base64 Encode/Decode, are my files uploaded?", answer: "No. Encoding runs entirely in your browser. Files and text never leave your device." },
     ],
 },
   {
@@ -1531,7 +1534,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Can I use it for school assignments?", answer: "Technically yes, ethically risky — most schools treat submitting machine-written work as your own handwriting as dishonesty. Safer uses: cards, invitations, stylized quotes, and design mockups." },
       { question: "What export formats?", answer: "Download as PNG image sized for print or screen. For multi-page letters, generate one image per page and combine with the JPG-to-PDF tool." },
       { question: "Can I add my own handwriting font?", answer: "The tool ships curated fonts only. For true personal handwriting, create a font from your writing (Calligraphr, FontForge) — beyond this tool's scope." },
-      { question: "Is my text uploaded?", answer: "No. Rendering runs entirely in your browser via Canvas. Text never leaves your device." },
+      { question: "When using Text to Handwriting, is my text uploaded?", answer: "No. Rendering runs entirely in your browser via Canvas. Text never leaves your device." },
     ],
   },
   {
@@ -1606,6 +1609,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Is my subtitle content uploaded?", answer: "Yes. Subtitle text is sent to the translation API and deleted after processing — it is never stored or shared." },
       { question: "Are timing codes preserved?", answer: "Yes. Translation only replaces text lines; SRT/VTT timestamps and frame structure pass through untouched." },
       { question: "Which subtitle languages are supported?", answer: "100+ target languages via the translation API. Quality is best between major languages; rare pairs may need a human pass." },
+      { question: "How do Pro limits work for subtitle translation?", answer: "Sign in free for 2 translations a day; Pro unlocks unlimited use." },
     ],
 },
   {
@@ -1739,7 +1743,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Mifflin-St Jeor vs Harris-Benedict?", answer: "Mifflin-St Jeor (men: 10w + 6.25h − 5a + 5; women: −161 instead of +5) validates better against modern calorimetry, underestimating less for overweight users. This tool uses Mifflin-St Jeor." },
       { question: "BMR vs TDEE — which do I diet on?", answer: "Never eat at BMR long-term — that is starvation level. Multiply BMR by activity (sedentary 1.2 … very active 1.9) to get TDEE, then subtract 300–500 kcal for fat loss. Use the calorie calculator for the full chain." },
       { question: "Does muscle raise BMR?", answer: "Yes, ~6 kcal/lb/day vs ~2 for fat — but the effect is modest: 5kg of extra muscle adds roughly 60–70 kcal/day. Strength training matters more for the calories it burns directly." },
-      { question: "Is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted or stored." },
+      { question: "When using BMR Calculator, is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted or stored." },
     ],
   },
   // REMOVED: meta-tag-generator — merged into seo-meta-tag-generator (id:799)
@@ -1782,6 +1786,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What encoding is used?", answer: "Text is converted to binary using UTF-8 encoding. Each character is represented as its 8-bit binary equivalent (e.g., 'A' = 01000001)." },
       { question: "How do I separate binary values?", answer: "Use spaces between 8-bit groups (e.g., 01001000 01100101). Commas are also accepted as separators." },
       { question: "Does this handle special characters?", answer: "Yes. UTF-8 encoding supports all Unicode characters including accented letters, emoji, and non-Latin scripts." },
+      { question: "How do I decode binary back to text?", answer: "Paste the binary string to decode it back to readable text — both directions work in the same tool." },
     ],
   },
   {
@@ -1797,7 +1802,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What is the sensitivity slider?", answer: "The price sensitivity slider lets you adjust the selling price to see how it affects your break-even point. It answers 'what if I raise/lower my price?' without recalculating everything manually." },
       { question: "Does it show profit above break-even?", answer: "Yes. The calculator shows profit at any volume above the break-even point, helping you understand margins at different sales levels." },
       { question: "Can I use this for service businesses?", answer: "Yes. Enter your monthly fixed costs and set variable cost to zero (or per-client cost). The break-even point shows how many clients or projects you need to cover costs." },
-      { question: "Is my financial data stored?", answer: "No. All calculations run locally in your browser. No cost or pricing data is transmitted." },
+      { question: "When using Break-Even Calculator, is my financial data stored?", answer: "No. All calculations run locally in your browser. No cost or pricing data is transmitted." },
     ],
   },
   {
@@ -1839,6 +1844,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Is my podcast audio uploaded?", answer: "Yes. Your episode file is sent to our server for AI transcription and deleted after processing — it is never stored or shared by us. Note: transcription runs on a third-party speech service whose free tier may retain samples for service improvement — avoid highly sensitive recordings." },
       { question: "What does podcast transcription cost?", answer: "Transcription bills 1 credit per minute of audio (25MB, 30-minute caps). Free plans include a one-time 5-credit trial; Pro gets 200/month." },
       { question: "What formats are supported?", answer: "MP3, WAV, M4A, OGG, and video files with audio tracks. Files over 25MB or audio over 30 minutes need splitting first." },
+      { question: "How long an episode can I transcribe?", answer: "Up to 30 minutes or 25 MB per file, billed at 1 credit per minute from your free trial or Pro balance." },
     ],
   },
   {
@@ -1883,7 +1889,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "How does Title Case handle small words?", answer: "Articles and short prepositions (a, the, of, in) stay lowercase mid-title per Chicago/AP style — the converter follows standard title-casing rules, not naive capitalize-every-word." },
       { question: "camelCase vs PascalCase?", answer: "camelCase starts lowercase (myVariable) for variables/functions; PascalCase starts uppercase (MyClass) for classes/components. The converter offers both — check your language's convention." },
       { question: "Does it handle large documents?", answer: "Yes — pastes of full articles convert instantly since it's pure string ops. Sentence case on long text: verify abbreviations (e.g., 'e.g.') didn't trigger false sentence breaks." },
-      { question: "Is my text uploaded?", answer: "No. Conversion runs entirely in your browser. Text never leaves your device." },
+      { question: "When using Case Converter, is my text uploaded?", answer: "No. Conversion runs entirely in your browser. Text never leaves your device." },
     ],
       },
   {
@@ -1948,7 +1954,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Do I need to buy barcode numbers?", answer: "For retail checkout, yes — EAN/UPC numbers come from GS1 (never reuse another company's prefix). For warehouse, tickets, and internal labels, Code 128 with your own numbering is free and sufficient." },
       { question: "Why won't my barcode scan?", answer: "Usual causes: printed too small (EAN needs ≥80% magnification ≈ 30mm wide), low contrast (no red-on-white — scanners see red as white), or glossy lamination reflecting the laser. Test with a phone scanner before mass printing." },
       { question: "What size should I print?", answer: "EAN-13 at 100% is 37.3×25.9mm including quiet zones (mandatory blank margins). Keep quiet zones clear — text or borders inside them break scanning." },
-      { question: "Is my data uploaded?", answer: "No. Generation runs entirely in your browser via JsBarcode. Data never leaves your device." },
+      { question: "When using Barcode Generator, is my data uploaded?", answer: "No. Generation runs entirely in your browser via JsBarcode. Data never leaves your device." },
     ],
 },
   {
@@ -2221,7 +2227,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What size does it crop to?", answer: "Standard Indian wallet photo size: 3.5 x 3.5 cm (1.38 x 1.38 inches). This is the standard size for laminated wallet cards and ID holders in India." },
       { question: "How does face detection work?", answer: "The tool uses OpenCV Haar cascade classifiers to detect faces in the uploaded image. It automatically centers the crop on the detected face for a well-composed result." },
       { question: "Can I adjust the crop position?", answer: "Yes. After auto-detection, you can manually adjust the crop position to fine-tune the face placement within the wallet-size frame." },
-      { question: "What image formats are supported?", answer: "JPG, PNG, and BMP inputs are accepted. Output is high-resolution JPG suitable for printing at 300 DPI." },
+      { question: "When using Aadhaar Wallet Cropper, what image formats are supported?", answer: "JPG, PNG, and BMP inputs are accepted. Output is high-resolution JPG suitable for printing at 300 DPI." },
       { question: "Is my image stored?", answer: "No. All processing happens locally in your browser using Canvas API. No Aadhaar images are uploaded to any server." },
     ],
   },
@@ -2318,7 +2324,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What does MP4 to MP3 Converter do?", answer: "Extracts the audio track from MP4 video files and saves it as a standalone MP3 file. All processing runs locally in your browser with FFmpeg WASM \u2014 nothing is uploaded." },
       { question: "Why convert MP4 to MP3?", answer: "MP4 (MPEG-4 Part 14) is lossy compressed \u2014 best for universal video playback on any device \u2014 phones, smart TVs, web browsers, and social media. MP3 (MPEG-1 Audio Layer 3) is lossy compressed \u2014 best for universal music playback and sharing across all devices and platforms." },
       { question: "Where does MP3 fit best?", answer: "universal music playback and sharing across all devices and platforms." },
-      { question: "What MP4 files convert best?", answer: "Complete, uncorrupted MP4 files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
+      { question: "When using MP4 to MP3 Converter, what MP4 files convert best?", answer: "Complete, uncorrupted MP4 files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
     ],
   },
   {
@@ -2371,11 +2377,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Can I choose my own address or domain?", answer: "No — every address is randomly generated on our domain. Custom names would let two people claim the same address, so random is what keeps inboxes separate." },
       { question: "Can I send or reply from a temp address?", answer: "No — inbound only. You can still complete signup flows that email you a clickable link (you click it in your browser); you just can't answer an email from the temp address." },
       { question: "Is my temp inbox private?", answer: "Treat it as semi-public: anyone who guesses the random address can read it. Never use it for banking, passwords, or anything sensitive — it exists for throwaway signups." },
-      { question: "What happens to messages after expiry?", answer: "They are deleted with the address. Messages are capped at 50 per address and bodies truncated past 10KB to keep the service fast for everyone." },
-      { question: "Do attachments come through?", answer: "No — only the sender, subject, and text of each message are kept (subjects capped at 300 characters). Anything needing a file download should go to your real inbox." },
       { question: "Why didn't my email arrive?", answer: "Some sites block disposable domains outright. Otherwise allow a minute for delivery, hit Refresh, and check the sender didn't typo the address — addresses expire exactly 60 minutes after creation." },
       { question: "Temp mail, fake email, disposable email — what's the difference?", answer: "Temp mail usually means one throwaway inbox that disappears after a while. Fake email is the same idea from the sender's point of view — an address not tied to your identity. Disposable email means use it once, then drop it. This tool is all three: a free temporary address, generated on demand, gone in 60 minutes." },
-      { question: "Why do I have to verify before generating?", answer: "One checkbox stops bots from farming thousands of inboxes and getting the domain blocklisted — which would break the tool for everyone. Humans pass in one click." },
       { question: "What is it good for?", answer: "Confirming an email for a signup, registering on forums and Wi-Fi logins, creating test accounts, grabbing discount or promo codes, receiving one-time codes and files-as-text, and keeping your real inbox clean. Anything you wouldn't want spam from later." },
     ],
   },
