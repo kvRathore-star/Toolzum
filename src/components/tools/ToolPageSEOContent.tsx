@@ -57,7 +57,7 @@ export function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern
   const fileDeps = ['ffmpeg', 'pdf-lib', 'heic2any', 'jszip', 'cropper.js', 'exifr', 'tesseract', 'pdf2json', 'pdf2docx', 'sheetjs', 'jspdf', 'pptxgenjs', 'html2canvas', 'canvas api', 'sharp'];
   const hasFileInput = fileDeps.some(d => dep.includes(d)) || ['pdf', 'image', 'video', 'audio', 'archive', 'document', 'transcription'].includes(cat);
 
-  if (hasFileInput && (n.includes('compress') || n.includes('merge') || n.includes('split') || n.includes('lock') || n.includes('unlock') || n.includes('stamp') || n.includes('watermark') || n.includes('protect') || n.includes('rotate') || n.includes('extract') || n.includes('resize') || n.includes('crop') || n.includes('remove') || n.includes('enhance') || n.includes('trim') || n.includes('cut') || n.includes('filter') || n.includes('batch') || n.includes('record') || n.includes('add text') || n.includes('add page') || n.includes('normaliz') || n.includes('reduc') || n.includes('blur') || n.includes('redact') || n.includes('anonymiz') || n.includes('pixelat') || n.includes('screenshot') || n.includes('snapshot') || n.includes('capture') || n.includes('thumbnail') || n.includes('background') || n.includes('tint') || n.includes('bates') || n.includes('numbering') || n.includes('delete') || n.includes('annotat') || n.includes('bookmark') || n.includes('workflow') || n.includes('whiteout') || n.includes('create') || n.includes('add image') || n.includes('attach') || n.includes('advanced') || n.includes('suite') || n.includes('toolbox') || n.includes('bundle'))) {
+  if (hasFileInput && (n.includes('compress') || n.includes('merge') || n.includes('split') || n.includes('lock') || n.includes('unlock') || n.includes('stamp') || n.includes('watermark') || n.includes('protect') || n.includes('rotate') || n.includes('extract') || n.includes('resize') || n.includes('crop') || n.includes('remove') || n.includes('enhance') || n.includes('trim') || n.includes('cut') || n.includes('filter') || n.includes('batch') || n.includes('record') || n.includes('add text') || n.includes('add page') || n.includes('normaliz') || n.includes('reduc') || n.includes('blur') || n.includes('redact') || n.includes('anonymiz') || n.includes('pixelat') || n.includes('screenshot') || n.includes('snapshot') || n.includes('capture') || n.includes('thumbnail') || n.includes('background') || n.includes('tint') || n.includes('bates') || n.includes('numbering') || n.includes('delete') || n.includes('annotat') || n.includes('bookmark') || n.includes('workflow') || n.includes('whiteout') || n.includes('create') || n.includes('add image') || n.includes('attach') || n.includes('advanced') || n.includes('suite') || n.includes('toolbox') || n.includes('bundle') || n.includes('strip') || n.includes('inject'))) {
     return { pattern: 'upload-process-download' };
   }
 
@@ -93,7 +93,7 @@ export function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern
   // steps, not enter-values steps (Oct 5 audit: 14 tools like yaml-json
   // showed "fill in numbers, dates, measurements"). Unit/value converters
   // (length, currency, px-rem…) fall through to enter-values below.
-  if (n.includes('converter') && !hasFileInput && /(text|code|css|scss|less|yaml|json|xml|markdown|html|case|phonetic|ascii|unicode|encoding|hex|jsx|tsx|sql)/i.test(`${n} ${s}`)) {
+  if (n.includes('converter') && !hasFileInput && /(text|code|css|scss|less|yaml|json|xml|markdown|html|case|phonetic|ascii|unicode|encoding|hex|jsx|tsx|sql|proto|schema)/i.test(`${n} ${s}`)) {
     return { pattern: 'paste-text-process-copy' };
   }
   if (n.includes('calculator') || n.includes('converter') && !hasFileInput) {
@@ -174,6 +174,10 @@ export function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern
   // Playable games: start, play moves, track score.
   if (/game|hangman|guessing|rock-paper|tic-tac|memory-match|snake|tetris|pong|chess|sudoku|quiz/i.test(`${n} ${s}`)) {
     return { pattern: 'play-interact' };
+  }
+  // Single-file visual editors (GIF editor): upload, edit frames, download.
+  if (s === 'gif-editor') {
+    return { pattern: 'upload-process-download' };
   }
 
   return { pattern: 'other' };
@@ -640,13 +644,25 @@ export const categoryFaqTemplates: Record<string, ((tool: ToolMetadata) => { que
     { question: `What browsers are supported?`, answer: `Generated extensions follow Manifest V3, compatible with Chrome, Edge, Brave, and other Chromium browsers.` },
     { question: `Will it work offline?`, answer: `Most generated extensions work offline, but some features may require internet connectivity.` },
   ],
-  "Utility": (tool) => [
+  "Utility": (tool) => {
+    // Oct 5 audit: static "Completely free with no usage limits" rendered on
+    // 23 gated Utility tools. Answers now follow the tool's real tier/verdict.
+    const gated =
+      (DOWNLOAD_PRODUCING_SLUGS as Set<string>).has(tool.slug) ||
+      (proSlugs as readonly string[]).includes(tool.slug) ||
+      classifyDependencies(tool.dependencies || '') !== 'local';
+    const freeAnswer = gated
+      ? `Yes — free to start with no signup, under fair daily limits. Pro removes all limits.`
+      : `Yes. Completely free with no usage limits, registration, or hidden charges.`;
+    const localOnly = classifyDependencies(tool.dependencies || '') === 'local';
+    return [
     { question: `What does ${tool.name} do?`, answer: `${tool.description} All processing runs locally in your browser.` },
-    { question: `Is this tool free?`, answer: `Yes. Completely free with no usage limits, registration, or hidden charges.` },
+    { question: `Is this tool free?`, answer: freeAnswer },
     { question: `Can I use this on mobile?`, answer: `Yes. All utility tools are fully responsive and work on any device.` },
-    { question: `How is my privacy protected?`, answer: `Your data never leaves your browser. All processing runs locally.` },
-    { question: `Does ${tool.name} work offline?`, answer: `Yes. After the initial page load, the tool runs entirely offline.` },
-  ],
+    { question: `How is my privacy protected?`, answer: localOnly ? `Your data never leaves your browser. All processing runs locally.` : `Local features never leave your browser; server features are marked where they run.` },
+    { question: `Does ${tool.name} work offline?`, answer: localOnly && !gated ? `Yes. After the initial page load, the tool runs entirely offline.` : `Core features work without a connection once loaded; downloads and server features check in online.` },
+    ];
+  },
   "Health": (tool) => [
     { question: `What does ${tool.name} do?`, answer: `${tool.description} All calculations run locally in your browser.` },
     { question: `Is this medical advice?`, answer: `No. These calculators provide estimates for educational and personal reference. Always consult a healthcare professional.` },
@@ -689,13 +705,20 @@ export const categoryFaqTemplates: Record<string, ((tool: ToolMetadata) => { que
     { question: `Do I need an account?`, answer: `No. All productivity tools work without registration. Everything stays on your device.` },
     { question: `Does ${tool.name} work offline?`, answer: `Yes. All productivity tools work fully offline after the initial page load.` },
   ],
-  "Converter": (tool) => [
+  "Converter": (tool) => {
+    // Oct 5 audit: static "No artificial limits" rendered on gated tools.
+    const gatedC =
+      (DOWNLOAD_PRODUCING_SLUGS as Set<string>).has(tool.slug) ||
+      (proSlugs as readonly string[]).includes(tool.slug) ||
+      classifyDependencies(tool.dependencies || '') !== 'local';
+    return [
     { question: `What does ${tool.name} do?`, answer: `${tool.description} All conversions happen locally in your browser.` },
     { question: `What formats are supported?`, answer: `Format support depends on the specific converter. Check the tool description for supported input and output formats.` },
     { question: `Will I lose quality?`, answer: `Quality depends on the format pair. Lossless conversions preserve original quality; compressed formats offer adjustable quality.` },
-    { question: `Is there a file size limit?`, answer: `No artificial limits. Very large files may process slower depending on your device's memory.` },
+    { question: `Is there a file size limit?`, answer: gatedC ? `Free tier carries fair file-size and daily limits, shown before you hit them. Pro removes all limits.` : `No artificial limits. Very large files may process slower depending on your device's memory.` },
     { question: `Are my files private?`, answer: `Yes. All conversions happen locally in your browser. Files never leave your device.` },
-  ],
+    ];
+  },
 };
 
 const defaultInstructions = [
@@ -713,9 +736,10 @@ const defaultInstructions = [
  */
 export function defaultFaqsFor(tool: ToolMetadata): { question: string; answer: string }[] {
   const v = classifyDependencies(tool.dependencies || '');
+  const isPro = (proSlugs as readonly string[]).includes(tool.slug);
   const gated =
-    (DOWNLOAD_PRODUCING_SLUGS as Set<string>).has(tool.slug) || v !== 'local';
-  const pro = (proSlugs as readonly string[]).includes(tool.slug);
+    isPro || (DOWNLOAD_PRODUCING_SLUGS as Set<string>).has(tool.slug) || v !== 'local';
+  const pro = isPro;
   return [
     {
       question: 'Is this tool free to use?',

@@ -72,6 +72,9 @@ describe('deriveInteractionPattern', () => {
     expect(deriveInteractionPattern(bySlug('word-to-pdf')).pattern).toBe('upload-convert-download');
     expect(deriveInteractionPattern(bySlug('blur-face')).pattern).toBe('upload-process-download');
     expect(deriveInteractionPattern(bySlug('pdf-background-color')).pattern).toBe('upload-process-download');
+    expect(deriveInteractionPattern(bySlug('gif-editor')).pattern).toBe('upload-process-download');
+    expect(deriveInteractionPattern(bySlug('bulk-exif-stripper-injector')).pattern).toBe('upload-process-download');
+    expect(deriveInteractionPattern(bySlug('proto-schema-converter')).pattern).toBe('paste-text-process-copy');
   });
 
   it('routes pickers, toolkits, SaaS compute, and games (Batch 2 recheck)', () => {

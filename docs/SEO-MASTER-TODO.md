@@ -1,98 +1,87 @@
-# SEO Master TODO — everything from the Oct 5 session, in execution order
+# SEO Master TODO — single entrance (rewritten Oct 6, covers everything)
 
-> Companion: `docs/SEO-GEO-AEO-AIO-DR-PLAYBOOK.md` (the how).
-> This file is the what + who + status. Update statuses as work lands.
-> Rule: no commit/push without explicit owner word. No blind changes (test +
-> live-verify + suite green, §7 guardrails apply to everything).
+> Companion: `docs/SEO-GEO-AEO-AIO-DR-PLAYBOOK.md` (the how — §§1–13 incl.
+> §7b trust audit, §10 quality doctrine + agency standard, §11 tracking sets,
+> §12 SOPs, §13 risks/gates).
+> Rules: no commit/push without explicit owner word · no blind changes
+> (validate → targeted gates → suite only on demand) · quotas + routes frozen.
 
 ## A. Diagnosed (done, evidence on file)
 
-- [x] Full-property inspection sweep: 5 indexed / 510 crawled-not-indexed / 566
-      unknown → `docs/gsc-inspection-2026-10-05.csv` + `scripts/gsc-check.py --sweep`
+- [x] Full-property sweep Oct 5: 5 indexed / 510 parked / 566 unknown →
+      `docs/gsc-inspection-2026-10-05.csv` + `scripts/gsc-check.py --sweep`
 - [x] Collapse dated: Jul 15–21 peak (2,758 impr/wk) → Jul 22–31 cliff (−97%).
-      Cause: migration live with 241 dead redirects (fixed Aug 9) + spam updates.
-- [x] Manual Actions: clean (owner checked Oct 5). Purely algorithmic.
-- [x] Technical blockers ruled out: robots.txt clean, pages 200 + `index,follow`,
-      sitemap canonical, AI crawlers allowed.
-- [x] GSC API limits mapped: trends work; query/page breakdowns withheld (need UI export).
+      Migration live with 241 dead redirects (fixed Aug 9) + spam updates.
+- [x] Manual Actions clean (Oct 5) · technical blockers ruled out · GSC API
+      limits mapped (trends work; breakdowns need UI export).
 
-## B. Shipped Oct 5 — IN TREE, UNCOMMITTED (needs owner "commit/push" word)
+## B. Shipped + COMMITTED (local unless noted)
 
-- [ ] Hub FAQs: 84 Q&As, all 21 hubs + render + FAQPage JSON-LD + coverage test
-      (`categorySections.ts`, `[category]/page.tsx`, `CategoryPageClient.tsx`,
-      `category-shelves.test.ts`). Gates: hub tests 6/6, eslint 0, tsc 0.
-- [ ] Sitemap slash fix (22 URLs) + extension-dupe removal + slash/uniqueness tests.
-- [ ] GSC checker fixes (`siteUrl` — the real 403 cause) + sweep mode.
-- [ ] This playbook + master todo files.
+- [x] GSC checker + sweep mode · sitemap slashes/dupes/`/press` + full-scope guards
+- [x] Hub program: 84 FAQs all 21 hubs + render + FAQPage JSON-LD + tests
+- [x] Trust program: cloudPatterns verdicts + generator gating + 25 honest
+      rewords + JSON-LD swap + claims-integrity (processing + signup axes)
+- [x] Tier A dedup: 21 category claim variants, 557 closer swaps, 3 safe-patterns
+- [x] Cross-link map (18 pro-bulk → free) + paywall render + tests
+- [x] PoweredBy engine badges (hub rows + tool header) + tests
+- [x] 351→401 audit program: dedupe 176 Qs, 4–7 standard, 20 additions, trims,
+      Batch 2/3 patterns + honest fallbacks + recheck (0 problems)
+- [x] Top-30 program: 120 FAQs + 10 descs + routing completion (0/30 problems)
+- [x] Titles batch 1: `seoTitle` field + helper + 30 query-first titles + tests
+- [x] Claim matrix (§7b): 5-family audit clean; Utility/Converter/defaultFaqs
+      templates made tool-aware; all-templates guard test
+- [x] Rival teardowns (ilovepdf/iloveimg) → hub-upgrade specs file
+- [x] Press page · llms.txt · agent manifests + types · quota-10 SPEC (not built)
+- [x] Quota verdicts: D1 shows 12 downloads/8wks → frozen 90d · bulk inventory
+      (35 $0-cost PRO = legitimate moat) · calculators ungated verified
+- [x] Playbook §§7b,9–13 · agency audit (§10) · FAQ 4–7 standard (§10.6) ·
+      master checklist (§10.7) · chaos diagnosis (visible below)
 
-## C. Waiting on Google (no action, just watch)
+## C. Waiting on Google (watch only)
 
-- [ ] Sitemap re-read (Last read still Sep 15 as of Oct 5 eve) → expect ~1,082–1,085
-      discovered when it flips. If still Sep 15 after 24h, ping agent.
-- [ ] Recrawl of slash-fixed + FAQ-enriched hubs.
-- [ ] Next update windows (spam ~monthly, core quarterly-ish).
+- [ ] Sitemap re-read (Last read Sep 15) → expect ~1,082–1,085 on flip
+- [ ] Recrawl of enriched hubs/tools · next update windows
+- [ ] Oct 13: full re-sweep vs Oct 5 + playbook §13 decision gates
 
-## D. Owner actions (only you can do these)
+## D. Owner actions (only you)
 
-- [ ] GSC → Request indexing ×10/day (hubs first, then new tools, then top tools).
-- [ ] GSC → Performance → Export CSV (Jul 8–31 queries×pages) → drop in `docs/`.
-- [ ] DR baseline number (Ahrefs free checker) → record in playbook §5.
-- [ ] Send outreach batches (drafts provided on request) · HARO replies · Reddit answers.
-- [ ] Directory submissions (SaaSHub, AlternativeTo, Capterra, Product Hunt).
-- [ ] Cloudflare DNS: DNS-AID records (`_index._agents`, `_a2a._agents`) — 5 min.
-- [ ] Manual Actions glance, monthly.
+- [ ] GSC Request indexing ×10/day (hubs → new/changed tools → top tools)
+- [ ] GSC Performance CSV (Jul 8–31) → `docs/` · DR baseline → playbook §5
+- [ ] Outreach sending · HARO · Reddit · directories · DNS-AID (5 min)
+- [ ] Quota-10 merge: pricing APPROVAL only (spec filed, code untouched)
+- [ ] Manual Actions glance, monthly
 
-## E. Week sprint (day-by-day — owner + due in brackets)
+## E. Queued builds (agent, in priority order)
 
-- [ ] Day 1 [owner, Oct 6]: indexing ×10 (hubs 1–10) · Performance CSV → `docs/` ·
-      DR baseline → playbook §5 · SaaSHub + AlternativeTo submitted.
-- [ ] Day 2 [agent→owner review, Oct 7]: `/press` live · outreach batch 1 (prospects
-      1–4, §12.2 SOP) sent · blog↔tool interlink pass on existing 10 posts.
-- [ ] Day 3 [agent→owner review, Oct 8]: PDF guide per §12.1 skeleton + outreach
-      batch 2 (5–8) · indexing ×10 (hubs 11–21).
-- [ ] Day 4 [agent, Oct 9]: Image + India guides · `/llms.txt` + api-catalog +
-      skills/ARD manifests + Link headers (tests green).
-- [ ] Day 5 [split, Oct 10]: Photo Editor spec frozen [agent] · HARO batch 1
-      [owner] · DNS-AID [owner, 5 min] · Reddit ×2 genuine answers [owner].
-- [ ] Day 6 [split, Oct 11]: outreach batch 3 + follow-ups [owner] · "Toolzum vs
-      Smallpdf" comparison [agent→review] · indexing ×10 (guides + defend-3).
-- [ ] Day 7 [both, Oct 12]: measure — coverage delta, sitemap Last-read, DR,
-      AI citations on §11.2 set · plan week 2.
+- [ ] Next-30 tools batch (§10.7 checklist applies from §F: same machinery)
+- [ ] Titles batch 2 (defend-3 + India/format pairs)
+- [ ] Hub upgrades per teardown spec (badges, category wheel, trust strip)
+- [ ] Blog↔tool interlinking · `/tools` editorial · comparison page
+- [ ] Visuals (screenshots/GIFs — §10.1 DoD item, zero shipped)
+- [ ] E-E-A-T (authors, reviews/testimonials)
+- [ ] CWV measurement + AI-citation baseline run
+- [ ] Cannibalization mapping (query→pages, consolidation list)
+- [ ] Consolidation pilot (§10.5) · markdown/WebMCP (P2 agent-readiness)
+- [ ] 6 pre-existing one-way-converter gaps (faq-gate backlog, unrelated)
 
-## F. Builds (agent does code, owner approves deploy)
+## F. Recurring
 
-- [ ] Trust-claims fixes (playbook §7b): reword 4 gated collisions · scrub 27
-      meta descriptions · JSON-LD source swap · extend claims-integrity test.
-- [ ] `/press` page · `/llms.txt` · `.well-known` manifests · Link headers.
-- [ ] Blog expansion (10 posts live — interlink + PDF/Image/India guides per §12.1).
-- [ ] Photo Editor (spec → build → §12.3 launch gate v2).
-- [ ] `/tools` editorial block · header/footer statics depth pass.
-- [ ] Consolidation PILOT: 1 audio-converter cluster per §10.5 (measure 2 wks before scaling).
-- [ ] Per-category tool deep-work (after hubs prove out at Oct 13 gate).
-- [ ] P2 agent-readiness: markdown negotiation, WebMCP tool registration.
+- [ ] Daily: 10 indexing requests (only changed pages) · Weekly: outreach +
+      HARO + ≤10 URLs shipped (§10.4 cap) · Monthly: DR, Manual Actions,
+      AI citations (§11.2), rankings (§11.1)
+- [ ] Deploy rule: push at 10 local commits (4 done: b7d6de12, 5ecb8a9c,
+      d98c3400, a43235d7 → 6 to go)
 
-## G. Recurring
-
-- [ ] Daily: 10 indexing requests (never re-request unchanged pages).
-- [ ] Weekly: outreach batch + follow-ups per §12.2 · HARO batch · ship ≤10 URLs (§10.4 cap).
-- [ ] Monthly: DR/domains → playbook · Manual Actions glance · AI citations on §11.2 set ·
-      rankings on §11.1 set.
-- [ ] Oct 13: full re-sweep vs Oct 5 baseline + decision gates (playbook §13).
-
-## H. Scoreboard
+## G. Scoreboard
 
 - Indexed 4 → 50+ (Nov) → 300+ (Q1) · hubs 0/21 → 21/21 · DR +10/90d ·
   AI citations 0 → 10 queries · traffic beats July peak by December.
 
-## I. Why the site felt chaotic (honest diagnosis, Oct 5 — keep this visible)
+## H. Why the site felt chaotic (keep visible)
 
-1. Scale without a single source of truth (1,059 tools but docs say 1,145;
-   65 vs 66 pro tools; GSC 1,084 vs sitemap 1,085) — re-verify cadence: monthly.
-2. History of changes without reasons (11 sitemap commits, quota flips, Sep 15
-   "separate cleanup" sat 3 weeks) — every change now gets reason + date.
-3. Overlapping docs — THIS file is the single entrance; everything hangs off it.
-4. Two wars one front (product + SEO in same deploys) — small guarded deploys only.
-5. Laggy instruments (GSC withholds breakdowns, stale reads) — one number rules:
-   indexed count, Oct 13 re-sweep.
-Antidotes in force: routes frozen · quotas frozen 90d · one queue (this file) ·
-decision records · daily/weekly/monthly rhythm.
+1. Scale without a single source of truth — re-verify cadence: monthly.
+2. Changes without reasons — every change now gets reason + date.
+3. Overlapping docs — THIS file is the entrance; all else hangs off it.
+4. Two wars one front — small guarded deploys only.
+5. Laggy instruments — one number rules: indexed count, Oct 13.
+Antidotes: routes frozen · quotas frozen 90d · one queue · decision records · rhythm.

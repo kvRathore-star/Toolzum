@@ -157,6 +157,21 @@ claims. Category intros disclose server exceptions. OG descriptions generated (c
 description; free-tier entry ("no signup to start") stays only where true for
 entry use. Same two-person + test gates as §10.3 apply.
 
+### Claim matrix (binding for every tool, present + future — Oct 6 audit: 0 violations)
+
+| Claim family | Free + local, ungated | Gated (quota/Pro/credit) or cloud/hybrid |
+|---|---|---|
+| no signup / no account | Allowed as absolute | Conditional only: "free to start…", "sign in free for…" |
+| offline / runs offline | Allowed as absolute | Qualified: core offline-capable; downloads/server check in online |
+| no limits / unlimited | n/a (nothing to limit) | Numbers disclosed (3/5/2/credits) or "fair daily limits"; "unlimited" only for Pro |
+| unlimited (bare) | Never (meaningless without a cap context) | Only as "Pro unlocks unlimited" |
+| free / 100% free | Allowed (money-true) | Allowed for entry tier; must pair with limits disclosure, never standalone |
+| local processing | Allowed (verdict-gated by test) | Cloud/hybrid get their own labels; unverified gets none |
+
+Enforcement: `claims-integrity.test.ts` (absolute forms) + `tool-content-standard`
+(all-templates guard) + `defaultFaqsFor`/`categoryFaqTemplates` branch on
+tier+verdict at render time. Re-audit quarterly with `claims5` method.
+
 **Quota doctrine (Oct 5 verdict: KEEP quotas, reform disclosure):**
 Tiers are anon 3/day → signed-up 5/day (+5 trial credits, 10-file batch) → Pro.
 Keep them: (1) server AI/transcription calls cost real money per use — unlimited
@@ -372,6 +387,65 @@ When 3+ pages serve one intent with near-identical content:
   disclosure where gated · PoweredBy engines render.
 - Tools without custom FAQs use category templates (gated by `faq-gate.ts`,
   Jaccard <0.30) — the 690 follow after the 371 prove out.
+
+### 10.7 Per-tool master checklist (binding from next batch on — Oct 6)
+
+> Every tool ships against ALL of these, verified before commit. This list is
+> the sum of every fix this session: nothing here is theory, each line cost
+> a real bug found. Test-locked items cite their guard.
+
+**A. Groundwork (before writing a word)**
+1. Record tier (anon/signup/Pro/credits) + verdict (local/cloud/hybrid) — all
+   copy decisions derive from these two facts.
+2. Identify the target query (§11.1 or demand logic) — the page must earn one query.
+3. Inventory what templates already say (category FAQs, fallbacks) — new content
+   must ADD ground, never repeat it.
+
+**B. Description**
+4. ≥120ch substantive (100 hard floor) — what it does + who/what-for + one concrete.
+5. Unique full text (no shared paragraphs anywhere).
+6. Carries the target query terms naturally.
+7. Ends with the category-specific closer (keeps generator suffix honest).
+8. No absolute signup/free claims beyond the tool's real tier.
+
+**C. Title (`seoTitle`)**
+9. ≤60ch, query-first, "Free" retained, zero absolutes beyond tier (test-locked).
+
+**D. FAQs (4–7 by importance: flagship 6–7, standard 4–5)**
+10. Every question globally unique (no 3+× sharing — validated at write time).
+11. Answers ≥60ch (40 hard floor), tool-specific mechanics named.
+12. Honest gating disclosure where applicable (credits/limits/Pro taste).
+13. Cover the essentials the template yielded: what, privacy, limits, edge case.
+
+**E. How-to pattern**
+14. Matches mechanics: file→upload, text→paste, values→enter, timers→alert,
+    games→play, measure→read, AI→generate, pick→click-generate. Never `other`
+    without custom instructions. (Full routing table + regression tests in
+    `interaction-pattern.test.ts` — extend the test with every new case.)
+
+**F. Meta / OG / JSON-LD / sitemap**
+15. Meta + OG unique and honesty-checked (generated or hand, test-covered).
+16. JSON-LD from generated honest text (never stored boilerplate).
+17. Canonical trailing-slash; sitemap inclusion verified post-build.
+
+**G. Honesty (the non-negotiables)**
+18. Signup/free claims == tier reality (anon 3 / signed 5 / pro taste / credits).
+19. Locality claims == verdict reality (local only; cloud/hybrid labeled).
+20. Limits disclosed BEFORE effort (badge/modal/description, never post-work walls).
+21. PoweredBy shows actual engines, no versions.
+22. No invented features, numbers, formats, or limits — every concrete claim
+    traceable to registry code, LIMITS doc, or measured behavior.
+
+**H. Gates (all green or it doesn't ship)**
+23. Content tests: content-standard, claims-integrity, shelves, interaction,
+    generate, sitemap, press/paywall where touched.
+24. `faq-gate --full`: no NEW failures (6 pre-existing topology gaps logged).
+25. `quality-audit.js`: 0 issues. eslint 0 errors. `tsc --noEmit` 0.
+26. Registry parses (1,143 tools). No full suite (owner order) — targeted only.
+
+**I. Post-publish**
+27. Request indexing ONLY after material change (same content = same verdict).
+28. Re-sweep compare at next checkpoint (Oct 13 cadence).
 
 ## 11. Fixed tracking sets (same queries every check — no moving goalposts)
 

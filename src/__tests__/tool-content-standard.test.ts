@@ -1,6 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { toolsRegistry } from '@/registry/tools';
 import { defaultFaqsFor } from '@/components/tools/ToolPageSEOContent';
+import { categoryFaqTemplates } from '@/components/tools/ToolPageSEOContent';
+import { classifyDependencies } from '@/lib/cloudPatterns';
+import { DOWNLOAD_PRODUCING_SLUGS } from '@/lib/downloadProducingSlugs';
+import { proSlugs } from '@/registry/tools-constants';
 
 /**
  * Tool content standard (Oct 5 agency pass): custom FAQ sets must have
@@ -55,5 +59,33 @@ describe('tool content standard', () => {
     const free = defaultFaqsFor(bySlug.get('password-generator'));
     const usage = free.find((f) => /limits|free/i.test(f.question));
     expect(usage ? usage.answer : '').toMatch(/no signup|completely free/i);
+  });
+
+  it('category templates never promise absolutes to gated tools', () => {
+    // Oct 5 catch: Utility/Converter static sentences rendered false claims
+    // on gated tools. Templates must branch like defaultFaqsFor does.
+    const ABS = [
+      /Completely free with no usage limits/,
+      /No artificial limits/,
+      /runs entirely offline/,
+      /never uploaded to any server\./,
+      /No signup or account required\./,
+      /No sign-?up needed\./,
+    ];
+    const bad: string[] = [];
+    for (const t of toolsRegistry as any[]) {
+      if (t.id?.startsWith('seo-') || (t.faqs?.length ?? 0) > 0) continue;
+      const fn = (categoryFaqTemplates as any)[t.category];
+      if (!fn) continue;
+      const faqs = typeof fn === 'function' ? fn(t) : fn;
+      const gated =
+        (proSlugs as readonly string[]).includes(t.slug) ||
+        (DOWNLOAD_PRODUCING_SLUGS as Set<string>).has(t.slug) ||
+        classifyDependencies(t.dependencies || '') !== 'local';
+      if (!gated) continue;
+      const text = faqs.map((f: any) => `${f.question} ${f.answer}`).join(' || ');
+      for (const rx of ABS) if (rx.test(text)) bad.push(`${t.slug}: ${rx.source.slice(0, 35)}`);
+    }
+    expect(bad).toEqual([]);
   });
 });

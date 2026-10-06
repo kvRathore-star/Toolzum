@@ -447,6 +447,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "pdf-to-ppt",
     category: "PDF",
     description: 'Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure. Documents stay on your device — editing and conversion run locally in your browser.',
+    seoTitle: "PDF to PPT Converter – Editable Slides Free",
     faqs: [
       { question: 'Are slides really editable?', answer: 'Yes — text, images, and vector graphics land as native PowerPoint objects, not screenshots.' },
       { question: 'Does layout survive?', answer: 'Structure preserves well; dense or unusual layouts deserve a quick review pass.' },
@@ -840,7 +841,14 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Meme Generator",
     slug: "meme-generator",
     category: "Image",
-    description: 'Adds top-and-bottom text to any uploaded image with meme-style Impact font, customizable font size, stroke width, and white border. Free to start with no signup — fair daily limits apply.',
+    description: 'Caption classic meme templates or upload your pictures — top/bottom Impact text, custom fonts, instant download with custom fonts and positioning.',
+    seoTitle: "Meme Generator Online – Free Meme Maker",
+    faqs: [
+      { question: "Is my work uploaded anywhere when using Meme Generator?", answer: "No — memeing runs locally in your browser; free tier carries fair daily limits." },
+      { question: "Top/bottom Impact text?", answer: "The classic meme style, with custom fonts and positioning available." },
+      { question: "Download format?", answer: "JPG or PNG exports, ready to post anywhere without watermarks." },
+      { question: "Where does Meme Generator process my files?", answer: "No — memeing runs locally in your browser; free tier carries fair daily limits." },
+    ],
     seoDescription: 'Free online Meme Generator — Adds top-and-bottom text to any uploaded image with meme-style Impact font, customizable font size, stroke width, and white border. ',
     dependencies: "Canvas API",
   },
@@ -1382,6 +1390,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "pdf-page-delete",
     category: "PDF",
     description: 'Removes selected page ranges from a PDF while renumbering the remaining pages and updating any internal page references. Documents stay on your device — editing and conversion run locally in your browser.',
+    seoTitle: "Delete PDF Pages – Free Online Remover",
     faqs: [
       { question: 'Does deleting renumber pages?', answer: 'Yes — remaining pages renumber and internal references update automatically.' },
       { question: 'Can I recover deleted pages?', answer: 'Not after saving — work on a copy when experimenting with large deletions.' },
@@ -1984,6 +1993,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "add-page-numbers-to-pdf",
     category: "PDF",
     description: 'Inserts page number labels at user-chosen positions (bottom-center, top-right, etc.) with configurable font, size, and starting offset. Documents stay on your device — editing and conversion run locally in your browser.',
+    seoTitle: "Add Page Numbers to PDF – Free Online",
     faqs: [
       { question: 'Where can numbers sit?', answer: 'Bottom-center, top-right, and other corners — with configurable font and size.' },
       { question: 'Can numbering start late?', answer: 'Yes — start from any number, so front matter stays unnumbered.' },
@@ -2143,6 +2153,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     isPro: false,
     description: 'Full-featured PDF editor that runs entirely in your browser — merge, split, fill forms, rotate pages, add/remove passwords, and edit metadata. Your files never leave your device — 100% private.',
+    seoTitle: "PDF Workflow Builder – Automate Tasks Free",
     faqs: [
       { question: 'What can one workflow combine?', answer: 'Merge, split, forms, rotation, passwords, and editing chained into a repeatable pipeline.' },
       { question: 'How do Pro limits work here?', answer: 'Sign in free for 2 workflow runs a day; Pro unlocks unlimited use.' },
