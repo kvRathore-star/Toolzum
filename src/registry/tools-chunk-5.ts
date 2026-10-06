@@ -267,10 +267,22 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "Random Time Generator",
     slug: "random-time-generator",
     category: "Utility",
-    description: 'Generate random times in 12-hour or 24-hour format with optional seconds and configurable time range. Input never leaves your device — everything runs locally in your browser.',
-    seoDescription: 'Free online Random Time Generator — Generate random times in 12-hour or 24-hour format with optional seconds and configurable time range. ',
+    description: 'Generate random times in 12/24-hour format with seconds and range control. Schedule surprise drills and test fixtures — free, local, no signup.',
+    seoDescription: 'Free random time generator — ranges, formats. Free, local, no signup.',
     dependencies: "Vanilla JS",
-},
+    seoTitle: "Free Random Time Generator Online",
+    instructions: [
+      { title: "1. Set the range", desc: "Start and end times bounding the output." },
+      { title: "2. Pick the format", desc: "12 or 24 hour, with or without seconds." },
+      { title: "3. Copy the time", desc: "Generate again for fresh values." },
+    ],
+    faqs: [
+      { question: 'How do I bound the range?', answer: 'Set start and end (e.g. 9:00–17:00) — outputs land inside work hours only. Overnight ranges crossing midnight need two runs.' },
+      { question: '12-hour or 24-hour output?', answer: 'Both with optional seconds: school schedules read 2:30 PM, test fixtures read 14:30:00. Match the format your system parses.' },
+      { question: 'Is it truly random?', answer: 'Cryptographically decent browser randomness — fine for drills, fixtures, and games. Not for security tokens or lottery draws.' },
+      { question: 'Do generated times leave the browser?', answer: 'No — generation runs locally in your browser. Nothing leaves your device.' },
+    ],
+  },
   {
 
     id: "gt-3",
@@ -517,10 +529,22 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "iCal Event Generator",
     slug: "ical-event-generator",
     category: "Utility",
-    description: 'Generate .ics calendar files for any event. Set summary, dates, times, description, and location — download or copy ready-to-import iCal (RFC 5545) format.',
-    seoDescription: 'Free online iCal Event Generator — Generate .ics calendar files for any event with summary, dates, times, description, and location. ',
+    description: 'Build .ics calendar files with summary, dates, location, and description — import anywhere. Send invites that land in every calendar app — free, local download.',
+    seoDescription: 'Free iCal generator — .ics with all fields. Free, local download.',
     dependencies: "Vanilla JS",
-},
+    seoTitle: "Free iCal Event Generator – ICS Files",
+    instructions: [
+      { title: "1. Fill event details", desc: "Summary, dates with timezone, location, description." },
+      { title: "2. Review the preview", desc: "Check times render correctly before exporting." },
+      { title: "3. Download .ics", desc: "Import into any calendar app or attach to invites." },
+    ],
+    faqs: [
+      { question: 'Which apps import the .ics?', answer: 'Google Calendar, Apple Calendar, and Outlook all import .ics natively — one file covers every guest regardless of their app.' },
+      { question: 'What fields should I fill?', answer: 'Summary, start/end with timezone, location, and description with the meeting link. Timezone-correct entries prevent the classic 3am-invite bug.' },
+      { question: 'Recurring events supported?', answer: 'Single events export cleanly; complex recurrence rules vary by importer — send one file per occurrence for critical meetings.' },
+      { question: 'Is event data uploaded?', answer: 'No — file building runs locally in your browser. Only the .ics download touches disk.' },
+    ],
+  },
   {
 
     id: "dt-1",
@@ -537,10 +561,22 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "Column Renamer",
     slug: "column-renamer",
     category: "Utility",
-    description: 'Rename CSV column headers in bulk using old:new mapping. Quickly relabel columns for data standardization and reporting.',
-    seoDescription: 'Free online CSV Column Renamer — Rename CSV column headers in bulk using old:new mapping. Relabel columns for data standardization. ',
+    description: 'Rename CSV headers in bulk with old:new mapping — standardize client exports fast. Fix 40 messy columns before import — local parsing, free, no signup.',
+    seoDescription: 'Free column renamer — bulk header mapping. Local, free, no signup.',
     dependencies: "Vanilla JS",
-},
+    seoTitle: "Free CSV Column Renamer Online",
+    instructions: [
+      { title: "1. Upload the CSV", desc: "Client export with messy headers." },
+      { title: "2. Map old to new", desc: "One old:new pair per line; unmapped keep names." },
+      { title: "3. Download renamed CSV", desc: "Import the clean file where needed." },
+    ],
+    faqs: [
+      { question: 'How does the mapping work?', answer: 'Enter old:new pairs per line (CustName:name) — all 40 headers rename in one pass. Unmapped columns keep original names, so partial maps are safe.' },
+      { question: 'What about duplicate new names?', answer: 'Duplicates get flagged before applying — two columns can\'t share one header. Rename or drop one side first.' },
+      { question: 'Does data change too?', answer: 'No — only header row rewrites; all rows pass through byte-identical. Verify with a diff on the first run.' },
+      { question: 'Is my CSV uploaded?', answer: 'No — parsing runs locally in your browser. Data never leaves your device.' },
+    ],
+  },
   {
 
     id: "dt-3",
@@ -653,10 +689,22 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "CSV Row Sorter",
     slug: "csv-row-sorter",
     category: "Utility",
-    description: 'Sort CSV rows by any column in ascending or descending order. Quickly organize your data for analysis and reporting.',
-    seoDescription: 'Free online CSV Row Sorter — Sort CSV rows by any column in ascending or descending order. Organize data for analysis. ',
+    description: 'Sort CSV rows by any column ascending or descending — dates, numbers, names handled right. Order 10,000 sales rows in seconds — local parsing, free, no signup.',
+    seoDescription: 'Free CSV sorter — any column, either direction. Local, free, no signup.',
     dependencies: "Vanilla JS",
-},
+    seoTitle: "Free CSV Row Sorter Online",
+    instructions: [
+      { title: "1. Upload the CSV", desc: "Any size that fits comfortably in browser memory." },
+      { title: "2. Pick column and direction", desc: "Ascending or descending; numerics and dates handled natively." },
+      { title: "3. Download sorted CSV", desc: "Use multi-pass sorting for secondary keys." },
+    ],
+    faqs: [
+      { question: 'Do numbers sort numerically?', answer: 'Yes — numeric columns sort by value (2 before 10), dates chronologically, text alphabetically. Mixed columns fall back to text order with a warning.' },
+      { question: 'How large a file sorts?', answer: 'Tens of thousands of rows sort instantly locally. Past ~100k rows, split by month first for smoother handling.' },
+      { question: 'Can I sort by multiple columns?', answer: 'Single-column per pass: sort the secondary key first, then the primary — stable sorting preserves the earlier order within ties.' },
+      { question: 'Is my data uploaded?', answer: 'No — sorting runs locally in your browser. Data never leaves your device.' },
+    ],
+  },
   {
 
     id: "dt-11",
