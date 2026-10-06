@@ -93,7 +93,7 @@ export function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern
   // steps, not enter-values steps (Oct 5 audit: 14 tools like yaml-json
   // showed "fill in numbers, dates, measurements"). Unit/value converters
   // (length, currency, px-rem…) fall through to enter-values below.
-  if (n.includes('converter') && !hasFileInput && /(text|code|css|scss|less|yaml|json|xml|markdown|html|case|phonetic|ascii|unicode|encoding|hex|jsx|tsx|sql|proto|schema)/i.test(`${n} ${s}`)) {
+  if (n.includes('converter') && !hasFileInput && /(text|code|css|scss|less|yaml|json|xml|markdown|html|case|phonetic|ascii|unicode|encoding|hex|jsx|tsx|sql|proto|schema|postman|openapi)/i.test(`${n} ${s}`)) {
     return { pattern: 'paste-text-process-copy' };
   }
   if (n.includes('calculator') || n.includes('converter') && !hasFileInput) {
@@ -104,8 +104,10 @@ export function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern
   }
 
   // AI pattern: only match actual AI/API dependencies, not Web Audio API or fetch API
+  // Oct 6: crypto/dns/lookup/reader deps (OTP, JWK, DNS, WHOIS, file viewing)
+  // matched the loose 'api' fallback and showed AI-generate steps — excluded.
   const aiApiDeps = ['openai', 'anthropic', 'gemini', 'huggingface', 'replicate', 'stability', 'ai api', 'ai provider', 'real-esrgan', 'insightface', 'whisper', 'cf vectorize', 'stable diffusion'];
-  const isAiDep = aiApiDeps.some(d => dep.includes(d)) || (dep.includes('api') && !dep.includes('web audio') && !dep.includes('fetch api') && !dep.includes('vanilla') && !dep.includes('canvas'));
+  const isAiDep = aiApiDeps.some(d => dep.includes(d)) || (dep.includes('api') && !dep.includes('web audio') && !dep.includes('fetch api') && !dep.includes('vanilla') && !dep.includes('canvas') && !dep.includes('crypto') && !dep.includes('dns') && !dep.includes('rdap') && !dep.includes('whois') && !dep.includes('lookup') && !dep.includes('filereader') && !dep.includes('postal') && !dep.includes('ifsc') && !dep.includes('crt.sh') && !dep.includes('mailinator') && !dep.includes('maxmind'));
   if (isAiDep || cat === 'ai') {
     return { pattern: 'ai-generate' };
   }
@@ -140,15 +142,15 @@ export function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern
   // through everything above (currently 'other') — they cannot hijack tools
   // already routed to upload/ai/click patterns.
   // Text/data tools take pasted content, not typed numbers.
-  if (!hasFileInput && /(sort|slug|split|dedup|filter|analyz|shorten|anonymiz|extract|renam|merg|transpos|statistic|translat|null|morse|braille|csv)/i.test(`${n} ${s}`)) {
+  if (!hasFileInput && /(sort|slug|split|dedup|filter|analyz|shorten|anonymiz|extract|renam|merg|transpos|statistic|translat|null|morse|braille|csv|viewer)/i.test(`${n} ${s}`)) {
     return { pattern: 'paste-text-process-copy' };
   }
   // X-to-Y with text formats and no file input (json-to-csv, csv-to-json…).
   if (!hasFileInput && s.includes('-to-') && /(json|xml|csv|yaml|yml|markdown|md|html|txt|text)/i.test(s)) {
     return { pattern: 'paste-text-process-copy' };
   }
-  // Form-fill/lookup tools take entered values (validators, checkers, builders, finders).
-  if (!hasFileInput && /(valid|verify|checker|parser|finder|builder)/i.test(`${n} ${s}`)) {
+  // Form-fill/lookup tools take entered values (validators, checkers, builders, finders, lookups).
+  if (!hasFileInput && /(valid|verify|checker|parser|finder|builder|lookup)/i.test(`${n} ${s}`)) {
     return { pattern: 'enter-values-result' };
   }
   // Timers count down/up and alert — dedicated honest steps.

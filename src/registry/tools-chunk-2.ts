@@ -1189,6 +1189,12 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "backslash-escape",
     category: "Developer",
     description: 'Escape or unescape special characters with backslashes. Handles newlines, tabs, quotes, and more. Code never leaves your device — formatting and validation run locally in your browser.',
+    faqs: [
+      { question: "What gets escaped?", answer: "Quotes, backslashes, and newlines for safe embedding anywhere." },
+      { question: "Double-escaping trap?", answer: "Already-escaped input flagged — escaping twice corrupts output." },
+      { question: "Which escaping styles are covered?", answer: "JS and JSON-style escaping plus the other common string variants." },
+      { question: "Is my text uploaded anywhere when using Backslash Escape / Unescape?", answer: "No — escaping runs locally in your browser, free with no signup." },
+    ],
     seoDescription: 'Free online Backslash Escape Unescape — Escape or unescape special characters with backslashes. Handles newlines, tabs, quotes, and more. ',
     dependencies: "None",
     showInCategory: false,
@@ -1710,6 +1716,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "pdf-background-color",
     category: "PDF",
     description: 'Add a subtle color tint to all pages in a PDF document. Upload your PDF and pick a background color.',
+    seoTitle: "PDF Background Color – Free Customizer",
     seoDescription: 'Free online PDF Background Color \u2014 Add a subtle color tint to all pages in a PDF document. ',
     dependencies: "pdf-lib",
     faqs: [

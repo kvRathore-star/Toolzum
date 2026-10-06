@@ -375,7 +375,10 @@ When 3+ pages serve one intent with near-identical content:
 
 - **4–7 FAQs per tool with custom sets** (9 is bloat, 3 is thin): flagship/complex
   tools earn 6–7, standard tools 4–5. Count follows importance, never template.
-  Locked by `tool-content-standard.test.ts`.
+- **Complexity rule (Oct 6):** single-function tools get exactly 4; multi-mode
+  tools (editors, builders, converters with options) get 5–6; flagships with
+  pricing/compliance/Pro dimensions get 6–7. Never pad to hit a number — each
+  added FAQ must answer a question users actually ask.
 - **No question shared by 3+ tools** (test-locked). Pairs tolerated, trios fail
   the build. (Oct 5: eliminated a 46x-shared question class.)
 - **Answers ≥40 chars**, tool-specific mechanics named (FFmpeg WASM, pdf-lib,

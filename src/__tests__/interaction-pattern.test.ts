@@ -34,7 +34,22 @@ describe('deriveInteractionPattern', () => {
       const n = t.name.toLowerCase();
       if (!n.includes('speech')) return false;
       return deriveInteractionPattern(t).pattern === 'upload-convert-download';
-    });
+  it('routes non-AI API tools away from ai-generate (Oct 6 crypto/dns fix)', () => {
+    // The loose dep.includes('api') fallback showed AI steps on lookups,
+    // generators, and viewers. Excluded families route by real mechanics.
+    for (const slug of ['otp-generator', 'pin-generator', 'jwk-generator', 'oauth-pkce-generator']) {
+      expect(deriveInteractionPattern(bySlug(slug)).pattern).toBe('click-generate');
+    }
+    for (const slug of ['ifsc-code-lookup', 'india-pincode-finder', 'large-text-viewer']) {
+      const p = deriveInteractionPattern(bySlug(slug)).pattern;
+      expect(['enter-values-result', 'paste-text-process-copy']).toContain(p);
+    }
+    // Genuine AI tools keep ai-generate (no regression from the tightening).
+    for (const slug of ['resume-ats-score-checker', 'ai-chat-pdf', 'translate-pdf', 'pronunciation-tool']) {
+      expect(deriveInteractionPattern(bySlug(slug)).pattern).toBe('ai-generate');
+    }
+  });
+});
     expect(bad.map(t => t.slug)).toEqual([]);
   });
 

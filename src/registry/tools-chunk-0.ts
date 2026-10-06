@@ -185,6 +185,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     slug: "heic-to-pdf",
     dependencies: "pdf-lib, heic2any",
+    seoTitle: "HEIC to PDF Converter – Free Online",
     faqs: [
       { question: "What does HEIC to PDF do?", answer: "Converts HEIC files to PDF format \u2014 Apple device photos to document sharing, printing, and archival with consistent formatting. All conversion happens locally in your browser with no file size limits." },
       { question: "Where does PDF fit best?", answer: "document sharing, printing, and archival with consistent formatting." },
@@ -216,6 +217,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "pdf-to-word",
     category: "PDF",
     description: 'Extract PDF content into editable DOCX files. Preserves formatting, tables, and layout — review complex layouts after conversion.',
+    seoTitle: "PDF to Word Converter – Free Online",
     dependencies: "pdf2docx / PDF.js",
     seoDescription: 'Convert PDF to Word online free — editable DOCX with layout kept. Know the limits first. ',
     faqs: [
@@ -307,6 +309,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "pdf-compressor",
     dependencies: "Ghostscript / PDF-lib",
     seoDescription: 'Free online PDF Compressor — reduce PDF file size by up to 90% with three compression tiers. Compress embedded images, remove metadata, optimize streams. ',
+    seoTitle: "Compress PDF Online – Free, Small Files",
     faqs: [
       { question: "What are the three compression tiers?", answer: "Low compression preserves maximum quality with modest size reduction. Medium balances quality and file size. High achieves maximum compression (up to 90% smaller) with some quality trade-off, ideal for email attachments and upload limits." },
       { question: "What is the maximum PDF file size I can compress?", answer: "PDFs up to 50 MB are supported. Very large files with many high-resolution images may take longer to process, but the compression works reliably across all sizes within the limit." },
@@ -321,6 +324,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "word-to-pdf",
     category: "PDF",
     description: 'Converts .docx and .doc files to PDF while preserving fonts, tables, images, headers, and embedded formatting. Uses cloud-based processing.',
+    seoTitle: "Word to PDF Converter – Free Online",
     seoDescription: 'Free online Word to PDF — convert DOCX/DOC with fonts, tables, and images intact. Server-side for fidelity. ',
     dependencies: "None",
     faqs: [
@@ -353,6 +357,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "jpg-to-pdf",
     category: "PDF",
     description: 'Convert JPG images to PDF format in your browser. Documents stay on your device — editing and conversion run locally in your browser.',
+    seoTitle: "JPG to PDF Converter – Free Online",
     seoDescription: 'Free online JPG to PDF — merge JPG photos into one multi-page PDF in your order. Lossless, private, no uploads. ',
     dependencies: "jsPDF / Canvas API",
     faqs: [
@@ -432,6 +437,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "pdf-to-jpg",
     category: "PDF",
     description: 'Convert PDF images to JPG format in your browser. Documents stay on your device — editing and conversion run locally in your browser.',
+    seoTitle: "PDF to JPG Converter – Free Online",
     seoDescription: 'Free online PDF to JPG — Renders each PDF page as a high-quality JPG image, preserving layout, fonts, and embedded graphics exactly as they appear. ',
     dependencies: "PDF.js / Canvas API",
     faqs: [
@@ -589,6 +595,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "pdf-merger",
     category: "PDF",
     description: 'Combines two or more PDF files into one contiguous document with a drag-and-drop reorder interface for the input list. Legal assistants compiling.',
+    seoTitle: "Merge PDF Online – Combine Files Free",
     dependencies: "pdf-lib",
     seoDescription: 'Merge PDF files online free — combine multiple PDFs into one document with drag-and-drop reordering. No uploads, 100% secure and private.',
     faqs: [
@@ -883,6 +890,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "gst-calculator",
     category: "indian-utilities",
     description: 'Computes GST-inclusive and GST-exclusive amounts for Indian tax slabs (5%, 12%, 18%, 28%) with automatic HSN/SAC code hints.',
+    seoTitle: "GST Calculator India – Free Online",
     dependencies: "Vanilla JS",
     seoDescription: 'Free online GST calculator for India — compute GST inclusive and exclusive prices for 5%, 12%, 18%, and 28% slabs. Instant, accurate, and 100% client-side.',
     faqs: [
@@ -1174,6 +1182,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "pdf-to-epub",
     category: "PDF",
     description: 'Convert PDF documents to EPUB format for e-book readers right in your browser. Preserves layout, images, and chapter structure — nothing uploaded.',
+    seoTitle: "PDF to EPUB Converter – Free Online",
     seoDescription: 'Free online PDF to EPUB — reflowable ebooks for Kindle and readers, with chapters and images kept. ',
     dependencies: "JSZip / pdf-lib",
     faqs: [
@@ -2240,6 +2249,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "passport-photo-india",
     category: "indian-utilities",
     description: 'Create a compliant 3.5x4.5 cm Indian passport photo from any uploaded image. Auto-crops with proper face positioning and background standards for passport, visa, and OCI card applications.',
+    seoTitle: "Passport Photo Maker India – Free Online",
     seoDescription: 'Free online Indian Passport Photo Maker — crop any photo to compliant 3.5x4.5 cm with auto face positioning and clean background. ',
     dependencies: "Canvas API / react-cropper",
     faqs: [
@@ -2256,6 +2266,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "aadhaar-wallet-cropper",
     category: "indian-utilities",
     description: 'Crops Aadhaar card images to the standard 3.5 x 3.5 cm wallet-photo size with automatic face detection using OpenCV Haar cascades. All processing is local and private.',
+    seoTitle: "Aadhaar Card Photo Cropper – Free Online",
     seoDescription: 'Free online Aadhaar Wallet Cropper — Crop Aadhaar card photos to standard 3.5x3.5 cm wallet size with auto face detection using OpenCV Haar cascades. 100% private, no uploads.',
     dependencies: "Canvas API",
     faqs: [
@@ -2337,6 +2348,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "pan-card-resizer",
     category: "indian-utilities",
     description: 'Resizes PAN card images to standard 3.5 x 2.5 cm dimensions with automated cropping and proper margins for official documentation. All processing is local and private.',
+    seoTitle: "PAN Card Photo Resizer – Free Online",
     seoDescription: 'Free online PAN Card Resizer — fit PAN photos to 3.5x2.5 cm with auto crop and proper margins. Private, in-browser. ',
     dependencies: "Canvas API",
     faqs: [
