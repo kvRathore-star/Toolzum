@@ -197,3 +197,14 @@ Caught live: correcting shortener deps to TinyURL/is.gd flipped both to
 to paste-text, locked test green.
 Gates: tsc 0 · eslint 0 errors · 23 tests green · faq-gate 0 new ·
 quality-audit 0. Pro tier now 65/65 on FAQs + how-to + meta.
+
+## Mass how-to round (Oct 6 — 532 tools, 0 identical blocks)
+
+All remaining FAQ'd tools got tool-specific 3-steps: format/action nouns
+from names, real engines from deps, caps/quota in final steps; dev/utility
+hard cases hand-verbed (parse/inspect/debug/normalize/lint/reindent…);
+calculators got standard input sets + scenario step; 25 handcrafted
+specials (timers, recorders, TTS/STT, multi-tools). Utility/dev no longer
+on generic category templates anywhere in the FAQ'd set.
+Gates: tsc 0 · eslint 0 · 23 tests green · faq-gate 0 new · quality-audit 0.
+Registry: 605 tools with custom instructions.
