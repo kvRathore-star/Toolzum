@@ -57,7 +57,7 @@ export function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern
   const fileDeps = ['ffmpeg', 'pdf-lib', 'heic2any', 'jszip', 'cropper.js', 'exifr', 'tesseract', 'pdf2json', 'pdf2docx', 'sheetjs', 'jspdf', 'pptxgenjs', 'html2canvas', 'canvas api', 'sharp'];
   const hasFileInput = fileDeps.some(d => dep.includes(d)) || ['pdf', 'image', 'video', 'audio', 'archive', 'document', 'transcription'].includes(cat);
 
-  if (hasFileInput && (n.includes('compress') || n.includes('merge') || n.includes('split') || n.includes('lock') || n.includes('unlock') || n.includes('stamp') || n.includes('watermark') || n.includes('protect') || n.includes('rotate') || n.includes('extract') || n.includes('resize') || n.includes('crop') || n.includes('remove') || n.includes('enhance') || n.includes('trim') || n.includes('cut') || n.includes('filter') || n.includes('batch') || n.includes('record') || n.includes('add text') || n.includes('add page') || n.includes('normaliz') || n.includes('reduc') || n.includes('blur') || n.includes('redact') || n.includes('anonymiz') || n.includes('pixelat') || n.includes('screenshot') || n.includes('snapshot') || n.includes('capture') || n.includes('thumbnail') || n.includes('background') || n.includes('tint') || n.includes('bates') || n.includes('numbering') || n.includes('delete') || n.includes('annotat') || n.includes('bookmark') || n.includes('workflow') || n.includes('whiteout') || n.includes('create') || n.includes('add image') || n.includes('attach') || n.includes('advanced') || n.includes('suite') || n.includes('toolbox') || n.includes('bundle') || n.includes('strip') || n.includes('inject'))) {
+  if (hasFileInput && (n.includes('compress') || n.includes('merge') || n.includes('split') || n.includes('lock') || n.includes('unlock') || n.includes('stamp') || n.includes('watermark') || n.includes('protect') || n.includes('rotate') || n.includes('extract') || n.includes('resize') || n.includes('crop') || n.includes('remove') || n.includes('enhance') || n.includes('trim') || n.includes('cut') || n.includes('filter') || n.includes('batch') || n.includes('record') || n.includes('add text') || n.includes('add page') || n.includes('normaliz') || n.includes('reduc') || n.includes('blur') || n.includes('redact') || n.includes('anonymiz') || n.includes('pixelat') || n.includes('screenshot') || n.includes('snapshot') || n.includes('capture') || n.includes('thumbnail') || n.includes('background') || n.includes('tint') || n.includes('bates') || n.includes('numbering') || n.includes('delete') || n.includes('annotat') || n.includes('bookmark') || n.includes('workflow') || n.includes('whiteout') || n.includes('create') || n.includes('add image') || n.includes('attach') || n.includes('advanced') || n.includes('suite') || n.includes('toolbox') || n.includes('bundle') || n.includes('strip') || n.includes('inject') || n.includes('mask'))) {
     return { pattern: 'upload-process-download' };
   }
 
@@ -149,8 +149,8 @@ export function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern
   if (!hasFileInput && s.includes('-to-') && /(json|xml|csv|yaml|yml|markdown|md|html|txt|text)/i.test(s)) {
     return { pattern: 'paste-text-process-copy' };
   }
-  // Form-fill/lookup tools take entered values (validators, checkers, builders, finders, lookups).
-  if (!hasFileInput && /(valid|verify|checker|parser|finder|builder|lookup)/i.test(`${n} ${s}`)) {
+  // Form-fill/lookup tools take entered values (validators, checkers, builders, finders, lookups, helpers).
+  if (!hasFileInput && /(valid|verif|checker|parser|finder|builder|lookup|helper)/i.test(`${n} ${s}`)) {
     return { pattern: 'enter-values-result' };
   }
   // Timers count down/up and alert — dedicated honest steps.
