@@ -69,6 +69,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Convert fetch, XHR, and HTTP client snippets to equivalent curl commands — headers and auth preserved for terminal debugging sessions.',
     seoTitle: "Code to cURL Converter – Free Online",
+    instructions: [
+      { title: "1. Paste URL", desc: "Paste URL text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Convert", desc: "Pick direction and target." },
+      { title: "3. Copy converted", desc: "Copy the converted output." },
+    ],
     faqs: [
       { question: "Which client code converts?", answer: "Fetch, XHR, and other popular HTTP client snippets become equivalent curl commands." },
       { question: "Are headers preserved?", answer: "Yes — auth tokens, content types, and custom headers carry into flags." },
@@ -127,6 +132,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Validate package.json for required fields, semver format, and dependency presence.',
     seoDescription: 'Free online package.json Validator \u2014 Validate name, version, scripts, and dependencies. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for package.json Validator." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "What fields does it validate?", answer: "Required fields (name, version), semver format compliance, valid dependency declarations, script definitions, and common best practices like license and description fields." },
       { question: "Does it check for security issues?", answer: "It validates dependency syntax and detects common issues like missing version ranges, duplicate dependencies, and invalid package names. For vulnerability scanning, use npm audit." },
@@ -164,6 +174,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Paste an AWS IAM policy JSON to check for wildcard resources, overly broad actions, and full admin access.',
     seoDescription: 'Free online AWS IAM Policy Analyzer \u2014 Check IAM policies for wildcard resources, overly broad actions, and admin access. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste source for AWS IAM Policy Analyzer", desc: "Paste source for AWS IAM Policy Analyzer into the input area. Nothing runs until you trigger it." },
+      { title: "2. Analyze", desc: "Analyze and read every finding." },
+      { title: "3. Fix and rerun", desc: "Fix flagged items and re-run." },
+    ],
     faqs: [
       { question: "What security issues does it detect?", answer: "It flags wildcard resources (Resource: *), overly broad actions (Action: *), full admin access (AdministratorAccess), and policies that grant access to sensitive services like IAM, STS, or Organizations without restrictions." },
       { question: "What format should the policy be in?", answer: "Paste the IAM policy as valid JSON. This can be an inline policy, an attached managed policy, or the policy document from the AWS IAM console." },
@@ -180,6 +195,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert SCSS variables and nesting to plain CSS. Files are converted locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online SCSS to CSS Converter \u2014 Convert SCSS variables and nesting to plain CSS. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste SCSS", desc: "Paste or drop SCSS source text into the input area." },
+      { title: "2. Convert to CSS", desc: "Run the conversion; review errors or warnings line by line." },
+      { title: "3. Copy CSS", desc: "Copy the converted output for your project." },
+    ],
     faqs: [
       { question: "What SCSS features are converted?", answer: "Variables ($var to var(--var)), nesting (flattened to descendant selectors), @extend (inlined), @mixin (expanded), and @import (included). Output is plain CSS3." },
       { question: "Does it handle SCSS mixins?", answer: "Yes. @mixin definitions are expanded at each @include point. The output CSS contains the actual CSS properties from the mixin body, not CSS-level abstractions." },
@@ -197,6 +217,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Stylus to CSS Converter \u2014 Convert Stylus syntax to plain CSS. ',
     dependencies: "None",
     showInCategory: false,
+    instructions: [
+      { title: "1. Paste Stylus", desc: "Paste or drop Stylus source text into the input area." },
+      { title: "2. Convert to CSS", desc: "Run the conversion; review errors or warnings line by line." },
+      { title: "3. Copy CSS", desc: "Copy the converted output for your project." },
+    ],
     faqs: [
       { question: "What Stylus features are converted?", answer: "Stylus syntax (indentation-based, optional braces/semicolons, variable $prefix) is converted to standard CSS with braces, colons, and proper nesting expansion." },
       { question: "Does it handle Stylus variables?", answer: "Yes. Stylus variables (varName = value) are converted to CSS custom properties (--var-name: value) or hardcoded values depending on the use case." },
@@ -213,6 +238,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert Tailwind utility classes to plain CSS. Files are converted locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Tailwind to CSS Converter \u2014 Convert Tailwind utility classes to plain CSS. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste Tailwind", desc: "Paste or drop Tailwind source text into the input area." },
+      { title: "2. Convert to CSS", desc: "Run the conversion; review errors or warnings line by line." },
+      { title: "3. Copy CSS", desc: "Copy the converted output for your project." },
+    ],
     faqs: [
       { question: "What Tailwind features are converted?", answer: "Utility classes (flex, p-4, text-lg, bg-blue-500) are converted to their CSS equivalents (display: flex, padding: 1rem, font-size: 1.125rem, background-color: #3b82f6)." },
       { question: "Does it handle responsive prefixes?", answer: "Yes. sm:, md:, lg:, xl: prefixes are converted to the appropriate @media queries in the output CSS." },
@@ -229,6 +259,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Convert Protocol Buffer .proto definitions to JSON Schema and back — bridge gRPC APIs and JSON tooling for docs, validators, and gRPC tests.',
     seoTitle: "Proto to JSON Schema Converter Free",
+    instructions: [
+      { title: "1. Paste source for Proto Schema Converter", desc: "Paste source for Proto Schema Converter into the input area. Nothing runs until you trigger it." },
+      { title: "2. Convert", desc: "Pick direction and target." },
+      { title: "3. Copy converted", desc: "Copy the converted output." },
+    ],
     faqs: [
       { question: "Which direction?", answer: "Both — .proto definitions to JSON Schema and back in one tool." },
       { question: "What are .proto files?", answer: "Protocol Buffers interfaces — compact typed contracts for gRPC APIs." },
@@ -247,6 +282,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Decode protobuf wire format hex bytes into readable field structure. Shows field numbers, wire types, varints, strings, nested messages, and raw hex.',
     seoDescription: 'Free online Protobuf Decoder — Decode protobuf wire format hex to structured fields. Shows field numbers, types, varints, strings, and nested messages. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste Protobuf", desc: "Paste Protobuf text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Decode", desc: "Decode back to readable form." },
+      { title: "3. Copy decoded", desc: "Copy the decoded output." },
+    ],
     faqs: [
       { question: "What is protobuf wire format?", answer: "Protocol Buffers (protobuf) serializes structured data into binary. Each field is encoded as a tag (field number + wire type) followed by the value. Wire types: 0=varint, 1=64-bit, 2=length-delimited (strings, nested messages), 5=32-bit." },
       { question: "How do I find protobuf hex to decode?", answer: "Capture network traffic with browser DevTools or Wireshark, then copy the hex bytes from the request/response body. gRPC and HTTP/2 APIs commonly use protobuf encoding." },
@@ -283,6 +323,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Test JavaScript template literals live — ${} interpolation, nesting, and escaping, evaluated instantly with instant error highlighting.',
     seoTitle: "String Template Tester – Free Online",
+    instructions: [
+      { title: "1. Paste source for String Template Tester", desc: "Paste source for String Template Tester into the input area. Nothing runs until you trigger it." },
+      { title: "2. Test", desc: "Run the test and read each result." },
+      { title: "3. Fix and rerun", desc: "Fix failures and re-run." },
+    ],
     faqs: [
       { question: "What syntax works?", answer: "JavaScript template literals — ${} interpolation, nesting, and escaping, evaluated live." },
       { question: "Errors shown how?", answer: "Instantly, with the failing expression highlighted in the editor." },
@@ -300,6 +345,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Generate realistic fake data — names, emails, numbers, addresses — in common formats for testing and demos for demos, seeding, and UI tests.',
     seoTitle: "Test Data Generator – Fake Data Free",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Test Data first." },
+      { title: "2. Generate", desc: "Create your Test Data with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What data comes out?", answer: "Names, emails, numbers, addresses — plausibly formatted but entirely fake." },
       { question: "Which formats?", answer: "Common developer formats for seeding databases and demos: CSV, JSON, and SQL inserts." },
@@ -317,6 +367,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate monthly mortgage payments with amortization schedule. Enter loan amount, interest rate, and term to see total interest paid. Figures never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free mortgage calculator — monthly payment, total interest, and amortization. Test rates and terms. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter home price, down payment, rate, and years." },
+      { title: "2. Read the monthly payment", desc: "Check the monthly payment with lifetime interest." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "How is the monthly payment calculated?", answer: "Standard amortization: M = P·r(1+r)^n/((1+r)^n−1). Example: $300,000 at 7% for 30 years (360 months, r=0.00583) → ≈$1,996/month, ≈$418,000 total interest — more interest than principal." },
       { question: "15-year vs 30-year — what's the real difference?", answer: "On $300k at 7%: 30-year pays ≈$1,996/mo and $418k interest; 15-year pays ≈$2,697/mo but only ≈$185k interest. The 15-year costs $700/mo more and saves $233k — if cash flow allows." },
@@ -334,6 +389,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate Annual Recurring Revenue from subscription revenue, expansion revenue, and churn. Essential for SaaS businesses tracking growth. Numbers never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online ARR Calculator — build the ARR bridge (new + expansion − churn) and avoid double-counting. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter MRR with new, expansion, and churn splits." },
+      { title: "2. Read the ARR", desc: "Check the ARR with new-vs-churn split." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "How is ARR built?", answer: "ARR bridge: start ARR + new + expansion − churned − contraction. Example: $1.0M + $300k + $150k − $200k = $1.25M ARR. Every dollar must sit in exactly one bucket." },
       { question: "ARR vs revenue — what's the difference?", answer: "ARR is contracted run-rate; revenue is recognized cash. A $120k annual deal signed in December adds $120k ARR immediately but ~$10k December revenue. Investors value the ARR; accountants audit the revenue." },
@@ -351,6 +411,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate compound interest with regular contributions. See how your money grows over time with different compounding frequencies. Figures never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online Compound Interest Calculator — Calculate compound interest with regular contributions. See how your money grows over time with different compounding frequencies. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter principal, rate, frequency, and time." },
+      { title: "2. Read the grown value", desc: "Check the grown value with interest share." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What compounding frequencies are supported?", answer: "Annual, semi-annual, quarterly, monthly, and daily compounding. More frequent compounding produces slightly higher returns — the calculator shows the difference between each frequency." },
       { question: "Can I include regular contributions?", answer: "Yes. Add monthly or annual contributions to see how consistent investing accelerates growth. The tool calculates compound interest on both the principal and accumulated contributions." },
@@ -367,6 +432,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate monthly car loan payments, total interest, and total cost. Enter loan amount, rate, and term for a complete auto financing picture. Figures never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free car loan calculator — payment, total interest, and true cost with depreciation reality-check. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter principal, rate, and tenure." },
+      { title: "2. Read the repayment figure", desc: "Check the repayment figure with total interest." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "How much car can I afford?", answer: "The 20/4/10 rule: 20% down, max 4-year term, total car costs under 10% of gross income. $6,000/mo income → ≈$600/mo all-in (payment + insurance + fuel). A $30,000 car at 8%/48mo ≈ $732/mo payment alone — over budget before insurance." },
       { question: "What loan term should I pick?", answer: "48 months max for new cars, 36 for used. 72–84 month terms lower the payment but keep you underwater (owing more than resale) for years — a $30k car at 8%/84mo costs ≈$9,200 in interest vs ≈$5,100 at 48mo." },
@@ -394,6 +464,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate customer churn rate by dividing customers lost by total customers. Monitor retention health for your subscription business. Numbers never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online Churn Calculator — logo vs revenue churn, net revenue retention, and cohort math with examples. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter lost and starting customers." },
+      { title: "2. Read the churn rate", desc: "Check the churn rate with lost-revenue math." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "Logo churn vs revenue churn?", answer: "Logo churn = customers lost ÷ starting customers (1,000 → 950 = 5%). Revenue churn weights by MRR — losing ten $10 plans hurts less than one $1,000 plan. Track both; revenue churn decides survival." },
       { question: "What is net revenue retention?", answer: "NRR = (start MRR + expansion − churn − contraction) ÷ start MRR. Example: ($100k + $15k − $8k − $2k) ÷ $100k = 105% — growing without adding a single customer. Best-in-class SaaS runs 110–130%." },
@@ -421,6 +496,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate savings and final price after a percentage discount. Perfect for shopping, sales, and budget planning. Figures never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free discount calculator — final price, savings, and stacked-discount math for smart shopping. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste your content", desc: "Drop the text into Discount Calculator — full documents are fine, length is free." },
+      { title: "2. Read the counts", desc: "Check each metric row; toggle options (with/without spaces) to match your target definition." },
+      { title: "3. Copy what you need", desc: "Copy individual figures or the full breakdown for your brief or caption limits." },
+    ],
     faqs: [
       { question: "How do stacked discounts work?", answer: "Multiply, don't add: 30% then 20% off $100 → $100 × 0.70 × 0.80 = $56 (44% total, not 50%). Retailers stack precisely because most shoppers add." },
       { question: "Is 50% off plus an extra 20% off really 60%?", answer: "Yes in this case: $100 × 0.50 × 0.80 = $40 paid, i.e., 60% off. Stacking multiplies remainders: (1−0.5)(1−0.2) = 0.40. The calculator chains any discount sequence correctly — never just add the percentages." },
@@ -438,6 +518,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert hourly wage to annual salary. Enter hourly rate and hours per week to see your projected yearly income. Figures never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free hourly-to-salary converter — annualize wages (2080-hr rule), compare offers, price freelance rates. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter CTC with city and regime." },
+      { title: "2. Read the in-hand figure", desc: "Check the in-hand figure with deduction split." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "How do I annualize an hourly wage?", answer: "Multiply by 2,080 (40 hrs × 52 weeks): $35/hr → $72,800/year. For 37.5-hr weeks use 1,950 ($68,250). These assume zero unpaid time off — subtract 2–3 weeks for reality." },
       { question: "Hourly offer vs salary offer — how to compare?", answer: "Annualize the hourly, then add benefits gap: salaried roles typically add 20–30% in health insurance, PTO, retirement match. $35/hr contracting ($72.8k, no benefits) ≈ $55–58k salaried equivalent." },
@@ -475,6 +560,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate Monthly Recurring Revenue from customer count and average revenue per account (ARPA), with new, expansion, churned, and contraction MRR broken out so net growth is visible. Example: 120 customers at $49 ARPA = $5,880 MRR. Numbers never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online MRR Calculator — compute Monthly Recurring Revenue, net new MRR, and ARR from customers and ARPA, with churn and expansion broken out. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter customers, ARPA, and churn." },
+      { title: "2. Read the MRR", desc: "Check the MRR with new-vs-churn split." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "How is MRR calculated?", answer: "MRR = paying customers × average revenue per account (ARPA). Example: 120 customers at $49 ARPA gives $5,880 MRR. Enter your two numbers and the result updates instantly." },
       { question: "What is net new MRR?", answer: "Net new MRR = new + expansion − churned − contraction MRR. Example: $800 new + $200 expansion − $300 churned − $100 contraction = $600 net new MRR for the month. Positive net new means the business is growing." },
@@ -502,6 +592,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Compare the total cost of renting versus buying a home over time. Factor in mortgage payments, rent, and equity growth. Figures never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free rent-vs-buy calculator — break-even horizon with equity, appreciation, and opportunity cost. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter monthly rent with city and split." },
+      { title: "2. Read the payable split", desc: "Check the payable split with deposit math." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "How is the break-even horizon computed?", answer: "Year-by-year net worth: buying builds equity minus interest, tax, insurance, maintenance (~1%/yr) and selling costs (~8%); renting invests the down payment difference at market returns. Example: $400k home, 10% down, 7% rate vs $2,200 rent growing 3%/yr → buying pulls ahead around year 7–9." },
       { question: "What is the 5% rule?", answer: "Unrecoverable buying costs run ≈5% of home value yearly (interest + tax + maintenance, excluding principal). If annual rent is well below 5% of the price, renting wins financially. $400k × 5% = $20k/yr vs $26,400 rent → close call, decided by appreciation." },
@@ -519,6 +614,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Project your retirement savings based on current age, savings, monthly contributions, and expected returns. Plan for a comfortable retirement. Figures never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online Retirement Calculator — Project your retirement savings based on current age, savings, monthly contributions, and expected returns. Plan for a comfortable retirement. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter current savings, contribution, and years." },
+      { title: "2. Read the corpus gap", desc: "Check the corpus gap with monthly need." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What inputs does it need?", answer: "Current age, retirement age, current savings, monthly contribution, expected annual return rate, and inflation rate. The calculator projects savings growth to your retirement date." },
       { question: "Does it account for inflation?", answer: "Yes. Enter an inflation rate to see the real purchasing power of your retirement savings. The tool shows both nominal and inflation-adjusted projections." },
@@ -535,6 +635,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate revenue growth rate by comparing current period revenue to previous period. Track your business growth over time. Numbers never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online Revenue Growth Calculator — Calculate revenue growth rate by comparing current period revenue to previous period. Track your business growth over time. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter current and previous revenue." },
+      { title: "2. Read growth percent", desc: "Check growth percent with absolute gain." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "How is revenue growth calculated?", answer: "Growth rate = (Current Revenue - Previous Revenue) / Previous Revenue × 100. Positive values show growth, negative values show decline." },
       { question: "Can I calculate month-over-month and year-over-year?", answer: "Yes. Enter any two periods — monthly, quarterly, or annual — to calculate the growth rate between them. MoM and YoY comparisons are common use cases." },
@@ -607,6 +712,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate your final grade using weighted assignment scores. Enter grades and their weights to compute your overall percentage. Numbers never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free final grade calculator — what you need on the final, with weights that actually count. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter marks with maximum." },
+      { title: "2. Read the letter grade", desc: "Check the letter grade with percentage." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What do I need on the final to get an A?", answer: "Needed = (target − current×(1−w)) ÷ w, where w is the final's weight. Example: 82% average, 30% final, targeting 90% → (90 − 57.4) ÷ 0.30 = 108.7% — impossible; targeting 87% needs 98.7%. The calculator solves your exact numbers." },
       { question: "How do dropped lowest scores work?", answer: "If 1 of 10 quizzes drops, your quiz average uses the best 9 — enter only counted scores, or average all 10 and note the tool assumes equal weights within the category unless specified." },
@@ -774,6 +884,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "scientific-calculator",
     category: "Calculator",
     description: 'Evaluate mathematical expressions with sin, cos, tan, log, and sqrt functions. A versatile scientific calculator in your browser. No signup or account required.',
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter your figures — the tool labels each field it needs." },
+      { title: "2. Read the evaluated expression", desc: "Check the evaluated expression with steps." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "Which functions?", answer: "Trig, logs, powers, roots, and constants — the full scientific set." },
       { question: "Degrees or radians?", answer: "Both modes, switchable — wrong mode is the classic error source." },
@@ -809,6 +924,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate body fat percentage using the US Navy circumference method. Enter waist, neck, height, and hip measurements. Health data never leaves your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online Body Fat Percentage Calculator — Calculate body fat percentage using the US Navy circumference method. Enter waist, neck, height, and hip measurements. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter gender, age, and tape measurements as labeled." },
+      { title: "2. Read the body-fat percent", desc: "Check the estimate with its fitness category." },
+      { title: "3. Track over time", desc: "Re-measure monthly under the same conditions — trend beats any single reading." },
+    ],
     faqs: [
       { question: "How does the Navy method work?", answer: "It uses circumference measurements (waist, neck, hips) and height to estimate body fat percentage using formulas developed by the US Navy. It's a reliable non-caliper method." },
       { question: "What measurements do I need?", answer: "For men: waist and neck circumference. For women: waist, neck, and hip circumference. All measurements should be taken at the narrowest point." },
@@ -843,6 +963,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Estimate baby growth percentiles from weight, height, and age. Monitor your childs growth compared to population averages. Health data never leaves your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online Baby Growth Percentile Calculator — Estimate baby growth percentiles from weight, height, and age. Monitor your childs growth compared to population averages. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter age, weight, height, and gender." },
+      { title: "2. Read the percentile band", desc: "Check the percentile band with chart position." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What growth metrics does it calculate?", answer: "Weight-for-age, height-for-age, and weight-for-height percentiles based on WHO Child Growth Standards. These compare your baby's measurements to a reference population of the same age and sex." },
       { question: "What do the percentile numbers mean?", answer: "A 50th percentile means your baby is average for their age. 25th means 25% of babies are smaller, 75th means 75% are smaller. Consistent growth along a percentile line is what matters most." },
@@ -895,6 +1020,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate your Total Daily Energy Expenditure (TDEE) from BMR and activity level. Find how many calories you burn per day.',
     seoDescription: 'Free online TDEE Calculator — daily calorie burn from BMR × activity level, with deficit/surplus targets. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter age, weight, height, and activity level." },
+      { title: "2. Read the daily calorie target", desc: "Check the daily calorie target with deficit and surplus bands." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "How is TDEE calculated?", answer: "TDEE = BMR × activity multiplier: 1.2 sedentary, 1.375 light, 1.55 moderate, 1.725 heavy, 1.9 athlete. Example: BMR 1,730 × 1.55 (moderate) ≈ 2,680 kcal/day maintenance." },
       { question: "How big a deficit for fat loss?", answer: "300–500 kcal/day → ~0.3–0.5kg/week. A 500 kcal deficit on 2,680 TDEE means eating ≈2,180 kcal. Larger deficits cost muscle and stall faster — slow beats heroic." },
@@ -911,6 +1041,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate heart rate training zones by age. Find your target heart rate ranges for different exercise intensity levels. Health data never leaves your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online Heart Rate Zone Calculator — 5 training zones by age, with max-HR math explained. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter age and resting rate." },
+      { title: "2. Read the training zones", desc: "Check the training zones with max rate." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "How are the zones calculated?", answer: "Max HR ≈ 220 − age (rough) or 207 − 0.7 × age (better fit over 40). Zones: 50–60% recovery, 60–70% fat-burn, 70–80% aerobic, 80–90% threshold, 90–100% max. Example: age 30 → max ≈186, Zone 2 ≈112–130 bpm." },
       { question: "Which zone burns the most fat?", answer: "Zone 2 (60–70%) burns the highest fat fraction — but higher zones burn more total calories per minute. For fat loss, total weekly volume in Zones 2–3 beats short Zone 5 bursts." },
@@ -1008,6 +1143,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate simple interest using principal, rate, and time. Find total interest earned and final amount for basic interest calculations. Figures never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online Simple Interest Calculator — Calculate simple interest using principal, rate, and time. Find total interest earned and final amount for basic interest calculations. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter principal, rate, and time." },
+      { title: "2. Read the interest", desc: "Check the interest with total payable." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What is the simple interest formula?", answer: "SI = P × R × T / 100, where P = principal, R = annual interest rate (%), T = time in years. Total amount = P + SI." },
       { question: "How is this different from compound interest?", answer: "Simple interest is calculated only on the principal. Compound interest is calculated on principal plus accumulated interest. Simple interest produces lower returns over time." },
@@ -1024,6 +1164,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate the future value of monthly savings with compound interest. Plan your savings goals and see your money grow over time. Figures never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online Savings Calculator — Calculate the future value of monthly savings with compound interest. Plan your savings goals and see your money grow over time. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter goal, current savings, and monthly amount." },
+      { title: "2. Read months to goal", desc: "Check months to goal with shortfall." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What does this calculator show?", answer: "Future value of your savings based on monthly contributions, interest rate, and time horizon. Shows total contributions, interest earned, and final balance with a growth chart." },
       { question: "Does it include compound interest?", answer: "Yes. Interest compounds based on your selected frequency (monthly, quarterly, annually). More frequent compounding produces slightly higher returns." },
@@ -1040,6 +1185,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Calculate total cost of software licenses by seats, price per seat, and duration. Budget and plan your SaaS subscription costs. Numbers never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online Seat License Calculator — Calculate total cost of software licenses by seats, price per seat, and duration. Budget and plan your SaaS subscription costs. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter seats with plan price." },
+      { title: "2. Read license cost", desc: "Check license cost with per-seat math." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What inputs are needed?", answer: "Number of seats (users/licenses), price per seat (monthly or annual), and contract duration. The calculator computes total cost, per-period cost, and cost per user per month." },
       { question: "Can I compare monthly vs annual pricing?", answer: "Yes. Enter both monthly and annual per-seat prices to see the savings from annual commitments. Most SaaS vendors offer 15-25% discounts for annual billing." },
@@ -1113,6 +1263,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "api-tester",
     category: "Developer",
     description: 'Test any HTTP endpoint by sending GET, POST, PUT, or DELETE requests directly from your browser. View response status, headers, and body.',
+    instructions: [
+      { title: "1. Set method and endpoint", desc: "GET/POST/PUT with URL, headers, and body. Test keys only — never production secrets." },
+      { title: "2. Send and inspect", desc: "Read status, timing, and body: 401 means auth is wrong, 422 means the body shape is off." },
+      { title: "3. Save the working call", desc: "Keep successful requests in collections; copy the snippet into your codebase." },
+    ],
     faqs: [
       { question: "What can I test?", answer: "Endpoints, methods, headers, and bodies — REST, GraphQL, and SOAP calls alike." },
       { question: "Do I need an API key to test?", answer: "Only for protected endpoints — public APIs test with no credentials." },
@@ -1140,6 +1295,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Decode cryptic API error codes into plain explanations — 4xx client errors, 5xx server faults, and retry guidance. Runs locally in your browser.',
     seoTitle: "API Error Decoder – Lookup Codes Free",
+    instructions: [
+      { title: "1. Paste source for API Error Decoder", desc: "Paste source for API Error Decoder into the input area. Nothing runs until you trigger it." },
+      { title: "2. Decode", desc: "Decode back to readable form." },
+      { title: "3. Copy decoded", desc: "Copy the decoded output." },
+    ],
     faqs: [
       { question: "Which codes are covered?", answer: "4xx client errors, 5xx server faults, and common API-specific codes." },
       { question: "Which errors are retryable?", answer: "429 and 503 usually yes; 4xx usually means fix the request, not the timing." },
@@ -1157,6 +1317,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Inspect JSON API payloads for structure, size breakdown, and key depth — spot sensitive fields before sharing logs before production incidents.',
     seoTitle: "API Payload Analyzer – Inspect JSON Free",
+    instructions: [
+      { title: "1. Paste source for API Payload Analyzer", desc: "Paste source for API Payload Analyzer into the input area. Nothing runs until you trigger it." },
+      { title: "2. Analyze", desc: "Analyze and read every finding." },
+      { title: "3. Fix and rerun", desc: "Fix flagged items and re-run." },
+    ],
     faqs: [
       { question: "What does the payload analyzer inspect?", answer: "JSON payload structure, size breakdown, key depth, and type distribution." },
       { question: "Large payloads?", answer: "Analyzes in chunks — multi-megabyte bodies won't freeze the tab." },
@@ -1185,6 +1350,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate JSON Server configuration files from endpoint definitions. Set up a fully functional mock API server in seconds.',
     seoDescription: 'Free online API Mock Server Config — Generate JSON Server configuration files from endpoint definitions. Set up a mock API server. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste source for API Mock Server Config", desc: "Paste source for API Mock Server Config into the input area. Nothing runs until you trigger it." },
+      { title: "2. Mock", desc: "Configure the mock behavior." },
+      { title: "3. Save config", desc: "Save and use the generated config." },
+    ],
     faqs: [
       { question: "What does this tool generate?", answer: "It generates a db.json file and route configuration for JSON Server — a fake REST API. Define your endpoints and the tool outputs ready-to-use config files for instant mock server setup." },
       { question: "What is JSON Server?", answer: "JSON Server is a Node.js tool that creates a full REST API from a JSON file. It supports GET, POST, PUT, PATCH, DELETE, filtering, pagination, and sorting — no backend code needed." },
@@ -1211,6 +1381,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Calculate API latency budgets from SLA requirements. Distribute response time across application, database, and external service layers.',
     seoTitle: "API Latency Budget Calculator – Free",
+    instructions: [
+      { title: "1. Enter service latencies", desc: "P50/P99 per dependency plus call counts on the critical path." },
+      { title: "2. Read total vs budget", desc: "The summed budget shows headroom or overrun against your SLO." },
+      { title: "3. Trim the tail", desc: "Cache, parallelize, or downgrade the slowest dependency first." },
+    ],
     faqs: [
       { question: "p50, p95, p99 — which matters?", answer: "p99 for user experience promises; p50 for typical cost math." },
       { question: "How is budget math done?", answer: "Millisecond allowances split across services in the call chain." },
@@ -1228,6 +1403,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Calculate API pagination math — page counts, edge items, and rate-budget tradeoffs for cursor vs offset designs before you write code.',
     seoTitle: "API Pagination Calculator – Free Online",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter total items with page size." },
+      { title: "2. Read page count", desc: "Check page count with offsets." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "Cursor or offset — which?", answer: "Cursor for large live datasets (stable); offset for small fixed lists (simple)." },
       { question: "How is page size math done?", answer: "Total items divided by page size, rounded up — plus edge counts for the last page." },
@@ -1245,6 +1425,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Generate secure API keys with configurable length, character set, and optional prefix. Use with any authentication scheme.',
     seoTitle: "API Key Generator – Random Keys Free",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for API Key first." },
+      { title: "2. Generate", desc: "Create your API Key with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "How long should keys be?", answer: "256 bits (43 base64 chars) for serious use; shorter only for low-stakes tokens." },
       { question: "URL-safe output?", answer: "Yes — base64url alphabet with no +/= characters that break URLs." },
@@ -1262,6 +1447,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Hash API keys using SHA-256 for secure storage. Never store raw API keys — hash them before persisting to your database.',
     seoTitle: "API Key Hasher – Secure Hashing Free",
+    instructions: [
+      { title: "1. Paste source for API Key Hasher", desc: "Paste source for API Key Hasher into the input area. Nothing runs until you trigger it." },
+      { title: "2. Hash", desc: "Pick the algorithm and run it." },
+      { title: "3. Copy digest", desc: "Copy the digest for your records." },
+    ],
     faqs: [
       { question: "Why hash API keys?", answer: "Store hashes, compare on arrival — leaked databases reveal nothing usable." },
       { question: "SHA-256 enough?", answer: "For key storage yes; password storage needs bcrypt/argon2 instead." },
@@ -1279,6 +1469,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Validate API key format and structure — charset, length, and provider prefix patterns checked instantly without exposing secrets anywhere.',
     seoTitle: "API Key Validator – Check Keys Free",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for API Key Validator." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "Format or live check?", answer: "Both — structure validation instantly, live verification where the provider allows." },
       { question: "What makes a key valid?", answer: "Charset, length, and prefix patterns per provider convention." },
@@ -1305,6 +1500,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "api-gateway-rate-calculator",
     category: "Developer",
     description: 'Calculate rate limits, burst capacities, and throttling thresholds for API gateway configurations. Plan your traffic management strategy.',
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter requests with rate tier." },
+      { title: "2. Read estimated cost", desc: "Check estimated cost with tier math." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "Requests per second math?", answer: "Quota divided by window — 1000/day means ~0.7 sustained RPS with burst headroom." },
       { question: "Burst vs sustained?", answer: "Buckets absorb bursts; sustained rate must stay under refill, or 429s start." },
@@ -1322,6 +1522,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Calculate rate limit windows, burst allowances, and retry intervals. Design effective rate limiting for your API endpoints.',
     seoTitle: "Rate Limiter Calculator – Free Online",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter requests with time window." },
+      { title: "2. Read the verdict", desc: "Check the verdict with limit math." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "Token bucket or fixed window?", answer: "Bucket allows bursts; fixed window is simpler but edges spike at boundaries." },
       { question: "How is burst math done?", answer: "Capacity plus refill rate determine sustainable vs peak throughput." },
@@ -1339,6 +1544,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Generate structured changelogs from API version diffs. Categorize changes as Added, Changed, Deprecated, Removed, Fixed, or Security.',
     seoTitle: "API Changelog Generator – Free",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for API Changelog first." },
+      { title: "2. Generate", desc: "Create your API Changelog with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What feeds it?", answer: "Endpoint lists, old and new — diffed into added, changed, and removed." },
       { question: "Semver grouping?", answer: "Breaking changes surface first, then additions, then fixes — in release order." },
@@ -1365,6 +1575,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "rest-endpoint-documenter",
     category: "Developer",
     description: 'Document REST API endpoints with method, path, and description. Generates formatted documentation with sample request and response bodies.',
+    instructions: [
+      { title: "1. Paste source for REST Endpoint Documenter", desc: "Paste source for REST Endpoint Documenter into the input area. Nothing runs until you trigger it." },
+      { title: "2. Document", desc: "Fill each documentation field." },
+      { title: "3. Export document", desc: "Export the finished document." },
+    ],
     faqs: [
       { question: "What comes out of the documenter?", answer: "Structured endpoint docs — methods, paths, parameters, and example payloads." },
       { question: "OpenAPI compatible?", answer: "Field structure maps cleanly onto OpenAPI operations and schemas." },
@@ -1382,6 +1597,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Estimate GraphQL query complexity based on field count and nesting depth. Identify expensive queries before they hit your server.',
     seoTitle: "GraphQL Cost Estimator – Free Online",
+    instructions: [
+      { title: "1. Paste Graphql", desc: "Paste Graphql text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Estimate", desc: "Enter scope and read the estimate." },
+      { title: "3. Compare quotes", desc: "Adjust inputs to compare quotes." },
+    ],
     faqs: [
       { question: "How are points assigned?", answer: "Fields cost by depth and multiplicity — lists multiply, scalars add." },
       { question: "Why estimate?", answer: "Rate limits bill complexity, not requests — estimation prevents 429 surprises." },
@@ -1399,6 +1619,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Format GraphQL queries with consistent indentation — fragments, variables, and nested selections normalized for readable, reviewable APIs.',
     seoTitle: "GraphQL Formatter Online – Free",
+    instructions: [
+      { title: "1. Paste Graphql", desc: "Paste Graphql text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Format", desc: "Format with indent and style options." },
+      { title: "3. Copy output", desc: "Copy the clean output for your project." },
+    ],
     faqs: [
       { question: "Does it validate?", answer: "Syntax errors surface with locations; formatting applies to valid documents." },
       { question: "Fragments preserved?", answer: "Yes — named fragments keep structure with consistent indentation." },
@@ -1417,6 +1642,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Convert GraphQL schema definitions to JSON Schema format. Bridge the gap between GraphQL and REST tooling ecosystems.',
     seoDescription: 'Free online GraphQL Schema to JSON Schema — Convert GraphQL schema definitions to JSON Schema format. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste JSON", desc: "Paste JSON text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Map schema", desc: "Map each type to the target schema." },
+      { title: "3. Copy schema", desc: "Copy the converted schema." },
+    ],
     faqs: [
       { question: "Why convert GraphQL Schema to JSON Schema?", answer: "JSON Schema is used by OpenAPI, form validators, and REST API tools. Converting GraphQL schemas enables code generation, validation, and documentation in ecosystems that don't natively support GraphQL." },
       { question: "What GraphQL features are mapped?", answer: "Scalar types, object types, interfaces, unions, enums, input types, non-null markers, and list types are mapped to their JSON Schema equivalents with appropriate type constraints." },
@@ -1433,6 +1663,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Validate GraphQL schema syntax and structure. Detect missing root types, unknown type references, and common schema issues.',
     seoTitle: "GraphQL Schema Validator – Free",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for GraphQL Schema Validator." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "Spec compliance?", answer: "Validated against the GraphQL spec — types, fields, and nullability rules." },
       { question: "Error messages useful?", answer: "Each violation cites the exact type and field path for direct fixing." },
@@ -1451,6 +1686,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Build GraphQL subscription queries with custom event names and payload fields. Generate ready-to-use subscription strings.',
     seoDescription: 'Free online GraphQL Subscription Builder — Build GraphQL subscription queries with custom event names and payload fields. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Complete each section", desc: "Fill the GraphQL Subscription Builder fields in order — required items first, optional details after." },
+      { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
+      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+    ],
     faqs: [
       { question: "What is a GraphQL subscription?", answer: "Subscriptions provide real-time updates over WebSocket connections. When data changes on the server, the server pushes updates to connected clients. They use the same syntax as queries but with the subscription keyword." },
       { question: "What does this builder generate?", answer: "It generates ready-to-use GraphQL subscription strings with your chosen event name, payload fields, and optional variables. Copy the output directly into your client-side code." },
@@ -1468,6 +1708,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Test GraphQL queries with variables. Format queries and variables, and preview formatted responses for development and debugging.',
     seoDescription: 'Free online GraphQL Tester — Test GraphQL queries with variables. Format and preview responses for development. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter endpoint and query", desc: "Paste the GraphQL endpoint plus query and variables. Add auth headers for private APIs." },
+      { title: "2. Run and inspect", desc: "Read data, errors array, and timing per field — errors pinpoint the failing resolver." },
+      { title: "3. Save the query", desc: "Keep working queries in collections for regression checks." },
+    ],
     faqs: [
       { question: "When using GraphQL Tester, what does this tool do?", answer: "Paste a GraphQL query and optional JSON variables, then preview the formatted query and expected response structure. It validates syntax and formats the query for readability." },
       { question: "Does it execute queries against a real server?", answer: "No. The tester formats and validates queries locally. It does not make network requests to GraphQL servers. Use it for query preparation and debugging." },
@@ -1494,6 +1739,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Look up all 17 gRPC status codes (0–16) with meanings — from OK and CANCELLED through resource and network errors for backend debugging.',
     seoTitle: "gRPC Status Codes List – All 17 Free",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for gRPC Status Code Lookup." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "How many gRPC codes exist?", answer: "Seventeen, numbered 0–16 — from OK through CANCELLED, UNKNOWN, and resource errors." },
       { question: "Which codes appear most?", answer: "0 OK, 2 UNKNOWN, 5 NOT_FOUND, 13 INTERNAL, 14 UNAVAILABLE cover nearly all debugging." },
@@ -1511,6 +1761,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Build and test SOAP API envelopes with WSDL URL, method name, and XML parameters. Generate complete SOAP request envelopes.',
     seoTitle: "SOAP API Tester Online – Free",
+    instructions: [
+      { title: "1. Paste WSDL or endpoint", desc: "Add the service URL plus SOAP action and envelope body." },
+      { title: "2. Send and read XML", desc: "Inspect the SOAP response and fault codes for failures." },
+      { title: "3. Save the call", desc: "Keep the working envelope for repeat tests." },
+    ],
     faqs: [
       { question: "What do I need?", answer: "The WSDL endpoint plus operation name — envelopes build from there." },
       { question: "Auth headers?", answer: "Basic, WS-Security, and custom headers all attachable before sending." },
@@ -1528,6 +1783,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Generate mock endpoints from OpenAPI specs — example responses shaped for immediate frontend work, no backend wait while real backends are still being built.',
     seoTitle: "OpenAPI Mock Generator – Free Online",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for OpenAPI Mock first." },
+      { title: "2. Generate", desc: "Create your OpenAPI Mock with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What comes out?", answer: "Mock endpoints returning example responses shaped by your OpenAPI spec." },
       { question: "Why mock before building?", answer: "Frontend work starts immediately instead of waiting on the real API." },
@@ -1555,6 +1815,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Validate OpenAPI/Swagger spec syntax. Check for required fields, missing paths, and structural issues in your API specification.',
     seoTitle: "OpenAPI Validator – Check Specs Free",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for OpenAPI Validator." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "Which OpenAPI versions?", answer: "2.0 and 3.x structures, including nested $ref chains and Schema Objects." },
       { question: "What breaks most?", answer: "Missing required fields, wrong types, and unresolvable $refs." },
@@ -1572,6 +1837,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Generate Postman collection JSON from endpoint descriptions. Create ready-to-import collections with method and path for each endpoint.',
     seoTitle: "Postman Collection Generator – Free",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Postman Collection first." },
+      { title: "2. Generate", desc: "Create your Postman Collection with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What comes out of the generator?", answer: "Postman Collection v2.1 JSON — importable into any workspace with one click." },
       { question: "How do I import?", answer: "Postman Import button accepts the file directly into a workspace." },
@@ -1588,6 +1858,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "postman-to-openapi-converter",
     category: "Developer",
     description: 'Convert Postman collections to OpenAPI 3.0 specs. Migrate your API documentation. Code never leaves your device — formatting and validation run locally in your browser.',
+    instructions: [
+      { title: "1. Paste Postman", desc: "Paste or drop Postman source text into the input area." },
+      { title: "2. Convert to Openapi", desc: "Run the conversion; review errors or warnings line by line." },
+      { title: "3. Copy Openapi", desc: "Copy the converted output for your project." },
+    ],
     faqs: [
       { question: "What converts?", answer: "Postman collections become OpenAPI operations with paths and methods." },
       { question: "Auth mapping?", answer: "Collection auth schemes translate to OpenAPI security definitions." },
@@ -1606,6 +1881,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Generate Swagger UI / OpenAPI specs from a simple description. Enter title, version, and endpoints to produce a complete spec JSON.',
     seoDescription: 'Free online Swagger/OpenAPI Generator — Generate Swagger UI / OpenAPI specs from a simple description. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Swagger/OpenAPI first." },
+      { title: "2. Generate", desc: "Create your Swagger/OpenAPI with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What does this tool generate?", answer: "A complete OpenAPI 3.0 spec JSON file with info, servers, paths, and schemas. Enter your API title, version, and endpoints to produce a ready-to-use specification." },
       { question: "Can I define request/response schemas?", answer: "Yes. For each endpoint, define the HTTP method, path, request body schema, response schemas, and status codes." },
@@ -1621,6 +1901,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "webhook-payload-generator",
     category: "Developer",
     description: 'Generate realistic webhook payload examples with customizable event names and data fields. Test your webhook handlers with realistic data.',
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Webhook Payload first." },
+      { title: "2. Generate", desc: "Create your Webhook Payload with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What payloads?", answer: "Realistic event JSON for common providers, shaped to their documented schemas." },
       { question: "Signatures included?", answer: "Test HMAC signatures sign payloads exactly the way providers do." },
@@ -1658,6 +1943,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Test webhook endpoints by sending simulated POST requests with custom JSON payloads. Verify your webhook handlers are working correctly.',
     seoTitle: "Webhook Tester Online – Free",
+    instructions: [
+      { title: "1. Paste source for Webhook Tester", desc: "Paste source for Webhook Tester into the input area. Nothing runs until you trigger it." },
+      { title: "2. Test", desc: "Run the test and read each result." },
+      { title: "3. Fix and rerun", desc: "Fix failures and re-run." },
+    ],
     faqs: [
       { question: "What can I inspect?", answer: "Headers, payload JSON, and timing for every incoming test hook." },
       { question: "Response codes I control?", answer: "Set 200s for happy paths and 4xx/5xx codes to exercise retry logic end to end." },
@@ -1675,6 +1965,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Validate webhook payload structure including required fields (id, event, data, created). Ensure your webhooks meet the standard format.',
     seoTitle: "Webhook Validator – Verify Free Online",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Webhook Validator." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "What gets verified?", answer: "HMAC signatures against your secret — proving the payload is genuine." },
       { question: "Test payloads?", answer: "Craft sample events to exercise handlers without waiting on providers." },
@@ -1692,6 +1987,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Compare two OpenAPI specs side-by-side to detect breaking changes, new endpoints, removed fields, and modified schemas between versions.',
     seoTitle: "API Diff Checker – Compare Specs Free",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for API Diff Checker." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "Spec diff or traffic diff?", answer: "Spec diff — OpenAPI v1 against v2, structural changes highlighted." },
       { question: "Breaking changes flagged?", answer: "Removed endpoints, narrowed types, and new required fields surface first." },
@@ -1740,6 +2040,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Indents and structures HTML markup with proper nesting, attribute alignment, and readable indentation for templates and email designs.',
     seoDescription: 'Free online HTML Formatter — Format and beautify HTML markup with proper indentation and structure. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste HTML", desc: "Paste HTML text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Format", desc: "Format with indent and style options." },
+      { title: "3. Copy output", desc: "Copy the clean output for your project." },
+    ],
     faqs: [
       { question: "When using HTML Formatter, what formatting rules does it apply?", answer: "Proper indentation (configurable 2 or 4 spaces), attribute alignment, closing tag consistency, logical nesting hierarchy, and blank line separation between major sections." },
       { question: "Does it handle inline styles and scripts?", answer: "Yes. HTML with inline styles, script tags, and embedded CSS is formatted correctly. The content inside script and style tags is preserved without modification." },
@@ -1757,6 +2062,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Organizes CSS stylesheets with consistent indentation, property grouping, and selector formatting for maintainable styles.',
     seoDescription: 'Free online CSS Formatter — Format and beautify CSS stylesheets with proper indentation and organization. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste CSS", desc: "Paste CSS text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Format", desc: "Format with indent and style options." },
+      { title: "3. Copy output", desc: "Copy the clean output for your project." },
+    ],
     faqs: [
       { question: "When using CSS Formatter, what formatting rules does it apply?", answer: "Consistent 2 or 4 space indentation, property grouping (layout, visual, typography), one property per line, aligned colons, and logical selector hierarchy for readable stylesheets." },
       { question: "Can it format minified CSS?", answer: "Yes. Paste minified or compressed CSS and the formatter expands it with proper indentation and structure for readability and maintainability." },
@@ -1793,6 +2103,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Format TSX React components with type-aware indentation — TypeScript types plus JSX markup, both handled correctly without breaking either side.',
     seoTitle: "TSX Formatter Online – Free",
+    instructions: [
+      { title: "1. Paste source for TSX Formatter", desc: "Paste source for TSX Formatter into the input area. Nothing runs until you trigger it." },
+      { title: "2. Format", desc: "Format with indent and style options." },
+      { title: "3. Copy output", desc: "Copy the clean output for your project." },
+    ],
     faqs: [
       { question: "How is TSX different to format?", answer: "Type annotations plus JSX markup need both rule sets — plain JS formatters mangle one side." },
       { question: "Are types preserved?", answer: "Yes — formatting never alters type annotations, only whitespace and layout." },
@@ -1821,6 +2136,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Formats Python code with PEP 8 compliant indentation, consistent spacing, and readable structure for scripts and modules.',
     seoDescription: 'Free online Python Formatter — Format and beautify Python code with proper indentation and structure. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste source for Python Formatter", desc: "Paste source for Python Formatter into the input area. Nothing runs until you trigger it." },
+      { title: "2. Format", desc: "Format with indent and style options." },
+      { title: "3. Copy output", desc: "Copy the clean output for your project." },
+    ],
     faqs: [
       { question: "When using Python Formatter, what formatting rules does it apply?", answer: "PEP 8 compliant formatting: 4-space indentation, consistent spacing around operators, proper blank lines between functions/classes, trailing commas, and line length awareness." },
       { question: "Does it handle Python 2 and 3 syntax?", answer: "Yes. The formatter understands both Python 2 and Python 3 syntax, including f-strings, type hints, walrus operators, match statements, and other modern constructs." },
@@ -1836,6 +2156,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "yaml-formatter",
     category: "Developer",
     description: 'Structures YAML configuration files with consistent indentation, proper key alignment, and readable hierarchy for Docker and CI/CD configs.',
+    instructions: [
+      { title: "1. Paste YAML", desc: "Paste YAML text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Format", desc: "Format with indent and style options." },
+      { title: "3. Copy output", desc: "Copy the clean output for your project." },
+    ],
     faqs: [
       { question: "Tabs or spaces?", answer: "Spaces only — YAML forbids tabs, and the formatter converts them." },
       { question: "Anchors preserved?", answer: "Yes — aliases and merge keys survive formatting intact, references and all." },
@@ -1853,6 +2178,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Pretty-prints XML documents with proper tree indentation, validates structure, and reorganizes attributes for maximum readability.',
     seoTitle: "XML Formatter Online – Free",
+    instructions: [
+      { title: "1. Paste XML", desc: "Paste XML text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Format", desc: "Format with indent and style options." },
+      { title: "3. Copy output", desc: "Copy the clean output for your project." },
+    ],
     faqs: [
       { question: "Indentation style?", answer: "Configurable nesting depth with attribute alignment options." },
       { question: "Invalid XML?", answer: "Malformed markup highlights the failure point instead of guessing." },
@@ -1879,6 +2209,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "css-generator",
     category: "Developer",
     description: 'Generate CSS code interactively for box shadows, gradients, border radius, transforms, filters, and more. Code never leaves your device — formatting and validation run locally in your browser.',
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for CSS first." },
+      { title: "2. Generate", desc: "Create your CSS with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What gets generated?", answer: "Layouts, buttons, loaders, and effects as copy-paste CSS snippets." },
       { question: "Responsive output?", answer: "Relative units and media queries included where relevant always." },
@@ -1906,6 +2241,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "border-radius-generator",
     category: "Developer",
     description: 'Generate CSS border-radius values visually. Control each corner independently with live preview. Code never leaves your device — formatting and validation run locally in your browser.',
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Border Radius first." },
+      { title: "2. Generate", desc: "Create your Border Radius with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "8-value syntax?", answer: "Horizontal and vertical radii per corner, slash-separated precisely." },
       { question: "Elliptical corners?", answer: "Different x/y radii per corner for organic, non-circular shapes." },
@@ -1926,6 +2266,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Flexbox CSS Generator — Generate Flexbox CSS code interactively. Configure direction, wrap, justify, align, and gap with live preview. ',
     dependencies: "None",
     showInCategory: false,
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Flexbox CSS first." },
+      { title: "2. Generate", desc: "Create your Flexbox CSS with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What Flexbox properties can I configure?", answer: "All major flexbox properties: flex-direction, flex-wrap, justify-content, align-items, align-content, align-self, gap, and individual item grow/shrink/basis values." },
       { question: "Does it show a live preview?", answer: "Yes. The generator shows a real-time preview of your flex layout with colored boxes, so you can see exactly how your CSS configuration arranges elements before copying the code." },
@@ -1941,6 +2286,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "css-grid-generator",
     category: "Developer",
     description: 'Generate CSS Grid layout code interactively. Configure columns, rows, and gap with live preview. Code never leaves your device — formatting and validation run locally in your browser.',
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for CSS Grid first." },
+      { title: "2. Generate", desc: "Create your CSS Grid with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "fr units?", answer: "Fractional tracks that share free space proportionally and responsively." },
       { question: "Gap control?", answer: "Row and column gutters independently settable in pixels or rems." },
@@ -1958,6 +2308,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "text-shadow-generator",
     category: "Developer",
     description: 'Generate CSS text-shadow values with interactive preview. Configure offset, blur, color, and opacity. Code never leaves your device — formatting and validation run locally in your browser.',
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Text Shadow first." },
+      { title: "2. Generate", desc: "Create your Text Shadow with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "How many shadows?", answer: "Stacked comma-separated layers for glow, outline, and 3D depth." },
       { question: "Color and blur?", answer: "Full RGBA control plus blur radius per layer, previewed live." },
@@ -1986,6 +2341,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "css-animation-generator",
     category: "Developer",
     description: 'Generate CSS keyframe animations interactively. Choose from fade-in, slide-in, and pulse animations. Code never leaves your device — formatting and validation run locally in your browser.',
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for CSS Animation first." },
+      { title: "2. Generate", desc: "Create your CSS Animation with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "Keyframes or transitions?", answer: "Both — keyframe sequences for loops, transitions for hover states." },
       { question: "Easing options?", answer: "Linear, ease, cubic-bezier curves, and steps for frame-by-frame effects." },
@@ -2024,6 +2384,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Encode or decode text using Base64, Base64URL, URL encoding, HTML entities, Hex, Binary, ROT13, UTF-8, and Unicode escape schemes.',
     seoTitle: "Encoder Decoder Online – Free Tools",
+    instructions: [
+      { title: "1. Paste source for Encoder / Decoder", desc: "Paste source for Encoder / Decoder into the input area. Nothing runs until you trigger it." },
+      { title: "2. Encode", desc: "Encode to the target format." },
+      { title: "3. Copy encoded", desc: "Copy the encoded output." },
+    ],
     faqs: [
       { question: "Which encodings?", answer: "Base64, URL, HTML entities, and hex — the common web pairings." },
       { question: "Decode direction?", answer: "Both directions — paste encoded text back to readable form any time." },
@@ -2043,6 +2408,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Analyze CSV structure — column types, counts, unique values, and empty cells. Spot malformed rows and mixed types before import.',
     seoDescription: 'Free online CSV Analyzer — Analyze CSV structure including column types, counts, unique values, and empty cells. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste source for CSV Analyzer", desc: "Paste source for CSV Analyzer into the input area. Nothing runs until you trigger it." },
+      { title: "2. Analyze", desc: "Analyze and read every finding." },
+      { title: "3. Fix and rerun", desc: "Fix flagged items and re-run." },
+    ],
     faqs: [
       { question: "What analysis does it perform?", answer: "Column types (text, number, date), row count, unique value count, empty/null cell count per column, and data distribution. Identifies data quality issues before analysis." },
       { question: "Can it detect data types automatically?", answer: "Yes. The analyzer inspects column values and classifies columns as numeric, text, date, or boolean. This helps determine which columns can be used for calculations vs categories." },
@@ -2058,6 +2428,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "json-path-query-builder",
     category: "Developer",
     description: 'Query JSON data using dot-notation path expressions with wildcard support. Code never leaves your device — formatting and validation run locally in your browser.',
+    instructions: [
+      { title: "1. Complete each section", desc: "Fill the JSON Path Query Builder fields in order — required items first, optional details after." },
+      { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
+      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+    ],
     faqs: [
       { question: "Basic syntax?", answer: "$.store.book[0].title — root, children, indices, dot notation." },
       { question: "Filters?", answer: "Expressions like [?(@.price < 10)] select matching elements." },
@@ -2076,6 +2451,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Visualize JSON structure as an indented tree — see nested objects and arrays at a glance.',
     seoDescription: 'Free online JSON Tree Viewer — Visualize JSON structure as an indented tree with nested objects and arrays. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste JSON", desc: "Paste JSON text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Inspect nodes", desc: "Expand nodes and inspect values." },
+      { title: "3. Copy value", desc: "Copy the path or value you need." },
+    ],
     faqs: [
       { question: "What does the tree view show?", answer: "JSON structure as an expandable/collapsible tree with nested objects, arrays, and leaf values. Colors distinguish keys (strings), numbers, booleans, and null values." },
       { question: "Can I expand and collapse branches?", answer: "Yes. Click any object or array node to expand or collapse it. This helps navigate large JSON documents by hiding irrelevant branches." },
@@ -2161,6 +2541,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "dummy-text-generator",
     category: "Developer",
     description: 'Generate dummy placeholder text at a specified character length for design mockups, UI prototypes, and content layout testing. Code never leaves your device — formatting and validation run locally in your browser.',
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Dummy Text first." },
+      { title: "2. Generate", desc: "Create your Dummy Text with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "Lorem ipsum or readable?", answer: "Both modes — classic placeholder plus realistic sentence mode." },
       { question: "Paragraph count?", answer: "Any count, with sentence-length variance for natural flow always." },
@@ -2187,6 +2572,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "fake-identity-generator",
     category: "Developer",
     description: 'Generate complete fake identities with name, email, phone, address, date of birth, and occupation. Includes a photo placeholder. Code never leaves your device — formatting and validation run locally in your browser.',
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Fake Identity first." },
+      { title: "2. Generate", desc: "Create your Fake Identity with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "Is this real data?", answer: "No — entirely fictitious profiles for testing only, never real people." },
       { question: "What fields?", answer: "Names, addresses, phones, emails, and IDs in consistent sets." },
@@ -2203,6 +2593,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "fake-credit-card-generator",
     category: "Developer",
     description: 'Generate fake credit card numbers with valid formats including Visa, Mastercard, Amex, and Discover. All numbers pass Luhn algorithm validation. Code never leaves your device — formatting and validation run locally in your browser.',
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Fake Credit Card first." },
+      { title: "2. Generate", desc: "Create your Fake Credit Card with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "Are these real cards?", answer: "No — Luhn-valid format only, tied to no account, useless for purchases." },
       { question: "Why generate fakes?", answer: "Payment form testing without touching real card numbers ever." },

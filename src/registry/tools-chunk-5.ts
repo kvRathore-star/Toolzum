@@ -40,6 +40,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Scan text and code for leaked secrets and credentials. Detects Stripe keys, GitHub tokens, Slack tokens, Google API keys, AWS keys, OpenAI keys, JWT tokens, private keys, and config passwords.',
     seoDescription: 'Free online Secret Scanner — Scan text and code for leaked API keys, tokens, and credentials. Detects Stripe, GitHub, Slack, AWS, Google, OpenAI, and more. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste source for Secret Scanner", desc: "Paste source for Secret Scanner into the input area. Nothing runs until you trigger it." },
+      { title: "2. Scan", desc: "Scan and read every finding." },
+      { title: "3. Fix and rescan", desc: "Fix findings and re-scan." },
+    ],
     faqs: [
       { question: "What types of secrets does it detect?", answer: "Stripe API keys, GitHub/GitLab tokens, Slack tokens, AWS access keys, Google API keys, OpenAI keys, JWT tokens, private keys (PEM), database connection strings, and hardcoded passwords in config files." },
       { question: "How should I use the results?", answer: "Review each flagged item. If it's a real credential, rotate it immediately in the respective service's dashboard. Remove the secret from code and use environment variables or a secrets manager instead." },
@@ -95,6 +100,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "dockerfile-linter",
     category: "Developer",
     description: 'Lint Dockerfiles against 20+ valid instructions (FROM, RUN, CMD, COPY, ENTRYPOINT, HEALTHCHECK, SHELL). Detects unknown instructions and missing FROM declaration.',
+    instructions: [
+      { title: "1. Paste source for Dockerfile Linter", desc: "Paste source for Dockerfile Linter into the input area. Nothing runs until you trigger it." },
+      { title: "2. Lint", desc: "Lint and read each issue with its line." },
+      { title: "3. Fix and relint", desc: "Fix issues and re-lint." },
+    ],
     faqs: [
       { question: "What gets flagged?", answer: "Missing tags (:latest), root users, cache-busting order, and secret leaks." },
       { question: "Base image pinning?", answer: "Digests beat tags — immutable references only, never floating majors." },
@@ -111,6 +121,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "htaccess-validator",
     category: "Developer",
     description: 'Validate .htaccess files against 30+ known Apache directives. Checks RewriteEngine, RewriteRule, ErrorDocument, Redirect, Header, Options, and block directives. Flags unknown directives.',
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for htaccess Validator." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "What rules get checked?", answer: "Rewrite, redirect, auth, and caching directives against Apache best practices." },
       { question: "Will it fix my file?", answer: "No — it reports problems with line numbers; edits stay yours to make." },
@@ -139,6 +154,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Validate GitHub Actions workflow YAML — checks for workflow name, on trigger, jobs section, and correct YAML structure. Identifies formatting issues and missing fields.',
     seoDescription: 'Free online GitHub Actions Validator — Validate workflow YAML for name, on trigger, jobs section, and YAML structure. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for GitHub Actions Validator." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "What does the validator check?", answer: "Valid YAML syntax, required top-level keys (name, on, jobs), correct trigger format, job structure (runs-on, steps), and common mistakes like indentation errors." },
       { question: "Does it check action versions?", answer: "The validator focuses on YAML structure and required fields. It does not verify action version pinning or action marketplace availability." },
@@ -154,6 +174,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "geojson-validator",
     category: "Developer",
     description: 'Validate GeoJSON objects against the GeoJSON specification. Checks feature, geometry, point coordinates, FeatureCollection structure, and bounding box format.',
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for GeoJSON Validator." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "Which spec?", answer: "RFC 7946 — the current GeoJSON standard, enforced strictly here." },
       { question: "Geometries covered?", answer: "Point, LineString, Polygon, Multi* variants, and FeatureCollections." },
@@ -180,6 +205,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "sitemap-validator",
     category: "Developer",
     description: 'Validate XML sitemaps — checks urlset/sitemapindex root, loc entries, XML declaration, and URL count. Supports standard sitemap protocol formatting.',
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Sitemap Validator." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "XML validity first?", answer: "Malformed XML fails fast with the error location highlighted." },
       { question: "The 50k/50MB rules?", answer: "Checked — sitemaps cap at 50,000 URLs and 50MB uncompressed." },
@@ -218,6 +248,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate random dates within a configurable range with optional format selection including ISO, US, EU, and full-date styles. Input never leaves your device — everything runs locally in your browser.',
     seoDescription: 'Free online Random Date Generator — Generate random dates within a configurable range with optional format selection including ISO, US, EU, and full-date styles. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Random Date first." },
+      { title: "2. Generate", desc: "Create your Random Date with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What date formats are available?", answer: "ISO 8601 (YYYY-MM-DD), US format (MM/DD/YYYY), EU format (DD/MM/YYYY), and full text format (January 1, 2025). Choose the format that matches your locale or application needs." },
       { question: "Can I set a custom date range?", answer: "Yes. Define start and end dates to generate random dates within any range. This is useful for creating test datasets, filling placeholder content, or generating time-series mock data." },
@@ -245,6 +280,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate random IPv4 and IPv6 addresses for network testing, development, and security research. Code never leaves your device — formatting and validation run locally in your browser.',
     seoDescription: 'Free online Random IP Generator — Generate random IPv4 and IPv6 addresses for network testing, development, and security research. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Random IP first." },
+      { title: "2. Generate", desc: "Create your Random IP with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What IP versions are supported?", answer: "Both IPv4 (e.g., 192.168.1.1) and IPv6 (e.g., 2001:db8::1) addresses are generated. Choose the version or generate both." },
       { question: "Can I restrict to specific IP ranges?", answer: "Yes. Set CIDR prefixes or specific first octets to generate IPs within a range (e.g., only 192.168.x.x for private networks)." },
@@ -262,6 +302,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate random browser user-agent strings from a curated list covering Chrome, Firefox, Safari, Edge, and mobile browsers. Free to start with no signup — fair daily limits apply.',
     seoDescription: 'Free online Random User-Agent Generator — Generate random browser user-agent strings from a curated list covering Chrome, Firefox, Safari, Edge, and mobile browsers. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Random User-Agent first." },
+      { title: "2. Generate", desc: "Create your Random User-Agent with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "Which browsers are included?", answer: "Chrome, Firefox, Safari, Edge, Opera on desktop, plus Chrome Mobile, Safari Mobile, and Firefox Mobile. The database includes recent versions for realistic UA strings." },
       { question: "Why would I need random user agents?", answer: "Web scraping, API testing, load testing, and browser compatibility testing. Random UAs help distribute requests and simulate diverse client traffic." },
@@ -297,6 +342,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "pin-generator",
     category: "Developer",
     description: 'Generate numeric PINs of configurable length from 4 to 10 digits for security codes, verification codes, and access tokens. Code never leaves your device — formatting and validation run locally in your browser.',
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for PIN first." },
+      { title: "2. Generate", desc: "Create your PIN with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "How many digits?", answer: "Configurable length — 4 for convenience, 6 or more for security." },
       { question: "Is generation crypto-random?", answer: "Browser cryptographic randomness, never Math.random, guaranteed." },
@@ -353,6 +403,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "oauth-pkce-generator",
     category: "Developer",
     description: 'Generate RFC 7636 OAuth PKCE code_verifier + code_challenge (S256 method) pairs. Verifier uses 48 bytes → 64-char base64url, challenge uses SHA-256. Code never leaves your device — formatting and validation run locally in your browser.',
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for OAuth PKCE first." },
+      { title: "2. Generate", desc: "Create your OAuth PKCE with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What is PKCE in OAuth?", answer: "Proof Key for Code Exchange — secures OAuth on public clients that can't keep secrets." },
       { question: "Code verifier rules?", answer: "43–128 URL-safe characters, cryptographically random every time." },
@@ -421,6 +476,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate Apache Avro schemas from a JSON field definition. Configure namespace, record name, and field types — outputs valid Avro schema JSON.',
     seoDescription: 'Free online Avro Schema Generator — Generate Apache Avro schemas from JSON field definitions. Configure namespace, record name, and field types. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Avro Schema first." },
+      { title: "2. Generate", desc: "Create your Avro Schema with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What is Apache Avro?", answer: "Avro is a row-based data serialization format used in big data systems (Kafka, Spark, Hadoop). It uses JSON-defined schemas to specify data structure, enabling compact binary encoding and schema evolution." },
       { question: "What field types are supported?", answer: "All Avro types: string, int, long, float, double, boolean, bytes, null, record, enum, array, map, and union (nullable fields). Nested records are fully supported." },
@@ -438,6 +498,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate sample JSON data from an Avro schema. Auto-generates values based on field types. Code never leaves your device — formatting and validation run locally in your browser.',
     seoDescription: 'Free online Avro to JSON Sample Generator — Generate sample JSON data from an Avro schema. Auto-generates values based on field types. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Avro to JSON Sample first." },
+      { title: "2. Generate", desc: "Create your Avro to JSON Sample with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "When using Avro to JSON Sample Generator, what does this tool do?", answer: "It reads an Apache Avro schema and generates realistic sample JSON data based on field types. String fields get sample text, numbers get realistic values, enums get random options, and arrays get populated entries." },
       { question: "How many sample records can I generate?", answer: "You can generate 1 to 1000 sample records in a single batch. Each record conforms to the Avro schema structure with type-appropriate values." },
@@ -495,6 +560,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Remove duplicate rows from CSV data based on a specific column. Keep only unique values for cleaner datasets.',
     seoDescription: 'Free online CSV Deduplicator — Remove duplicate rows from CSV data based on a specific column. Keep only unique values. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Paste source for CSV Deduplicator", desc: "Paste source for CSV Deduplicator into the input area. Nothing runs until you trigger it." },
+      { title: "2. Deduplicate", desc: "Deduplicate with one click." },
+      { title: "3. Copy unique list", desc: "Copy the unique list." },
+    ],
     faqs: [
       { question: "How does deduplication work?", answer: "Select the column to check for duplicates. The tool keeps the first occurrence of each unique value in that column and removes subsequent duplicates." },
       { question: "Can I deduplicate based on multiple columns?", answer: "Some deduplicators support compound keys. If not, combine columns into a single key first using the CSV tools, then deduplicate." },
@@ -532,6 +602,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Replace empty, null, or NA values in CSV data with a custom fill value. Clean your datasets for analysis and migration.',
     seoDescription: 'Free online Null Value Handler — Replace empty/null/NA values in CSV data with a custom fill value. Clean datasets for analysis. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Paste source for Null Value Handler", desc: "Paste source for Null Value Handler into the input area. Nothing runs until you trigger it." },
+      { title: "2. Handle", desc: "Configure handling and run." },
+      { title: "3. Copy cleaned", desc: "Copy the cleaned output." },
+    ],
     faqs: [
       { question: "What null patterns does it detect?", answer: "Empty cells, 'null', 'NULL', 'None', 'NA', 'N/A', 'n/a', '-', 'undefined', and whitespace-only cells. All are treated as missing values." },
       { question: "What fill options are available?", answer: "Replace with a custom text value, zero (0), empty string, the column mean/median (for numeric columns), or forward-fill from the previous row." },
@@ -559,6 +634,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Filter CSV rows by column value matching. Includes exact match, contains, and not-equal operators for flexible data selection.',
     seoDescription: 'Free online CSV Row Filter — Filter CSV rows by column value with exact match, contains, and not-equal operators. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Paste source for CSV Row Filter", desc: "Paste source for CSV Row Filter into the input area. Nothing runs until you trigger it." },
+      { title: "2. Filter", desc: "Filter rows and review matches." },
+      { title: "3. Copy filtered", desc: "Copy the filtered result." },
+    ],
     faqs: [
       { question: "What filter operators are available?", answer: "Exact match (=), contains, does not contain, starts with, ends with, greater than, less than, and not-equal (!=). These cover most data filtering needs." },
       { question: "Can I filter by multiple columns?", answer: "Yes. Add multiple filter conditions and they are applied with AND logic — a row must match all conditions to appear in the output." },
@@ -607,6 +687,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online CSV to Markdown Table — Convert CSV data into GitHub-flavored Markdown tables for docs and README files. ',
     dependencies: "Vanilla JS",
     showInCategory: false,
+    instructions: [
+      { title: "1. Paste CSV data", desc: "Headers plus rows, comma-separated. Messy exports work — quotes and commas parse." },
+      { title: "2. Convert to table", desc: "Headers become the Markdown header row with alignment syntax." },
+      { title: "3. Copy into docs", desc: "Paste straight into README, wiki, or GitHub — renders as a table instantly." },
+    ],
     faqs: [
       { question: "What format is the output?", answer: "GitHub-flavored Markdown (GFM) table format with pipe-delimited columns and a separator row. Compatible with GitHub READMEs, GitLab docs, and Markdown preview tools." },
       { question: "Does it handle quoted CSV fields?", answer: "Yes. Quoted fields containing commas or newlines are parsed correctly. The output preserves the full cell content in each table column." },
@@ -656,6 +741,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Flatten nested JSON objects into dot-notation key-value pairs. Unwrap complex hierarchies for tabular processing.',
     seoDescription: 'Free online JSON Flattener — Flatten nested JSON into dot-notation key-value pairs. Unwrap complex hierarchies for tabular processing. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Paste JSON", desc: "Paste JSON text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Flatten", desc: "Flatten and read the result." },
+      { title: "3. Copy flattened", desc: "Copy the flattened output." },
+    ],
     faqs: [
       { question: "What does JSON flattening do?", answer: "It converts nested JSON objects into a flat key-value structure using dot notation. For example, {a: {b: 1}} becomes {'a.b': 1}. This makes nested data suitable for CSV export and database imports." },
       { question: "How are arrays handled?", answer: "Arrays can be flattened with indexed keys (items.0, items.1) or with bracket notation (items[0]). Choose the style that matches your downstream processing requirements." },
@@ -673,6 +763,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Wrap JSON data in valid JSON-LD (Linked Data) structure with @context and @type. Generate schema.org-compatible structured data.',
     seoDescription: 'Free online JSON-LD Generator — Wrap JSON data in valid JSON-LD with @context and @type. Schema.org-compatible structured data. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for JSON-LD first." },
+      { title: "2. Generate", desc: "Create your JSON-LD with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What is JSON-LD?", answer: "JSON-LD (Linked Data) is a method of encoding structured data using JSON. It wraps your data with @context (schema.org) and @type (Article, Product, FAQPage, etc.) for search engine rich results." },
       { question: "What schema types are supported?", answer: "All schema.org types: Article, Product, FAQPage, HowTo, LocalBusiness, Event, Recipe, VideoObject, BreadcrumbList, and more." },
@@ -689,6 +784,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Developer",
     description: 'Generate JSON Merge Patch (RFC 7396) documents by comparing original and modified JSON objects. Show exactly what changed.',
     seoTitle: "JSON Merge Patch Generator – Free",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Merge Patch first." },
+      { title: "2. Generate", desc: "Create your Merge Patch with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What is Merge Patch?", answer: "RFC 7396 JSON diffs — send just the changes instead of whole documents every time." },
       { question: "Arrays handling?", answer: "Replaced wholesale, not merged — by design, since element identity is ambiguous." },
@@ -706,6 +806,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Developer",
     description: 'Generate JSON Schema from sample JSON — types, required fields, and nested structure inferred automatically in seconds flat.',
     seoTitle: "JSON Schema Generator – Free Online",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for JSON Schema first." },
+      { title: "2. Generate", desc: "Create your JSON Schema with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What schema comes out?", answer: "Types, required fields, and nested structure inferred from your sample JSON." },
       { question: "Draft version?", answer: "Modern draft conventions with $schema declarations included." },
@@ -734,6 +839,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate Zod validation schemas from sample JSON data. TypeScript runtime validation. Code never leaves your device — formatting and validation run locally in your browser.',
     seoDescription: 'Free online JSON to Zod Schema — Generate Zod validation schemas from sample JSON data. TypeScript runtime validation. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Paste sample JSON", desc: "A representative object or array — fields present here shape the schema." },
+      { title: "2. Infer the Zod schema", desc: "Types, optionals, and nesting derive automatically from the sample." },
+      { title: "3. Copy into code", desc: "Paste the schema and validate real payloads; widen types that reject valid data." },
+    ],
     faqs: [
       { question: "What is Zod?", answer: "Zod is a TypeScript-first schema validation library. It defines data shapes with runtime validation, type inference, and excellent error messages. Widely used in Next.js and React projects." },
       { question: "How does the generator work?", answer: "Paste sample JSON and the tool analyzes its structure to generate corresponding Zod schemas. Objects become z.object(), arrays become z.array(), strings/numbers/booleans map to z.string()/z.number()/z.boolean()." },
@@ -750,6 +860,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Developer",
     description: 'Generate JSON Web Keys (RSA, EC, oct) with kid and alg parameters — browser-crypto randomness, ready to use for auth systems that need them.',
     seoTitle: "JWK Generator Online – Free Key Generator",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for JWK first." },
+      { title: "2. Generate", desc: "Create your JWK with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "RSA, EC, or oct?", answer: "RSA for broad compatibility, EC for compact modern keys, oct for shared secrets." },
       { question: "What key size?", answer: "2048-bit RSA minimum mainstream; 256-bit EC roughly equivalent." },
@@ -818,6 +933,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Developer",
     description: 'Generate soft-UI neumorphic CSS — extruded surfaces with paired shadows from any base color, ready to paste into any stylesheet.',
     seoTitle: "Neumorphism CSS Generator – Free Online",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Neumorphism CSS first." },
+      { title: "2. Generate", desc: "Create your Neumorphism CSS with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What is neumorphism?", answer: "Soft UI — elements extruded from the background with paired light and dark shadows." },
       { question: "Which colors work?", answer: "Muted mid-tones; extremes (pure black/white) break the soft-shadow illusion." },
@@ -847,6 +967,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online CSS to SCSS Converter — Convert plain CSS to SCSS syntax with nesting and parent selector references. ',
     dependencies: "None",
     showInCategory: false,
+    instructions: [
+      { title: "1. Paste CSS", desc: "Paste or drop CSS source text into the input area." },
+      { title: "2. Convert to SCSS", desc: "Run the conversion; review errors or warnings line by line." },
+      { title: "3. Copy SCSS", desc: "Copy the converted output for your project." },
+    ],
     faqs: [
       { question: "What does the converter add?", answer: "It analyzes CSS selector patterns and generates SCSS nesting with parent selectors (&). Flat CSS like .nav a, .nav li becomes nested .nav { a { } li { } }." },
       { question: "Does it extract variables?", answer: "Repeated color values and spacing constants can be extracted as SCSS variables ($variable). This makes stylesheets more maintainable and themeable." },
@@ -902,6 +1027,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "js-syntax-checker",
     category: "Developer",
     description: 'Check JavaScript code for syntax errors using the Function constructor. Validate code before execution. Code never leaves your device — formatting and validation run locally in your browser.',
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for JavaScript Syntax Checker." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "What errors surface?", answer: "Missing brackets, bad tokens, and reserved-word misuse with line numbers." },
       { question: "Which JS version?", answer: "Modern ES syntax including modules, optional chaining, and nullish coalescing." },
@@ -927,6 +1057,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "text-tools",
     category: "Converter",
     description: 'Convert between case styles, CSS preprocessors (SCSS/Less/Stylus), HTML/JSX, number bases, serialization formats (YAML/INI/TOML/JSON), and time zones. One tool for all text transformations.',
+    instructions: [
+      { title: "1. Paste your text", desc: "Any plain text, list, or document excerpt." },
+      { title: "2. Pick the sub-tool", desc: "Case, sort, count, encode, and clean operations sit in one toolbox — choose yours." },
+      { title: "3. Copy the result", desc: "Copy output back into your document or ticket." },
+    ],
     faqs: [
       { question: "What's inside?", answer: "A workbench of text utilities — case, diff, encode, count, and clean in one place." },
       { question: "Batch operations?", answer: "Chain transforms without shuttling text between separate tools." },
@@ -1100,6 +1235,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     dependencies: "FFmpeg",
 
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop MKV file(s)", desc: "Upload your MKV source. Runs locally on FFmpeg." },
+      { title: "2. Set WebM options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "3. Download WebM", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does MKV to WEBM do?", answer: "Convert MKV video files to WEBM format directly in your browser. 100% free, private \u2014 your files never leave your device." },
       { question: "Where does WebM fit best?", answer: "web-optimized video \u2014 streaming, embedded players, and HTML5 video tags with fast loading." },
@@ -1137,6 +1277,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert MP4 video files to AVI format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MP4 to AVI — Convert MP4 video files into AVI format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
+    instructions: [
+      { title: "1. Drop MP4 file(s)", desc: "Upload your MP4 source. Runs locally on FFmpeg." },
+      { title: "2. Set AVI options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "3. Download AVI", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert MP4 to AVI?", answer: "AVI is required by legacy media players, older video editing software, and some Windows applications that don't support MP4. Converting ensures compatibility with older systems." },
       { question: "What video codecs does the AVI output use?", answer: "The converter typically outputs AVI with MJPEG or MPEG-4 codecs. Choose the codec based on your compatibility needs — MJPEG is most widely supported but produces larger files." },
@@ -1165,6 +1310,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert MOV video files to AVI format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MOV to AVI — Convert MOV video files into AVI format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
+    instructions: [
+      { title: "1. Drop MOV file(s)", desc: "Upload your MOV source. Runs locally on FFmpeg." },
+      { title: "2. Set AVI options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "3. Download AVI", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert MOV to AVI?", answer: "AVI is required by legacy media players, older video editing software, and Windows applications that don't support QuickTime MOV format." },
       { question: "What quality settings does MOV to AVI offer?", answer: "Choose between quality-preserved encoding and compressed output. Higher quality produces larger files. Codec selection (MPEG-4, MJPEG) affects compatibility." },
@@ -1185,6 +1335,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     dependencies: "FFmpeg",
 
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop WebM file(s)", desc: "Upload your WebM source. Runs locally on FFmpeg." },
+      { title: "2. Set MKV options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "3. Download MKV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does WEBM to MKV do?", answer: "Convert WEBM video files to MKV format directly in your browser. 100% free, private \u2014 your files never leave your device." },
       { question: "Will converting WebM lose quality?", answer: "From lossy compressed to lossless container: quality is preserved as far as the formats allow." },
@@ -1213,6 +1368,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     dependencies: "FFmpeg",
 
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop WebM file(s)", desc: "Upload your WebM source. Runs locally on FFmpeg." },
+      { title: "2. Set AVI options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "3. Download AVI", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does WEBM to AVI do?", answer: "Convert WEBM video files to AVI format directly in your browser. 100% free, private \u2014 your files never leave your device." },
       { question: "What WebM files convert best?", answer: "Complete, uncorrupted WebM files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
@@ -1228,6 +1388,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert AVI video files to MKV format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online AVI to MKV — Convert AVI video files into MKV format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
+    instructions: [
+      { title: "1. Drop AVI file(s)", desc: "Upload your AVI source. Runs locally on FFmpeg." },
+      { title: "2. Set MKV options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "3. Download MKV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert AVI to MKV?", answer: "MKV supports more modern codecs (H.264, H.265), multiple audio tracks, subtitles, and chapter markers. Converting from legacy AVI to MKV enables these advanced features." },
       { question: "Does it preserve video quality?", answer: "If re-encoding with the same codec, quality depends on bitrate settings. Stream copy (no re-encode) preserves exact quality when the codec is compatible." },
@@ -1247,6 +1412,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     dependencies: "FFmpeg",
 
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop AVI file(s)", desc: "Upload your AVI source. Runs locally on FFmpeg." },
+      { title: "2. Set MOV options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "3. Download MOV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does AVI to MOV do?", answer: "Convert AVI video files to MOV format directly in your browser. 100% free, private \u2014 your files never leave your device." },
       { question: "Should I keep the original AVI files?", answer: "Yes \u2014 archive AVI originals before batch-converting. Re-converting from MOV back to AVI never restores discarded data." },
@@ -1262,6 +1432,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert AVI video files to WEBM format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online AVI to WEBM — Convert AVI video files into WEBM format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
+    instructions: [
+      { title: "1. Drop AVI file(s)", desc: "Upload your AVI source. Runs locally on FFmpeg." },
+      { title: "2. Set WebM options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "3. Download WebM", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert AVI to WEBM?", answer: "WEBM uses the VP8/VP9 codec which is royalty-free and natively supported by all modern browsers. Converting legacy AVI to WEBM enables web playback without plugins." },
       { question: "Does it support VP9 encoding?", answer: "The converter typically uses VP8 for faster encoding. VP9 may be available for higher quality at smaller file sizes, but encoding is slower." },
@@ -1290,6 +1465,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert PNG images to WEBP format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.',
     seoDescription: 'Free online PNG to WEBP — Convert PNG images into WEBP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
+    instructions: [
+      { title: "1. Drop PNG file(s)", desc: "Upload your PNG source. Runs locally on Canvas." },
+      { title: "2. Set WebP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download WebP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Does WebP support PNG transparency?", answer: "Yes. WebP supports alpha channel transparency just like PNG. Your transparent backgrounds and soft edges are preserved through the conversion." },
       { question: "Why is my WebP file much smaller than the PNG?", answer: "PNG uses lossless compression that preserves every pixel exactly. WebP uses more advanced compression algorithms that achieve 25-35% smaller files while keeping visual quality nearly identical." },
@@ -1318,6 +1498,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online WEBP to PNG — Convert WEBP images into PNG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop WebP file(s)", desc: "Upload your WebP source. Runs locally on Canvas." },
+      { title: "2. Set PNG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download PNG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does WEBP to PNG do?", answer: "Converts WebP files to PNG format \u2014 modern websites to graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds. All conversion happens locally in your browser with no file size limits." },
       { question: "Where does PNG fit best?", answer: "graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds." },
@@ -1334,6 +1519,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online HEIC to PNG — Convert HEIC images into PNG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop HEIC file(s)", desc: "Upload your HEIC source. Runs locally on Canvas." },
+      { title: "2. Set PNG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download PNG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does HEIC to PNG do?", answer: "Converts HEIC files to PNG format \u2014 Apple device photos to graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds. All conversion happens locally in your browser with no file size limits." },
       { question: "How long does HEIC-to-PNG conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
@@ -1348,6 +1538,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Image",
     description: 'Convert PNG images to modern AVIF in your browser — transparency kept at a fraction of the size for faster web delivery.',
     seoTitle: "PNG to AVIF Converter – Free Online",
+    instructions: [
+      { title: "1. Drop PNG file(s)", desc: "Upload your PNG source. Runs locally on Canvas." },
+      { title: "2. Set AVIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download AVIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "How much smaller than PNG?", answer: "Typically 30–50% smaller than PNG with transparency intact — biggest wins on photos." },
       { question: "Photos or graphics for AVIF?", answer: "Both — AVIF handles gradients and flat color better than PNG." },
@@ -1367,6 +1562,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online JPG to AVIF — Convert JPG images into AVIF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop JPG file(s)", desc: "Upload your JPG source. Runs locally on Canvas." },
+      { title: "2. Set AVIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download AVIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert JPG to AVIF?", answer: "AVIF offers 50% better compression than JPG at the same visual quality. Converting to AVIF reduces file sizes significantly while maintaining or improving image clarity — ideal for web performance." },
       { question: "What quality settings does JPG to AVIF offer?", answer: "You can adjust the AVIF compression quality from 1-100. Higher values preserve more detail but produce larger files. The default (80) provides a good balance of quality and size." },
@@ -1392,6 +1592,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Image",
     description: 'Convert PNG images to uncompressed BMP in your browser — for legacy software and embedded systems that accept nothing else.',
     seoTitle: "PNG to BMP Converter – Free Online",
+    instructions: [
+      { title: "1. Drop PNG file(s)", desc: "Upload your PNG source. Runs locally on Canvas." },
+      { title: "2. Set BMP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download BMP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'Why is BMP enormous?', answer: 'No compression — every pixel stored raw. Expect 5–10x the PNG size.' },
       { question: 'When is BMP actually needed?', answer: 'Legacy software and embedded systems that accept nothing else.' },
@@ -1411,6 +1616,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online PNG to TIFF — Convert PNG images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop PNG file(s)", desc: "Upload your PNG source. Runs locally on Canvas." },
+      { title: "2. Set TIFF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download TIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert PNG to TIFF?", answer: "TIFF is preferred for print publishing, archival storage, and professional photography. It supports higher bit depths, lossless compression, and is accepted by most print services and publishing workflows." },
       { question: "Does TIFF support transparency like PNG?", answer: "Yes. TIFF supports alpha channel transparency, preserving any transparent areas from your PNG source. You can also choose to flatten transparency to a white background." },
@@ -1438,6 +1648,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online JPG to HEIC — Convert JPG images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop JPG file(s)", desc: "Upload your JPG source. Runs locally on Canvas." },
+      { title: "2. Set HEIC options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download HEIC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert JPG to HEIC?", answer: "HEIC offers 50% better compression than JPG at similar visual quality. Converting JPGs to HEIC saves storage on Apple devices and iCloud." },
       { question: "Will quality improve from JPG to HEIC?", answer: "No. Both are lossy formats. HEIC is more efficient, so you get similar quality at smaller file sizes. It does not restore detail lost in the original JPG compression." },
@@ -1465,6 +1680,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online JPG to BMP — Convert JPG images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop JPG file(s)", desc: "Upload your JPG source. Runs locally on Canvas." },
+      { title: "2. Set BMP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download BMP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert JPG to BMP?", answer: "BMP is uncompressed and supported by virtually all image software. Converting JPG to BMP is useful for legacy applications, medical imaging, or when you need lossless output for further editing." },
       { question: "When using JPG to BMP, will the file size increase?", answer: "Yes, significantly. BMP is uncompressed, so a 500KB JPG may become 5-15MB as BMP. The tradeoff is lossless quality for editing workflows." },
@@ -1481,6 +1701,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JPG images to TIFF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.',
     seoDescription: 'Free online JPG to TIFF — Convert JPG images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
+    instructions: [
+      { title: "1. Drop JPG file(s)", desc: "Upload your JPG source. Runs locally on Canvas." },
+      { title: "2. Set TIFF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download TIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why would I convert JPG to TIFF?", answer: "TIFF preserves image quality without compression artifacts. If you need to edit a JPG repeatedly (retouching, color grading, printing), converting to TIFF first prevents quality degradation from re-saving." },
       { question: "Does converting JPG to TIFF improve quality?", answer: "No. TIFF cannot recover detail lost during the original JPG compression. The conversion preserves whatever quality exists in the JPG. Think of it as a safe container for further editing, not a quality enhancer." },
@@ -1497,6 +1722,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Image",
     description: 'Convert JPG photos to ICO favicons in your browser — 16/32/48 px multi-size icons ready to link with a single rel=icon tag.',
     seoTitle: "JPG to ICO Converter – Free Favicon Maker",
+    instructions: [
+      { title: "1. Drop JPG file(s)", desc: "Upload your JPG source. Runs locally on Canvas." },
+      { title: "2. Set ICO options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download ICO", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'What favicon sizes do I get?', answer: '16, 32, and 48 px packed into one ICO — covering tabs, bookmarks, and shortcuts.' },
       { question: 'Where do I install it?', answer: 'Link it in HTML head with rel="icon" — browsers pick it up automatically.' },
@@ -1516,6 +1746,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online WEBP to HEIC — Convert WEBP images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop WebP file(s)", desc: "Upload your WebP source. Runs locally on Canvas." },
+      { title: "2. Set HEIC options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download HEIC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert WEBP to HEIC?", answer: "HEIC is the default format for Apple devices and offers excellent compression. Converting to HEIC is useful for importing WEBP images into Apple Photos, iOS apps, or macOS workflows." },
       { question: "Does HEIC support transparency?", answer: "HEIC supports alpha channel transparency, so transparent WEBP images will preserve their transparency in the converted output." },
@@ -1533,6 +1768,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online WEBP to SVG — Convert WEBP images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop WebP file(s)", desc: "Upload your WebP source. Runs locally on Canvas." },
+      { title: "2. Set SVG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download SVG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "When should I convert WEBP to SVG?", answer: "SVG is a vector format, so WEBP-to-SVG conversion is best for simple graphics, logos, and icons where you need scalability. Complex photographs will produce very large SVGs with embedded raster data." },
       { question: "Will the SVG be truly vector?", answer: "The converter embeds the WEBP image as a raster element inside the SVG wrapper. For true vectorization (tracing), use a dedicated vector tracing tool. This conversion is useful for embedding in SVG-only contexts." },
@@ -1550,6 +1790,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online WEBP to BMP — Convert WEBP images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop WebP file(s)", desc: "Upload your WebP source. Runs locally on Canvas." },
+      { title: "2. Set BMP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download BMP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert WEBP to BMP?", answer: "BMP is an uncompressed format supported by legacy Windows applications, image editors, and embedded systems that don't handle WEBP. Converting to BMP ensures compatibility with older software." },
       { question: "Will the file size increase significantly?", answer: "Yes. BMP is uncompressed, so expect 5-20x larger files than WEBP. A 200KB WEBP may become 2-4MB as BMP. This is the tradeoff for uncompressed, lossless output." },
@@ -1578,6 +1823,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online WEBP to ICO — Convert WEBP images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop WebP file(s)", desc: "Upload your WebP source. Runs locally on Canvas." },
+      { title: "2. Set ICO options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download ICO", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert WEBP to ICO?", answer: "WEBP is not supported as favicon format by browsers. ICO is the standard format for favicons and Windows icons. Converting WEBP to ICO makes your image usable as a favicon." },
       { question: "When using WEBP to ICO, what sizes are included in the ICO?", answer: "Multiple sizes: 16x16 (favicon), 32x32 (taskbar), 48x48 (desktop), and 256x256 (high-DPI). The converter generates all standard sizes." },
@@ -1595,6 +1845,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online WEBP to JXL — Convert WEBP images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop WebP file(s)", desc: "Upload your WebP source. Runs locally on Canvas." },
+      { title: "2. Set JPEG XL options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download JPEG XL", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert WEBP to JXL?", answer: "JXL offers better compression than WEBP with faster decode times and progressive rendering. It's the next-generation format designed to replace both JPEG and PNG with superior quality-to-size ratios." },
       { question: "Does JXL support transparency?", answer: "Yes. JXL supports alpha channel transparency, preserving any transparent areas from the WEBP source. It also supports 16-bit color for HDR content." },
@@ -1622,6 +1877,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online HEIC to BMP — Convert HEIC images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop HEIC file(s)", desc: "Upload your HEIC source. Runs locally on Canvas." },
+      { title: "2. Set BMP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download BMP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert HEIC to BMP?", answer: "HEIC is Apple's default format but isn't natively supported by many Windows applications and legacy software. Converting to BMP ensures universal compatibility across all platforms." },
       { question: "Does HEIC transparency carry over to BMP?", answer: "No. Standard BMP does not support alpha channels. Any transparent areas in the HEIC source will be rendered against a white background." },
@@ -1648,6 +1908,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert HEIC images to ICO format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.',
     seoDescription: 'Free online HEIC to ICO — Convert HEIC images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
+    instructions: [
+      { title: "1. Drop HEIC file(s)", desc: "Upload your HEIC source. Runs locally on Canvas." },
+      { title: "2. Set ICO options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download ICO", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       {
         question: "What sizes does the ICO file include?",
@@ -1701,6 +1966,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online AVIF to HEIC — Convert AVIF images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop AVIF file(s)", desc: "Upload your AVIF source. Runs locally on Canvas." },
+      { title: "2. Set HEIC options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download HEIC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does AVIF to HEIC do?", answer: "Convert AVIF images to HEIC format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
       { question: "Where does HEIC fit best?", answer: "Apple device photos \u2014 iPhone and Mac default format with excellent compression efficiency." },
@@ -1757,6 +2027,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online AVIF to ICO — Convert AVIF images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop AVIF file(s)", desc: "Upload your AVIF source. Runs locally on Canvas." },
+      { title: "2. Set ICO options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download ICO", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert AVIF to ICO?", answer: "ICO is the required format for Windows application icons and website favicons. AVIF is not supported as favicon format. Converting lets you use modern AVIF content as traditional icons." },
       { question: "When using AVIF to ICO, what sizes are included in the ICO?", answer: "The output ICO typically includes 16x16, 32x32, 48x48, and 256x256 pixel variants. This covers favicon, taskbar, and desktop icon requirements across Windows." },
@@ -1773,6 +2048,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert AVIF images to JXL format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.',
     seoDescription: 'Free online AVIF to JXL — Convert AVIF images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
+    instructions: [
+      { title: "1. Drop AVIF file(s)", desc: "Upload your AVIF source. Runs locally on Canvas." },
+      { title: "2. Set JPEG XL options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download JPEG XL", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why would I convert AVIF to JXL?", answer: "JXL offers better lossless compression and supports higher bit depths than AVIF. If you are archiving images or working in a professional photography pipeline, JXL preserves more data." },
       { question: "Will I lose quality in the conversion?", answer: "Converting lossy AVIF to lossless JXL preserves whatever quality exists in the source. The conversion cannot recover detail already lost by AVIF compression, but it stops further degradation." },
@@ -1799,6 +2079,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Image",
     description: 'Convert SVG vectors to BMP raster in your browser — only when legacy compatibility demands it, since PNG beats BMP everywhere else.',
     seoTitle: "SVG to BMP Converter – Free Online",
+    instructions: [
+      { title: "1. Drop SVG file(s)", desc: "Upload your SVG source. Runs locally on Canvas." },
+      { title: "2. Set BMP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download BMP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'Why BMP from SVG?', answer: 'Only when legacy compatibility demands it — BMP is otherwise the worst tradeoff.' },
       { question: 'What resolution?', answer: 'Rasterize at exactly the pixels needed; vectors scale cleanly to any size first.' },
@@ -1816,6 +2101,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Image",
     description: 'Convert SVG vectors to print-grade TIFF in your browser — resolution-independent artwork rasterized at any size from web size to poster size.',
     seoTitle: "SVG to TIFF Converter – Free Online",
+    instructions: [
+      { title: "1. Drop SVG file(s)", desc: "Upload your SVG source. Runs locally on Canvas." },
+      { title: "2. Set TIFF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download TIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why TIFF from SVG?", answer: "Print publishing — TIFF is the print industry's raster standard." },
       { question: "What resolution?", answer: "Any — vectors rasterize cleanly from web size to poster size." },
@@ -1855,6 +2145,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online BMP to HEIC — Convert BMP images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop BMP file(s)", desc: "Upload your BMP source. Runs locally on Canvas." },
+      { title: "2. Set HEIC options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download HEIC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert BMP to HEIC?", answer: "HEIC offers 50% better compression than BMP while maintaining visual quality. Converting large BMP files to HEIC dramatically reduces storage requirements, especially useful for Apple device users." },
       { question: "Will quality be lost in conversion?", answer: "HEIC supports lossless mode, so you can preserve original BMP quality. Lossy mode provides much smaller files with visually imperceptible quality loss for most content." },
@@ -1892,6 +2187,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online BMP to ICO — Convert BMP images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop BMP file(s)", desc: "Upload your BMP source. Runs locally on Canvas." },
+      { title: "2. Set ICO options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download ICO", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert BMP to ICO?", answer: "ICO is the required format for Windows application icons and website favicons. BMP is not supported as favicon format. Converting lets you use BMP content as traditional icons." },
       { question: "When using BMP to ICO, what sizes are included in the ICO?", answer: "The output ICO typically includes 16x16, 32x32, 48x48, and 256x256 pixel variants, covering favicon, taskbar, and desktop icon requirements." },
@@ -1907,6 +2207,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Image",
     description: 'Convert BMP bitmaps to next-gen JPEG XL in your browser — rescue uncompressed legacy files into efficient modern archival.',
     seoTitle: "BMP to JXL Converter – Free Online",
+    instructions: [
+      { title: "1. Drop BMP file(s)", desc: "Upload your BMP source. Runs locally on Canvas." },
+      { title: "2. Set JPEG XL options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download JPEG XL", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert BMP at all?", answer: "Uncompressed BMPs are enormous — JPEG XL archives them at a fraction with modern efficiency." },
       { question: "Lossless or lossy?", answer: "Either — JXL stores both, so masters stay perfect and shares stay small." },
@@ -1946,6 +2251,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online TIFF to BMP — Convert TIFF images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop TIFF file(s)", desc: "Upload your TIFF source. Runs locally on Canvas." },
+      { title: "2. Set BMP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download BMP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does TIFF to BMP do?", answer: "Convert TIFF images to BMP format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
       { question: "What TIFF files convert best?", answer: "Complete, uncorrupted TIFF files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
@@ -1972,6 +2282,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online TIFF to JXL — Convert TIFF images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop TIFF file(s)", desc: "Upload your TIFF source. Runs locally on Canvas." },
+      { title: "2. Set JPEG XL options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download JPEG XL", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert TIFF to JXL?", answer: "JXL offers 50-60% better compression than TIFF while maintaining visual quality. Archival TIFF files can be dramatically reduced in size for web distribution and storage." },
       { question: "Does JXL preserve TIFF quality?", answer: "JXL supports lossless mode, preserving exact TIFF quality. Lossy mode provides much smaller files with visually imperceptible differences for most content." },
@@ -1998,6 +2313,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert GIF images to SVG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.',
     seoDescription: 'Free online GIF to SVG — Convert GIF images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
+    instructions: [
+      { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on Canvas." },
+      { title: "2. Set SVG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download SVG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Does this convert the GIF into a vector SVG?", answer: "No. GIF is a raster (pixel) format and cannot be truly vectorized. The converter embeds the raster image inside an SVG container, which provides SVG compatibility without vector scalability." },
       { question: "Will the SVG version scale without pixelation?", answer: "No. Because the SVG contains an embedded raster image, enlarging it beyond the original dimensions produces the same pixelation as scaling the GIF directly." },
@@ -2016,6 +2336,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online GIF to BMP — Convert GIF images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on Canvas." },
+      { title: "2. Set BMP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download BMP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert GIF to BMP?", answer: "BMP is uncompressed and supported by legacy image editors, medical imaging software, and embedded systems. Converting GIF to BMP provides lossless output for further processing in tools that don't support GIF." },
       { question: "Does it handle animated GIFs?", answer: "Animated GIFs are converted frame-by-frame. The first frame is extracted and converted to BMP. For animated output, use other format converters." },
@@ -2031,6 +2356,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Image",
     description: 'Convert GIF images to print-grade TIFF in your browser — frames and stills rasterized for publishing for print and publishing workflows.',
     seoTitle: "GIF to TIFF Converter – Free Online",
+    instructions: [
+      { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on Canvas." },
+      { title: "2. Set TIFF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download TIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why TIFF from GIF?", answer: "Print frames from animations or archive stills losslessly for publishing." },
       { question: "Does quality improve?", answer: "No — TIFF preserves exactly, never enhances, the 256-color source." },
@@ -2050,6 +2380,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online GIF to ICO — Convert GIF images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on Canvas." },
+      { title: "2. Set ICO options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download ICO", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert GIF to ICO?", answer: "ICO is the required format for website favicons and Windows application icons. Converting a GIF to ICO lets you use your animated or static graphic as a favicon or desktop icon." },
       { question: "Does it preserve GIF animation in ICO?", answer: "ICO files support multiple frames at different sizes. The converter can embed multiple resolution variants (16x16, 32x32, 48x48, 256x256) but does not preserve GIF frame animation." },
@@ -2105,6 +2440,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Image",
     description: 'Convert ICO favicons to BMP bitmaps in your browser — full-size icon artwork for legacy Windows software for editing in legacy Windows apps.',
     seoTitle: "ICO to BMP Converter – Free Online",
+    instructions: [
+      { title: "1. Drop ICO file(s)", desc: "Upload your ICO source. Runs locally on Canvas." },
+      { title: "2. Set BMP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download BMP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why BMP from an icon?", answer: "Legacy Windows software that accepts nothing else — modern cases should use PNG." },
       { question: "Which size exports?", answer: "The largest embedded size, for maximum quality to work down from." },
@@ -2124,6 +2464,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online ICO to TIFF — Convert ICO images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop ICO file(s)", desc: "Upload your ICO source. Runs locally on Canvas." },
+      { title: "2. Set TIFF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download TIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does ICO to TIFF do?", answer: "Convert ICO images to TIFF format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
       { question: "How long does ICO-to-TIFF conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
@@ -2140,6 +2485,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online ICO to GIF — Convert ICO images into GIF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop ICO file(s)", desc: "Upload your ICO source. Runs locally on Canvas." },
+      { title: "2. Set GIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download GIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert ICO to GIF?", answer: "GIF is supported by platforms and messaging apps that don't handle ICO files. Converting ICO to GIF makes your icon usable in chat apps, social media, and legacy web contexts." },
       { question: "Does it handle multi-size ICO files?", answer: "Multi-size ICO files contain multiple resolution variants. The converter exports the largest available size as a single GIF frame." },
@@ -2157,6 +2507,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online ICO to JXL — Convert ICO images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop ICO file(s)", desc: "Upload your ICO source. Runs locally on Canvas." },
+      { title: "2. Set JPEG XL options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download JPEG XL", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert ICO to JXL?", answer: "JXL (JPEG XL) offers superior compression and quality compared to ICO's embedded bitmap formats. It's useful for archival or web use where you want modern compression for icon imagery." },
       { question: "Does JXL support multiple sizes like ICO?", answer: "JXL supports multiple resolution layers, but the converter exports a single image. For multi-size icons, convert each ICO size separately or use a dedicated icon tool." },
@@ -2172,6 +2527,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Image",
     description: 'Convert JPEG XL photos to Apple HEIC in your browser — native iPhone and Mac format from next-gen originals across the whole Apple ecosystem.',
     seoTitle: "JXL to HEIC Converter – Free Online",
+    instructions: [
+      { title: "1. Drop JPEG XL file(s)", desc: "Upload your JPEG XL source. Runs locally on Canvas." },
+      { title: "2. Set HEIC options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download HEIC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why HEIC?", answer: "Apple's native format — iPhone libraries and macOS handle it best." },
       { question: "Quality path?", answer: "Lossless JXL sources stay lossless in HEIC across the conversion." },
@@ -2190,6 +2550,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JXL images to AVIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.',
     seoDescription: 'Free online JXL to AVIF — Convert JXL images into AVIF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
+    instructions: [
+      { title: "1. Drop JPEG XL file(s)", desc: "Upload your JPEG XL source. Runs locally on Canvas." },
+      { title: "2. Set AVIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download AVIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert between JXL and AVIF instead of just using one?", answer: "JXL has better lossless compression while AVIF has wider browser support. Converting JXL to AVIF lets you use your library of JXL images on websites where AVIF is better supported." },
       { question: "Which format produces smaller files?", answer: "For lossy compression at the same quality level, AVIF and JXL produce similarly sized files. JXL edges ahead in lossless mode, while AVIF has a slight advantage in lossy at low bitrates." },
@@ -2207,6 +2572,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JXL images to SVG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.',
     seoDescription: 'Free online JXL to SVG — Convert JXL images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
+    instructions: [
+      { title: "1. Drop JPEG XL file(s)", desc: "Upload your JPEG XL source. Runs locally on Canvas." },
+      { title: "2. Set SVG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download SVG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Can a raster JXL image become a true vector SVG?", answer: "No. SVG is a vector format, but JXL is raster (pixel-based). The converter embeds the raster image inside an SVG wrapper, which preserves compatibility but does not add vector scalability." },
       { question: "Why would I want a JXL inside an SVG wrapper?", answer: "Some design tools and web workflows require SVG input. Wrapping your JXL in SVG lets you use it in these contexts without converting to a different raster format." },
@@ -2233,6 +2603,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Image",
     description: 'Convert JPEG XL photos to archival TIFF in your browser — lossless masters for print and publishing for print and long-term archival.',
     seoTitle: "JXL to TIFF Converter – Free Online",
+    instructions: [
+      { title: "1. Drop JPEG XL file(s)", desc: "Upload your JPEG XL source. Runs locally on Canvas." },
+      { title: "2. Set TIFF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download TIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why TIFF?", answer: "Archival masters and print — lossless, layered-capable, universal." },
       { question: "File size warning?", answer: "TIFFs run enormous — archive deliberately, share in lighter formats." },
@@ -2261,6 +2636,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Create SRT/VTT subtitles manually by typing or dictating text with live timestamp capture. No automatic transcription — you provide the text.',
     seoDescription: 'Free online Subtitle Generator — Generate SRT and VTT subtitle files from transcript text. Auto-sync with configurable timestamps.',
     dependencies: "None",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Subtitle first." },
+      { title: "2. Generate", desc: "Create your Subtitle with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "How do I create subtitles from a transcript?", answer: "Paste your transcript text into the input area. The generator splits it into timed subtitle segments, distributing them evenly across the video duration you specify." },
       { question: "What is the difference between SRT and VTT?", answer: "SRT is the most widely supported subtitle format — it works in virtually every video player. VTT (WebVTT) supports styling and positioning. Choose SRT for maximum compatibility, VTT for web players." },
@@ -2279,6 +2659,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online JSON to YAML Converter — Convert JSON objects to YAML format with proper key-value formatting. ',
     dependencies: "None",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop JSON file(s)", desc: "Upload your JSON source. Runs locally in your browser." },
+      { title: "2. Set YAML options", desc: "Adjust output settings for YAML — presets fit most jobs without further tuning." },
+      { title: "3. Download YAML", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What JSON features are preserved in YAML?", answer: "Objects, arrays, strings, numbers, booleans, and null values are mapped to YAML equivalents. Nested structures become indented YAML blocks." },
       { question: "How are JSON strings formatted in YAML?", answer: "Simple strings are unquoted. Strings with special characters, colons, or hashes are quoted. Multi-line strings use YAML block scalars (| or >)." },
@@ -2306,6 +2691,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online JSON to TOML Converter — Convert JSON to TOML configuration format with proper typing. ',
     dependencies: "None",
     showInCategory: false,
+    instructions: [
+      { title: "1. Paste JSON", desc: "Paste or drop JSON source text into the input area." },
+      { title: "2. Convert to TOML", desc: "Run the conversion; review errors or warnings line by line." },
+      { title: "3. Copy TOML", desc: "Copy the converted output for your project." },
+    ],
     faqs: [
       { question: "What is TOML?", answer: "TOML (Tom's Obvious Minimal Language) is a config file format used by Rust (Cargo.toml), Python (pyproject.toml), and other tools. It's more readable than JSON for configuration files." },
       { question: "How are JSON types mapped to TOML?", answer: "Strings, numbers, booleans, arrays, and objects map directly. Nested objects become TOML sections ([section]). Arrays of objects become [[array-of-tables]]." },
@@ -2323,6 +2713,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online CSS to Less Converter — Convert CSS variables to Less syntax with proper transformation. ',
     dependencies: "None",
     showInCategory: false,
+    instructions: [
+      { title: "1. Paste CSS", desc: "Paste or drop CSS source text into the input area." },
+      { title: "2. Convert to LESS", desc: "Run the conversion; review errors or warnings line by line." },
+      { title: "3. Copy LESS", desc: "Copy the converted output for your project." },
+    ],
     faqs: [
       { question: "What CSS features are converted to Less?", answer: "CSS custom properties (--variable) are converted to Less variables (@variable). Nesting, mixins, and functions are preserved. The output is valid Less syntax." },
       { question: "Does it handle nested CSS?", answer: "Yes. If your CSS uses native nesting (a recent CSS feature), the converter preserves the nesting structure while converting variables to Less syntax." },
@@ -2337,6 +2732,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "css-to-stylus-converter",
     category: "Converter",
     description: 'Convert CSS braces and semicolons to Stylus indentation-based syntax. Files are converted locally in your browser — nothing is uploaded.',
+    instructions: [
+      { title: "1. Paste CSS", desc: "Paste or drop CSS source text into the input area." },
+      { title: "2. Convert to Stylus", desc: "Run the conversion; review errors or warnings line by line." },
+      { title: "3. Copy Stylus", desc: "Copy the converted output for your project." },
+    ],
     faqs: [
       { question: "Braces to indentation?", answer: "Yes — Stylus drops braces and semicolons for whitespace structure." },
       { question: "Variables convert?", answer: "$ variables become Stylus assignments, preserving names exactly." },
@@ -2459,6 +2859,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Bidirectional NATO phonetic alphabet converter. Convert text to NATO words (Alpha, Bravo, Charlie) and back. Perfect for radio communication, spelling clarification, and aviation.',
     seoDescription: 'Free online NATO Phonetic Converter — Convert text to NATO phonetic alphabet (Alpha, Bravo, Charlie) and back. Perfect for radio communication and spelling clarification. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Everything runs locally." },
+      { title: "2. Configure conversion", desc: "Set the conversion options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What is the NATO phonetic alphabet?", answer: "The NATO phonetic alphabet assigns a word to each letter: Alpha (A), Bravo (B), Charlie (C), Delta (D), through Zulu (Z). It is the international standard for spelling out letters clearly over radio and电话." },
       { question: "Can I convert both ways?", answer: "Yes. Convert text to NATO phonetic words (A -> Alpha) and NATO words back to letters (Alpha -> A). The bidirectional converter handles both directions." },
