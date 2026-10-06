@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { toolsRegistry } from '@/registry/tools';
+import { defaultFaqsFor } from '@/components/tools/ToolPageSEOContent';
 
 /**
  * Tool content standard (Oct 5 agency pass): custom FAQ sets must have
@@ -42,5 +43,17 @@ describe('tool content standard', () => {
         .map((f: any) => `${t.slug}: "${String(f.question || '').slice(0, 40)}"`)
     );
     expect(thin).toEqual([]);
+  });
+
+  it('fallback FAQs are honest per tool (no unconditional absolutes)', () => {
+    // Gated/cloud tools must disclose limits; free-local tools keep the
+    // plain truth. Spot-check both sides through the real function.
+    const bySlug = new Map((toolsRegistry as any[]).map((t: any) => [t.slug, t]));
+    const gated = defaultFaqsFor(bySlug.get('qr-code-generator'));
+    const limits = gated.find((f) => /limits|free/i.test(f.question));
+    expect(limits ? limits.answer : '').toMatch(/fair daily limits/i);
+    const free = defaultFaqsFor(bySlug.get('password-generator'));
+    const usage = free.find((f) => /limits|free/i.test(f.question));
+    expect(usage ? usage.answer : '').toMatch(/no signup|completely free/i);
   });
 });

@@ -215,7 +215,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "PDF to Word",
     slug: "pdf-to-word",
     category: "PDF",
-    description: 'Extract PDF content into editable DOCX files. Preserves formatting and layout.',
+    description: 'Extract PDF content into editable DOCX files. Preserves formatting, tables, and layout — review complex layouts after conversion.',
     dependencies: "pdf2docx / PDF.js",
     seoDescription: 'Convert PDF to Word online free — editable DOCX with layout kept. Know the limits first. ',
     faqs: [
@@ -1357,7 +1357,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     faqs: [
       { question: "What does JSON to CSV do?", answer: "Converts JSON files to CSV format \u2014 APIs, configuration files, and data exchange between web services to spreadsheets, database exports, and data imports. All conversion happens locally in your browser with no file size limits." },
       { question: "Why convert JSON to CSV?", answer: "JSON (JavaScript Object Notation) is human-readable structured data \u2014 best for APIs, configuration files, and data exchange between web services. CSV (Comma-Separated Values) is tabular plain text \u2014 best for spreadsheets, database exports, and data imports." },
-      { question: "Where does CSV fit best?", answer: "spreadsheets, database exports, and data imports." },
+      { question: "Where does CSV fit best?", answer: "CSV fits best for spreadsheets, database exports, and data imports — anywhere tabular plain text beats nested JSON." },
       { question: "What JSON files convert best?", answer: "Complete, uncorrupted JSON files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
     ],
   },

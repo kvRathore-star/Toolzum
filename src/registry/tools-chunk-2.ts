@@ -1462,7 +1462,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "Phone Number Parser",
     slug: "phone-parser",
     category: "Developer",
-    description: 'Parse and validate international phone numbers with country detection.',
+    description: 'Parse and validate international phone numbers with automatic country detection from the dial code. All validation runs locally in your browser.',
     seoDescription: 'Free online Phone Number Parser — Parse and validate international phone numbers with country detection and formatting. ',
     dependencies: "None",
     faqs: [
@@ -1530,7 +1530,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "MAC Vendor Lookup",
     slug: "mac-vendor-lookup",
     category: "Developer",
-    description: 'Look up device manufacturer from MAC address OUI prefix.',
+    description: 'Look up device manufacturer from a MAC address OUI prefix, covering thousands of registered vendors from Apple and Samsung to Intel and Cisco.',
     seoDescription: 'Free online MAC Vendor Lookup — Look up device manufacturer from MAC address OUI prefix with extensive vendor database. ',
     dependencies: "None",
     faqs: [
@@ -1584,7 +1584,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "ASCII Art Generator",
     slug: "ascii-art-generator",
     category: "Utility",
-    description: 'Convert text to ASCII art with multiple font styles.',
+    description: 'Convert text to ASCII art with multiple font styles — download or copy the result for READMEs, code comments, and banners.',
     seoDescription: 'Free online ASCII Art Generator — Convert text to ASCII art with block, bubble, fancy, and digital styles. ',
     dependencies: "None",
     faqs: [
@@ -1770,7 +1770,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "Words Per Page Calculator",
     slug: "words-per-page-calculator",
     category: "Calculator",
-    description: 'Estimate how many pages your word count will take at different font sizes.',
+    description: 'Estimate how many pages your word count fills at different font sizes — compare 11pt vs 12pt, single vs double spacing, for essays and manuscripts.',
     seoDescription: 'Free online Words Per Page Calculator \u2014 Estimate page count from word count and font size. ',
     dependencies: "None",
     faqs: [
@@ -1887,7 +1887,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "OAuth State Validator",
     slug: "oauth-state-validator",
     category: "Developer",
-    description: 'Validate OAuth state parameters for format, length, and age.',
+    description: 'Validate OAuth state parameters for format, length, and age — catch CSRF holes before they ship. Nothing leaves your browser.',
     seoDescription: 'Free online OAuth State Validator \u2014 Validate state parameters for format, length, and age. ',
     dependencies: "None",
     faqs: [
@@ -1991,7 +1991,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "Base32 Encoder / Decoder",
     slug: "base32-encoder",
     category: "Developer",
-    description: 'Encode text to Base32 or decode Base32 strings back to text.',
+    description: 'Encode text to Base32 or decode Base32 strings back — the alphabet TOTP apps and authenticator URIs use. Both directions, fully local.',
     seoDescription: 'Free online Base32 Encoder / Decoder \u2014 Encode and decode Base32 strings. ',
     dependencies: "None",
     faqs: [
@@ -2113,7 +2113,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "SVG Optimizer",
     slug: "svg-optimizer",
     category: "Developer",
-    description: 'Minify SVG by removing whitespace, comments, and redundant attributes.',
+    description: 'Minify SVG by removing whitespace, comments, and redundant attributes — typically cutting files 20–50% with zero visual change.',
     seoDescription: 'Free online SVG Optimizer \u2014 Minify SVG by removing whitespace and comments. ',
     dependencies: "None",
     faqs: [
@@ -2130,7 +2130,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "Power Converter",
     slug: "power-converter",
     category: "Utility",
-    description: 'Convert between kW, hp, bhp, W, MW, and BTU/hr.',
+    description: 'Convert between kW, hp, bhp, W, MW, and BTU/hr — engine specs, solar sizing, and HVAC math in one place.',
     seoDescription: 'Free online Power Converter \u2014 Convert between kW, hp, W, MW, and BTU/hr. ',
     dependencies: "None",
     faqs: [

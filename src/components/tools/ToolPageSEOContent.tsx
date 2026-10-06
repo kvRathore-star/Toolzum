@@ -2,7 +2,9 @@ import Link from "next/link";
 import { ChevronRight, HelpCircle, BookOpen, Layers, ArrowRight } from "lucide-react";
 import type { ToolMetadata } from "@/registry/tools";
 import { getShortDescription } from "@/lib/generateToolDescription";
-import { requiresCloudApi, LOCAL_TRUST_CLAIM, FORMAT_INFO } from "@/lib/cloudPatterns";
+import { requiresCloudApi, classifyDependencies, LOCAL_TRUST_CLAIM, FORMAT_INFO } from "@/lib/cloudPatterns";
+import { proSlugs } from "@/registry/tools-constants";
+import { DOWNLOAD_PRODUCING_SLUGS } from "@/lib/downloadProducingSlugs";
 import { UNIT_FAMILIES } from './modules/shared/unitFamilies';
 
 interface ToolPageSEOContentProps {
@@ -20,16 +22,19 @@ type InteractionPattern =
   | { pattern: 'upload-edit-visual-download' }
   | { pattern: 'ai-generate' }
   | { pattern: 'click-generate'; hasOptions: boolean }
+  | { pattern: 'set-start-alert' }
+  | { pattern: 'measure-read' }
+  | { pattern: 'play-interact' }
   | { pattern: 'other' };
 
 const ZERO_INPUT_TOOLS = new Set(['dice-roller', 'coin-flipper', 'password-strength-checker']);
 
 const KNOWN_INPUT_TYPES = new Set([
-  'pdf', 'jpg', 'jpeg', 'png', 'gif', 'webp', 'heic', 'heif', 'bmp', 'tiff', 'tif', 'svg', 'avif', 'ico',
+  'pdf', 'jpg', 'jpeg', 'png', 'gif', 'webp', 'heic', 'heif', 'bmp', 'tiff', 'tif', 'svg', 'avif', 'ico', 'jxl',
   'mp4', 'mov', 'avi', 'webm', 'mkv', 'flv', 'wmv', 'm4v', 'mpg', 'mpeg', '3gp', 'video',
-  'mp3', 'wav', 'ogg', 'm4a', 'flac', 'aac', 'wma', 'opus', 'audio',
+  'mp3', 'wav', 'ogg', 'm4a', 'flac', 'aac', 'wma', 'opus', 'aiff', 'audio',
   'json', 'xml', 'csv', 'yaml', 'yml', 'toml', 'ini', 'env',
-  'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'odt', 'ods', 'odp',
+  'doc', 'docx', 'word', 'xls', 'xlsx', 'ppt', 'pptx', 'odt', 'ods', 'odp',
   'epub', 'mobi', 'txt', 'rtf', 'md', 'markdown',
   'zip', 'rar', '7z', 'tar', 'gz',
   'css', 'html', 'htm', 'js', 'ts', 'jsx', 'tsx',
@@ -52,7 +57,7 @@ export function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern
   const fileDeps = ['ffmpeg', 'pdf-lib', 'heic2any', 'jszip', 'cropper.js', 'exifr', 'tesseract', 'pdf2json', 'pdf2docx', 'sheetjs', 'jspdf', 'pptxgenjs', 'html2canvas', 'canvas api', 'sharp'];
   const hasFileInput = fileDeps.some(d => dep.includes(d)) || ['pdf', 'image', 'video', 'audio', 'archive', 'document', 'transcription'].includes(cat);
 
-  if (hasFileInput && (n.includes('compress') || n.includes('merge') || n.includes('split') || n.includes('lock') || n.includes('unlock') || n.includes('stamp') || n.includes('watermark') || n.includes('protect') || n.includes('rotate') || n.includes('extract') || n.includes('resize') || n.includes('crop') || n.includes('remove') || n.includes('enhance') || n.includes('trim') || n.includes('cut') || n.includes('filter') || n.includes('batch') || n.includes('record') || n.includes('add text') || n.includes('add page') || n.includes('normaliz') || n.includes('reduc'))) {
+  if (hasFileInput && (n.includes('compress') || n.includes('merge') || n.includes('split') || n.includes('lock') || n.includes('unlock') || n.includes('stamp') || n.includes('watermark') || n.includes('protect') || n.includes('rotate') || n.includes('extract') || n.includes('resize') || n.includes('crop') || n.includes('remove') || n.includes('enhance') || n.includes('trim') || n.includes('cut') || n.includes('filter') || n.includes('batch') || n.includes('record') || n.includes('add text') || n.includes('add page') || n.includes('normaliz') || n.includes('reduc') || n.includes('blur') || n.includes('redact') || n.includes('anonymiz') || n.includes('pixelat') || n.includes('screenshot') || n.includes('snapshot') || n.includes('capture') || n.includes('thumbnail') || n.includes('background') || n.includes('tint'))) {
     return { pattern: 'upload-process-download' };
   }
 
@@ -83,6 +88,13 @@ export function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern
   // they don't take typed values — route them to the converter pattern.
   if (n.includes('converter') && hasFileInput) {
     return { pattern: 'upload-convert-download', inputType: cat };
+  }
+  // Text/code converters take pasted text, not typed numbers — paste-text
+  // steps, not enter-values steps (Oct 5 audit: 14 tools like yaml-json
+  // showed "fill in numbers, dates, measurements"). Unit/value converters
+  // (length, currency, px-rem…) fall through to enter-values below.
+  if (n.includes('converter') && !hasFileInput && /(text|code|css|scss|less|yaml|json|xml|markdown|html|case|phonetic|ascii|unicode|encoding|hex|jsx|tsx|sql)/i.test(`${n} ${s}`)) {
+    return { pattern: 'paste-text-process-copy' };
   }
   if (n.includes('calculator') || n.includes('converter') && !hasFileInput) {
     return { pattern: 'enter-values-result' };
@@ -124,6 +136,46 @@ export function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern
     return { pattern: 'paste-text-process-copy' };
   }
 
+  // Oct 5 recheck: end-position rules below fire ONLY for tools that fell
+  // through everything above (currently 'other') — they cannot hijack tools
+  // already routed to upload/ai/click patterns.
+  // Text/data tools take pasted content, not typed numbers.
+  if (!hasFileInput && /(sort|slug|split|dedup|filter|analyz|shorten|anonymiz|extract|renam|merg|transpos|statistic|translat|null|morse|braille|csv)/i.test(`${n} ${s}`)) {
+    return { pattern: 'paste-text-process-copy' };
+  }
+  // X-to-Y with text formats and no file input (json-to-csv, csv-to-json…).
+  if (!hasFileInput && s.includes('-to-') && /(json|xml|csv|yaml|yml|markdown|md|html|txt|text)/i.test(s)) {
+    return { pattern: 'paste-text-process-copy' };
+  }
+  // Form-fill/lookup tools take entered values (validators, checkers, builders, finders).
+  if (!hasFileInput && /(valid|verify|checker|parser|finder|builder)/i.test(`${n} ${s}`)) {
+    return { pattern: 'enter-values-result' };
+  }
+  // Timers count down/up and alert — dedicated honest steps.
+  if (/timer|stopwatch|countdown|tabata|pomodoro/i.test(`${n} ${s}`)) {
+    return { pattern: 'set-start-alert' };
+  }
+  // Measurement tools: click, wait, read.
+  if (s === 'speed-test' || n.includes('speed test')) {
+    return { pattern: 'measure-read' };
+  }
+  // Pickers choose then copy (color, emoji, yes/no).
+  if (/picker/i.test(`${n} ${s}`)) {
+    return { pattern: 'click-generate', hasOptions: true };
+  }
+  // Multi-output toolkits take pasted input (links, text) and produce copies.
+  if (/toolkit/i.test(`${n} ${s}`)) {
+    return { pattern: 'paste-text-process-copy' };
+  }
+  // SaaS compute tools take entered numbers (payback, ratios, scores).
+  if (/payback|quick-ratio|rule-of-40|saas-metrics/i.test(s)) {
+    return { pattern: 'enter-values-result' };
+  }
+  // Playable games: start, play moves, track score.
+  if (/game|hangman|guessing|rock-paper|tic-tac|memory-match|snake|tetris|pong|chess|sudoku|quiz/i.test(`${n} ${s}`)) {
+    return { pattern: 'play-interact' };
+  }
+
   return { pattern: 'other' };
 }
 
@@ -162,6 +214,21 @@ const interactionPatternTemplates: Record<string, ((inputType?: string) => { tit
     { title: "1. Set Options (if needed)", desc: "Adjust any available settings like length, format, or count." },
     { title: "2. Click Generate", desc: "Click the generate button to produce your output instantly." },
     { title: "3. Copy the Result", desc: "Copy the generated output to your clipboard." },
+  ],
+  'set-start-alert': [
+    { title: "1. Set the Duration", desc: "Enter the work interval, break length, or countdown target." },
+    { title: "2. Start the Timer", desc: "Hit start — timing uses the system clock, so switching tabs doesn't lose time." },
+    { title: "3. Get Alerted", desc: "An alert fires at zero; laps and totals stay visible for your records." },
+  ],
+  'measure-read': [
+    { title: "1. Click Go", desc: "Start the measurement — close bandwidth-heavy tabs first for an honest reading." },
+    { title: "2. Wait for Completion", desc: "The test runs automatically against a nearby test endpoint." },
+    { title: "3. Read Your Results", desc: "Compare the numbers against what your plan promises." },
+  ],
+  'play-interact': [
+    { title: "1. Start Playing", desc: "Open the game — no signup, no download, runs instantly in your browser." },
+    { title: "2. Make Your Moves", desc: "Tap, click, or type your guesses. Every round is generated fresh and fair." },
+    { title: "3. Track Your Score", desc: "Wins, streaks, and best scores stay visible while you play." },
   ],
 };
 
@@ -637,13 +704,51 @@ const defaultInstructions = [
   { title: "3. Get Your Result", desc: "View the output instantly. Copy it to your clipboard or download it as a file for later use." },
 ];
 
-const defaultFaqs: { question: string; answer: string }[] = [
-  { question: "Is this tool free to use?", answer: "Yes, this tool is completely free with no usage limits, registration, or credit card required." },
-  { question: "How is my privacy protected?", answer: "All processing happens locally in your browser. Your data is never uploaded to any server." },
-  { question: "Can I use this tool offline?", answer: "Yes. After the initial page load, the tool runs entirely offline without requiring an internet connection." },
-  { question: "Are there any usage limits?", answer: "No. You can use this tool unlimited times with no quotas or restrictions." },
-  { question: "What are the system requirements?", answer: "Any modern web browser (Chrome, Firefox, Safari, Edge) on desktop or mobile. No installation needed." },
-];
+/**
+ * Fallback FAQs for tools with neither custom FAQs nor a category template
+ * (16 tools, Oct 5 audit — all Growth & Marketing calculators today).
+ * Generated from the tool's actual verdict + gating: the previous static
+ * version promised "no usage limits" and "never uploaded" unconditionally —
+ * false for any gated or cloud tool that ever lands here.
+ */
+export function defaultFaqsFor(tool: ToolMetadata): { question: string; answer: string }[] {
+  const v = classifyDependencies(tool.dependencies || '');
+  const gated =
+    (DOWNLOAD_PRODUCING_SLUGS as Set<string>).has(tool.slug) || v !== 'local';
+  const pro = (proSlugs as readonly string[]).includes(tool.slug);
+  return [
+    {
+      question: 'Is this tool free to use?',
+      answer: gated
+        ? 'Free to start with fair daily limits — no signup needed to try it. Pro removes all limits.'
+        : 'Yes, completely free with no signup. No account, no credit card, no quotas.',
+    },
+    {
+      question: 'How is my privacy protected?',
+      answer:
+        v === 'cloud'
+          ? 'This tool uses cloud processing — data you submit is transmitted for processing.'
+          : v === 'hybrid'
+            ? 'Most processing runs locally; specific features use cloud AI and are marked.'
+            : 'All processing happens locally in your browser. Your data is never uploaded to any server.',
+    },
+    {
+      question: 'Can I use this tool offline?',
+      answer:
+        v === 'local'
+          ? 'Yes. After the initial page load, the tool runs entirely offline without requiring an internet connection.'
+          : 'The interface loads offline-capable, but processing needs a connection for server features.',
+    },
+    {
+      question: 'Are there any usage limits?',
+      answer:
+        gated || pro
+          ? 'The free tier carries fair daily limits, shown on the page before you hit them. Pro is unlimited.'
+          : 'No quotas or restrictions.',
+    },
+    { question: "What are the system requirements?", answer: "Any modern web browser (Chrome, Firefox, Safari, Edge) on desktop or mobile. No installation needed." },
+  ];
+}
 
 function getCategoryPath(category: string): string {
   return category.toLowerCase().replace(/\s+/g, "-");
@@ -722,7 +827,7 @@ export function ToolPageSEOContent({ tool, relatedTools = [] }: ToolPageSEOConte
   }
   const steps = tool.instructions || formatSteps || patternSteps || (seoType && seoInstructionTypeTemplates[seoType]) || typeInstructionTemplates[toolType] || categoryInstructionTemplates[categoryKey] || defaultInstructions;
   const categoryFaqFn = categoryFaqTemplates[categoryKey];
-  const baseFaqs = tool.faqs || (categoryFaqFn ? (typeof categoryFaqFn === 'function' ? (categoryFaqFn as (t: ToolMetadata) => { question: string; answer: string }[])(tool) : categoryFaqFn) : defaultFaqs);
+  const baseFaqs = tool.faqs || (categoryFaqFn ? (typeof categoryFaqFn === 'function' ? (categoryFaqFn as (t: ToolMetadata) => { question: string; answer: string }[])(tool) : categoryFaqFn) : defaultFaqsFor(tool));
   const formatFaq = pair ? {
     question: `Why convert ${FORMAT_INFO[pair.from]!.name} to ${FORMAT_INFO[pair.to]!.name}?`,
     answer: `${FORMAT_INFO[pair.from]!.name} (${FORMAT_INFO[pair.from]!.fullName}) uses ${FORMAT_INFO[pair.from]!.quality} encoding and is best for ${FORMAT_INFO[pair.from]!.bestFor}. ${FORMAT_INFO[pair.to]!.name} (${FORMAT_INFO[pair.to]!.fullName}) uses ${FORMAT_INFO[pair.to]!.quality} encoding and excels at ${FORMAT_INFO[pair.to]!.bestFor}. Converting between them lets you take advantage of each format's strengths — for example, using a compressed format for sharing and a lossless format for editing. All conversion happens locally in your browser with no file size limits.`

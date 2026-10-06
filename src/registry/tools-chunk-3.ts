@@ -1779,7 +1779,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "CSV Analyzer",
     slug: "csv-analyzer",
     category: "Utility",
-    description: 'Analyze CSV structure — column types, counts, unique values, and empty cells.',
+    description: 'Analyze CSV structure — column types, counts, unique values, and empty cells. Spot malformed rows and mixed types before import.',
     seoDescription: 'Free online CSV Analyzer — Analyze CSV structure including column types, counts, unique values, and empty cells. ',
     dependencies: "None",
     faqs: [
