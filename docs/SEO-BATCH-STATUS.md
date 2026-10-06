@@ -239,3 +239,14 @@ unimproved parked pages now; remaining 486 are never-crawled (phase 2).
 
 Highest-demand unknown pool first: PDF ops with code-truth framing.
 Customs 657 → 687/1,143. Next: image unknowns (~47).
+
+## Image batches DONE (Oct 6–7 — 30 + 17 = 47/47, gates green)
+
+Measured pool was 47, not 57 — shipped as IMG1 (30) + IMG2 (17).
+Format pairs with per-format use cases; editors/retoucher/AI with
+verified mechanics (patch-fill not AI, Gemini-sparkle alpha reversal,
+DeOldify/OpenCV local, honest sharpen limits). Free quota cited only
+where downloadOrShare verified. Process fix: SKIP guard is now
+instructions-only, never whole-tool.
+Customs 687 → 734/1,143. Image unknowns cleared. Next: developer
+unknowns (~85).
