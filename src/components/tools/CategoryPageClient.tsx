@@ -7,6 +7,7 @@ import { Search, ChevronRight, Grid3X3, List, ChevronDown, Image, FileText, Code
 import { getCategoryTheme, getCategoryGroup } from "@/lib/categoryTheme";
 import { FavoriteStarButton } from "@/components/FavoriteStarButton";
 import type { CategorySection, CategoryFaq } from "@/data/categorySections";
+import { PoweredBy } from "@/components/tools/PoweredBy";
 
 interface CategoryPageClientProps {
   category: ToolCategory;
@@ -242,6 +243,7 @@ function SectionToolRow({ tool }: { tool: ToolMetadata }) {
       <div className="flex-1 min-w-0">
         <h3 className="text-sm font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors truncate">{tool.name}</h3>
         <p className="text-xs text-[var(--text-secondary)] truncate break-words">{tool.description}</p>
+        <PoweredBy deps={tool.dependencies || ""} />
       </div>
       <ChevronRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--accent)] group-hover:translate-x-0.5 transition-all shrink-0" />
     </Link>

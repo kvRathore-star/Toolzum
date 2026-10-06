@@ -8,6 +8,7 @@ import { CategorySidebar, type SidebarGroup } from './CategorySidebar';
 import { ChevronRight, Shield, Zap, Info, ArrowLeft, Sparkles, LayoutGrid } from 'lucide-react';
 import type { RelatedTool, ToolMetadata } from '@/registry/tools';
 import { FREE_SINGLE_ALTERNATIVE } from '@/registry/tools-constants';
+import { PoweredBy } from '@/components/tools/PoweredBy';
 import { clientToolsRegistry } from '@/registry/tools-client-index';
 import { categorySlug } from '@/lib/categorySlugs';
 import { PerToolBadge } from '@/components/privacy-claims';
@@ -279,6 +280,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
           <p className="text-lg text-[var(--text-secondary)] mb-6 max-w-[600px]">
             {description}
           </p>
+          {tool && <PoweredBy deps={tool.dependencies || ""} linked className="mb-6 -mt-4" />}
 
           {/* Badges row */}
           <div className="flex items-center gap-3 sm:gap-4 mb-12 text-[11px] font-medium text-[var(--text-muted)] tracking-wide bg-[var(--bg-overlay)] border border-[var(--border-subtle)] px-3 sm:px-4 py-2 rounded-full shadow-sm hover:border-[var(--border-default)] transition-colors flex-wrap justify-center">

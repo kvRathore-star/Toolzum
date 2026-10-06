@@ -321,6 +321,130 @@ export function localTrustClaim(category?: string): string {
 }
 
 /**
+ * Display names (+ docs URLs) for engine badges (Oct 5 PoweredBy restore).
+ * Pre-July the site showed lib mentions under tool names on suggested tools;
+ * the July 6 UI overhaul dropped them. This rebuild derives them from the
+ * registry `dependencies` field — never hand-written, so they can't drift.
+ * Rules: max 3 shown, no version numbers ever, unknown/junk deps skipped
+ * (see POWERED_BY_SKIP). Matching is case-insensitive substring on deps.
+ */
+export interface PoweredByLib {
+  label: string;
+  url?: string;
+}
+
+const LIB_DISPLAY: [pattern: string, label: string, url?: string][] = [
+  ['ffmpeg', 'FFmpeg', 'https://ffmpeg.org'],
+  ['pdf-lib', 'pdf-lib', 'https://pdf-lib.js.org'],
+  ['pdf.js', 'PDF.js', 'https://mozilla.github.io/pdf.js/'],
+  ['pdfjs', 'PDF.js', 'https://mozilla.github.io/pdf.js/'],
+  ['jspdf', 'jsPDF', 'https://github.com/parallax/jsPDF'],
+  ['tesseract', 'Tesseract.js', 'https://tesseract.projectnaptha.com'],
+  ['sheetjs', 'SheetJS', 'https://sheetjs.com'],
+  ['xlsx', 'SheetJS', 'https://sheetjs.com'],
+  ['jszip', 'JSZip', 'https://stuk.github.io/jszip/'],
+  ['fabric.js', 'Fabric.js', 'http://fabricjs.com'],
+  ['konva', 'Konva', 'https://konvajs.org'],
+  ['cropper.js', 'Cropper.js', 'https://fengyuanchen.github.io/cropperjs/'],
+  ['opencv', 'OpenCV', 'https://opencv.org'],
+  ['onnx', 'ONNX', 'https://onnx.ai'],
+  ['transformers.js', 'Transformers.js', 'https://huggingface.co/docs/transformers.js'],
+  ['tensorflow.js', 'TensorFlow.js', 'https://www.tensorflow.org/js'],
+  ['tf.js', 'TensorFlow.js', 'https://www.tensorflow.org/js'],
+  ['huggingface', 'Hugging Face', 'https://huggingface.co'],
+  ['whisper api', 'Whisper API', 'https://openai.com/index/whisper/'],
+  ['openai api', 'OpenAI', 'https://openai.com'],
+  ['gemini api', 'Gemini', 'https://deepmind.google/technologies/gemini/'],
+  ['google translate', 'Google Translate', 'https://translate.google.com'],
+  ['mymemory', 'MyMemory', 'https://mymemory.translated.net'],
+  ['insightface', 'InsightFace', 'https://github.com/deepinsight/insightface'],
+  ['lama cleaner', 'Lama Cleaner', 'https://github.com/Sanster/lama-cleaner'],
+  ['rembg', 'rembg', 'https://github.com/danielgatis/rembg'],
+  ['real-esrgan', 'Real-ESRGAN', 'https://github.com/xinntao/Real-ESRGAN'],
+  ['deoldify', 'DeOldify', 'https://github.com/jantic/DeOldify'],
+  ['html2canvas', 'html2canvas', 'https://html2canvas.hertzen.com'],
+  ['canvas', 'Canvas', undefined],
+  ['opentype.js', 'opentype.js', 'https://opentype.js.org'],
+  ['codemirror', 'CodeMirror', 'https://codemirror.net'],
+  ['monaco', 'Monaco', 'https://microsoft.github.io/monaco-editor/'],
+  ['prism', 'Prism', 'https://prismjs.com'],
+  ['highlight.js', 'highlight.js', 'https://highlightjs.org'],
+  ['marked.js', 'Marked', 'https://marked.js.org'],
+  ['marked', 'Marked', 'https://marked.js.org'],
+  ['turndown', 'Turndown', 'https://github.com/mixmark-io/turndown'],
+  ['papaparse', 'Papa Parse', 'https://www.papaparse.com'],
+  ['heic2any', 'heic2any', 'https://github.com/alexcorvi/heic2any'],
+  ['browser-image-compression', 'browser-image-compression', 'https://github.com/Donaldcwl/browser-image-compression'],
+  ['jimp', 'Jimp', 'https://github.com/jimp-dev/jimp'],
+  ['exifr', 'exifr', 'https://github.com/MikeKovarik/exifr'],
+  ['piexifjs', 'piexifjs', 'https://github.com/hMatoba/piexifjs'],
+  ['qrcode', 'QRCode.js', 'https://github.com/davidshimjs/qrcodejs'],
+  ['jsbarcode', 'JsBarcode', 'https://github.com/lindell/JsBarcode'],
+  ['jsqr', 'jsQR', 'https://github.com/cozmo/jsQR'],
+  ['diff-match-patch', 'diff-match-patch', 'https://github.com/google/diff-match-patch'],
+  ['openpgp.js', 'OpenPGP.js', 'https://openpgpjs.org'],
+  ['zxcvbn', 'zxcvbn', 'https://github.com/dropbox/zxcvbn'],
+  ['web crypto', 'Web Crypto', 'https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API'],
+  ['cryptojs', 'CryptoJS', 'https://github.com/brix/crypto-js'],
+  ['crypto-js', 'CryptoJS', 'https://github.com/brix/crypto-js'],
+  ['web audio', 'Web Audio', 'https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API'],
+  ['web speech', 'Web Speech', 'https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API'],
+  ['webrtc', 'WebRTC', 'https://webrtc.org'],
+  ['mediarecorder', 'MediaRecorder', 'https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder'],
+  ['sql.js', 'SQLite', 'https://sqlite.org'],
+  ['sql-formatter', 'sql-formatter', 'https://github.com/sql-formatter-org/sql-formatter'],
+  ['terser', 'Terser', 'https://terser.org'],
+  ['clean-css', 'clean-css', 'https://github.com/clean-css/clean-css'],
+  ['html-minifier', 'html-minifier', 'https://github.com/kangax/html-minifier'],
+  ['uuid', 'UUID', 'https://github.com/uuidjs/uuid'],
+  ['chart.js', 'Chart.js', 'https://www.chartjs.org'],
+  ['leaflet', 'Leaflet', 'https://leafletjs.com'],
+  ['d3.js', 'D3.js', 'https://d3js.org'],
+  ['three.js', 'Three.js', 'https://threejs.org'],
+  ['plotly', 'Plotly', 'https://plotly.com'],
+  ['katex', 'KaTeX', 'https://katex.org'],
+  ['mathjax', 'MathJax', 'https://www.mathjax.org'],
+  ['potrace', 'Potrace', 'http://potrace.sourceforge.net'],
+  ['fflate', 'fflate', 'https://github.com/101arrowz/fflate'],
+  ['date-fns', 'date-fns', 'https://date-fns.org'],
+  ['ag-psd', 'ag-psd', 'https://github.com/Agamnentzar/ag-psd'],
+];
+
+const POWERED_BY_SKIP = [
+  'vanilla', 'none', 'browser api (landing page)', 'react', 'vue.js',
+  'math.random()', 'btoa/atob', 'filereader api', 'css3 animations',
+  'fetch api', 'url api', 'drag and drop', 'clipboard api', 'geolocation',
+  'web workers', 'webassembly', 'wasm', 'indexeddb', 'localstorage',
+  'sessionstorage', 'service worker', 'unicode mapping', 'browser api',
+  'resize observer', 'intersection observer', 'mutation observer',
+  'broadcast channel', 'performance api', 'navigation api',
+];
+
+/**
+ * Derive display-worthy engine badges from a tool's dependencies string.
+ * Returns at most 3 entries in deps order. Unknown or junk deps are skipped
+ * (never shown), so output is always a subset of what's actually used.
+ */
+export function poweredByLibs(deps: string): PoweredByLib[] {
+  const parts = (deps || '')
+    .split(',')
+    .map((p) => p.trim())
+    .filter(Boolean);
+  const out: PoweredByLib[] = [];
+  const seen = new Set<string>();
+  for (const part of parts) {
+    const low = part.toLowerCase();
+    if (POWERED_BY_SKIP.includes(low)) continue;
+    const hit = LIB_DISPLAY.find(([pattern]) => low.includes(pattern));
+    if (!hit || seen.has(hit[1])) continue;
+    seen.add(hit[1]);
+    out.push(hit[2] ? { label: hit[1], url: hit[2] } : { label: hit[1] });
+    if (out.length >= 3) break;
+  }
+  return out;
+}
+
+/**
  * Classifies a tool's dependencies into one of four verdicts.
  *
  * WHY THIS EXISTS
