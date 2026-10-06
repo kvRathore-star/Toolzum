@@ -497,9 +497,9 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free discount calculator — final price, savings, and stacked-discount math for smart shopping. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Paste your content", desc: "Drop the text into Discount Calculator — full documents are fine, length is free." },
-      { title: "2. Read the counts", desc: "Check each metric row; toggle options (with/without spaces) to match your target definition." },
-      { title: "3. Copy what you need", desc: "Copy individual figures or the full breakdown for your brief or caption limits." },
+      { title: "1. Fill the inputs", desc: "Enter original price and discount percent." },
+      { title: "2. Read the final price", desc: "Check the final price with savings shown." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
     ],
     faqs: [
       { question: "How do stacked discounts work?", answer: "Multiply, don't add: 30% then 20% off $100 → $100 × 0.70 × 0.80 = $56 (44% total, not 50%). Retailers stack precisely because most shoppers add." },
