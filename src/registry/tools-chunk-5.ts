@@ -1296,11 +1296,23 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "MOV to WEBM",
     slug: "mov-to-webm",
     category: "Video",
-    description: 'Convert MOV video files to WEBM format directly in your browser. 100% free, private — your files never leave your device.',
-    seoDescription: 'Free online MOV to WEBM — Convert MOV video files into WEBM format. Fast browser-based video conversion.',
+    description: 'Convert Apple MOV files to web-ready WebM for fast HTML5 playback. Shrink a 200 MB screen recording for embedding — local FFmpeg conversion, free quota on saves.',
+    seoDescription: 'Free MOV to WebM converter — web-ready output. Local FFmpeg, free quota on saves.',
     dependencies: "FFmpeg",
 
-    showInCategory: false
+    showInCategory: false,
+    seoTitle: "Free MOV to WebM Converter Online",
+    instructions: [
+      { title: "1. Upload the MOV", desc: "Apple recordings of any length." },
+      { title: "2. Convert to WebM", desc: "Web-optimized settings apply automatically; keep the tab open." },
+      { title: "3. Download and embed", desc: "Save the file (counts on free quota) and drop it in a video tag." },
+    ],
+    faqs: [
+      { question: 'Why convert MOV to WebM?', answer: 'WebM streams faster in browsers with smaller files: a 200 MB MOV screen recording lands near 40–60 MB WebM at 1080p. Embed with the HTML5 video tag for instant playback, no player needed.' },
+      { question: 'Will I lose the alpha channel?', answer: 'WebM with VP9 preserves transparency where the source has it — lower-thirds and overlays survive. Odd dimensions get padded to even numbers automatically.' },
+      { question: 'How long does conversion take?', answer: 'Roughly real-time to 2x on a laptop: a 10-minute MOV converts in 10–20 minutes. Keep the tab open; closing it cancels the FFmpeg worker.' },
+      { question: 'Are my videos uploaded?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only the final save counts on the free download quota (3 a day anonymous, 5 signed-in).' },
+    ],
   },
   {
     id: "1008",
