@@ -2079,9 +2079,21 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "PDF to TXT",
     slug: "pdf-to-txt",
     category: "PDF",
-    description: 'Extract plain text from PDF files with estimated output size. Documents stay on your device — editing and conversion run locally in your browser.',
-    seoDescription: 'Free online PDF to TXT Extractor \u2014 Extract plain text from PDF files with estimated output size. ',
+    description: 'Extract plain text from any PDF — articles, transcripts, documentation. Strip a 100-page manual to editable text — local extraction, free, no signup.',
+    seoDescription: 'Free PDF to text — plain-text extraction. Local, free, no signup.',
     dependencies: "None",
+    seoTitle: "Free PDF to Text Converter Online",
+    instructions: [
+      { title: "1. Upload the PDF", desc: "Native-text documents extract best." },
+      { title: "2. Extract text", desc: "Reading-order plain text in one pass." },
+      { title: "3. Copy or save", desc: "Copy free anywhere; saves use free quota." },
+    ],
+    faqs: [
+      { question: 'How clean is extracted text?', answer: 'Native-text PDFs extract near-perfectly in reading order; two-column layouts may interleave. A 100-page manual becomes editable text with light cleanup.' },
+      { question: 'Tables and footnotes?', answer: 'Tables flatten to spaced text (use PDF-to-Excel for structure); footnotes inline at page ends. Rebuild complex layouts manually after extraction.' },
+      { question: 'Scanned PDFs?', answer: 'Image-only scans extract nothing — OCR first, then extract. The pipeline order is fixed: scan, OCR, extract.' },
+      { question: 'Is document text uploaded?', answer: 'No — extraction runs locally in your browser. Text never leaves your device.' },
+    ],
   },
   {
 
