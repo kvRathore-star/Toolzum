@@ -7,7 +7,7 @@ import { ToolPageSEOContent } from "@/components/tools/ToolPageSEOContent";
 import { DynamicModuleWrapper } from "@/components/tools/modules/DynamicModuleWrapper";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { MemoryWatchdog } from "@/hooks/useMemoryWatchdog";
-import { getMetaDescription, getShortDescription, getOgDescription } from "@/lib/generateToolDescription";
+import { getMetaDescription, getShortDescription, getOgDescription, getToolTitle } from "@/lib/generateToolDescription";
 import { CATEGORY_SECTIONS } from "@/data/categorySections";
 import type { SidebarGroup } from "@/components/tools/CategorySidebar";
 
@@ -53,13 +53,13 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
   const ogImageUrl = `https://toolzum.com/og/${params.category}/${params.tool}.webp`;
 
   return {
-    title: `${toolMetadata.name} – Free Online Tool`,
+    title: getToolTitle(toolMetadata),
     description: desc,
     alternates: {
       canonical: `https://toolzum.com/${params.category}/${params.tool}/`,
     },
     openGraph: {
-      title: `${toolMetadata.name} – Free Online Tool`,
+      title: getToolTitle(toolMetadata),
       description: getOgDescription(toolMetadata),
       type: 'website',
       images: [{ url: ogImageUrl, width: 1200, height: 630 }],

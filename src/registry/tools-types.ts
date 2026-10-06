@@ -33,5 +33,9 @@ export interface ToolMetadata {
   faqs?: { question: string; answer: string }[];
   seoDescription?: string;
   showInCategory?: boolean;
+  /** Query-first SERP title. Falls back to `{name} – Free Online Tool`.
+   * Must stay ≤60 chars and make no absolute signup/free claims beyond
+   * the tool's real tier (test-locked). */
+  seoTitle?: string;
 }
 

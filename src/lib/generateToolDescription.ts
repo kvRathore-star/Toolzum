@@ -499,6 +499,10 @@ export function getOgDescription(tool: ToolMetadata): string {
   return generateToolDescription(tool).og;
 }
 
+export function getToolTitle(tool: ToolMetadata): string {
+  return tool.seoTitle || `${tool.name} – Free Online Tool`;
+}
+
 /**
  * Returns all tools whose dependencies are non-empty but don't match
  * any known cloud or local pattern. These need manual verification

@@ -4,8 +4,10 @@ import {
   getShortDescription,
   getMetaDescription,
   getOgDescription,
+  getToolTitle,
   getUnverifiedDependencyTools,
 } from '@/lib/generateToolDescription';
+import { toolsRegistry } from '@/registry/tools';
 import type { ToolMetadata } from '@/registry/tools';
 
 function makeTool(overrides: Partial<ToolMetadata> = {}): ToolMetadata {
@@ -273,5 +275,30 @@ describe('getUnverifiedDependencyTools', () => {
     ];
     const result = getUnverifiedDependencyTools(tools);
     expect(result.length).toBe(0);
+  });
+});
+
+describe('getToolTitle', () => {
+  it('falls back to name template without seoTitle', () => {
+    expect(getToolTitle({ name: 'Foo Bar' } as ToolMetadata)).toBe(
+      'Foo Bar – Free Online Tool'
+    );
+  });
+
+  it('prefers seoTitle when present', () => {
+    expect(
+      getToolTitle({ name: 'Foo', seoTitle: 'Foo Converter – Free Online' } as ToolMetadata)
+    ).toBe('Foo Converter – Free Online');
+  });
+
+  it('all shipped seoTitles are SERP-safe (<=60ch, no absolutes)', () => {
+    const bad: string[] = [];
+    for (const t of toolsRegistry as ToolMetadata[]) {
+      if (!t.seoTitle) continue;
+      if (t.seoTitle.length > 60) bad.push(`${t.slug}: ${t.seoTitle.length}ch`);
+      if (/no signup|no account|100% free|completely free|unlimited|no watermark/i.test(t.seoTitle))
+        bad.push(`${t.slug}: absolute claim`);
+    }
+    expect(bad).toEqual([]);
   });
 });
