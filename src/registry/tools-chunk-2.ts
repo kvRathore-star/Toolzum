@@ -2500,6 +2500,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     dependencies: "heic2any, jszip",
     showInCategory: true,
     seoTitle: "Free Bulk HEIC Converter – HEIF to JPG",
+    instructions: [
+      { title: "1. Upload HEIC or HEIF", desc: "iPhone shots and camera HEIF files. Re-export full originals if files fail to read." },
+      { title: "2. Pick JPG, PNG, or WebP", desc: "JPG 85 for sharing, PNG for lossless editing, WebP for web uploads." },
+      { title: "3. Download ZIP", desc: "Converted files keep original names. One batch save counts as one Pro download." },
+    ],
     faqs: [
       { question: 'HEIC to JPG, PNG, or WebP — which?', answer: 'JPG quality 85 for sharing and print workflows; PNG when transparency or lossless editing matters; WebP for web uploads at smallest size. One iPhone batch converts to all three targets in three quick runs.' },
       { question: 'Do Live Photos and bursts convert?', answer: 'Still frames convert perfectly; the motion/video component of Live Photos exports as a still only. For motion, export the .MOV separately from Photos first, then convert the stills here.' },

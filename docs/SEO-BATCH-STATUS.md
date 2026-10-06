@@ -101,9 +101,10 @@ bulk-image-upscaler.
 concrete numbers (1 credit / 1-per-minute, 5 trial, 200 Pro, 25 MB /
 30-min caps, 2 Pro downloads/day) + worked example + unique privacy
 framing. Credit-vs-local distinction kept: pasted-text formatters bill
-1 credit/call (not per-minute); complaint-letter uses the user's own AI
-key (no credits); local tools (upscaler, face-swap, bg-changer,
-grammar, humanizer, detector) disclose Pro page limits, never credits.
+1 credit/call (not per-minute); local tools (upscaler, face-swap,
+bg-changer, grammar-base, humanizer-template, detector) disclose page
+limits, never credits. (Complaint-letter own-key line below superseded —
+recheck proved 1 credit; see RECHECK.)
 
 Gates: tsc 0 · eslint 0 · content-standard + claims-integrity +
 interaction-pattern + sitemap (23 tests) green · faq-gate --full same 6
@@ -183,3 +184,16 @@ fact: third-party service receives each URL. Deps corrected
 `Node.js / Redis` → real providers on both shorteners.
 Gates: tsc 0 · eslint 0 · edge/claims/content/UrlShortener 18 green ·
 faq-gate 0 new · quality-audit 0.
+
+## How-to completion (Oct 6 — 65/65 pro tools custom)
+
+Remaining 39 instruction sets shipped mechanics-first: text/AI tools get
+paste→options→generate steps with credit costs; local media tools get
+upload→exact-setting→save steps with quota in step 3; utility/dev/seo
+tools (regex, url-checker/shortener, csv-json, api-builder, saas) get
+workflow steps matching their real UIs — no generic category templates.
+Caught live: correcting shortener deps to TinyURL/is.gd flipped both to
+`ai-generate` via the loose `'api'` matcher — exclusion added, both back
+to paste-text, locked test green.
+Gates: tsc 0 · eslint 0 errors · 23 tests green · faq-gate 0 new ·
+quality-audit 0. Pro tier now 65/65 on FAQs + how-to + meta.

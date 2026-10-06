@@ -26,7 +26,12 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "batch-image-editor",
     dependencies: "Canvas API, jszip",
     isPro: true,
-        faqs: [
+        instructions: [
+      { title: "1. Upload the batch", desc: "Marketplace shots and catalogs. Split mixed portrait/landscape shoots into two batches." },
+      { title: "2. Set the edit chain", desc: "Resize long-edge, crop ratio, rotation, output format, and quality in one configuration." },
+      { title: "3. Download ZIP", desc: "All images process identically. One batch save counts as one Pro download." },
+    ],
+    faqs: [
       { question: 'How do I prep 60 marketplace shots identically?', answer: 'Set the chain once: resize long-edge 2000px, center-crop 1:1, convert JPG quality 85. All 60 images process with those exact settings — uniform listings in minutes instead of an hour of one-by-ones.' },
       { question: 'One setting set for all — any exceptions?', answer: 'Yes by design: rotation, crop, format, and quality apply uniformly. Mixed-orientation shoots (portrait + landscape) need two batches — one per orientation — to avoid awkward auto-crops.' },
       { question: 'Lossless vs lossy operations here?', answer: 'Rotate and crop preserve pixels; format conversion and compression re-encode. Chain lossless steps freely; set quality last — a quality-85 JPG from a resized 2000px source beats quality-95 from a 4000px source at half the bytes.' },
@@ -209,6 +214,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "Google Cloud Translation API",
     seoDescription: 'Free AI translator — 100+ languages, auto-detect, 1 credit per translation. Sign in free for 5 trial translations.',
     seoTitle: "Free AI Translator – 100+ Languages Online",
+    instructions: [
+      { title: "1. Paste source text", desc: "Any of 100+ languages — detection is automatic. Split mixed-language input first for accuracy." },
+      { title: "2. Pick the target", desc: "Choose from 100+ languages. Major pairs translate cleanly; rare pairs need a human review pass." },
+      { title: "3. Translate and copy", desc: "Each run costs 1 credit. Split 10,000-word manuals by chapter to avoid truncation." },
+    ],
     faqs: [
       { question: 'How accurate is AI Translator for real documents?', answer: 'Excellent between major languages (English, Spanish, Hindi, French) for everyday prose — a 500-word blog post translates cleanly in one pass. Rare pairs and legal, medical, or literary text need a human review pass; idioms and jokes mistranslate most often.' },
       { question: 'Is my translated text uploaded anywhere?', answer: 'Yes — source text is sent to the translation API and deleted after processing; never stored or shared by us. The cloud provider may retain request logs briefly, so strip passwords, account numbers, and personal IDs before translating sensitive documents.' },
@@ -242,7 +252,12 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Turn text prompts into high-resolution images with three engines: free Pollinations drafts, 1-credit FLUX drafts, and 5-credit Gemini HD for Pro. Designers prototype hero art in seconds — free to start, sign in for credits.',
     dependencies: "Stable Diffusion API",
     seoDescription: 'Free AI image generator — free Pollinations drafts, 1-credit FLUX, 5-credit Gemini HD (Pro). Sign in free for trial credits.',
-        faqs: [
+        instructions: [
+      { title: "1. Describe the image", desc: "Write subject, style, lighting, and ratio in one line — 'mountain lake at sunset, photorealistic, 16:9' beats two vague words." },
+      { title: "2. Pick the engine", desc: "Pollinations free (~4/min pace), FLUX draft at 1 credit, or Gemini HD at 5 credits (Pro-only)." },
+      { title: "3. Download PNG", desc: "Save the winner. Drafts cost credits per render; Pollinations is free with a breather between generations." },
+    ],
+    faqs: [
       { question: 'How much does AI Image Generator cost per image?', answer: 'Pollinations engine is free for everyone. FLUX drafts cost 1 credit each and Gemini HD costs 5 credits (Pro-only). Signed-in free plans get a one-time 5-credit trial — enough for 5 drafts or 1 HD image — and Pro gets 200 credits monthly. Pollinations renders stay free with a short breather between generations (about 4 per minute).' },
       { question: 'Where does my AI Image Generator prompt go?', answer: 'Your prompt is sent to the image API to render the picture and is not stored by us. Pollinations and Workers AI process the text only; nothing is added to a public gallery. Avoid pasting passwords or private names into prompts.' },
       { question: 'Which engine should I pick: Pollinations, draft, or HD?', answer: 'Use Pollinations for free brainstorming at good quality (short breather between renders). Switch to FLUX drafts (1 credit) for sharper composition, and Gemini HD (5 credits, Pro-only) for final marketing art. A practical flow: 10 free Pollinations tries, then 1 HD render of the winner.' },
@@ -762,6 +777,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "HuggingFace",
     seoDescription: 'Free AI paraphrasing tool — rewrite sentences keeping meaning, 7 tones. 1 credit per rewrite, 5-use free trial.',
     seoTitle: "Free AI Paraphrasing Tool – Rewrite Online",
+    instructions: [
+      { title: "1. Paste one paragraph", desc: "50–200 words at a time paraphrase most faithfully; whole essays drift — split per section." },
+      { title: "2. Pick a tone", desc: "Academic for essays, Casual for blogs, Professional for work mail." },
+      { title: "3. Run and verify", desc: "Each rewrite costs 1 credit. Keep the better half of two runs and check technical terms survived." },
+    ],
     faqs: [
       { question: 'How do I get the best rewrite from AI Paraphrasing Tool?', answer: 'Paste one paragraph at a time (50–200 words) and pick a tone first — Academic for essays, Casual for blogs. Example: a 120-word stiff draft becomes a fluid version in one click; run it twice with different tones and keep the better half of each.' },
       { question: 'Is my pasted text sent anywhere?', answer: 'Yes — your text is sent to the AI API for rewriting and deleted after processing; it is never stored or shared by us. The provider may log prompts briefly for abuse prevention, so never paste passwords, keys, or unpublished client work you cannot expose.' },
@@ -1435,6 +1455,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free meeting minutes generator — raw notes to decisions, owners, follow-ups. 1 credit per doc, 5-use trial.',
     dependencies: "Cloud AI API",
     seoTitle: "Free Meeting Minutes Generator Online",
+    instructions: [
+      { title: "1. Paste raw notes", desc: "100–500 words with names, numbers, and dates — 'Priya ships login by Friday, Rs.50k approved'." },
+      { title: "2. Generate minutes", desc: "Each document costs 1 credit. Attendees, decisions, owners, and follow-ups structure automatically." },
+      { title: "3. Verify and share", desc: "Check owner-date pairs before pasting into Slack or email — ambiguous dates like 'next Friday' need a human eye." },
+    ],
     faqs: [
       { question: 'What should I paste for the best meeting minutes?', answer: 'Paste raw timestamped notes of 100–500 words naming people and numbers: \'Priya ships login by Friday, budget Rs.50k approved\'. The tool structures them into attendees, decisions, action items with owners, and follow-ups. Vague notes (\'discussed stuff\') produce vague minutes — specifics in, specifics out.' },
       { question: 'Are my meeting notes sent anywhere?', answer: 'Yes — your notes are sent to the AI API for structuring and deleted after processing; never stored or shared by us. The provider may log prompts briefly, so redact salaries, passwords, and unannounced plans before generating.' },
@@ -1451,6 +1476,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free cover letter generator — tailored to the job post, keyword-matched. 1 credit per letter, 5-use free trial.',
     dependencies: "Cloud AI API",
     seoTitle: "Free AI Cover Letter Generator Online",
+    instructions: [
+      { title: "1. Paste ad plus bullets", desc: "Add the real job post and 5–8 resume bullets with numbers — specifics in, specifics out." },
+      { title: "2. Generate the draft", desc: "Each letter costs 1 credit. Mirrored keywords from the ad land automatically." },
+      { title: "3. Rewrite and send", desc: "Replace the opening and closing in your own voice, add one quantified win, then send." },
+    ],
     faqs: [
       { question: 'How do I get a cover letter that actually gets interviews?', answer: 'Paste the real job ad plus 5–8 resume bullets, then generate and edit: keep the mirrored keywords (React, reconciliation, TDS), cut generic filler, and add one quantified win like \'cut invoice errors 30%\'. Hiring screens reward specific matches, not flattery.' },
       { question: 'Is my resume data sent anywhere?', answer: 'Yes — your job description and resume text go to the AI API for generation and are deleted after processing; never stored or shared by us. The provider may log prompts briefly, so redact phone numbers, addresses, and current-employer secrets before generating.' },
@@ -1683,6 +1713,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free thumbnail maker — 1280x720 canvas, bold text, cutouts, effects. Local processing, free to start.',
     dependencies: "Canvas API",
     seoTitle: "Free AI Thumbnail Maker – YouTube Online",
+    instructions: [
+      { title: "1. Set canvas and background", desc: "Pick 16:9, 1:1, or 9:16, then solid, gradient, or image background." },
+      { title: "2. Add headline and cutout", desc: "3–5 high-contrast words plus one expressive face or object. Preview at tiny size — unreadable means simplify." },
+      { title: "3. Export 1280×720", desc: "JPG under 2 MB for YouTube. Each export counts as one Pro download (signed-in free: 2 a day)." },
+    ],
     faqs: [
       { question: 'What makes a thumbnail actually get clicked?', answer: 'Three elements: a 1280x720 frame readable at 120px wide, 3–5 high-contrast words, and one expressive face or object. Example: \'I Tried 30 Days\' in yellow on dark blue with a surprised cutout outperforms a busy 20-word collage every time.' },
       { question: 'Are my thumbnail assets uploaded?', answer: 'No — compositing runs locally in your browser on canvas, so your images and text stay on your device. Only the final PNG/JPG export counts toward the Pro download quota (signed-in free: 2 a day; Pro unlimited).' },
@@ -2266,6 +2301,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "Vanilla JS"
   ,
     seoTitle: "Free SaaS Metrics Dashboard Online",
+    instructions: [
+      { title: "1. Enter current metrics", desc: "MRR, customers, churn, ARPA, CAC, NPS into the numeric inputs. Defaults illustrate the layout — overwrite all." },
+      { title: "2. Read KPIs, model one lever", desc: "Check growth, LTV:CAC, and runway cards; adjust a single scenario input (e.g. churn −2%) to see the effect." },
+      { title: "3. Export PDF", desc: "One-page board-ready report saves direct to your device. Sign in free to unlock; no download counting." },
+    ],
     faqs: [
       { question: 'How do I model a pricing change in the dashboard?', answer: 'Enter current MRR, customers, churn, and ARPA, then adjust one lever: for example 120 customers x Rs.2,000 ARPA at 5% monthly churn shows Rs.2.4L MRR decaying without growth. Raise ARPA 10% in the scenario box to see the new runway instantly — all math runs locally.' },
       { question: 'Is my financial data uploaded or counted?', answer: 'Nothing is uploaded and nothing is counted: every metric computes locally in your browser and the PDF export saves straight to your device by direct download. The only gate is the Pro page lock for anonymous visitors — sign in free and the dashboard plus export are unlimited; Pro removes limits site-wide.' },
@@ -2281,7 +2321,12 @@ export const entries_chunk_0: ToolMetadata[] = [
     isPro: false,
     description: 'Chain merge, split, form-fill, rotation, passwords, and metadata edits into repeatable PDF pipelines. Offices rerun payroll-doc prep monthly without reconfiguring — runs locally on pdf-lib, 2 free runs a day.',
     seoTitle: "PDF Workflow Builder – Automate Tasks Free",
-        faqs: [
+        instructions: [
+      { title: "1. Upload your PDFs", desc: "Scans, forms, contracts — unlock password-protected files first." },
+      { title: "2. Chain steps in tabs", desc: "Add merge, split, form-fill, rotation, and password steps in order; preview each tab before exporting." },
+      { title: "3. Export the result", desc: "Building is free — the final export counts as one Pro download (signed-in free: 2 a day)." },
+    ],
+    faqs: [
       { question: 'What can one PDF workflow combine?', answer: 'Merge, split, form-fill, rotation, password add/remove, and metadata edits chained into one repeatable pipeline. Example: merge 12 scans, rotate pages 3–5, set the \'CHAIRMAN\' password, export — saved once, rerun monthly on fresh files.' },
       { question: 'How do Pro limits work here?', answer: 'Signed-in free users run 2 workflow saves a day on the Pro counter; anonymous visitors meet the paywall and sign in to continue. Pro unlocks unlimited runs. Building and previewing the chain is free — only the final export counts.' },
       { question: 'Do workflows save for reuse?', answer: 'Yes — build the chain once and rerun it on new files without reconfiguring steps. Office teams standardize monthly packs (merge, stamp, protect) so anyone on the team produces identical output.' },
@@ -2421,6 +2466,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "browser-image-compression / jszip",
     isPro: true,
     seoTitle: "Free Batch Image Converter – JPG PNG WebP",
+    instructions: [
+      { title: "1. Drop the whole folder", desc: "Mixed JPG, PNG, WebP, AVIF sources accepted together." },
+      { title: "2. Pick one output format", desc: "JPG, PNG, WebP, AVIF, GIF, or TIFF for the entire batch. Spot-check 5 files at 200% zoom first." },
+      { title: "3. Download ZIP", desc: "Directory structure preserves inside the archive. One batch save counts as one Pro download." },
+    ],
     faqs: [
       { question: 'How is this different from Bulk Image Converter?', answer: 'This tool converts mixed input folders to ONE chosen output format per batch — fastest for uniform jobs. Bulk Image Converter offers 100+ dedicated format-pair pages with per-pair tuning. Redesigning 150 mixed images to WebP: use this; converting PNG→AVIF specifically: use that pair page.' },
       { question: 'What output format fits a site redesign?', answer: 'WebP quality 80 for photos (modern browsers, ~30% smaller than JPEG), PNG for graphics with text, AVIF for maximum savings on hero images. Convert the full 150-image set to WebP in one batch, then spot-check 5 at 200% zoom.' },

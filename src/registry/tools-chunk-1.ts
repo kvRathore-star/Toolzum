@@ -528,6 +528,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     id:  "270",
     dependencies: 'Canvas API',
     seoTitle: "Free AI Background Changer – Swap BG Online",
+    instructions: [
+      { title: "1. Upload the photo", desc: "Contrasting, evenly lit backdrop works best. Processing runs locally on canvas." },
+      { title: "2. Replace and inspect", desc: "Pick transparent, white, or color; zoom to 200% and check flyaway edges before finishing." },
+      { title: "3. Download the result", desc: "Export PNG for transparency or JPG for listings. Each save counts as one Pro download." },
+    ],
     faqs: [
       { question: 'How do I get clean edges with AI Background Changer?', answer: 'Shoot against a contrasting, evenly lit backdrop and keep hair away from busy patterns. Then pick the replacement color and zoom to 200% to check flyaway edges — a 30-second edge inspection separates marketplace-ready shots from obvious cutouts.' },
       { question: 'Are my photos uploaded when changing backgrounds?', answer: 'No — detection and compositing run locally in your browser with canvas processing, so images never leave your device. Saving counts against the Pro download quota: anonymous visitors sign in first, signed-in free users get 2 Pro downloads a day.' },
@@ -608,7 +613,12 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'AI',
     id:  "276",
     dependencies: 'AI API, PDF.js',
-        faqs: [
+        instructions: [
+      { title: "1. Upload the PDF", desc: "Native-text PDFs up to ~50 pages. Scanned image-only PDFs need OCR first." },
+      { title: "2. Pick the format", desc: "Bullets for revision, paragraph for flow, executive summary for leadership — 1 credit per run." },
+      { title: "3. Verify before citing", desc: "Spot-check every figure against source pages; summaries compress faithfully but merge adjacent facts." },
+    ],
+    faqs: [
       { question: 'How long a PDF can I summarise at once?', answer: 'Up to about 50 pages of native-text PDF per run at 1 credit — a 48-page report returns bullets, key arguments, and action items in under a minute. Longer documents split into two runs (part 1, part 2), then combine the bullet lists yourself.' },
       { question: 'Is my PDF content sent anywhere?', answer: 'Text is extracted locally with PDF.js, then sent to the AI API for condensing and deleted after processing — files are never stored permanently. Provider-side request logging may apply, so redact financial passwords and personal IDs from sensitive documents first.' },
       { question: 'Which summary format should I choose?', answer: 'Bullets for revision and meeting prep, paragraph for reports that need flow, executive summary for leadership updates. A practical habit: bullets first for understanding, then regenerate as executive summary to forward — 2 credits total for both views.' },
@@ -626,6 +636,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free bulk watermark — text, logo, timestamp across dozens. Local canvas, 2 batches daily free.',
     dependencies: "Canvas API, jszip",
     seoTitle: "Free Bulk Image Watermark Tool Online",
+    instructions: [
+      { title: "1. Upload the batch", desc: "JPEG, PNG, or WebP proofs. Group files sharing one watermark configuration per batch." },
+      { title: "2. Configure the mark", desc: "Text, logo, or timestamp with position, opacity (40% diagonal deters theft), size, and rotation." },
+      { title: "3. Download ZIP", desc: "All files stamp identically. One batch save counts as one Pro download." },
+    ],
     faqs: [
       { question: 'Text, logo, or timestamp — which watermark protects best?', answer: 'Semi-transparent text across the center deters theft most; corner logos brand without ruining previews; timestamps prove shoot date. For 200 client proofs, use 40% opacity diagonal text — visible enough to deter, light enough to sell from.' },
       { question: 'Can different images get different watermarks?', answer: 'One configuration applies to the whole batch by design — that uniformity is what makes 200 files finish in minutes. For varied marks, split into groups (proofs vs finals) and run one batch per configuration.' },
@@ -642,6 +657,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free bulk PDF extractor — tables and forms to one CSV. Local parsing, 2 batches daily free.',
     dependencies: "pdf-lib, SheetJS",
     seoTitle: "Free Bulk PDF Data Extractor – PDF to CSV",
+    instructions: [
+      { title: "1. Upload same-layout PDFs", desc: "Invoices and statements sharing one template extract cleanest. Scanned image-only PDFs need OCR first." },
+      { title: "2. Pick extraction mode", desc: "Tables, form fields, or key-value pairs depending on document type." },
+      { title: "3. Download CSV", desc: "One compiled file opens in Sheets or databases. The save counts as one Pro download." },
+    ],
     faqs: [
       { question: 'What PDF content extracts cleanly?', answer: 'Native-text tables, AcroForm fields, and labeled pairs like Invoice #: 12345 extract at 95%+ accuracy. A 60-invoice stack with identical layouts becomes one CSV with consistent columns. Scanned image-only PDFs need OCR first — extraction reads embedded text, not pictures of text.' },
       { question: 'How many PDFs per extraction batch?', answer: 'Signed-in free users run 2 Pro batches a day; Pro is unlimited up to 500 files and 2 GB each. For 200 monthly invoices, standardize the supplier template first — identical layouts extract perfectly, mixed layouts need column review.' },
@@ -658,6 +678,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free images-to-PDF — hundreds of photos, one document. Local jsPDF, 2 batches daily free.',
     dependencies: "jsPDF, Canvas API",
     seoTitle: "Free Bulk Images to PDF Converter",
+    instructions: [
+      { title: "1. Upload images", desc: "JPG, PNG, or WebP. Name files 01, 02, 03 so page order sorts on upload." },
+      { title: "2. Set layout and reorder", desc: "Page size, orientation, and fit mode; drag pages into final order." },
+      { title: "3. Download PDF", desc: "One multi-page document. The save counts as one Pro download (signed-in free: 2 a day)." },
+    ],
     faqs: [
       { question: 'How many images fit in one PDF?', answer: 'Signed-in free users bind 2 Pro batches a day; Pro handles hundreds of pages to 2 GB. An 80-photo listing at full resolution makes roughly a 120 MB PDF — drop quality to 85 first and it lands near 35 MB, emailable and fast to open.' },
       { question: 'Will full-resolution quality survive?', answer: 'Yes at fit-without-downscale settings — images embed at native pixels. For screen-only brochures, cap the long edge at 1920px: identical on-screen sharpness at one-third the file size.' },
@@ -671,7 +696,12 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-audio-converter",
     category: "Audio",
     description: 'Convert whole folders between MP3, WAV, OGG, FLAC, M4A, and AAC with uniform bitrate and sample settings. Podcasters standardize 50 episodes for every platform — local FFmpeg WASM, 2 free batches a day.',
-        faqs: [
+        instructions: [
+      { title: "1. Upload audio files", desc: "MP3, WAV, OGG, FLAC, M4A, AAC. Keep the tab open — long files take minutes each." },
+      { title: "2. Set output and quality", desc: "One target format with uniform bitrate and sample rate for the whole batch." },
+      { title: "3. Download ZIP", desc: "Converted files package together. One batch save counts as one Pro download." },
+    ],
+    faqs: [
       { question: 'Which output settings fit each platform?', answer: 'MP3 128 kbps for Spotify and RSS feeds, WAV 44.1 kHz for editing masters, FLAC for archival, M4A for Apple listeners. Set once per batch: 50 episodes at MP3 128k land near 1 MB per minute — a 30-minute show ships at ~30 MB.' },
       { question: 'How long does a 50-file batch take?', answer: 'FFmpeg WASM processes sequentially in your browser: short clips finish in seconds each, hour-long WAVs take minutes. A 50-episode MP3 batch typically completes in 10–20 minutes on a laptop — start it, keep the tab open, and download the ZIP once.' },
       { question: 'Does converting improve poor audio?', answer: 'No — conversion preserves at best and degrades at worst, especially lossy-to-lossy. Fix noise and levels in the WAV masters first, then convert outward. Never upconvert MP3 to FLAC expecting quality gains; the file grows with zero fidelity added.' },
@@ -690,6 +720,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free bulk SVG to PNG — any resolution, sharp output. Local canvas, 2 batches daily free.',
     dependencies: "Canvas API, jszip",
     seoTitle: "Free Bulk SVG to PNG Converter Online",
+    instructions: [
+      { title: "1. Upload SVG vectors", desc: "Logos, icons, illustrations — filename order preserved for set building." },
+      { title: "2. Set resolution", desc: "Export 3x display size for retina (24px icon from 72px PNG). Run 1x/2x/3x for complete sets." },
+      { title: "3. Download ZIP", desc: "Transparent PNGs ready for Xcode, Android Studio, or web. One batch save counts as one Pro download." },
+    ],
     faqs: [
       { question: 'What resolution should icon PNGs export at?', answer: 'Export at 3x the display size for retina: a 24px icon renders from a 72px PNG. Run three batches (1x, 2x, 3x) from the same SVGs for a complete set — vectors stay razor sharp at every scale, unlike upscaled rasters.' },
       { question: 'Do filenames and transparency survive?', answer: 'Yes — original names carry over with .png extensions and alpha channels stay intact. A 200-icon set exports as 200 transparent PNGs ready to drop into Xcode, Android Studio, or web builds.' },
@@ -706,6 +741,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free bulk image compressor — 40-80% smaller, quality slider. Local, 2 batches daily free.',
     dependencies: "browser-image-compression, jszip",
     seoTitle: "Free Bulk Image Compressor Online",
+    instructions: [
+      { title: "1. Upload JPG, PNG, WebP", desc: "Product shots, lifestyle, thumbnails — mixed types accepted in one batch." },
+      { title: "2. Set quality", desc: "80 for photos, 70 for thumbnails. Compress 5 samples first and compare at 100% zoom." },
+      { title: "3. Download ZIP", desc: "Typical savings 40–80%. One batch save counts as one Pro download." },
+    ],
     faqs: [
       { question: 'What quality setting keeps photos sharp?', answer: 'JPEG 80 for product and lifestyle shots (visually identical, ~65% smaller), 70 for thumbnails, PNG optimization for graphics with text. Compress 5 samples first: a 400 KB photo at quality 80 lands near 130 KB with no visible change at 100% zoom.' },
       { question: 'Compress or resize first?', answer: 'Resize first, then compress: capping the long edge at 1600px removes pixels before the quality slider removes data. A 300-photo batch at 1600px/quality-80 typically drops from 120 MB to under 25 MB total.' },
@@ -742,7 +782,12 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Resize hundreds of photos to exact pixels, percentage scale, or social presets in one pass with aspect control. Photographers deliver 400 wedding shots at uniform 2048px — local Canvas work, 2 free batches a day.',
     seoDescription: 'Free bulk image resizer — exact pixels, presets, aspect lock. Local canvas, 2 batches daily.',
     dependencies: "Canvas API, jszip",
-        faqs: [
+        instructions: [
+      { title: "1. Upload the batch", desc: "Wedding sets, catalogs, galleries — hundreds of files in one pass." },
+      { title: "2. Set dimensions", desc: "Exact pixels, percentage, or social preset with aspect lock on. Center-crop for exact squares." },
+      { title: "3. Download ZIP", desc: "Format converts in the same pass if set. One batch save counts as one Pro download." },
+    ],
+    faqs: [
       { question: 'Exact pixels, percentage, or preset — which mode?', answer: 'Exact pixels for marketplaces (e.g. 2000px long edge), percentage for quick 50% delivery sets, presets for Instagram 1080x1080 and story 1080x1920. A 400-shot wedding at 50% finishes in one batch with uniform sharpness.' },
       { question: 'How do I avoid stretched faces?', answer: 'Leave aspect-ratio lock on: the tool fits within your dimensions instead of forcing them. For exact squares, enable center-crop — faces stay centered while edges trim. Never force 1:1 on 3:2 portraits without cropping.' },
       { question: 'Does resizing hurt print quality?', answer: 'Only if you print larger than the resized pixels allow: 2048px prints sharp to 7 inches at 300 DPI. Keep masters archived; deliver resized copies per channel (web, social, print) from the same batch settings.' },
@@ -760,6 +805,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free bulk video compressor — CRF presets, consistent output. FFmpeg WASM, 2 batches daily.',
     dependencies: "FFmpeg WASM",
     seoTitle: "Free Bulk Video Compressor – CRF Online",
+    instructions: [
+      { title: "1. Upload videos", desc: "MP4, MOV, WebM. Keep the tab open — 100 MB files take 1–3 minutes each on a laptop." },
+      { title: "2. Set CRF and preset", desc: "CRF 23 balanced, 28 web, 18 archive; pick web, email, or archive preset for resolution and codec." },
+      { title: "3. Download files", desc: "Grab each finished file or the full ZIP. Saves count against Pro downloads (signed-in free: 2 a day)." },
+    ],
     faqs: [
       { question: 'What CRF value should my batch use?', answer: 'CRF 23 for balanced quality, 28 for web uploads (roughly half the size), 18 for archival masters. A 20-video batch of 100 MB uploads at CRF 28 lands near 35–45 MB each with YouTube-acceptable quality.' },
       { question: 'How long does video batch compression take?', answer: 'FFmpeg WASM runs sequentially on your CPU: a 100 MB 1080p file takes 1–3 minutes on a laptop. A 10-video batch runs 15–30 minutes — keep the tab open and download each finished file or the final ZIP.' },
@@ -797,6 +847,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free bulk face anonymizer — blur or pixelate every face. On-device AI, 2 batches daily.',
     dependencies: "TensorFlow.js, Canvas API, jszip",
     seoTitle: "Free Bulk Face Anonymizer – Blur Faces",
+    instructions: [
+      { title: "1. Upload the batch", desc: "Front-facing, well-lit photos detect best. Processing runs on-device with TensorFlow.js." },
+      { title: "2. Pick method and review", desc: "Blur, pixelate, or solid cover — solid bars are irreversible and safest. Review the output grid once for misses." },
+      { title: "3. Download ZIP", desc: "Only anonymized copies export; originals stay untouched. One batch save counts as one Pro download." },
+    ],
     faqs: [
       { question: 'How accurate is batch face detection?', answer: 'Front-facing, well-lit faces detect at 90%+; profile angles, sunglasses, and tiny background faces miss more often. For 100 event photos, review the output grid once — re-run misses individually rather than trusting blind automation for publication.' },
       { question: 'Blur, pixelate, or solid cover — which is safest?', answer: 'Solid black bars are irreversible and safest for sensitive publication; heavy pixelation second; light blur can sometimes be reversed by enhancement, so never use subtle blur where identity protection is legally required.' },
@@ -813,6 +868,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free bulk form extractor — hundreds of forms, one CSV. Local pdf-lib, 2 batches daily free.',
     dependencies: "pdf-lib",
     seoTitle: "Free Bulk PDF Form Extractor to CSV",
+    instructions: [
+      { title: "1. Upload identical forms", desc: "300 applications from one template merge perfectly; mixed templates scatter — group by version." },
+      { title: "2. Confirm field mapping", desc: "Review auto-detected fields before extracting; semantic names (full_name, email) make clean columns." },
+      { title: "3. Download CSV", desc: "All responses aggregate into one sheet. The save counts as one Pro download." },
+    ],
     faqs: [
       { question: 'Do all forms need identical fields?', answer: 'Yes for clean output — the tool unions field names into CSV columns, so 300 applications from one template merge perfectly while mixed templates scatter. Version your form once, distribute widely, extract in version groups.' },
       { question: 'AcroForm, XFA, or scanned forms?', answer: 'Digital AcroForm fields extract reliably; XFA support varies by complexity; scanned printouts without digital fields extract nothing — OCR those first, then extract from the digital versions.' },
@@ -829,6 +889,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free bulk video size reducer — hit MB targets per file. FFmpeg WASM local, 2 batches daily.',
     dependencies: "FFmpeg WASM",
     seoTitle: "Free Bulk Video Size Reducer – MB Target",
+    instructions: [
+      { title: "1. Upload videos", desc: "Clips bound for email or messaging apps with hard MB walls." },
+      { title: "2. Set the MB target", desc: "10 MB safe everywhere, 20 MB Outlook, 25 MB Gmail. Preview one file — crushed faces mean split, not squeeze." },
+      { title: "3. Download files", desc: "Each reduced file saves individually or as ZIP. Saves count against Pro downloads." },
+    ],
     faqs: [
       { question: 'Compressor vs Size Reducer — which tool?', answer: 'Compressor holds quality constant (CRF) and lets size fall where it may; Size Reducer holds your MB target constant and adjusts quality and resolution to hit it. Emailing under 25 MB demands the Reducer; archiving demands the Compressor.' },
       { question: 'What target fits email providers?', answer: '10 MB is safe everywhere, 20 MB clears Outlook, 25 MB clears Gmail. A 15-clip batch at 25 MB each ships as separate emails — messaging apps like WhatsApp need 16–64 MB depending on platform.' },
@@ -908,6 +973,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free bulk CSV/Excel to JSON — mapping, arrays or objects. Local SheetJS, 2 batches daily.',
     dependencies: "SheetJS",
     seoTitle: "Free Bulk CSV Excel to JSON Converter",
+    instructions: [
+      { title: "1. Upload CSV or Excel", desc: "Client exports and multi-sheet workbooks. Standardize headers (date, vendor, amount) before upload." },
+      { title: "2. Map and shape output", desc: "Review column mapping; choose merged single JSON or separate files, array-of-objects or keyed-by-ID." },
+      { title: "3. Download JSON", desc: "Formatted output ready for APIs or configs. The save counts as one Pro download." },
+    ],
     faqs: [
       { question: 'Array or keyed-object JSON — which output?', answer: 'Array-of-objects for APIs and databases; keyed-by-ID objects for lookups and configs. Convert once per shape: a 50-file client dump becomes one merged array or 50 keyed files, your choice per batch.' },
       { question: 'What if columns differ across files?', answer: 'The tool unions all headers; missing cells become null. Standardize supplier exports first — renaming Date, Vender, AMT to date, vendor, amount before upload saves an hour of post-cleanup.' },
@@ -923,7 +993,12 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Scan hundreds of URLs for status codes, redirect chains, and dead pages with CSV export for audits. SEOs check 500 links before a migration — local fetch with auto-paced backend, 2 free batches a day.',
     seoDescription: 'Free bulk URL checker — statuses, redirects, dead pages. Auto-paced scans, 2 batches daily.',
     dependencies: "fetch API",
-        faqs: [
+        instructions: [
+      { title: "1. Paste or upload URLs", desc: "Hundreds per batch, one per line or CSV. Dedupe first — repeats waste scan budget." },
+      { title: "2. Run the scan", desc: "Backend paces ~15 checks/min with auto-resume. A 500-link audit takes ~35 minutes; keep the tab open." },
+      { title: "3. Export CSV", desc: "Sort by status: fix 404s first, then 2+ hop chains. The export counts as one Pro download." },
+    ],
+    faqs: [
       { question: 'How many URLs fit one audit batch?', answer: 'Paste or upload hundreds of URLs per batch; the backend paces ~15 checks per minute with auto-resume on 429s. A 500-link pre-migration audit completes in about 35 minutes — start it, keep the tab open, export the CSV once.' },
       { question: 'What does the results table catch?', answer: '2xx success, 3xx redirect targets and chains, 4xx client errors, 5xx server failures, plus timeouts and DNS misses. Sort by status: fix 404s first (lost rankings), then chains over 2 hops (diluted link equity).' },
       { question: 'Will target sites block the scan?', answer: 'Checks come from shared backend IPs with polite pacing, so aggressive firewalls may 403 some URLs that load fine in browsers. Re-check flagged URLs manually before reporting them dead to clients.' },
@@ -938,7 +1013,12 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "Image",
     description: 'Convert whole folders between 100+ format pairs — PNG to WebP, JPG to AVIF, HEIC to JPG — with quality control and folder-preserving ZIP output. Web teams modernize 300 images before deploy — local, 2 free batches a day.',
     seoTitle: "Free Bulk Image Converter – Batch Images",
-        faqs: [
+        instructions: [
+      { title: "1. Drop the folder", desc: "Mixed formats accepted — PNG, JPG, WebP, HEIC, AVIF in one batch." },
+      { title: "2. Pick the pair page output", desc: "Choose the exact conversion (e.g. PNG→WebP at quality 80) with folder-preserving output." },
+      { title: "3. Download ZIP", desc: "Structure preserves for direct deploy. One batch save counts as one Pro download." },
+    ],
+    faqs: [
       { question: 'How do I convert 300 images to WebP before a deploy?', answer: 'Drop the folder, pick the pair tool (e.g. PNG to WebP), set quality 80, and run — a 300-file set averaging 400 KB shrinks to roughly 120 KB each, and the ZIP preserves folder structure for direct upload. Signed-in free covers 2 batches a day; Pro is unlimited.' },
       { question: 'Which output format should my website use?', answer: 'WebP for broad compatibility today (95%+ browsers) at ~30% smaller than JPEG; AVIF for maximum savings (~50% smaller) where your audience runs modern browsers. Serve WebP with AVIF for hero images and WebP everywhere else.' },
       { question: 'Are my images uploaded during conversion?', answer: 'No — conversion runs locally in your browser on Canvas, so images never leave your device. Only the final ZIP save counts against the Pro download quota (signed-in free: 2 a day; Pro unlimited with 2 GB files).' },
@@ -957,7 +1037,12 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "Image",
     description: 'Strip GPS, camera serials, and timestamps from thousands of photos — or inject copyright and author credits. Agents clean 500 listing shots before upload — local exifr work, 2 free batches a day.',
     seoTitle: "Free Bulk EXIF Remover – Strip Metadata",
-        faqs: [
+        instructions: [
+      { title: "1. Upload JPEG or TIFF", desc: "Listing shots, client galleries, proofs — thousands per batch." },
+      { title: "2. Strip or inject", desc: "Strip removes GPS, serials, timestamps; inject stamps copyright, author, and usage rights." },
+      { title: "3. Download and verify", desc: "Check one file's properties panel for zero location data. One batch save counts as one Pro download." },
+    ],
+    faqs: [
       { question: 'What exactly gets stripped from my photos?', answer: 'GPS coordinates, camera make, model, serial number, timestamps, software tags, and embedded thumbnails — everything except pixels. A 500-photo listing set strips in one batch; verify one file\'s properties panel after to confirm zero location data.' },
       { question: 'Why strip EXIF before uploading?', answer: 'Phone photos embed your home GPS to ~5-meter accuracy plus device serials. Strip before posting to marketplaces, social media, or client galleries — keep one unstripped archive copy for your own records.' },
       { question: 'What credits can I inject instead?', answer: 'Copyright notice, author name, contact, description, and usage rights — ideal for photographers delivering 200 proofs. Inject once per batch so every file carries your ownership downstream.' },
@@ -997,6 +1082,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free bulk Markdown converter — styled PDF or HTML, custom CSS. Local, 2 batches daily free.',
     dependencies: "marked.js, jsPDF, jszip",
     seoTitle: "Free Bulk Markdown to PDF Converter",
+    instructions: [
+      { title: "1. Upload Markdown files", desc: "Keep local images beside the .md files with matching relative paths for embedding." },
+      { title: "2. Pick format and style", desc: "PDF with auto table of contents for handbooks, HTML with custom CSS for web publishing." },
+      { title: "3. Download ZIP", desc: "Styled documents export together. One batch save counts as one Pro download." },
+    ],
     faqs: [
       { question: 'What Markdown features convert faithfully?', answer: 'GitHub-flavored Markdown: headings, lists, tables, fenced code with highlighting, images, links, blockquotes, and task lists. A 100-file docs folder converts with navigation intact — preview one complex table page before running all.' },
       { question: 'PDF or HTML output — which?', answer: 'PDF for printable handbooks and client deliverables (with auto table of contents); HTML for publishing to the web with your CSS. Convert once per format from the same sources — content stays identical, presentation differs.' },
@@ -1055,7 +1145,12 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Hunt IPs, API keys, emails, and URLs across thousands of logs or code files — extract matches or replace in place. SREs scrub 5,000 logs before sharing — local JS RegExp, 2 free batches a day.',
     seoDescription: 'Free bulk regex tool — extract or replace across files. Local JS engine, 2 batches daily free.',
     dependencies: "Vanilla JS, jszip",
-        faqs: [
+        instructions: [
+      { title: "1. Upload text files", desc: "Logs, code, CSVs, configs. Back up folders containing .env or .git internals before replace mode." },
+      { title: "2. Enter pattern, pick mode", desc: "JS RegExp with flags; extract harvests matches to one file, replace rewrites in place. Preview hits first." },
+      { title: "3. Download results", desc: "Findings file or rewritten ZIP. Saves count as Pro downloads (signed-in free: 2 a day)." },
+    ],
+    faqs: [
       { question: 'Extract or replace mode — which?', answer: 'Extract to harvest matches into one findings file (all leaked keys, all error lines); replace to rewrite files in place (redact secrets, update domains). Preview matches first — a 5,000-file replace is instant and permanent.' },
       { question: 'What pattern finds leaked secrets?', answer: 'Start with (?i)(api[_-]?key|secret|token)\\s*[:=]\\s*[\'"]?\\S+ for keys and \\b[\\w.-]+@[\\w.-]+\\.\\w+ for emails. Run extract-only first, eyeball 20 hits for false positives, then tighten before any replace pass.' },
       { question: 'Which file types process safely?', answer: 'Any text: .txt, .md, .csv, .log, .json, .yaml, .js, .py, .sql, .html. Binaries and archives skip automatically — never run replace across a folder containing .git internals or production .env files you haven\'t backed up.' },
@@ -1070,7 +1165,12 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "Image",
     description: 'OCR batches of scans, photos, and PDF pages into one text document in 100+ languages. Archivists digitize 200-page records weekly — local Tesseract.js, 2 free batches a day.',
     seoTitle: "Free Bulk OCR – Images to Text Online",
-        faqs: [
+        instructions: [
+      { title: "1. Upload scans", desc: "300 DPI flat prints in the right language pack. Digitally-created PDFs should use text extraction instead." },
+      { title: "2. Run OCR", desc: "Tesseract.js processes locally in 100+ languages; multi-language pages run two packs at once." },
+      { title: "3. Export text", desc: "TXT, DOCX, or searchable PDF as one compiled document. The export counts as one Pro download." },
+    ],
+    faqs: [
       { question: 'What scan quality hits 95%+ accuracy?', answer: '300 DPI, flat, high-contrast prints in a supported language. Phone snaps of curved book pages land 70–85% — press flat, light evenly, and pick the right language pack before blaming the engine.' },
       { question: 'Which languages and scripts work?', answer: '100+ including English, Hindi, Tamil, Arabic, and Chinese; multi-language pages run two packs at once. Handwriting is not supported — printed text only, with clean fonts best.' },
       { question: 'PDF pages or image files — which input?', answer: 'Both: PDF pages rasterize automatically, JPG/PNG process directly. For digitally-created PDFs with selectable text, skip OCR entirely and extract text directly — faster and 100% accurate.' },
@@ -1090,6 +1190,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free bulk ebook converter — EPUB, MOBI, PDF libraries. Metadata kept, 2 batches daily.',
     dependencies: "EPUB.js, jszip",
     seoTitle: "Free Bulk Ebook Converter – EPUB MOBI PDF",
+    instructions: [
+      { title: "1. Upload DRM-free ebooks", desc: "EPUB, MOBI, or PDF you own. Store purchases with DRM cannot convert." },
+      { title: "2. Pick the target reader", desc: "EPUB for Kobo/Apple/Google, MOBI for older Kindles, PDF for fixed layout." },
+      { title: "3. Download and verify", desc: "Open 3 converted books (cover, flip, contents) before converting all 100. One ZIP save counts as one Pro download." },
+    ],
     faqs: [
       { question: 'EPUB, MOBI, or PDF — which target?', answer: 'EPUB for Apple Books, Kobo, and Google Play; MOBI for older Kindles (newer Kindles take EPUB too); PDF only when fixed layout matters. Moving 100 books to Kobo means one EPUB batch — covers and tables of contents carry over.' },
       { question: 'Do covers and metadata survive?', answer: 'Title, author, ISBN, cover art, table of contents, and bookmarks preserve wherever the target format supports them. Verify 3 converted books (open, flip, check cover) before converting all 100.' },
@@ -1106,6 +1211,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free bulk HEIC to JPG — iPhone photos, universal JPGs. Local WASM, 2 batches daily free.',
     dependencies: "libheif WASM, jszip",
     seoTitle: "Free Bulk HEIC to JPG Converter Online",
+    instructions: [
+      { title: "1. Upload HEIC photos", desc: "iPhone originals at full quality — iCloud placeholders fail, download originals first." },
+      { title: "2. Set JPG quality", desc: "90+ for print, 85 for sharing, 80 for smallest files." },
+      { title: "3. Download ZIP", desc: "Filenames carry over with .jpg extensions. One batch save counts as one Pro download." },
+    ],
     faqs: [
       { question: 'Why convert HEIC to JPG at all?', answer: 'Apple\'s HEIC saves space but Windows, older software, and many web platforms reject it. A 300-photo vacation batch becomes universally readable JPGs in one run — share anywhere without \'cannot open attachment\' replies.' },
       { question: 'How much quality is lost?', answer: 'At quality 90+, imperceptible: a 2 MB HEIC becomes roughly a 1.5 MB JPG with identical visible detail. Drop to 80 for sharing (half the size); keep 90+ for printing.' },
@@ -1171,7 +1281,12 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoTitle: "Complaint Letter Generator India – Free",
     seoDescription: 'Free complaint letter generator India — Consumer Protection Act 2019, RERA, TRAI, RBI drafts. Your own AI key.',
     dependencies: "AI API",
-        faqs: [
+        instructions: [
+      { title: "1. Enter facts, pick dispute", desc: "Names, dates, amounts, and your demand — plus Consumer Act, RERA, TRAI, or RBI track. Never paste passwords or OTPs." },
+      { title: "2. Generate the draft", desc: "Each letter costs 1 credit. Legal structure and citations format automatically." },
+      { title: "3. Attach and send", desc: "Add bills and screenshots as annexures, have an advocate review, then download the .txt (one Pro download)." },
+    ],
+    faqs: [
       { question: 'What details make a complaint letter effective?', answer: 'Names, dates, amounts, and a clear demand: \'On 12 March I paid Rs.4,999 for order #8821, delivered damaged on 15 March; I seek full refund within 15 days\'. The tool structures your facts into legal format with the right Act cited — vague complaints (\'bad service\') get vague responses.' },
       { question: 'Where does my complaint text go?', answer: 'Your details go to the AI API for generation and are deleted after processing — never stored or shared by us. The provider may log prompts briefly for abuse prevention, so never paste passwords, OTPs, or card numbers into the complaint details.' },
       { question: 'What does each complaint letter cost?', answer: 'No API key needed — each letter costs 1 text-generation credit: signed-in free plans include a one-time 5-credit trial (about 5 letters), Pro includes 200 monthly, and anonymous requests return 401. Exporting the letter .txt counts as one Pro download (signed-in free: 2 a day).' },
@@ -1188,6 +1303,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free brand palette generator — 6 colors with hex and usage notes. 1 credit per palette, 5-use trial.',
     dependencies: "AI API",
     seoTitle: "Free Brand Color Palette Generator",
+    instructions: [
+      { title: "1. Describe the brand", desc: "One line: industry, mood, audience — 'trustworthy fintech for young Indians, bold but calm'." },
+      { title: "2. Generate the palette", desc: "Each palette costs 1 credit. Six hex-coded colors arrive with usage roles." },
+      { title: "3. Check contrast", desc: "Test text-background pairs (body 4.5:1) in a contrast checker before shipping to Figma or Tailwind." },
+    ],
     faqs: [
       { question: 'What should I describe for the best palette?', answer: 'Write one line with industry, mood, and audience: \'trustworthy fintech for young Indians, bold but calm\'. You get 6 hex-coded colors with roles (primary, accent, background, text) — paste them straight into Tailwind or Figma variables.' },
       { question: 'Is my brand description sent anywhere?', answer: 'Yes — your description goes to the AI API for generation and is deleted after processing; never stored or shared. Brand names and taglines are low-sensitivity, but skip unannounced product details you cannot expose.' },
@@ -2009,6 +2129,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: "none",
     showInCategory: true,
     seoTitle: "Free AI Humanizer – Make Text Natural",
+    instructions: [
+      { title: "1. Paste the stiff draft", desc: "100–300 words of robotic text. The template engine handles this free and locally." },
+      { title: "2. Pick a tone", desc: "Casual, Professional, Friendly, Natural, or Storytelling — or AI Rewrite at 1 credit for harder passages." },
+      { title: "3. Add one true detail", desc: "A real sentence ('our Jaipur store sold out in 3 days') beats any rewrite pass for naturalness." },
+    ],
     faqs: [
       { question: 'How do I humanize AI text without losing meaning?', answer: 'Paste 100–300 words and pick the tone matching your audience — Professional for LinkedIn, Casual for blogs. Then edit the result\'s opening line yourself: one genuine sentence with a real detail (\'our Jaipur store sold out in 3 days\') does more for naturalness than any rewrite pass.' },
       { question: 'Is my pasted text uploaded anywhere?', answer: 'The built-in template rewrite runs locally in your browser — nothing you paste leaves your device. Only the AI Rewrite button sends text to the AI API (1 credit per use, sign-in required); keep sensitive drafts on the template engine.' },
@@ -2026,7 +2151,12 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free AI detector — burstiness and pattern scoring with breakdown. Local analysis, free to start.',
     dependencies: "none",
     showInCategory: true,
-        faqs: [
+        instructions: [
+      { title: "1. Paste the text", desc: "Essays, articles, or posts of any length. Analysis is free and runs locally." },
+      { title: "2. Read the bands", desc: "Under ~35% reads human on the meter; higher scores flag AI signals. The middle band needs human review." },
+      { title: "3. Decide, don't accuse", desc: "Use the score as a screening signal with drafts and process evidence — save the report (one Pro download) for records." },
+    ],
+    faqs: [
       { question: 'How should I read the AI Detector percentage?', answer: 'Scores under ~35% read as human-written on the tool\'s own meter; higher scores flag AI signals, with very high scores the strongest. Treat the middle band as \'needs human review\', not a verdict. A 2,000-word essay scoring 82% deserves a conversation with the author, not an automatic accusation.' },
       { question: 'Is my checked text uploaded or stored?', answer: 'No — all analysis happens locally in your browser with pattern statistics, so checked text never leaves your device. Safe for student submissions and unpublished drafts; nothing is sent to any server.' },
       { question: 'What is burstiness and why does it matter?', answer: 'Burstiness measures sentence-length variation: humans mix short punches with long explanations (high burstiness), while raw AI output stays uniform (low burstiness). Heavily edited AI text regains burstiness, which is why the score is one indicator among several, never a final judgment.' },
@@ -2871,6 +3001,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free bulk PDF suite — rotate, protect, split, watermark 50+ files. Local processing, 2 batches daily.',
     dependencies: "pdf-lib",
     seoTitle: "Free Bulk PDF Suite – 9 Tools in One",
+    instructions: [
+      { title: "1. Upload the batch", desc: "Up to 10 files signed-in free (500 on Pro). Scans and digital PDFs can mix." },
+      { title: "2. Pick one of 9 operations", desc: "Rotate, protect, unlock, remove pages, split, watermark, crop, resize, or flatten — with quality 80 default." },
+      { title: "3. Download results", desc: "One batch save counts as one Pro download. Re-running another operation costs another save — set it right first." },
+    ],
     faqs: [
       { question: 'Which 9 operations does Bulk PDF Suite cover?', answer: 'Rotate (90/180/270), password-protect, unlock (with password), split by page count, text watermark, margin crop, page resize (A4/Letter), and form flatten — each applied uniformly across the whole batch. A 50-file scan cleanup (rotate + compress-ready + flatten) finishes in one session.' },
       { question: 'How many PDFs fit in one batch?', answer: 'Signed-in free users batch up to 10 files per run within 2 Pro downloads a day; Pro handles up to 500 files to 2 GB each. A 15 MB-per-file cap applies to free uploads (40 MB signed-in) — split oversized scan sets before starting.' },

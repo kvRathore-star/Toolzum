@@ -107,7 +107,7 @@ export function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern
   // Oct 6: crypto/dns/lookup/reader deps (OTP, JWK, DNS, WHOIS, file viewing)
   // matched the loose 'api' fallback and showed AI-generate steps — excluded.
   const aiApiDeps = ['openai', 'anthropic', 'gemini', 'huggingface', 'replicate', 'stability', 'ai api', 'ai provider', 'real-esrgan', 'insightface', 'whisper', 'cf vectorize', 'stable diffusion'];
-  const isAiDep = aiApiDeps.some(d => dep.includes(d)) || (dep.includes('api') && !dep.includes('web audio') && !dep.includes('fetch api') && !dep.includes('vanilla') && !dep.includes('canvas') && !dep.includes('crypto') && !dep.includes('dns') && !dep.includes('rdap') && !dep.includes('whois') && !dep.includes('lookup') && !dep.includes('filereader') && !dep.includes('postal') && !dep.includes('ifsc') && !dep.includes('crt.sh') && !dep.includes('mailinator') && !dep.includes('maxmind'));
+  const isAiDep = aiApiDeps.some(d => dep.includes(d)) || (dep.includes('api') && !dep.includes('web audio') && !dep.includes('fetch api') && !dep.includes('tinyurl') && !dep.includes('is.gd') && !dep.includes('vanilla') && !dep.includes('canvas') && !dep.includes('crypto') && !dep.includes('dns') && !dep.includes('rdap') && !dep.includes('whois') && !dep.includes('lookup') && !dep.includes('filereader') && !dep.includes('postal') && !dep.includes('ifsc') && !dep.includes('crt.sh') && !dep.includes('mailinator') && !dep.includes('maxmind'));
   if (isAiDep || cat === 'ai') {
     return { pattern: 'ai-generate' };
   }

@@ -2356,7 +2356,12 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Shorten hundreds of URLs in one batch with automatic provider failover — paste a list, get clean links for campaigns and bios. Marketers prep 200 UTM links before launch — managed shortening (~10/min pace), sign in free.',
     seoDescription: 'Free bulk URL shortener — hundreds of links, one batch. Server-side, sign in free to start.',
     dependencies: "TinyURL API, is.gd API",
-        faqs: [
+        instructions: [
+      { title: "1. Paste URLs", desc: "One per line — campaign links, UTM URLs, bio links. Invalid entries report as errors, not blockers." },
+      { title: "2. Shorten all", desc: "Managed providers with failover run ~10/min. 200 links finish in about 20 minutes; keep the tab open." },
+      { title: "3. Copy or export", desc: "Copy-all to clipboard free anytime; the CSV results download counts as one Pro download." },
+    ],
+    faqs: [
       { question: 'How fast does a 200-link batch shorten?', answer: 'Our backend shortens each URL through managed shortening providers with automatic failover — if one provider errors, the request retries on a second — at ~10 links per minute with automatic retry on 429s. 200 UTM links finish in about 20 minutes. Paste, start, keep the tab open; invalid URLs report as errors instead of blocking the batch.' },
       { question: 'Are my original URLs stored or tracked?', answer: 'URLs pass through our backend to a third-party shortening service (unavoidable — short links live on the provider\'s domain under its terms). We keep no batch list beyond standard rate-limit rows — copy results before leaving. For sensitive pre-launch campaigns, shorten after the embargo lifts rather than weeks early.' },
       { question: 'How do Pro limits work here?', answer: 'Anonymous visitors meet the Pro page lock and sign in to continue; signed-in free users run 2 Pro batches a day; Pro is unlimited. Copy results to clipboard free anytime; the CSV results download counts as one Pro download.' },
