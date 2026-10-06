@@ -132,3 +132,23 @@ gaps; all fixed and re-gated green:
   10 credits).
 Final: tsc 0 · eslint 0 · 26 tests green · faq-gate 0 new ·
 quality-audit 0 · 0 bare-`other` · 0 trios · 0 shared sentences.
+
+## Pro Batch 2 DONE (Oct 6 — 35/35, gates green)
+
+2a (18): bg-changer, qr-generator, watermark, pdf-extractor, image-to-pdf,
+audio-converter, svg-to-png, compressor, size-reducer, resizer,
+video-compressor, merger, face-anonymizer, form-extractor,
+size-reducer-v, normalizer, subtitle-burner, invoice-parser.
+2b (17): csv-excel-json, url-status, exif, app-icon, markdown-pdf,
+font-subsetter, subtitle-shifter, regex, ocr, ebook, heic-to-jpg,
+url-shortener, batch-editor, image-bulk-converter, avif-optimizer,
+heic-converter, image-upscaler.
+~150 FAQs (4–5/tool, flagships 5–6) + descriptions + seoTitles +
+8 mechanics-accurate custom instructions (4 bare-`other` + 4 misrouted).
+Server-side truth kept: url-shortener (cloud, ~10/min backend pace,
+clipboard + CSV export); url-status (~15 checks/min auto-resume).
+Bulk quota truth uniform: anon page-lock, signed 2 Pro batches/day,
+Pro unlimited to 500 files/2 GB.
+Gates: tsc 0 · eslint 0 · 23 tests green · faq-gate 0 new ·
+quality-audit 0 · 0 bare-`other` · 0 trios.
+Customs coverage: 581 → 604 of 1,143. Pro program complete: 65/65.
