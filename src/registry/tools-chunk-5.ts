@@ -1584,7 +1584,6 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Does WEBP transparency survive?", answer: "WEBP supports alpha transparency. The converter renders transparent areas against a white background in the ICO, since ICO has limited transparency support." },
       { question: "Can I customize which sizes are included?", answer: "Some converters offer size selection. Check if this tool allows picking specific sizes to reduce the final ICO file size." },
       { question: "Is WEBP to ICO conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
-      { question: "Where do I install the ICO?", answer: "Link with rel=\"icon\" in HTML head; browsers pick it up for tabs and bookmarks automatically." },
     ],
   },
   {

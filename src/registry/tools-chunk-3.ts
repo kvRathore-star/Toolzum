@@ -774,6 +774,12 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "scientific-calculator",
     category: "Calculator",
     description: 'Evaluate mathematical expressions with sin, cos, tan, log, and sqrt functions. A versatile scientific calculator in your browser. No signup or account required.',
+    faqs: [
+      { question: "Which functions?", answer: "Trig, logs, powers, roots, and constants — the full scientific set." },
+      { question: "Degrees or radians?", answer: "Both modes, switchable — wrong mode is the classic error source." },
+      { question: "Parentheses?", answer: "Full nesting supported with proper precedence. Full nesting supported with proper precedence throughout." },
+      { question: "Is my calculation uploaded anywhere?", answer: "No — calculation runs locally in your browser, free with no signup." },
+    ],
     seoDescription: 'Free online Scientific Calculator — Evaluate mathematical expressions with sin, cos, tan, log, and sqrt functions. A versatile scientific calculator in your browser. ',
     dependencies: "None",
   },
