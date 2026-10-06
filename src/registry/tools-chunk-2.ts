@@ -8,6 +8,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     category: "Image",
     description: 'Convert WebP images to next-gen AVIF in your browser — squeeze modern files smaller still with transparency intact throughout.',
     seoTitle: "WebP to AVIF Converter – Free Online",
+    instructions: [
+      { title: "1. Drop WebP file(s)", desc: "Upload your WebP source. Runs locally on Canvas." },
+      { title: "2. Set AVIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download AVIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Worth converting?", answer: "Marginal but real — smaller files in the same compatibility class." },
       { question: "Transparency?", answer: "Both formats carry alpha, so nothing is lost in either direction." },
@@ -27,6 +32,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AAC to FLAC — Convert AAC audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop AAC file(s)", desc: "Upload your AAC source. Runs locally on FFmpeg." },
+      { title: "2. Set FLAC options", desc: "Set FLAC bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download FLAC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does AAC to FLAC do?", answer: "Convert AAC audio files to FLAC format directly in your browser. High-quality conversion with no file size limits." },
       { question: "Where does FLAC fit best?", answer: "high-fidelity music archives and audiophile listening where quality matters more than file size." },
@@ -40,6 +50,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "aac-to-m4a",
     category: "Audio",
     description: 'Convert AAC audio files to M4A format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.',
+    instructions: [
+      { title: "1. Drop AAC file(s)", desc: "Upload your AAC source. Runs locally on FFmpeg." },
+      { title: "2. Set M4A options", desc: "Set M4A bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download M4A", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert AAC to M4A?", answer: "Same codec family — container swap for Apple compatibility only." },
       { question: "Quality loss?", answer: "None when staying in AAC — stream copies without re-encoding." },
@@ -59,6 +74,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AAC to OGG — Convert AAC audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop AAC file(s)", desc: "Upload your AAC source. Runs locally on FFmpeg." },
+      { title: "2. Set OGG options", desc: "Set OGG bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download OGG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert AAC to OGG?", answer: "OGG Vorbis is open-source and royalty-free, while AAC has patent licensing requirements. Converting to OGG is useful for open-source projects, web games, and platforms that prefer free formats." },
       { question: "Is there quality loss?", answer: "Both AAC and OGG are lossy formats. Converting between them introduces generation loss. At equivalent bitrates, OGG and AAC have similar quality. Higher OGG bitrates compensate for the re-encoding." },
@@ -76,6 +96,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AAC to WAV — Convert AAC audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop AAC file(s)", desc: "Upload your AAC source. Runs locally on FFmpeg." },
+      { title: "2. Set WAV options", desc: "Set WAV bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download WAV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert AAC to WAV?", answer: "WAV is uncompressed and universally supported by audio editing software (Audacity, Pro Tools, Logic Pro). Converting AAC to WAV provides lossless output for professional editing and mastering workflows." },
       { question: "When using AAC to WAV, will the audio quality improve?", answer: "Converting from lossy AAC to lossless WAV does not restore lost quality. The WAV file will be larger but fidelity is limited by the original AAC compression. Useful for editing, not quality enhancement." },
@@ -93,6 +118,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online FLAC to AAC — Convert lossless FLAC audio into space-efficient AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop FLAC file(s)", desc: "Upload your FLAC source. Runs locally on FFmpeg." },
+      { title: "2. Set AAC options", desc: "Set AAC bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download AAC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does FLAC to AAC do?", answer: "Convert FLAC audio files to AAC format directly in your browser. High-quality conversion with no file size limits." },
       { question: "Will converting FLAC lose quality?", answer: "From losslessly compressed to lossy compressed: yes, some detail is discarded \u2014 keep the original FLAC archived." },
@@ -106,6 +136,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "flac-to-m4a",
     category: "Audio",
     description: 'Convert FLAC audio files to M4A format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for Apple music libraries.',
+    instructions: [
+      { title: "1. Drop FLAC file(s)", desc: "Upload your FLAC source. Runs locally on FFmpeg." },
+      { title: "2. Set M4A options", desc: "Set M4A bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download M4A", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why M4A from FLAC?", answer: "Apple libraries — M4A (AAC or ALAC) plays where FLAC doesn't." },
       { question: "Lossless path?", answer: "Choose ALAC output and not one bit is lost. Choose ALAC output and not one single bit is ever lost." },
@@ -125,6 +160,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online FLAC to OGG — Convert lossless FLAC audio into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop FLAC file(s)", desc: "Upload your FLAC source. Runs locally on FFmpeg." },
+      { title: "2. Set OGG options", desc: "Set OGG bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download OGG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does FLAC to OGG do?", answer: "Convert FLAC audio files to OGG format directly in your browser. High-quality conversion with no file size limits." },
       { question: "What FLAC files convert best?", answer: "Complete, uncorrupted FLAC files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
@@ -138,6 +178,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "flac-to-wav",
     category: "Audio",
     description: 'Convert FLAC audio files to WAV format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for DAW editing workflows.',
+    instructions: [
+      { title: "1. Drop FLAC file(s)", desc: "Upload your FLAC source. Runs locally on FFmpeg." },
+      { title: "2. Set WAV options", desc: "Set WAV bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download WAV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why WAV from FLAC?", answer: "DAW editing and archival workflows that want raw PCM. DAW editing and archival workflows that want raw PCM data." },
       { question: "Quality cost converting FLAC?", answer: "Bit-perfect — WAV holds exactly what FLAC held. There is none — WAV holds exactly what FLAC held before." },
@@ -157,6 +202,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online M4A to AAC — Convert M4A audio files into raw AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop M4A file(s)", desc: "Upload your M4A source. Runs locally on FFmpeg." },
+      { title: "2. Set AAC options", desc: "Set AAC bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download AAC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What is the difference between M4A and AAC?", answer: "M4A is a container format (MPEG-4) that typically holds AAC audio. AAC is the raw audio codec. Converting M4A to AAC strips the container, producing a raw .aac file for direct playback or editing." },
       { question: "When would I need raw AAC instead of M4A?", answer: "Some audio players, DAWs, and embedded systems require raw .aac files. Streaming services and certain hardware players may not recognize the M4A container but play AAC directly." },
@@ -171,6 +221,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "m4a-to-flac",
     category: "Audio",
     description: 'Convert M4A audio files to FLAC format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for universal lossless archival.',
+    instructions: [
+      { title: "1. Drop M4A file(s)", desc: "Upload your M4A source. Runs locally on FFmpeg." },
+      { title: "2. Set FLAC options", desc: "Set FLAC bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download FLAC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why FLAC from M4A?", answer: "Escaping Apple format into universal lossless archival. Escaping Apple format into universal lossless archival storage." },
       { question: "Lossy AAC sources?", answer: "FLAC preserves exactly, but can't restore already-lost detail." },
@@ -187,6 +242,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "m4a-to-ogg",
     category: "Audio",
     description: 'Convert M4A audio files to OGG format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.',
+    instructions: [
+      { title: "1. Drop M4A file(s)", desc: "Upload your M4A source. Runs locally on FFmpeg." },
+      { title: "2. Set OGG options", desc: "Set OGG bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download OGG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert M4A to OGG?", answer: "Open-source playback on Linux and open platforms, free forever." },
       { question: "Quality tradeoff?", answer: "Lossy to lossy — pick bitrates generously to mask generation loss." },
@@ -226,6 +286,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online MP3 to AIFF — Convert MP3 audio files into uncompressed AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop MP3 file(s)", desc: "Upload your MP3 source. Runs locally on FFmpeg." },
+      { title: "2. Set AIFF options", desc: "Set AIFF bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download AIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert MP3 to AIFF?", answer: "AIFF is uncompressed and supported by professional DAWs (Logic Pro, Pro Tools). Converting MP3 to AIFF provides lossless output for editing workflows, though quality is limited by the original MP3 compression." },
       { question: "When using MP3 to AIFF, will the audio quality improve?", answer: "No. Converting from lossy MP3 to lossless AIFF does not restore lost data. The AIFF file will be larger but fidelity is limited by the MP3 source." },
@@ -240,6 +305,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "mp3-to-flac",
     category: "Audio",
     description: 'Convert MP3 audio files to FLAC format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for library uniformity.',
+    instructions: [
+      { title: "1. Drop MP3 file(s)", desc: "Upload your MP3 source. Runs locally on FFmpeg." },
+      { title: "2. Set FLAC options", desc: "Set FLAC bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download FLAC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Does FLAC improve MP3?", answer: "No — it preserves exactly, file grows with zero quality gain." },
       { question: "Why do it then?", answer: "Archive uniformity when a library standardizes on FLAC. Archive uniformity when a whole library standardizes on FLAC." },
@@ -259,6 +329,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online MP3 to M4A — Convert MP3 audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop MP3 file(s)", desc: "Upload your MP3 source. Runs locally on FFmpeg." },
+      { title: "2. Set M4A options", desc: "Set M4A bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download M4A", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does MP3 to M4A do?", answer: "Convert MP3 audio files to M4A format directly in your browser. High-quality conversion with no file size limits." },
       { question: "Where does M4A fit best?", answer: "Apple ecosystem \u2014 iTunes, iPhones, iPads, and macOS music libraries." },
@@ -275,6 +350,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online MP3 to OGG — convert MP3 audio to open OGG Vorbis in your browser. Smaller files, no uploads. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop MP3 file(s)", desc: "Upload your MP3 source. Runs locally on FFmpeg." },
+      { title: "2. Set OGG options", desc: "Set OGG bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download OGG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert MP3 to OGG?", answer: "OGG Vorbis is patent-free and typically 10–20% smaller than MP3 at the same perceived quality — useful for game assets, web audio, and open-source projects that avoid MP3 licensing friction." },
       { question: "Will I lose audio quality?", answer: "Both are lossy, so transcoding loses a little. At quality setting 6 (≈192 kbps) the difference from the source MP3 is inaudible for speech and most music. Keep the original MP3 archived if quality is critical." },
@@ -289,6 +369,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "mp3-to-opus",
     category: "Audio",
     description: 'Convert MP3 audio files to OPUS format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for voice streaming and bots.',
+    instructions: [
+      { title: "1. Drop MP3 file(s)", desc: "Upload your MP3 source. Runs locally on FFmpeg." },
+      { title: "2. Set Opus options", desc: "Set Opus bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download Opus", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why Opus from MP3?", answer: "Voice streaming, Discord bots, and VoIP at tiny bitrates. Voice streaming, Discord bots, and VoIP at tiny bitrates." },
       { question: "Music too?", answer: "Only voice — music deserves better than low-rate Opus. Only voice — music deserves better than low-rate Opus encoding." },
@@ -305,6 +390,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "mp3-to-wma",
     category: "Audio",
     description: 'Convert MP3 audio files to WMA format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.',
+    instructions: [
+      { title: "1. Drop MP3 file(s)", desc: "Upload your MP3 source. Runs locally on FFmpeg." },
+      { title: "2. Set WMA options", desc: "Set WMA bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download WMA", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why WMA?", answer: "Legacy Windows media libraries and corporate systems need it." },
       { question: "Quality loss converting?", answer: "Lossy to lossy — keep bitrates high to mask generation loss." },
@@ -343,6 +433,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OGG audio files to M4A format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.',
     seoDescription: 'Free online OGG to M4A — Convert OGG Vorbis audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
+    instructions: [
+      { title: "1. Drop OGG file(s)", desc: "Upload your OGG source. Runs locally on FFmpeg." },
+      { title: "2. Set M4A options", desc: "Set M4A bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download M4A", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why would I convert OGG to M4A?", answer: "M4A (AAC) is the default audio format for Apple devices and iTunes. If your OGG files do not play on an iPhone, iPod, or in Apple Music, converting to M4A fixes the compatibility issue." },
       { question: "Is M4A better quality than OGG?", answer: "At the same bitrate, AAC (M4A) and OGG Vorbis are very close in quality. AAC has a slight edge at low bitrates (below 128kbps), while OGG performs better in some mid-range scenarios." },
@@ -361,6 +456,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online OGG to WAV — Convert OGG Vorbis audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop OGG file(s)", desc: "Upload your OGG source. Runs locally on FFmpeg." },
+      { title: "2. Set WAV options", desc: "Set WAV bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download WAV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does OGG to WAV do?", answer: "Convert OGG audio files to WAV format directly in your browser. High-quality conversion with no file size limits." },
       { question: "Where does WAV fit best?", answer: "professional audio editing, mastering, and archival in DAWs and production software." },
@@ -377,6 +477,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WAV to AAC — Convert WAV audio files into space-efficient AAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop WAV file(s)", desc: "Upload your WAV source. Runs locally on FFmpeg." },
+      { title: "2. Set AAC options", desc: "Set AAC bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download AAC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does WAV to AAC do?", answer: "Convert WAV audio files to AAC format directly in your browser. High-quality conversion with no file size limits." },
       { question: "Where does AAC fit best?", answer: "modern streaming services, YouTube, and devices where AAC is the native codec." },
@@ -390,6 +495,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "wav-to-aiff",
     category: "Audio",
     description: 'Convert WAV audio files to AIFF format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for Logic Pro and GarageBand.',
+    instructions: [
+      { title: "1. Drop WAV file(s)", desc: "Upload your WAV source. Runs locally on FFmpeg." },
+      { title: "2. Set AIFF options", desc: "Set AIFF bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download AIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why AIFF from WAV?", answer: "Apple pro workflows — Logic Pro and GarageBand prefer AIFF. Apple pro workflows — Logic Pro and GarageBand prefer AIFF." },
       { question: "Quality cost converting WAV to AIFF?", answer: "Identical — both uncompressed PCM, different wrappers. Zero — identical PCM in a different wrapper only." },
@@ -416,6 +526,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "wav-to-m4a",
     category: "Audio",
     description: 'Convert WAV audio files to M4A format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.',
+    instructions: [
+      { title: "1. Drop WAV file(s)", desc: "Upload your WAV source. Runs locally on FFmpeg." },
+      { title: "2. Set M4A options", desc: "Set M4A bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download M4A", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why M4A?", answer: "A tenth the size of WAV with AAC quality — fully Apple-ready." },
       { question: "Lossless option?", answer: "ALAC variant preserves everything for archival masters safely." },
@@ -432,6 +547,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "wav-to-ogg",
     category: "Audio",
     description: 'Convert WAV audio files to OGG format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.',
+    instructions: [
+      { title: "1. Drop WAV file(s)", desc: "Upload your WAV source. Runs locally on FFmpeg." },
+      { title: "2. Set OGG options", desc: "Set OGG bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download OGG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert WAV to OGG?", answer: "Open, efficient streaming format for the open web, widely supported." },
       { question: "Quality setting?", answer: "High bitrates preserve masters transparently — always go high." },
@@ -448,6 +568,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "wav-to-opus",
     category: "Audio",
     description: 'Convert WAV audio files to OPUS format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for podcasts and voice calls.',
+    instructions: [
+      { title: "1. Drop WAV file(s)", desc: "Upload your WAV source. Runs locally on FFmpeg." },
+      { title: "2. Set Opus options", desc: "Set Opus bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download Opus", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why Opus from WAV?", answer: "Maximum compression for voice — podcasts and calls. Maximum compression for voice — podcasts and phone calls." },
       { question: "Music warning?", answer: "Lossy at low rates — keep WAV/FLAC masters for music. Lossy at low rates — keep WAV/FLAC masters for music always." },
@@ -464,6 +589,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "wav-to-wma",
     category: "Audio",
     description: 'Convert WAV audio files to WMA format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for legacy Windows libraries.',
+    instructions: [
+      { title: "1. Drop WAV file(s)", desc: "Upload your WAV source. Runs locally on FFmpeg." },
+      { title: "2. Set WMA options", desc: "Set WMA bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download WMA", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why WMA from WAV?", answer: "Legacy Windows libraries that accept nothing else — modern cases should stay WAV or FLAC." },
       { question: "Quality cost converting WAV?", answer: "Uncompressed to lossy always loses — keep bitrates high to mask it." },
@@ -481,6 +611,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     category: "Image",
     description: 'Compress animated GIFs by reducing colors from 256 to as few as 16, removing duplicate frames, and applying lossy optimization. Reduce file size by up to 80% while keeping animation intact. Essential for web performance, email signatures, and social media where large GIFs cause slow loading.',
     seoTitle: "GIF Compressor – Shrink GIFs Free Online",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
+      { title: "2. Configure compress", desc: "Set the compress options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "How small can GIFs go?", answer: "30–60% typical — trim frames and cap dimensions first for the biggest wins." },
       { question: "Animated stay animated?", answer: "Yes — timing and loops preserved through compression at any setting." },
@@ -499,6 +634,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Resize animated GIFs to exact dimensions while preserving animation. Choose from presets or custom width with aspect ratio lock.',
     seoDescription: 'Free online GIF Resizer — Resize animated GIFs to exact dimensions while preserving animation. Presets or custom size. ',
     dependencies: "@ffmpeg/ffmpeg",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
+      { title: "2. Configure resize", desc: "Set the resize options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Will resizing break my GIF animation?", answer: "No. The resizer preserves all frames and their timing. Your animation plays at the same speed — only the frame dimensions change." },
       { question: "Can I make a GIF smaller without losing animation?", answer: "Yes. Reducing dimensions shrinks the file size proportionally. A 500x500 GIF resized to 250x250 loses about 75% of its file size while keeping the animation intact." },
@@ -527,6 +667,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online APNG to GIF — Convert animated PNG files into universally compatible GIF format. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
+      { title: "2. Configure process", desc: "Set the process options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What is APNG?", answer: "APNG (Animated PNG) is an extension of PNG that supports animation. It offers better quality than GIF with full alpha transparency and 24-bit color, but has limited browser support." },
       { question: "Why convert APNG to GIF?", answer: "GIF is universally supported by all browsers, messaging apps, and platforms. Converting APNG to GIF ensures your animation plays everywhere." },
@@ -542,6 +687,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     category: "Image",
     description: 'Turn any image into ICO favicon files in your browser — 16/32/48 px multi-size icons ready to link for browser tabs and shortcuts.',
     seoTitle: "Image to ICO Converter – Free Favicons",
+    instructions: [
+      { title: "1. Drop image file(s)", desc: "Upload your image source. Runs locally on Canvas." },
+      { title: "2. Set ICO options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download ICO", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What sizes come out?", answer: "16, 32, and 48 px packed into one ICO for tabs and shortcuts." },
       { question: "Which source works best?", answer: "Square PNGs with clear subjects — transparency preserved at every size." },
@@ -571,6 +721,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online QR Code Reader — Decode QR codes from images. Scan and extract text/URL from any QR code. ',
     dependencies: "jsQR",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload the QR image", desc: "PNG/JPG photo or screenshot containing the code. Cropped, in-focus codes read best." },
+      { title: "2. Decode", desc: "The tool extracts the embedded URL, text, or contact on-device." },
+      { title: "3. Copy the content", desc: "Copy the decoded link or text where you need it." },
+    ],
     faqs: [
       { question: "What image formats can I upload?", answer: "PNG, JPG, GIF, BMP, and WebP. The tool analyzes the image pixel data to locate and decode any QR code pattern present." },
       { question: "Can it read multiple QR codes from one image?", answer: "The tool decodes the first QR code it finds. For images with multiple QR codes, crop to the specific code you want to read before uploading." },
@@ -588,6 +743,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Lorem Ipsum Generator — classic, Cicero, legal, startup, coffee, pirate themes. Paragraphs and word counts. ',
     dependencies: "none",
     showInCategory: true,
+    instructions: [
+      { title: "1. Set paragraphs and length first", desc: "Set paragraphs and length first so the output matches your need." },
+      { title: "2. Generate", desc: "Create the placeholder text with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the placeholder text where needed; regenerate for fresh options." },
+    ],
     faqs: [
       { question: "Why use placeholder text at all?", answer: "Real-looking text reveals layout problems (overflows, orphans, contrast) that gray boxes hide. Clients also review design instead of proofreading when content isn't final." },
       { question: "What are the themed variants for?", answer: "Legal, startup, coffee, and pirate themes match mockup context so demos feel intentional — a coffee-shop site mock reads better with coffee-themed filler than Cicero Latin." },
@@ -606,6 +766,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WHOIS Lookup — Check domain registration info: registrar, expiration, name servers. Uses public RDAP APIs. ',
     dependencies: "RDAP API",
     showInCategory: true,
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for WHOIS Lookup." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "What information does the WHOIS lookup return?", answer: "Domain registrar name, registration and expiration dates, name servers, DNSSEC status, and the RDAP registry where the domain is managed." },
       { question: "What's the difference between WHOIS and RDAP?", answer: "WHOIS is the legacy protocol. RDAP (Registration Data Access Protocol) is the modern replacement that provides structured JSON data and respects privacy laws by redacting personal info." },
@@ -623,6 +788,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online SSL Checker — Check SSL certificate details for any domain. Issuer, validity, days remaining, SANs. ',
     dependencies: "crt.sh / TLS endpoints",
     showInCategory: true,
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for SSL Checker." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "What SSL certificate details does it show?", answer: "Certificate issuer (e.g., Let's Encrypt, DigiCert), validity period (not-before and not-after dates), days remaining until expiration, serial number, and Subject Alternative Names (SANs)." },
       { question: "Can I check if a certificate is about to expire?", answer: "Yes. The tool shows the exact expiration date and calculates days remaining. Use this to monitor your own domains or verify a site's certificate is current." },
@@ -648,6 +818,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     category: "PDF",
     description: 'Convert TIFF images to PDF format in your browser. Documents stay on your device — editing and conversion run locally in your browser.',
     seoTitle: "TIFF to PDF Converter – Free Online",
+    instructions: [
+      { title: "1. Drop TIFF file(s)", desc: "Upload your TIFF source. Runs locally on pdf-lib." },
+      { title: "2. Set PDF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download PDF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'Do multi-page TIFFs stay together?', answer: 'Yes — every TIFF page becomes a PDF page in order, so faxes and scans stay whole.' },
       { question: 'Why convert TIFF at all?', answer: 'TIFFs are enormous and poorly supported — PDF compresses them into something shareable anywhere.' },
@@ -684,6 +859,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "cbz-to-pdf",
     category: "Converter",
     description: 'Convert comic book archives to PDF. Page ranges, double-page spreads, multiple sizes. Files are converted locally in your browser — nothing is uploaded.',
+    instructions: [
+      { title: "1. Drop CBZ pages file(s)", desc: "Upload your CBZ pages source. Runs locally on pdf-lib." },
+      { title: "2. Set PDF options", desc: "Adjust output settings for PDF — presets fit most jobs without further tuning." },
+      { title: "3. Download PDF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What is CBZ?", answer: "Zipped comic-book images — sequential pages in one handy archive." },
       { question: "Page order?", answer: "Filename sort order applies, exactly as archived originally." },
@@ -702,6 +882,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Bidirectional YAML to JSON and JSON to YAML conversion with auto-format detection and real-time preview. Perfect for configuration files, API payloads, and data migration.',
     seoDescription: 'Free online YAML ↔ JSON Converter — Bidirectional YAML to JSON and JSON to YAML conversion with auto-format detection and real-time preview. ',
     dependencies: "js-yaml",
+    instructions: [
+      { title: "1. Paste YAML", desc: "Paste or drop YAML source text into the input area." },
+      { title: "2. Convert to JSON", desc: "Run the conversion; review errors or warnings line by line." },
+      { title: "3. Copy JSON", desc: "Copy the converted output for your project." },
+    ],
     faqs: [
       { question: "How does auto-detection work?", answer: "Paste any content and the converter detects whether it's JSON or YAML based on syntax patterns (curly braces for JSON, indentation-based for YAML). It then converts to the other format." },
       { question: "What YAML features are supported?", answer: "Objects, arrays, strings, numbers, booleans, null, anchors (&), aliases (*), multi-line strings (| and >), and comments. The converter preserves all YAML-specific features." },
@@ -750,6 +935,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WAV to MP3 — shrink studio WAVs ~10x for sharing and players. Bitrate guide inside. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop WAV file(s)", desc: "Upload your WAV source. Runs locally on FFmpeg." },
+      { title: "2. Set MP3 options", desc: "Set MP3 bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "How much smaller does MP3 get?", answer: "Roughly 10×: a 50MB WAV becomes ~5MB at 192 kbps. WAV stores every sample; MP3 discards what ears can't hear. Archive masters as WAV/FLAC, share as MP3." },
       { question: "Which bitrate should I pick?", answer: "320 kbps for music libraries, 192 kbps for general sharing (transparent to most ears), 128 kbps for speech/podcasts. Below 128, cymbals and stereo imaging audibly degrade." },
@@ -767,6 +957,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online FLAC to MP3 — portable copies of lossless audio. Keep masters, share MP3s. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop FLAC file(s)", desc: "Upload your FLAC source. Runs locally on FFmpeg." },
+      { title: "2. Set MP3 options", desc: "Set MP3 bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why keep FLAC if MP3 is smaller?", answer: "FLAC is bit-perfect: every future conversion starts from full quality. Convert FLAC→MP3 for phones and cars, but archive the FLAC — re-encoding MP3→MP3 compounds quality loss each generation." },
       { question: "Can I hear the difference?", answer: "On good headphones with quiet recordings, sometimes (reverb tails, cymbals). On Bluetooth earbuds or car speakers, 192+ kbps MP3 is indistinguishable. Convert honestly to your listening chain." },
@@ -781,6 +976,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "flac-to-wma",
     category: "Audio",
     description: 'Convert FLAC audio files to WMA format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for Windows-only workflows.',
+    instructions: [
+      { title: "1. Drop FLAC file(s)", desc: "Upload your FLAC source. Runs locally on FFmpeg." },
+      { title: "2. Set WMA options", desc: "Set WMA bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download WMA", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why WMA from FLAC?", answer: "Legacy Windows systems that accept nothing newer. Legacy Windows systems that accept nothing newer exist." },
       { question: "Quality cost converting FLAC to WMA?", answer: "Lossless to lossy — keep bitrates high. Lossless to lossy — keep bitrates high to mask the drop." },
@@ -799,6 +999,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert FLAC audio files to OPUS format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.',
     seoDescription: 'Free online FLAC to Opus — Convert lossless FLAC audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
+    instructions: [
+      { title: "1. Drop FLAC file(s)", desc: "Upload your FLAC source. Runs locally on FFmpeg." },
+      { title: "2. Set Opus options", desc: "Set Opus bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download Opus", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert lossless FLAC to lossy Opus?", answer: "Opus files are 80-90% smaller than FLAC while sounding nearly identical at normal listening volumes. This is ideal for portable devices, streaming, or reducing storage usage without noticeable quality loss." },
       { question: "What bitrate should I use for Opus?", answer: "128kbps Opus sounds comparable to 192kbps MP3. For transparent quality, use 192-256kbps. At 64kbps Opus still sounds better than most other codecs at the same bitrate." },
@@ -814,6 +1019,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "flac-to-aiff",
     category: "Audio",
     description: 'Convert FLAC audio files to AIFF format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for native Logic ingest.',
+    instructions: [
+      { title: "1. Drop FLAC file(s)", desc: "Upload your FLAC source. Runs locally on FFmpeg." },
+      { title: "2. Set AIFF options", desc: "Set AIFF bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download AIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why AIFF from FLAC?", answer: "Apple pro workflows — Logic and GarageBand ingest AIFF natively." },
       { question: "Quality cost converting FLAC to AIFF?", answer: "Bit-perfect — lossless to uncompressed preserves everything." },
@@ -830,6 +1040,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "ogg-to-mp3",
     category: "Audio",
     description: 'Convert OGG audio files to MP3 format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for universal device playback.',
+    instructions: [
+      { title: "1. Drop OGG file(s)", desc: "Upload your OGG source. Runs locally on FFmpeg." },
+      { title: "2. Set MP3 options", desc: "Set MP3 bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why MP3 from OGG?", answer: "Universal playback — MP3 plays on devices OGG never reached." },
       { question: "Quality cost converting OGG?", answer: "Lossy to lossy recompounds — use 192+ kbps to hide it. fully." },
@@ -849,6 +1064,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online OGG to WMA — Convert OGG Vorbis audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop OGG file(s)", desc: "Upload your OGG source. Runs locally on FFmpeg." },
+      { title: "2. Set WMA options", desc: "Set WMA bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download WMA", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert OGG to WMA?", answer: "WMA is the native audio format for Windows Media Player and older Windows applications. Converting OGG to WMA ensures playback on legacy Windows devices and software that don't support OGG." },
       { question: "Does WMA support multiple channels?", answer: "Yes. WMA supports mono, stereo, and surround sound. The converter preserves the original channel configuration from the OGG source." },
@@ -863,6 +1083,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "ogg-to-opus",
     category: "Audio",
     description: 'Convert OGG audio files to OPUS format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for a newer codec generation.',
+    instructions: [
+      { title: "1. Drop OGG file(s)", desc: "Upload your OGG source. Runs locally on FFmpeg." },
+      { title: "2. Set Opus options", desc: "Set Opus bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download Opus", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Vorbis to Opus — why?", answer: "Newer codec, better quality per bit, same open family. Newer codec, better quality per bit, same open-source family." },
       { question: "Quality cost converting OGG to Opus?", answer: "Transparent at moderate bitrates for most ears. Minimal — transparent at moderate bitrates for most ears." },
@@ -882,6 +1107,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online OGG to AIFF — Convert OGG Vorbis audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop OGG file(s)", desc: "Upload your OGG source. Runs locally on FFmpeg." },
+      { title: "2. Set AIFF options", desc: "Set AIFF bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download AIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert OGG to AIFF?", answer: "AIFF is an uncompressed audio format widely supported by professional audio software, DAWs (Logic Pro, Pro Tools), and Apple devices. Converting from OGG provides lossless quality for editing and mastering." },
       { question: "When using OGG to AIFF, will the audio quality improve?", answer: "Converting from lossy OGG to lossless AIFF does not restore lost quality. The AIFF file will be larger but the audio fidelity is limited by the original OGG compression. It is useful for editing workflows, not quality enhancement." },
@@ -896,6 +1126,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "m4a-to-mp3",
     category: "Audio",
     description: 'Convert M4A audio files to MP3 format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. when leaving the Apple ecosystem.',
+    instructions: [
+      { title: "1. Drop M4A file(s)", desc: "Upload your M4A source. Runs locally on FFmpeg." },
+      { title: "2. Set MP3 options", desc: "Set MP3 bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why MP3 from M4A?", answer: "Leaving Appleland — MP3 plays on every non-Apple device ever made." },
       { question: "Quality cost converting M4A?", answer: "AAC to MP3 loses a generation — 192+ kbps keeps it transparent." },
@@ -915,6 +1150,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online M4A to WMA — Convert M4A audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop M4A file(s)", desc: "Upload your M4A source. Runs locally on FFmpeg." },
+      { title: "2. Set WMA options", desc: "Set WMA bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download WMA", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does M4A to WMA do?", answer: "Convert M4A audio files to WMA format directly in your browser. High-quality conversion with no file size limits." },
       { question: "What M4A files convert best?", answer: "Complete, uncorrupted M4A files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
@@ -928,6 +1168,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "m4a-to-opus",
     category: "Audio",
     description: 'Convert M4A audio files to OPUS format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for efficient voice streaming.',
+    instructions: [
+      { title: "1. Drop M4A file(s)", desc: "Upload your M4A source. Runs locally on FFmpeg." },
+      { title: "2. Set Opus options", desc: "Set Opus bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download Opus", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why Opus from M4A?", answer: "Shrinking Apple audio for voice streaming and bots. Shrinking Apple audio for voice streaming and bot use." },
       { question: "Quality cost converting M4A to Opus?", answer: "AAC to Opus loses a generation — voice survives, music suffers." },
@@ -964,6 +1209,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "aac-to-wma",
     category: "Audio",
     description: 'Convert AAC audio files to WMA format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for corporate Windows systems.',
+    instructions: [
+      { title: "1. Drop AAC file(s)", desc: "Upload your AAC source. Runs locally on FFmpeg." },
+      { title: "2. Set WMA options", desc: "Set WMA bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download WMA", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why WMA from AAC?", answer: "Corporate Windows systems that standardized on WMA long ago." },
       { question: "Quality cost converting AAC?", answer: "Modern lossy to legacy lossy — keep bitrates generous. throughout for safety." },
@@ -990,6 +1240,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "aac-to-aiff",
     category: "Audio",
     description: 'Convert AAC audio files to AIFF format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for professional Apple workflows.',
+    instructions: [
+      { title: "1. Drop AAC file(s)", desc: "Upload your AAC source. Runs locally on FFmpeg." },
+      { title: "2. Set AIFF options", desc: "Set AIFF bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download AIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why AIFF from AAC?", answer: "Pro Apple workflows needing uncompressed audio. Pro Apple workflows needing uncompressed audio masters." },
       { question: "Quality gain converting AAC to AIFF?", answer: "None whatsoever — AIFF preserves exactly what AAC held before now." },
@@ -1006,6 +1261,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "wma-to-wav",
     category: "Audio",
     description: 'Convert WMA audio files to WAV format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for editable uncompressed audio.',
+    instructions: [
+      { title: "1. Drop WMA file(s)", desc: "Upload your WMA source. Runs locally on FFmpeg." },
+      { title: "2. Set WAV options", desc: "Set WAV bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download WAV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why WAV from WMA?", answer: "Escaping legacy format into editable uncompressed audio. for editable uncompressed audio masters." },
       { question: "Quality gain?", answer: "None — WAV preserves exactly, never improves, the WMA source." },
@@ -1032,6 +1292,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "wma-to-ogg",
     category: "Audio",
     description: 'Convert WMA audio files to OGG format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for open-source playback.',
+    instructions: [
+      { title: "1. Drop WMA file(s)", desc: "Upload your WMA source. Runs locally on FFmpeg." },
+      { title: "2. Set OGG options", desc: "Set OGG bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download OGG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why OGG from WMA?", answer: "Open-source playback on Linux and open platforms. on Linux and other open platforms consistently." },
       { question: "Quality cost converting WMA?", answer: "Legacy lossy to modern lossy — encode generously. — encode generously throughout every file." },
@@ -1048,6 +1313,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "wma-to-m4a",
     category: "Audio",
     description: 'Convert WMA audio files to M4A format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for Apple devices and apps.',
+    instructions: [
+      { title: "1. Drop WMA file(s)", desc: "Upload your WMA source. Runs locally on FFmpeg." },
+      { title: "2. Set M4A options", desc: "Set M4A bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download M4A", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why M4A from WMA?", answer: "Moving a Windows library into Apple devices and apps. into Apple devices and apps cleanly." },
       { question: "AAC or ALAC?", answer: "AAC for portable size, ALAC when quality must survive intact." },
@@ -1077,6 +1347,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WMA to Opus — Convert Windows Media Audio (WMA) audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop WMA file(s)", desc: "Upload your WMA source. Runs locally on FFmpeg." },
+      { title: "2. Set Opus options", desc: "Set Opus bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download Opus", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does WMA to Opus do?", answer: "Convert WMA audio files to OPUS format directly in your browser. High-quality conversion with no file size limits." },
       { question: "Why convert WMA to Opus?", answer: "WMA (Windows Media Audio) is lossy compressed \u2014 best for Windows-based media libraries, legacy devices, and corporate audio systems. Opus (Opus Interactive Audio Codec) is lossy compressed \u2014 best for voice-over-IP, real-time communication, and streaming at very low bitrates with excellent quality." },
@@ -1102,6 +1377,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OPUS audio files to WAV format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.',
     seoDescription: 'Free online Opus to WAV — Convert Opus audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
+    instructions: [
+      { title: "1. Drop Opus file(s)", desc: "Upload your Opus source. Runs locally on FFmpeg." },
+      { title: "2. Set WAV options", desc: "Set WAV bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download WAV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why would I convert lossy Opus to lossless WAV?", answer: "Some professional audio software, DAWs, and hardware only accept WAV input. Converting Opus to WAV makes the audio compatible with these tools, though it cannot recover lost quality." },
       { question: "Will converting to WAV improve the audio quality?", answer: "No. WAV is lossless but the source Opus file has already discarded audio data. The WAV output will sound identical to the Opus — it just uses more storage space." },
@@ -1117,6 +1397,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "opus-to-flac",
     category: "Audio",
     description: 'Convert OPUS audio files to FLAC format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for archive uniformity.',
+    instructions: [
+      { title: "1. Drop Opus file(s)", desc: "Upload your Opus source. Runs locally on FFmpeg." },
+      { title: "2. Set FLAC options", desc: "Set FLAC bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download FLAC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why FLAC from Opus?", answer: "Archive uniformity — lossy sources in a lossless container. Archive uniformity — lossy sources in a lossless container." },
       { question: "Quality gain converting Opus to FLAC?", answer: "None at all — FLAC preserves exactly, improves nothing ever made." },
@@ -1135,6 +1420,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OPUS audio files to OGG format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.',
     seoDescription: 'Free online Opus to OGG — Convert Opus audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
+    instructions: [
+      { title: "1. Drop Opus file(s)", desc: "Upload your Opus source. Runs locally on FFmpeg." },
+      { title: "2. Set OGG options", desc: "Set OGG bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download OGG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert Opus to OGG?", answer: "Opus is newer and more efficient, but OGG Vorbis has broader device and software support. Some older media players, car stereos, and gaming consoles recognize OGG but not Opus." },
       { question: "Will I lose quality converting Opus to OGG?", answer: "Both are lossy formats, so converting between them re-encodes the audio. The quality difference is minimal at high bitrates (192kbps+), but avoid repeatedly converting between lossy formats." },
@@ -1162,6 +1452,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OPUS audio files to AAC format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.',
     seoDescription: 'Free online Opus to AAC — Convert Opus audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
+    instructions: [
+      { title: "1. Drop Opus file(s)", desc: "Upload your Opus source. Runs locally on FFmpeg." },
+      { title: "2. Set AAC options", desc: "Set AAC bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download AAC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert Opus to AAC?", answer: "AAC is the universal standard for music downloads, streaming platforms, and Apple devices. If you need to submit audio to a service that requires AAC, this conversion gets you there." },
       { question: "How does AAC quality compare to Opus?", answer: "At the same bitrate, Opus is generally more efficient than AAC. At 256kbps, most listeners cannot tell the difference. For critical listening, keep your Opus originals." },
@@ -1177,6 +1472,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "opus-to-wma",
     category: "Audio",
     description: 'Convert OPUS audio files to WMA format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for legacy Windows targets.',
+    instructions: [
+      { title: "1. Drop Opus file(s)", desc: "Upload your Opus source. Runs locally on FFmpeg." },
+      { title: "2. Set WMA options", desc: "Set WMA bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download WMA", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why WMA from Opus?", answer: "Legacy Windows targets that predate modern codecs. Legacy Windows targets that predate all modern codecs." },
       { question: "Quality cost converting Opus to WMA?", answer: "Two lossy generations — keep bitrates generous throughout. Two lossy generations — keep bitrates generous throughout both." },
@@ -1196,6 +1496,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Opus to AIFF — Convert Opus audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop Opus file(s)", desc: "Upload your Opus source. Runs locally on FFmpeg." },
+      { title: "2. Set AIFF options", desc: "Set AIFF bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download AIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does Opus to AIFF do?", answer: "Convert OPUS audio files to AIFF format directly in your browser. High-quality conversion with no file size limits." },
       { question: "What Opus files convert best?", answer: "Complete, uncorrupted Opus files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
@@ -1209,6 +1514,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "aiff-to-wav",
     category: "Audio",
     description: 'Convert AIFF audio files to WAV format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for Windows and DAW compatibility.',
+    instructions: [
+      { title: "1. Drop AIFF file(s)", desc: "Upload your AIFF source. Runs locally on FFmpeg." },
+      { title: "2. Set WAV options", desc: "Set WAV bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download WAV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why WAV from AIFF?", answer: "Windows and DAW compatibility — same audio, wider support. Windows and DAW compatibility — same audio, wider support." },
       { question: "Quality cost converting AIFF to WAV?", answer: "Identical PCM, different wrapper — zero change. Zero change — identical PCM in a different wrapper." },
@@ -1237,6 +1547,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert AIFF audio files to OGG format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.',
     seoDescription: 'Free online AIFF to OGG — Convert AIFF audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
+    instructions: [
+      { title: "1. Drop AIFF file(s)", desc: "Upload your AIFF source. Runs locally on FFmpeg." },
+      { title: "2. Set OGG options", desc: "Set OGG bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download OGG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What is AIFF and why would I have these files?", answer: "AIFF (Audio Interchange File Format) is Apple's equivalent of WAV — lossless, uncompressed audio. Mac users often have AIFF files from GarageBand, iTunes, or professional audio workflows." },
       { question: "Why convert AIFF to OGG instead of MP3?", answer: "OGG Vorbis at the same bitrate as MP3 generally produces better sound quality. At 192kbps, OGG is considered transparent by most listeners while being fully open-source with no licensing fees." },
@@ -1255,6 +1570,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AIFF to M4A — Convert AIFF audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop AIFF file(s)", desc: "Upload your AIFF source. Runs locally on FFmpeg." },
+      { title: "2. Set M4A options", desc: "Set M4A bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download M4A", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does AIFF to M4A do?", answer: "Convert AIFF audio files to M4A format directly in your browser. High-quality conversion with no file size limits." },
       { question: "Should I keep the original AIFF files?", answer: "Yes \u2014 archive AIFF originals before batch-converting. Re-converting from M4A back to AIFF never restores discarded data." },
@@ -1291,6 +1611,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AIFF to Opus — Convert AIFF audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop AIFF file(s)", desc: "Upload your AIFF source. Runs locally on FFmpeg." },
+      { title: "2. Set Opus options", desc: "Set Opus bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download Opus", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert AIFF to Opus?", answer: "Opus offers excellent quality at very low bitrates, making it ideal for streaming, VoIP, and web audio. Converting from large AIFF files to Opus dramatically reduces file size." },
       { question: "What bitrate should I use?", answer: "64-128 kbps is recommended for music. 32-64 kbps works well for speech. Higher bitrates preserve more detail but produce larger files." },
@@ -1308,6 +1633,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion. Code never leaves your device — formatting and validation run locally in your browser.',
     seoDescription: 'Free online Hex to ASCII Converter — Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste HEX", desc: "Paste HEX text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Convert", desc: "Pick direction and target." },
+      { title: "3. Copy converted", desc: "Copy the converted output." },
+    ],
     faqs: [
       { question: "What's the difference between hex and ASCII?", answer: "Hex is a base-16 representation of binary data (0-9, A-F). ASCII maps byte values to human-readable characters (letters, digits, symbols). The converter translates between the two representations." },
       { question: "What delimiters are supported?", answer: "Space-separated (48 65 6C 6C 6F), colon-separated (48:65:6C:6C:6F), no delimiter (48656C6C6F), and comma-separated. Choose the format that matches your input." },
@@ -1324,6 +1654,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Encode or decode URLs with percent-encoding. Swaps input/output for quick bidirectional conversion. Code never leaves your device — formatting and validation run locally in your browser.',
     seoDescription: 'Free online URL Encoder Decoder — Encode or decode URLs with percent-encoding. Swaps input/output for quick bidirectional conversion. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste URL", desc: "Paste URL text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Encode", desc: "Encode to the target format." },
+      { title: "3. Copy encoded", desc: "Copy the encoded output." },
+    ],
     faqs: [
       { question: "What's percent-encoding?", answer: "Percent-encoding (URL encoding) replaces unsafe URL characters with % followed by two hex digits. Spaces become %20, special characters become %XX. This ensures URLs are transmitted correctly over HTTP." },
       { question: "When should I encode vs decode?", answer: "Encode when building URLs programmatically — query strings, form data, redirect URLs. Decode when reading encoded URLs you received from APIs or webhooks." },
@@ -1340,6 +1675,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     category: "Developer",
     description: 'Encode special HTML characters into entities (&amp; &lt; &gt;) or decode them back to readable text — display code safely and neutralize injection vectors.',
     seoTitle: "HTML Entity Encoder – Free Online",
+    instructions: [
+      { title: "1. Paste HTML", desc: "Paste HTML text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Encode", desc: "Encode to the target format." },
+      { title: "3. Copy encoded", desc: "Copy the encoded output." },
+    ],
     faqs: [
       { question: "When do I need entities?", answer: "Displaying code or angle brackets inside HTML without the browser parsing them." },
       { question: "Named or numeric?", answer: "Named (&amp;) for readability, numeric (&#38;) for maximum compatibility." },
@@ -1357,6 +1697,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "backslash-escape",
     category: "Developer",
     description: 'Escape or unescape special characters with backslashes. Handles newlines, tabs, quotes, and more. Code never leaves your device — formatting and validation run locally in your browser.',
+    instructions: [
+      { title: "1. Paste source for Backslash Escape / Unescape", desc: "Paste source for Backslash Escape / Unescape into the input area. Nothing runs until you trigger it." },
+      { title: "2. Escape", desc: "Escape special characters." },
+      { title: "3. Copy safe text", desc: "Copy the safe output for code." },
+    ],
     faqs: [
       { question: "What gets escaped?", answer: "Quotes, backslashes, and newlines for safe embedding anywhere." },
       { question: "Double-escaping trap?", answer: "Already-escaped input flagged — escaping twice corrupts output." },
@@ -1396,6 +1741,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Sort lines alphabetically (A→Z, Z→A), reverse order, shuffle randomly, or remove duplicate lines.',
     seoDescription: 'Free online Line Sorter and Deduplicator — Sort lines A→Z or Z→A, reverse, shuffle, or remove duplicates. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste source for Line Sorter & Deduplicator", desc: "Paste source for Line Sorter & Deduplicator into the input area. Nothing runs until you trigger it." },
+      { title: "2. Sort", desc: "Sort with one click." },
+      { title: "3. Copy ordered", desc: "Copy the ordered result." },
+    ],
     faqs: [
       { question: "What sort options are available?", answer: "Alphabetical A→Z, reverse Z→A, reverse order (last line first), random shuffle, and duplicate removal. All operations work on one line per entry." },
       { question: "Does it handle case-sensitive sorting?", answer: "By default, sorting is case-insensitive. Some implementations offer case-sensitive mode where uppercase letters sort before lowercase." },
@@ -1413,6 +1763,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more with copy-to-clipboard.',
     seoDescription: 'Free online URL Parser — Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste URL", desc: "Paste URL text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Parse", desc: "Parse and read each field of the structured output." },
+      { title: "3. Verify values", desc: "Verify values against your source." },
+    ],
     faqs: [
       { question: "What components does it parse?", answer: "Protocol (http/https), hostname, port, pathname, query parameters, hash fragment, and authentication info. Each component is displayed separately with its value." },
       { question: "Can I parse URLs with query strings?", answer: "Yes. Query parameters are extracted and displayed as key-value pairs. Multiple parameters, encoded values, and complex query strings are all handled correctly." },
@@ -1430,6 +1785,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Inspect any string — view character count, byte length, word count, line count, Unicode code points, and non-ASCII character breakdown.',
     seoDescription: 'Free online String Inspector — Inspect any string with character count, byte length, word count, line count, Unicode code points, and non-ASCII breakdown. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste source for String Inspector", desc: "Paste source for String Inspector into the input area. Nothing runs until you trigger it." },
+      { title: "2. Inspect", desc: "Inspect section by section." },
+      { title: "3. Verify fields", desc: "Verify fields against your source." },
+    ],
     faqs: [
       { question: "What metrics does it show?", answer: "Character count, byte length (UTF-8), word count, line count, number of Unicode code points, and a breakdown of non-ASCII characters with their code points." },
       { question: "What's the difference between character count and byte length?", answer: "Character count is the number of visible characters. Byte length is the UTF-8 encoded size in bytes. For example, 'é' is 1 character but 2 bytes in UTF-8." },
@@ -1446,6 +1806,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time formats.',
     seoDescription: 'Free online Unix Time Converter — Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter the time with from- and to-zones." },
+      { title: "2. Read the converted time", desc: "Check the converted time with offset shown." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What's percent-encoding?", answer: "Percent-encoding (URL encoding) replaces unsafe URL characters with % followed by two hex digits. Spaces become %20, special characters become %XX. This ensures URLs are transmitted correctly over HTTP." },
       { question: "When should I encode vs decode?", answer: "Encode when building URLs programmatically — query strings, form data, redirect URLs. Decode when reading encoded URLs you received from APIs or webhooks." },
@@ -1463,6 +1828,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS with a single click.',
     seoDescription: 'Free online Code Beautifier and Minifier — Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste source for Code Beautifier & Minifier", desc: "Paste source for Code Beautifier & Minifier into the input area. Nothing runs until you trigger it." },
+      { title: "2. Minify", desc: "Minify to one compact line." },
+      { title: "3. Copy minified", desc: "Copy the minified output." },
+    ],
     faqs: [
       { question: "What languages are supported?", answer: "HTML, CSS, JavaScript, XML, ERB (Ruby templates), LESS, and SCSS. Each language has its own formatter that understands the syntax." },
       { question: "What's the difference between beautify and minify?", answer: "Beautify adds indentation, line breaks, and spacing for readability. Minify removes all unnecessary whitespace to reduce file size for production." },
@@ -1480,6 +1850,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Converts HTML files to JSX format — web pages, email templates, and content rendering to React component definitions and UI rendering. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online HTML to JSX Converter — Convert HTML markup to JSX for React components. Handles class→className, for→htmlFor, event handlers, and more. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste HTML", desc: "Paste or drop HTML source text into the input area." },
+      { title: "2. Convert to JSX", desc: "Run the conversion; review errors or warnings line by line." },
+      { title: "3. Copy JSX", desc: "Copy the converted output for your project." },
+    ],
     faqs: [
       { question: "What HTML features are converted?", answer: "Standard HTML elements, attributes, inline styles, event handlers, comments, and nested structures. All HTML5 elements are supported." },
       { question: "Does it handle self-closing tags?", answer: "Yes. HTML self-closing tags like <img>, <br>, and <input> are converted to JSX-compatible self-closing syntax with explicit closing slashes." },
@@ -1497,6 +1872,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between JSON and PHP arrays, and serialize/unserialize PHP data. All four operations in one tool with instant swap.',
     seoDescription: 'Free online PHP Tools — Convert between JSON and PHP arrays, serialize and unserialize PHP data. All operations in one tool. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste PHP code", desc: "Scripts or snippets in the input area." },
+      { title: "2. Run the selected tool", desc: "Formatting, validation, or conversion applies to the whole snippet." },
+      { title: "3. Copy the output", desc: "Copy clean code back into your project and re-test locally." },
+    ],
     faqs: [
       { question: "What operations are supported?", answer: "JSON to PHP array, PHP array to JSON, PHP serialize, and PHP unserialize. All four operations are available with instant swap between input and output." },
       { question: "What's the difference between serialize and json_encode?", answer: "PHP serialize creates a PHP-specific string format that preserves types (objects, arrays). json_encode creates JSON format for cross-language compatibility." },
@@ -1514,6 +1894,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert SVG images to CSS format in your browser. Code never leaves your device — formatting and validation run locally in your browser.',
     seoDescription: 'Free online SVG to CSS Converter — Convert SVG markup to CSS background-image data URIs. Preview the result. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste CSS", desc: "Paste CSS text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Convert", desc: "Pick direction and target." },
+      { title: "3. Copy converted", desc: "Copy the converted output." },
+    ],
     faqs: [
       { question: "What does SVG to CSS conversion do?", answer: "It converts SVG markup into a CSS data URI that can be used directly in background-image properties. This eliminates the need for a separate SVG file and reduces HTTP requests." },
       { question: "When should I use SVG as CSS data URI?", answer: "For small icons, logos, and decorative SVGs embedded in stylesheets. It reduces server requests and allows CSS-based theming (color changes via currentColor). Not ideal for large or complex SVGs." },
@@ -1531,6 +1916,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online JSON to Code Generator — Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. ',
     dependencies: "None",
     showInCategory: false,
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for JSON to Code first." },
+      { title: "2. Generate", desc: "Create your JSON to Code with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "Which programming languages are supported?", answer: "TypeScript (interfaces/types), Java (POJO classes), C# (classes), Python (dataclasses/pydantic), Go (structs), Rust (structs), and Kotlin (data classes)." },
       { question: "How does it handle nested JSON?", answer: "Nested objects generate separate type/class definitions for each level. Arrays of objects create array-typed fields with the correct element type." },
@@ -1548,6 +1938,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Decode and inspect JWT tokens — view header, payload, expiration, issuer, subject, and other standard claims.',
     seoDescription: 'Free online JWT Debugger — Decode and inspect JWT tokens. View header, payload, expiration, issuer, subject, and standard claims. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste JWT", desc: "Paste JWT text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Debug", desc: "Inspect the decoded parts." },
+      { title: "3. Verify structure", desc: "Verify claims and structure." },
+    ],
     faqs: [
       { question: "What JWT fields are displayed?", answer: "Header (algorithm, type), payload (all claims), and signature. Standard claims like exp, iss, sub, aud, iat, and jti are decoded and displayed with human-readable labels." },
       { question: "Does it verify token signatures?", answer: "No. The debugger decodes and displays JWT content without signature verification. It shows the algorithm used but does not validate against a secret or public key." },
@@ -1565,6 +1960,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Write HTML and see a live preview rendered in a sandboxed iframe. Perfect for prototyping and testing. Code never leaves your device — formatting and validation run locally in your browser.',
     seoDescription: 'Free online HTML Preview — Write HTML and see a live preview rendered in a sandboxed iframe. Perfect for prototyping and testing. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste HTML markup", desc: "Full documents or snippets with inline styles." },
+      { title: "2. Watch the live preview", desc: "Rendering updates as you type; open DevTools thinking for layout bugs." },
+      { title: "3. Copy or export", desc: "Copy the markup back out or screenshot the preview for docs." },
+    ],
     faqs: [
       { question: "How does the live preview work?", answer: "As you type HTML in the editor, the preview pane updates in real-time using an iframe. The HTML is rendered immediately without any build step." },
       { question: "Is the preview sandboxed?", answer: "Yes. The preview runs in a sandboxed iframe that prevents it from accessing the parent page or running scripts that could affect the editor." },
@@ -1582,6 +1982,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Parse cron expressions into human-readable descriptions. Includes common presets for quick reference.',
     seoDescription: 'Free online Cron Expression Parser — Parse cron expressions into human-readable descriptions with common presets. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste CRON", desc: "Paste CRON text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Parse", desc: "Parse and read each field of the structured output." },
+      { title: "3. Verify values", desc: "Verify values against your source." },
+    ],
     faqs: [
       { question: "What cron formats are supported?", answer: "Standard 5-field cron format (minute, hour, day-of-month, month, day-of-week) and extended 6-field format with seconds. Supports wildcards, ranges, lists, and steps." },
       { question: "What are the common presets?", answer: "Ready-to-use presets for hourly, daily, weekly, monthly, and yearly schedules. Common intervals like every 5 minutes or every Monday are included." },
@@ -1609,6 +2014,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Browser device info, user-agent parser, HTTP status codes reference, MIME types lookup, Basic Auth header generator, Open Graph meta tags generator, and keycode inspector.',
     seoDescription: 'Free online Web Inspector & HTTP Tools — Browser device info, user-agent parser, HTTP status codes, MIME types, Basic Auth generator, OG meta tags, and keycode inspector. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter the site URL", desc: "Any public site. Login-walled pages inspect the public surface only." },
+      { title: "2. Run the inspection", desc: "Headers, DNS, certificates, and response details collect automatically." },
+      { title: "3. Read and act", desc: "Fix missing HSTS, weak certs, or slow responses flagged in the report." },
+    ],
     faqs: [
       { question: "What tools are included?", answer: "Seven tools: device info display, user-agent string parser, HTTP status codes reference, MIME types lookup, Basic Auth header generator, Open Graph meta tags generator, and keycode inspector." },
       { question: "How does the user-agent parser work?", answer: "Parses your browser's user-agent string to extract browser name/version, OS, device type, and rendering engine. Displays structured data from the raw user-agent." },
@@ -1634,6 +2044,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "eta-calculator",
     category: "Calculator",
     description: 'Estimate travel time from distance and speed — with optional arrival time and traffic buffer.',
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter distance and average speed." },
+      { title: "2. Read the arrival time", desc: "Check the arrival time with duration." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What does ETA need?", answer: "Distance and speed — arrival time computes instantly. Distance and speed entered — arrival time computes instantly." },
       { question: "Traffic delays?", answer: "Add buffer manually; the math is pure distance-over-speed. Add buffer manually; the math itself is pure distance-over-speed." },
@@ -1652,6 +2067,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Clean up messy YAML — fix indentation, align colons, and normalize list formatting. Paste any YAML and get consistently formatted output.',
     seoDescription: 'Free online YAML Re-indenter — Clean up messy YAML with proper indentation, aligned colons, and normalized list formatting. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Paste YAML", desc: "Paste YAML text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Reindent", desc: "Reindent consistently." },
+      { title: "3. Copy clean file", desc: "Copy the clean file." },
+    ],
     faqs: [
       { question: "What YAML issues does it fix?", answer: "Fixes inconsistent indentation, misaligned colons, inconsistent list markers, trailing spaces, and incorrect spacing after colons. Normalizes the entire document." },
       { question: "Does it validate YAML syntax?", answer: "Yes. The tool detects and reports syntax errors like invalid indentation, unclosed quotes, and malformed mappings. Errors are highlighted with line numbers." },
@@ -1680,6 +2100,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Parse and validate international phone numbers with automatic country detection from the dial code. All validation runs locally in your browser.',
     seoDescription: 'Free online Phone Number Parser — Parse and validate international phone numbers with country detection and formatting. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste source for Phone Number Parser", desc: "Paste source for Phone Number Parser into the input area. Nothing runs until you trigger it." },
+      { title: "2. Parse", desc: "Parse and read each field of the structured output." },
+      { title: "3. Verify values", desc: "Verify values against your source." },
+    ],
     faqs: [
       { question: "What information does it extract?", answer: "Country code, national number, area code, carrier prefix, and formatted display. The parser detects the country from the number format or +CC prefix." },
       { question: "Which countries are supported?", answer: "All countries with international dialing codes. The parser handles US, UK, India, Germany, Japan, Australia, and 200+ other country formats." },
@@ -1697,6 +2122,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert text to URL-friendly slugs with configurable separators. Input never leaves your device — everything runs locally in your browser.',
     seoDescription: 'Free online Slugify — Convert text to URL-friendly slugs with configurable separators. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste source for Slugify", desc: "Paste source for Slugify into the input area. Nothing runs until you trigger it." },
+      { title: "2. Slugify", desc: "Generate the slug." },
+      { title: "3. Copy into URL", desc: "Copy it into your URL." },
+    ],
     faqs: [
       { question: "What separator options are available?", answer: "Choose from hyphen (-), underscore (_), dot (.), or space as the separator. Hyphens are the default and most SEO-friendly option for URL slugs." },
       { question: "How does it handle special characters?", answer: "Special characters, accented letters, and symbols are removed or transliterated. Unicode characters like 'é' become 'e', and symbols are stripped entirely." },
@@ -1714,6 +2144,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate time-ordered ULID identifiers with Crockford base32 encoding. Input never leaves your device — everything runs locally in your browser.',
     seoDescription: 'Free online ULID Generator — Generate time-ordered ULID identifiers with Crockford base32 encoding. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for ULID first." },
+      { title: "2. Generate", desc: "Create your ULID with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What is a ULID?", answer: "ULID (Universally Unique Lexicographically Sortable Identifier) is a 26-character string that is time-ordered and collision-resistant. Format: 48-bit timestamp + 80-bit randomness in Crockford base32." },
       { question: "How is ULID different from UUID?", answer: "ULIDs are lexicographically sortable by creation time. UUIDs (v4) are random and not sortable. ULIDs are shorter (26 chars vs 36) and more database-friendly." },
@@ -1731,6 +2166,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert words to numeronyms (a11y-style) and acronyms. Input never leaves your device — everything runs locally in your browser.',
     seoDescription: 'Free online Numeronym Generator — Convert words to numeronyms (a11y-style) and acronyms. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Numeronym first." },
+      { title: "2. Generate", desc: "Create your Numeronym with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What is a numeronym?", answer: "A numeronym replaces some letters in a word with a number representing the count of skipped letters. For example, 'accessibility' becomes 'a11y' (a + 11 letters + y). 'Internationalization' becomes 'i18n'." },
       { question: "Can I generate both numeronyms and acronyms?", answer: "Yes. The tool generates numeronyms (letter-number-letter format) and standard acronyms (first letters of each word). Toggle between modes as needed." },
@@ -1748,6 +2188,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Look up device manufacturer from a MAC address OUI prefix, covering thousands of registered vendors from Apple and Samsung to Intel and Cisco.',
     seoDescription: 'Free online MAC Vendor Lookup — Look up device manufacturer from MAC address OUI prefix with extensive vendor database. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for MAC Vendor Lookup." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "What is a MAC address OUI?", answer: "The OUI (Organizationally Unique Identifier) is the first 3 octets (6 hex characters) of a MAC address. It uniquely identifies the device manufacturer or vendor, assigned by IEEE." },
       { question: "What information does the lookup return?", answer: "The vendor/manufacturer name associated with the MAC address OUI prefix. For example, looking up 00:1A:2B returns the manufacturer who owns that OUI block." },
@@ -1775,6 +2220,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate RSA key pairs (2048/4096-bit) using the Web Crypto API. Export public and private keys as PEM strings. All client-side, no server uploads.',
     seoDescription: 'Free online RSA Key Pair Generator — Generate 2048 or 4096-bit RSA key pairs and export as PEM. Uses Web Crypto API, ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for RSA Key Pair first." },
+      { title: "2. Generate", desc: "Create your RSA Key Pair with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What key sizes are supported?", answer: "2048-bit and 4096-bit RSA keys. 2048-bit is standard for most applications; 4096-bit provides stronger security for sensitive use cases." },
       { question: "What format are the keys exported in?", answer: "PEM format (Base64-encoded DER) with standard headers (-----BEGIN PUBLIC KEY-----, etc.). Ready for use with OpenSSL, SSH, and most cryptographic libraries." },
@@ -1802,6 +2252,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert text to ASCII art with multiple font styles — download or copy the result for READMEs, code comments, and banners.',
     seoDescription: 'Free online ASCII Art Generator — Convert text to ASCII art with block, bubble, fancy, and digital styles. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for ASCII Art first." },
+      { title: "2. Generate", desc: "Create your ASCII Art with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What font styles are available?", answer: "Block, bubble, fancy, digital, shadow, and slant styles. Each style creates a different visual effect for your text, from bold block letters to ornate decorative text." },
       { question: "What text length works best?", answer: "Short text (1-15 characters) produces the best results. Longer text may wrap or become too small to read in ASCII art format." },
@@ -1837,6 +2292,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     category: "PDF",
     description: 'Convert PDF images to PNG format in your browser. Documents stay on your device — editing and conversion run locally in your browser.',
     seoTitle: "PDF to PNG Converter – Free Online",
+    instructions: [
+      { title: "1. Drop PDF file(s)", desc: "Upload your PDF source. Runs locally on PDF.js." },
+      { title: "2. Set PNG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download PNG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'PNG or JPG for PDF pages — which?', answer: 'PNG for crisp text and diagrams (lossless); JPG for smaller photo-heavy pages.' },
       { question: 'Do transparent elements survive?', answer: 'Page backgrounds render white — PNG keeps sharp edges that JPG would blur.' },
@@ -1854,6 +2314,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     category: "PDF",
     description: 'Generate PDF documents from plain text, CSV tables, JSON data, or XML content. Includes customizable title, font size, and table formatting for the CSV mode.',
     seoTitle: "Create PDF Online – Free Text to PDF Maker",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
+      { title: "2. Configure create", desc: "Set the create options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'What inputs become PDFs?', answer: 'Plain text, CSV tables, JSON data, or XML — each rendered with title, font size, and table formatting.' },
       { question: 'How do CSV tables render?', answer: 'Columns become formatted tables with headers — clean enough to share without a spreadsheet app.' },
@@ -1893,6 +2358,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoTitle: "PDF Background Color – Free Customizer",
     seoDescription: 'Free online PDF Background Color \u2014 Add a subtle color tint to all pages in a PDF document. ',
     dependencies: "pdf-lib",
+    instructions: [
+      { title: "1. Upload the PDF", desc: "The background applies to every page in the file." },
+      { title: "2. Pick the color", desc: "Choose a readable shade — dark text needs light backgrounds and vice versa." },
+      { title: "3. Download PDF", desc: "Save the recolored file (counts toward free download quota)." },
+    ],
     faqs: [
       { question: "When using PDF Background Color, what does this tool do?", answer: "Adds a colored background layer to every page in a PDF. Choose any color and the tool inserts a full-page colored rectangle behind the existing content." },
       { question: "Does it cover the text?", answer: "No. The background color is placed behind the existing content. Text and images remain visible on top of the colored background." },
@@ -1928,6 +2398,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     category: "PDF",
     description: 'Add sequential Bates numbers to every page of your PDF. Customize prefix, starting number, and position.',
     seoTitle: "Bates Numbering for PDF – Free Legal Stamping",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
+      { title: "2. Configure number", desc: "Set the number options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'What prefix and numbering can I set?', answer: 'Custom prefix, starting number, and page position — e.g., ACME-0001 in the footer from page one.' },
       { question: 'Why do lawyers use Bates numbers?', answer: 'Courts require unique sequential IDs per page so exhibits are citable — Bates is that standard.' },
@@ -1944,6 +2419,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     category: "PDF",
     description: 'Add a diagonal watermark stamp (DRAFT, CONFIDENTIAL, etc.) to every page of your PDF — mark review copies and control document status visibly. Runs locally in your browser.',
     seoTitle: "PDF Stamp Tool – DRAFT & Confidential Stamps Free",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
+      { title: "2. Configure stamp", desc: "Set the stamp options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'Which stamp texts are available?', answer: 'DRAFT, CONFIDENTIAL, and other common markings — applied diagonally across every page.' },
       { question: 'Can I stamp selected pages only?', answer: 'Stamping covers every page; extract the pages you need first, then stamp the subset.' },
@@ -1960,6 +2440,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     category: "PDF",
     description: 'Add a generation timestamp to the bottom-right corner of every page in your PDF — proof of when each copy was produced. Works on scans and forms; runs locally in your browser.',
     seoTitle: "PDF Timestamp Tool – Add Date Stamps Free",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
+      { title: "2. Configure stamp", desc: "Set the stamp options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'Where does the timestamp appear?', answer: 'Bottom-right corner of every page, stamped at generation time — proof of when each copy was produced.' },
       { question: 'Does it work on scanned PDFs?', answer: 'Yes — stamping overlays pages visually, so scans, forms, and digitally-born PDFs all work the same.' },
@@ -1985,6 +2470,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     category: "PDF",
     description: 'Overlay one PDF on another, alternate-merge two documents, combine pages into sheets, apply booklet layout, invert colors, or extract pages as ZIP images.',
     seoTitle: "Advanced PDF Tools – Merge, Booklet & More Free",
+    instructions: [
+      { title: "1. Upload the PDF", desc: "Native PDFs with selectable text work best." },
+      { title: "2. Apply advanced options", desc: "Compression, metadata, and optimization toggles per the panel." },
+      { title: "3. Download PDF", desc: "Save the optimized file (counts toward free download quota)." },
+    ],
     faqs: [
       { question: 'Overlay vs merge — what\'s the difference?', answer: 'Overlay stacks pages visually (letterhead onto content); merge appends pages end to end.' },
       { question: 'What is booklet layout?', answer: 'Reorders pages into printer spreads so folded sheets read in order — for saddle-stitch booklets.' },
@@ -2002,6 +2492,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     category: "PDF",
     description: 'View, add, and extract embedded files inside PDF documents. Supports any file type as attachments — images, spreadsheets, archives, and more.',
     seoTitle: "Attach Files to PDF – Free Online Tool",
+    instructions: [
+      { title: "1. Upload the PDF", desc: "Files with or without existing embedded attachments." },
+      { title: "2. Manage attachments", desc: "List, add, or remove embedded files from the document package." },
+      { title: "3. Download PDF", desc: "Save with attachments embedded (counts toward free download quota)." },
+    ],
     faqs: [
       { question: 'Which file types can attach?', answer: 'Any — images, spreadsheets, archives, documents. The PDF carries them as embedded payloads.' },
       { question: 'Do attachments survive email?', answer: 'Yes — embedded files travel inside the PDF through any mail system intact.' },
@@ -2038,6 +2533,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Estimate how many pages your word count fills at different font sizes — compare 11pt vs 12pt, single vs double spacing, for essays and manuscripts.',
     seoDescription: 'Free online Words Per Page Calculator \u2014 Estimate page count from word count and font size. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter word count with page count." },
+      { title: "2. Read words per page", desc: "Check words per page with totals." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "How is the estimate calculated?", answer: "The tool uses standard formulas: ~250 words per single-spaced page and ~500 words per double-spaced page at 12pt font. Adjustments are made for font size, margins, and line spacing." },
       { question: "What formatting options affect the count?", answer: "Font size (10pt-16pt), line spacing (single, 1.5, double), and margin width all affect words per page. Smaller fonts and tighter spacing fit more words per page." },
@@ -2104,6 +2604,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate OAuth authorization URLs for Google, GitHub, Facebook, Microsoft, and LinkedIn with custom client ID, redirect URI, and scope.',
     seoDescription: 'Free online OAuth Client Setup \u2014 Generate authorization URLs for Google, GitHub, Facebook, Microsoft, and LinkedIn. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste source for OAuth Client Setup", desc: "Paste source for OAuth Client Setup into the input area. Nothing runs until you trigger it." },
+      { title: "2. Set up", desc: "Complete the setup fields." },
+      { title: "3. Save and continue", desc: "Save and follow the next steps." },
+    ],
     faqs: [
       { question: "Which providers are supported?", answer: "Google, GitHub, Facebook, Microsoft, and LinkedIn. Each provider's OAuth 2.0 authorization endpoint is configured with the correct parameters." },
       { question: "What parameters do I need to provide?", answer: "Client ID (from provider dashboard), redirect URI (your callback URL), and requested scopes. The tool assembles the complete authorization URL." },
@@ -2121,6 +2626,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate PKCE code_verifier and code_challenge (S256) pairs, or verify that a verifier matches a challenge.',
     seoDescription: 'Free online PKCE Verifier \u2014 Generate and verify PKCE code_verifier / code_challenge pairs for secure OAuth flows. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste source for PKCE Verifier", desc: "Paste source for PKCE Verifier into the input area. Nothing runs until you trigger it." },
+      { title: "2. Verify", desc: "Run verification and read the verdict." },
+      { title: "3. Confirm officially", desc: "Confirm on the official source." },
+    ],
     faqs: [
       { question: "What is PKCE?", answer: "PKCE (Proof Key for Code Exchange) is a security extension to OAuth 2.0 that prevents authorization code interception attacks. Used with public clients like mobile and SPA apps." },
       { question: "When do I use code_verifier vs code_challenge?", answer: "Generate a code_verifier (random string) and its code_challenge (SHA-256 hash). Send the challenge in the authorization request, then send the verifier during token exchange." },
@@ -2138,6 +2648,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Build OAuth scope strings from comma-separated values with URL encoding and breakdown.',
     seoDescription: 'Free online OAuth Scope Builder \u2014 Build and preview OAuth scope strings with URL encoding. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Complete each section", desc: "Fill the OAuth Scope Builder fields in order — required items first, optional details after." },
+      { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
+      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+    ],
     faqs: [
       { question: "What does the scope builder do?", answer: "It takes individual OAuth scope values (comma-separated) and builds a properly formatted scope string with URL encoding. It also breaks down existing scope strings into individual permissions." },
       { question: "Which providers' scopes does it support?", answer: "Google, GitHub, Facebook, Microsoft, LinkedIn, and generic OAuth. The builder includes scope names and descriptions for each provider's common permissions." },
@@ -2155,6 +2670,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Validate OAuth state parameters for format, length, and age — catch CSRF holes before they ship. Nothing leaves your browser.',
     seoDescription: 'Free online OAuth State Validator \u2014 Validate state parameters for format, length, and age. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for OAuth State Validator." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "What does the state parameter do?", answer: "The OAuth state parameter prevents CSRF attacks by ensuring the authorization response matches your original request. It must be unpredictable and tied to the user's session." },
       { question: "What makes a state parameter valid?", answer: "A valid state is a cryptographically random string (at least 32 characters), properly encoded for URL use, and not expired. It should be stored server-side for verification." },
@@ -2172,6 +2692,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate PBKDF2 hashes with 10,000 iterations of SHA-256 for password storage simulation.',
     seoDescription: 'Free online PBKDF2 Hash Generator \u2014 Generate PBKDF2 hashes with 10,000 SHA-256 iterations. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for PBKDF2 Hash first." },
+      { title: "2. Generate", desc: "Create your PBKDF2 Hash with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What is PBKDF2?", answer: "PBKDF2 (Password-Based Key Derivation Function 2) derives a cryptographic key from a password using repeated hashing. It's designed to slow brute-force attacks through high iteration counts." },
       { question: "Why 10,000 iterations?", answer: "10,000 iterations provides a balance between security and performance. Modern standards recommend higher counts (100,000+), but 10,000 is suitable for password storage simulation." },
@@ -2189,6 +2714,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Parse Set-Cookie headers into structured JSON, or analyze cookie security flags (Secure, HttpOnly, SameSite, expiry).',
     seoDescription: 'Free online Cookie Parser & Analyzer \u2014 Parse Set-Cookie headers and check security flags. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste source for Cookie Parser & Analyzer", desc: "Paste source for Cookie Parser & Analyzer into the input area. Nothing runs until you trigger it." },
+      { title: "2. Parse", desc: "Parse and read each field of the structured output." },
+      { title: "3. Verify values", desc: "Verify values against your source." },
+    ],
     faqs: [
       { question: "What cookie fields are parsed?", answer: "Name, value, domain, path, expires/max-age, secure flag, HttpOnly flag, SameSite attribute, and other Set-Cookie directives are extracted and displayed." },
       { question: "Can I check security flags?", answer: "Yes. The tool analyzes Secure, HttpOnly, SameSite, and domain settings, flagging missing or insecure configurations." },
@@ -2206,6 +2736,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Lint HTML for missing DOCTYPE, unclosed tags, and unexpected closing tags. Paste your HTML and get instant feedback.',
     seoDescription: 'Free online HTML Linter \u2014 Lint HTML for missing DOCTYPE, unclosed tags, and unexpected closing tags. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste HTML", desc: "Paste HTML text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Lint", desc: "Lint and read each issue with its line." },
+      { title: "3. Fix and relint", desc: "Fix issues and re-lint." },
+    ],
     faqs: [
       { question: "What does the linter check?", answer: "Missing DOCTYPE declaration, unclosed tags, unexpected closing tags, duplicate attributes, deprecated elements, and accessibility issues." },
       { question: "Does it validate HTML5 syntax?", answer: "Yes. The linter checks HTML5 DOCTYPE, valid element nesting, required attributes, and semantic structure compliance." },
@@ -2223,6 +2758,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Minify XML by removing whitespace, or validate XML syntax. Paste your XML and choose an operation.',
     seoDescription: 'Free online XML Minifier / Validator \u2014 Minify XML by removing whitespace, or validate XML syntax. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for XML Minifier / Validator." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "What does minification remove?", answer: "Removes all unnecessary whitespace, line breaks, and indentation between elements and attributes. Comments and CDATA sections are preserved." },
       { question: "Does it validate XML?", answer: "Yes. The validator checks for well-formed XML: proper tag nesting, closed elements, valid attribute syntax, and correct entity references." },
@@ -2259,6 +2799,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Encode text to Base32 or decode Base32 strings back — the alphabet TOTP apps and authenticator URIs use. Both directions, fully local.',
     seoDescription: 'Free online Base32 Encoder / Decoder \u2014 Encode and decode Base32 strings. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste source for Base32 Encoder / Decoder", desc: "Paste source for Base32 Encoder / Decoder into the input area. Nothing runs until you trigger it." },
+      { title: "2. Encode", desc: "Encode to the target format." },
+      { title: "3. Copy encoded", desc: "Copy the encoded output." },
+    ],
     faqs: [
       { question: "What is Base32 encoding?", answer: "Base32 encodes binary data into 32 ASCII characters (A-Z, 2-7). It produces longer output than Base64 but is human-readable and avoids ambiguous characters." },
       { question: "When would I use Base32 vs Base64?", answer: "Use Base32 when you need human-readable encoding (TOTP secrets, QR codes) or systems that only support uppercase letters. Base64 is more compact for general use." },
@@ -2276,6 +2821,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Decode Base64 strings and pretty-print JSON data — paste encoded text to see the decoded result instantly.',
     seoDescription: 'Free online Base64 to JSON Decoder \u2014 Decode Base64 and pretty-print JSON. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste JSON", desc: "Paste JSON text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Decode", desc: "Decode back to readable form." },
+      { title: "3. Copy decoded", desc: "Copy the decoded output." },
+    ],
     faqs: [
       { question: "What does it do with Base64 input?", answer: "Decodes the Base64 string to its original text, then attempts to parse it as JSON. If successful, the JSON is pretty-printed with syntax highlighting." },
       { question: "Does it auto-detect Base64?", answer: "Yes. Paste any Base64 string and the tool attempts to decode it. If the result is valid JSON, it's automatically pretty-printed." },
@@ -2293,6 +2843,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between hex strings and text. Code never leaves your device — formatting and validation run locally in your browser.',
     seoDescription: 'Free online Hex to Text Converter \u2014 Convert between hex strings and text. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste HEX", desc: "Paste or drop HEX source text into the input area." },
+      { title: "2. Convert to TEXT", desc: "Run the conversion; review errors or warnings line by line." },
+      { title: "3. Copy TEXT", desc: "Copy the converted output for your project." },
+    ],
     faqs: [
       { question: "What format should hex be in?", answer: "Enter hex values as pairs of characters (0-9, a-f, A-F) with or without spaces. Both '48656C6C6F' and '48 65 6C 6C 6F' are accepted." },
       { question: "Can I convert text to hex?", answer: "Yes. The tool converts in both directions. Enter text to see its hex representation, or enter hex to see the decoded text." },
@@ -2320,6 +2875,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Analyze each character to see its Unicode code point and ASCII/non-ASCII status.',
     seoDescription: 'Free online Character Encoding Converter \u2014 Analyze Unicode code points and ASCII status. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste source for Character Encoding Converter", desc: "Paste source for Character Encoding Converter into the input area. Nothing runs until you trigger it." },
+      { title: "2. Encode", desc: "Encode to the target format." },
+      { title: "3. Copy encoded", desc: "Copy the encoded output." },
+    ],
     faqs: [
       { question: "What character data is shown?", answer: "Each character displays its Unicode code point (e.g., U+0041), decimal value, binary representation, and whether it's ASCII or non-ASCII." },
       { question: "Does it detect encoding issues?", answer: "Yes. The tool identifies characters that may cause encoding problems, including replacement characters (U+FFFD), control characters, and ambiguous encoding." },
@@ -2337,6 +2897,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert text to Unicode code points with JavaScript escape sequences and HTML entities.',
     seoDescription: 'Free online Unicode Converter \u2014 Get code points, JS escapes, and HTML entities. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste Unicode", desc: "Paste Unicode text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Convert", desc: "Pick direction and target." },
+      { title: "3. Copy converted", desc: "Copy the converted output." },
+    ],
     faqs: [
       { question: "When using Unicode Converter, what output formats are supported?", answer: "Unicode code points (U+XXXX), JavaScript escape sequences (backslash uXXXX, backslash u{XXXXX}), HTML entities (&#xXXXX;), and decimal values." },
       { question: "Does it handle emojis?", answer: "Yes. Emojis (including multi-codepoint sequences) are converted to their proper Unicode representations. Both simple and compound emojis work." },
@@ -2364,6 +2929,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between PX and REM with custom base size. Code never leaves your device — formatting and validation run locally in your browser.',
     seoDescription: 'Free online PX to REM Converter \u2014 Convert between PX and REM with custom base size. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter your figures — the tool labels each field it needs." },
+      { title: "2. Read the converted size", desc: "Check the converted size with base shown." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What is the default base size?", answer: "16px = 1rem (the browser default). You can customize the base size to match your project's root font-size setting." },
       { question: "Can I convert in both directions?", answer: "Yes. PX to REM and REM to PX conversion are both supported. Enter values in either field and the other updates instantly." },
@@ -2381,6 +2951,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Minify SVG by removing whitespace, comments, and redundant attributes — typically cutting files 20–50% with zero visual change.',
     seoDescription: 'Free online SVG Optimizer \u2014 Minify SVG by removing whitespace and comments. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste source for SVG Optimizer", desc: "Paste source for SVG Optimizer into the input area. Nothing runs until you trigger it." },
+      { title: "2. Optimize", desc: "Optimize with safe presets." },
+      { title: "3. Copy smaller file", desc: "Copy the smaller output." },
+    ],
     faqs: [
       { question: "What does the optimizer remove?", answer: "Removes whitespace, line breaks, comments (<!-- -->), metadata, editor-specific attributes, empty groups, and redundant attributes like xmlns declarations." },
       { question: "Does it preserve visual appearance?", answer: "Yes. The optimizer removes only non-visual elements and whitespace. The rendered SVG appearance remains identical to the original." },
@@ -2398,6 +2973,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between kW, hp, bhp, W, MW, and BTU/hr — engine specs, solar sizing, and HVAC math in one place.',
     seoDescription: 'Free online Power Converter \u2014 Convert between kW, hp, W, MW, and BTU/hr. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter the value with from- and to-units." },
+      { title: "2. Read the computed result", desc: "Check the computed result with its breakup." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What power units are supported?", answer: "Kilowatts (kW), horsepower (hp and bhp), watts (W), megawatts (MW), and BTU per hour (BTU/hr). All conversions are bidirectional." },
       { question: "What is the difference between hp and bhp?", answer: "Horsepower (hp) is mechanical power. Brake horsepower (bhp) is the power at the engine's output shaft before drivetrain losses. bhp is slightly lower than hp in most contexts." },
@@ -2415,6 +2995,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between kPa, psi, bar, atm, Torr, and mbar. Input never leaves your device — everything runs locally in your browser.',
     seoDescription: 'Free online Pressure Converter \u2014 Convert between kPa, psi, bar, atm, Torr, and mbar. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter the value with from- and to-units." },
+      { title: "2. Read the computed result", desc: "Check the computed result with its breakup." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What pressure units are supported?", answer: "Kilopascals (kPa), pounds per square inch (psi), bar, atmosphere (atm), Torr (mmHg), and millibar (mbar). All conversions are bidirectional." },
       { question: "When would I use each unit?", answer: "kPa: SI standard, meteorology. psi: tire pressure, US hydraulics. bar: industrial, European. atm: chemistry. Torr: vacuum systems. mbar: weather." },
@@ -2450,6 +3035,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate CSS media queries with min/max width and optional device type conditions.',
     seoDescription: 'Free online Media Query Generator \u2014 Generate CSS media queries with width and device conditions. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Media Query first." },
+      { title: "2. Generate", desc: "Create your Media Query with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What breakpoints can I set?", answer: "Min-width and max-width breakpoints in px, em, rem, or vw units. Preset common breakpoints: mobile (480px), tablet (768px), laptop (1024px), desktop (1200px)." },
       { question: "Can I target specific devices?", answer: "Yes. Add device-type conditions: screen, print, handheld. Combine with orientation (portrait/landscape) and hover capability (hover: none/hover)." },
@@ -2466,6 +3056,11 @@ export const entries_chunk_2: ToolMetadata[] = [
     category: "Developer",
     description: 'Generate Markdown tables without hand-aligning pipes — define columns and rows, preview live, and copy GitHub-ready markup.',
     seoTitle: "Markdown Table Generator – Free Online",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Markdown Table first." },
+      { title: "2. Generate", desc: "Create your Markdown Table with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "How do I write a table?", answer: "Pipes separate columns, dashes set alignment — the tool builds it without hand-aligning." },
       { question: "Column alignment?", answer: "Left, center, and right via :---, :---:, and ---: markers in the delimiter row." },

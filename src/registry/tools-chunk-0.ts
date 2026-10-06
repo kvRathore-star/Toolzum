@@ -9,6 +9,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Image",
     slug: "add-text-to-photo",
     dependencies: "Canvas API",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on Canvas." },
+      { title: "2. Configure add text", desc: "Set the add text options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What font options are available for adding text to photos?", answer: "You can choose from a wide selection of web-safe fonts including Arial, Helvetica, Times New Roman, Georgia, and more. Font size, color, opacity, and rotation are all adjustable." },
       { question: "Can I add multiple text layers to a single image?", answer: "Yes. You can add as many text overlays as needed, each with independent font, color, size, position, and rotation settings." },
@@ -47,6 +52,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Video",
     slug: "video-to-mp3",
     dependencies: "ffmpeg",
+    instructions: [
+      { title: "1. Drop video file(s)", desc: "Upload your video source. Runs locally on FFmpeg." },
+      { title: "2. Set MP3 options", desc: "Adjust output settings for MP3 — presets fit most jobs without further tuning." },
+      { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What video formats can I convert to MP3?", answer: "MP4, MOV, AVI, WebM, MKV, and other common video formats. The tool extracts the audio track and encodes it as MP3." },
       { question: "Can I choose the MP3 bitrate?", answer: "Yes. You can select from common bitrates (128kbps, 192kbps, 256kbps, 320kbps) to balance file size and audio quality." },
@@ -63,6 +73,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Video",
     slug: "crop-video",
     dependencies: "ffmpeg",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
+      { title: "2. Configure crop", desc: "Set the crop options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What video formats are supported for cropping?", answer: "MP4, MOV, AVI, WebM, and MKV files. The tool uses FFmpeg WASM to handle cropping without re-encoding when possible." },
       { question: "Can I crop to a specific aspect ratio?", answer: "Yes. You can select preset aspect ratios (16:9, 4:3, 1:1, 9:16) or draw a custom crop region freely." },
@@ -79,6 +94,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Converter",
     slug: "json-to-xml",
     dependencies: "fast-xml-parser",
+    instructions: [
+      { title: "1. Drop JSON file(s)", desc: "Upload your JSON source. Runs locally in your browser." },
+      { title: "2. Set XML options", desc: "Adjust output settings for XML — presets fit most jobs without further tuning." },
+      { title: "3. Download XML", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Can I control the XML output format?", answer: "Yes. Options include indentation style (tabs/spaces), XML declaration inclusion, attribute vs element encoding, and custom root element names." },
       { question: "How are JSON arrays represented in XML?", answer: "Arrays can be encoded as repeated child elements or as a single element with comma-separated values. Choose your preferred style in settings." },
@@ -96,6 +116,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Utility",
     slug: "time-converter",
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter the time with from- and to-zones." },
+      { title: "2. Read the converted time", desc: "Check the converted time with offset shown." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What time units can I convert between?", answer: "Seconds, minutes, hours, days, weeks, months, and years. Results include decimal precision for billing and scientific use." },
       { question: "How many seconds are in an hour?", answer: "1 hour = 3,600 seconds (60 minutes × 60 seconds). The converter uses exact factors for all calculations." },
@@ -112,6 +137,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Generate random TCP/UDP port numbers from well-known, registered, or dynamic ranges. Useful for network testing, Docker port mapping, and firewall configuration.',
     seoDescription: 'Free online Random Port Generator — Generate random TCP/UDP port numbers from well-known, registered, or dynamic ranges. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Random Port first." },
+      { title: "2. Generate", desc: "Create your Random Port with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What port ranges can I generate from?", answer: "Well-known (0-1023), registered (1024-49151), dynamic/private (49152-65535), or any combination of these ranges." },
       { question: "Can I exclude specific ports?", answer: "Yes. You can specify ports to exclude (e.g., 80, 443, 3000) to avoid conflicts with commonly used services." },
@@ -129,6 +159,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert between numeric (755) and symbolic (u=rwx,g=rx,o=rx) chmod permission formats. See detailed breakdown for owner, group, and others.',
     seoDescription: 'Free online Chmod Calculator — Convert between numeric and symbolic chmod permission formats with detailed breakdown. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter owner, group, and other permissions." },
+      { title: "2. Read the octal code", desc: "Check the octal code with symbolic form." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What's the difference between numeric and symbolic notation?", answer: "Numeric uses octal digits (e.g., 755), while symbolic uses letters (e.g., u=rwx,g=rx,o=rx). Both represent the same permissions." },
       { question: "What permissions does each digit represent?", answer: "Read (4), write (2), and execute (1). Add them together: 4+2+1=7 (full), 4+0+1=5 (read+execute), etc." },
@@ -146,6 +181,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert docker run commands to docker-compose.yml format. Supports ports, volumes, environment variables, networks, restart policies, and container names.',
     seoDescription: 'Free online Docker Run to Compose Converter — Convert docker run commands to docker-compose.yml format. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Paste the docker run command", desc: "Full command with flags, ports, volumes, and environment variables." },
+      { title: "2. Convert to Compose", desc: "Flags map to compose keys — ports, volumes, restart policy — in one YAML service block." },
+      { title: "3. Copy compose file", desc: "Paste into docker-compose.yml, verify volume paths, then bring the stack up." },
+    ],
     faqs: [
       { question: "What docker run options are supported?", answer: "Ports (-p), volumes (-v), environment variables (-e), networks, restart policies, container names, image tags, and more." },
       { question: "Can I convert complex multi-option commands?", answer: "Yes. The converter parses chained flags like -p 8080:80 -v /data:/app/data -e NODE_ENV=production into proper compose syntax." },
@@ -163,6 +203,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Normalize email addresses by removing dots (Gmail), stripping +tags, and lowercasing. Process multiple emails at once for deduplication and cleaning.',
     seoDescription: 'Free online Email Normalizer — Normalize email addresses by removing dots, stripping +tags, and lowercasing. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Paste source for Email Normalizer", desc: "Paste source for Email Normalizer into the input area. Nothing runs until you trigger it." },
+      { title: "2. Normalize", desc: "Normalize to canonical form." },
+      { title: "3. Copy normalized", desc: "Copy the normalized output." },
+    ],
     faqs: [
       { question: "What normalizations are applied?", answer: "Lowercasing the domain, removing dots from Gmail addresses (before @), stripping +tags, and trimming whitespace." },
       { question: "Why remove dots from Gmail addresses?", answer: "Gmail ignores dots in the local part. john.doe@gmail.com and johndoe@gmail.com are the same inbox. This helps deduplicate." },
@@ -189,6 +234,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "heic-to-pdf",
     dependencies: "pdf-lib, heic2any",
     seoTitle: "HEIC to PDF Converter – Free Online",
+    instructions: [
+      { title: "1. Drop HEIC file(s)", desc: "Upload your HEIC source. Runs locally on pdf-lib." },
+      { title: "2. Set PDF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download PDF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does HEIC to PDF do?", answer: "Converts HEIC files to PDF format \u2014 Apple device photos to document sharing, printing, and archival with consistent formatting. All conversion happens locally in your browser with no file size limits." },
       { question: "Where does PDF fit best?", answer: "document sharing, printing, and archival with consistent formatting." },
@@ -236,6 +286,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoTitle: "PDF to Word Converter – Free Online",
     dependencies: "pdf2docx / PDF.js",
     seoDescription: 'Convert PDF to Word online free — editable DOCX with layout kept. Know the limits first. ',
+    instructions: [
+      { title: "1. Drop PDF file(s)", desc: "Upload your PDF source. Runs locally on PDF.js." },
+      { title: "2. Set Word (DOCX) options", desc: "Adjust output settings for Word (DOCX) — presets fit most jobs without further tuning." },
+      { title: "3. Download Word (DOCX)", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "How accurate is the conversion?", answer: "Text-heavy PDFs convert cleanly — paragraphs, headings, lists, and tables survive. Scanned/image-only PDFs need OCR first; complex multi-column magazine layouts may reflow into single-column text." },
       { question: "What about fonts?", answer: "Standard fonts map to Word equivalents; exotic embedded fonts fall back to the closest match. Check headings and special characters after conversion before sending." },
@@ -276,6 +331,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Measures your internet connection’s download speed and latency by downloading a test file from a CDN. Upload speed is not currently measured.',
     seoDescription: 'Free online Speed Test — Measures your internet connection’s download speed and latency by downloading a test file from a CDN. ',
     dependencies: "Fetch API",
+    instructions: [
+      { title: "1. Close heavy apps", desc: "Pause downloads, streams, and VPNs — they steal the bandwidth you are measuring." },
+      { title: "2. Run the test", desc: "The tool pings, downloads, and uploads probe packets automatically in under a minute." },
+      { title: "3. Read down, up, ping", desc: "Compare against your plan: 25+ Mbps down streams 4K; over 50 ms ping hurts gaming." },
+    ],
     faqs: [
       { question: "How is my privacy protected?", answer: "Nothing of yours is uploaded or stored. The test downloads sample files from a CDN to measure throughput — that test traffic is the measurement itself, and no personal data leaves your browser." },
       { question: "What exactly is measured?", answer: "Download speed and latency against CDN test files. Upload speed is not currently measured." },
@@ -291,6 +351,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Reduces image file size to a specific target — 50 KB, 100 KB, or 200 KB — by automatically adjusting JPEG quality, reducing pixel dimensions, or stripping EXIF metadata. Ideal for government forms, job applications, and upload portals with strict file size limits.',
     seoDescription: 'Free online Compress Image to 50KB — reduce any image to exactly 50 KB, 100 KB, or 200 KB for government forms, job applications, and upload portals with strict limits. ',
     dependencies: "browser-image-compression",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on browser compression." },
+      { title: "2. Configure compress", desc: "Set the compress options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What target file sizes are supported?", answer: "You can compress images to 50 KB, 100 KB, or 200 KB. The tool automatically adjusts JPEG quality, reduces pixel dimensions, and strips EXIF metadata to hit your target size." },
       { question: "Which image formats can I compress?", answer: "JPG, PNG, WebP, GIF, and BMP inputs are accepted. Output is typically JPEG for maximum compression, but PNG is available when transparency must be preserved." },
@@ -307,6 +372,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Converts between 160+ world currencies using real-time exchange rates sourced from central banks and financial data providers. Uses cloud-based processing.',
     seoDescription: 'Free currency converter — 160+ currencies at live bank rates. Travel, shopping, and forex math. ',
     dependencies: "ExchangeRate-API",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter the amount with from- and to-currencies." },
+      { title: "2. Read the converted amount at the live rate", desc: "Check the converted amount at the live rate." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "How fresh are the rates?", answer: "Rates refresh from central-bank and provider feeds throughout the trading day. For travel cash and small purchases any intraday rate is fine; for large transfers, compare against your bank's sell rate, which adds 1–3% margin." },
       { question: "Why does my bank show a different rate?", answer: "Banks add a spread plus flat fees on top of the mid-market rate shown here. A $1,000 transfer at 1% spread costs $10 more than mid-market — always compare the all-in received amount, not the headline rate." },
@@ -333,6 +403,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "Ghostscript / PDF-lib",
     seoDescription: 'Free online PDF Compressor — reduce PDF file size by up to 90% with three compression tiers. Compress embedded images, remove metadata, optimize streams. ',
     seoTitle: "Compress PDF Online – Free, Small Files",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
+      { title: "2. Configure compress", desc: "Set the compress options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What are the three compression tiers?", answer: "Low compression preserves maximum quality with modest size reduction. Medium balances quality and file size. High achieves maximum compression (up to 90% smaller) with some quality trade-off, ideal for email attachments and upload limits." },
       { question: "What is the maximum PDF file size I can compress?", answer: "PDFs up to 50 MB are supported. Very large files with many high-resolution images may take longer to process, but the compression works reliably across all sizes within the limit." },
@@ -350,6 +425,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoTitle: "Word to PDF Converter – Free Online",
     seoDescription: 'Free online Word to PDF — convert DOCX/DOC with fonts, tables, and images intact. Server-side for fidelity. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Drop Word (DOCX) file(s)", desc: "Upload your Word (DOCX) source. Runs locally in your browser." },
+      { title: "2. Set PDF options", desc: "Adjust output settings for PDF — presets fit most jobs without further tuning." },
+      { title: "3. Download PDF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Will my formatting survive?", answer: "Yes — fonts, tables, images, headers, footers, and page breaks render via LibreOffice, matching desktop Word output closely. Macro/VBA code does not transfer (PDFs can't carry it)." },
       { question: "Why is this one server-side, not in-browser?", answer: "Faithful Word rendering needs a full document engine, too heavy for browsers. Files are processed on the conversion API and deleted after — unlike the local-first tools elsewhere on this site." },
@@ -366,6 +446,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Computes percentage values, percentage increases and decreases, and what-percent-of-what relationships with precise decimal arithmetic. Essential for everyday math — tips, discounts, tax rates, grade scores, and statistical comparisons where quick percentage answers are needed.',
     seoDescription: 'Free online Percentage Calculator — tips, discounts, increases, and what-percent-of-what, with precise decimals. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter the part and the whole." },
+      { title: "2. Read the percentage", desc: "Check the percentage with its base and part shown." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What can it compute?", answer: "Three modes: X% of Y (20% of ₹1,500 = ₹300), percent change (₹120 → ₹150 = +25%), and what-percent-of-what (45 is 25% of 180). Covers tips, discounts, tax, and grade math." },
       { question: "How do I reverse a discount?", answer: "A 20%-off price of ₹800 means original = 800 ÷ 0.80 = ₹1,000 — not 800 × 1.20 (₹960). Always divide by (1 − rate) to undo a percentage decrease." },
@@ -383,6 +468,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoTitle: "JPG to PDF Converter – Free Online",
     seoDescription: 'Free online JPG to PDF — merge JPG photos into one multi-page PDF in your order. Lossless, private, no uploads. ',
     dependencies: "jsPDF / Canvas API",
+    instructions: [
+      { title: "1. Drop JPG file(s)", desc: "Upload your JPG source. Runs locally on Canvas." },
+      { title: "2. Set PDF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download PDF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "How do I order the pages?", answer: "Upload images, then drag to arrange — page 1 is the first image. The PDF preserves your order exactly, one image per page." },
       { question: "What page size and orientation?", answer: "Each page auto-fits its image (landscape photos get landscape pages). For uniform A4 output, resize images to the same dimensions first with the Image Resizer." },
@@ -399,6 +489,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Computes exact age in years, months, and days from a given birth date relative to any target date. Numbers never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online Age Calculator — Computes exact age in years, months, and days from a given birth date relative to any target date. ',
     dependencies: "Date-fns / Moment.js",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter birth date." },
+      { title: "2. Read the exact age in years, months, and days", desc: "Check the exact age in years, months, and days." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       {
         question: "How does the Age Calculator count my age exactly?",
@@ -430,6 +525,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert HEIC images to JPG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.',
     seoDescription: 'Free online HEIC to JPG — Decodes Apple HEIC photos and converts them to universally compatible JPG files while preserving EXIF metadata like location and camera settings. ',
     dependencies: "heic2any",
+    instructions: [
+      { title: "1. Drop HEIC file(s)", desc: "Upload your HEIC source. Runs locally on heic2any." },
+      { title: "2. Set JPG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download JPG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       {
         question: "Will my photo's location and camera data survive the conversion?",
@@ -463,6 +563,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoTitle: "PDF to JPG Converter – Free Online",
     seoDescription: 'Free online PDF to JPG — Renders each PDF page as a high-quality JPG image, preserving layout, fonts, and embedded graphics exactly as they appear. ',
     dependencies: "PDF.js / Canvas API",
+    instructions: [
+      { title: "1. Drop PDF file(s)", desc: "Upload your PDF source. Runs locally on Canvas." },
+      { title: "2. Set JPG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download JPG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does PDF to JPG do?", answer: "Convert PDF images to JPG format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
       { question: "Where does JPEG fit best?", answer: "photographs, web images, and social media where smaller file size matters more than perfect quality." },
@@ -477,6 +582,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure. Documents stay on your device — editing and conversion run locally in your browser.',
     seoTitle: "PDF to PPT Converter – Editable Slides Free",
+    instructions: [
+      { title: "1. Drop PDF file(s)", desc: "Upload your PDF source. Runs locally in your browser." },
+      { title: "2. Set PowerPoint options", desc: "Adjust output settings for PowerPoint — presets fit most jobs without further tuning." },
+      { title: "3. Download PowerPoint", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'Are slides really editable?', answer: 'Yes — text, images, and vector graphics land as native PowerPoint objects, not screenshots.' },
       { question: 'Does layout survive?', answer: 'Structure preserves well; dense or unusual layouts deserve a quick review pass.' },
@@ -494,6 +604,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Creates stylish Unicode text in 40+ decorative font styles including double-struck, bubble, cursive, gothic, and small caps. Perfect for social media bios, gaming usernames, Discord profiles, and Instagram captions where standard fonts will not render.',
     seoDescription: 'Free online Fancy Text Generator — 40+ Unicode styles for bios, usernames, and captions. Copy-paste anywhere. ',
     dependencies: "Unicode mapping",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Fancy Text first." },
+      { title: "2. Generate", desc: "Create your Fancy Text with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "How does fancy text work?", answer: "It swaps letters for lookalike Unicode symbols (e.g., double-struck 𝕙𝕖𝕝𝕝𝕠) — not real fonts, so it renders anywhere plain text does: bios, usernames, captions, Discord." },
       { question: "Will it work on all platforms?", answer: "Modern phones, browsers, Instagram, TikTok, Discord, and games: yes. Some old systems and screen readers garble decorative characters — keep critical info (contact, links) in plain text." },
@@ -511,6 +626,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "rembg / OpenCV / TensorFlow.js",
     seoDescription: 'Remove image backgrounds free — AI cutout to transparent PNG in your browser. Handles hair and product edges. ',
     showInCategory: false,
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on TensorFlow.js." },
+      { title: "2. Configure removal", desc: "Set the removal options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "How does background removal work?", answer: "The tool uses a neural network to segment the foreground subject from the background, producing a transparent PNG. It analyzes edges, colors, and textures to identify what to keep and what to remove." },
       { question: "When using Background Remover, what image formats are supported?", answer: "JPG, PNG, WebP, and BMP inputs are accepted. Output is always PNG with a transparent background, which preserves the cutout for further editing or compositing." },
@@ -528,6 +648,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online WebP to JPG — Converts WebP images into standard JPG format, making them usable in applications and websites that do not support Google\'s modern format. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop WebP file(s)", desc: "Upload your WebP source. Runs locally on Canvas." },
+      { title: "2. Set JPG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download JPG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does WebP to JPG do?", answer: "Convert WEBP images to JPG format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
       { question: "Will converting WebP lose quality?", answer: "From lossy or lossless to lossy compressed: yes, some detail is discarded \u2014 keep the original WebP archived." },
@@ -544,6 +669,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online PNG to JPG — convert PNG to smaller JPEG. Know the transparency tradeoff first. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop PNG file(s)", desc: "Upload your PNG source. Runs locally on Canvas." },
+      { title: "2. Set JPG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download JPG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "When should I convert PNG to JPG?", answer: "For photographs and complex images where file size matters more than transparency — expect 60–90% smaller files. Keep PNG for logos, icons, and anything with transparency or sharp text edges." },
       { question: "What happens to transparency?", answer: "JPG has no alpha channel: transparent pixels become a solid background (usually white). If the transparency matters, convert to WebP instead — it keeps alpha at JPG-like sizes." },
@@ -570,6 +700,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Reduces JPG, PNG, and WebP file sizes using smart compression with a side-by-side quality preview slider — drag it and watch file size vs visual quality update live. Max 20MB per image. Perfect for web optimization, email attachments, and social media uploads.',
     dependencies: "HTML5 Canvas / libjpeg-turbo",
     seoDescription: 'Free online Image Compressor — shrink JPG, PNG, and WebP photos with a live quality slider. See file size vs quality side by side, up to 20MB per image. ',
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on Canvas." },
+      { title: "2. Configure compress", desc: "Set the compress options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "How much smaller will my image get?", answer: "Typical JPEG photos shrink 60–80% at quality 80 with no visible difference on screens. PNG screenshots with flat colors often shrink less — converting those to WebP usually beats PNG compression." },
       { question: "Should I choose JPG, PNG, or WebP output?", answer: "Photos: JPG or WebP. Graphics with transparency: PNG or WebP. WebP is smallest in most cases and supported by all modern browsers — pick it unless you need maximum compatibility with old software." },
@@ -604,6 +739,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Generates a browser extension that captures browser tabs, full screens, or specific application windows with configurable resolution, frame rate. No signup or account required.',
     seoDescription: 'Free online Screen Recorder Extension — Generates a browser extension that captures browser tabs, full screens, or specific application windows with configurable resolution, frame rate. ',
     dependencies: "MediaRecorder API",
+    instructions: [
+      { title: "1. Pick what to share", desc: "Choose tab, window, or full screen when the browser prompts; grant mic if narrating." },
+      { title: "2. Record", desc: "Capture locally via MediaRecorder — keep the tab alive while recording." },
+      { title: "3. Preview and download", desc: "Watch the preview, then save the WebM file to your device." },
+    ],
     faqs: [
       { question: "What does this extension capture?", answer: "It can record browser tabs, full desktop screens, or specific application windows. You choose the source before recording starts and can configure resolution and frame rate." },
       { question: "What format is the recorded video saved in?", answer: "Recordings are saved as WebM files using the VP8/VP9 codec, which is widely supported by video players and editors. The format offers good quality at reasonable file sizes." },
@@ -621,6 +761,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoTitle: "Merge PDF Online – Combine Files Free",
     dependencies: "pdf-lib",
     seoDescription: 'Merge PDF files online free — combine multiple PDFs into one document with drag-and-drop reordering. No uploads, 100% secure and private.',
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
+      { title: "2. Configure merge", desc: "Set the merge options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "How many PDFs can I merge?", answer: "There is no hard limit. You can merge 2, 5, 20, or more PDFs into a single document. The tool processes all files sequentially and outputs one combined PDF." },
       { question: "Can I reorder the pages?", answer: "Yes. The drag-and-drop interface lets you reorder PDFs before merging. You can also mix pages from different PDFs to create a custom document order." },
@@ -638,6 +783,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Renders a scannable QR code from any text or URL using a client-side Reed-Solomon encoder. Download as PNG.',
     dependencies: "qrcode.js",
     seoDescription: 'Free QR code generator online — create QR codes for URLs and text. Download high-resolution PNG. Free to start with no account — fair daily limits apply, free accounts get more.',
+    instructions: [
+      { title: "1. Set size and error correction first", desc: "Set size and error correction first so the output matches your need." },
+      { title: "2. Generate", desc: "Create the QR image with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the QR image where needed; regenerate for fresh options." },
+    ],
     faqs: [
       { question: "What can I encode in a QR code?", answer: "Any text string, URL, email address, phone number, or Wi-Fi credentials. URLs are the most common use, but the encoder handles any UTF-8 text up to the QR code capacity limit." },
       { question: "What is the download format and resolution?", answer: "QR codes are generated as high-resolution PNG files suitable for print and digital use. The resolution is sufficient for business cards, posters, flyers, and screen display." },
@@ -663,6 +813,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Splits a loan principal into equal monthly installments using the standard reducing-balance formula with configurable annual interest and tenure. Figures never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online EMI Calculator — Splits a loan principal into equal monthly installments using the standard reducing-balance formula with configurable annual interest and tenure. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter loan principal, annual interest rate, and tenure in months." },
+      { title: "2. Read the monthly EMI", desc: "Check the monthly EMI with total interest and payable." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What loan types does this calculator support?", answer: "Any loan with fixed EMI payments — home loans, car loans, personal loans, education loans, and business loans. It uses the standard reducing-balance formula used by banks worldwide." },
       { question: "What inputs do I need to provide?", answer: "Three inputs: principal loan amount, annual interest rate (%), and loan tenure in months or years. The calculator instantly computes your monthly EMI, total interest payable, and total payment." },
@@ -709,6 +864,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Analyzes your writing with real-time word count, sentence count, syllable count, paragraphs, and advanced readability metrics — Flesch-Kincaid Reading Ease, Grade Level, estimated speaking time, and keyword density. Essential for writers, students, and SEO professionals optimizing content for readability.',
     dependencies: "Vanilla JS",
     seoDescription: 'Free online Word Counter — analyze writing with real-time word, sentence, syllable, and paragraph counts plus Flesch-Kincaid readability scores, grade level, speaking time, and keyword density. ',
+    instructions: [
+      { title: "1. Paste your content", desc: "Drop the text into Word Counter — full documents are fine, length is free." },
+      { title: "2. Read the counts", desc: "Check each metric row; toggle options (with/without spaces) to match your target definition." },
+      { title: "3. Copy what you need", desc: "Copy individual figures or the full breakdown for your brief or caption limits." },
+    ],
     faqs: [
       { question: "What readability metrics are calculated?", answer: "Flesch-Kincaid Reading Ease, Flesch-Kincaid Grade Level, Gunning Fog Index, Coleman-Liau Index, SMOG Index, and Automated Readability Index. These help you match content to your target audience." },
       { question: "Does it count character and character-no-spaces?", answer: "Yes. The tool provides word count, character count (with and without spaces), sentence count, paragraph count, and syllable count — all updating in real time as you type or paste text." },
@@ -743,6 +903,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert MKV video files to MP4 format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MKV to MP4 — Re-encapsulates MKV video files into the more universally compatible MP4 container without re-encoding the underlying video stream. ',
     dependencies: "FFmpeg",
+    instructions: [
+      { title: "1. Drop MKV file(s)", desc: "Upload your MKV source. Runs locally on FFmpeg." },
+      { title: "2. Set MP4 options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "3. Download MP4", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Does converting MKV to MP4 re-encode the video?", answer: "No. The converter re-muxes (repackages) the video and audio streams from the MKV container into the MP4 container. The actual video quality, resolution, and bitrate remain identical." },
       { question: "Why is MKV less compatible than MP4?", answer: "MP4 is supported by virtually every device, browser, and streaming platform. MKV is open-source and feature-rich but not natively supported by many TVs, game consoles, and mobile devices." },
@@ -760,6 +925,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: "Generate natural-sounding speech from text using your browser's built-in voices, including Hindi, Tamil, Telugu, Bengali, and more Indian languages. Adjust speed, pitch, and volume — download your text as .txt.",
     dependencies: "Web Speech API",
     seoDescription: 'Free text to speech online with Indian accents — convert text to natural-sounding audio using browser voices. Hindi, Tamil, Telugu, and more. Free to start; downloads use credits included with a free account.',
+    instructions: [
+      { title: "1. Paste or type text", desc: "Articles, scripts, or notes up to the visible limit. Plain sentences speak cleanest." },
+      { title: "2. Pick voice and speed", desc: "Choose language, voice, and rate; preview 10 seconds before the full read." },
+      { title: "3. Play or save audio", desc: "Listen in-browser or download the narration for videos and revision." },
+    ],
     faqs: [
       { question: "Which Indian languages are supported?", answer: "Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Punjabi, and English with Indian accents. Each language has multiple voice options." },
       { question: "What voices are available?", answer: "Your browser's built-in voices — male and female options vary by device and OS. Pick from the voice list in the tool; quality depends on your system voices." },
@@ -799,6 +969,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Generates random integers or decimals within a user-defined min-max range with optional repetition filtering. Uses the browser random number generator — fine for games, raffles, and sampling, not for security secrets. Input never leaves your device — everything runs locally in your browser.',
     seoDescription: 'Free online Random Number Generator — integers and decimals in any range, with no-repeat option. For games and draws. ',
     dependencies: "Math.random()",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Random Number first." },
+      { title: "2. Generate", desc: "Create your Random Number with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "How do I run a fair draw?", answer: "Set min 1, max = number of entries, enable no-repeat filtering, generate once per prize. Screen-record the draw if the audience needs proof — the tool itself keeps no audit trail." },
       { question: "Is it cryptographically secure?", answer: "No — it uses Math.random(), fine for games, raffles, sampling, and testing. For passwords, tokens, or anything adversarial, use the Password Generator (Web Crypto) instead." },
@@ -816,6 +991,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Takes any long URL and generates a compact, shareable short link. Uses cloud-based processing.',
     seoDescription: 'Free online URL Shortener — Takes any long URL and generates a compact, shareable short link. ',
     dependencies: "TinyURL API, is.gd API",
+    instructions: [
+      { title: "1. Paste the long URL", desc: "Any public http(s) address. The destination stays visible to the shortening service — never shorten links with secrets or tokens." },
+      { title: "2. Shorten", desc: "Managed providers with failover answer in seconds (~10/min pace)." },
+      { title: "3. Copy the short link", desc: "Copy for sharing. For links that must never break, prefer your own domain shortener." },
+    ],
     faqs: [
       { question: "Where do shortened URLs go?", answer: "Your long URL is sent to our shortening API, which returns a compact link. The destination URL is visible to the shortening service by design — don't shorten private URLs containing secrets or tokens." },
       { question: "Do shortened links expire?", answer: "Links persist per the shortening provider's policy. For links that must never break, use your own domain shortener instead." },
@@ -858,6 +1038,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Projects the future value of recurring mutual-fund investments using compounded monthly returns based on historical or assumed growth rates. Figures never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online SIP Calculator — project mutual-fund SIP growth with monthly compounding. See future value, invested amount, and gains. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter monthly amount, expected annual return, and years." },
+      { title: "2. Read the maturity value", desc: "Check the maturity value with invested-vs-gains split." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "How is SIP future value calculated?", answer: "FV = P × [((1+r)^n − 1) / r] × (1+r), with monthly rate r and n months. Example: ₹10,000/month at 12% annual (≈1%/month) for 10 years (120 months) → ≈₹23.2 lakh on ₹12 lakh invested." },
       { question: "What return rate should I assume?", answer: "Indian equity funds averaged ~12% over long periods, but use 10–12% for planning and 8% for conservative estimates. The calculator shows invested vs gains separately so you can sanity-check the growth assumption." },
@@ -874,6 +1059,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Computes Body Mass Index from metric or imperial height and weight inputs, categorizing the result into underweight, normal, overweight. Health data never leaves your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online BMI Calculator — Computes Body Mass Index from metric or imperial height and weight inputs, categorizing the result into underweight, normal, overweight. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter height and weight." },
+      { title: "2. Read the BMI value", desc: "Check the BMI value with its weight band." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What units does the BMI calculator support?", answer: "Both metric (kg/cm) and imperial (lbs/ft-in) inputs are supported. Toggle between units and the calculator converts and computes your BMI instantly." },
       { question: "What BMI categories are shown?", answer: "The result is categorized into underweight (below 18.5), normal weight (18.5–24.9), overweight (25–29.9), and obese (30+). These are the standard WHO classifications." },
@@ -910,6 +1100,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Image",
     description: 'Caption classic meme templates or upload your pictures — top/bottom Impact text, custom fonts, instant download with custom fonts and positioning.',
     seoTitle: "Meme Generator Online – Free Meme Maker",
+    instructions: [
+      { title: "1. Pick a template and top/bottom text first", desc: "Pick a template and top/bottom text first so the output matches your need." },
+      { title: "2. Generate", desc: "Create the captioned meme with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the captioned meme where needed; regenerate for fresh options." },
+    ],
     faqs: [
       { question: "Is my work uploaded anywhere when using Meme Generator?", answer: "No — memeing runs locally in your browser; free tier carries fair daily limits." },
       { question: "Top/bottom Impact text?", answer: "The classic meme style, with custom fonts and positioning available." },
@@ -927,6 +1122,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Provides a structured, form-based interface for entering work history, education, and skills, then renders a professionally formatted PDF resume. Input never leaves your device — everything runs locally in your browser.',
     seoDescription: 'Free online Resume Builder — fill work history, education, and skills once; download a clean ATS-friendly PDF resume. ',
     dependencies: "React / html2pdf.js",
+    instructions: [
+      { title: "1. Complete each section", desc: "Fill the Resume Builder fields in order — required items first, optional details after." },
+      { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
+      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+    ],
     faqs: [
       { question: "What sections should my resume include?", answer: "Contact header, 2–3 line summary, work history (newest first, with quantified achievements), skills, education. Freshers: lead with projects and internships; experienced hires: keep it to one page per 10 years." },
       { question: "Will this resume pass ATS screening?", answer: "Yes — single-column layout, standard section headings, real text (not images), and common fonts. Avoid tables, text boxes, and graphics, which confuse older applicant-tracking parsers." },
@@ -965,6 +1165,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoTitle: "GST Calculator India – Free Online",
     dependencies: "Vanilla JS",
     seoDescription: 'Free online GST calculator for India — compute GST inclusive and exclusive prices for 5%, 12%, 18%, and 28% slabs. Instant, accurate, and 100% client-side.',
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter the amount and the GST rate slab." },
+      { title: "2. Read the CGST/SGST split", desc: "Check the CGST/SGST split with net and gross totals." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "Which GST slabs are supported?", answer: "All four Indian GST slabs: 5% (essential items), 12% (processed food, business services), 18% (most goods and services), and 28% (luxury items). Select the applicable rate for your calculation." },
       { question: "Can I calculate both GST-inclusive and GST-exclusive amounts?", answer: "Yes. Enter the base amount to get the GST-inclusive total, or enter the inclusive amount to reverse-calculate the base price and GST component. Both directions work instantly." },
@@ -981,6 +1186,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Scales images to exact pixel dimensions or percentage-based sizes with intelligent resampling algorithms that preserve sharpness.',
     dependencies: "Canvas API / Sharp",
     seoDescription: 'Resize images online free — exact pixels or percentage, with resampling that keeps edges sharp. ',
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on Canvas." },
+      { title: "2. Configure resize", desc: "Set the resize options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Exact pixels or percentage — which to use?", answer: "Exact pixels for platform requirements (e.g., 1920×1080 hero, 1080×1080 post); percentage for quick proportional shrinks. Percentage preserves aspect ratio automatically; exact dimensions let you lock one side." },
       { question: "Will downscaling blur my image?", answer: "Minimal loss with proper resampling — halving a 4000px photo to 2000px stays crisp. Upscaling beyond ~2× invents pixels and softens detail; use the AI Upscaler instead for enlargements." },
@@ -998,6 +1208,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Generates cryptographically strong random passwords with fully customizable length, character sets, and pattern rules. Input never leaves your device — everything runs locally in your browser.',
     seoDescription: 'Free online Password Generator — create strong random passwords with custom length and character sets, generated securely in your browser. ',
     dependencies: "Crypto API",
+    instructions: [
+      { title: "1. Set length, symbols, and count first", desc: "Set length, symbols, and count first so the output matches your need." },
+      { title: "2. Generate", desc: "Create a password with one click." },
+      { title: "3. Copy and reuse", desc: "Copy a password where needed; regenerate for fresh options." },
+    ],
     faqs: [
       { question: "How long should my password be?", answer: "12 characters minimum for everyday accounts (≈79 bits of entropy from a 94-character set); 16+ (≈105 bits) for email, banking, and password-manager master passwords. Every extra character multiplies guessing effort ~94×." },
       { question: "Random characters or a passphrase?", answer: "Random strings pack more entropy per character; 5-word passphrases are easier to type and remember. Use random for stored-in-manager logins, passphrases for the few you must memorize." },
@@ -1015,6 +1230,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors. Code never leaves your device — formatting and validation run locally in your browser.',
     seoDescription: 'Free online Diff Checker — Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors. ',
     dependencies: "diff-match-patch",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Diff Checker." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "What types of differences does it highlight?", answer: "Insertions (new lines added), deletions (lines removed), and modifications (changed lines) are each highlighted with distinct background colors so you can spot every difference at a glance." },
       { question: "Is there a limit on text size?", answer: "There's no hard limit. Very large texts (100KB+) may take a moment to compare, but the diff-match-patch algorithm handles substantial inputs efficiently." },
@@ -1031,6 +1251,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Displays your public IPv4 and IPv6 addresses with geolocation data (city, ISP, ASN, timezone). Network engineers use it to verify VPN connectivity. Uses cloud-based processing.',
     seoDescription: 'Free online IP Address Lookup — Displays your public IPv4 and IPv6 addresses with geolocation data (city, ISP, ASN, timezone). Network engineers use it to verify VPN connectivity. ',
     dependencies: "MaxMind / IP-API",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for IP Address Lookup." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "What information does the IP lookup show?", answer: "Your public IPv4 and IPv6 addresses, city, country, region, ISP name, ASN (Autonomous System Number), timezone, and approximate latitude/longitude coordinates." },
       { question: "Does it show my real IP even with a VPN?", answer: "It shows the IP address visible to external servers. If you're connected to a VPN, it will display the VPN server's IP and location, not your physical one — which is exactly how to verify your VPN is working." },
@@ -1074,6 +1299,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: "Calculate net salary after taxes — enter gross salary, deductions, and tax brackets to see your take-home pay with a full breakdown.",
     seoDescription: 'Free online Salary Calculator — Calculate net salary after taxes ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter CTC with city and regime." },
+      { title: "2. Read the in-hand figure", desc: "Check the in-hand figure with deduction split." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What tax regime does this calculator support?", answer: "It supports both the old and new Indian tax regimes. Select your regime to see accurate TDS deductions under the applicable income tax slabs and standard deduction rules." },
       { question: "What deductions are included?", answer: "The calculator accounts for standard deduction, Section 80C (EPF, PPF, ELSS), Section 80D (health insurance), HRA exemption, and other common deductions under the old regime." },
@@ -1090,6 +1320,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: "Trim and cut audio files online — MP3, WAV, M4A, FLAC, and OGG. Select start and end points visually on the waveform, then download the trimmed clip.",
     seoDescription: 'Free online Audio Cutter — Trim and cut audio files online ',
     dependencies: "Web Audio API / FFmpeg",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
+      { title: "2. Configure cutter", desc: "Set the cutter options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "How do I select the exact part of the audio to keep?", answer: "Drag the start and end markers on the waveform display to set your trim points. You can also type exact timestamps in the input fields for frame-accurate cuts." },
       { question: "Does cutting the audio reduce its quality?", answer: "No. The cutter extracts the selected portion without re-encoding. The output quality matches the original file exactly — there is no generation loss from trimming." },
@@ -1107,6 +1342,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online MP3 to WAV — Convert compressed MP3 audio files into uncompressed WAV format for professional audio editing. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop MP3 file(s)", desc: "Upload your MP3 source. Runs locally on FFmpeg." },
+      { title: "2. Set WAV options", desc: "Set WAV bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download WAV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does MP3 to WAV do?", answer: "Converts MP3 files to WAV format \u2014 universal music playback and sharing across all devices and platforms to professional audio editing, mastering, and archival in DAWs and production software. All conversion happens locally in your browser with no file size limits." },
       { question: "How long does MP3-to-WAV conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
@@ -1122,6 +1362,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Pomodoro Timer manages work and break intervals with fully customizable session lengths and auto-start options. Tasks never leave your device — everything stores locally in your browser.',
     seoDescription: 'Free online Pomodoro Timer — 25/5 focus cycles with custom lengths and auto-start. Beat procrastination. ',
     dependencies: "Web Audio API / Vanilla JS",
+    instructions: [
+      { title: "1. Set focus and break", desc: "Classic 25 focus / 5 break, or tune to your rhythm." },
+      { title: "2. Work the block", desc: "Single-task until the bell; jot intrusions aside instead of chasing them." },
+      { title: "3. Take the real break", desc: "Stand, water, eyes off screen — breaks you skip silently tax the next block." },
+    ],
     faqs: [
       { question: "How does Pomodoro work?", answer: "25 minutes focused work, 5 minutes break, repeat; after 4 cycles take a 15–30 minute break. One task per pomodoro, phone away — the timer enforces the rhythm." },
       { question: "What if 25 minutes doesn't fit my work?", answer: "Adjust freely: 50/10 suits deep coding and writing; 15/5 suits admin and email. The protocol matters (single-tasking + breaks), not the exact numbers." },
@@ -1160,6 +1405,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online EPUB to PDF — Convert e-books to PDF format. Preserves structure, images, and formatting. ',
     dependencies: "jszip, pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Drop EPUB file(s)", desc: "Upload your EPUB source. Runs locally on pdf-lib." },
+      { title: "2. Set PDF options", desc: "Adjust output settings for PDF — presets fit most jobs without further tuning." },
+      { title: "3. Download PDF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does EPUB to PDF do?", answer: "Converts EPUB files to PDF format \u2014 e-readers, mobile devices, and accessible digital books to document sharing, printing, and archival with consistent formatting. All conversion happens locally in your browser with no file size limits." },
       { question: "Should I keep the original EPUB files?", answer: "Yes \u2014 archive EPUB originals before batch-converting. Re-converting from PDF back to EPUB never restores discarded data." },
@@ -1184,6 +1434,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Produces downloadable PDF or HTML invoices with customizable line items, tax rates, discounts, and business logo placement. Figures never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online Invoice Generator — create GST-ready PDF or HTML invoices with line items, tax rates, discounts, and your logo. ',
     dependencies: "PDF-lib / Vue.js",
+    instructions: [
+      { title: "1. Complete each section", desc: "Fill the Invoice Generator fields in order — required items first, optional details after." },
+      { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
+      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+    ],
     faqs: [
       { question: "What fields go on a GST-compliant invoice?", answer: "Supplier and buyer GSTIN, invoice number and date, HSN/SAC codes per line item, taxable value, CGST+SGST (intra-state) or IGST (inter-state) breakup, and place of supply. The generator includes all of these as line-item fields." },
       { question: "How should I number my invoices?", answer: "Use a continuous yearly series like INV/25-26/001 — tax authorities require sequential, gap-free numbering per financial year. Start a fresh series each April." },
@@ -1200,6 +1455,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Business Card Maker provides a WYSIWYG editor with snap-to-grid alignment and preset card dimensions. Designs never leave your device — everything renders locally in your browser.',
     seoDescription: 'Free online Business Card Maker — Business Card Maker provides a WYSIWYG editor with snap-to-grid alignment and preset card dimensions. ',
     dependencies: "React / Canvas API",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Business Card first." },
+      { title: "2. Generate", desc: "Create your Business Card with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What card sizes are available?", answer: "Standard business card sizes: US (3.5 x 2 inches), EU (85 x 55 mm), and custom dimensions. Each template is pre-sized for print-ready output." },
       { question: "Can I add my own logo and images?", answer: "Yes. Upload your logo, photos, or icons and position them on the card canvas. Drag, resize, and layer elements freely." },
@@ -1217,6 +1477,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match. Code never leaves your device — formatting and validation run locally in your browser.',
     seoDescription: 'Free online Regex Tester — Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match. ',
     dependencies: "regex.js",
+    instructions: [
+      { title: "1. Paste Regex", desc: "Paste Regex text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Test", desc: "Run the test and read each result." },
+      { title: "3. Fix and rerun", desc: "Fix failures and re-run." },
+    ],
     faqs: [
       { question: "How does the real-time matching work?", answer: "As you type your regex pattern and test string, matches are highlighted instantly. The tool uses the JavaScript RegExp engine, so what you see is exactly how the pattern will behave in your code." },
       { question: "Does it support all regex flags?", answer: "Yes. You can toggle common flags like global (g), case-insensitive (i), multiline (m), and dotAll (s) using checkboxes. The flags are applied to your pattern in real time." },
@@ -1252,6 +1517,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: "Dictate live microphone speech to text in multiple languages using on-device browser recognition.",
     seoDescription: 'Free online Speech to Text — live microphone dictation in multiple languages. On-device recognition, private. ',
     dependencies: "Web Speech API",
+    instructions: [
+      { title: "1. Allow the microphone", desc: "Grant mic access once; speak clearly 6–12 inches away in a quiet room." },
+      { title: "2. Dictate", desc: "Talk at natural pace — punctuation commands insert marks as you go." },
+      { title: "3. Copy the transcript", desc: "Edit misheard words, then copy clean text into your notes or doc." },
+    ],
     faqs: [
       { question: "Which languages are supported?", answer: "Dozens, including English, Hindi, Tamil, Telugu, Bengali, Spanish, French, and German. Accuracy is highest on clear speech in major languages; heavy accents or background noise lower it." },
       { question: "How accurate is the transcription?", answer: "Clean recordings typically hit 90–95% word accuracy. For meetings and interviews, budget 10–15 minutes of cleanup per hour of audio — proper nouns and crosstalk are the usual errors." },
@@ -1269,6 +1539,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoTitle: "PDF to EPUB Converter – Free Online",
     seoDescription: 'Free online PDF to EPUB — reflowable ebooks for Kindle and readers, with chapters and images kept. ',
     dependencies: "JSZip / pdf-lib",
+    instructions: [
+      { title: "1. Drop PDF file(s)", desc: "Upload your PDF source. Runs locally on pdf-lib." },
+      { title: "2. Set EPUB options", desc: "Adjust output settings for EPUB — presets fit most jobs without further tuning." },
+      { title: "3. Download EPUB", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Will my ebook reflow on small screens?", answer: "Yes — text becomes reflowable with adjustable font size, unlike fixed-layout PDF. Tables and multi-column pages are linearized; check the chapter breaks after conversion." },
       { question: "What happens to images and chapters?", answer: "Images carry over at readable resolution; detected headings become a navigable table of contents. Scanned PDFs need OCR first — images of text won't reflow." },
@@ -1305,6 +1580,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Strips GPS coordinates, camera metadata, timestamps, and software fingerprints from JPEG and PNG images. Sensitive data never leaves your device — encryption runs locally in your browser.',
     seoDescription: 'Free online EXIF Remover — strip GPS, camera, and timestamp metadata from photos before sharing. Local, instant. ',
     dependencies: "exifr / Piexifjs",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on exifr." },
+      { title: "2. Configure removal", desc: "Set the removal options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What data hides in my photos?", answer: "GPS coordinates (often within meters), camera model, timestamps, and sometimes software fingerprints. Posting an original phone photo can reveal your home location — stripping EXIF removes all of it." },
       { question: "Does cleaning affect image quality?", answer: "No. EXIF is metadata alongside the pixels; removing it changes zero pixels. File size drops slightly (a few KB) since the metadata block is gone." },
@@ -1322,6 +1602,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "mp4-to-mkv",
     dependencies: "ffmpeg",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop MP4 file(s)", desc: "Upload your MP4 source. Runs locally on FFmpeg." },
+      { title: "2. Set MKV options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "3. Download MKV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does MP4 to MKV Converter do?", answer: "Converts MP4 files to MKV format \u2014 universal video playback on any device to advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file. All conversion happens locally in your browser with no file size limits." },
       { question: "Where does MKV fit best?", answer: "advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file." },
@@ -1338,6 +1623,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "mp4-to-mov",
     dependencies: "ffmpeg",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop MP4 file(s)", desc: "Upload your MP4 source. Runs locally on FFmpeg." },
+      { title: "2. Set MOV options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "3. Download MOV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does MP4 to MOV Converter do?", answer: "Convert MP4 video files to MKV format directly in your browser. 100% free, private \u2014 your files never leave your device." },
       { question: "Why convert MP4 to MOV?", answer: "MP4 (MPEG-4 Part 14) is lossy compressed \u2014 best for universal video playback on any device \u2014 phones, smart TVs, web browsers, and social media. MOV (QuickTime Movie) is lossless or lossy \u2014 best for Apple ecosystem \u2014 Final Cut Pro, iMovie, and macOS video editing workflows." },
@@ -1354,6 +1644,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "mkv-to-mov",
     dependencies: "ffmpeg",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop MKV file(s)", desc: "Upload your MKV source. Runs locally on FFmpeg." },
+      { title: "2. Set MOV options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "3. Download MOV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does MKV to MOV Converter do?", answer: "Converts MKV files to MOV format \u2014 advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file to Apple ecosystem. All conversion happens locally in your browser with no file size limits." },
       { question: "Will converting MKV lose quality?", answer: "From lossless container to lossless or lossy: yes, some detail is discarded \u2014 keep the original MKV archived." },
@@ -1370,6 +1665,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "mov-to-mkv",
     dependencies: "ffmpeg",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop MOV file(s)", desc: "Upload your MOV source. Runs locally on FFmpeg." },
+      { title: "2. Set MKV options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "3. Download MKV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does MOV to MKV Converter do?", answer: "Convert MKV video files to MOV format directly in your browser. 100% free, private \u2014 your files never leave your device." },
       { question: "What MOV files convert best?", answer: "Complete, uncorrupted MOV files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
@@ -1385,6 +1685,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: "Reduces MP4, MOV, and WebM video file sizes using configurable CRF (Constant Rate Factor) encoding, resolution scaling, and bitrate control. Includes a quality preview before processing. Videos never leave your device — compression and conversion run locally in your browser with FFmpeg WASM.",
     dependencies: "FFmpeg / WebCodecs API",
     seoDescription: 'Free online Video Compressor — reduce MP4, MOV, and WebM file sizes with CRF encoding, resolution scaling, and bitrate control. 30MB guest / 150MB free sign-in / 2GB Pro. ',
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
+      { title: "2. Configure compress", desc: "Set the compress options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What compression methods are available?", answer: "Three methods: CRF (Constant Rate Factor) for quality-based compression, resolution scaling to reduce dimensions, and bitrate control for predictable file sizes. Combine methods for maximum reduction." },
       { question: "What is CRF and how do I choose a value?", answer: "CRF (Constant Rate Factor) controls quality. Lower CRF = higher quality/larger file. Typical values: 18 (high quality), 23 (default/good balance), 28 (smaller file). 18-23 is recommended for most use cases." },
@@ -1423,6 +1728,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Pretty-prints raw JSON with configurable indent width, key sorting, and bracket collapsing options while flagging syntax errors with exact.',
     dependencies: "JSONLint",
     seoDescription: 'Free JSON formatter online — format, validate, and beautify JSON with configurable indentation and sorting. Syntax error highlighting included.',
+    instructions: [
+      { title: "1. Paste JSON", desc: "Paste JSON text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Format", desc: "Format with indent and style options." },
+      { title: "3. Copy output", desc: "Copy the clean output for your project." },
+    ],
     faqs: [
       { question: "What does the formatter do to my JSON?", answer: "It pretty-prints minified JSON with proper indentation, sorts keys alphabetically (optional), and collapses or expands nested brackets. Malformed JSON gets flagged with the exact line number of the syntax error." },
       { question: "Can I choose the indent size?", answer: "Yes. Select from 2 spaces (default), 4 spaces, tabs, or minified output. The indent setting applies instantly as you switch between options." },
@@ -1439,6 +1749,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Crawls any website and generates a standards-compliant XML sitemap. Supports JavaScript sites (React, Next.js, Vue), detects broken links, and provides SEO health insights.',
     seoDescription: 'Free online XML Sitemap Generator — Crawl any website and generate a standards-compliant XML sitemap. Supports JavaScript sites (React, Next.js, Vue), detects broken links, and provides SEO health insights. ',
     dependencies: "Fetch API / DOMParser",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for XML Sitemap first." },
+      { title: "2. Generate", desc: "Create your XML Sitemap with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "Where does the crawl run?", answer: "On our server: pages are fetched and analyzed server-side, then the sitemap is generated for download. Crawled URLs are not retained after your session." },
       { question: "How many pages can it crawl?", answer: "Free crawls go up to 100 URLs; signed-in users up to 200 and Pro up to 2000. Crawls over 500 URLs are split automatically into 500-URL sitemap files plus a sitemap index — upload them all and submit the index to Google." },
@@ -1498,6 +1813,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online JSON to CSV — Parses structured JSON data—including nested objects and arrays—and flattens it into a clean CSV spreadsheet with proper column headers. ',
     dependencies: "PapaParse",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop JSON file(s)", desc: "Upload your JSON source. Runs locally in your browser." },
+      { title: "2. Set CSV options", desc: "Adjust output settings for CSV — presets fit most jobs without further tuning." },
+      { title: "3. Download CSV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does JSON to CSV do?", answer: "Converts JSON files to CSV format \u2014 APIs, configuration files, and data exchange between web services to spreadsheets, database exports, and data imports. All conversion happens locally in your browser with no file size limits." },
       { question: "Why convert JSON to CSV?", answer: "JSON (JavaScript Object Notation) is human-readable structured data \u2014 best for APIs, configuration files, and data exchange between web services. CSV (Comma-Separated Values) is tabular plain text \u2014 best for spreadsheets, database exports, and data imports." },
@@ -1521,6 +1841,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Removes selected page ranges from a PDF while renumbering the remaining pages and updating any internal page references. Documents stay on your device — editing and conversion run locally in your browser.',
     seoTitle: "Delete PDF Pages – Free Online Remover",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
+      { title: "2. Configure delete", desc: "Set the delete options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'Does deleting renumber pages?', answer: 'Yes — remaining pages renumber and internal references update automatically.' },
       { question: 'Can I recover deleted pages?', answer: 'Not after saving — work on a copy when experimenting with large deletions.' },
@@ -1538,6 +1863,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert PNG images to SVG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.',
     seoDescription: 'Free online PNG to SVG — Traces bitmap PNG shapes into clean SVG paths using Potrace in WebAssembly, with controls for curve tolerance, corner threshold. ',
     dependencies: "Potrace",
+    instructions: [
+      { title: "1. Drop PNG file(s)", desc: "Upload your PNG source. Runs locally in your browser." },
+      { title: "2. Set SVG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download SVG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does PNG to SVG do?", answer: "Convert PNG images to SVG format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
       { question: "What PNG files convert best?", answer: "Complete, uncorrupted PNG files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
@@ -1562,6 +1892,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Calculates gross margin percentage, markup percentage, cost, and selling price from any two known variables — perfect for retail pricing, wholesale negotiations, and e-commerce product listing optimization where you need to work backwards from a target margin.',
     seoDescription: 'Free online Margin Calculator — calculate gross margin %, markup %, cost, or selling price from any two known variables. Perfect for retail pricing, wholesale, and e-commerce. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter revenue and cost." },
+      { title: "2. Read the margin", desc: "Check the margin with markup shown." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What is the difference between margin and markup?", answer: "Margin is profit as a share of selling price; markup is profit as a share of cost. Example: cost $80, price $100 → margin 20%, markup 25%. Same profit, different base — mixing them up is the most common pricing error." },
       { question: "How do I work backwards from a target margin?", answer: "Enter your cost and target margin %; the calculator solves for price. Example: cost $80 with a 30% target margin → price = $80 / (1 − 0.30) = $114.29." },
@@ -1597,6 +1932,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Measures return on investment by comparing net gain or loss against the original cost, expressed as both a percentage and a dollar amount. Essential for marketing campaign evaluation, equipment purchase decisions, real estate investment analysis, and comparing investment opportunities.',
     seoDescription: 'Free ROI calculator — percentage and dollar returns, annualized, with the metric traps flagged. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter gain and cost." },
+      { title: "2. Read the return percentage", desc: "Check the return percentage with profit." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "How is ROI calculated?", answer: "ROI = (gain − cost) ÷ cost. Example: $12,000 revenue on $10,000 ad spend → ($12,000−$10,000)÷$10,000 = 20%. Simple, but time-blind — see annualization below." },
       { question: "Why annualize ROI?", answer: "20% in 3 months (≈107% annualized) beats 20% in 2 years (≈9.5% annualized). Annualized ROI = (1+ROI)^(1/years) − 1. Always attach a horizon or comparisons lie." },
@@ -1613,6 +1953,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Computes VAT-inclusive and VAT-exclusive amounts for EU member-state rates (standard and reduced) with country-specific rules for digital services. Figures never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free EU VAT calculator — add/strip VAT by country, standard and reduced rates, digital-goods rules. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter net amount and VAT rate." },
+      { title: "2. Read the gross total", desc: "Check the gross total with tax split." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "How do I add or remove VAT?", answer: "Add: net × (1 + rate). Strip: gross ÷ (1 + rate). Example at 20%: €100 net → €120 gross; €120 gross → €100 net. Never subtract 20% from gross (€96 — wrong)." },
       { question: "Which rate applies?", answer: "Standard rates run 17–27% by member state (Germany 19%, France 20%, Hungary 27%); reduced rates cover food, books, and hospitality. Digital services use the CUSTOMER's country rate under EU VAT MOSS rules." },
@@ -1629,6 +1974,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Evaluates password strength using zxcvbn entropy analysis: score, crack time estimate, length, character diversity, dictionary words, and pattern repetition.',
     seoDescription: 'Free password strength checker — zxcvbn entropy score, crack-time estimate, and fixes. ',
     dependencies: "zxcvbn",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Password Strength Checker." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "What does the score mean?", answer: "zxcvbn scores 0–4 from real-world cracking models (not just length): 0–1 fall in seconds (dictionary words, patterns), 2 takes hours, 3 takes years, 4 takes centuries. Aim for 3+ on important accounts, 4 on email and banking." },
       { question: "Why is 'Tr0ub4dor&3' weak but 'correct horse battery staple' strong?", answer: "Leetspeak substitutions are in every cracking dictionary — that 11-character example falls in ~3 days. Four random common words (≈44 bits) take centuries despite looking simple. Length beats complexity theater." },
@@ -1646,6 +1996,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Strips comments, whitespace, and shortens local variable names in JavaScript source without altering execution semantics. No signup or account required.',
     seoDescription: 'Free online JS Minifier — Strips comments, whitespace, and shortens local variable names in JavaScript source without altering execution semantics. ',
     dependencies: "Terser",
+    instructions: [
+      { title: "1. Paste JS", desc: "Paste JS text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Minify", desc: "Minify to one compact line." },
+      { title: "3. Copy minified", desc: "Copy the minified output." },
+    ],
     faqs: [
       { question: "What does the minifier remove?", answer: "Comments, extra whitespace, line breaks, and optional local variable name shortening. The output is functionally identical JavaScript with a significantly smaller file size." },
       { question: "Will minification break my code?", answer: "No. The Terser engine preserves execution semantics. It only removes dead code, comments, and whitespace — never logic, function calls, or variable references." },
@@ -1664,6 +2019,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online Base64 Encode/Decode — convert text and files to Base64 and back, with MIME detection. Private, in-browser. ',
     dependencies: "btoa/atob",
     showInCategory: false,
+    instructions: [
+      { title: "1. Paste Base64", desc: "Paste Base64 text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Encode", desc: "Encode to the target format." },
+      { title: "3. Copy encoded", desc: "Copy the encoded output." },
+    ],
     faqs: [
       { question: "When should I use Base64?", answer: "Embedding small images in CSS/HTML data URIs, passing binary through JSON APIs, and encoding credentials for Basic auth headers. It is an encoding, not encryption — anyone can decode it." },
       { question: "Why is the output ~33% larger?", answer: "Base64 maps every 3 bytes to 4 ASCII characters by design. A 3MB file becomes ~4MB of text — fine for small assets, wasteful for large ones." },
@@ -1680,6 +2040,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Render typed text as realistic handwritten output with configurable fonts, ink colors, paper styles, and simulated pressure variations. Create handwritten-looking notes, letters, and assignments.',
     seoDescription: 'Free online Text to Handwriting — realistic handwritten notes with fonts, ink colors, and paper styles. Export as image. ',
     dependencies: "Canvas API",
+    instructions: [
+      { title: "1. Type or paste text", desc: "Notes, letters, or assignments in plain paragraphs." },
+      { title: "2. Pick ink and paper", desc: "Choose handwriting style, pen color, and ruled or plain background." },
+      { title: "3. Download the page", desc: "Save the handwritten-style image for sharing or printing." },
+    ],
     faqs: [
       { question: "How realistic is the output?", answer: "Configurable handwriting fonts with ink color, paper backgrounds (lined, grid, plain), and simulated pressure variation. At a glance it passes as handwriting; experts spot the repeated letterforms on close inspection." },
       { question: "Can I use it for school assignments?", answer: "Technically yes, ethically risky — most schools treat submitting machine-written work as your own handwriting as dishonesty. Safer uses: cards, invitations, stylized quotes, and design mockups." },
@@ -1696,6 +2061,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Creates printer-friendly receipt pages with itemized purchases, payment method, date, and merchant details in a compact single-page layout. Figures never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online Receipt Generator — printer-friendly single-page receipts with items, tax, payment, and merchant details. ',
     dependencies: "Canvas API / jsPDF",
+    instructions: [
+      { title: "1. Complete each section", desc: "Fill the Receipt Generator fields in order — required items first, optional details after." },
+      { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
+      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+    ],
     faqs: [
       { question: "What goes on a proper receipt?", answer: "Merchant name/address, date, itemized lines with prices, subtotal, tax, total, and payment method. The generator lays all of these out on one printable page." },
       { question: "Receipt vs invoice — which do I need?", answer: "Receipts prove payment already made (for customers and reimbursements); invoices request payment (with due dates and GSTIN). Generate receipts after payment, invoices before." },
@@ -1742,6 +2112,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: "Convert MP4/WebM to GIF animations. Videos up to 30MB as guest, 150MB signed in, 2GB Pro. Videos never leave your device — compression and conversion run locally in your browser with FFmpeg WASM.",
     seoDescription: 'Free online Video to GIF — Convert MP4/WebM to GIF animations. 30MB guest / 150MB free sign-in / 2GB Pro. ',
     dependencies: "FFmpeg / gif.js",
+    instructions: [
+      { title: "1. Drop video file(s)", desc: "Upload your video source. Runs locally on FFmpeg." },
+      { title: "2. Set GIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download GIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What video formats can I convert to GIF?", answer: "MP4, WebM, MOV, AVI, and MKV files are supported. The tool uses FFmpeg to extract frames and gif.js to encode the final GIF animation." },
       { question: "Can I control the GIF frame rate and resolution?", answer: "Yes. You can set the output frame rate (fps), resize dimensions, and quality. Lower frame rates and smaller dimensions produce much smaller GIF files." },
@@ -1801,6 +2176,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online CSV to JSON — Reads CSV files and converts each row into a structured JSON object, correctly inferring data types and handling quoted fields. ',
     dependencies: "PapaParse",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop CSV file(s)", desc: "Upload your CSV source. Runs locally in your browser." },
+      { title: "2. Set JSON options", desc: "Adjust output settings for JSON — presets fit most jobs without further tuning." },
+      { title: "3. Download JSON", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does CSV to JSON do?", answer: "Converts CSV files to JSON format \u2014 spreadsheets, database exports, and data imports to APIs, configuration files, and data exchange between web services. All conversion happens locally in your browser with no file size limits." },
       { question: "Will converting CSV lose quality?", answer: "From tabular plain text to human-readable structured data: quality is preserved as far as the formats allow." },
@@ -1817,6 +2197,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online CSV to XML — Parses CSV data and converts it into well-formed XML documents using configurable root and row element names. ',
     dependencies: "PapaParse / xml2js",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop CSV file(s)", desc: "Upload your CSV source. Runs locally in your browser." },
+      { title: "2. Set XML options", desc: "Adjust output settings for XML — presets fit most jobs without further tuning." },
+      { title: "3. Download XML", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does CSV to XML do?", answer: "Converts CSV files to XML format \u2014 spreadsheets, database exports, and data imports to enterprise systems, SOAP APIs, document formats like DOCX and SVG. All conversion happens locally in your browser with no file size limits." },
       { question: "Where does XML fit best?", answer: "enterprise systems, SOAP APIs, document formats like DOCX and SVG." },
@@ -1851,6 +2236,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Formats SQL queries with proper keyword capitalization, indentation, and clause alignment for readable database operations.',
     seoDescription: 'Free online SQL Formatter — Reindents and rewrites SQL queries with configurable dialect support (MySQL, PostgreSQL, SQL Server, BigQuery) and keyword-case preference. ',
     dependencies: "sql-formatter",
+    instructions: [
+      { title: "1. Paste SQL", desc: "Paste SQL text into the input area. Nothing runs until you trigger it." },
+      { title: "2. Format", desc: "Format with indent and style options." },
+      { title: "3. Copy output", desc: "Copy the clean output for your project." },
+    ],
     faqs: [
       { question: "Which SQL dialects are supported?", answer: "MySQL, PostgreSQL, SQL Server, BigQuery, SQLite, Oracle, and Standard SQL. Each dialect applies the correct keyword syntax and function formatting." },
       { question: "Can I control keyword capitalization?", answer: "Yes. Choose between uppercase keywords (SELECT, WHERE, JOIN), lowercase (select, where, join), or original case. Uppercase is the most common convention." },
@@ -1868,6 +2258,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Generates UUID v4 random identifiers in standard 36-character string format with an optional compact hex mode (no dashes). Code never leaves your device — formatting and validation run locally in your browser.',
     seoDescription: 'Free online UUID Generator — Generates UUID v4 random identifiers in standard 36-character string format with an optional compact hex mode (no dashes). ',
     dependencies: "uuid",
+    instructions: [
+      { title: "1. Set version and count first", desc: "Set version and count first so the output matches your need." },
+      { title: "2. Generate", desc: "Create UUIDs with one click." },
+      { title: "3. Copy and reuse", desc: "Copy UUIDs where needed; regenerate for fresh options." },
+    ],
     faqs: [
       {
         question: "What is the difference between UUID v4 and v1?",
@@ -1908,6 +2303,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Calculates Basal Metabolic Rate using the Mifflin-St Jeor equation with age, sex, height, and weight. Nutritionists use it for diet planning. Health data never leaves your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online BMR Calculator — Mifflin-St Jeor basal metabolic rate by age, sex, height, weight. Diet-planning baseline. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter age, weight, height, and gender." },
+      { title: "2. Read the daily burn", desc: "Check the daily burn with needs estimate." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What is BMR?", answer: "Basal Metabolic Rate — calories your body burns at complete rest in 24h. Example: a 30-year-old man, 178cm, 75kg → ≈1,730 kcal/day. Everything above that (movement, digestion, exercise) adds on top." },
       { question: "Mifflin-St Jeor vs Harris-Benedict?", answer: "Mifflin-St Jeor (men: 10w + 6.25h − 5a + 5; women: −161 instead of +5) validates better against modern calorimetry, underestimating less for overweight users. This tool uses Mifflin-St Jeor." },
@@ -1967,6 +2367,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Determines the exact unit volume or revenue required to cover fixed and variable costs, with a built-in sensitivity slider for price changes. Essential for startup pricing strategy, product launch planning, and manufacturing cost analysis where knowing your break-even point is critical before committing to production.',
     seoDescription: 'Free online Break-Even Calculator — find the exact unit volume or revenue needed to cover fixed and variable costs. Price sensitivity slider for what-if analysis. Perfect for startups and product launches. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter fixed costs, unit price, and variable cost." },
+      { title: "2. Read break-even units", desc: "Check break-even units with profit zone." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What inputs do I need?", answer: "Three main inputs: fixed costs (rent, salaries, equipment), variable cost per unit (materials, labor per unit), and selling price per unit. The calculator computes break-even in both units and revenue." },
       { question: "What is the sensitivity slider?", answer: "The price sensitivity slider lets you adjust the selling price to see how it affects your break-even point. It answers 'what if I raise/lower my price?' without recalculating everything manually." },
@@ -2060,6 +2465,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Transform text between uppercase, lowercase, title case, camelCase, snake_case, kebab-case, sentence case, and alternating case with a single click. All processing is local.',
     seoDescription: 'Free online Case Converter — UPPER, lower, Title, camelCase, snake_case, kebab-case in one click. For code and prose. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Paste source for Case Converter", desc: "Paste source for Case Converter into the input area. Nothing runs until you trigger it." },
+      { title: "2. Convert", desc: "Pick direction and target." },
+      { title: "3. Copy converted", desc: "Copy the converted output." },
+    ],
     faqs: [
       { question: "Which case for which job?", answer: "UPPER for constants and headings; Title Case for document titles; camelCase for JavaScript variables; snake_case for Python/files; kebab-case for URLs and CSS classes. Pick by ecosystem convention, not taste." },
       { question: "How does Title Case handle small words?", answer: "Articles and short prepositions (a, the, of, in) stay lowercase mid-title per Chicago/AP style — the converter follows standard title-casing rules, not naive capitalize-every-word." },
@@ -2097,6 +2507,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Compute MD5, SHA-1, SHA-256, and SHA-512 hashes from text or file input using CryptoJS.',
     seoDescription: 'Free online MD5 & SHA Hash Generator — Compute MD5, SHA-1, SHA-256, and SHA-512 cryptographic hashes from text or file input. All processing happens in your browser, nothing is uploaded.',
     dependencies: "CryptoJS",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for MD5 & SHA Hash first." },
+      { title: "2. Generate", desc: "Create your MD5 & SHA Hash with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "Which hash algorithms are supported?", answer: "MD5, SHA-1, SHA-256, and SHA-512. Each produces a fixed-length hash string — MD5 (32 hex chars), SHA-1 (40), SHA-256 (64), SHA-512 (128)." },
       { question: "Can I hash files, not just text?", answer: "Yes. Paste text or upload a file. The tool computes the hash of the file contents using the CryptoJS library entirely in your browser." },
@@ -2125,6 +2540,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Generates scannable barcodes in major symbologies including EAN-13, Code 128, QR Code, and UPC-A from typed input or pasted data. Input never leaves your device — everything runs locally in your browser.',
     seoDescription: 'Free barcode generator — EAN-13, UPC-A, Code 128, and QR. Retail-ready, scannable output. ',
     dependencies: "JsBarcode",
+    instructions: [
+      { title: "1. Set format and size first", desc: "Set format and size first so the output matches your need." },
+      { title: "2. Generate", desc: "Create the barcode with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the barcode where needed; regenerate for fresh options." },
+    ],
     faqs: [
       { question: "Which symbology should I use?", answer: "Retail products: EAN-13 (international) or UPC-A (North America) — these need GS1-registered numbers to scan at checkout. Internal tracking: Code 128 (dense, alphanumeric). Customer phones: QR Code." },
       { question: "Do I need to buy barcode numbers?", answer: "For retail checkout, yes — EAN/UPC numbers come from GS1 (never reuse another company's prefix). For warehouse, tickets, and internal labels, Code 128 with your own numbering is free and sufficient." },
@@ -2149,6 +2569,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Inserts page number labels at user-chosen positions (bottom-center, top-right, etc.) with configurable font, size, and starting offset. Documents stay on your device — editing and conversion run locally in your browser.',
     seoTitle: "Add Page Numbers to PDF – Free Online",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
+      { title: "2. Configure add page", desc: "Set the add page options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'Where can numbers sit?', answer: 'Bottom-center, top-right, and other corners — with configurable font and size.' },
       { question: 'Can numbering start late?', answer: 'Yes — start from any number, so front matter stays unnumbered.' },
@@ -2194,6 +2619,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Projects customer lifetime value using average order value, purchase frequency, gross margin, and estimated customer lifespan in months. SaaS founders and e-commerce operators use LTV to determine acquisition budgets, segment high-value customers, and forecast recurring revenue.',
     seoDescription: 'Free online LTV Calculator — customer lifetime value from ARPA, margin, and lifespan, with the 3:1 LTV:CAC rule explained. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter your figures — the tool labels each field it needs." },
+      { title: "2. Read the LTV", desc: "Check the LTV with margin applied." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "How is LTV calculated?", answer: "LTV = ARPA × gross margin × average lifetime in months. Example: $50 ARPA × 80% margin × 20 months = $800 LTV. E-commerce variant swaps ARPA for average order value × purchase frequency." },
       { question: "What is a good LTV:CAC ratio?", answer: "3:1 or higher — $800 LTV supports up to ~$267 CAC. Below 3:1 you're overpaying for growth; above 5:1 you're likely under-spending and growing slower than you could." },
@@ -2210,6 +2640,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Divides total sales-and-marketing spend by the number of new customers acquired in the same period to produce a blended acquisition cost. Startups and growth teams use CAC to evaluate marketing channel efficiency, optimize ad spend, and benchmark against LTV.',
     seoDescription: 'Free online CAC Calculator — fully-loaded acquisition cost per customer, payback math, and the LTV:CAC check. ',
     dependencies: "Vanilla JS",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter spend and new customers." },
+      { title: "2. Read the CAC", desc: "Check the CAC with payback months." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "How is CAC calculated?", answer: "CAC = fully-loaded sales + marketing cost ÷ new customers in the same period. Example: $50,000 spend for 500 customers = $100 CAC. Same-period matching matters — don't divide Q1 spend by Q2 customers." },
       { question: "What counts as fully-loaded cost?", answer: "Ad spend plus salaries, tools, agency fees, and content production. Ad-only CAC of $40 becomes $100+ fully loaded — the version investors and the LTV:CAC ratio actually use." },
@@ -2246,6 +2681,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online XML to CSV — Parses XML documents of any depth and transforms elements and attributes into a tabular CSV structure with automatically generated column paths. ',
     dependencies: "xml2js / PapaParse",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop XML file(s)", desc: "Upload your XML source. Runs locally in your browser." },
+      { title: "2. Set CSV options", desc: "Adjust output settings for CSV — presets fit most jobs without further tuning." },
+      { title: "3. Download CSV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does XML to CSV do?", answer: "Converts XML files to CSV format \u2014 enterprise systems, SOAP APIs, document formats like DOCX and SVG to spreadsheets, database exports, and data imports. All conversion happens locally in your browser with no file size limits." },
       { question: "How long does XML-to-CSV conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
@@ -2397,6 +2837,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online XML to JSON — Transforms well-formed XML documents into equivalent JSON structures, mapping attributes to prefixed keys and text content to a configurable key. ',
     dependencies: "xml2js",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop XML file(s)", desc: "Upload your XML source. Runs locally in your browser." },
+      { title: "2. Set JSON options", desc: "Adjust output settings for JSON — presets fit most jobs without further tuning." },
+      { title: "3. Download JSON", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does XML to JSON do?", answer: "Transforms well-formed XML documents into equivalent JSON structures, mapping attributes to prefixed keys and text content." },
       { question: "Where does JSON fit best?", answer: "APIs, configuration files, and data exchange between web services." },
@@ -2422,6 +2867,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoTitle: "Passport Photo Maker India – Free Online",
     seoDescription: 'Free online Indian Passport Photo Maker — crop any photo to compliant 3.5x4.5 cm with auto face positioning and clean background. ',
     dependencies: "Canvas API / react-cropper",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Passport Photo Maker (India) first." },
+      { title: "2. Generate", desc: "Create your Passport Photo Maker (India) with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "What size does the tool output?", answer: "A print-ready 3.5 × 4.5 cm crop with the face auto-positioned to official proportions — accepted for Indian passport, visa, and OCI applications." },
       { question: "What photo should I upload?", answer: "A front-facing, evenly lit portrait on a plain background, taken within the last 6 months. No shadows across the face, no head coverings except for religious reasons, neutral expression with both eyes open." },
@@ -2439,6 +2889,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoTitle: "Aadhaar Card Photo Cropper – Free Online",
     seoDescription: 'Free online Aadhaar Wallet Cropper — Crop Aadhaar card photos to standard 3.5x3.5 cm wallet size with auto face detection using OpenCV Haar cascades. 100% private, no uploads.',
     dependencies: "Canvas API",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on Canvas." },
+      { title: "2. Configure crop", desc: "Set the crop options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What size does it crop to?", answer: "Standard Indian wallet photo size: 3.5 x 3.5 cm (1.38 x 1.38 inches). This is the standard size for laminated wallet cards and ID holders in India." },
       { question: "How does face detection work?", answer: "The tool uses OpenCV Haar cascade classifiers to detect faces in the uploaded image. It automatically centers the crop on the detected face for a well-composed result." },
@@ -2545,6 +3000,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoTitle: "PAN Card Photo Resizer – Free Online",
     seoDescription: 'Free online PAN Card Resizer — fit PAN photos to 3.5x2.5 cm with auto crop and proper margins. Private, in-browser. ',
     dependencies: "Canvas API",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on Canvas." },
+      { title: "2. Configure resize", desc: "Set the resize options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What dimensions does the tool output?", answer: "A 3.5 × 2.5 cm crop with automated face centering and regulation margins — sized for NSDL/UTIITSL e-KYC uploads and PAN application photo fields." },
       { question: "What file format and size should I download?", answer: "JPG under 50KB is the safe choice for NSDL e-sign and UTIITSL portals, which reject oversized uploads. The tool compresses while keeping the face region sharp." },
@@ -2561,6 +3021,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Extracts the audio track from MP4 video files and saves it as a standalone MP3 file. All processing runs locally in your browser with FFmpeg WASM — nothing is uploaded.',
     seoDescription: 'Free online MP4 to MP3 Converter — Extract audio from MP4 video files and save as MP3. 100% browser-based, no uploads.',
     dependencies: "ffmpeg",
+    instructions: [
+      { title: "1. Drop MP4 file(s)", desc: "Upload your MP4 source. Runs locally on FFmpeg." },
+      { title: "2. Set MP3 options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does MP4 to MP3 Converter do?", answer: "Extracts the audio track from MP4 video files and saves it as a standalone MP3 file. All processing runs locally in your browser with FFmpeg WASM \u2014 nothing is uploaded." },
       { question: "Why convert MP4 to MP3?", answer: "MP4 (MPEG-4 Part 14) is lossy compressed \u2014 best for universal video playback on any device \u2014 phones, smart TVs, web browsers, and social media. MP3 (MPEG-1 Audio Layer 3) is lossy compressed \u2014 best for universal music playback and sharing across all devices and platforms." },
@@ -2576,6 +3041,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Extract the audio track from QuickTime MOV files and convert it to MP3 format. All processing runs locally in your browser with FFmpeg WASM — nothing is uploaded.',
     seoDescription: 'Free online MOV to MP3 Converter — Extract audio from QuickTime MOV files and convert to MP3. 100% browser-based, no uploads.',
     dependencies: "ffmpeg",
+    instructions: [
+      { title: "1. Drop MOV file(s)", desc: "Upload your MOV source. Runs locally on FFmpeg." },
+      { title: "2. Set MP3 options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why would I extract audio from a MOV file?", answer: "MOV files contain both video and audio tracks. If you only need the audio — a podcast clip, a song from a video, or a voice recording — extracting it as MP3 gives you a smaller, audio-only file." },
       { question: "What audio quality will the MP3 have?", answer: "The converter defaults to 192kbps, which sounds excellent for most purposes. You can adjust the bitrate for smaller files (128kbps) or higher quality (320kbps) depending on your needs." },
@@ -2592,6 +3062,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Extract the audio track from WebM video files and convert it to MP3 format. All processing runs locally in your browser with FFmpeg WASM — nothing is uploaded.',
     seoDescription: 'Free online WebM to MP3 Converter — Extract audio from WebM video files and convert to MP3. 100% browser-based, no uploads.',
     dependencies: "ffmpeg",
+    instructions: [
+      { title: "1. Drop WebM file(s)", desc: "Upload your WebM source. Runs locally on FFmpeg." },
+      { title: "2. Set MP3 options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does WebM to MP3 Converter do?", answer: "Extract the audio track from WebM video files and convert it to MP3 format. All processing runs locally in your browser with FFmpeg WASM \u2014 nothing is uploaded." },
       { question: "What WebM files convert best?", answer: "Complete, uncorrupted WebM files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },

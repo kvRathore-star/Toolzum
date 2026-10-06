@@ -9,6 +9,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'Utility',
     id:  "224",
     dependencies: 'None',
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter the value with from- and to-units." },
+      { title: "2. Read the converted value", desc: "Check the converted value with formula shown." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What units can this converter handle?", answer: "Length (mm, cm, m, km, in, ft, yd, mi) with more unit families available. Enter any value and see the conversion to all supported units instantly." },
       { question: "How many feet are in a meter?", answer: "1 meter = 3.28084 feet. All conversions use internationally standardized factors." },
@@ -31,6 +36,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: 'gst-invoice-generator',
     description: 'Generates compliant PDF invoices with mandatory Indian GST fields — HSN/SAC codes, GSTIN, place of supply, and tax breakdown. Everything runs locally in your browser.',
     seoTitle: "GST Invoice Generator India – Free GST Bill Maker",
+    instructions: [
+      { title: "1. Complete each section", desc: "Fill the GST Invoice Generator fields in order — required items first, optional details after." },
+      { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
+      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+    ],
     faqs: [
       { question: "What GST slabs apply?", answer: "5%, 12%, 18%, and 28% depending on item category — the tool applies the right slab per line item." },
       { question: "CGST+SGST or IGST — which?", answer: "Intra-state sales split CGST and SGST equally; inter-state sales use IGST in full." },
@@ -49,6 +59,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: 'itr-filing-helper',
     description: 'Step-by-step assistant for India Income Tax Return filing. ITR form selection, 80C/80D deductions, salary and house property income.',
     seoTitle: "ITR Filing Helper India – Free Tax Guide",
+    instructions: [
+      { title: "1. Complete each section", desc: "Fill the ITR Filing Helper fields in order — required items first, optional details after." },
+      { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
+      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+    ],
     faqs: [
       { question: "Which ITR form do I need?", answer: "ITR-1 for salary, ITR-2 for capital gains, ITR-3 for business, ITR-4 for presumptive — matched to your income." },
       { question: "80C vs 80D?", answer: "80C covers investments up to ₹1.5L (PPF, ELSS); 80D covers health insurance premiums separately." },
@@ -79,6 +94,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'Converter',
     id:  "232",
     dependencies: 'FFmpeg WASM',
+    instructions: [
+      { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on FFmpeg." },
+      { title: "2. Set MP4 options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download MP4", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does GIF to MP4 Converter do?", answer: "Convert GIF animations to MP4 videos for drastically smaller file sizes. Content creators use this to shrink animated GIFs by up to 90% for social media, Discord, and web pages \u2014 all in your browser, nothing uploaded." },
       { question: "What GIF files convert best?", answer: "Complete, uncorrupted GIF files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
@@ -100,6 +120,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: 'aadhaar-card-masker',
     description: 'Securely masks the first 8 digits of your 12-digit Aadhaar number on card images, leaving only the last 4 digits visible for safe sharing. Fully local processing.',
     seoTitle: "Aadhaar Card Mask Online – Free Masking",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on Canvas." },
+      { title: "2. Configure process", desc: "Set the process options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does masked mean?", answer: "First 8 digits become Xs, last 4 visible (XXXX-XXXX-1234) per UIDAI convention." },
       { question: "Where is masked Aadhaar accepted?", answer: "KYC copies and verifications that don't need the full number." },
@@ -116,6 +141,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: 'pan-verification',
     description: 'Verifies PAN card number format and structure locally. Extracts the taxpayer category from the PAN code — Individual, Company, Trust, etc. No data is sent to any server.',
     seoTitle: "PAN Verification Online – Free PAN Check",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for PAN Card Verification." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "What is the PAN structure?", answer: "10 characters: 5 letters, 4 digits, 1 letter (e.g., ABCDE1234F)." },
       { question: "What does the 4th letter mean?", answer: "Holder type — P individual, C company, H HUF, plus trusts and firms." },
@@ -136,6 +166,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'indian-utilities',
     id:  "236",
     dependencies: 'IFSC API',
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for IFSC Code Lookup." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "What details does the IFSC lookup return?", answer: "Bank name, branch name, full address, city, district, state, contact number, and MICR code. The IFSC code uniquely identifies a specific bank branch in India." },
       { question: "What is an IFSC code?", answer: "IFSC (Indian Financial System Code) is an 11-character alphanumeric code assigned by the RBI to identify bank branches for electronic fund transfers (NEFT, RTGS, IMPS). Format: AAAA0NNNNNN (first 4 = bank, 5th = 0, last 6 = branch)." },
@@ -149,6 +184,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: 'voter-id-form-helper',
     description: 'Get document checklists and step-by-step guidance for Indian voter registration forms — Form 6 (new enrollment), Form 7 (correction/objection), and Form 8 (name transfer within constituency).',
     seoTitle: "Voter ID Form Helper – Free Guide",
+    instructions: [
+      { title: "1. Complete each section", desc: "Fill the Voter ID Form Helper fields in order — required items first, optional details after." },
+      { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
+      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+    ],
     faqs: [
       { question: "Which form for new registration?", answer: "Form 6 — first-time voter enrollment with address proof attached." },
       { question: "What is EPIC?", answer: "Electors Photo Identity Card number — your voter ID once approved." },
@@ -169,6 +209,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'indian-utilities',
     id:  "238",
     dependencies: 'Postal API',
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for India Pincode Finder." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "Is my search sent anywhere?", answer: "Yes. Lookups query the live postal API, so the pincode or name you search is transmitted for the lookup. Nothing is stored — there is no search history beyond your own browser session." },
       { question: "How current is the data?", answer: "Results come live from the official postal API on every search — no stale built-in database. For critical address verification, cross-check with India Post." },
@@ -181,6 +226,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: 'hindi-regional-font-generator',
     description: 'Generate stylish Unicode fonts for Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, and other Indian regional scripts. Copy-paste styled text for social media, WhatsApp, and more.',
     seoTitle: "Hindi Font Generator – Free Devanagari Text",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Hindi / Regional Font first." },
+      { title: "2. Generate", desc: "Create your Hindi / Regional Font with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "Unicode or Kruti Dev?", answer: "Unicode for everything new; legacy Kruti Dev only for old documents." },
       { question: "Which fonts render Hindi?", answer: "Mangal, Noto Sans Devanagari, and built-in system Devanagari fonts." },
@@ -197,6 +247,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: 'indian-age-calculator',
     description: 'Calculate exact age in years, months, and days from a date of birth in DD/MM/YYYY format. Includes eligibility check for Indian government age requirements.',
     seoTitle: "Age Calculator India – Free Online",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter birth date." },
+      { title: "2. Read the exact age in years, months, and days", desc: "Check the exact age in years, months, and days." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What counts as proof?", answer: "Birth certificate, Aadhaar, PAN, or school records per asking authority." },
       { question: "Age on a future date?", answer: "Enter any target date — eligibility cutoffs computed exactly." },
@@ -217,6 +272,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'indian-utilities',
     id:  "241",
     dependencies: 'None',
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter CGPA with your university scale." },
+      { title: "2. Read the percentage", desc: "Check the percentage equivalent with the applied scale." },
+      { title: "3. Compare scenarios", desc: "Try adjacent CGPA values to see grade-band cutoffs." },
+    ],
     faqs: [
       { question: "Which formula does my university use?", answer: "CBSE: CGPA × 9.5 (7.5 CGPA = 71.25%). Mumbai University: 7.1 × CGPA + 11 (7.5 = 64.25%). Anna University: CGPA × 10. Using the wrong one misstates your score by up to 7 points — select your university first." },
       { question: "Why do formulas differ so much?", answer: "Each university calibrates to its grading curve: CBSE's 9.5 factor maps its 10-point scale to historical board percentages; MU's offset formula fits Mumbai's distribution. There is no universal converter — only per-university ones." },
@@ -234,6 +294,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'PDF',
     id:  "242",
     dependencies: 'PDF.js',
+    instructions: [
+      { title: "1. Drop PDF file(s)", desc: "Upload your PDF source. Runs locally on PDF.js." },
+      { title: "2. Set HTML options", desc: "Adjust output settings for HTML — presets fit most jobs without further tuning." },
+      { title: "3. Download HTML", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does PDF to HTML do?", answer: "Converts PDF files to HTML format \u2014 document sharing, printing, and archival with consistent formatting to web pages, email templates, and content rendering. All conversion happens locally in your browser with no file size limits." },
       { question: "How long does PDF-to-HTML conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
@@ -250,6 +315,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'PDF',
     id:  "243",
     dependencies: 'jsPDF',
+    instructions: [
+      { title: "1. Drop HTML file(s)", desc: "Upload your HTML source. Runs locally on jsPDF." },
+      { title: "2. Set PDF options", desc: "Adjust output settings for PDF — presets fit most jobs without further tuning." },
+      { title: "3. Download PDF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does HTML to PDF do?", answer: "Converts HTML files to PDF format \u2014 web pages, email templates, and content rendering to document sharing, printing, and archival with consistent formatting. All conversion happens locally in your browser with no file size limits." },
       { question: "Why convert HTML to PDF?", answer: "HTML (HyperText Markup Language) is semantic document markup \u2014 best for web pages, email templates, and content rendering. PDF (Portable Document Format) is fixed-layout document \u2014 best for document sharing, printing, and archival with consistent formatting." },
@@ -303,6 +373,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'Image',
     id:  "250",
     dependencies: 'TensorFlow.js (on-device)',
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on TensorFlow.js." },
+      { title: "2. Configure blur", desc: "Set the blur options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "How does face detection work?", answer: "The tool uses an AI-powered computer vision model to detect faces in the image. It identifies face bounding boxes and applies a configurable Gaussian blur effect to each detected region." },
       { question: "Can I adjust the blur intensity?", answer: "Yes. An adjustable blur slider lets you control the intensity from subtle to completely unrecognizable. Preview the effect before downloading." },
@@ -319,6 +394,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'Converter',
     id:  "251",
     dependencies: 'html2canvas',
+    instructions: [
+      { title: "1. Drop HTML file(s)", desc: "Upload your HTML source. Runs locally on Canvas." },
+      { title: "2. Set image options", desc: "Adjust output settings for image — presets fit most jobs without further tuning." },
+      { title: "3. Download image", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What HTML can I convert to an image?", answer: "Any valid HTML and CSS — including text, layout, gradients, shadows, borders, and images. Complex layouts with flexbox and grid are supported." },
       { question: "What output formats are available?", answer: "PNG (best for transparency and quality), JPG (smaller file size), and SVG (vector output for scalable graphics). Choose based on your use case." },
@@ -352,6 +432,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: 'marriage-biodata-maker',
     description: 'Creates printable matrimonial biodata forms with sections for personal details, family background, education, career, and partner preferences. Download as PDF for sharing on matrimonial platforms.',
     seoTitle: "Marriage Biodata Maker India – Free",
+    instructions: [
+      { title: "1. Set tone and length first", desc: "Set tone and length first so the output matches your need." },
+      { title: "2. Generate", desc: "Create the bio with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the bio where needed; regenerate for fresh options." },
+    ],
     faqs: [
       { question: "What goes in biodata?", answer: "Personal details, family background, education, horoscope optional — the Indian marriage format." },
       { question: "Photo included?", answer: "Yes — passport-style photo placement per convention included." },
@@ -368,6 +453,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: 'rental-agreement-generator',
     description: 'Generates customizable rental lease and license agreements compliant with Indian property laws. Supports leave-and-license agreements and standard tenancy formats for residential and commercial properties.',
     seoTitle: "Rental Agreement Generator India – Free",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Rental Agreement first." },
+      { title: "2. Generate", desc: "Create your Rental Agreement with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "Why 11 months?", answer: "Under 12 months avoids mandatory registration in most states — the market standard." },
       { question: "Stamp duty?", answer: "Varies by state and rent — check local rates before signing." },
@@ -410,6 +500,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'Utility',
     id:  "261",
     dependencies: 'QRCode.js',
+    instructions: [
+      { title: "1. Pick a mini-tool", desc: "Click-to-chat links, group invites, QR codes, chat formatter, or status templates — each tab works standalone." },
+      { title: "2. Fill its fields", desc: "Phone with country code plus message for links; text plus style for the formatter." },
+      { title: "3. Copy and use", desc: "Copy the wa.me link, QR, or formatted text straight into WhatsApp. Everything stays local." },
+    ],
     faqs: [
       { question: "What tools are included?", answer: "Click-to-chat link generator (wa.me), group invite link generator, QR code creator for quick connections, chat text formatter (bold, italic, strikethrough), and status text templates." },
       { question: "How do click-to-chat links work?", answer: "Enter a phone number (with country code) and a message. The tool generates a wa.me link that opens WhatsApp directly with the message pre-filled." },
@@ -427,6 +522,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'indian-utilities',
     id:  "262",
     dependencies: 'Canvas API',
+    instructions: [
+      { title: "1. Upload the scan", desc: "Aadhaar, PAN, or document photos — flat, lit, and legible." },
+      { title: "2. Enhance readability", desc: "Contrast, sharpness, and crop tune automatically with manual sliders." },
+      { title: "3. Download for upload", desc: "Save the enhanced image sized for portal upload limits." },
+    ],
     faqs: [
       { question: "Which Indian documents does it support?", answer: "Aadhaar card, PAN card, Voter ID (EPIC), Driving License, and other government-issued ID cards. The enhancer adjusts contrast, brightness, and sharpness for upload compliance." },
       { question: "Why do government portals reject my scan?", answer: "Government upload portals often require minimum DPI, specific file sizes, and clear contrast. The enhancer improves scan quality to meet these requirements without changing document content." },
@@ -1232,6 +1332,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoTitle: "Tax Saving Calculator India – Free",
     seoDescription: 'Free Indian tax regime comparer — old vs new with 80C, 80D, HRA. Know which regime wins. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter income and applicable rate." },
+      { title: "2. Read the tax payable", desc: "Check the tax payable with slab-wise breakup." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "Old vs new regime — how do I choose?", answer: "Rough rule: deductions above ~₹4–4.25 lakh favor old regime; below favors new (for ₹15L+ incomes). Example: ₹18L salary with ₹5L deductions (80C+HRA+80D+NPS) → old regime saves roughly ₹60–70k tax vs new. Enter your exact figures — the crossover is personal." },
       { question: "Which deductions matter most?", answer: "80C (₹1.5L: EPF, PPF, ELSS), HRA (often ₹2–4L for metro renters), 80D (health insurance), NPS 80CCD(1B) (extra ₹50k). Standard deduction ₹50k applies in both regimes now." },
@@ -1247,6 +1352,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "indian-utilities",
     description: 'Verifies any GSTIN (Goods and Services Tax Identification Number) instantly — returns legal name, trade name, address, registration date, and filing status. Supports bulk CSV export for accounts teams.',
     seoTitle: "GSTIN Lookup – Verify GST Numbers Free",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for GSTIN Lookup." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "How is GSTIN structured?", answer: "15 characters: 2-digit state code + 10-char PAN + entity code + Z + checksum." },
       { question: "What can I verify?", answer: "Format validity instantly; active status needs the GST portal." },
@@ -1263,6 +1373,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "indian-utilities",
     description: 'Calculates exact profit after marketplace commissions (Meesho, Amazon, Flipkart), GST, shipping costs, returns, and packaging. Compare platform profitability side-by-side for Indian e-commerce sellers.',
     seoTitle: "Seller Profit Calculator – Free Online",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter your figures — the tool labels each field it needs." },
+      { title: "2. Read the margin", desc: "Check the margin with cost breakup." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What eats margin?", answer: "Marketplace commission, GST, shipping, packaging, and returns — in that order usually." },
       { question: "How is GST handled?", answer: "Output GST passed to buyers nets against input credits in the math." },
@@ -1342,6 +1457,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: "Check if a domain name is available across major TLDs. Instantly verify domain availability, lookup registration status, and get suggestions for alternative names.",
     seoDescription: "Free online Domain Availability Checker — Check if a domain name is available across major TLDs. Instantly verify domain availability, lookup registration status, and get suggestions for alternative names. No signup required.",
     dependencies: "DNS API",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Domain Availability Checker." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "Which TLDs does it check?", answer: "Major TLDs including .com, .net, .org, .io, .dev, .co, .app, and more. The checker queries DNS records to determine if a domain is registered or available." },
       { question: "How accurate are the results?", answer: "Results are based on DNS queries and WHOIS data. A domain showing as 'available' may still be registered but not actively hosted — always verify with a registrar before purchasing." },
@@ -1368,6 +1488,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Video Format Converter — Convert between MKV, MP4, MOV, WebM, and AVI video formats. Pick any input and output format. ',
     dependencies: "FFmpeg",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
+      { title: "2. Configure conversion", desc: "Set the conversion options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       {
         question: "Which video formats does this converter support?",
@@ -1399,6 +1524,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert between MP3, WAV, FLAC, OGG, M4A, and AAC audio formats. Pick any input and output format — your files never leave your device.',
     seoDescription: 'Free online Audio Format Converter — Convert between MP3, WAV, FLAC, OGG, M4A, and AAC audio formats. Pick any input and output format. ',
     dependencies: "FFmpeg",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
+      { title: "2. Configure conversion", desc: "Set the conversion options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Which format should I choose for the best quality?", answer: "FLAC and WAV are lossless — they preserve every detail of the original audio. For smaller files with good quality, use AAC at 256kbps or OGG at 320kbps. MP3 at 320kbps is a safe universal choice." },
       { question: "Why would I convert WAV to MP3?", answer: "WAV files are large because they store uncompressed audio. Converting to MP3 reduces file size by 80-90% while maintaining quality that most listeners cannot distinguish from the original." },
@@ -1417,6 +1547,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free single-image converter — turn one photo from any format (PNG, JPG, WebP, HEIC, AVIF…) into any other, right in your browser. No uploads, no signup. ',
     dependencies: "Sharp / Browser Canvas",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on Canvas." },
+      { title: "2. Configure conversion", desc: "Set the conversion options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       {
         question: "Which image formats can I convert between?",
@@ -1456,6 +1591,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "document-converter",
     category: "Converter",
     description: 'Convert between PDF, Word, Excel, PowerPoint, JPG, EPUB, and HEIC document formats. Pick any input and output format — your files never leave your device.',
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
+      { title: "2. Configure conversion", desc: "Set the conversion options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Which documents?", answer: "Office formats, PDFs, and text convert between each other freely." },
       { question: "Formatting preserved?", answer: "Structure carries over; pixel-perfect fidelity varies by pair." },
@@ -1473,6 +1613,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "PDF",
     description: 'Extracts all text content from PDF files and converts it to clean Markdown format with proper headings, lists, and structure. Documents stay on your device — editing and conversion run locally in your browser.',
     seoTitle: "PDF to Markdown Converter – Free Online",
+    instructions: [
+      { title: "1. Drop PDF file(s)", desc: "Upload your PDF source. Runs locally on PDF.js." },
+      { title: "2. Set Markdown options", desc: "Adjust output settings for Markdown — presets fit most jobs without further tuning." },
+      { title: "3. Download Markdown", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'Do headings and lists survive?', answer: 'Yes — headings, lists, and structure convert cleanly to Markdown syntax.' },
       { question: 'What about tables and images?', answer: 'Simple tables carry over; complex layouts and images may need manual cleanup.' },
@@ -1490,6 +1635,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "PDF",
     description: 'Extract specific pages from a PDF document to create a new PDF. Select individual pages or page ranges like 1-3,5,7-9. Keeps original formatting intact.',
     seoTitle: "Extract Pages from PDF – Free Online",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
+      { title: "2. Configure extract", desc: "Set the extract options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'How do I write page ranges?', answer: 'Use 1-3,5,7-9 style: individual pages, ranges, or mixes in one expression.' },
       { question: 'Does the original stay intact?', answer: 'Yes — extraction copies pages out; the source file is never modified.' },
@@ -1510,6 +1660,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Scan to PDF — Turn photos and scanned images into a professional PDF document. Upload multiple images, reorder, and combine into a single PDF. ',
     dependencies: "pdf-lib",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload scans or photos", desc: "JPG/PNG pages in reading order; flat, legible captures work best." },
+      { title: "2. Order the pages", desc: "Drag into final sequence before binding." },
+      { title: "3. Download PDF", desc: "One multi-page document. The save counts toward free download quota (3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What image formats can I use?", answer: "JPG, PNG, WebP, BMP, and TIFF images. The tool combines multiple images into a multi-page PDF document." },
       { question: "Can I reorder pages before combining?", answer: "Yes. Drag and drop to reorder pages. Arrange them in the correct sequence before generating the final PDF." },
@@ -1535,6 +1690,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "PDF",
     description: 'Converts standard PDF files to PDF/A archival format with proper metadata, embedded fonts, and color profiles. Documents stay on your device — editing and conversion run locally in your browser.',
     seoTitle: "PDF to PDF/A Converter – Archival Free Online",
+    instructions: [
+      { title: "1. Drop PDF file(s)", desc: "Upload your PDF source. Runs locally on pdf-lib." },
+      { title: "2. Set PDF/A options", desc: "Adjust output settings for PDF/A — presets fit most jobs without further tuning." },
+      { title: "3. Download PDF/A", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'What is PDF/A?', answer: 'The ISO archival standard — self-contained files guaranteed readable decades from now.' },
       { question: 'Are fonts embedded?', answer: 'Yes — plus metadata and color profiles, so archives render identically anywhere.' },
@@ -1575,6 +1735,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Translate PDF — Extract text from a PDF and translate it between 20 languages. Output is plain text.',
     dependencies: "pdfjs-dist / MyMemory API",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload the PDF", desc: "Native-text PDFs translate best; scanned image-only files need OCR first." },
+      { title: "2. Pick the language pair", desc: "Source auto-detects; choose any supported target language." },
+      { title: "3. Download translated PDF", desc: "Layout follows the original. Verify names and numbers before official use." },
+    ],
     faqs: [
       { question: "Is my document uploaded?", answer: "Only extracted text (up to 5,000 characters) is transmitted for translation; the PDF itself is never transmitted. Nothing is stored after the translation returns." },
       { question: "Why is output plain text?", answer: "Only extracted text is translated, so PDF layout, fonts, and images do not carry over. For layout-preserving conversion, use a PDF converter instead." },
@@ -1609,6 +1774,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "PDF",
     description: 'Cover sensitive or unwanted content in PDF files with white rectangles. Select entire pages or custom areas to hide text, images, or sections before sharing or printing.',
     seoTitle: "Whiteout PDF Tool – Redact by Covering Free",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
+      { title: "2. Configure whiteout", desc: "Set the whiteout options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'Whiteout vs redaction — which?', answer: 'Whiteout covers visually; true redaction (burned removal) is needed for sensitive data leaving your hands.' },
       { question: 'Whole pages or areas?', answer: 'Both — cover entire pages or draw custom rectangles over text, images, or regions.' },
@@ -1646,6 +1816,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "PDF",
     description: 'Insert images (PNG, JPG) onto any page of your PDF document. Position and resize images anywhere on the page. Perfect for adding signatures, logos, or photos to documents.',
     seoTitle: "Add Image to PDF – Insert Pictures Free",
+    instructions: [
+      { title: "1. Drop image file(s)", desc: "Upload your image source. Runs locally on pdf-lib." },
+      { title: "2. Set PDF options", desc: "Adjust output settings for PDF — presets fit most jobs without further tuning." },
+      { title: "3. Download PDF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'Which image formats work?', answer: 'PNG and JPG — placed at any size on any page, with PNG transparency preserved.' },
       { question: 'Does transparency survive when I place PNGs?', answer: 'Yes — transparent areas stay transparent with no white boxes, composited cleanly over the page.' },
@@ -1683,6 +1858,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "PDF",
     description: 'Add visual annotations like highlights, underlines, strikeouts, and shapes to your PDF pages. Perfect for reviewing documents, marking up text, and adding visual emphasis.',
     seoTitle: "Annotate PDF Online – Free Highlighter Tool",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
+      { title: "2. Configure annotate", desc: "Set the annotate options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'Highlights, underlines, strikeouts — which when?', answer: 'Highlights for key lines, underlines for definitions, strikeouts for deletions under review.' },
       { question: 'Do collaborators see annotations?', answer: 'Yes — annotations save into the exported PDF, visible in any reader.' },
@@ -1710,6 +1890,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "PDF",
     description: 'Convert any webpage to PDF in your browser. Save articles, receipts, and web pages as PDF documents. No signup or account required.',
     seoTitle: "URL to PDF Converter – Save Web Pages Free",
+    instructions: [
+      { title: "1. Paste the page URL", desc: "Any public http(s) address for a clean, printable PDF." },
+      { title: "2. Render the page", desc: "The tool loads the page and paginates it for print." },
+      { title: "3. Download PDF", desc: "Save the document. The save counts toward free download quota (3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'What gets captured from the page?', answer: 'Articles, receipts, and full web pages — text plus layout, saved as a PDF document.' },
       { question: 'Does the page need to be public?', answer: 'Yes — the fetcher can only reach publicly visible URLs, not logged-in or paywalled pages.' },
@@ -1727,6 +1912,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "PDF",
     description: 'Convert Markdown to beautifully formatted PDF. Supports headings, bold, italic, code blocks, and lists. Documents stay on your device — editing and conversion run locally in your browser.',
     seoTitle: "Markdown to PDF Converter – Free Online",
+    instructions: [
+      { title: "1. Drop Markdown file(s)", desc: "Upload your Markdown source. Runs locally on pdf-lib." },
+      { title: "2. Set PDF options", desc: "Adjust output settings for PDF — presets fit most jobs without further tuning." },
+      { title: "3. Download PDF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'What markdown renders?', answer: 'Headings, bold, italic, code blocks, and lists — the core set, cleanly typeset.' },
       { question: 'How do code blocks look?', answer: 'Monospaced with preserved indentation — paste-ready for documentation handouts.' },
@@ -1744,6 +1934,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "PDF",
     description: 'Add a Table of Contents to your PDF documents. Organize pages with titled sections, create nested hierarchies, and navigate large documents with ease. Perfect for reports, ebooks, and manuals.',
     seoTitle: "Bookmark PDF – Add Table of Contents Free",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
+      { title: "2. Configure bookmark", desc: "Set the bookmark options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'How do nested hierarchies work?', answer: 'Chapters contain sections contain subsections — readers expand and jump at any depth.' },
       { question: 'Bookmarks vs page labels?', answer: 'Bookmarks navigate content structure; page labels number pages — use both on long documents.' },
@@ -1761,6 +1956,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "PDF",
     description: 'Converts EML files to PDF format — email backup, archival, and forensic analysis to document sharing, printing, and archival with consistent formatting. All conversion happens locally in your browser with no file size limits.',
     seoTitle: "EML to PDF Converter – Archive Emails Free",
+    instructions: [
+      { title: "1. Drop email files file(s)", desc: "Upload your email files source. Runs locally on pdf-lib." },
+      { title: "2. Set PDF options", desc: "Adjust output settings for PDF — presets fit most jobs without further tuning." },
+      { title: "3. Download PDF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'When should I convert EML to PDF?', answer: 'Email backup, archival, and forensic records — anywhere a stable shareable document beats a mail file.' },
       { question: 'Do attachments convert too?', answer: 'The message body converts reliably; large or unusual attachments may need separate handling.' },
@@ -1788,6 +1988,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "Image",
     description: 'Convert PSD images to JPG or PNG in your browser — flatten layered Photoshop files for sharing where PSD isn\'t supported. Photos never leave your device.',
     seoTitle: "PSD to JPG Converter – Open Photoshop Files Free",
+    instructions: [
+      { title: "1. Drop PSD images file(s)", desc: "Upload your PSD images source. Runs locally in your browser." },
+      { title: "2. Set JPG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download JPG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'Do PSD layers survive?', answer: 'No — JPG and PNG flatten to one layer, so keep the PSD as your editable master.' },
       { question: 'Which output for web?', answer: 'JPG for photos, PNG where transparency or crisp edges matter.' },
@@ -1806,6 +2011,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Combine multiple photos into beautiful collages. Choose from grid, strip, or featured layouts. Perfect for creating photo montages, mood boards, and social media posts.',
     seoDescription: 'Free online Collage Maker — Combine multiple photos into beautiful collages. Grid, strip, and featured layouts. ',
     dependencies: "none",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Collage first." },
+      { title: "2. Generate", desc: "Create your Collage with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "How many photos can I add to a collage?", answer: "Most layouts support between 2 and 12 photos. The exact count depends on the layout template you choose — grids support more images while featured layouts highlight fewer." },
       { question: "Can I rearrange photos after placing them?", answer: "Yes. Drag and drop photos between cells to reposition them. You can also swap photos by dragging one onto another." },
@@ -1822,6 +2032,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "Image",
     description: 'Build bar, line, and pie charts from your data in your browser — paste values, style, and export images for reports and posts.',
     seoTitle: "Chart Maker Online – Free Graph Creator",
+    instructions: [
+      { title: "1. Set options", desc: "Adjust the settings for Chart first." },
+      { title: "2. Generate", desc: "Create your Chart with one click." },
+      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+    ],
     faqs: [
       { question: "Which chart types?", answer: "Bar, line, and pie — the three that cover nearly every report and post." },
       { question: "How do I add data?", answer: "Type or paste values directly; labels and series update live." },
@@ -1859,6 +2074,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "Image",
     description: 'Edit animated GIFs frame by frame in your browser — crop, add text, trim clips, and resize without re-uploading without re-uploading anything.',
     seoTitle: "GIF Editor Online – Edit Animated GIFs Free",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
+      { title: "2. Configure edit", desc: "Set the edit options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What can I edit?", answer: "Crop frames, add text overlays, trim clips, and resize — frame-aware throughout." },
       { question: "Does it stay animated?", answer: "Yes — edits preserve animation; exports play everywhere GIFs play." },
@@ -1911,6 +2131,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Vocal Remover — Remove vocals from songs to create karaoke tracks. Extract instrumentals or acapella. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
+      { title: "2. Configure removal", desc: "Set the removal options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       {
         question: "How does Vocal Remover actually remove vocals?",
@@ -1942,6 +2167,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Combine multiple audio files into one continuous track. Supports crossfade between songs and automatic volume normalization. Perfect for making mixtapes, podcasts, and audiobooks.',
     seoDescription: 'Free online Audio Merger — Combine multiple audio files into one track with crossfade and volume normalization. ',
     dependencies: "@ffmpeg/ffmpeg",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
+      { title: "2. Configure merge", desc: "Set the merge options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "How many audio files can I merge together?", answer: "There is no limit. Add as many files as you need — the merger concatenates them in the order you arrange. Each file is processed sequentially from your browser." },
       { question: "What does the crossfade option do?", answer: "Crossfade blends the end of one track into the beginning of the next, creating a smooth transition instead of an abrupt cut. You can set the crossfade duration in seconds." },
@@ -2007,6 +2237,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "fade-in-out",
     category: "Audio",
     description: 'Apply smooth volume fades to your audio tracks. Supports fade in, fade out, or both with linear, logarithmic, exponential, and S-curve transitions. Perfect for podcast intros and outros.',
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
+      { title: "2. Configure fade", desc: "Set the fade options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What fades can I shape?", answer: "Linear, logarithmic, and S-curve fades with adjustable length." },
       { question: "Intros, outros, or both?", answer: "Either end independently — fade in, out, or both. Either end independently — fade in, out, or both together." },
@@ -2036,6 +2271,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Capture still frames from any video at precise timestamps. Extract single screenshots or batch capture at regular intervals. Export as JPG, PNG, or WebP. Perfect for thumbnails and previews.',
     seoDescription: 'Free online Video Screenshot — Capture frames from videos at precise timestamps. Single or batch extraction. ',
     dependencies: "@ffmpeg/ffmpeg",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
+      { title: "2. Configure screenshot", desc: "Set the screenshot options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "How do I capture a frame at an exact timestamp?", answer: "Use the timestamp input to enter the precise time (in seconds or HH:MM:SS format) where you want to capture. The tool extracts that exact frame from the video." },
       { question: "What image format should I choose for the screenshot?", answer: "PNG preserves full quality with no compression artifacts — best for thumbnails you will edit later. JPG produces smaller files for web use. WebP offers the best compression-to-quality ratio." },
@@ -2065,6 +2305,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Record your screen, application window, or browser tab with optional microphone audio. Choose HD, Full HD, or 2K quality. Download as WebM or MP4. No software installation needed.',
     seoDescription: 'Free online Screen Recorder — Record screen, window, or tab with mic audio. HD to 2K quality. Download as WebM or MP4. ',
     dependencies: "@ffmpeg/ffmpeg",
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
+      { title: "2. Configure record", desc: "Set the record options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Can I record just one application window?", answer: "Yes. When you start recording, the browser asks you to choose between recording your entire screen, a specific application window, or a browser tab. Pick the option that fits your needs." },
       { question: "Does the recorder capture system audio?", answer: "It captures microphone audio by default. To record system audio (the sound your computer plays), you need to share a browser tab that is playing audio — system audio capture depends on your browser and OS." },
@@ -2191,6 +2436,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "mobi-converter",
     category: "Converter",
     description: 'Convert MOBI (Kindle) e-book files to PDF or EPUB, and create MOBI files from PDF. Perfect for Kindle users who need to read books on other devices or share with non-Kindle readers.',
+    instructions: [
+      { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
+      { title: "2. Configure conversion", desc: "Set the conversion options once — one configuration applies to the whole batch." },
+      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "MOBI still relevant?", answer: "Legacy Kindle format — converts for archival or migration off old devices." },
       { question: "To EPUB?", answer: "Yes — modern reflowable EPUB format for all current readers." },
@@ -2207,6 +2457,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "odt-rtf-to-pdf",
     category: "Converter",
     description: 'Convert OpenDocument (ODT) and Rich Text Format (RTF) files to PDF. Preserves basic formatting like bold, italic, headers, and paragraphs. Perfect for LibreOffice and WordPad users.',
+    instructions: [
+      { title: "1. Drop RTF documents file(s)", desc: "Upload your RTF documents source. Runs locally on pdf-lib." },
+      { title: "2. Set PDF options", desc: "Adjust output settings for PDF — presets fit most jobs without further tuning." },
+      { title: "3. Download PDF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Which inputs?", answer: "ODT open documents and RTF rich text, both converting to PDF." },
       { question: "Formatting fidelity?", answer: "Styles, tables, and images carry into the PDF layout faithfully." },
@@ -2224,6 +2479,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "Image",
     description: 'Convert SVG vectors to PNG raster in your browser — export logos and icons at any exact pixel size. Photos never leave your device.',
     seoTitle: "SVG to PNG Converter – Free Online",
+    instructions: [
+      { title: "1. Drop SVG file(s)", desc: "Upload your SVG source. Runs locally on Canvas." },
+      { title: "2. Set PNG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download PNG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'What size should I export?', answer: 'Any — vectors scale infinitely, so export exactly the pixels you need, from favicon to poster.' },
       { question: 'Does transparency survive SVG to PNG conversion?', answer: 'Yes — transparent SVG artwork stays transparent in PNG exports.' },
@@ -2242,6 +2502,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert SVG images to JPG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.',
     seoDescription: 'Free online SVG to JPG — Convert SVG vector graphics into JPEG images for sharing on platforms that require raster formats. ',
     dependencies: "Canvas API",
+    instructions: [
+      { title: "1. Drop SVG file(s)", desc: "Upload your SVG source. Runs locally on Canvas." },
+      { title: "2. Set JPG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download JPG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Will my SVG lose vector quality as a JPG?", answer: "Yes. JPG is a raster format, so the SVG is rendered at a fixed pixel resolution during conversion. The result looks sharp at the chosen size but cannot be scaled up infinitely like the original SVG." },
       { question: "What resolution should I export the JPG at?", answer: "Match the resolution to your use case. 72 DPI for web, 150 DPI for standard print, and 300 DPI for high-quality print. The tool lets you set the output width in pixels." },
@@ -2260,6 +2525,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online PNG to GIF — Convert PNG images into GIF format for compatibility with older platforms and software. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop PNG file(s)", desc: "Upload your PNG source. Runs locally on Canvas." },
+      { title: "2. Set GIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download GIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert PNG to GIF?", answer: "GIF is supported by legacy platforms, older messaging apps, and some web contexts that don't handle PNG. Converting ensures compatibility." },
       { question: "Does PNG transparency survive?", answer: "PNG supports full alpha transparency. GIF supports only 1-bit transparency (fully on/off). Semi-transparent areas become either transparent or opaque." },
@@ -2277,6 +2547,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online JPG to GIF — Convert JPEG photos into GIF format for legacy applications and platforms with limited format support. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop JPG file(s)", desc: "Upload your JPG source. Runs locally on Canvas." },
+      { title: "2. Set GIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download GIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert JPG to GIF?", answer: "GIF is supported by legacy platforms, older messaging apps, and some web contexts that don't accept JPG. Converting ensures compatibility while keeping visual quality acceptable." },
       { question: "Does JPG's color depth survive the conversion?", answer: "JPG supports millions of colors (24-bit). GIF is limited to 256 colors. The converter uses an optimal color palette to minimize visible quality loss for photos." },
@@ -2294,6 +2569,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online WebP to GIF — Convert modern WebP images into the widely compatible GIF format. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop WebP file(s)", desc: "Upload your WebP source. Runs locally on Canvas." },
+      { title: "2. Set GIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download GIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does WebP to GIF do?", answer: "Convert WEBP images to GIF format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
       { question: "Why convert WebP to GIF?", answer: "WebP (Web Picture Format) is lossy or lossless \u2014 best for modern websites \u2014 Google-recommended format with superior compression for faster page loads. GIF (Graphics Interchange Format) is lossy (limited to 256 colors) \u2014 best for simple animations, memes, and images on platforms that support animated GIFs natively." },
@@ -2310,6 +2590,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online BMP to JPG — Convert uncompressed BMP bitmap images into space-efficient JPEG files. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop BMP file(s)", desc: "Upload your BMP source. Runs locally on Canvas." },
+      { title: "2. Set JPG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download JPG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert BMP to JPG?", answer: "BMP files are uncompressed and very large. Converting to JPG reduces file size by 90%+ while maintaining good visual quality. JPG is universally supported for web, email, and social media." },
       { question: "What quality settings does BMP to JPG offer?", answer: "Adjust JPG quality from 1-100. Higher values preserve more detail but produce larger files. 85 is a good default — visually lossless at a fraction of BMP size." },
@@ -2327,6 +2612,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online BMP to PNG — Convert BMP bitmap images into compressed PNG format with optional transparency. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop BMP file(s)", desc: "Upload your BMP source. Runs locally on Canvas." },
+      { title: "2. Set PNG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download PNG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does BMP to PNG do?", answer: "Convert BMP images to PNG format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
       { question: "Should I keep the original BMP files?", answer: "Yes \u2014 archive BMP originals before batch-converting. Re-converting from PNG back to BMP never restores discarded data." },
@@ -2342,6 +2632,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert TIFF images to JPG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.',
     seoDescription: 'Free online TIFF to JPG — Convert TIFF images into universally compatible JPEG format for sharing on the web or via email. ',
     dependencies: "Canvas API",
+    instructions: [
+      { title: "1. Drop TIFF file(s)", desc: "Upload your TIFF source. Runs locally on Canvas." },
+      { title: "2. Set JPG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download JPG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       {
         question: "Why are my TIFF files so large?",
@@ -2385,6 +2680,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free GIF to JPG converter — stills from animations in millions of colors. Frame picker inside. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on Canvas." },
+      { title: "2. Set JPG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download JPG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Which frame becomes the JPG?", answer: "You pick: scrub the animation and export the exact frame. GIFs store full frames, so the still is pixel-faithful to that moment — no motion blur beyond what the frame contains." },
       { question: "Why does the JPG look better than the GIF?", answer: "GIFs cap at 256 colors (banding in gradients); JPG renders millions. A sunset GIF's stripes become smooth gradients in the export — same pixels, richer palette." },
@@ -2402,6 +2702,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online GIF to PNG — Convert GIF images into lossless PNG format with superior color depth and compression. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on Canvas." },
+      { title: "2. Set PNG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download PNG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does GIF to PNG do?", answer: "Convert GIF images to PNG format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
       { question: "Where does PNG fit best?", answer: "graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds." },
@@ -2416,6 +2721,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "Image",
     description: 'Convert ICO favicons to editable PNG in your browser — extract icon artwork at full embedded size for reuse in any editor.',
     seoTitle: "ICO to PNG Converter – Extract Icons Free",
+    instructions: [
+      { title: "1. Drop ICO file(s)", desc: "Upload your ICO source. Runs locally on Canvas." },
+      { title: "2. Set PNG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download PNG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'Which size exports from a multi-size ICO?', answer: 'The largest embedded size, for maximum quality to work down from.' },
       { question: 'Does transparency survive ICO to PNG conversion?', answer: 'Yes — icon alpha channels carry into the PNG at full embedded size.' },
@@ -2433,6 +2743,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "Image",
     description: 'Convert next-gen JPEG XL photos to universal PNG in your browser — open JXL anywhere with zero quality loss, including shots from phones and cameras.',
     seoTitle: "JXL to PNG Converter – Open JPEG XL Free",
+    instructions: [
+      { title: "1. Drop JPEG XL file(s)", desc: "Upload your JPEG XL source. Runs locally on Canvas." },
+      { title: "2. Set PNG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download PNG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'Any quality loss?', answer: 'None meaningful — JXL lossless sources stay lossless in PNG.' },
       { question: 'Why convert JXL at all?', answer: 'Compatibility — many apps still can\'t open JPEG XL, while PNG opens everywhere.' },
@@ -2450,6 +2765,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "Image",
     description: 'Convert JPEG XL photos to compact JPG in your browser — small shareable files from next-gen originals, recompressed at your chosen quality.',
     seoTitle: "JXL to JPG Converter – Free Online",
+    instructions: [
+      { title: "1. Drop JPEG XL file(s)", desc: "Upload your JPEG XL source. Runs locally on Canvas." },
+      { title: "2. Set JPG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download JPG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: 'What\'s the quality tradeoff?', answer: 'JPG recompresses, so fine detail softens slightly versus lossless PNG — pick JPG for small files.' },
       { question: 'What quality setting?', answer: 'High 80s–90s for photos worth keeping; lower for thumbnails and previews.' },
@@ -2469,6 +2789,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online WMA to MP3 — Convert Windows Media Audio (WMA) files into universally compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop WMA file(s)", desc: "Upload your WMA source. Runs locally on FFmpeg." },
+      { title: "2. Set MP3 options", desc: "Set MP3 bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does WMA to MP3 do?", answer: "Convert WMA audio files to MP3 format directly in your browser. High-quality conversion with no file size limits." },
       { question: "Will converting WMA lose quality?", answer: "From lossy compressed to lossy compressed: quality is preserved as far as the formats allow." },
@@ -2482,6 +2807,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "opus-to-mp3",
     category: "Audio",
     description: 'Convert OPUS audio files to MP3 format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. from VoIP and streaming sources.',
+    instructions: [
+      { title: "1. Drop Opus file(s)", desc: "Upload your Opus source. Runs locally on FFmpeg." },
+      { title: "2. Set MP3 options", desc: "Set MP3 bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why MP3 from Opus?", answer: "Opus shines in VoIP and streaming — MP3 plays everywhere else." },
       { question: "Quality cost converting Opus?", answer: "Low-bitrate voice sources stay intelligible; music sources deserve high bitrates." },
@@ -2498,6 +2828,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "aiff-to-mp3",
     category: "Audio",
     description: 'Convert AIFF audio files to MP3 format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. from studio masters to portable size.',
+    instructions: [
+      { title: "1. Drop AIFF file(s)", desc: "Upload your AIFF source. Runs locally on FFmpeg." },
+      { title: "2. Set MP3 options", desc: "Set MP3 bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
+      { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why MP3 from AIFF?", answer: "Shrinking studio masters to portable size for everyday listening." },
       { question: "Quality cost converting AIFF?", answer: "Uncompressed to lossy — 256–320 kbps preserves nearly everything audible." },
@@ -2517,6 +2852,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Capture screenshots of any website directly in your browser. Choose output format, viewport size, and capture delay. No server-side processing.',
     seoDescription: 'Free online Website Screenshot — Capture screenshots of any website in your browser. Multiple formats, viewport sizes, and delay options. ',
     dependencies: "html2canvas",
+    instructions: [
+      { title: "1. Paste the page URL", desc: "Any public http(s) address. Login-walled pages capture the login screen, not the content." },
+      { title: "2. Capture", desc: "The tool renders the page and snapshots full-page or viewport as set." },
+      { title: "3. Download the image", desc: "Save the PNG for docs, decks, or bug reports (counts toward free download quota)." },
+    ],
     faqs: [
       { question: "What viewport sizes can I capture?", answer: "Common presets include desktop (1920x1080), tablet (768x1024), and mobile (375x812). You can also enter custom width and height values for any screen size." },
       { question: "When using Website Screenshot, what output formats are supported?", answer: "PNG (lossless, best for sharp text) and JPEG (compressed, smaller file size). Choose based on whether you need quality or smaller downloads." },
@@ -2535,6 +2875,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free GIF to WebP/WebM converter — animations ~10x smaller with transparency. For web and chat. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
+    instructions: [
+      { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on FFmpeg." },
+      { title: "2. Set WebP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download WebP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "How much smaller really?", answer: "Typically 8–12×: a 5MB reaction GIF becomes ~500KB WebP. GIF is a 1989 format with 256 colors; WebP/WebM use modern video compression on the same animation." },
       { question: "WebP or WebM — which output?", answer: "WebP for image contexts (img tags, chats, CMS uploads); WebM for video contexts (video tags, editing pipelines). Both keep transparency; WebM edges ahead on long clips." },
@@ -2550,6 +2895,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "Image",
     description: 'Convert modern AVIF images to universal JPG in your browser — maximum compatibility where AVIF support lags where AVIF support still lags.',
     seoTitle: "AVIF to JPG Converter – Free Online",
+    instructions: [
+      { title: "1. Drop AVIF file(s)", desc: "Upload your AVIF source. Runs locally on Canvas." },
+      { title: "2. Set JPG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download JPG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why leave AVIF?", answer: "Compatibility — JPG opens absolutely everywhere AVIF still doesn't." },
       { question: "What quality setting?", answer: "High 80s–90s for photos worth keeping; lower for thumbnails and previews." },
@@ -2567,6 +2917,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "Image",
     description: 'Convert AVIF images to lossless PNG in your browser — transparency and quality preserved for editing for editing and compositing work.',
     seoTitle: "AVIF to PNG Converter – Free Online",
+    instructions: [
+      { title: "1. Drop AVIF file(s)", desc: "Upload your AVIF source. Runs locally on Canvas." },
+      { title: "2. Set PNG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download PNG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Does transparency survive AVIF to PNG conversion?", answer: "Yes — PNG keeps the full alpha channel AVIF carries, ready for editing and compositing." },
       { question: "Is PNG bigger than AVIF?", answer: "Usually yes — PNG trades size for universal lossless compatibility." },
@@ -2584,6 +2939,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "Image",
     description: 'Convert BMP bitmaps to modern AVIF in your browser — shrink uncompressed legacy files to a fraction with royalty-free encoding.',
     seoTitle: "BMP to AVIF Converter – Free Online",
+    instructions: [
+      { title: "1. Drop BMP file(s)", desc: "Upload your BMP source. Runs locally on Canvas." },
+      { title: "2. Set AVIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download AVIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why AVIF specifically?", answer: "Royalty-free and modern — smaller than WebP with wider quality range." },
       { question: "How much smaller?", answer: "Often 5–10x smaller than the source BMP with no visible change." },
@@ -2603,6 +2963,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online BMP to GIF — Convert BMP bitmap images into GIF format for compatibility with legacy platforms. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop BMP file(s)", desc: "Upload your BMP source. Runs locally on Canvas." },
+      { title: "2. Set GIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download GIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why convert BMP to GIF?", answer: "GIF is supported by legacy platforms, older browsers, and some messaging apps that don't handle BMP. Converting ensures compatibility while keeping file sizes manageable." },
       { question: "Does GIF support all BMP colors?", answer: "BMP supports millions of colors (24-bit/32-bit). GIF is limited to 256 colors. The converter uses an optimal color palette to minimize visible quality loss." },
@@ -2620,6 +2985,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online BMP to WebP — Convert BMP bitmap images into modern WebP format with dramatically smaller sizes. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop BMP file(s)", desc: "Upload your BMP source. Runs locally on Canvas." },
+      { title: "2. Set WebP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download WebP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "How much smaller are WebP files?", answer: "WebP typically produces 25-35% smaller files than BMP at equivalent visual quality. A 5MB BMP may become 1-2MB as WebP." },
       { question: "Does WebP support transparency?", answer: "Yes. WebP supports alpha channel transparency, so any transparent areas in the BMP source are preserved in the WebP output." },
@@ -2635,6 +3005,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "Image",
     description: 'Convert GIF images to modern AVIF in your browser — still frames compress dramatically smaller than legacy GIF, ideal for poster frames and thumbnails.',
     seoTitle: "GIF to AVIF Converter – Free Online",
+    instructions: [
+      { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on Canvas." },
+      { title: "2. Set AVIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download AVIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Do animations convert?", answer: "Still frames convert reliably; true animation belongs in video formats." },
       { question: "Quality from 256 colors?", answer: "AVIF can't invent detail, but it compresses flat graphics far better than GIF." },
@@ -2654,6 +3029,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online GIF to WebP — Convert GIF images into modern WebP format for smaller file sizes with optional animation support. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on Canvas." },
+      { title: "2. Set WebP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download WebP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does GIF to WebP do?", answer: "Converts GIF files to WebP format \u2014 simple animations, memes, and images on platforms that support animated GIFs natively to modern websites. All conversion happens locally in your browser with no file size limits." },
       { question: "How long does GIF-to-WebP conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
@@ -2669,6 +3049,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert HEIC images to AVIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.',
     seoDescription: 'Free online HEIC to AVIF — Convert Apple HEIC/HEIF photos into next-gen AVIF format with superior compression. ',
     dependencies: "Canvas API",
+    instructions: [
+      { title: "1. Drop HEIC file(s)", desc: "Upload your HEIC source. Runs locally on Canvas." },
+      { title: "2. Set AVIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download AVIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       {
         question: "Why would I convert HEIC to AVIF instead of JPG?",
@@ -2701,6 +3086,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert HEIC images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.',
     seoDescription: 'Free online HEIC to GIF — Convert Apple HEIC/HEIF photos into GIF format for compatibility with older platforms. ',
     dependencies: "Canvas API",
+    instructions: [
+      { title: "1. Drop HEIC file(s)", desc: "Upload your HEIC source. Runs locally on Canvas." },
+      { title: "2. Set GIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download GIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       {
         question: "Why would I convert a HEIC photo to GIF?",
@@ -2734,6 +3124,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online HEIC to WebP — Convert Apple HEIC/HEIF photos into modern WebP format for efficient web delivery. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop HEIC file(s)", desc: "Upload your HEIC source. Runs locally on Canvas." },
+      { title: "2. Set WebP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download WebP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does HEIC to WebP do?", answer: "Convert HEIC images to WEBP format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
       { question: "What HEIC files convert best?", answer: "Complete, uncorrupted HEIC files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
@@ -2758,6 +3153,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "Image",
     description: 'Convert ICO favicons to modern WebP in your browser — small fast-loading icons for today\'s web for faster modern web delivery.',
     seoTitle: "ICO to WebP Converter – Free Online",
+    instructions: [
+      { title: "1. Drop ICO file(s)", desc: "Upload your ICO source. Runs locally on Canvas." },
+      { title: "2. Set WebP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download WebP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why WebP from an icon?", answer: "Modern web favicons — smaller than PNG, supported everywhere that matters." },
       { question: "Does transparency survive ICO to WebP conversion?", answer: "Yes — WebP keeps alpha unlike JPG, so converted icons stay transparent for modern web use." },
@@ -2777,6 +3177,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online JPG to JXL — Convert JPEG photos into cutting-edge JPEG XL format with superior compression. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop JPG file(s)", desc: "Upload your JPG source. Runs locally on Canvas." },
+      { title: "2. Set JPEG XL options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download JPEG XL", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does JPG to JXL do?", answer: "Convert JPG images to JXL format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
       { question: "Why convert JPEG to JPEG XL?", answer: "JPEG (Joint Photographic Experts Group) is lossy compressed \u2014 best for photographs, web images, and social media where smaller file size matters more than perfect quality. JPEG XL (JPEG XL) is lossy or lossless \u2014 best for next-gen image archival \u2014 better compression than JPEG with support for wide gamut and HDR." },
@@ -2792,6 +3197,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert JXL images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.',
     seoDescription: 'Free online JXL to GIF — Convert JPEG XL images into GIF format for use on legacy platforms. ',
     dependencies: "Canvas API",
+    instructions: [
+      { title: "1. Drop JPEG XL file(s)", desc: "Upload your JPEG XL source. Runs locally on Canvas." },
+      { title: "2. Set GIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download GIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why would I convert JXL to GIF?", answer: "GIF is universally supported on every platform, social media site, and messaging app. If you need to share a JXL image on a platform that does not support it, GIF is a safe fallback format." },
       { question: "Will my image lose quality as a GIF?", answer: "Yes. JXL supports millions of colors and transparency, but GIF is limited to 256 colors per frame. Photos with smooth gradients may show color banding. Flat-color graphics convert well." },
@@ -2830,6 +3240,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online SVG to AVIF — Convert SVG vector graphics into AVIF format for next-gen web delivery. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop SVG file(s)", desc: "Upload your SVG source. Runs locally on Canvas." },
+      { title: "2. Set AVIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download AVIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does SVG to AVIF do?", answer: "Convert SVG images to AVIF format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
       { question: "Where does AVIF fit best?", answer: "next-gen web images \u2014 royalty-free format with better compression than WebP and JPEG." },
@@ -2866,6 +3281,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online TIFF to AVIF — Convert TIFF images into next-gen AVIF format for best-in-class compression. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    instructions: [
+      { title: "1. Drop TIFF file(s)", desc: "Upload your TIFF source. Runs locally on Canvas." },
+      { title: "2. Set AVIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download AVIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "What does TIFF to AVIF do?", answer: "Convert TIFF images to AVIF format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
       { question: "How long does TIFF-to-AVIF conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
@@ -2880,6 +3300,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "Image",
     description: 'Convert TIFF scans and photos to compact GIF in your browser — small previews where full TIFFs are overkill where full TIFFs are overkill.',
     seoTitle: "TIFF to GIF Converter – Free Online",
+    instructions: [
+      { title: "1. Drop TIFF file(s)", desc: "Upload your TIFF source. Runs locally on Canvas." },
+      { title: "2. Set GIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download GIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "Why GIF from TIFF?", answer: "Compact previews and animations where full TIFFs are overkill." },
       { question: "Color loss?", answer: "TIFF depth collapses to 256 colors — fine for previews, never for masters." },
@@ -2898,6 +3323,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert TIFF images to WEBP format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.',
     seoDescription: 'Free online TIFF to WebP — Convert TIFF images into modern WebP format for smaller file sizes and web use. ',
     dependencies: "Canvas API",
+    instructions: [
+      { title: "1. Drop TIFF file(s)", desc: "Upload your TIFF source. Runs locally on Canvas." },
+      { title: "2. Set WebP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "3. Download WebP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+    ],
     faqs: [
       { question: "How much smaller is WebP compared to TIFF?", answer: "WebP files are typically 80-90% smaller than uncompressed TIFF. A 50MB TIFF might become 3-5MB as WebP while maintaining visually similar quality, making it ideal for web delivery." },
       { question: "Can WebP match TIFF quality for archival purposes?", answer: "No. TIFF is lossless and preserves every pixel exactly. WebP uses lossy compression by default. Use TIFF for archival master files and WebP only for web-optimized copies." },
@@ -2916,6 +3346,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoTitle: "UPI ID Validator – Free Online Check",
     seoDescription: 'Free online UPI ID Validator and QR Generator — Validate UPI IDs for @paytm, @okhdfcbank, @ybl, @sbi handles. Generate UPI payment QR codes with merchant name, amount, and transaction note. Local processing, no uploads.',
     dependencies: "QRCode.js",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for UPI ID Validator & QR Generator." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "Which UPI handles are validated?", answer: "All major Indian UPI handles: @paytm, @okhdfcbank, @ybl, @sbi, @upi, @axl, @icici, @okaxis, @oksbi, @payzapp, @amazonpay, and more. The validator checks format rules specific to each handle." },
       { question: "What does the validator check?", answer: "It verifies the UPI ID format: valid characters, handle suffix, minimum/maximum length, and correct structure. A valid format does not guarantee the UPI ID is active — it only confirms it follows the correct pattern." },
@@ -2933,6 +3368,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoTitle: "Indian Address Parser – Free Online",
     seoDescription: 'Free online Indian Address Parser — Parse unstructured Indian addresses into fields: line 1, line 2, city, district, state, pincode. Recognizes Indian states, cities, and address patterns. 100 percent local parsing.',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste source for Indian Address Parser", desc: "Paste source for Indian Address Parser into the input area. Nothing runs until you trigger it." },
+      { title: "2. Parse", desc: "Parse and read each field of the structured output." },
+      { title: "3. Verify values", desc: "Verify values against your source." },
+    ],
     faqs: [
       { question: "What fields does it extract?", answer: "Line 1 (door number, building), line 2 (street, area), city, district, state, and 6-digit pincode. The parser handles various Indian address formats and orders." },
       { question: "Does it recognize all Indian states?", answer: "Yes. All 28 states and 8 union territories are recognized by their names and common abbreviations. The parser maps cities to their correct states and districts." },
@@ -2950,6 +3390,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoTitle: "Vehicle RC Checker India – Free",
     seoDescription: 'Free online Vehicle Registration Number Checker — Parse Indian vehicle registration numbers. Identify state/UT codes, RTO codes, and series for all Indian states and union territories. Instant local parsing.',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Vehicle Registration Checker." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "What information does it extract from a registration number?", answer: "State/UT code (e.g., MH for Maharashtra, DL for Delhi), RTO code (e.g., 01 for South Mumbai), series letters, and unique number. It decodes the standard Indian license plate format." },
       { question: "Which states and UTs are covered?", answer: "All 28 states and 8 union territories. The database includes RTO codes for every registered RTO across India, from major metros to smaller districts." },
@@ -2967,6 +3412,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoTitle: "Aadhaar Number Validator – Free Check",
     seoDescription: 'Free online Aadhaar Number Validator — check any 12-digit Aadhaar with Verhoeff checksum. Spot fakes, learn the structure. ',
     dependencies: "None",
+    instructions: [
+      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Aadhaar Number Validator." },
+      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
+      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+    ],
     faqs: [
       { question: "How does Aadhaar validation work?", answer: "The 12-digit number must satisfy the Verhoeff checksum (last digit validates the first 11) and format rules — first digit 2–9, no obvious patterns like 11 repeated digits. The tool checks all of these instantly." },
       { question: "Does a valid number mean a genuine card?", answer: "No. Validation proves the number is well-formed, not that UIDAI issued it to the holder. For onboarding or KYC, always verify against UIDAI e-KYC or masked-Aadhaar XML — never trust format alone." },
@@ -2984,6 +3434,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoTitle: "SIP PPF EPF Calculator India – Free",
     seoDescription: 'Free online Indian Investment Calculator — SIP, PPF, and EPF return calculator for Indian investors. SIP lumpsum plus monthly, PPF 15-year maturity, EPF projections with current interest rates. 100 percent local.',
     dependencies: "None",
+    instructions: [
+      { title: "1. Fill the inputs", desc: "Enter monthly amount, expected annual return, and years." },
+      { title: "2. Read the maturity value", desc: "Check the maturity value with invested-vs-gains split." },
+      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+    ],
     faqs: [
       { question: "What investment types does it calculate?", answer: "SIP (Systematic Investment Plan) with lumpsum and monthly options, PPF (Public Provident Fund) with 15-year maturity, and EPF (Employee Provident Fund) with employer contribution projections." },
       { question: "What are the current interest rates used?", answer: "The calculator uses the latest announced rates: SIP returns are based on assumed annual returns (typically 10-12%), PPF at 7.1% (as of latest GOI notification), and EPF at 8.25%." },
