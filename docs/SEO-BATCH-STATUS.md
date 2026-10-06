@@ -172,3 +172,14 @@ Adversarial pass over all 65 pro tools (code-truth vs copy):
   uncapped-local truth.
 Gates: tsc 0 · eslint 0 · 26 tests green · faq-gate 0 new ·
 quality-audit 0 · 0 bare-`other` · 0 trios · 95/95 mechanical checks OK.
+
+## Shortener failover (Oct 6 — owner decision: keep Pro + fallback)
+
+`functions/api/url-shorten.ts` now tries TinyURL then is.gd (first
+valid `https?://` body wins; 502 only if both fail). No frontend change
+needed — failover is server-side; bulk backoff behavior unchanged.
+Copy is provider-neutral (no brand headline) but keeps the material
+fact: third-party service receives each URL. Deps corrected
+`Node.js / Redis` → real providers on both shorteners.
+Gates: tsc 0 · eslint 0 · edge/claims/content/UrlShortener 18 green ·
+faq-gate 0 new · quality-audit 0.

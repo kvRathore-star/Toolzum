@@ -98,6 +98,8 @@ export const CLOUD_API_PATTERNS: readonly string[] = [
   "MyMemory",
   "RDAP",
   "crt.sh",
+  "TinyURL",
+  "is.gd",
 ];
 
 /**

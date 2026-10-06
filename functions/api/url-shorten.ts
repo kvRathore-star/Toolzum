@@ -23,26 +23,41 @@ export async function onRequestGet(context: { request: Request; env: Env }): Pro
 
   recordRateLimit(DB, 'url-short', ip, '/url-shorten');
 
-  let tinyRes: Response;
-  try {
-    tinyRes = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(target)}`);
-  } catch {
-    return new Response(JSON.stringify({ error: 'Shortening service unreachable' }), {
-      status: 502,
-      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'https://toolzum.com' },
-    });
+  // Shortening providers in priority order: primary first, fallback on any
+  // failure (network error, non-2xx, or 200-with-error body). Failover is
+  // the reliability story for bulk batches — one provider's outage must not
+  // fail all N URLs. Both endpoints are plain GET text APIs.
+  const providers = [
+    (target: string) =>
+      fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(target)}`),
+    (target: string) =>
+      fetch(`https://is.gd/create.php?format=simple&url=${encodeURIComponent(target)}`),
+  ];
+
+  let shortUrl = '';
+  for (const call of providers) {
+    let providerRes: Response;
+    try {
+      providerRes = await call(target);
+    } catch {
+      continue; // unreachable provider — try the next one
+    }
+    const text = (await providerRes.text()).trim();
+    // Providers answer 200 with an "Error" body for rejected URLs — never
+    // pass that through as a success (it would get cached as a link).
+    if (providerRes.ok && /^https?:\/\/\S+$/.test(text)) {
+      shortUrl = text;
+      break;
+    }
   }
-  const text = (await tinyRes.text()).trim();
-  // tinyurl answers 200 with an "Error" body for rejected URLs — never pass
-  // that through as a success (it would get cached and displayed as a link).
-  if (!tinyRes.ok || !/^https?:\/\/\S+$/.test(text)) {
+  if (!shortUrl) {
     return new Response(JSON.stringify({ error: 'Shortening failed for this URL' }), {
       status: 502,
       headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'https://toolzum.com' },
     });
   }
 
-  return new Response(text, {
+  return new Response(shortUrl, {
     headers: {
       'Content-Type': 'text/plain',
       'Access-Control-Allow-Origin': 'https://toolzum.com',

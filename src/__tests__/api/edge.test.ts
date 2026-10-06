@@ -52,4 +52,26 @@ describe('GET /api/url-shorten contract', () => {
     expect(await res.text()).toBe('https://tinyurl.com/abc');
     expect(res.headers.get('Cache-Control')).toContain('max-age=3600');
   });
+
+  it('fails over to the second provider when the primary errors', async () => {
+    const fetchSpy = vi.fn()
+      .mockImplementationOnce(async () => new Response('Error', { status: 200 }))
+      .mockImplementationOnce(async () => new Response('https://is.gd/xyz'));
+    vi.stubGlobal('fetch', fetchSpy);
+    const res = await shortGet({
+      request: new Request('https://toolzum.com/api/url-shorten?url=https://example.com'),
+      env: { DB: mockDb() },
+    });
+    expect(await res.text()).toBe('https://is.gd/xyz');
+    expect(fetchSpy).toHaveBeenCalledTimes(2);
+  });
+
+  it('502s when all providers fail', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => { throw new Error('down'); }));
+    const res = await shortGet({
+      request: new Request('https://toolzum.com/api/url-shorten?url=https://example.com'),
+      env: { DB: mockDb() },
+    });
+    expect(res.status).toBe(502);
+  });
 });

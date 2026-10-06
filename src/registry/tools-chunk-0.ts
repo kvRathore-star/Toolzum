@@ -795,7 +795,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Utility",
     description: 'Takes any long URL and generates a compact, shareable short link. Uses cloud-based processing.',
     seoDescription: 'Free online URL Shortener — Takes any long URL and generates a compact, shareable short link. ',
-    dependencies: "Node.js / Redis",
+    dependencies: "TinyURL API, is.gd API",
     faqs: [
       { question: "Where do shortened URLs go?", answer: "Your long URL is sent to our shortening API, which returns a compact link. The destination URL is visible to the shortening service by design — don't shorten private URLs containing secrets or tokens." },
       { question: "Do shortened links expire?", answer: "Links persist per the shortening provider's policy. For links that must never break, use your own domain shortener instead." },
