@@ -2357,10 +2357,10 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free bulk URL shortener — hundreds of links, one batch. Server-side, sign in free to start.',
     dependencies: "Node.js / Redis",
         faqs: [
-      { question: 'How fast does a 200-link batch shorten?', answer: 'The backend paces ~10 links per minute with automatic retry on 429s — 200 UTM links finish in about 20 minutes. Paste, start, keep the tab open; invalid URLs report as errors instead of blocking the batch.' },
-      { question: 'Are my original URLs stored or tracked?', answer: 'URLs pass through the shortening backend (unavoidable — short links live server-side) and results are not kept by us. For sensitive pre-launch campaigns, shorten after the embargo lifts rather than weeks early.' },
+      { question: 'How fast does a 200-link batch shorten?', answer: 'Our backend forwards each URL to TinyURL\'s API for shortening at ~10 links per minute with automatic retry on 429s — 200 UTM links finish in about 20 minutes. Paste, start, keep the tab open; invalid URLs report as errors instead of blocking the batch.' },
+      { question: 'Are my original URLs stored or tracked?', answer: 'URLs pass through our backend to TinyURL (unavoidable — TinyURL creates and hosts the short links under its own terms). We keep no batch list beyond standard rate-limit rows — copy results before leaving. For sensitive pre-launch campaigns, shorten after the embargo lifts rather than weeks early.' },
       { question: 'How do Pro limits work here?', answer: 'Anonymous visitors meet the Pro page lock and sign in to continue; signed-in free users run 2 Pro batches a day; Pro is unlimited. Copy results to clipboard free anytime; the CSV results download counts as one Pro download.' },
-      { question: 'Do shortened links expire?', answer: 'Links persist per the backend\'s retention policy — check the response domain\'s terms for expiry. For evergreen content (bios, packaging), prefer your own domain shortener; use bulk shortening for campaigns and temporary pushes.' },
+      { question: 'Do shortened links expire?', answer: 'TinyURL links typically persist — check TinyURL\'s terms for expiry and unsuitable-use rules. For evergreen content (bios, packaging), prefer your own domain shortener; use bulk shortening for campaigns and temporary pushes.' },
     ],
     seoTitle: "Free Bulk URL Shortener – Shorten Links",
   },

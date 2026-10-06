@@ -152,3 +152,23 @@ Pro unlimited to 500 files/2 GB.
 Gates: tsc 0 · eslint 0 · 23 tests green · faq-gate 0 new ·
 quality-audit 0 · 0 bare-`other` · 0 trios.
 Customs coverage: 581 → 604 of 1,143. Pro program complete: 65/65.
+
+## Both-commits RECHECK (Oct 6 — 2 real harms + refinements fixed)
+
+Adversarial pass over all 65 pro tools (code-truth vs copy):
+- HARM 1 (fixed): 32/60 descriptions were STALE — a quote-style bug in
+  the batch applier skipped double-quoted `description:` fields, leaving
+  old template closers live (shared-sentence clusters 7x/5x/3x). Repaired
+  quote-agnostically; exact-sentence sharing now zero at 3+.
+- HARM 2 (fixed): url-shortener hid third-party processing — backend
+  proxies to TinyURL (verified `functions/api/url-shorten.ts`: 10/min,
+  TinyURL retention owns links). Copy now discloses TinyURL + keeps no
+  batch list. (url-status verified clean: HEAD checks, ≤45/req, 2-hop
+  max, no result storage.)
+- Refinements: 11 quota-closers diversified to unique sentences;
+  Pollinations de-`unlimited` (4/min pace); detector bands matched to
+  component (`~35` meter); youtube 70% stat removed; bank accuracy range
+  softened; AVIF share softened; 7 bare-`unlimited` reworded to
+  uncapped-local truth.
+Gates: tsc 0 · eslint 0 · 26 tests green · faq-gate 0 new ·
+quality-audit 0 · 0 bare-`other` · 0 trios · 95/95 mechanical checks OK.
