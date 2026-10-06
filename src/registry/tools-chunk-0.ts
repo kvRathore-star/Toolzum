@@ -3060,7 +3060,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "ffmpeg",
     instructions: [
       { title: "1. Drop MP4 file(s)", desc: "Upload your MP4 source. Runs locally on FFmpeg." },
-      { title: "2. Set MP3 options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "2. Set MP3 options", desc: "Set MP3 bitrate — 128 kbps for spoken audio, 192+ kbps for music. Keep the tab open while it works." },
       { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
     ],
     faqs: [
@@ -3080,7 +3080,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "ffmpeg",
     instructions: [
       { title: "1. Drop MOV file(s)", desc: "Upload your MOV source. Runs locally on FFmpeg." },
-      { title: "2. Set MP3 options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "2. Set MP3 options", desc: "Set MP3 bitrate — 128 kbps for spoken audio, 192+ kbps for music. Keep the tab open while it works." },
       { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
     ],
     faqs: [
@@ -3101,7 +3101,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "ffmpeg",
     instructions: [
       { title: "1. Drop WebM file(s)", desc: "Upload your WebM source. Runs locally on FFmpeg." },
-      { title: "2. Set MP3 options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
+      { title: "2. Set MP3 options", desc: "Set MP3 bitrate — 128 kbps for spoken audio, 192+ kbps for music. Keep the tab open while it works." },
       { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
     ],
     faqs: [
