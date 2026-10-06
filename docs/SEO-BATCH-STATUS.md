@@ -234,3 +234,8 @@ local, clipboard-only generators, free quota only where downloadOrShare
 verified, games with no persistence claims).
 Customs 634 → 657/1,143. Parked pool cleared — Google judges zero
 unimproved parked pages now; remaining 486 are never-crawled (phase 2).
+
+## Unknown U DONE (Oct 6 — 30/30 PDF tools, gates green)
+
+Highest-demand unknown pool first: PDF ops with code-truth framing.
+Customs 657 → 687/1,143. Next: image unknowns (~47).
