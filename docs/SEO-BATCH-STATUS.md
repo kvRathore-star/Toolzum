@@ -216,3 +216,11 @@ brand-kit, social-caption. FAQs + how-to + titles inline per 10.7 with
 code-truth framing (CalculatorShell ungated saves, Web Speech vendor
 processing disclosed, FFmpeg local + free quota, clipboard-only text).
 Customs 604 → 634/1,143. ~23 parked remain for P2.
+
+## Parked P2 DONE (Oct 6 — 23/23, gates green)
+
+Design/health/seo/utility/games with code-truth framing (opentype/fflate
+local, clipboard-only generators, free quota only where downloadOrShare
+verified, games with no persistence claims).
+Customs 634 → 657/1,143. Parked pool cleared — Google judges zero
+unimproved parked pages now; remaining 486 are never-crawled (phase 2).
