@@ -96,7 +96,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: 'FFmpeg WASM',
     instructions: [
       { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on FFmpeg." },
-      { title: "2. Set MP4 options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
+      { title: "2. Set MP4 options", desc: "Set resolution and frame rate — 1080p for feeds, smaller dimensions for stickers and replies." },
       { title: "3. Download MP4", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
     ],
     faqs: [
