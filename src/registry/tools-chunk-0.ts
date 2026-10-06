@@ -243,7 +243,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "Stable Diffusion API",
     seoDescription: 'Free AI image generator — unlimited Pollinations drafts, 1-credit FLUX, 5-credit Gemini HD (Pro). Sign in free for trial credits.',
         faqs: [
-      { question: 'How much does AI Image Generator cost per image?', answer: 'Pollinations engine is free and unlimited for everyone. FLUX drafts cost 1 credit each and Gemini HD costs 5 credits (Pro-only). Signed-in free plans get a one-time 5-credit trial — enough for 5 drafts or 1 HD image — and Pro gets 200 credits monthly.' },
+      { question: 'How much does AI Image Generator cost per image?', answer: 'Pollinations engine is free for everyone. FLUX drafts cost 1 credit each and Gemini HD costs 5 credits (Pro-only). Signed-in free plans get a one-time 5-credit trial — enough for 5 drafts or 1 HD image — and Pro gets 200 credits monthly. Pollinations renders stay free with a short breather between generations (about 4 per minute).' },
       { question: 'Where does my AI Image Generator prompt go?', answer: 'Your prompt is sent to the image API to render the picture and is not stored by us. Pollinations and Workers AI process the text only; nothing is added to a public gallery. Avoid pasting passwords or private names into prompts.' },
       { question: 'Which engine should I pick: Pollinations, draft, or HD?', answer: 'Use Pollinations for unlimited free brainstorming at good quality. Switch to FLUX drafts (1 credit) for sharper composition, and Gemini HD (5 credits, Pro-only) for final marketing art. A practical flow: 10 free Pollinations tries, then 1 HD render of the winner.' },
       { question: 'Can I use AI Image Generator pictures commercially?', answer: 'Yes — images you generate are free to use in personal and commercial projects: marketing, websites, presentations, and social posts. Verify third-party model terms for trademarked styles, and do not generate faces of real private people without consent.' },
@@ -674,6 +674,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free video transcript formatter — raw logs to scripts and articles. Paste text, 1 credit per cleanup.',
     dependencies: "Cloud AI API",
     seoTitle: "Free Video to Text Formatter Online",
+    instructions: [
+      { title: "1. Paste video log", desc: "Paste the auto-caption export or SRT dump. For actual video files, extract audio and transcribe separately first." },
+      { title: "2. Pick target shape", desc: "Script keeps speaker flow and timestamps, article reads as a blog post, outline gives revision notes." },
+      { title: "3. Run and copy", desc: "Each run costs 1 credit. Split logs over ~8,000 words into two runs for cleaner structure." },
+    ],
     faqs: [
       { question: 'How is this different from transcribing a video file?', answer: 'This tool polishes TEXT logs you paste (auto-caption exports, SRT dumps) into scripts, articles, or outlines at 1 credit per cleanup — it never touches video files. To transcribe actual video audio, extract the audio and use a per-minute transcription tool instead.' },
       { question: 'Is my pasted video log sent anywhere?', answer: 'Yes — pasted text is sent to the AI API for restructuring and deleted after processing; never stored or shared by us. Brief provider-side logging may apply, so remove private names, addresses, and credentials before pasting.' },
@@ -866,6 +871,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free audio transcript formatter — messy dumps to clean articles. Paste text, 1 credit per cleanup.',
     dependencies: "Cloud AI API",
     seoTitle: "Free Audio to Text Formatter Online",
+    instructions: [
+      { title: "1. Paste transcript dump", desc: "Paste the raw text — timestamps, filler words, and run-ons included. This tool polishes text; it never touches audio files." },
+      { title: "2. Pick output format", desc: "Choose article for publishable copy or script to keep speaker flow for editing." },
+      { title: "3. Run and copy", desc: "Each cleanup costs 1 credit. Copy the result and verify names and numbers against the original." },
+    ],
     faqs: [
       { question: 'How is this different from true audio transcription?', answer: 'This tool does not transcribe audio files — it polishes already-transcribed TEXT you paste in (timestamps, filler words, run-ons) into articles or scripts at 1 credit per cleanup. To transcribe an actual recording, use Podcast Transcription or Indian Voice Transcriber, billed at 1 credit per audio minute.' },
       { question: 'Is my pasted transcript sent anywhere?', answer: 'Yes — pasted text goes to the AI API for cleanup and is deleted after processing; never stored or shared by us. Provider logs may retain prompts briefly, so strip names, passwords, and confidential quotes from sensitive recordings first.' },
@@ -914,6 +924,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "Real-ESRGAN",
     seoDescription: 'Free image upscaler — 4x Lanczos for logos and icons, local processing. Sign in free for 2 Pro downloads daily.',
     seoTitle: "Free AI Image Upscaler – 4x Online",
+    instructions: [
+      { title: "1. Upload image", desc: "Use PNG or high-quality JPG at 500px or more — clean sources upscale far better than tiny thumbnails." },
+      { title: "2. Pick scale", desc: "Choose 2x, 3x, or 4x. Logos and icons stay crisp; photos sharpen but gain no new detail." },
+      { title: "3. Download PNG", desc: "Save the upscaled file. Each save counts as one Pro download (signed-in free: 2 a day)." },
+    ],
     faqs: [
       { question: 'When should I use AI Image Upscaler vs a photo enhancer?', answer: 'Use this upscaler for logos, icons, and flat graphics: a 256px logo becomes a crisp 1024px asset with clean edges. For photographs of faces, prefer a true AI-reconstruction enhancer — interpolation sharpens photos but cannot invent missing facial detail.' },
       { question: 'Are my images uploaded when upscaling?', answer: 'No — upscaling runs locally in your browser with Canvas processing, so pixels never leave your device. Only the final file save passes through the download quota (signed-in free: 2 Pro downloads a day; Pro unlimited).' },
@@ -1100,13 +1115,18 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "YouTube Transcript Generator",
     slug: "youtube-transcript-generator",
     category: "Transcription",
-    description: 'Fetch captions from any public YouTube video by URL or ID — lectures, podcasts, interviews — and read or copy the full text. Students revise a 40-minute lecture in minutes — free to start, fair daily limits apply.',
+    description: 'Fetch captions from any public YouTube video by URL or ID — lectures, podcasts, interviews — with AI analysis of the transcript. Students revise a 40-minute lecture in minutes — 1 credit per video, sign in free.',
     seoDescription: 'Free YouTube transcript generator — paste a video URL, get full captions text. Public videos, instant fetch.',
     dependencies: "YouTube Data API",
     seoTitle: "Free YouTube Transcript Generator Online",
+    instructions: [
+      { title: "1. Paste video link", desc: "Enter the full YouTube URL or 11-character ID. Only public videos with captions enabled work." },
+      { title: "2. Fetch and analyze", desc: "Captions fetch in seconds; AI analysis costs 1 credit per video (5-video free trial)." },
+      { title: "3. Copy or download", desc: "Copy the text for notes, or download the analysis file for your records." },
+    ],
     faqs: [
       { question: 'How do I get a YouTube transcript from a video URL?', answer: 'Paste the full YouTube URL or 11-character video ID, then fetch: a 40-minute lecture returns its caption track as readable text in seconds. Copy it for notes or summaries. Only public videos with captions enabled work — private, deleted, or caption-less videos return nothing.' },
-      { question: 'Is the video downloaded or am I tracked?', answer: 'No video is downloaded and nothing runs on your device beyond fetching the public caption track via the YouTube Data API. No account, search history, or watch data touches this tool — it reads the same public captions any viewer could see.' },
+      { question: 'Is the video downloaded, and what does analysis cost?', answer: 'Your video URL goes to the captions API for fetching, then the transcript is analyzed by the AI API — 1 credit per video (the 5-credit trial covers 5 videos; Pro gets 200 monthly; anonymous blocked). Nothing is stored or shared, and no watch history or account data is ever touched.' },
       { question: 'What if a YouTube video has no captions?', answer: 'About 70% of popular videos carry auto or manual captions; the rest return an honest empty result. For caption-less videos, download the audio and run it through a transcription tool (1 credit per minute) instead — that path handles any spoken audio.' },
       { question: 'Can I use YouTube transcripts for notes and quotes?', answer: 'Yes for study and reference: a 10,000-word lecture transcript condenses to a one-page summary with timestamps you can cite. For republication, captions belong to the creator — quote briefly with attribution rather than reposting full transcripts.' },
     ],
@@ -1362,6 +1382,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free face swap — manual compositing with position, scale, blend. Local canvas processing, fair daily limits.',
     dependencies: "Canvas API",
     seoTitle: "Free AI Face Swap – Swap Faces Online",
+    instructions: [
+      { title: "1. Upload two photos", desc: "Pick source and target facing the same direction at similar sizes, 500px or more, front-facing and well lit." },
+      { title: "2. Align and blend", desc: "Nudge position and scale until eyes and mouth line up, then feather the blend edge at 200% zoom." },
+      { title: "3. Download composite", desc: "Save the result. Each save counts as one Pro download. Use only faces you have the right to use." },
+    ],
     faqs: [
       { question: 'How do I get a natural-looking face swap?', answer: 'Match angle and lighting first: pick source and target photos facing the same direction at similar sizes. Then nudge position and scale until eyes and mouth align, and feather the blend edge. A 2-minute alignment pass beats any one-click result.' },
       { question: 'Are my photos uploaded during face swapping?', answer: 'No — compositing runs locally in your browser on canvas; both photos stay on your device. Only saving the result counts against the download quota (3 a day anonymous, 5 signed-in on free tools; this Pro tool allows 2 a day signed-in).' },
@@ -1705,14 +1730,20 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Subtitle Translator",
     slug: "subtitle-translator",
     category: "Video",
-    description: 'Translate SRT or VTT subtitle files into 100+ languages while preserving every timestamp — creators localize a full episode\'s captions in one batch. Free to start; sign in free for 2 Pro downloads a day.',
+    description: 'Translate SRT or VTT subtitle files into 100+ languages while preserving every timestamp — creators localize a full episode in one batch. 1 credit per translation; sign in free for trial credits.',
     seoDescription: 'Free subtitle translator — SRT/VTT to 100+ languages, timestamps preserved. Free to start, 2/day signed-in.',
     dependencies: "Google Translate API",
-        faqs: [
+        instructions: [
+      { title: "1. Upload subtitles", desc: "Drop an SRT or VTT file. Filenames like S01E01-en.srt keep season batches sorted." },
+      { title: "2. Translate", desc: "Pick any of 100+ target languages. Each file costs 1 credit; timestamps pass through untouched." },
+      { title: "3. Download file", desc: "Save the translated subtitles. Each save counts as one Pro download (signed-in free: 2 a day)." },
+    ],
+    faqs: [
       { question: 'Will my subtitle timing survive translation?', answer: 'Yes — only text lines are replaced; SRT/VTT timestamps and sequence numbers pass through untouched. A 45-minute episode with 600 cues returns all 600 cues retimed identically, so the file drops straight into YouTube or Premiere with zero resync.' },
       { question: 'Which language pairs translate subtitles best?', answer: 'Major pairs (English-Hindi, English-Spanish, English-Tamil) read naturally after one review pass. Rare pairs and jokes, slang, or songs need human editing — budget 20 minutes of review per 30 minutes of dialogue for those.' },
-      { question: 'How do I translate a whole season at once?', answer: 'Upload episode files one by one with the same target language; each translated file downloads separately and counts as one Pro download (signed-in free: 2 a day; Pro unlimited). Keep filenames like S01E01-en.srt so outputs sort correctly.' },
+      { question: 'How do I translate a whole season at once?', answer: 'Upload episode files one by one with the same target language; each file costs 1 credit and each save counts as one Pro download (signed-in free: 2 a day; Pro unlimited on both). A 10-episode season is 10 credits — keep filenames like S01E01-en.srt so outputs sort correctly.' },
       { question: 'Is my subtitle text sent to a server?', answer: 'Yes — subtitle text is sent to the translation API and deleted after processing; never stored or shared. Strip any personal data baked into captions before translating sensitive content.' },
+      { question: 'What does subtitle translation cost?', answer: 'Each translation costs 1 text-generation credit — signed-in free plans include a one-time 5-credit trial, Pro includes 200 monthly, anonymous requests return 401. Saving the translated file counts as one Pro download (signed-in free: 2 a day; Pro unlimited).' },
     ],
     seoTitle: "Free Subtitle Translator – SRT, VTT Online",
   },
@@ -1944,7 +1975,12 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Turn a full podcast episode into a text transcript with AI speech recognition — upload MP3, WAV, or M4A and get searchable text. Hosts convert a 30-minute show into show notes — 1 credit per minute.',
     seoDescription: 'Free podcast transcription — episode audio to full text, 1 credit per minute. 5-minute free trial included.',
     dependencies: "AI speech recognition API",
-        faqs: [
+        instructions: [
+      { title: "1. Upload episode", desc: "Drop MP3, WAV, M4A, or OGG up to 25 MB or 30 minutes per file. Split longer shows first." },
+      { title: "2. Transcribe", desc: "AI speech recognition runs at 1 credit per minute — the 5-credit trial covers about 5 minutes." },
+      { title: "3. Export and polish", desc: "Copy the text or save it, then run it through the transcript formatter for a readable draft." },
+    ],
+    faqs: [
       { question: 'How long a podcast episode can I transcribe at once?', answer: 'Up to 30 minutes or 25 MB per file at 1 credit per minute — a 28-minute interview costs 28 credits, so the 5-credit trial covers about 5 minutes and Pro\'s 200 credits cover roughly 3 hours monthly. Split longer shows into parts before uploading.' },
       { question: 'Which audio formats transcribe most accurately?', answer: 'Clean MP3, WAV, M4A, or OGG with one or two clear speakers hit 90%+ word accuracy. Heavy crosstalk, music beds, and phone-call compression drop accuracy — for those, transcribe anyway, then run the text through the Audio Transcript Formatter for a readable draft.' },
       { question: 'Can I get speaker labels and timestamps?', answer: 'The transcript includes time-coded segments you can map to speakers in editing. For a two-host show, search \'Speaker\' breaks and rename them Host and Guest in one pass — a 30-minute episode takes about 10 minutes to label fully.' },
@@ -2225,14 +2261,14 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "saas-metrics-dashboard",
     category: "Growth & Marketing",
     isPro: false,
-    description: 'Track ARR, MRR, LTV, CAC, NPS, churn, runway, and A/B tests with scenario modeling and PDF export — all computed locally. Founders model \'what if churn drops 2%\' live — free to start, fair daily limits apply.',
+    description: 'Track ARR, MRR, LTV, CAC, NPS, churn, runway, and A/B tests with scenario modeling and PDF export — all computed locally. Founders model what-if churn shifts live — sign in free to unlock the page; everything runs locally.',
     seoDescription: 'Free SaaS dashboard — ARR, MRR, LTV, CAC, churn, runway, A/B tests. Local compute, free to start.',
     dependencies: "Vanilla JS"
   ,
     seoTitle: "Free SaaS Metrics Dashboard Online",
     faqs: [
       { question: 'How do I model a pricing change in the dashboard?', answer: 'Enter current MRR, customers, churn, and ARPA, then adjust one lever: for example 120 customers x Rs.2,000 ARPA at 5% monthly churn shows Rs.2.4L MRR decaying without growth. Raise ARPA 10% in the scenario box to see the new runway instantly — all math runs locally.' },
-      { question: 'Is my financial data uploaded?', answer: 'No — every metric computes locally in your browser with vanilla JS; figures never leave your device. Only exporting the PDF report counts against the download quota (signed-in free: 5 a day on free tools; Pro unlimited).' },
+      { question: 'Is my financial data uploaded or counted?', answer: 'Nothing is uploaded and nothing is counted: every metric computes locally in your browser and the PDF export saves straight to your device by direct download. The only gate is the Pro page lock for anonymous visitors — sign in free and the dashboard plus export are unlimited; Pro removes limits site-wide.' },
       { question: 'Which metrics matter most at each stage?', answer: 'Pre-revenue: runway and burn. Early revenue: MRR growth and churn — a 5% monthly churn halves your base yearly. Scaling: LTV:CAC ratio (healthy at 3:1+) and NPS for expansion signals. The dashboard surfaces all three layers so you watch the right one per stage.' },
       { question: 'Can I export a board-ready report?', answer: 'Yes — the PDF export packages your current inputs, charts, and scenario comparison into a shareable one-pager. Generate it after locking inputs for the month; each export counts as one download against your daily quota.' },
     ],
@@ -2265,12 +2301,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Send HTTP requests from your browser — custom headers, bodies, params, saved collections, and one-click cURL/Fetch/Axios snippets. Developers debug a REST endpoint without leaving the tab — runs locally, free to start.',
     seoDescription: 'Free API tester — requests, auth, collections, code snippets. Local fetch, keys never touch servers.',
     dependencies: "Browser API",
-        faqs: [
+        instructions: [
+      { title: "1. Build the request", desc: "Set method, URL, headers, query params, and body. Add Bearer tokens or API keys for auth — they never leave your browser." },
+      { title: "2. Send and inspect", desc: "Read the status code, timing, and body: 401 means auth is wrong, 422 means the body shape is off." },
+      { title: "3. Save or export code", desc: "Save to a localStorage collection, or copy the cURL/Fetch/Axios snippet into your project." },
+    ],
+    faqs: [
       { question: 'How do I debug a failing API call fastest?', answer: 'Reproduce it here first: set method, URL, headers, and body, then send and read the status plus timing. A 401 means auth headers are wrong, 422 means the body shape is off — fix in the builder, then copy the working cURL snippet into your codebase.' },
       { question: 'Are my API keys and tokens safe here?', answer: 'Yes — requests fire from your browser with the Fetch API, so keys, tokens, and bodies never pass through our servers. Collections save to your browser\'s local storage only. Still, use test keys over production secrets when screen-sharing.' },
       { question: 'What auth methods are supported?', answer: 'Bearer tokens, Basic auth, API-key headers, and custom header schemes, with a built-in token manager for JWT and OAuth flows. A typical debug run: paste the Bearer token, hit send, confirm 200, then generate the Axios snippet for your app.' },
       { question: 'Can I save and organize request collections?', answer: 'Yes — save requests into named collections in local storage, grouped by project or API, and reload them without retyping. Export the generated cURL per request for teammates; collections themselves stay on your machine.' },
-      { question: 'How do Pro limits apply to API Builder?', answer: 'Requests are local fetches and unlimited; the Pro page gates access: anonymous visitors sign in to continue, signed-in free users get 2 Pro uses a day, Pro unlocks unlimited use. No credits or download quota are involved.' },
+      { question: 'Are there usage limits on API Builder?', answer: 'There is no per-use counter: requests fire from your browser, collections live in localStorage, and snippets copy to clipboard — all unlimited. The only gate is the Pro page lock for anonymous visitors: sign in free for full access. No credits or downloads are ever involved.' },
     ],
     seoTitle: "Free API Builder & Tester Online",
   },
@@ -2417,6 +2458,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "CF Vectorize",
     seoDescription: 'Free AI document chat (RAG) — upload PDF/Word, ask questions, get cited answers. 1 credit per answer, 5-credit free trial.',
     seoTitle: "Free AI Document Chat – Ask Your PDFs Anything",
+    instructions: [
+      { title: "1. Upload documents", desc: "Add PDF, Word, or plain-text files. They index into a vector store for retrieval." },
+      { title: "2. Ask questions", desc: "Each answer costs 1 credit and quotes the passages it used — sign in for the 5-answer trial." },
+      { title: "3. Verify before citing", desc: "Confirm quotes against the source pages; never paste secrets into uploads." },
+    ],
     faqs: [
       { question: 'How does AI Document Chat find answers in my file?', answer: 'Your document is chunked and indexed into a vector store (CF Vectorize), then each question retrieves the most relevant passages for the language model to answer from. It quotes from your file rather than guessing — always verify the cited page before relying on it.' },
       { question: 'Is my uploaded document stored or shared?', answer: 'Your file is sent to our server for indexing and deleted after processing — never stored or shared by us. Note the language model runs on a third-party AI service whose logs may retain prompt text briefly, so avoid uploading passwords, medical records, or client secrets.' },

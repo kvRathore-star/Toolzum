@@ -111,3 +111,24 @@ pre-existing one-way-converter gaps, 0 new · quality-audit 0 issues.
 Customs coverage: 562 → 581 of 1,143 (19 newly gained FAQs; 11 upgraded).
 
 Next: Batch 2 (35 bulk/moat) queued.
+
+## Pro Batch 1 RECHECK (Oct 6 — passed with 12 repairs)
+
+Mechanical 28-pt re-audit + component-code truth check found 12 factual
+gaps; all fixed and re-gated green:
+- 5 wrong credit claims fixed against `CREDIT_COST_SLUGS` + components:
+  complaint-letter (own-key → 1 credit), youtube-transcript (+1/video),
+  subtitle-translator (+1/file), resume-ats (+1/check),
+  grammar/humanizer (base free-local, AI boost 1 credit).
+- 4 invented download limits corrected to component truth
+  (`downloadOrShare` presence): saas (no gate — page lock only),
+  api-builder (no gate — page lock only), bank-statement (export-only),
+  ai-detector (report-save only).
+- bulk-image-converter seoTitle regained "Free".
+- 13 mechanics-accurate custom `instructions` added (incl. bare-`other`
+  bank-statement-analyser; paste-text formatters were on
+  upload-convert-download; api-builder/upscaler/face-swap misrouted).
+- Pollinations pace note (4/min breather); subtitle season math (10 eps =
+  10 credits).
+Final: tsc 0 · eslint 0 · 26 tests green · faq-gate 0 new ·
+quality-audit 0 · 0 bare-`other` · 0 trios · 0 shared sentences.
