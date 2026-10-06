@@ -134,8 +134,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     dependencies: "None",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for package.json Validator." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
+      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
     ],
     faqs: [
       { question: "What fields does it validate?", answer: "Required fields (name, version), semver format compliance, valid dependency declarations, script definitions, and common best practices like license and description fields." },
@@ -348,7 +348,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Test Data first." },
       { title: "2. Generate", desc: "Create your Test Data with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy the result into your project; generate again for alternatives." },
     ],
     faqs: [
       { question: "What data comes out?", answer: "Names, emails, numbers, addresses — plausibly formatted but entirely fake." },
@@ -392,7 +392,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter MRR with new, expansion, and churn splits." },
       { title: "2. Read the ARR", desc: "Check the ARR with new-vs-churn split." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Nudge each input up and down in turn — the most sensitive one deserves your attention." },
     ],
     faqs: [
       { question: "How is ARR built?", answer: "ARR bridge: start ARR + new + expansion − churned − contraction. Example: $1.0M + $300k + $150k − $200k = $1.25M ARR. Every dollar must sit in exactly one bucket." },
@@ -414,7 +414,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter principal, rate, frequency, and time." },
       { title: "2. Read the grown value", desc: "Check the grown value with interest share." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Nudge each input up and down in turn — the most sensitive one deserves your attention." },
     ],
     faqs: [
       { question: "What compounding frequencies are supported?", answer: "Annual, semi-annual, quarterly, monthly, and daily compounding. More frequent compounding produces slightly higher returns — the calculator shows the difference between each frequency." },
@@ -435,7 +435,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter principal, rate, and tenure." },
       { title: "2. Read the repayment figure", desc: "Check the repayment figure with total interest." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Nudge each input up and down in turn — the most sensitive one deserves your attention." },
     ],
     faqs: [
       { question: "How much car can I afford?", answer: "The 20/4/10 rule: 20% down, max 4-year term, total car costs under 10% of gross income. $6,000/mo income → ≈$600/mo all-in (payment + insurance + fuel). A $30,000 car at 8%/48mo ≈ $732/mo payment alone — over budget before insurance." },
@@ -467,7 +467,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter lost and starting customers." },
       { title: "2. Read the churn rate", desc: "Check the churn rate with lost-revenue math." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Save both outputs before deciding — side-by-side numbers beat memory." },
     ],
     faqs: [
       { question: "Logo churn vs revenue churn?", answer: "Logo churn = customers lost ÷ starting customers (1,000 → 950 = 5%). Revenue churn weights by MRR — losing ten $10 plans hurts less than one $1,000 plan. Track both; revenue churn decides survival." },
@@ -499,7 +499,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter original price and discount percent." },
       { title: "2. Read the final price", desc: "Check the final price with savings shown." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Save both outputs before deciding — side-by-side numbers beat memory." },
     ],
     faqs: [
       { question: "How do stacked discounts work?", answer: "Multiply, don't add: 30% then 20% off $100 → $100 × 0.70 × 0.80 = $56 (44% total, not 50%). Retailers stack precisely because most shoppers add." },
@@ -521,7 +521,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter CTC with city and regime." },
       { title: "2. Read the in-hand figure", desc: "Check the in-hand figure with deduction split." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Re-run with last month's figures for a reality check against this month's plan." },
     ],
     faqs: [
       { question: "How do I annualize an hourly wage?", answer: "Multiply by 2,080 (40 hrs × 52 weeks): $35/hr → $72,800/year. For 37.5-hr weeks use 1,950 ($68,250). These assume zero unpaid time off — subtract 2–3 weeks for reality." },
@@ -563,7 +563,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter customers, ARPA, and churn." },
       { title: "2. Read the MRR", desc: "Check the MRR with new-vs-churn split." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Re-run with last month's figures for a reality check against this month's plan." },
     ],
     faqs: [
       { question: "How is MRR calculated?", answer: "MRR = paying customers × average revenue per account (ARPA). Example: 120 customers at $49 ARPA gives $5,880 MRR. Enter your two numbers and the result updates instantly." },
@@ -884,10 +884,10 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "scientific-calculator",
     category: "Calculator",
     description: 'Evaluate mathematical expressions with sin, cos, tan, log, and sqrt functions. A versatile scientific calculator in your browser. No signup or account required.',
-    instructions: [
-      { title: "1. Fill the inputs", desc: "Enter your figures — the tool labels each field it needs." },
+        instructions: [
+      { title: "1. Fill the inputs", desc: "Enter the expression." },
       { title: "2. Read the evaluated expression", desc: "Check the evaluated expression with steps." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Duplicate the run with one input changed — the gap between outputs decides it." },
     ],
     faqs: [
       { question: "Which functions?", answer: "Trig, logs, powers, roots, and constants — the full scientific set." },
@@ -966,7 +966,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter age, weight, height, and gender." },
       { title: "2. Read the percentile band", desc: "Check the percentile band with chart position." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Save both outputs before deciding — side-by-side numbers beat memory." },
     ],
     faqs: [
       { question: "What growth metrics does it calculate?", answer: "Weight-for-age, height-for-age, and weight-for-height percentiles based on WHO Child Growth Standards. These compare your baby's measurements to a reference population of the same age and sex." },
@@ -1023,7 +1023,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter age, weight, height, and activity level." },
       { title: "2. Read the daily calorie target", desc: "Check the daily calorie target with deficit and surplus bands." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Test an edge value (zero, maximum) to sanity-check the math before trusting mid-range answers." },
     ],
     faqs: [
       { question: "How is TDEE calculated?", answer: "TDEE = BMR × activity multiplier: 1.2 sedentary, 1.375 light, 1.55 moderate, 1.725 heavy, 1.9 athlete. Example: BMR 1,730 × 1.55 (moderate) ≈ 2,680 kcal/day maintenance." },
@@ -1044,7 +1044,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter age and resting rate." },
       { title: "2. Read the training zones", desc: "Check the training zones with max rate." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Re-run with last month's figures for a reality check against this month's plan." },
     ],
     faqs: [
       { question: "How are the zones calculated?", answer: "Max HR ≈ 220 − age (rough) or 207 − 0.7 × age (better fit over 40). Zones: 50–60% recovery, 60–70% fat-burn, 70–80% aerobic, 80–90% threshold, 90–100% max. Example: age 30 → max ≈186, Zone 2 ≈112–130 bpm." },
@@ -1146,7 +1146,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter principal, rate, and time." },
       { title: "2. Read the interest", desc: "Check the interest with total payable." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Re-run with last month's figures for a reality check against this month's plan." },
     ],
     faqs: [
       { question: "What is the simple interest formula?", answer: "SI = P × R × T / 100, where P = principal, R = annual interest rate (%), T = time in years. Total amount = P + SI." },
@@ -1319,7 +1319,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoTitle: "API Payload Analyzer – Inspect JSON Free",
     instructions: [
       { title: "1. Paste source for API Payload Analyzer", desc: "Paste source for API Payload Analyzer into the input area. Nothing runs until you trigger it." },
-      { title: "2. Analyze", desc: "Analyze and read every finding." },
+      { title: "2. Analyze", desc: "Analyze and work through the findings list." },
       { title: "3. Fix and rerun", desc: "Fix flagged items and re-run." },
     ],
     faqs: [
@@ -1406,7 +1406,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter total items with page size." },
       { title: "2. Read page count", desc: "Check page count with offsets." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Duplicate the run with one input changed — the gap between outputs decides it." },
     ],
     faqs: [
       { question: "Cursor or offset — which?", answer: "Cursor for large live datasets (stable); offset for small fixed lists (simple)." },
@@ -1428,7 +1428,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for API Key first." },
       { title: "2. Generate", desc: "Create your API Key with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy what you need; rerun for a fresh batch." },
     ],
     faqs: [
       { question: "How long should keys be?", answer: "256 bits (43 base64 chars) for serious use; shorter only for low-stakes tokens." },
@@ -1471,8 +1471,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoTitle: "API Key Validator – Check Keys Free",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for API Key Validator." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Inspect each field in the response; mismatches mean re-enter, not proceed." },
+      { title: "3. Confirm officially", desc: "Screen with this tool, decide with the authority record." },
     ],
     faqs: [
       { question: "Format or live check?", answer: "Both — structure validation instantly, live verification where the provider allows." },
@@ -1503,7 +1503,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter requests with rate tier." },
       { title: "2. Read estimated cost", desc: "Check estimated cost with tier math." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Save both outputs before deciding — side-by-side numbers beat memory." },
     ],
     faqs: [
       { question: "Requests per second math?", answer: "Quota divided by window — 1000/day means ~0.7 sustained RPS with burst headroom." },
@@ -1525,7 +1525,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter requests with time window." },
       { title: "2. Read the verdict", desc: "Check the verdict with limit math." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Nudge each input up and down in turn — the most sensitive one deserves your attention." },
     ],
     faqs: [
       { question: "Token bucket or fixed window?", answer: "Bucket allows bursts; fixed window is simpler but edges spike at boundaries." },
@@ -1665,8 +1665,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoTitle: "GraphQL Schema Validator – Free",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for GraphQL Schema Validator." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
+      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
     ],
     faqs: [
       { question: "Spec compliance?", answer: "Validated against the GraphQL spec — types, fields, and nullability rules." },
@@ -1688,8 +1688,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     dependencies: "None",
     instructions: [
       { title: "1. Complete each section", desc: "Fill the GraphQL Subscription Builder fields in order — required items first, optional details after." },
-      { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
-      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+      { title: "2. Review everything", desc: "Read the full draft once top to bottom; errors hide in fields you skipped." },
+      { title: "3. Download or submit", desc: "Keep a saved copy, then submit the details where officially required." },
     ],
     faqs: [
       { question: "What is a GraphQL subscription?", answer: "Subscriptions provide real-time updates over WebSocket connections. When data changes on the server, the server pushes updates to connected clients. They use the same syntax as queries but with the subscription keyword." },
@@ -1741,8 +1741,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoTitle: "gRPC Status Codes List – All 17 Free",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for gRPC Status Code Lookup." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
+      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
     ],
     faqs: [
       { question: "How many gRPC codes exist?", answer: "Seventeen, numbered 0–16 — from OK through CANCELLED, UNKNOWN, and resource errors." },
@@ -1840,7 +1840,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Postman Collection first." },
       { title: "2. Generate", desc: "Create your Postman Collection with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy output where needed; each regeneration is a new roll." },
     ],
     faqs: [
       { question: "What comes out of the generator?", answer: "Postman Collection v2.1 JSON — importable into any workspace with one click." },
@@ -1884,7 +1884,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Swagger/OpenAPI first." },
       { title: "2. Generate", desc: "Create your Swagger/OpenAPI with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy what you need; rerun for a fresh batch." },
     ],
     faqs: [
       { question: "What does this tool generate?", answer: "A complete OpenAPI 3.0 spec JSON file with info, servers, paths, and schemas. Enter your API title, version, and endpoints to produce a ready-to-use specification." },
@@ -1904,7 +1904,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Webhook Payload first." },
       { title: "2. Generate", desc: "Create your Webhook Payload with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy the result into your project; generate again for alternatives." },
     ],
     faqs: [
       { question: "What payloads?", answer: "Realistic event JSON for common providers, shaped to their documented schemas." },
@@ -1967,8 +1967,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoTitle: "Webhook Validator – Verify Free Online",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Webhook Validator." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
+      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
     ],
     faqs: [
       { question: "What gets verified?", answer: "HMAC signatures against your secret — proving the payload is genuine." },
@@ -1987,10 +1987,10 @@ export const entries_chunk_3: ToolMetadata[] = [
     category: "Developer",
     description: 'Compare two OpenAPI specs side-by-side to detect breaking changes, new endpoints, removed fields, and modified schemas between versions.',
     seoTitle: "API Diff Checker – Compare Specs Free",
-    instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for API Diff Checker." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+        instructions: [
+      { title: "1. Paste both API responses", desc: "Baseline and current JSON/XML payloads from the same endpoint." },
+      { title: "2. Run the diff", desc: "Added, removed, and changed fields highlight with paths." },
+      { title: "3. Triage breaking changes", desc: "Removed fields and type changes break clients — added optional fields usually do not." },
     ],
     faqs: [
       { question: "Spec diff or traffic diff?", answer: "Spec diff — OpenAPI v1 against v2, structural changes highlighted." },
@@ -2212,7 +2212,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for CSS first." },
       { title: "2. Generate", desc: "Create your CSS with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy what you need; rerun for a fresh batch." },
     ],
     faqs: [
       { question: "What gets generated?", answer: "Layouts, buttons, loaders, and effects as copy-paste CSS snippets." },
@@ -2244,7 +2244,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Border Radius first." },
       { title: "2. Generate", desc: "Create your Border Radius with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy output where needed; each regeneration is a new roll." },
     ],
     faqs: [
       { question: "8-value syntax?", answer: "Horizontal and vertical radii per corner, slash-separated precisely." },
@@ -2269,7 +2269,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Flexbox CSS first." },
       { title: "2. Generate", desc: "Create your Flexbox CSS with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy what you need; rerun for a fresh batch." },
     ],
     faqs: [
       { question: "What Flexbox properties can I configure?", answer: "All major flexbox properties: flex-direction, flex-wrap, justify-content, align-items, align-content, align-self, gap, and individual item grow/shrink/basis values." },
@@ -2289,7 +2289,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for CSS Grid first." },
       { title: "2. Generate", desc: "Create your CSS Grid with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy the result into your project; generate again for alternatives." },
     ],
     faqs: [
       { question: "fr units?", answer: "Fractional tracks that share free space proportionally and responsively." },
@@ -2311,7 +2311,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Text Shadow first." },
       { title: "2. Generate", desc: "Create your Text Shadow with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy output where needed; each regeneration is a new roll." },
     ],
     faqs: [
       { question: "How many shadows?", answer: "Stacked comma-separated layers for glow, outline, and 3D depth." },
@@ -2344,7 +2344,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for CSS Animation first." },
       { title: "2. Generate", desc: "Create your CSS Animation with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Save the good ones; regenerate the rest until the set is complete." },
     ],
     faqs: [
       { question: "Keyframes or transitions?", answer: "Both — keyframe sequences for loops, transitions for hover states." },
@@ -2430,8 +2430,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Query JSON data using dot-notation path expressions with wildcard support. Code never leaves your device — formatting and validation run locally in your browser.',
     instructions: [
       { title: "1. Complete each section", desc: "Fill the JSON Path Query Builder fields in order — required items first, optional details after." },
-      { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
-      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+      { title: "2. Review everything", desc: "Read the full draft once top to bottom; errors hide in fields you skipped." },
+      { title: "3. Download or submit", desc: "Keep a saved copy, then submit the details where officially required." },
     ],
     faqs: [
       { question: "Basic syntax?", answer: "$.store.book[0].title — root, children, indices, dot notation." },
@@ -2544,7 +2544,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Dummy Text first." },
       { title: "2. Generate", desc: "Create your Dummy Text with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy the result into your project; generate again for alternatives." },
     ],
     faqs: [
       { question: "Lorem ipsum or readable?", answer: "Both modes — classic placeholder plus realistic sentence mode." },
@@ -2596,7 +2596,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Fake Credit Card first." },
       { title: "2. Generate", desc: "Create your Fake Credit Card with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy the result into your project; generate again for alternatives." },
     ],
     faqs: [
       { question: "Are these real cards?", answer: "No — Luhn-valid format only, tied to no account, useless for purchases." },

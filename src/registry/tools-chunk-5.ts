@@ -123,8 +123,8 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Validate .htaccess files against 30+ known Apache directives. Checks RewriteEngine, RewriteRule, ErrorDocument, Redirect, Header, Options, and block directives. Flags unknown directives.',
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for htaccess Validator." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
+      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
     ],
     faqs: [
       { question: "What rules get checked?", answer: "Rewrite, redirect, auth, and caching directives against Apache best practices." },
@@ -176,8 +176,8 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Validate GeoJSON objects against the GeoJSON specification. Checks feature, geometry, point coordinates, FeatureCollection structure, and bounding box format.',
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for GeoJSON Validator." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Inspect each field in the response; mismatches mean re-enter, not proceed." },
+      { title: "3. Confirm officially", desc: "Screen with this tool, decide with the authority record." },
     ],
     faqs: [
       { question: "Which spec?", answer: "RFC 7946 — the current GeoJSON standard, enforced strictly here." },
@@ -251,7 +251,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Random Date first." },
       { title: "2. Generate", desc: "Create your Random Date with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy the result into your project; generate again for alternatives." },
     ],
     faqs: [
       { question: "What date formats are available?", answer: "ISO 8601 (YYYY-MM-DD), US format (MM/DD/YYYY), EU format (DD/MM/YYYY), and full text format (January 1, 2025). Choose the format that matches your locale or application needs." },
@@ -305,7 +305,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Random User-Agent first." },
       { title: "2. Generate", desc: "Create your Random User-Agent with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy output where needed; each regeneration is a new roll." },
     ],
     faqs: [
       { question: "Which browsers are included?", answer: "Chrome, Firefox, Safari, Edge, Opera on desktop, plus Chrome Mobile, Safari Mobile, and Firefox Mobile. The database includes recent versions for realistic UA strings." },
@@ -345,7 +345,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for PIN first." },
       { title: "2. Generate", desc: "Create your PIN with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Save the good ones; regenerate the rest until the set is complete." },
     ],
     faqs: [
       { question: "How many digits?", answer: "Configurable length — 4 for convenience, 6 or more for security." },
@@ -406,7 +406,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for OAuth PKCE first." },
       { title: "2. Generate", desc: "Create your OAuth PKCE with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy the result into your project; generate again for alternatives." },
     ],
     faqs: [
       { question: "What is PKCE in OAuth?", answer: "Proof Key for Code Exchange — secures OAuth on public clients that can't keep secrets." },
@@ -479,7 +479,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Avro Schema first." },
       { title: "2. Generate", desc: "Create your Avro Schema with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy output where needed; each regeneration is a new roll." },
     ],
     faqs: [
       { question: "What is Apache Avro?", answer: "Avro is a row-based data serialization format used in big data systems (Kafka, Spark, Hadoop). It uses JSON-defined schemas to specify data structure, enabling compact binary encoding and schema evolution." },
@@ -501,7 +501,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Avro to JSON Sample first." },
       { title: "2. Generate", desc: "Create your Avro to JSON Sample with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy what you need; rerun for a fresh batch." },
     ],
     faqs: [
       { question: "When using Avro to JSON Sample Generator, what does this tool do?", answer: "It reads an Apache Avro schema and generates realistic sample JSON data based on field types. String fields get sample text, numbers get realistic values, enums get random options, and arrays get populated entries." },
@@ -766,7 +766,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for JSON-LD first." },
       { title: "2. Generate", desc: "Create your JSON-LD with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy the result into your project; generate again for alternatives." },
     ],
     faqs: [
       { question: "What is JSON-LD?", answer: "JSON-LD (Linked Data) is a method of encoding structured data using JSON. It wraps your data with @context (schema.org) and @type (Article, Product, FAQPage, etc.) for search engine rich results." },
@@ -787,7 +787,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Merge Patch first." },
       { title: "2. Generate", desc: "Create your Merge Patch with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy the result into your project; generate again for alternatives." },
     ],
     faqs: [
       { question: "What is Merge Patch?", answer: "RFC 7396 JSON diffs — send just the changes instead of whole documents every time." },
@@ -809,7 +809,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for JSON Schema first." },
       { title: "2. Generate", desc: "Create your JSON Schema with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Save the good ones; regenerate the rest until the set is complete." },
     ],
     faqs: [
       { question: "What schema comes out?", answer: "Types, required fields, and nested structure inferred from your sample JSON." },
@@ -863,7 +863,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for JWK first." },
       { title: "2. Generate", desc: "Create your JWK with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy output where needed; each regeneration is a new roll." },
     ],
     faqs: [
       { question: "RSA, EC, or oct?", answer: "RSA for broad compatibility, EC for compact modern keys, oct for shared secrets." },
@@ -936,7 +936,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Neumorphism CSS first." },
       { title: "2. Generate", desc: "Create your Neumorphism CSS with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy the result into your project; generate again for alternatives." },
     ],
     faqs: [
       { question: "What is neumorphism?", answer: "Soft UI — elements extruded from the background with paired light and dark shadows." },
@@ -1029,8 +1029,8 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Check JavaScript code for syntax errors using the Function constructor. Validate code before execution. Code never leaves your device — formatting and validation run locally in your browser.',
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for JavaScript Syntax Checker." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
+      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
     ],
     faqs: [
       { question: "What errors surface?", answer: "Missing brackets, bad tokens, and reserved-word misuse with line numbers." },

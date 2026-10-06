@@ -116,10 +116,10 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Utility",
     slug: "time-converter",
     dependencies: "None",
-    instructions: [
+        instructions: [
       { title: "1. Fill the inputs", desc: "Enter the time with from- and to-zones." },
       { title: "2. Read the converted time", desc: "Check the converted time with offset shown." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Duplicate the run with one input changed — the gap between outputs decides it." },
     ],
     faqs: [
       { question: "What time units can I convert between?", answer: "Seconds, minutes, hours, days, weeks, months, and years. Results include decimal precision for billing and scientific use." },
@@ -140,7 +140,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Random Port first." },
       { title: "2. Generate", desc: "Create your Random Port with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy what you need; rerun for a fresh batch." },
     ],
     faqs: [
       { question: "What port ranges can I generate from?", answer: "Well-known (0-1023), registered (1024-49151), dynamic/private (49152-65535), or any combination of these ranges." },
@@ -162,7 +162,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter owner, group, and other permissions." },
       { title: "2. Read the octal code", desc: "Check the octal code with symbolic form." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Save both outputs before deciding — side-by-side numbers beat memory." },
     ],
     faqs: [
       { question: "What's the difference between numeric and symbolic notation?", answer: "Numeric uses octal digits (e.g., 755), while symbolic uses letters (e.g., u=rwx,g=rx,o=rx). Both represent the same permissions." },
@@ -375,7 +375,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter the amount with from- and to-currencies." },
       { title: "2. Read the converted amount at the live rate", desc: "Check the converted amount at the live rate." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Nudge each input up and down in turn — the most sensitive one deserves your attention." },
     ],
     faqs: [
       { question: "How fresh are the rates?", answer: "Rates refresh from central-bank and provider feeds throughout the trading day. For travel cash and small purchases any intraday rate is fine; for large transfers, compare against your bank's sell rate, which adds 1–3% margin." },
@@ -492,7 +492,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter birth date." },
       { title: "2. Read the exact age in years, months, and days", desc: "Check the exact age in years, months, and days." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Re-run with last month's figures for a reality check against this month's plan." },
     ],
     faqs: [
       {
@@ -816,7 +816,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter loan principal, annual interest rate, and tenure in months." },
       { title: "2. Read the monthly EMI", desc: "Check the monthly EMI with total interest and payable." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Nudge each input up and down in turn — the most sensitive one deserves your attention." },
     ],
     faqs: [
       { question: "What loan types does this calculator support?", answer: "Any loan with fixed EMI payments — home loans, car loans, personal loans, education loans, and business loans. It uses the standard reducing-balance formula used by banks worldwide." },
@@ -1041,7 +1041,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter monthly amount, expected annual return, and years." },
       { title: "2. Read the maturity value", desc: "Check the maturity value with invested-vs-gains split." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Test an edge value (zero, maximum) to sanity-check the math before trusting mid-range answers." },
     ],
     faqs: [
       { question: "How is SIP future value calculated?", answer: "FV = P × [((1+r)^n − 1) / r] × (1+r), with monthly rate r and n months. Example: ₹10,000/month at 12% annual (≈1%/month) for 10 years (120 months) → ≈₹23.2 lakh on ₹12 lakh invested." },
@@ -1062,7 +1062,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter height and weight." },
       { title: "2. Read the BMI value", desc: "Check the BMI value with its weight band." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Duplicate the run with one input changed — the gap between outputs decides it." },
     ],
     faqs: [
       { question: "What units does the BMI calculator support?", answer: "Both metric (kg/cm) and imperial (lbs/ft-in) inputs are supported. Toggle between units and the calculator converts and computes your BMI instantly." },
@@ -1124,8 +1124,8 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "React / html2pdf.js",
     instructions: [
       { title: "1. Complete each section", desc: "Fill the Resume Builder fields in order — required items first, optional details after." },
-      { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
-      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+      { title: "2. Review everything", desc: "Read the full draft once top to bottom; errors hide in fields you skipped." },
+      { title: "3. Download or submit", desc: "Keep a saved copy, then submit the details where officially required." },
     ],
     faqs: [
       { question: "What sections should my resume include?", answer: "Contact header, 2–3 line summary, work history (newest first, with quantified achievements), skills, education. Freshers: lead with projects and internships; experienced hires: keep it to one page per 10 years." },
@@ -1168,7 +1168,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter the amount and the GST rate slab." },
       { title: "2. Read the CGST/SGST split", desc: "Check the CGST/SGST split with net and gross totals." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Save both outputs before deciding — side-by-side numbers beat memory." },
     ],
     faqs: [
       { question: "Which GST slabs are supported?", answer: "All four Indian GST slabs: 5% (essential items), 12% (processed food, business services), 18% (most goods and services), and 28% (luxury items). Select the applicable rate for your calculation." },
@@ -1230,10 +1230,10 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors. Code never leaves your device — formatting and validation run locally in your browser.',
     seoDescription: 'Free online Diff Checker — Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors. ',
     dependencies: "diff-match-patch",
-    instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Diff Checker." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+        instructions: [
+      { title: "1. Paste both texts", desc: "Original in the left pane, revised in the right — full documents are fine." },
+      { title: "2. Run the diff", desc: "Additions, deletions, and moves highlight line by line." },
+      { title: "3. Review every change", desc: "Walk each hunk before accepting; whitespace-only diffs can hide real edits." },
     ],
     faqs: [
       { question: "What types of differences does it highlight?", answer: "Insertions (new lines added), deletions (lines removed), and modifications (changed lines) are each highlighted with distinct background colors so you can spot every difference at a glance." },
@@ -1253,8 +1253,8 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "MaxMind / IP-API",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for IP Address Lookup." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Read every returned field slowly — one wrong character voids the check." },
+      { title: "3. Confirm officially", desc: "Confirm high-stakes results on the official source before acting on them." },
     ],
     faqs: [
       { question: "What information does the IP lookup show?", answer: "Your public IPv4 and IPv6 addresses, city, country, region, ISP name, ASN (Autonomous System Number), timezone, and approximate latitude/longitude coordinates." },
@@ -1302,7 +1302,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter CTC with city and regime." },
       { title: "2. Read the in-hand figure", desc: "Check the in-hand figure with deduction split." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Re-run with last month's figures for a reality check against this month's plan." },
     ],
     faqs: [
       { question: "What tax regime does this calculator support?", answer: "It supports both the old and new Indian tax regimes. Select your regime to see accurate TDS deductions under the applicable income tax slabs and standard deduction rules." },
@@ -1436,8 +1436,8 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "PDF-lib / Vue.js",
     instructions: [
       { title: "1. Complete each section", desc: "Fill the Invoice Generator fields in order — required items first, optional details after." },
-      { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
-      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+      { title: "2. Review everything", desc: "Proofread every field twice — transposed digits cause most form rejections." },
+      { title: "3. Download or submit", desc: "Download the finished file for your records, then file it on the official portal." },
     ],
     faqs: [
       { question: "What fields go on a GST-compliant invoice?", answer: "Supplier and buyer GSTIN, invoice number and date, HSN/SAC codes per line item, taxable value, CGST+SGST (intra-state) or IGST (inter-state) breakup, and place of supply. The generator includes all of these as line-item fields." },
@@ -1458,7 +1458,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Business Card first." },
       { title: "2. Generate", desc: "Create your Business Card with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy what you need; rerun for a fresh batch." },
     ],
     faqs: [
       { question: "What card sizes are available?", answer: "Standard business card sizes: US (3.5 x 2 inches), EU (85 x 55 mm), and custom dimensions. Each template is pre-sized for print-ready output." },
@@ -1752,7 +1752,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for XML Sitemap first." },
       { title: "2. Generate", desc: "Create your XML Sitemap with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy output where needed; each regeneration is a new roll." },
     ],
     faqs: [
       { question: "Where does the crawl run?", answer: "On our server: pages are fetched and analyzed server-side, then the sitemap is generated for download. Crawled URLs are not retained after your session." },
@@ -1895,7 +1895,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter revenue and cost." },
       { title: "2. Read the margin", desc: "Check the margin with markup shown." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Nudge each input up and down in turn — the most sensitive one deserves your attention." },
     ],
     faqs: [
       { question: "What is the difference between margin and markup?", answer: "Margin is profit as a share of selling price; markup is profit as a share of cost. Example: cost $80, price $100 → margin 20%, markup 25%. Same profit, different base — mixing them up is the most common pricing error." },
@@ -1935,7 +1935,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter gain and cost." },
       { title: "2. Read the return percentage", desc: "Check the return percentage with profit." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Duplicate the run with one input changed — the gap between outputs decides it." },
     ],
     faqs: [
       { question: "How is ROI calculated?", answer: "ROI = (gain − cost) ÷ cost. Example: $12,000 revenue on $10,000 ad spend → ($12,000−$10,000)÷$10,000 = 20%. Simple, but time-blind — see annualization below." },
@@ -1956,7 +1956,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter net amount and VAT rate." },
       { title: "2. Read the gross total", desc: "Check the gross total with tax split." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Test an edge value (zero, maximum) to sanity-check the math before trusting mid-range answers." },
     ],
     faqs: [
       { question: "How do I add or remove VAT?", answer: "Add: net × (1 + rate). Strip: gross ÷ (1 + rate). Example at 20%: €100 net → €120 gross; €120 gross → €100 net. Never subtract 20% from gross (€96 — wrong)." },
@@ -1976,8 +1976,8 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "zxcvbn",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Password Strength Checker." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
+      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
     ],
     faqs: [
       { question: "What does the score mean?", answer: "zxcvbn scores 0–4 from real-world cracking models (not just length): 0–1 fall in seconds (dictionary words, patterns), 2 takes hours, 3 takes years, 4 takes centuries. Aim for 3+ on important accounts, 4 on email and banking." },
@@ -2063,8 +2063,8 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "Canvas API / jsPDF",
     instructions: [
       { title: "1. Complete each section", desc: "Fill the Receipt Generator fields in order — required items first, optional details after." },
-      { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
-      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+      { title: "2. Review everything", desc: "Read the full draft once top to bottom; errors hide in fields you skipped." },
+      { title: "3. Download or submit", desc: "Keep a saved copy, then submit the details where officially required." },
     ],
     faqs: [
       { question: "What goes on a proper receipt?", answer: "Merchant name/address, date, itemized lines with prices, subtotal, tax, total, and payment method. The generator lays all of these out on one printable page." },
@@ -2510,7 +2510,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for MD5 & SHA Hash first." },
       { title: "2. Generate", desc: "Create your MD5 & SHA Hash with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy what you need; rerun for a fresh batch." },
     ],
     faqs: [
       { question: "Which hash algorithms are supported?", answer: "MD5, SHA-1, SHA-256, and SHA-512. Each produces a fixed-length hash string — MD5 (32 hex chars), SHA-1 (40), SHA-256 (64), SHA-512 (128)." },
@@ -2619,10 +2619,10 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Projects customer lifetime value using average order value, purchase frequency, gross margin, and estimated customer lifespan in months. SaaS founders and e-commerce operators use LTV to determine acquisition budgets, segment high-value customers, and forecast recurring revenue.',
     seoDescription: 'Free online LTV Calculator — customer lifetime value from ARPA, margin, and lifespan, with the 3:1 LTV:CAC rule explained. ',
     dependencies: "Vanilla JS",
-    instructions: [
-      { title: "1. Fill the inputs", desc: "Enter your figures — the tool labels each field it needs." },
+        instructions: [
+      { title: "1. Fill the inputs", desc: "Enter average revenue with lifespan and margin." },
       { title: "2. Read the LTV", desc: "Check the LTV with margin applied." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Test an edge value (zero, maximum) to sanity-check the math before trusting mid-range answers." },
     ],
     faqs: [
       { question: "How is LTV calculated?", answer: "LTV = ARPA × gross margin × average lifetime in months. Example: $50 ARPA × 80% margin × 20 months = $800 LTV. E-commerce variant swaps ARPA for average order value × purchase frequency." },
@@ -2870,7 +2870,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Passport Photo Maker (India) first." },
       { title: "2. Generate", desc: "Create your Passport Photo Maker (India) with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy output where needed; each regeneration is a new roll." },
     ],
     faqs: [
       { question: "What size does the tool output?", answer: "A print-ready 3.5 × 4.5 cm crop with the face auto-positioned to official proportions — accepted for Indian passport, visa, and OCI applications." },

@@ -9,10 +9,10 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'Utility',
     id:  "224",
     dependencies: 'None',
-    instructions: [
-      { title: "1. Fill the inputs", desc: "Enter the value with from- and to-units." },
+        instructions: [
+      { title: "1. Fill the inputs", desc: "Enter the measurement with from- and to-units." },
       { title: "2. Read the converted value", desc: "Check the converted value with formula shown." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Swap to verify", desc: "Reverse from/to and confirm you land back on the original." },
     ],
     faqs: [
       { question: "What units can this converter handle?", answer: "Length (mm, cm, m, km, in, ft, yd, mi) with more unit families available. Enter any value and see the conversion to all supported units instantly." },
@@ -61,8 +61,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoTitle: "ITR Filing Helper India – Free Tax Guide",
     instructions: [
       { title: "1. Complete each section", desc: "Fill the ITR Filing Helper fields in order — required items first, optional details after." },
-      { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
-      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+      { title: "2. Review everything", desc: "Read the full draft once top to bottom; errors hide in fields you skipped." },
+      { title: "3. Download or submit", desc: "Keep a saved copy, then submit the details where officially required." },
     ],
     faqs: [
       { question: "Which ITR form do I need?", answer: "ITR-1 for salary, ITR-2 for capital gains, ITR-3 for business, ITR-4 for presumptive — matched to your income." },
@@ -168,8 +168,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: 'IFSC API',
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for IFSC Code Lookup." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Read every returned field slowly — one wrong character voids the check." },
+      { title: "3. Confirm officially", desc: "Confirm high-stakes results on the official source before acting on them." },
     ],
     faqs: [
       { question: "What details does the IFSC lookup return?", answer: "Bank name, branch name, full address, city, district, state, contact number, and MICR code. The IFSC code uniquely identifies a specific bank branch in India." },
@@ -186,8 +186,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoTitle: "Voter ID Form Helper – Free Guide",
     instructions: [
       { title: "1. Complete each section", desc: "Fill the Voter ID Form Helper fields in order — required items first, optional details after." },
-      { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
-      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+      { title: "2. Review everything", desc: "Proofread every field twice — transposed digits cause most form rejections." },
+      { title: "3. Download or submit", desc: "Download the finished file for your records, then file it on the official portal." },
     ],
     faqs: [
       { question: "Which form for new registration?", answer: "Form 6 — first-time voter enrollment with address proof attached." },
@@ -211,8 +211,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: 'Postal API',
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for India Pincode Finder." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Inspect each field in the response; mismatches mean re-enter, not proceed." },
+      { title: "3. Confirm officially", desc: "Screen with this tool, decide with the authority record." },
     ],
     faqs: [
       { question: "Is my search sent anywhere?", answer: "Yes. Lookups query the live postal API, so the pincode or name you search is transmitted for the lookup. Nothing is stored — there is no search history beyond your own browser session." },
@@ -229,7 +229,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Hindi / Regional Font first." },
       { title: "2. Generate", desc: "Create your Hindi / Regional Font with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Save the good ones; regenerate the rest until the set is complete." },
     ],
     faqs: [
       { question: "Unicode or Kruti Dev?", answer: "Unicode for everything new; legacy Kruti Dev only for old documents." },
@@ -250,7 +250,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter birth date." },
       { title: "2. Read the exact age in years, months, and days", desc: "Check the exact age in years, months, and days." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Save both outputs before deciding — side-by-side numbers beat memory." },
     ],
     faqs: [
       { question: "What counts as proof?", answer: "Birth certificate, Aadhaar, PAN, or school records per asking authority." },
@@ -1354,8 +1354,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoTitle: "GSTIN Lookup – Verify GST Numbers Free",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for GSTIN Lookup." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
+      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
     ],
     faqs: [
       { question: "How is GSTIN structured?", answer: "15 characters: 2-digit state code + 10-char PAN + entity code + Z + checksum." },
@@ -1373,10 +1373,10 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "indian-utilities",
     description: 'Calculates exact profit after marketplace commissions (Meesho, Amazon, Flipkart), GST, shipping costs, returns, and packaging. Compare platform profitability side-by-side for Indian e-commerce sellers.',
     seoTitle: "Seller Profit Calculator – Free Online",
-    instructions: [
-      { title: "1. Fill the inputs", desc: "Enter your figures — the tool labels each field it needs." },
-      { title: "2. Read the margin", desc: "Check the margin with cost breakup." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+        instructions: [
+      { title: "1. Fill the inputs", desc: "Enter price with marketplace fees and cost." },
+      { title: "2. Read margin", desc: "Check margin with cost breakup." },
+      { title: "3. Compare scenarios", desc: "Duplicate the run with one input changed — the gap between outputs decides it." },
     ],
     faqs: [
       { question: "What eats margin?", answer: "Marketplace commission, GST, shipping, packaging, and returns — in that order usually." },
@@ -2014,7 +2014,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Collage first." },
       { title: "2. Generate", desc: "Create your Collage with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Save the good ones; regenerate the rest until the set is complete." },
     ],
     faqs: [
       { question: "How many photos can I add to a collage?", answer: "Most layouts support between 2 and 12 photos. The exact count depends on the layout template you choose — grids support more images while featured layouts highlight fewer." },
@@ -2035,7 +2035,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Chart first." },
       { title: "2. Generate", desc: "Create your Chart with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy output where needed; each regeneration is a new roll." },
     ],
     faqs: [
       { question: "Which chart types?", answer: "Bar, line, and pie — the three that cover nearly every report and post." },
@@ -3348,8 +3348,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: "QRCode.js",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for UPI ID Validator & QR Generator." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Inspect each field in the response; mismatches mean re-enter, not proceed." },
+      { title: "3. Confirm officially", desc: "Screen with this tool, decide with the authority record." },
     ],
     faqs: [
       { question: "Which UPI handles are validated?", answer: "All major Indian UPI handles: @paytm, @okhdfcbank, @ybl, @sbi, @upi, @axl, @icici, @okaxis, @oksbi, @payzapp, @amazonpay, and more. The validator checks format rules specific to each handle." },
@@ -3370,7 +3370,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: "None",
     instructions: [
       { title: "1. Paste source for Indian Address Parser", desc: "Paste source for Indian Address Parser into the input area. Nothing runs until you trigger it." },
-      { title: "2. Parse", desc: "Parse and read each field of the structured output." },
+      { title: "2. Parse", desc: "Parse and walk every field of the output." },
       { title: "3. Verify values", desc: "Verify values against your source." },
     ],
     faqs: [
@@ -3392,8 +3392,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: "None",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Vehicle Registration Checker." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Read every returned field slowly — one wrong character voids the check." },
+      { title: "3. Confirm officially", desc: "Confirm high-stakes results on the official source before acting on them." },
     ],
     faqs: [
       { question: "What information does it extract from a registration number?", answer: "State/UT code (e.g., MH for Maharashtra, DL for Delhi), RTO code (e.g., 01 for South Mumbai), series letters, and unique number. It decodes the standard Indian license plate format." },
@@ -3414,8 +3414,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: "None",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Aadhaar Number Validator." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
+      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
     ],
     faqs: [
       { question: "How does Aadhaar validation work?", answer: "The 12-digit number must satisfy the Verhoeff checksum (last digit validates the first 11) and format rules — first digit 2–9, no obvious patterns like 11 repeated digits. The tool checks all of these instantly." },
@@ -3437,7 +3437,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter monthly amount, expected annual return, and years." },
       { title: "2. Read the maturity value", desc: "Check the maturity value with invested-vs-gains split." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Re-run with last month's figures for a reality check against this month's plan." },
     ],
     faqs: [
       { question: "What investment types does it calculate?", answer: "SIP (Systematic Investment Plan) with lumpsum and monthly options, PPF (Public Provident Fund) with 15-year maturity, and EPF (Employee Provident Fund) with employer contribution projections." },

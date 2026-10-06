@@ -159,7 +159,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate the exact duration between two times. Handles overnight time spans and displays results in hours, minutes, and seconds. Numbers never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online Time Duration Calculator — Calculate the exact duration between two times. Handles overnight time spans and displays results in hours, minutes, and seconds. ',
     dependencies: "None",
-    instructions: [
+        instructions: [
       { title: "1. Fill the inputs", desc: "Enter start and end times." },
       { title: "2. Read the duration", desc: "Check elapsed time with day, hour, and minute breakup." },
       { title: "3. Add breaks out", desc: "Subtract pauses from the total for billable or worked hours." },
@@ -515,7 +515,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter bill total, tip percent, and headcount." },
       { title: "2. Read the per-person share", desc: "Check the per-person share with total bill." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Test an edge value (zero, maximum) to sanity-check the math before trusting mid-range answers." },
     ],
     faqs: [
       { question: "How does the tip splitting work?", answer: "Enter the bill amount, select a tip percentage, and specify how many people are splitting. The calculator shows the tip amount, total bill, and per-person amount including both bill and tip." },
@@ -578,7 +578,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter numerator and denominator." },
       { title: "2. Read the result", desc: "Check the result with decimal equivalent." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Test an edge value (zero, maximum) to sanity-check the math before trusting mid-range answers." },
     ],
     faqs: [
       { question: "Does it show the division steps?", answer: "Yes. The calculator displays the step-by-step long division process, showing how the numerator divided by the denominator produces the decimal result." },
@@ -638,7 +638,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter the integer." },
       { title: "2. Read the factorial", desc: "Check the factorial with stepwise product." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Nudge each input up and down in turn — the most sensitive one deserves your attention." },
     ],
     faqs: [
       { question: "What is n! (factorial)?", answer: "n! = n × (n-1) × (n-2) × ... × 2 × 1. For example, 5! = 5 × 4 × 3 × 2 × 1 = 120. By definition, 0! = 1." },
@@ -656,10 +656,10 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Check if any number is prime. Also shows all factors and whether the number is odd or even. Numbers never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online Prime Number Checker \u2014 Check if any number is prime. Also shows all factors and whether the number is odd or even. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Prime Number Checker." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+        instructions: [
+      { title: "1. Enter the integer", desc: "Any whole number to test for primality." },
+      { title: "2. Read the verdict", desc: "Prime or composite with the reasoning shown." },
+      { title: "3. Test neighbors", desc: "Check bounds around it when hunting prime ranges for crypto or puzzles." },
     ],
     faqs: [
       { question: "How does it check for primality?", answer: "The tool tests divisibility from 2 up to the square root of the number. If no divisors are found, the number is prime. This is efficient for numbers up to 10^12." },
@@ -707,7 +707,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter dividend and divisor." },
       { title: "2. Read remainder", desc: "Check remainder with quotient." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Re-run with last month's figures for a reality check against this month's plan." },
     ],
     faqs: [
       { question: "What is modulo?", answer: "Modulo (mod) returns the remainder after division. For example, 17 mod 5 = 2 because 17 = 5 × 3 + 2. It's used in cryptography, hash functions, clock arithmetic, and array indexing." },
@@ -845,10 +845,10 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert length and distance between km, miles, meters, yards, feet, and inches. Simple and intuitive. Input never leaves your device — everything runs locally in your browser.',
     seoDescription: 'Free online Length Converter — Convert length and distance between km, miles, meters, yards, feet, and inches. Simple and intuitive. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Fill the inputs", desc: "Enter the value with from- and to-units." },
-      { title: "2. Read the converted length", desc: "Check the converted length with formula." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+        instructions: [
+      { title: "1. Fill the inputs", desc: "Enter the length with from- and to-units." },
+      { title: "2. Read the converted length", desc: "Check the converted value with formula shown." },
+      { title: "3. Swap to verify", desc: "Reverse from/to and confirm you land back on the original." },
     ],
     faqs: [
       { question: "How many feet are in a meter?", answer: "1 meter = 3.28084 feet. The converter uses this exact factor for all length calculations." },
@@ -867,10 +867,10 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert weight between kg, g, lb, oz, and stone. Supports both metric and imperial systems. Input never leaves your device — everything runs locally in your browser.',
     seoDescription: 'Free online Weight Converter — Convert weight between kg, g, lb, oz, and stone. Supports both metric and imperial systems. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Fill the inputs", desc: "Enter the value with from- and to-units." },
-      { title: "2. Read the converted weight", desc: "Check the converted weight with formula." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+        instructions: [
+      { title: "1. Fill the inputs", desc: "Enter the weight with from- and to-units." },
+      { title: "2. Read the converted weight", desc: "Check the converted value with formula shown." },
+      { title: "3. Swap to verify", desc: "Reverse from/to and confirm you land back on the original." },
     ],
     faqs: [
       { question: "How many pounds are in a kilogram?", answer: "1 kilogram = 2.20462 pounds. The converter uses this factor for all weight calculations." },
@@ -889,7 +889,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert volume between liters, mL, gallons, quarts, fl oz, and cups. Handy for cooking, science, and travel. Input never leaves your device — everything runs locally in your browser.',
     seoDescription: 'Free online Volume Converter — Convert volume between liters, mL, gallons, quarts, fl oz, and cups. Handy for cooking, science, and travel. ',
     dependencies: "None",
-    instructions: [
+        instructions: [
       { title: "1. Fill the inputs", desc: "Enter the volume with from- and to-units." },
       { title: "2. Read the converted value", desc: "Check the converted value with formula." },
       { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
@@ -911,7 +911,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Convert area between square meters, square feet, acres, hectares, and square kilometers. Input never leaves your device — everything runs locally in your browser.',
     seoDescription: 'Free online Area Converter — Convert area between square meters, square feet, acres, hectares, and square kilometers. ',
     dependencies: "None",
-    instructions: [
+        instructions: [
       { title: "1. Fill the inputs", desc: "Enter the area with from- and to-units." },
       { title: "2. Read the converted value", desc: "Check the converted value with formula." },
       { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
@@ -936,7 +936,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter the size with from- and to-units." },
       { title: "2. Read the converted size", desc: "Check the converted size with unit math." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Save both outputs before deciding — side-by-side numbers beat memory." },
     ],
     faqs: [
       { question: "How many megabytes are in a gigabyte?", answer: "1 GB = 1,024 MB. This tool uses binary (base-1024) conventions, which is standard for computing and file systems." },
@@ -957,7 +957,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter gender, age, and tape measurements." },
       { title: "2. Read body-fat percent", desc: "Check body-fat percent with category." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Re-run with last month's figures for a reality check against this month's plan." },
     ],
     faqs: [
       { question: "How is body fat estimated from BMI?", answer: "The formula uses BMI, age, and gender to estimate body fat percentage: BF% = (1.20 × BMI) + (0.23 × Age) - (10.8 × Gender) - 5.4, where Gender = 1 for male, 0 for female." },
@@ -978,7 +978,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter age, weight, height, and activity level." },
       { title: "2. Read the daily target", desc: "Check the daily target with macro split." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Nudge each input up and down in turn — the most sensitive one deserves your attention." },
     ],
     faqs: [
       { question: "How is BMR calculated?", answer: "BMR (Basal Metabolic Rate) is calculated using the Mifflin-St Jeor equation: for men (10 × weight + 6.25 × height - 5 × age + 5), for women (10 × weight + 6.25 × height - 5 × age - 161)." },
@@ -1008,7 +1008,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter wake-up time." },
       { title: "2. Read the wake windows", desc: "Check the wake windows with cycle count." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Re-run with last month's figures for a reality check against this month's plan." },
     ],
     faqs: [
       { question: "What age groups are covered?", answer: "Newborn (0-3 months), infant (4-11 months), toddler (1-2 years), preschool (3-5 years), school-age (6-13 years), teenager (14-17 years), young adult (18-25 years), adult (26-64 years), and older adult (65+ years)." },
@@ -1056,7 +1056,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter drinks, weight, gender, and hours since first drink." },
       { title: "2. Read estimated BAC", desc: "Check estimated BAC with sober-up estimate." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Re-run with last month's figures for a reality check against this month's plan." },
     ],
     faqs: [
       { question: "How is BAC estimated?", answer: "The Widmark formula estimates BAC based on alcohol consumed, body weight, gender (body water percentage), and time elapsed since drinking started. It provides an approximate BAC percentage." },
@@ -1074,10 +1074,10 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Track your fertile window and estimated ovulation date based on your last menstrual period. Helps with family planning. Health data never leaves your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online Ovulation Tracker — fertile window and ovulation date from last period. Cycle-aware family planning. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Ovulation Tracker." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+        instructions: [
+      { title: "1. Enter cycle dates", desc: "Enter last period date with average cycle length." },
+      { title: "2. Read the fertile window", desc: "Check ovulation day plus the 5 fertile days around it." },
+      { title: "3. Track monthly", desc: "Log actual dates to calibrate predictions — accuracy improves with history." },
     ],
     faqs: [
       { question: "How is the fertile window calculated?", answer: "Ovulation ≈ 14 days before the next period; the fertile window is the 5 days before plus ovulation day (sperm survive up to 5 days, the egg ~24h). Example: 28-day cycle starting May 1 → ovulation ≈ May 15, fertile May 10–15." },
@@ -1150,9 +1150,9 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate total work hours between start and end times with a configurable break. Essential for timesheets and payroll. Numbers never leave your device — every calculation runs locally in your browser.',
     seoDescription: 'Free online Work Hours Calculator \u2014 Calculate total work hours between start and end times with a configurable break. Essential for timesheets and payroll. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Fill the inputs", desc: "Enter your figures — the tool labels each field it needs." },
-      { title: "2. Read the computed result", desc: "Check the computed result with its breakup." },
+        instructions: [
+      { title: "1. Fill the inputs", desc: "Enter clock-in and clock-out with breaks." },
+      { title: "2. Read total hours", desc: "Check total hours with overtime split." },
       { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
     ],
     faqs: [
@@ -1182,10 +1182,10 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Calculate password entropy in bits to measure password strength against brute-force attacks. Code never leaves your device — formatting and validation run locally in your browser.',
     seoDescription: 'Free online Password Entropy Calculator \u2014 Calculate password entropy in bits to measure password strength against brute-force attacks. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Fill the inputs", desc: "Enter your figures — the tool labels each field it needs." },
-      { title: "2. Read the computed result", desc: "Check the computed result with its breakup." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+        instructions: [
+      { title: "1. Fill the inputs", desc: "Enter password with charset scope." },
+      { title: "2. Read entropy bits", desc: "Check entropy bits with strength verdict." },
+      { title: "3. Compare scenarios", desc: "Duplicate the run with one input changed — the gap between outputs decides it." },
     ],
     faqs: [
       { question: "What is password entropy?", answer: "Entropy measures password randomness in bits. Higher entropy = harder to crack. It accounts for password length and character set size. 40 bits is weak, 60 bits is moderate, 80+ bits is strong." },
@@ -1205,7 +1205,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Two-Factor Auth first." },
       { title: "2. Generate", desc: "Create your Two-Factor Auth with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy the result into your project; generate again for alternatives." },
     ],
     faqs: [
       { question: "TOTP standard?", answer: "RFC 6238 time-based 6-digit codes, rotating every 30 seconds." },
@@ -1299,7 +1299,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for HMAC first." },
       { title: "2. Generate", desc: "Create your HMAC with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy output where needed; each regeneration is a new roll." },
     ],
     faqs: [
       { question: "Why HMAC over plain hash?", answer: "The secret key makes forgery impossible without it — plain hashes anyone can recompute." },
@@ -1320,8 +1320,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoTitle: "TLS Cipher Checker – Scan Servers Free",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for SSL/TLS Checker." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Inspect each field in the response; mismatches mean re-enter, not proceed." },
+      { title: "3. Confirm officially", desc: "Screen with this tool, decide with the authority record." },
     ],
     faqs: [
       { question: "What gets inspected?", answer: "Offered cipher suites, protocol versions, and certificate chain health." },
@@ -1446,7 +1446,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for IPv6 ULA first." },
       { title: "2. Generate", desc: "Create your IPv6 ULA with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy the result into your project; generate again for alternatives." },
     ],
     faqs: [
       { question: "What is a ULA?", answer: "Unique Local Address — private IPv6 space (fc00::/7) for internal networks, like 192.168.x.x for IPv4." },
@@ -1467,8 +1467,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoTitle: "DNS Lookup Tool – Records Free Online",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for DNS Lookup Generator." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
+      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
     ],
     faqs: [
       { question: "Which record types?", answer: "A, AAAA, MX, TXT, CNAME, and NS — the working set for debugging and setup." },
@@ -1520,7 +1520,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Env File first." },
       { title: "2. Generate", desc: "Create your Env File with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Save the good ones; regenerate the rest until the set is complete." },
     ],
     faqs: [
       { question: "Format rules?", answer: "KEY=VALUE lines, # comments, quoted values with spaces handled." },
@@ -1571,8 +1571,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoTitle: "XSS Protection Checker – Test Site Free",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for XSS Protection Checker." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
+      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
     ],
     faqs: [
       { question: "What payloads does it try?", answer: "Script tags, event handlers, and encoding tricks — the classic reflected-XSS battery." },
@@ -1595,7 +1595,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for CSRF Token first." },
       { title: "2. Generate", desc: "Create your CSRF Token with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy the result into your project; generate again for alternatives." },
     ],
     faqs: [
       { question: "What is a CSRF token?", answer: "A CSRF (Cross-Site Request Forgery) token is a unique, unpredictable value embedded in forms to verify that submissions originate from your site, not a malicious third party." },
@@ -1645,8 +1645,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Validate Content Security Policy headers against W3C spec and common pitfalls. Code never leaves your device — formatting and validation run locally in your browser.',
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for CSP Policy Validator." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Inspect each field in the response; mismatches mean re-enter, not proceed." },
+      { title: "3. Confirm officially", desc: "Screen with this tool, decide with the authority record." },
     ],
     faqs: [
       { question: "Which directives?", answer: "default-src, script-src, style-src, frame-ancestors, and the full set." },
@@ -1667,8 +1667,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoTitle: "TLS Cipher Checker – Scan Servers Free",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for TLS Cipher Checker." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
+      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
     ],
     faqs: [
       { question: "What does it inspect?", answer: "The cipher suites a server offers — the negotiated crypto behind HTTPS." },
@@ -1731,8 +1731,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     dependencies: "crt.sh API, Google DNS API",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Subdomain Finder." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Inspect each field in the response; mismatches mean re-enter, not proceed." },
+      { title: "3. Confirm officially", desc: "Screen with this tool, decide with the authority record." },
     ],
     faqs: [
       { question: "Where do the results come from?", answer: "Two sources: public certificate records (crt.sh) show names that ever had a certificate, and live DNS checks probe 24 common names (www, api, mail…). A name missing here can still exist — CNAME-only, unlisted, or firewalled names won't show." },
@@ -1750,8 +1750,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Validate email addresses for correct format, disposable domains, and MX record existence. Code never leaves your device — formatting and validation run locally in your browser.',
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Email Validator." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Read every returned field slowly — one wrong character voids the check." },
+      { title: "3. Confirm officially", desc: "Confirm high-stakes results on the official source before acting on them." },
     ],
     faqs: [
       { question: "RFC 5322?", answer: "Syntax validated against the email standard, not a naive regex." },
@@ -1771,8 +1771,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Validate code syntax across multiple languages including JSON, XML, and JavaScript. Code never leaves your device — formatting and validation run locally in your browser.',
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Validator." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Read every returned field slowly — one wrong character voids the check." },
+      { title: "3. Confirm officially", desc: "Confirm high-stakes results on the official source before acting on them." },
     ],
     faqs: [
       { question: "Which languages validate here?", answer: "Common web and config languages with grammar-aware parsing built in." },
@@ -1835,7 +1835,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for .gitignore first." },
       { title: "2. Generate", desc: "Create your .gitignore with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy the result into your project; generate again for alternatives." },
     ],
     faqs: [
       { question: "Should I use one .gitignore per repo or a global one?", answer: "Use a repo .gitignore for everything the project generates (node_modules, build output, .env) so every contributor is covered, and a global ~/.gitignore only for personal files like .DS_Store or editor swap files." },
@@ -1963,7 +1963,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Analyze HTTP request and response headers — detect security headers, review formatting, and inspect value structure. Code never leaves your device — formatting and validation run locally in your browser.',
     instructions: [
       { title: "1. Paste source for HTTP Header Analyzer", desc: "Paste source for HTTP Header Analyzer into the input area. Nothing runs until you trigger it." },
-      { title: "2. Analyze", desc: "Analyze and read every finding." },
+      { title: "2. Analyze", desc: "Analyze and review each finding in turn." },
       { title: "3. Fix and rerun", desc: "Fix flagged items and re-run." },
     ],
     faqs: [
@@ -1986,7 +1986,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for HTTP Headers first." },
       { title: "2. Generate", desc: "Create your HTTP Headers with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy output where needed; each regeneration is a new roll." },
     ],
     faqs: [
       { question: "Which security headers should I set?", answer: "CSP, HSTS, X-Frame-Options, X-Content-Type-Options, and Referrer-Policy cover most apps." },
@@ -2008,7 +2008,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for HTTP Cache Header first." },
       { title: "2. Generate", desc: "Create your HTTP Cache Header with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy what you need; rerun for a fresh batch." },
     ],
     faqs: [
       { question: "Which cache headers can I generate?", answer: "Cache-Control, ETag, Expires, and Last-Modified in coherent combinations." },
@@ -2059,8 +2059,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Build HTTP retry policies with exponential backoff, fixed delay, or circuit breaker strategies for resilient API clients. Code never leaves your device — formatting and validation run locally in your browser.',
     instructions: [
       { title: "1. Complete each section", desc: "Fill the HTTP Retry Policy Builder fields in order — required items first, optional details after." },
-      { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
-      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+      { title: "2. Review everything", desc: "Proofread every field twice — transposed digits cause most form rejections." },
+      { title: "3. Download or submit", desc: "Download the finished file for your records, then file it on the official portal." },
     ],
     faqs: [
       { question: "Which strategy?", answer: "Exponential backoff with jitter beats fixed delays under load." },
@@ -2077,7 +2077,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     slug: "triangle-area-calculator",
     category: "Calculator",
     description: 'Calculate the area of a triangle given base and height using the formula 0.5 × base × height. Numbers never leave your device — every calculation runs locally in your browser.',
-    instructions: [
+        instructions: [
       { title: "1. Fill the inputs", desc: "Enter base and height." },
       { title: "2. Read the area", desc: "Check the area with the formula shown." },
       { title: "3. Swap units to check", desc: "Re-enter in different units to verify the result scales correctly." },
@@ -2100,7 +2100,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter distance and fuel used." },
       { title: "2. Read the mileage", desc: "Check the mileage with cost per distance." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Duplicate the run with one input changed — the gap between outputs decides it." },
     ],
     faqs: [
       { question: "MPG or L/100km?", answer: "Both — converts between US, UK, and metric conventions. Both systems — converts between US, UK, and metric conventions." },
@@ -2131,7 +2131,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter both quantities." },
       { title: "2. Read the simplified ratio", desc: "Check the simplified ratio with parts." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Re-run with last month's figures for a reality check against this month's plan." },
     ],
     faqs: [
       { question: "How is waist-to-hip ratio calculated?", answer: "WHR = waist circumference / hip circumference. Measure waist at the narrowest point (above belly button) and hips at the widest point (around buttocks)." },
@@ -2222,8 +2222,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Validate YAML formatting, detect indentation issues, convert YAML to JSON, and minify YAML comments. Code never leaves your device — formatting and validation run locally in your browser.',
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for YAML Validator." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Inspect each field in the response; mismatches mean re-enter, not proceed." },
+      { title: "3. Confirm officially", desc: "Screen with this tool, decide with the authority record." },
     ],
     faqs: [
       { question: "What breaks YAML most often?", answer: "Indentation errors, tabs instead of spaces, and unquoted special strings." },
@@ -2350,7 +2350,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Parse and inspect URL query parameters as structured key-value pairs. Decodes URL-encoded values and displays them in a readable JSON format.',
     instructions: [
       { title: "1. Paste source for Query String Parser", desc: "Paste source for Query String Parser into the input area. Nothing runs until you trigger it." },
-      { title: "2. Parse", desc: "Parse and read each field of the structured output." },
+      { title: "2. Parse", desc: "Parse and list each field with its value." },
       { title: "3. Verify values", desc: "Verify values against your source." },
     ],
     faqs: [

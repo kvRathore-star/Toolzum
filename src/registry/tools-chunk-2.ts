@@ -768,8 +768,8 @@ export const entries_chunk_2: ToolMetadata[] = [
     showInCategory: true,
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for WHOIS Lookup." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Inspect each field in the response; mismatches mean re-enter, not proceed." },
+      { title: "3. Confirm officially", desc: "Screen with this tool, decide with the authority record." },
     ],
     faqs: [
       { question: "What information does the WHOIS lookup return?", answer: "Domain registrar name, registration and expiration dates, name servers, DNSSEC status, and the RDAP registry where the domain is managed." },
@@ -790,8 +790,8 @@ export const entries_chunk_2: ToolMetadata[] = [
     showInCategory: true,
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for SSL Checker." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
+      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
     ],
     faqs: [
       { question: "What SSL certificate details does it show?", answer: "Certificate issuer (e.g., Let's Encrypt, DigiCert), validity period (not-before and not-after dates), days remaining until expiration, serial number, and Subject Alternative Names (SANs)." },
@@ -1806,10 +1806,10 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time formats.',
     seoDescription: 'Free online Unix Time Converter — Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time. ',
     dependencies: "None",
-    instructions: [
+        instructions: [
       { title: "1. Fill the inputs", desc: "Enter the time with from- and to-zones." },
       { title: "2. Read the converted time", desc: "Check the converted time with offset shown." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Save both outputs before deciding — side-by-side numbers beat memory." },
     ],
     faqs: [
       { question: "What's percent-encoding?", answer: "Percent-encoding (URL encoding) replaces unsafe URL characters with % followed by two hex digits. Spaces become %20, special characters become %XX. This ensures URLs are transmitted correctly over HTTP." },
@@ -1984,7 +1984,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     dependencies: "None",
     instructions: [
       { title: "1. Paste CRON", desc: "Paste CRON text into the input area. Nothing runs until you trigger it." },
-      { title: "2. Parse", desc: "Parse and read each field of the structured output." },
+      { title: "2. Parse", desc: "Parse and list each field with its value." },
       { title: "3. Verify values", desc: "Verify values against your source." },
     ],
     faqs: [
@@ -2047,7 +2047,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter distance and average speed." },
       { title: "2. Read the arrival time", desc: "Check the arrival time with duration." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Re-run with last month's figures for a reality check against this month's plan." },
     ],
     faqs: [
       { question: "What does ETA need?", answer: "Distance and speed — arrival time computes instantly. Distance and speed entered — arrival time computes instantly." },
@@ -2147,7 +2147,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for ULID first." },
       { title: "2. Generate", desc: "Create your ULID with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy the result into your project; generate again for alternatives." },
     ],
     faqs: [
       { question: "What is a ULID?", answer: "ULID (Universally Unique Lexicographically Sortable Identifier) is a 26-character string that is time-ordered and collision-resistant. Format: 48-bit timestamp + 80-bit randomness in Crockford base32." },
@@ -2190,8 +2190,8 @@ export const entries_chunk_2: ToolMetadata[] = [
     dependencies: "None",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for MAC Vendor Lookup." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
+      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
     ],
     faqs: [
       { question: "What is a MAC address OUI?", answer: "The OUI (Organizationally Unique Identifier) is the first 3 octets (6 hex characters) of a MAC address. It uniquely identifies the device manufacturer or vendor, assigned by IEEE." },
@@ -2223,7 +2223,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for RSA Key Pair first." },
       { title: "2. Generate", desc: "Create your RSA Key Pair with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy what you need; rerun for a fresh batch." },
     ],
     faqs: [
       { question: "What key sizes are supported?", answer: "2048-bit and 4096-bit RSA keys. 2048-bit is standard for most applications; 4096-bit provides stronger security for sensitive use cases." },
@@ -2255,7 +2255,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for ASCII Art first." },
       { title: "2. Generate", desc: "Create your ASCII Art with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy output where needed; each regeneration is a new roll." },
     ],
     faqs: [
       { question: "What font styles are available?", answer: "Block, bubble, fancy, digital, shadow, and slant styles. Each style creates a different visual effect for your text, from bold block letters to ornate decorative text." },
@@ -2536,7 +2536,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter word count with page count." },
       { title: "2. Read words per page", desc: "Check words per page with totals." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Re-run with last month's figures for a reality check against this month's plan." },
     ],
     faqs: [
       { question: "How is the estimate calculated?", answer: "The tool uses standard formulas: ~250 words per single-spaced page and ~500 words per double-spaced page at 12pt font. Adjustments are made for font size, margins, and line spacing." },
@@ -2695,7 +2695,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for PBKDF2 Hash first." },
       { title: "2. Generate", desc: "Create your PBKDF2 Hash with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Copy the result into your project; generate again for alternatives." },
     ],
     faqs: [
       { question: "What is PBKDF2?", answer: "PBKDF2 (Password-Based Key Derivation Function 2) derives a cryptographic key from a password using repeated hashing. It's designed to slow brute-force attacks through high iteration counts." },
@@ -2760,8 +2760,8 @@ export const entries_chunk_2: ToolMetadata[] = [
     dependencies: "None",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for XML Minifier / Validator." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
+      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
     ],
     faqs: [
       { question: "What does minification remove?", answer: "Removes all unnecessary whitespace, line breaks, and indentation between elements and attributes. Comments and CDATA sections are preserved." },
@@ -2929,10 +2929,10 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between PX and REM with custom base size. Code never leaves your device — formatting and validation run locally in your browser.',
     seoDescription: 'Free online PX to REM Converter \u2014 Convert between PX and REM with custom base size. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Fill the inputs", desc: "Enter your figures — the tool labels each field it needs." },
+        instructions: [
+      { title: "1. Fill the inputs", desc: "Enter rems with base font size." },
       { title: "2. Read the converted size", desc: "Check the converted size with base shown." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+      { title: "3. Compare scenarios", desc: "Test an edge value (zero, maximum) to sanity-check the math before trusting mid-range answers." },
     ],
     faqs: [
       { question: "What is the default base size?", answer: "16px = 1rem (the browser default). You can customize the base size to match your project's root font-size setting." },
@@ -2973,10 +2973,10 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between kW, hp, bhp, W, MW, and BTU/hr — engine specs, solar sizing, and HVAC math in one place.',
     seoDescription: 'Free online Power Converter \u2014 Convert between kW, hp, W, MW, and BTU/hr. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Fill the inputs", desc: "Enter the value with from- and to-units." },
-      { title: "2. Read the computed result", desc: "Check the computed result with its breakup." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+        instructions: [
+      { title: "1. Fill the inputs", desc: "Enter watts with from- and to-units." },
+      { title: "2. Read the converted power", desc: "Check the converted value with formula shown." },
+      { title: "3. Swap to verify", desc: "Reverse from/to and confirm you land back on the original." },
     ],
     faqs: [
       { question: "What power units are supported?", answer: "Kilowatts (kW), horsepower (hp and bhp), watts (W), megawatts (MW), and BTU per hour (BTU/hr). All conversions are bidirectional." },
@@ -2995,10 +2995,10 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between kPa, psi, bar, atm, Torr, and mbar. Input never leaves your device — everything runs locally in your browser.',
     seoDescription: 'Free online Pressure Converter \u2014 Convert between kPa, psi, bar, atm, Torr, and mbar. ',
     dependencies: "None",
-    instructions: [
-      { title: "1. Fill the inputs", desc: "Enter the value with from- and to-units." },
-      { title: "2. Read the computed result", desc: "Check the computed result with its breakup." },
-      { title: "3. Compare scenarios", desc: "Change one input and re-read — the delta between runs is the decision signal." },
+        instructions: [
+      { title: "1. Fill the inputs", desc: "Enter the pressure with from- and to-units." },
+      { title: "2. Read the converted pressure", desc: "Check the converted value with formula shown." },
+      { title: "3. Swap to verify", desc: "Reverse from/to and confirm you land back on the original." },
     ],
     faqs: [
       { question: "What pressure units are supported?", answer: "Kilopascals (kPa), pounds per square inch (psi), bar, atmosphere (atm), Torr (mmHg), and millibar (mbar). All conversions are bidirectional." },
@@ -3059,7 +3059,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Markdown Table first." },
       { title: "2. Generate", desc: "Create your Markdown Table with one click." },
-      { title: "3. Copy and reuse", desc: "Copy the output; regenerate for more options." },
+      { title: "3. Copy and reuse", desc: "Save the good ones; regenerate the rest until the set is complete." },
     ],
     faqs: [
       { question: "How do I write a table?", answer: "Pipes separate columns, dashes set alignment — the tool builds it without hand-aligning." },
