@@ -208,3 +208,11 @@ specials (timers, recorders, TTS/STT, multi-tools). Utility/dev no longer
 on generic category templates anywhere in the FAQ'd set.
 Gates: tsc 0 · eslint 0 · 23 tests green · faq-gate 0 new · quality-audit 0.
 Registry: 605 tools with custom instructions.
+
+## Parked P1 DONE (Oct 6 — 30/30, gates green)
+
+18 calculators + inflation + 4 video + 4 text + live-transcription,
+brand-kit, social-caption. FAQs + how-to + titles inline per 10.7 with
+code-truth framing (CalculatorShell ungated saves, Web Speech vendor
+processing disclosed, FFmpeg local + free quota, clipboard-only text).
+Customs 604 → 634/1,143. ~23 parked remain for P2.
