@@ -24,3 +24,6 @@ playwright-report/
 # Ad-hoc a11y scan helpers from the Sep 2026 session — local only.
 .axe-*.mjs
 
+
+__pycache__/
+*.pyc

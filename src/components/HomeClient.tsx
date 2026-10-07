@@ -22,7 +22,9 @@ import { useIsIndia } from '@/hooks/useIsIndia';
 import { useSession } from '@/lib/auth-client';
 import { getRemainingDownloads } from '@/utils/freeUsageGuard';
 import { resolvePlan, fileCaps } from '@/lib/planTiers';
-import { detectFileType, heroRouteFor, heroToolName, type HeroFileType } from '@/lib/fileRoute';
+import { detectFileType, heroIntentsFor, heroBulkIntentsFor, heroDefaultIntentId, heroBlockReason, heroTypeWarning, heroSizeState, heroExtOf, type HeroFileType, type HeroIntent } from '@/lib/fileRoute';
+import { stashHeroFile } from '@/lib/heroFile';
+import { useRouter } from 'next/navigation';
 import { useFavorites } from '@/hooks/useFavorites';
 import { FavoriteStarButton } from '@/components/FavoriteStarButton';
 import { getClientToolBySlug } from '@/registry/tools-client-index';
@@ -168,8 +170,10 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
                 <span className="ml-4 text-[11px] text-[var(--text-muted)] font-mono">toolzum — browser-supercomputer</span>
               </div>
 
-              <div className="flex-1 p-6 flex flex-col justify-between gap-3">
-                <div className="flex gap-4 mb-8" role="tablist" aria-label="Demo actions" onKeyDown={onDemoTabsKeyDown}>
+              {/* Column fills the 600px panel: tabs, then the zone stretches.
+                  justify-start (not between) so no dead void opens up. */}
+              <div className="flex-1 p-6 flex flex-col justify-start gap-4 min-h-0">
+                <div className="flex gap-4" role="tablist" aria-label="Demo actions" onKeyDown={onDemoTabsKeyDown}>
                   {DEMO_TABS.map(tab => (
                     <button
                       key={tab}
@@ -189,7 +193,7 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
                   ))}
                 </div>
 
-                <div role="tabpanel" id="demotab-panel" aria-labelledby={`demotab-${activeTab}`}>
+                <div role="tabpanel" id="demotab-panel" aria-labelledby={`demotab-${activeTab}`} className="flex-1 flex flex-col min-h-0">
                 <FileDropZone activeTab={activeTab} />
                 </div>
               </div>
@@ -772,8 +776,13 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
 }
 
 function FileDropZone({ activeTab }: { activeTab: string }) {
-  const [file, setFile] = useState<File | null>(null);
+  const router = useRouter();
+  const [files, setFiles] = useState<File[]>([]);
   const [dragOver, setDragOver] = useState(false);
+  const [blocked, setBlocked] = useState<string | null>(null);
+  const [typeWarn, setTypeWarn] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [carrying, setCarrying] = useState(false);
   const { data: session } = useSession();
   const planCapMB = fileCaps(resolvePlan(!!session?.user, (session?.user as { plan?: string } | undefined)?.plan ?? null)).maxFileSizeMB;
   // User state (quota-aware box): cookie + local counters only — no request.
@@ -792,19 +801,73 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
 
   const takeFiles = useCallback((list: FileList | null) => {
     if (!list || list.length === 0) return;
-    if (list.length > 1) {
-      toast('One file here — bulk tools inside handle whole folders.', { icon: '📁' });
+    const arr = Array.from(list);
+    const first = arr[0]!;
+    // Abuse gate 1: executables/installers never enter the box.
+    const block = heroBlockReason(first.name);
+    if (block) {
+      setFiles([]);
+      setSelectedId(null);
+      setTypeWarn(null);
+      setBlocked(block);
+      toast.error('That file type is not supported here.', { icon: '⛔' });
+      return;
     }
-    const f = list[0]!;
-    setFile(f);
-    // Size heads-up against the viewer's plan cap (destination tool enforces).
-    const capMB = fileCaps(resolvePlan(!!session?.user, (session?.user as { plan?: string } | undefined)?.plan ?? null)).maxFileSizeMB;
-    if (f.size > capMB * 1024 * 1024) {
-      toast(`Exceeds your ${capMB}MB limit — the tool will enforce it.`, { icon: '⚠️' });
-    } else if (f.size > 500 * 1024 * 1024) {
-      toast('Large file — Pro tools handle up to 2GB.', { icon: '⚠️' });
+    // Abuse gate 2: 2GB hard browser-memory ceiling, every plan.
+    if (heroSizeState(first.size, planCapMB) === 'too-big') {
+      setFiles([]);
+      setSelectedId(null);
+      setTypeWarn(null);
+      setBlocked('This file exceeds the 2GB browser limit — split it before processing.');
+      return;
     }
-  }, [session]);
+    setBlocked(null);
+    setTypeWarn(heroTypeWarning(first.type, heroExtOf(first.name)));
+    setFiles(arr);
+  }, [planCapMB]);
+
+  const first = files[0] ?? null;
+  const multi = files.length > 1;
+  const fileType: HeroFileType | null = first ? detectFileType({ type: first.type, name: first.name }) : null;
+  const ext = first ? heroExtOf(first.name) : '';
+  const intents: HeroIntent[] = fileType
+    ? (multi ? heroBulkIntentsFor(fileType) : heroIntentsFor(fileType, ext))
+    : [];
+  // Homepage tabs double as the default intent: picking Convert then dropping
+  // a PNG preselects Convert. Unknown combos fall back to the first chip.
+  useEffect(() => {
+    if (fileType) setSelectedId(heroDefaultIntentId(fileType, ext, activeTab));
+    else setSelectedId(null);
+  }, [fileType, ext, activeTab, files.length]);
+  const selected: HeroIntent | null = intents.find((i) => i.id === selectedId) ?? intents[0] ?? null;
+
+  const sizeState = first ? heroSizeState(first.size, planCapMB) : 'ok';
+  const overCap = sizeState === 'over-cap';
+  const quotaOut = !!quota?.signedIn && quota.remaining <= 0;
+  const gated = overCap || quotaOut;
+
+  const clearAll = useCallback(() => {
+    setFiles([]);
+    setSelectedId(null);
+    setBlocked(null);
+    setTypeWarn(null);
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  }, []);
+
+  const go = useCallback(async (intent: HeroIntent) => {
+    if (gated || !first || carrying) return;
+    setCarrying(true);
+    try {
+      // Single files ride along via IndexedDB (same browser, never uploaded)
+      // so the destination opens with the file loaded — no second upload.
+      // Multi-file batches travel light: bulk tools take folders themselves.
+      if (!multi) await stashHeroFile(first);
+      const url = intent.params ? `${intent.route}?${intent.params}` : intent.route;
+      router.push(url);
+    } finally {
+      setCarrying(false);
+    }
+  }, [gated, first, multi, carrying, router]);
 
   const formatSize = (bytes: number) => {
     if (bytes < 1024) return `${bytes} B`;
@@ -847,8 +910,6 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
     }
   }, []);
 
-  const fileType = file ? detectFileType(file) : null;
-
   const formatBadges = [
     { label: 'IMG', exts: 'JPG, PNG, WebP' },
     { label: 'VID', exts: 'MP4, WebM' },
@@ -878,23 +939,33 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
         className={`max-h-[320px] flex-1 min-h-[180px] border-2 border-dashed rounded-[var(--radius-xl)] flex flex-col items-center justify-center gap-3 transition-all cursor-pointer group outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/50 ${
           dragOver
             ? 'border-[var(--accent)] bg-[var(--accent-ink)]/5 scale-[1.01]'
-            : file
+            : first
               ? 'border-[var(--accent)]/40 bg-[var(--accent-soft)]'
               : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] hover:border-[var(--accent-hover)] hover:bg-[var(--accent-soft)]'
         }`}
       >
         <input ref={fileInputRef} id="hero-file-input" type="file" className="hidden" onChange={handleInputChange} aria-hidden="true" tabIndex={-1} />
-        {file && fileType ? (
+        {blocked ? (
+          <div role="alert" className="flex flex-col items-center gap-2 p-4 text-center max-w-[260px]">
+            <p className="text-sm font-medium text-[var(--text-primary)]">Can't take this file</p>
+            <p className="text-xs text-[var(--text-secondary)]">{blocked}</p>
+          </div>
+        ) : first && fileType ? (
           <div role="status" className="flex flex-col items-center gap-2 p-4 animate-fade-in">
             <div className="w-12 h-12 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] flex items-center justify-center animate-scale-in">
               {fileTypeIcon(fileType)}
             </div>
-            <p className="text-sm font-medium text-[var(--text-primary)] truncate max-w-[200px]">{file.name}</p>
-            <p className={`text-xs mt-0.5 ${file.size > planCapMB * 1024 * 1024 ? "text-amber-600 dark:text-amber-400 font-medium" : "text-[var(--text-muted)]"}`}>
-              {formatSize(file.size)} &middot; {fileType.toUpperCase()} &middot; limit {planCapMB}MB
+            <p className="text-sm font-medium text-[var(--text-primary)] truncate max-w-[200px]">
+              {multi ? `${files.length} files · ${first.name}` : first.name}
             </p>
+            <p className={`text-xs mt-0.5 ${overCap ? "text-amber-600 dark:text-amber-400 font-medium" : "text-[var(--text-muted)]"}`}>
+              {multi ? `${files.length} files` : formatSize(first.size)} &middot; {fileType.toUpperCase()} &middot; limit {planCapMB}MB
+            </p>
+            {typeWarn && (
+              <p className="text-[11px] text-amber-600 dark:text-amber-400 max-w-[240px] text-center">{typeWarn}</p>
+            )}
             <button
-              onClick={(e) => { e.stopPropagation(); setFile(null); fileInputRef.current && (fileInputRef.current.value = ''); }}
+              onClick={(e) => { e.stopPropagation(); clearAll(); }}
               className="mt-1 px-3 py-1.5 text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text-primary)] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-lg hover:border-[var(--accent)]/30 transition-all duration-200 min-h-[32px]"
             >
               Remove
@@ -913,6 +984,53 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
         )}
       </div>
 
+      {/* Intent chips: WHAT the file is -> WHY the user came. Reserved height
+          so the box doesn't jump when they appear. */}
+      <div className="min-h-[76px] mt-3" aria-live="polite">
+        {first && fileType && !blocked && (
+          <div className="flex flex-col gap-2">
+            <p className="text-[11px] text-[var(--text-muted)]">
+              {multi
+                ? `${files.length} files detected — bulk tools take the whole batch:`
+                : `Detected ${ext ? ext.toUpperCase() + ' ' : ''}${fileType} — what should happen?`}
+            </p>
+            <div className="flex flex-wrap gap-2" role="group" aria-label="Choose what to do with this file">
+              {intents.map((intent) => {
+                const active = selected?.id === intent.id;
+                return (
+                  <button
+                    key={intent.id}
+                    onClick={(e) => { e.stopPropagation(); if (active) go(intent); else setSelectedId(intent.id); }}
+                    disabled={gated || carrying}
+                    aria-pressed={active}
+                    title={intent.note ?? intent.tool}
+                    className={`px-3 py-2 rounded-xl border text-left transition-all min-h-[44px] ${
+                      active
+                        ? 'border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--text-primary)]'
+                        : 'border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:border-[var(--accent)]/40'
+                    } ${(gated || carrying) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                  >
+                    <span className="block text-xs font-semibold">{intent.label}</span>
+                    <span className="block text-[10px] opacity-70">{intent.tool}{intent.note ? ` · ${intent.note}` : ''}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+        {/* State gate BEFORE effort: over-cap or quota-out disables every chip
+            and says exactly how to proceed. Never a post-work wall. */}
+        {first && gated && !blocked && (
+          <div role="alert" className="mt-2 p-2.5 rounded-xl border border-amber-500/30 bg-amber-500/10 text-[11px] text-[var(--text-secondary)]">
+            {overCap ? (
+              <>Too big for your {planCapMB}MB limit — <Link href="/sign-in" className="text-[var(--accent)] underline underline-offset-2">sign in free for 150MB</Link> or <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">go Pro (2GB)</Link>.</>
+            ) : (
+              <>Daily limit reached — resets tomorrow · <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">View Pro</Link>.</>
+            )}
+          </div>
+        )}
+      </div>
+
       <div className="flex flex-wrap gap-1.5 mt-3">
         {formatBadges.map((b) => (
           <span key={b.label} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[10px] font-mono text-[var(--text-muted)]">
@@ -927,9 +1045,9 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
           <span className="text-[10px] text-[var(--text-muted)]">Your file is only inspected in this browser</span>
         </div>
         <div className="flex items-center gap-3">
-          {file && fileType ? (
-            <Button size="sm" asChild>
-              <Link href={heroRouteFor(fileType)}>Open {heroToolName(fileType)} <MoveRight className="w-3 h-3 ml-1" /></Link>
+          {first && selected && !blocked ? (
+            <Button size="sm" onClick={() => go(selected)} disabled={gated || carrying}>
+              {carrying ? 'Loading…' : <>Open {selected.tool} <MoveRight className="w-3 h-3 ml-1" /></>}
             </Button>
           ) : (
             <Link

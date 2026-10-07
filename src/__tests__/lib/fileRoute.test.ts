@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { detectFileType, heroRouteFor, heroToolName } from "@/lib/fileRoute";
+import { detectFileType, heroRouteFor, heroToolName, heroIntentsFor, heroBulkIntentsFor, heroDefaultIntentId, heroBlockReason, heroTypeWarning, heroSizeState, heroExtOf } from "@/lib/fileRoute";
 import { clientToolsRegistry } from "@/registry/tools-client-index";
 
 const F = (name: string, type = "") => ({ name, type });
@@ -47,5 +47,56 @@ describe("hero upload routing (trustworthy file -> tool)", () => {
       expect(tool!.category.toLowerCase().replace(/\s+/g, "-")).toBe(m[1]);
     }
     expect(heroToolName("pdf")).toBe("PDF Compressor");
+  });
+
+  it("every intent chip resolves to a live registry tool (no 404 chips)", () => {
+    const bySlug = new Map(clientToolsRegistry.map((t) => [t.slug, t]));
+    const check = (route: string) => {
+      // /tools is the browse directory (fallback for unknown types), not a tool.
+      if (route === "/tools") return;
+      const m = route.match(/^\/([^/]+)\/([^/]+)$/);
+      expect(m, `${route} must be a tool path`).not.toBeNull();
+      const tool = bySlug.get(m![2]!);
+      expect(tool, `${route} must exist`).toBeDefined();
+      expect(tool!.category.toLowerCase().replace(/\s+/g, "-")).toBe(m![1]);
+    };
+    for (const kind of ["image", "video", "audio", "pdf", "document"] as const) {
+      for (const intent of heroIntentsFor(kind, "")) check(intent.route);
+      for (const intent of heroBulkIntentsFor(kind)) check(intent.route);
+    }
+    for (const ext of ["json", "csv", "txt", "md"]) {
+      for (const intent of heroIntentsFor("other", ext)) check(intent.route);
+    }
+    // No duplicate chip ids per type (aria-pressed + selection need unique ids).
+    for (const kind of ["image", "video", "audio", "pdf", "document"] as const) {
+      const ids = heroIntentsFor(kind, "").map((i) => i.id);
+      expect(new Set(ids).size).toBe(ids.length);
+    }
+  });
+
+  it("homepage tabs preselect the matching intent, never a lie", () => {
+    expect(heroDefaultIntentId("image", "png", "convert")).toBe("convert");
+    expect(heroDefaultIntentId("image", "png", "resize")).toBe("resize");
+    expect(heroDefaultIntentId("pdf", "pdf", "compress")).toBe("compress");
+    // Audio has no resize: falls back to the first chip, not a dead tab.
+    expect(heroDefaultIntentId("audio", "mp3", "resize")).toBe("compress");
+    expect(heroDefaultIntentId("other", "json", "convert")).toBe("format");
+  });
+
+  it("blocks executables, warns on renamed types, sizes honestly", () => {
+    expect(heroBlockReason("setup.exe")).not.toBeNull();
+    expect(heroBlockReason("run.sh")).not.toBeNull();
+    expect(heroBlockReason("photo.png")).toBeNull();
+    expect(heroBlockReason("report.pdf")).toBeNull();
+    expect(heroTypeWarning("video/mp4", "png")).not.toBeNull();
+    expect(heroTypeWarning("image/png", "png")).toBeNull();
+    expect(heroTypeWarning("", "png")).toBeNull();
+    // Office MIME types are unreliable: never warn there.
+    expect(heroTypeWarning("", "docx")).toBeNull();
+    expect(heroSizeState(10 * 1024 * 1024, 30)).toBe("ok");
+    expect(heroSizeState(50 * 1024 * 1024, 30)).toBe("over-cap");
+    expect(heroSizeState(3 * 1024 * 1024 * 1024, 2000)).toBe("too-big");
+    expect(heroExtOf("photo.HEIC")).toBe("heic");
+    expect(heroExtOf("README")).toBe("");
   });
 });
