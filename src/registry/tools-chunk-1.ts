@@ -2169,7 +2169,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Paste the page URL", desc: "Any public http(s) address for a clean, printable PDF." },
       { title: "2. Render the page", desc: "The tool loads the page and paginates it for print." },
-      { title: "3. Download PDF", desc: "Save the document. The save counts toward free download quota (3 a day anonymous, 5 signed-in)." },
+      { title: "3. Save via print dialog", desc: "Choose Save as PDF as the print destination. No download quota applies." },
     ],
     faqs: [
       { question: 'What gets captured from the page?', answer: 'Articles, receipts, and full web pages — text plus layout, saved as a PDF document.' },
@@ -2757,9 +2757,9 @@ export const entries_chunk_1: ToolMetadata[] = [
     ],
     faqs: [
       { question: 'How is AI Chat PDF different from Document Chat?', answer: 'Chat PDF parses and searches your PDF locally in the browser for instant Q&A over one file — fastest for textbooks and manuals. Document Chat (RAG) indexes multiple formats into a vector store for deeper multi-document research at 1 credit per answer. Start here; escalate long research there.' },
-      { question: 'Are my PDFs uploaded when chatting?', answer: 'No — parsing and search run locally in your browser with PDF.js, so the document never leaves your device. If you invoke an optional cloud AI action on an excerpt, only that excerpt is sent, with the credit cost shown on the button before you click.' },
+      { question: 'Are my PDFs uploaded when chatting?', answer: 'No — parsing and search run locally in your browser with PDF.js, so the document never leaves your device. There are no cloud calls and no credits involved — the tool has no AI-provider buttons.' },
       { question: 'What PDFs give the best answers?', answer: 'Native-text PDFs under ~500 pages: course books, manuals, contracts. Scanned image-only PDFs answer poorly until OCRed — extract text first, then chat. Heavy tables and two-column layouts may quote out of order, so verify numbers against the page.' },
-      { question: 'Can I use AI Chat PDF offline?', answer: 'Parsing and search work fully offline once the page loads, since everything runs locally. Optional cloud AI buttons need a connection and credits. Your chat history stays in the browser session and clears when you close the tab.' },
+      { question: 'Can I use AI Chat PDF offline?', answer: 'Parsing and search work fully offline once the page loads, since everything runs locally. Your chat history stays in the browser session and clears when you close the tab.' },
     ],
   },
   {

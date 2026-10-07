@@ -665,7 +665,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on TensorFlow.js." },
       { title: "2. Configure removal", desc: "Set the removal options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Saves save straight to your device. This page redirects to the live AI background tool." },
     ],
     faqs: [
       { question: "How does background removal work?", answer: "The tool uses a neural network to segment the foreground subject from the background, producing a transparent PNG. It analyzes edges, colors, and textures to identify what to keep and what to remove." },
@@ -1044,11 +1044,11 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Audio",
     description: "Generate natural-sounding speech from text using your browser's built-in voices, including Hindi, Tamil, Telugu, Bengali, and more Indian languages. Adjust speed, pitch, and volume — download your text as .txt.",
     dependencies: "Web Speech API",
-    seoDescription: 'Free text to speech online with Indian accents — convert text to natural-sounding audio using browser voices. Hindi, Tamil, Telugu, and more. Free to start; downloads use credits included with a free account.',
+    seoDescription: 'Free text to speech online with Indian accents — convert text to natural-sounding audio using browser voices. Hindi, Tamil, Telugu, and more. Free, local, no signup. Text downloads free; audio export needs server TTS elsewhere.',
     instructions: [
       { title: "1. Paste or type text", desc: "Articles, scripts, or notes up to the visible limit. Plain sentences speak cleanest." },
       { title: "2. Pick voice and speed", desc: "Choose language, voice, and rate; preview 10 seconds before the full read." },
-      { title: "3. Play or save audio", desc: "Listen in-browser or download the narration for videos and revision." },
+      { title: "3. Play or save text", desc: "Listen in-browser; download text as .txt (audio export is not possible from browser speech)." },
     ],
     faqs: [
       { question: "Which Indian languages are supported?", answer: "Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Punjabi, and English with Indian accents. Each language has multiple voice options." },
@@ -1297,7 +1297,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "ai-image-upscaler",
     category: "AI",
     description: 'Upscale images up to 4x with Lanczos-3 interpolation — best for logos, icons, and simple graphics where clean edges matter. Runs locally in your browser, no credits — sign in free for 2 Pro downloads a day.',
-    dependencies: "Real-ESRGAN",
+    dependencies: "Canvas API (Lanczos-3)",
     seoDescription: 'Free image upscaler — 4x Lanczos for logos and icons, local processing. Sign in free for 2 Pro downloads daily.',
     seoTitle: "Free AI Image Upscaler – 4x Online",
     instructions: [
