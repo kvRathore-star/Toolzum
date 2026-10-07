@@ -6,6 +6,7 @@ interface AiMessage {
 interface Env {
   DB: D1Database;
   GEMINI_API_KEY: string;
+  ANTHROPIC_API_KEY?: string;
 }
 
 import { checkRateLimit, recordRateLimit } from '../rate-limit';
@@ -22,6 +23,55 @@ import { creditsAvailable, spendCredits } from '../../../src/lib/creditPacks';
 // Per-task cost: plain text generation. (Transcription is metered per
 // minute — see CREDITS_PER_MINUTE in transcribe.ts / transcriptionPricing.ts.)
 export const TEXT_GENERATION_CREDITS = 1;
+
+// Cheapest Claude model, used ONLY as a fallback when the primary provider
+// fails — so Anthropic-side usage stays minimal (fallback traffic only).
+const CLAUDE_FALLBACK_MODEL = 'claude-haiku-4-5';
+
+// Claude fallback: fires only on primary-provider failure. Requires
+// ANTHROPIC_API_KEY in the worker environment; returns undefined when
+// unconfigured or on any failure, and never throws.
+async function tryClaudeFallback(
+  env: Env,
+  messages: AiMessage[],
+  temperature: number
+): Promise<string | undefined> {
+  try {
+    const key = env.ANTHROPIC_API_KEY;
+    if (!key) return undefined;
+    const systemParts: string[] = [];
+    const claudeMessages: { role: 'user' | 'assistant'; content: string }[] = [];
+    for (const m of messages) {
+      if (m.role === 'system') systemParts.push(m.content);
+      else claudeMessages.push({ role: m.role, content: m.content });
+    }
+    if (claudeMessages.length === 0) return undefined;
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01',
+      },
+      body: JSON.stringify({
+        model: CLAUDE_FALLBACK_MODEL,
+        max_tokens: 1024,
+        ...(systemParts.length > 0 ? { system: systemParts.join('\n\n') } : {}),
+        messages: claudeMessages,
+        temperature,
+      }),
+    });
+    if (!res.ok) {
+      console.error('Claude fallback error:', res.status, await res.text());
+      return undefined;
+    }
+    const data: { content?: { type: string; text?: string }[] } = await res.json();
+    return data.content?.find(b => b.type === 'text' && b.text)?.text;
+  } catch (err) {
+    console.error('Claude fallback failed:', err);
+    return undefined;
+  }
+}
 
 async function getUserContext(request: Request, DB: D1Database): Promise<{ userId: string; plan: string } | null> {
   const cookies = request.headers.get('cookie') || '';
@@ -160,20 +210,19 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       }
     );
 
-    if (!res.ok) {
+    // Primary provider first; Claude fallback only when Gemini fails.
+    let text: string | undefined;
+    if (res.ok) {
+      const data: { candidates: { content: { parts: { text: string }[] } }[] } = await res.json();
+      text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    } else {
       const errBody = await res.text();
       console.error('Gemini API error:', res.status, errBody);
-      return new Response(JSON.stringify({ error: 'AI provider error' }), {
-        status: 502,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      text = await tryClaudeFallback(context.env, messages, temperature);
     }
 
-    const data: { candidates: { content: { parts: { text: string }[] } }[] } = await res.json();
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-
     if (!text) {
-      return new Response(JSON.stringify({ error: 'Empty response from AI' }), {
+      return new Response(JSON.stringify({ error: 'AI provider error' }), {
         status: 502,
         headers: { 'Content-Type': 'application/json' },
       });

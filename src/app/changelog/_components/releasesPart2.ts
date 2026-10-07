@@ -219,12 +219,12 @@ export const RELEASES_PART_2: Release[] = [
   {
     version: "v1.0.0",
     date: "December 15, 2025",
-    title: "Public Launch — Zero Uploads, Zero Compromises",
-    tag: "launch",
-    tagColor: "bg-emerald-700/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20",
-    description: "Toolzum goes public with 50 tools. The promise: every tool runs in your browser, not on a server. Six months from idea to launch — and this is where the real work begins.",
+    title: "Staging Milestone — Zero Uploads, Zero Compromises",
+    tag: "minor",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
+    description: "ToolHub reaches 50 tools on the private staging preview — never publicly launched. The promise taking shape: every tool runs in your browser, not on a server. The foundation everything after is built on.",
     updates: [
-      { type: "feature", text: "50 tools at launch: hashing, text processing, image compression, format conversion, and random generators." },
+      { type: "feature", text: "50 tools in staging: hashing, text processing, image compression, format conversion, and random generators." },
       { type: "security", text: "Verified zero data exfiltration — no packets leave your device during any tool execution." },
       { type: "performance", text: "Each tool loads independently — initial page load kept under 100KB." },
       { type: "feature", text: "Browser-native file handling — drag and drop or click to select, no file upload dialogs." },
@@ -258,7 +258,7 @@ export const RELEASES_PART_2: Release[] = [
     title: "Private Beta — The Foundation",
     tag: "launch",
     tagColor: "bg-emerald-700/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20",
-    description: "Closed beta launches with 25 tools. The core engine is built: PDF handling, video/audio processing, OCR — all client-side. This is the starting point for everything that follows.",
+    description: "Closed beta on the private staging preview with 25 tools — shared with beta testers only, never publicly launched. The core engine is built: PDF handling, video/audio processing, OCR — all client-side. This is the starting point for everything that follows.",
     updates: [
       { type: "feature", text: "25 tools across PDF, Image, Video, Audio, and Text — all running entirely in your browser." },
       { type: "feature", text: "Pro subscription model with payment support for India (UPI) and global cards." },

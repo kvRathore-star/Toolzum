@@ -147,4 +147,32 @@ describe('POST /api/ai/generate contract', () => {
     expect(await res.json()).toEqual({ error: 'AI features are temporarily disabled' });
     expect(fetchSpy).not.toHaveBeenCalled();
   });
+
+  it('502s when Gemini fails and no Claude fallback key is configured', async () => {
+    const fetchSpy = vi.fn(async () => new Response('boom', { status: 500 }));
+    vi.stubGlobal('fetch', fetchSpy);
+    const res = await onRequestPost({
+      request: req({ messages: [{ role: 'user', content: 'hi' }] }),
+      env: ENV,
+    });
+    expect(res.status).toBe(502);
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('falls back to Claude when Gemini fails and ANTHROPIC_API_KEY is set', async () => {
+    const fetchSpy = vi.fn(async (url: unknown) =>
+      String(url).includes('api.anthropic.com')
+        ? new Response(JSON.stringify({ content: [{ type: 'text', text: 'via claude' }] }))
+        : new Response('boom', { status: 500 }),
+    );
+    vi.stubGlobal('fetch', fetchSpy);
+    const env = { DB: mockDb(), GEMINI_API_KEY: 'k', ANTHROPIC_API_KEY: 'sk-ant-test' } as unknown as typeof ENV;
+    const res = await onRequestPost({
+      request: req({ messages: [{ role: 'user', content: 'hi' }] }),
+      env,
+    });
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ content: 'via claude' });
+    expect(fetchSpy).toHaveBeenCalledTimes(2);
+  });
 });

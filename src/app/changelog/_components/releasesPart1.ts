@@ -150,6 +150,22 @@ export const RELEASES_PART_1: Release[] = [
     ]
   },
   // ══════════════════════════════════════════════
+  // JULY 2026 — PUBLIC LAUNCH
+  // ══════════════════════════════════════════════
+  {
+    version: "v2.0.1",
+    date: "July 10, 2026",
+    title: "Public Launch — ToolHub Becomes Toolzum",
+    tag: "launch",
+    tagColor: "bg-emerald-700/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20",
+    description: "The project goes public. The toolzum.com domain is registered and the staging project built as ToolHub is renamed and deployed under its own name. Before this day the work lived only on a private staging preview — this is the first day Toolzum exists on the public web.",
+    updates: [
+      { type: "feature", text: "Custom domain registered and live — Toolzum is publicly accessible for the first time." },
+      { type: "feature", text: "ToolHub renamed to Toolzum across the codebase — every reference updated in a single pass." },
+      { type: "feature", text: "Launch-day guides published — PDF compression, photo editing, background removal, video-to-MP3, and the privacy-first tools guide." },
+    ]
+  },
+  // ══════════════════════════════════════════════
   // JUNE 2026
   // ══════════════════════════════════════════════
   {

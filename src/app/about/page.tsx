@@ -6,7 +6,8 @@ import {
   Sparkles,
   EyeOff,
   Lock,
-  Ban
+  Ban,
+  User
 } from "lucide-react";
 import Link from "next/link";
 import { getCachedToolCounts } from "@/registry/tools-helpers";
@@ -83,6 +84,19 @@ export default function AboutPage() {
           </p>
           <p className="text-sm text-[var(--text-muted)] mt-4">
             Privacy-first by design.
+          </p>
+        </div>
+
+        {/* Company */}
+        <div className="max-w-3xl mx-auto mb-20 text-center">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
+            <User className="w-4 h-4" /> The Company
+          </span>
+          <h2 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl font-semibold text-[var(--text-primary)] mb-4">Solo-built and bootstrapped.</h2>
+          <p className="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed">
+            Toolzum is built by solo founder <strong className="text-[var(--text-primary)]">Kirtiwardhan Rathore</strong> with
+            no outside funding. The project began as a private staging preview (built as ToolHub) and
+            launched publicly on toolzum.com in July 2026.
           </p>
         </div>
 
