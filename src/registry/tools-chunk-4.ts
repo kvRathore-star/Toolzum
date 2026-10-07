@@ -360,6 +360,18 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Preview how your page will appear in Google search results. Enter title, URL, and description to see the live search snippet preview. Analysis runs locally in your browser — nothing you enter is uploaded.',
     seoDescription: 'Free online SEO Preview Generator — Preview how your page will appear in Google search results. Enter title, URL, and description to see the live search snippet preview. ',
     dependencies: "None",
+    seoTitle: "Free SEO Preview Generator – SERP Snippet Check",
+    instructions: [
+      { title: "1. Enter title, URL, description", desc: "Type your draft copy — or load the Toolzum, E-commerce, or Blog preset to start from a realistic example." },
+      { title: "2. Read the live preview", desc: "The Google-style snippet updates as you type; the Title/60 and Description/160 meters flag overflow with ⚠️ Too long." },
+      { title: "3. Export the values", desc: "Copy the final copy into your page, or download the JSON record for your publishing checklist." },
+    ],
+    faqs: [
+      { question: 'Will my title get cut off in Google?', answer: 'Quite possibly past 60 characters or about 600 pixels — the meter flags it the moment it crosses. Front-load the query terms: "bulk jpg to webp converter — free, private" survives truncation, while "welcome to our wonderful converter site" loses everything after "converter".' },
+      { question: 'How closely does this match real search results?', answer: 'Layout and truncation closely; wording not always. Google rewrites over half of all titles and picks snippets per query, so treat the preview as a truncation-and-format check. After indexing, search site:example.com with your terms to see what Google actually chose.' },
+      { question: 'What do the built-in presets demonstrate?', answer: 'Three representative shapes: a brand homepage, a product page with offer language, and a dated guide title. Load each to see how the green URL line, blue title link, and grey snippet stack — then overwrite with your own copy.' },
+      { question: 'Does anything I type leave my device?', answer: 'No — the preview renders locally in your browser as you type, with no account and no server round-trip. The JSON export downloads straight from the page, so drafts of unlaunched pages stay private.' },
+    ],
   },
   {
     id: "801",
@@ -369,6 +381,18 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Analyze headlines for word count, character count, sentiment, power words, and overall SEO score. Optimize your titles for better engagement. Analysis runs locally in your browser — nothing you enter is uploaded.',
     seoDescription: 'Free online SEO Headline Analyzer — Analyze headlines for word count, character count, sentiment, power words, and overall SEO score. Optimize your titles for better engagement. ',
     dependencies: "None",
+    seoTitle: "Free Headline Analyzer – SEO Title Score",
+    instructions: [
+      { title: "1. Paste the headline", desc: "Drop in a draft title — or load the Strong, Weak, or Clickbait preset to feel the scoring range." },
+      { title: "2. Click Analyze", desc: "Word count, character count, matched power words, sentiment, and the 0–100 score render in one pass." },
+      { title: "3. Revise toward 70+", desc: "Tighten length and add one power word, re-run, then download the JSON report for your records." },
+    ],
+    faqs: [
+      { question: 'How is the 0–100 score actually computed?', answer: 'Words × 5, plus 10 per power word, minus half a point per character away from 60 — clamped 0–100. "10 Proven Ways to Write Amazing SEO Headlines That Rank Fast" has 11 words (55), three power words — proven, amazing, fast (30) — and exactly 60 characters (no penalty): 85/100, Positive sentiment.' },
+      { question: 'Which words count as power words here?', answer: 'Twenty fixed triggers: amazing, essential, exclusive, guaranteed, instant, powerful, proven, simple, ultimate, urgent, free, new, secret, hidden, shocking, remarkable, complete, easy, fast, best. One "ultimate" adds 10 points; stuffing five reads as clickbait to humans even when the meter climbs.' },
+      { question: 'Does an 85 beat a 55 in real click-through?', answer: 'Not by itself — the score measures length discipline plus emotional triggers, not intent match or ranking position. Use 70+ as a drafting bar, publish, then check Search Console click-through for that query after a few hundred impressions and rewrite from data.' },
+      { question: 'Is my headline list stored anywhere?', answer: 'No — analysis runs in your browser when you click Analyze; nothing uploads and no account exists to attach it to. The JSON report downloads directly, so a slate of unreleased headlines never touches a server.' },
+    ],
   },
   {
     id: "802",
@@ -399,6 +423,18 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate SEO-friendly URL slugs from any text. Automatically removes special characters and converts spaces to hyphens. Analysis runs locally in your browser — nothing you enter is uploaded.',
     seoDescription: 'Free online SEO Slug Generator — Generate SEO-friendly URL slugs from any text. Automatically removes special characters and converts spaces to hyphens. ',
     dependencies: "None",
+    seoTitle: "Free URL Slug Generator – SEO-Friendly Slugs",
+    instructions: [
+      { title: "1. Paste the source text", desc: "A post title, product name, or category label — or try the Blog, Product, or Category preset." },
+      { title: "2. Click Generate", desc: "Lowercasing, special-character stripping, and hyphen-joining run instantly in the page." },
+      { title: "3. Copy or download", desc: "Copy the slug from the result card or grab slug.txt for your CMS import." },
+    ],
+    faqs: [
+      { question: 'What exactly happens to my text?', answer: 'Four mechanical steps: lowercase everything, delete anything that is not a letter, number, space, or hyphen, turn each space run into one hyphen, then collapse repeats and trim the edges. "Men\'s Running Shoes - Size 10" becomes mens-running-shoes-size-10 — apostrophe gone, separators clean.' },
+      { question: 'Hyphens or underscores between words?', answer: 'Hyphens, always — Google treats hyphens as word separators and joins underscore-words into one token, so best_running_shoes reads as a single blob. This generator only emits hyphens, which is also why pasted underscores are stripped rather than preserved.' },
+      { question: 'Should the slug keep stop words and years?', answer: 'Drop filler like "and", "the", and throat-clearing openers — five words or fewer ranks and reads best. Keep years only for dated guides ("seo-tips-2026") and never for evergreen pages, or the URL advertises staleness within a year.' },
+      { question: 'Where does my source text go?', answer: 'Nowhere — generation runs locally in your browser on click, with no account and no upload. Copy the slug from the result card or download slug.txt; drafts of unannounced products never leave the machine.' },
+    ],
   },
   {
     id: "805",
