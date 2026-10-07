@@ -1,9 +1,26 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { consumeHeroFile } from '@/lib/heroFile';
 
 export default function WordCounter() {
   const [text, setText] = useState('');
+
+  // Hero-box carry: a .txt/.md dropped on the homepage arrives via IndexedDB
+  // (same browser, never uploaded) and fills the counter — no paste needed.
+  // Text capped at 1MB: bigger payloads belong in file tools, not textareas.
+  const heroClaimed = useRef(false);
+  useEffect(() => {
+    if (heroClaimed.current) return;
+    heroClaimed.current = true;
+    consumeHeroFile().then(async (f) => {
+      if (!f || f.size > 1024 * 1024) return;
+      try {
+        const content = await f.text();
+        if (content) setText(content);
+      } catch { /* keep the empty input */ }
+    }).catch(() => {});
+  }, []);
   const words = text.trim() ? text.trim().split(/\s+/).length : 0;
   const chars = text.length;
   const charsNoSpace = text.replace(/\s/g, '').length;

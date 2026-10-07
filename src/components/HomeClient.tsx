@@ -822,9 +822,17 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
       return;
     }
     setBlocked(null);
-    setTypeWarn(heroTypeWarning(first.type, heroExtOf(first.name)));
+    const ext = heroExtOf(first.name);
+    const kind = detectFileType({ type: first.type, name: first.name });
+    setTypeWarn(heroTypeWarning(first.type, ext));
     setFiles(arr);
-  }, [planCapMB]);
+    // Homepage tabs double as the default intent: picking Convert then
+    // dropping a PNG preselects Convert. Set once at drop (event handler,
+    // never an effect) so an explicit chip choice always sticks.
+    setSelectedId(arr.length > 1
+      ? heroBulkIntentsFor(kind)[0]!.id
+      : heroDefaultIntentId(kind, ext, activeTab));
+  }, [planCapMB, activeTab]);
 
   const first = files[0] ?? null;
   const multi = files.length > 1;
@@ -833,12 +841,6 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
   const intents: HeroIntent[] = fileType
     ? (multi ? heroBulkIntentsFor(fileType) : heroIntentsFor(fileType, ext))
     : [];
-  // Homepage tabs double as the default intent: picking Convert then dropping
-  // a PNG preselects Convert. Unknown combos fall back to the first chip.
-  useEffect(() => {
-    if (fileType) setSelectedId(heroDefaultIntentId(fileType, ext, activeTab));
-    else setSelectedId(null);
-  }, [fileType, ext, activeTab, files.length]);
   const selected: HeroIntent | null = intents.find((i) => i.id === selectedId) ?? intents[0] ?? null;
 
   const sizeState = first ? heroSizeState(first.size, planCapMB) : 'ok';
@@ -914,7 +916,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
     { label: 'IMG', exts: 'JPG, PNG, WebP' },
     { label: 'VID', exts: 'MP4, WebM' },
     { label: 'PDF', exts: 'PDF docs' },
-    { label: 'DOC', exts: 'DOC, XLS, PPT' },
+    { label: 'DOC', exts: 'DOC, XLS, CSV' },
     { label: 'AUD', exts: 'MP3, WAV, FLAC' },
   ];
 
@@ -1038,6 +1040,21 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
           </span>
         ))}
       </div>
+
+      <details className="mt-3 group/guide">
+        <summary className="text-[11px] text-[var(--text-muted)] hover:text-[var(--accent)] cursor-pointer transition-colors list-none flex items-center gap-1.5 min-h-[32px]">
+          <span aria-hidden="true" className="inline-block transition-transform group-open/guide:rotate-90">▸</span>
+          What can you drop here?
+        </summary>
+        <div className="mt-1 p-3 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[11px] text-[var(--text-secondary)] leading-relaxed">
+          <p><strong className="text-[var(--text-primary)]">Images</strong> (JPG, PNG, WebP, HEIC, AVIF…) → compress, convert, resize, remove background</p>
+          <p className="mt-1"><strong className="text-[var(--text-primary)]">PDFs</strong> → compress, merge, split</p>
+          <p className="mt-1"><strong className="text-[var(--text-primary)]">Video / audio</strong> → compress, convert, extract MP3</p>
+          <p className="mt-1"><strong className="text-[var(--text-primary)]">Documents</strong> (DOCX, ODT, EPUB…) → convert · <strong className="text-[var(--text-primary)]">Spreadsheets</strong> (XLS, XLSX, CSV) → to JSON · <strong className="text-[var(--text-primary)]">Text</strong> (.txt, .md, .json) → count, format</p>
+          <p className="mt-1"><strong className="text-[var(--text-primary)]">PPT decks</strong> aren&apos;t supported yet — they land on the tool directory.</p>
+          <p className="mt-2 text-[var(--text-muted)]">Limits: {planCapMB}MB on your plan · files stay in this browser · executables refused · several files open the bulk tools.</p>
+        </div>
+      </details>
 
       <div className="mt-4 flex items-center justify-between bg-[var(--bg-overlay)] p-3 rounded-[var(--radius-lg)] border border-[var(--border-subtle)]">
         <div className="flex items-center gap-2">

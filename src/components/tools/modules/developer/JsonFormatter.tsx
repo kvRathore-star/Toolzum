@@ -1,16 +1,36 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from "@/lib/clipboard";
 import { getErrorMessage } from '@/utils/error';
+import { consumeHeroFile } from '@/lib/heroFile';
 // Using standard JSON.parse for basic formatting. jsonlint could be added for detailed error lines if needed.
 
 export default function JsonFormatter() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [error, setError] = useState<string | null>(null);
+
+  // Hero-box carry: a .json dropped on the homepage arrives via IndexedDB
+  // (same browser, never uploaded) and fills the input — no paste needed.
+  // Text capped at 1MB: bigger payloads belong in file tools, not textareas.
+  const heroClaimed = useRef(false);
+  useEffect(() => {
+    if (heroClaimed.current) return;
+    heroClaimed.current = true;
+    consumeHeroFile().then(async (f) => {
+      if (!f || f.size > 1024 * 1024) return;
+      try {
+        const text = await f.text();
+        if (text) {
+          setInput(text);
+          toast.success('Loaded your dropped file.');
+        }
+      } catch { /* keep the empty input */ }
+    }).catch(() => {});
+  }, []);
 
   const formatJson = (spaces: number = 2) => {
     if (!input.trim()) return;

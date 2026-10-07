@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { detectFileType, heroRouteFor, heroToolName, heroIntentsFor, heroBulkIntentsFor, heroDefaultIntentId, heroBlockReason, heroTypeWarning, heroSizeState, heroExtOf } from "@/lib/fileRoute";
+import { detectFileType, heroRouteFor, heroToolName, heroIntentsFor, heroBulkIntentsFor, heroDefaultIntentId, heroDocumentIntents, heroBlockReason, heroTypeWarning, heroSizeState, heroExtOf } from "@/lib/fileRoute";
 import { clientToolsRegistry } from "@/registry/tools-client-index";
 
 const F = (name: string, type = "") => ({ name, type });
@@ -74,8 +74,20 @@ describe("hero upload routing (trustworthy file -> tool)", () => {
     }
   });
 
-  it("homepage tabs preselect the matching intent, never a lie", () => {
-    expect(heroDefaultIntentId("image", "png", "convert")).toBe("convert");
+  it("spreadsheets go to the CSV tool, decks fall back honestly", () => {
+    // The document converter cannot parse spreadsheets (verified accept list).
+    expect(heroDocumentIntents("xls")[0]!.route).toBe("/converter/bulk-csv-excel-to-json");
+    expect(heroDocumentIntents("xlsx")[0]!.route).toBe("/converter/bulk-csv-excel-to-json");
+    expect(heroDocumentIntents("csv")[0]!.route).toBe("/converter/bulk-csv-excel-to-json");
+    expect(heroDocumentIntents("docx")[0]!.route).toBe("/converter/document-converter");
+    // No browser tool handles decks: honest directory fallback, no fake chip.
+    expect(heroDocumentIntents("pptx")[0]!.route).toBe("/tools");
+    expect(heroDocumentIntents("ods")[0]!.route).toBe("/tools");
+    // CSV drops route to a real file tool, never the data generator.
+    expect(heroIntentsFor("other", "csv")[0]!.route).toBe("/converter/bulk-csv-excel-to-json");
+  });
+
+  it("homepage tabs preselect the matching intent, never a lie", () => {    expect(heroDefaultIntentId("image", "png", "convert")).toBe("convert");
     expect(heroDefaultIntentId("image", "png", "resize")).toBe("resize");
     expect(heroDefaultIntentId("pdf", "pdf", "compress")).toBe("compress");
     // Audio has no resize: falls back to the first chip, not a dead tab.

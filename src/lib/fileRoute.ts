@@ -107,15 +107,27 @@ const AUDIO_INTENTS: HeroIntent[] = [
 ];
 
 const DOCUMENT_INTENTS: HeroIntent[] = [
-  { id: 'convert', label: 'Convert to PDF', tool: 'Document Converter', route: '/converter/document-converter' },
+  { id: 'convert', label: 'Convert', tool: 'Document Converter', route: '/converter/document-converter' },
 ];
+
+/** Spreadsheets go to the CSV/Excel tool (own dropzone: .csv/.xlsx/.xls),
+ *  never the document converter — it cannot parse them. PPT/ODP decks and
+ *  ODS sheets have no browser tool: honest browse fallback, no fake chip. */
+export function heroDocumentIntents(ext: string): HeroIntent[] {
+  const e = ext.toLowerCase();
+  if (e === 'csv' || e === 'xls' || e === 'xlsx')
+    return [{ id: 'convert', label: 'Convert to JSON', tool: 'CSV/Excel to JSON', route: '/converter/bulk-csv-excel-to-json' }];
+  if (['pdf', 'docx', 'txt', 'md', 'html', 'htm', 'rtf', 'odt', 'epub'].includes(e))
+    return DOCUMENT_INTENTS;
+  return [{ id: 'browse', label: 'Browse all tools', tool: 'All Tools', route: '/tools' }];
+}
 
 /** Extension-aware intents for text/code files the generic router calls 'other'. */
 function textIntents(ext: string): HeroIntent[] {
   if (ext === 'json' || ext === 'jsonl')
     return [{ id: 'format', label: 'Format', tool: 'JSON Formatter', route: '/developer/json-formatter' }];
-  if (ext === 'csv' || ext === 'tsv')
-    return [{ id: 'convert', label: 'Convert', tool: 'CSV Row Generator', route: '/utility/csv-json-row-generator' }];
+  if (ext === 'csv' || ext === 'xls' || ext === 'xlsx')
+    return [{ id: 'convert', label: 'Convert to JSON', tool: 'CSV/Excel to JSON', route: '/converter/bulk-csv-excel-to-json' }];
   if (ext === 'txt' || ext === 'md' || ext === 'srt' || ext === 'vtt')
     return [{ id: 'count', label: 'Count words', tool: 'Word Counter', route: '/text/word-counter' }];
   return [];
@@ -127,7 +139,7 @@ export function heroIntentsFor(fileType: HeroFileType, ext: string): HeroIntent[
     case 'video': return VIDEO_INTENTS;
     case 'audio': return AUDIO_INTENTS;
     case 'pdf': return PDF_INTENTS;
-    case 'document': return DOCUMENT_INTENTS;
+    case 'document': return heroDocumentIntents(ext);
     case 'other': {
       const specific = textIntents(ext.toLowerCase());
       if (specific.length > 0) return specific;

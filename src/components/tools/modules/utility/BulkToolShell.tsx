@@ -12,6 +12,7 @@ import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
 import { getSignedInStatus, gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
 import { usePickerFocusReturn } from '@/components/buttonKeys';
 import { isLowEndDevice } from '@/lib/device';
+import { consumeHeroFile } from '@/lib/heroFile';
 
 export interface ProcessedFile {
   name: string;
@@ -72,8 +73,9 @@ export function BulkToolShell({
     return () => window.removeEventListener('beforeunload', handler);
   }, [isProcessing]);
 
-  const handleFiles = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const accepted = Array.from(e.target.files || []);
+  // Shared intake: input picks, drops, and hero-box carries all land here —
+  // one validation path (size, content probe, plan batch caps) for every entry.
+  const addFiles = useCallback(async (accepted: File[]) => {
     if (accepted.length === 0) return;
     const withinSize = accepted.filter(f => f.size <= maxSizeMB * 1024 * 1024);
     if (withinSize.length !== accepted.length) {
@@ -139,6 +141,22 @@ export function BulkToolShell({
     // Keep keyboard context on the dropzone for the next Tab/Enter/Space.
     focusDrop();
   }, [maxSizeMB, accept, files.length, isPro, focusDrop]);
+
+  const handleFiles = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    await addFiles(Array.from(e.target.files || []));
+  }, [addFiles]);
+
+  // Hero-box carry: files dropped on the homepage arrive via IndexedDB (same
+  // browser, never uploaded) and enter through addFiles — same size, content,
+  // and batch-cap guards as a manual pick. Consume-once + 5-min TTL in heroFile.
+  const heroClaimed = useRef(false);
+  useEffect(() => {
+    if (heroClaimed.current) return;
+    heroClaimed.current = true;
+    consumeHeroFile().then((f) => {
+      if (f) void addFiles([f]);
+    }).catch(() => {});
+  }, [addFiles]);
 
   const removeFile = useCallback((idx: number) => {
     setFiles(prev => prev.filter((_, i) => i !== idx));
