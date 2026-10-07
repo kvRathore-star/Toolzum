@@ -1047,9 +1047,10 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
           What can you drop here?
         </summary>
         <div className="mt-1 p-3 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[11px] text-[var(--text-secondary)] leading-relaxed">
-          <p><strong className="text-[var(--text-primary)]">Images</strong> (JPG, PNG, WebP, HEIC, AVIF…) → compress, convert, resize, remove background</p>
+          <p><strong className="text-[var(--text-primary)]">Images</strong> (JPG, PNG, WebP…) → compress, convert, resize, remove background · <strong className="text-[var(--text-primary)]">HEIC, SVG, GIF, TIFF, BMP, AVIF, ICO</strong> → the matching converter</p>
           <p className="mt-1"><strong className="text-[var(--text-primary)]">PDFs</strong> → compress, merge, split</p>
-          <p className="mt-1"><strong className="text-[var(--text-primary)]">Video / audio</strong> → compress, convert, extract MP3</p>
+          <p className="mt-1"><strong className="text-[var(--text-primary)]">Video</strong> (MP4, MOV, MKV, WebM, AVI) → compress, convert, extract MP3 · older formats (WMV, FLV, 3GP) aren&apos;t supported yet</p>
+          <p className="mt-1"><strong className="text-[var(--text-primary)]">Audio</strong> (MP3, WAV, FLAC, OGG, M4A, AAC, WMA, Opus, AIFF) → compress, convert</p>
           <p className="mt-1"><strong className="text-[var(--text-primary)]">Documents</strong> (DOCX, ODT, EPUB…) → convert · <strong className="text-[var(--text-primary)]">Spreadsheets</strong> (XLS, XLSX, CSV) → to JSON · <strong className="text-[var(--text-primary)]">Text</strong> (.txt, .md, .json) → count, format</p>
           <p className="mt-1"><strong className="text-[var(--text-primary)]">PPT decks</strong> aren&apos;t supported yet — they land on the tool directory.</p>
           <p className="mt-2 text-[var(--text-muted)]">Limits: {planCapMB}MB on your plan · files stay in this browser · executables refused · several files open the bulk tools.</p>

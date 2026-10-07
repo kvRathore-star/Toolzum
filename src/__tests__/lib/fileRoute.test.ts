@@ -74,8 +74,7 @@ describe("hero upload routing (trustworthy file -> tool)", () => {
     }
   });
 
-  it("spreadsheets go to the CSV tool, decks fall back honestly", () => {
-    // The document converter cannot parse spreadsheets (verified accept list).
+  it("spreadsheets go to the CSV tool, decks fall back honestly", () => {    // The document converter cannot parse spreadsheets (verified accept list).
     expect(heroDocumentIntents("xls")[0]!.route).toBe("/converter/bulk-csv-excel-to-json");
     expect(heroDocumentIntents("xlsx")[0]!.route).toBe("/converter/bulk-csv-excel-to-json");
     expect(heroDocumentIntents("csv")[0]!.route).toBe("/converter/bulk-csv-excel-to-json");
@@ -85,6 +84,26 @@ describe("hero upload routing (trustworthy file -> tool)", () => {
     expect(heroDocumentIntents("ods")[0]!.route).toBe("/tools");
     // CSV drops route to a real file tool, never the data generator.
     expect(heroIntentsFor("other", "csv")[0]!.route).toBe("/converter/bulk-csv-excel-to-json");
+  });
+
+  it("format-specific files never get a chip that ends in rejection", () => {
+    // Compressor accept is jpeg/png/webp only: exotic formats get converters.
+    expect(heroIntentsFor("image", "heic").map((i) => i.route)).toEqual(["/image/heic-to-jpg"]);
+    expect(heroIntentsFor("image", "svg").map((i) => i.route)).toEqual(["/image/svg-to-png"]);
+    expect(heroIntentsFor("image", "gif").map((i) => i.route)).toEqual(["/image/gif-compressor", "/image/bulk-image-converter"]);
+    expect(heroIntentsFor("image", "tiff")[0]!.route).toBe("/image/tiff-to-jpg");
+    expect(heroIntentsFor("image", "bmp")[0]!.route).toBe("/image/bmp-to-jpg");
+    expect(heroIntentsFor("image", "avif")[0]!.route).toBe("/image/avif-to-jpg");
+    expect(heroIntentsFor("image", "ico")[0]!.route).toBe("/image/ico-to-jpg");
+    expect(heroIntentsFor("image", "png").map((i) => i.id)).toEqual(["compress", "convert", "resize", "bg-remove"]);
+    // AVI compresses nowhere but converts fine; WMV-class has no tool at all.
+    const avi = heroIntentsFor("video", "avi").map((i) => i.id);
+    expect(avi).not.toContain("compress");
+    expect(avi).toContain("convert");
+    expect(heroIntentsFor("video", "wmv")[0]!.route).toBe("/tools");
+    expect(heroIntentsFor("video", "mp4").map((i) => i.id)).toEqual(["compress", "convert", "to-mp3"]);
+    // MP3 extraction honors the broad video/* acceptor, not the mp4-only one.
+    expect(heroIntentsFor("video", "mp4").find((i) => i.id === "to-mp3")!.route).toBe("/video/video-to-mp3");
   });
 
   it("homepage tabs preselect the matching intent, never a lie", () => {    expect(heroDefaultIntentId("image", "png", "convert")).toBe("convert");

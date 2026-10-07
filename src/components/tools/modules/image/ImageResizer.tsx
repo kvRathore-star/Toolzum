@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { usePresetContext } from '@/context/WorkflowPresetContext';
 import { useEnterToSubmit } from '@/lib/keyboard';
+import { consumeHeroFile } from '@/lib/heroFile';
 
 export default function ImageResizer() {
   const [image, setImage] = useState<string | null>(null);
@@ -26,9 +27,7 @@ export default function ImageResizer() {
     );
   }, [registerConfig, width, height]);
 
-  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const loadFile = (file: File) => {
     const reader = new FileReader();
     reader.onload = (event) => {
        const img = new Image();
@@ -44,6 +43,24 @@ export default function ImageResizer() {
     reader.onerror = () => toast.error('Failed to read file. Please try another image.');
     reader.readAsDataURL(file);
   };
+
+  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    loadFile(file);
+  };
+
+  // Hero-box carry: a file dropped on the homepage arrives via IndexedDB (same
+  // browser, never uploaded) and enters through loadFile — same decode path
+  // as a manual pick. Consume-once + 5-min TTL live in heroFile.ts.
+  const heroClaimed = useRef(false);
+  useEffect(() => {
+    if (heroClaimed.current) return;
+    heroClaimed.current = true;
+    consumeHeroFile().then((f) => {
+      if (f) loadFile(f);
+    }).catch(() => {});
+  }, []);
 
   const download = () => {
     if (!image || !canvasRef.current) return;

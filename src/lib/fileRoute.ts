@@ -98,13 +98,61 @@ const PDF_INTENTS: HeroIntent[] = [
 const VIDEO_INTENTS: HeroIntent[] = [
   { id: 'compress', label: 'Compress', tool: 'Video Compressor', route: '/video/video-compressor' },
   { id: 'convert', label: 'Convert', tool: 'Video Converter', route: '/converter/video-converter' },
-  { id: 'to-mp3', label: 'Extract MP3', tool: 'Video to MP3', route: '/converter/mp4-to-mp3' },
+  { id: 'to-mp3', label: 'Extract MP3', tool: 'Video to MP3', route: '/video/video-to-mp3' },
 ];
 
 const AUDIO_INTENTS: HeroIntent[] = [
   { id: 'compress', label: 'Compress', tool: 'Audio Compressor', route: '/audio/audio-compressor' },
   { id: 'convert', label: 'Convert', tool: 'Audio Converter', route: '/audio/audio-converter' },
 ];
+
+/** Formats the compressor cannot take (its accept is jpeg/png/webp only) get
+ *  a dedicated converter chip instead — never a chip ending in rejection. */
+function heroImageIntents(ext: string): HeroIntent[] {
+  switch (ext.toLowerCase()) {
+    case 'heic':
+    case 'heif':
+      return [{ id: 'convert', label: 'Convert to JPG', tool: 'HEIC to JPG', route: '/image/heic-to-jpg' }];
+    case 'svg':
+      return [{ id: 'convert', label: 'Convert to PNG', tool: 'SVG to PNG', route: '/image/svg-to-png' }];
+    case 'gif':
+      return [
+        { id: 'compress', label: 'Compress', tool: 'GIF Compressor', route: '/image/gif-compressor' },
+        { id: 'convert', label: 'Convert', tool: 'Bulk Image Converter', route: '/image/bulk-image-converter' },
+      ];
+    case 'tiff':
+    case 'tif':
+      return [{ id: 'convert', label: 'Convert to JPG', tool: 'TIFF to JPG', route: '/image/tiff-to-jpg' }];
+    case 'bmp':
+      return [{ id: 'convert', label: 'Convert to JPG', tool: 'BMP to JPG', route: '/image/bmp-to-jpg' }];
+    case 'avif':
+      return [{ id: 'convert', label: 'Convert to JPG', tool: 'AVIF to JPG', route: '/image/avif-to-jpg' }];
+    case 'ico':
+      return [{ id: 'convert', label: 'Convert to JPG', tool: 'ICO to JPG', route: '/image/ico-to-jpg' }];
+    default:
+      return IMAGE_INTENTS;
+  }
+}
+
+/** The compressor takes mp4/mov/mkv/webm (not avi); the converter takes
+ *  mkv/mp4/mov/webm/avi. WMV/FLV/M4V/3GP have no browser tool: honest
+ *  directory fallback, never a chip ending in rejection. */
+function heroVideoIntents(ext: string): HeroIntent[] {
+  switch (ext.toLowerCase()) {
+    case 'mp4':
+    case 'mov':
+    case 'mkv':
+    case 'webm':
+      return VIDEO_INTENTS;
+    case 'avi':
+      return [
+        { id: 'convert', label: 'Convert', tool: 'Video Converter', route: '/converter/video-converter' },
+        { id: 'to-mp3', label: 'Extract MP3', tool: 'Video to MP3', route: '/video/video-to-mp3' },
+      ];
+    default:
+      return [{ id: 'browse', label: 'Browse all tools', tool: 'All Tools', route: '/tools', note: 'No converter for this format yet' }];
+  }
+}
 
 const DOCUMENT_INTENTS: HeroIntent[] = [
   { id: 'convert', label: 'Convert', tool: 'Document Converter', route: '/converter/document-converter' },
@@ -135,8 +183,8 @@ function textIntents(ext: string): HeroIntent[] {
 
 export function heroIntentsFor(fileType: HeroFileType, ext: string): HeroIntent[] {
   switch (fileType) {
-    case 'image': return IMAGE_INTENTS;
-    case 'video': return VIDEO_INTENTS;
+    case 'image': return heroImageIntents(ext);
+    case 'video': return heroVideoIntents(ext);
     case 'audio': return AUDIO_INTENTS;
     case 'pdf': return PDF_INTENTS;
     case 'document': return heroDocumentIntents(ext);

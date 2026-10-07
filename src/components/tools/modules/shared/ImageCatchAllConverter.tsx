@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { getErrorMessage } from '@/utils/error';
+import { consumeHeroFile } from '@/lib/heroFile';
+import { heroExtOf } from '@/lib/fileRoute';
 
 
 type FormatDef = {
@@ -306,6 +308,21 @@ export default function ImageFormatConverter({ slug }: ImageFormatConverterProps
     setFile(f);
     setPreview(URL.createObjectURL(f));
   }, []);
+
+  // Hero-box carry: a file dropped on the homepage arrives via IndexedDB (same
+  // browser, never uploaded). Accepted only when its extension matches this
+  // pair's input format — a stale or mismatched carry is ignored silently.
+  const heroClaimed = useRef(false);
+  useEffect(() => {
+    if (heroClaimed.current) return;
+    heroClaimed.current = true;
+    consumeHeroFile().then((f) => {
+      if (!f || heroExtOf(f.name) !== inputKey) return;
+      setFile(f);
+      setPreview(URL.createObjectURL(f));
+      toast.success('Loaded your dropped file.');
+    }).catch(() => {});
+  }, [inputKey]);
 
   const convertCanvas = useCallback((img: HTMLImageElement): Promise<Blob | null> => {
     return new Promise((resolve) => {
