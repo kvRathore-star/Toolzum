@@ -736,10 +736,21 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "Customer LTV Calculator",
     slug: "customer-ltv-calculator",
     category: "Growth & Marketing",
-    description: 'Calculate Customer Lifetime Value using ARPU and churn rate. Understand how much revenue each customer generates over their relationship. Numbers never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online Customer LTV Calculator — Calculate Customer Lifetime Value using ARPU and churn rate. Understand how much revenue each customer generates over their relationship. ',
+    description: 'Compute customer lifetime value from ARPA, margin, and churn — know what buyers are worth. Justify $500 CAC with $2,000 LTV — free, local, no signup.',
+    seoDescription: 'Free LTV calculator — worth per customer. Local, free, no signup.',
     dependencies: "None",
-
+    seoTitle: "Free Customer LTV Calculator Online",
+    instructions: [
+      { title: "1. Enter ARPA, margin, churn", desc: "Per segment for truth." },
+      { title: "2. Read LTV", desc: "Against 3:1 CAC bar." },
+      { title: "3. Segment cohorts", desc: "Enterprise vs SMB separately." },
+    ],
+    faqs: [
+      { question: 'Simple LTV formula?', answer: 'ARPA × gross margin ÷ churn rate: $100 × 80% ÷ 5% monthly = $1,600 LTV. Churn dominates — small improvements compound hugely.' },
+      { question: 'LTV:CAC ratio?', answer: '3:1+ healthy (spend a third of worth acquiring); under 2:1 fix economics before scaling. Over 5:1 suggests under-spending on growth.' },
+      { question: 'Cohort differences?', answer: 'Enterprise vs SMB vs self-serve LTVs differ 10x — blended averages mislead. Segment before deciding.' },
+      { question: 'Do LTV figures upload?', answer: 'No — math runs locally in your browser. Figures never leave your device.' },
+    ],
   },
   {
     id: "614",
@@ -853,20 +864,42 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "Runway Calculator",
     slug: "runway-calculator",
     category: "Growth & Marketing",
-    description: 'Calculate how many months your cash balance will last given your monthly burn rate. Essential for startup financial planning. Numbers never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online Runway Calculator — Calculate how many months your cash balance will last given your monthly burn rate. Essential for startup financial planning. ',
+    description: 'Compute startup runway from cash, burn, and revenue growth — months until decisions. Act at 12 months, not 3 — free, local, no signup.',
+    seoDescription: 'Free runway math — months remaining. Local, free, no signup.',
     dependencies: "None",
-
+    seoTitle: "Free Startup Runway Calculator",
+    instructions: [
+      { title: "1. Enter cash and burn", desc: "With revenue trend." },
+      { title: "2. Read months left", desc: "Best/base/worst scenarios." },
+      { title: "3. Act early", desc: "Plan at 12, emergency under 6." },
+    ],
+    faqs: [
+      { question: 'How many months left?', answer: 'Cash ÷ net monthly burn, adjusted for revenue growth trends. Static division lies when burn moves — project both lines.' },
+      { question: 'When to act?', answer: '12+ months: operate; 6–12: plan (raise/cut/grow); under 6: emergency mode. Founders consistently act two quarters late.' },
+      { question: 'Growth-adjusted runway?', answer: 'Rising revenue extends runway non-linearly — model best/base/worst revenue cases, not one line. The spread decides urgency.' },
+      { question: 'Do runway figures upload?', answer: 'No — math runs locally in your browser. Figures never leave your device.' },
+    ],
   },
   {
     id: "621",
     name: "A/B Test Calculator",
     slug: "ab-test-calculator",
     category: "Growth & Marketing",
-    description: 'Calculate A/B test significance between two variants. Compare conversion rates with visitor and conversion data for each variant. Numbers never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online A/B Test Calculator — Calculate A/B test significance between two variants. Compare conversion rates with visitor and conversion data for each variant. ',
+    description: 'Check A/B test significance — conversion lifts that are real vs noise. Stop shipping coin flips — free, local, no signup.',
+    seoDescription: 'Free A/B math — real lifts only. Local, free, no signup.',
     dependencies: "None",
-
+    seoTitle: "Free A/B Test Significance Calculator",
+    instructions: [
+      { title: "1. Enter visitors and conversions", desc: "Control plus variant counts." },
+      { title: "2. Read significance", desc: "95% bar with power check." },
+      { title: "3. Run full cycles", desc: "Weeks, not days, before shipping." },
+    ],
+    faqs: [
+      { question: 'Is my lift significant?', answer: 'Needs ~95% confidence with adequate power: 100 conversions per variant minimum, more for small lifts. Peeking early inflates false positives.' },
+      { question: 'How long to run?', answer: 'Full business cycles (1–2 weeks minimum) covering weekday/weekend variance. Stopping at significance courts regression to the mean.' },
+      { question: 'What about segments?', answer: 'Overall winners can lose in key segments — check mobile, new users, and top geos separately before full rollout.' },
+      { question: 'Is test data uploaded?', answer: 'No — math runs locally in your browser. Data never leaves your device.' },
+    ],
   },
   {
     id: "622",
@@ -1883,10 +1916,21 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "Trial Conversion Calculator",
     slug: "trial-conversion-calculator",
     category: "Growth & Marketing",
-    description: 'Calculate trial-to-paid conversion rate. Enter total trials and paid conversions to understand your freemium or trial funnel performance. Numbers never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online Trial Conversion Calculator — Calculate trial-to-paid conversion rate. Enter total trials and paid conversions to understand your freemium or trial funnel performance. ',
+    description: 'Compute trial-to-paid conversion with activation splits — find funnel leaks. Lift 15% trials to 25% deliberately — free, local, no signup.',
+    seoDescription: 'Free trial math — activation splits. Local, free, no signup.',
     dependencies: "None",
-
+    seoTitle: "Free Trial Conversion Calculator",
+    instructions: [
+      { title: "1. Enter trial and paid counts", desc: "With activation splits." },
+      { title: "2. Read conversion", desc: "Against motion benchmarks." },
+      { title: "3. Fix activation", desc: "Onboard to the key action first." },
+    ],
+    faqs: [
+      { question: 'What conversion is good?', answer: 'Opt-in trials 15–25%, opt-out higher with churn attached, freemium 2–5% to paid. Compare within motion, not across.' },
+      { question: 'Where do trials leak?', answer: 'Signup friction, empty-state confusion, and missing onboarding emails top the list. Instrument each step before optimizing.' },
+      { question: 'Activation vs conversion?', answer: 'Activated trials (key action done) convert 3–5x unactivated ones. Optimize activation first — conversion follows.' },
+      { question: 'Is funnel data uploaded?', answer: 'No — math runs locally in your browser. Data never leaves your device.' },
+    ],
   },
   {
 

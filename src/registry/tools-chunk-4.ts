@@ -51,9 +51,21 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "Avatar Generator",
     slug: "avatar-generator",
     category: "Design",
-    description: 'Generate avatar initials SVG from any name with customizable background color, text color, and size. Perfect for profile placeholders. Work never leaves your device — everything renders locally in your browser.',
-    seoDescription: 'Free online Avatar Generator — Generate avatar initials SVG from any name with customizable background color, text color, and size. Perfect for profile placeholders. ',
+    description: 'Generate initial-based avatars with custom colors, fonts, and sizes — profile placeholders in seconds. Ship default user pics that look designed — local Canvas work, free, no signup.',
+    seoDescription: 'Free avatar maker — initials, colors, sizes. Local Canvas, free, no signup.',
     dependencies: "None",
+    seoTitle: "Free Avatar Generator – Initials Online",
+    instructions: [
+      { title: "1. Enter initials", desc: "One or two letters per avatar." },
+      { title: "2. Style colors and shape", desc: "Background, font, radius, size." },
+      { title: "3. Export the set", desc: "All sizes for every slot." },
+    ],
+    faqs: [
+      { question: 'What styles generate?', answer: 'Initials (1–2 letters) on solid, gradient, or patterned backgrounds with font and radius control. A full user-base placeholder set builds in minutes.' },
+      { question: 'What export sizes?', answer: '16px favicon through 512px profile sizes — crisp at every slot. Export the full set once per palette.' },
+      { question: 'Beyond initials?', answer: 'Color and font carry brand identity even without photos. Match app palette so placeholders feel intentional, not missing.' },
+      { question: 'Do avatar designs upload?', answer: 'No — rendering runs locally in your browser. Nothing leaves your device.' },
+    ],
   },
   {
 
@@ -523,10 +535,22 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "Gradient Generator",
     slug: "gradient-generator",
     category: "Design",
-    description: 'Create beautiful CSS gradients with a visual preview. Choose between linear and radial gradients for your web designs. Work never leaves your device — everything renders locally in your browser.',
-    seoDescription: 'Free online Gradient Generator \u2014 Create beautiful CSS gradients with a visual preview. Choose between linear and radial gradients for your web designs. ',
+    description: 'Design CSS gradients — linear, radial, conic — with multi-stop color control and live preview. Ship mesh-grade backgrounds from code — local generation, free, no signup.',
+    seoDescription: 'Free gradient designer — linear, radial, conic. Local, free, no signup.',
     dependencies: "None",
-},
+    seoTitle: "Free Gradient Generator – CSS Online",
+    instructions: [
+      { title: "1. Pick gradient type", desc: "Linear, radial, or conic." },
+      { title: "2. Add color stops", desc: "Positions with hard-stop tricks." },
+      { title: "3. Copy the CSS", desc: "With solid fallback first." },
+    ],
+    faqs: [
+      { question: 'Linear, radial, or conic?', answer: 'Linear for backgrounds and buttons, radial for glows and spotlights, conic for pie charts and color wheels. Pick per surface purpose.' },
+      { question: 'How many stops?', answer: 'Two for clean fades, three-plus for rich blends — hard stops (same position twice) create sharp bands for retro looks.' },
+      { question: 'Fallbacks for old browsers?', answer: 'Solid background-color first, then gradient declarations. Legacy renders flat color instead of breaking.' },
+      { question: 'Do gradient styles upload?', answer: 'No — generation runs locally in your browser. Nothing leaves your device.' },
+    ],
+  },
   {
 
     id: "816",
@@ -2441,10 +2465,21 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "SaaS Rule of 40",
     slug: "saas-rule-of-40",
     category: "Growth & Marketing",
-    description: 'Calculate the Rule of 40 score by combining revenue growth rate and profit margin. Numbers never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online SaaS Rule of 40 Calculator \u2014 Calculate the Rule of 40 score by combining revenue growth rate and profit margin. ',
+    description: 'Score Rule of 40 — growth rate plus profit margin — for SaaS health at a glance. Prove 40+ to investors — free, local, no signup.',
+    seoDescription: 'Free Rule of 40 — growth plus margin. Local, free, no signup.',
     dependencies: "None",
-
+    seoTitle: "Free Rule of 40 Calculator – SaaS Online",
+    instructions: [
+      { title: "1. Enter growth and margin", desc: "Annual percentages." },
+      { title: "2. Read the score", desc: "Against the 40 bar." },
+      { title: "3. Fix lagging half", desc: "GTM or unit economics first." },
+    ],
+    faqs: [
+      { question: 'How is it computed?', answer: 'Revenue growth % plus profit margin %: 30% growth with 15% margin scores 45. Above 40 signals healthy scaling.' },
+      { question: 'Growth vs profitability tradeoff?', answer: 'Early stage favors growth (60+0 acceptable); mature favors balance. The sum matters more than the mix.' },
+      { question: 'Below 40?', answer: 'Diagnose which half lags: stalled growth needs GTM work, negative margins need unit-economics fixes. One lever at a time.' },
+      { question: 'Do rule inputs upload?', answer: 'No — math runs locally in your browser. Figures never leave your device.' },
+    ],
   },
   {
 
@@ -2537,9 +2572,21 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "Vector Pen Canvas",
     slug: "vector-pen-canvas",
     category: "Design",
-    description: 'A freeform vector drawing tool with freehand pen, shapes (rectangle, ellipse, line), multi-page canvas, color picker, and SVG/PNG export. Draw diagrams and illustrations entirely in your browser.',
-    seoDescription: 'Free online Vector Pen Canvas \u2014 Draw vector graphics with freehand pen, shapes, and multi-page canvas. Export as SVG or PNG.',
+    description: 'Draw bezier vector paths with a pen tool on canvas — anchor handles included. Sketch icons and illustrations freehand — local Fabric work, free quota on saves.',
+    seoDescription: 'Free pen canvas — bezier paths. Local, free quota on saves.',
     dependencies: "fabric.js",
+    seoTitle: "Free Vector Pen Tool Online",
+    instructions: [
+      { title: "1. Draw with pen", desc: "Anchors plus handle curves." },
+      { title: "2. Edit paths", desc: "Move points, reshape spans." },
+      { title: "3. Export SVG/PNG", desc: "Vectors master, rasters deliver (counts on free quota)." },
+    ],
+    faqs: [
+      { question: 'How do bezier handles work?', answer: 'Drag anchors to place points, pull handles to curve spans. Fewer points with longer handles make smoother paths than many short segments.' },
+      { question: 'Edit after drawing?', answer: 'Yes — select anchors to move, handles to reshape, segments to split. Non-destructive until export.' },
+      { question: 'Export formats?', answer: 'SVG for infinite scaling and PNG for immediate use. Save vectors as masters, rasters as deliverables.' },
+      { question: 'Do drawn paths upload?', answer: 'No — drawing runs locally in your browser. Only exports count on the free download quota (3 a day anonymous, 5 signed-in).' },
+    ],
   },
   {
 

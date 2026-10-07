@@ -1564,9 +1564,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "To-Do List",
     slug: "to-do-list",
     category: "Productivity",
-    description: "A persistent task manager with priorities and filters. Tasks never leave your device — everything stores locally in your browser.",
-    seoDescription: "Free online To-Do List — A persistent task manager with priorities and filters. ",
+    description: 'Simple task lists with priorities that persist in your browser — plan days without accounts. Manage today in one tab — local storage, free, no signup.',
+    seoDescription: 'Free task lists — priorities persist locally. Free, no signup.',
     dependencies: "None",
+    seoTitle: "Free To-Do List Online – Tasks",
+    instructions: [
+      { title: "1. Add tasks", desc: "One per line with priorities." },
+      { title: "2. Check off daily", desc: "Top-3 focus each morning." },
+      { title: "3. Export critical lists", desc: "Local lists don't sync devices." },
+    ],
+    faqs: [
+      { question: 'Do tasks persist?', answer: 'Yes — saved to browser localStorage, reloaded every visit on this device. Clearing site data removes them; export critical lists.' },
+      { question: 'Priorities?', answer: 'Flag urgent/important per task; the list sorts accordingly. Daily top-3 beats endless backlogs.' },
+      { question: 'Sync across devices?', answer: 'No sync — per-browser local lists. Shared team tasks belong in collaborative tools, not here.' },
+      { question: 'Is task data uploaded?', answer: 'No — everything stores locally in your browser. Tasks never leave your device.' },
+    ],
   },
   {
 
