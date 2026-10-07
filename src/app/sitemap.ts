@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { toolsRegistry, TOOL_REDIRECTS, SEO_PERMUTATIONS } from '@/registry/tools';
+import { blogPosts } from '@/lib/blog-posts';
 
 export const dynamic = 'force-static';
 
@@ -73,5 +74,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     }));
 
-  return [...staticPages, ...categoryPages, ...toolPages];
+  // Blog guides are indexable content pages (rendered from blog-posts.ts).
+  const blogPages = blogPosts.map((post) => ({
+    url: `${baseUrl}/blog/posts/${post.slug}/`,
+    lastModified: BUILD_DATE,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
+  const comparePages = [
+    { url: `${baseUrl}/compare/smallpdf-alternative/`, lastModified: BUILD_DATE, changeFrequency: 'monthly' as const, priority: 0.7 },
+  ];
+
+  return [...staticPages, ...categoryPages, ...toolPages, ...blogPages, ...comparePages];
 }

@@ -19,8 +19,8 @@ export const blogPosts: BlogPost[] = [
     title: "How to Compress a PDF Without Losing Quality",
     excerpt:
       "Learn how to reduce PDF file size while keeping text sharp and images clear. A practical guide using browser-based tools that keep your documents private.",
-    author: "Arjun Mehta",
-    authorTitle: "Product Engineer",
+    author: "Kirtiwardhan Rathore",
+    authorTitle: "Founder, Toolzum",
     date: "November 18, 2025",
     isoDate: "2025-11-18",
     readTime: "7 min read",
@@ -87,6 +87,13 @@ Similarly, legal documents that need to preserve every pixel of a scanned signat
 ## Try It Yourself
 
 Instead of uploading your next PDF to an unknown server, give our free PDF Compressor a try. It runs entirely in your browser, respects your privacy, and gives you full control over the quality-size tradeoff. No sign-up required.
+
+
+## Related free tools
+
+- [Bulk PDF Size Reducer](https://toolzum.com/pdf/bulk-pdf-size-reducer/) — shrink whole batches at once
+- [PDF Editor](https://toolzum.com/pdf/pdf-editor/) — edit before compressing
+- [Compress Image to 50KB](https://toolzum.com/image/compress-image-to-50kb/) — hit exact attachment limits
 `,
   },
   {
@@ -94,8 +101,8 @@ Instead of uploading your next PDF to an unknown server, give our free PDF Compr
     title: "Best Free Online Photo Editors That Require No Sign-Up",
     excerpt:
       "A curated list of browser-based photo editors that work instantly — no account, no uploads, no hidden fees. Edit images privately from any device.",
-    author: "Mira Roy",
-    authorTitle: "UX Designer",
+    author: "Kirtiwardhan Rathore",
+    authorTitle: "Founder, Toolzum",
     date: "December 15, 2025",
     isoDate: "2025-12-15",
     readTime: "8 min read",
@@ -166,6 +173,12 @@ With local-processing tools, your images never leave your device. When you close
 You do not need to create accounts or trust random servers with your images just to do basic photo editing. Browser-based tools have matured to the point where they handle most common tasks — resizing, format conversion, background removal, compression, and watermarking — with performance that rivals desktop software.
 
 Try any of the tools mentioned above. They are free, they respect your privacy, and they work on any device with a modern browser.
+
+
+## Related free tools
+
+- [AI Background Changer](https://toolzum.com/image/ai-bg-changer/) — swap backdrops without uploads
+- [Bulk Image Converter](https://toolzum.com/image/bulk-image-converter/) — convert whole folders locally
 `,
   },
   {
@@ -173,8 +186,8 @@ Try any of the tools mentioned above. They are free, they respect your privacy, 
     title: "How to Remove Background from an Image for Free",
     excerpt:
       "Remove image backgrounds instantly in your browser — no Photoshop, no uploads, no cost. A complete guide to AI-powered background removal that respects your privacy.",
-    author: "Sanjay Dixit",
-    authorTitle: "ML Engineer",
+    author: "Kirtiwardhan Rathore",
+    authorTitle: "Founder, Toolzum",
     date: "January 22, 2026",
     isoDate: "2026-01-22",
     readTime: "6 min read",
@@ -235,6 +248,12 @@ Even with good AI models, certain mistakes produce poor results:
 ## Try It Now
 
 Our free Background Remover is available right now in your browser. Upload any photo, and the AI removes the background in seconds. No account needed, no uploads, and your image stays on your device.
+
+
+## Related free tools
+
+- [AI Background Changer](https://toolzum.com/image/ai-bg-changer/) — edge-aware removal in the browser
+- [Bulk Background Changer](https://toolzum.com/image/bulk-bg-changer/) — whole photo batches at once
 `,
   },
   {
@@ -242,8 +261,8 @@ Our free Background Remover is available right now in your browser. Upload any p
     title: "How to Convert Video to MP3 Audio Online Free",
     excerpt:
       "Extract high-quality audio from video files without installing software. A complete guide to converting MP4, MOV, and WebM to MP3 in your browser.",
-    author: "Rohan Sen",
-    authorTitle: "Full-Stack Developer",
+    author: "Kirtiwardhan Rathore",
+    authorTitle: "Founder, Toolzum",
     date: "February 10, 2026",
     isoDate: "2026-02-10",
     readTime: "6 min read",
@@ -330,6 +349,13 @@ Extracting audio from video is useful in more situations than you might think:
 Because our converter runs entirely in your browser, your files stay private. The FFmpeg WASM binary is loaded once when you first visit the page, and all subsequent processing happens locally. This means there is no upload time, no file size limits, and no server storage.
 
 Try the Video to MP3 Converter now. No sign-up, no uploads, and your video never leaves your computer.
+
+
+## Related free tools
+
+- [MP3 to WAV](https://toolzum.com/audio/mp3-to-wav/) — uncompressed audio for editing
+- [Podcast Transcription](https://toolzum.com/transcription/podcast-transcription/) — turn episodes into text
+- [Bulk Video Compressor](https://toolzum.com/video/bulk-video-compressor/) — shrink videos before converting
 `,
   },
   {
@@ -337,8 +363,8 @@ Try the Video to MP3 Converter now. No sign-up, no uploads, and your video never
     title: "Free Online Tools That Respect Your Privacy: The Complete Guide",
     excerpt:
       "Most free online tools sell your data. Here is how to identify privacy-first tools that process everything locally in your browser — and a curated list of tools that genuinely protect your privacy.",
-    author: "Arjun Mehta",
-    authorTitle: "Product Engineer",
+    author: "Kirtiwardhan Rathore",
+    authorTitle: "Founder, Toolzum",
     date: "March 5, 2026",
     isoDate: "2026-03-05",
     readTime: "9 min read",
@@ -417,14 +443,20 @@ All the tools on Toolzum are built on a simple principle: your data stays on you
 Whether you need to compress a PDF, remove an image background, convert a video, or format some code, you can do it privately without uploading your data anywhere.
 
 Browse the full collection of privacy-first tools or check our about page to learn more about our architecture.
+
+
+## Related free tools
+
+- [Password Generator](https://toolzum.com/utility/password-generator/) — strong secrets, generated locally
+- [QR Code Generator](https://toolzum.com/utility/qr-code-generator/) — codes without tracking
 `,
   },
   {
     slug: "wasm-converters",
     title: "How WebAssembly is Replacing Server-Side Converters",
     excerpt: "Explore the compilation of LLVM utilities to WASM binaries that execute file compressions instantly in-browser.",
-    author: "Arjun Mehta",
-    authorTitle: "Product Engineer",
+    author: "Kirtiwardhan Rathore",
+    authorTitle: "Founder, Toolzum",
     date: "May 18, 2026",
     isoDate: "2026-05-18",
     readTime: "6 min read",
@@ -462,14 +494,20 @@ One limitation of WASM is the browser's memory ceiling. A 4K video or a 500-page
 ## The Bottom Line
 
 WebAssembly is not just a performance optimization. It represents a fundamental shift in how we build web applications — moving computation from the cloud to the edge of the network, which is the user's own device. For file conversion tools, this means faster processing, stronger privacy, and lower infrastructure costs.
+
+
+## Related free tools
+
+- [Bulk Image Converter](https://toolzum.com/image/bulk-image-converter/) — WebAssembly-powered batch conversion
+- [Base64 Encode Decode](https://toolzum.com/developer/base64-encode-decode/) — instant text transforms
 `,
   },
   {
     slug: "offline-first-web",
     title: "The Future of Offline-First Web Applications",
     excerpt: "How Service Workers, LocalStorage, and local canvas architectures allow complete utility usage without network access.",
-    author: "Rohan Sen",
-    authorTitle: "Engineering Lead",
+    author: "Kirtiwardhan Rathore",
+    authorTitle: "Founder, Toolzum",
     date: "April 29, 2026",
     isoDate: "2026-04-29",
     readTime: "8 min read",
@@ -506,14 +544,20 @@ The most demanding offline tools use a canvas-based rendering architecture. Imag
 ## The Toolzum Approach
 
 Every tool on Toolzum is designed to work without an active internet connection after the first load. WASM binaries are cached via Service Workers. Tool state is persisted to IndexedDB. The result is a seamless experience that works on airplanes, in remote areas, and during network outages.
+
+
+## Related free tools
+
+- [Password Generator](https://toolzum.com/utility/password-generator/) — works fully offline after load
+- [Word Counter](https://toolzum.com/text/word-counter/) — counts without a connection
 `,
   },
   {
     slug: "zero-telemetry-privacy",
     title: "Why Zero-Telemetry is Vital for Document Tools",
     excerpt: "Analyzing the security vulnerabilities of uploading sensitive legal PDFs to third-party server queues, and how to stay isolated.",
-    author: "Sanjay Dixit",
-    authorTitle: "Security Researcher",
+    author: "Kirtiwardhan Rathore",
+    authorTitle: "Founder, Toolzum",
     date: "March 15, 2026",
     isoDate: "2026-03-15",
     readTime: "5 min read",
@@ -562,14 +606,20 @@ Users can verify a tool's claims by:
 ## The Toolzum Standard
 
 All tools on Toolzum operate under zero-telemetry by design. We do not have servers that receive your files. We do not track your usage. We do not store your documents. This is not a feature we added later — it is the foundation of the architecture.
+
+
+## Related free tools
+
+- [JSON Formatter](https://toolzum.com/developer/json-formatter/) — format code with zero exfiltration
+- [Password Generator](https://toolzum.com/utility/password-generator/) — secrets that never leave the device
 `,
   },
   {
     slug: "webgl-image-tensors",
     title: "Optimizing Neural Networks on WebGL Canvas",
     excerpt: "How local execution of background-removal models runs directly on client GPUs using modern WebGL canvas engines.",
-    author: "Mira Roy",
-    authorTitle: "ML Engineer",
+    author: "Kirtiwardhan Rathore",
+    authorTitle: "Founder, Toolzum",
     date: "February 4, 2026",
     isoDate: "2026-02-04",
     readTime: "7 min read",
@@ -616,6 +666,144 @@ On a mid-range 2024 smartphone, a U2Net background removal model running via Web
 ## The Future
 
 WebGPU, the successor to WebGL, promises even better performance with explicit compute shader support and lower driver overhead. As browser GPU APIs mature, we can expect increasingly sophisticated AI models to run entirely on-device.
+
+
+## Related free tools
+
+- [Bulk Image Converter](https://toolzum.com/image/bulk-image-converter/) — preprocess datasets locally
+- [HEIC to JPG](https://toolzum.com/image/heic-to-jpg/) — normalize iPhone photos first
+`,
+  },
+  {
+    slug: "gst-invoice-guide-india",
+    title: "GST Invoice Format India: What Goes on It (With Free Generator)",
+    excerpt:
+      "Every mandatory GST invoice field — GSTIN, HSN/SAC codes, place of supply, tax breakup — explained with a free browser-based generator that never uploads your bills.",
+    author: "Kirtiwardhan Rathore",
+    authorTitle: "Founder, Toolzum",
+    date: "October 7, 2026",
+    isoDate: "2026-10-07",
+    readTime: "8 min read",
+    tag: "Finance",
+    tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+    canonical: "https://toolzum.com/blog/gst-invoice-guide-india",
+    content: `
+A GST invoice is not just a bill — it is the document your input tax credit depends on. Get one field wrong and your client's accountant sends it back. Get the format right once, and every invoice after it takes two minutes.
+
+TL;DR: a compliant GST invoice needs supplier and buyer GSTINs, invoice number and date, HSN/SAC codes per line item, taxable values, CGST+SGST (intra-state) or IGST (inter-state) breakup, place of supply, and total in words. Generate it free with the tools below — everything runs in your browser.
+
+## The 7 Mandatory Fields
+
+1. **Supplier GSTIN and details** — your GST identification number, name, and address as registered.
+2. **Buyer GSTIN (for B2B)** — wrong GSTIN means your client loses input credit. Verify before invoicing, every time.
+3. **Invoice number and date** — sequential, financial-year coded (e.g. INV/26-27/042). Gaps invite scrutiny.
+4. **HSN/SAC codes per item** — goods use HSN, services use SAC. Wrong codes are the most common compliance failure.
+5. **Taxable value per line** — quantity × rate, before tax.
+6. **Tax breakup** — CGST + SGST for same-state sales, IGST for inter-state. The place of supply decides which.
+7. **Total in words** — required on formal invoices; prevents tampering.
+
+## Generate One in Minutes
+
+1. Open the [GST Invoice Generator](https://toolzum.com/indian-utilities/gst-invoice-generator/) and fill seller, buyer, and line items with HSN codes.
+2. Check the automatic CGST/SGST vs IGST split against the place of supply.
+3. Download the PDF and verify totals in words before sending.
+
+For quick tax math outside invoices, the [GST Calculator](https://toolzum.com/indian-utilities/gst-calculator/) handles rate slabs instantly.
+
+## Honest Notes
+
+This guide explains format, not tax law — rates and rules change yearly, so verify current slabs on the CBIC portal before filing. And keep invoice data local: browser-based generation means your client details never upload anywhere.
+
+## Related free tools
+
+- [GST Invoice Generator](https://toolzum.com/indian-utilities/gst-invoice-generator/) — compliant bills in minutes
+- [GST Calculator](https://toolzum.com/indian-utilities/gst-calculator/) — slab math instantly
+`,
+  },
+  {
+    slug: "image-formats-webp-avif-jpg-guide",
+    title: "WebP vs AVIF vs JPG: Which Image Format to Use in 2026",
+    excerpt:
+      "Real size numbers, browser support, and a decision rule for every image on your site — plus free batch conversion that runs locally.",
+    author: "Kirtiwardhan Rathore",
+    authorTitle: "Founder, Toolzum",
+    date: "October 7, 2026",
+    isoDate: "2026-10-07",
+    readTime: "7 min read",
+    tag: "Image",
+    tagColor: "bg-sky-500/10 text-sky-400 border-sky-500/20",
+    canonical: "https://toolzum.com/blog/image-formats-webp-avif-jpg-guide",
+    content: `
+JPG won the 2000s. WebP won the 2010s. AVIF is winning now — but "best" depends on where the image goes, not just what's newest.
+
+TL;DR: WebP at quality 80 for general web use (~30% smaller than JPEG), AVIF for maximum savings where supported, JPG only where compatibility is forced. Convert batches free with the tools below.
+
+## Real Numbers (Same Photo, 1600px)
+
+- JPEG quality 85: ~420 KB baseline
+- WebP quality 80: ~270 KB (visually identical)
+- AVIF quality 65: ~190 KB (visually identical)
+
+Same pixels on screen, less than half the bytes. Across 500 product images, that is the difference between a 200 MB media library and an 85 MB one.
+
+## Browser Support in 2026
+
+WebP renders in 95%+ of browsers — safe as the default. AVIF covers most modern traffic (Chrome, Firefox, Safari 16+, Edge) with graceful fallbacks for the rest. Serve AVIF first with WebP fallback for hero images, WebP everywhere else.
+
+## The Decision Rule
+
+1. Photos for web → WebP 80. Convert the folder with the [Bulk Image Converter](https://toolzum.com/image/bulk-image-converter/) in one batch.
+2. iPhone originals → convert [HEIC to JPG](https://toolzum.com/image/heic-to-jpg/) for universal sharing first.
+3. Heroes where bytes matter most → AVIF with WebP fallback.
+4. Anything requiring transparency → PNG or WebP lossless, never JPEG.
+
+## Related free tools
+
+- [Bulk Image Converter](https://toolzum.com/image/bulk-image-converter/) — whole folders, 100+ format pairs
+- [HEIC to JPG](https://toolzum.com/image/heic-to-jpg/) — iPhone photos to universal JPGs
+`,
+  },
+  {
+    slug: "merge-pdf-online-free-guide",
+    title: "How to Merge PDFs Free (Without Uploading Private Files)",
+    excerpt:
+      "Combine PDFs in order in your browser — plus an honest comparison of free-tier limits across popular tools.",
+    author: "Kirtiwardhan Rathore",
+    authorTitle: "Founder, Toolzum",
+    date: "October 7, 2026",
+    isoDate: "2026-10-07",
+    readTime: "6 min read",
+    tag: "PDF",
+    tagColor: "bg-red-500/10 text-red-400 border-red-500/20",
+    canonical: "https://toolzum.com/blog/merge-pdf-online-free-guide",
+    content: `
+Merging PDFs sounds trivial until page 3 lands before page 1, or the "free" tool caps you mid-task. Here is the method that works, plus what the alternatives actually allow.
+
+TL;DR: upload PDFs in order (or reorder after), merge locally in your browser with the [Bulk PDF Merger](https://toolzum.com/pdf/bulk-pdf-merger/), download one file. No uploads, no daily caps on the merge itself.
+
+## Merge in Order, Step by Step
+
+1. Open the [Bulk PDF Merger](https://toolzum.com/pdf/bulk-pdf-merger/) and drop your files.
+2. Drag pages into final order — first file becomes page 1.
+3. Click merge and download the single document. Bookmarks carry over where the format allows.
+
+Need pages from the middle of files first? [Split the PDF](https://toolzum.com/pdf/pdf-splitter/) to extract ranges, then merge the parts.
+
+## Honest Comparison: Free Tiers
+
+Most big-name PDF tools cap free use at a couple of files a day and upload your documents to their servers for processing. That is a legitimate business model — but know what you trade: your files sit on someone else's infrastructure, and the paywall arrives exactly when you're busiest.
+
+Browser-local tools flip both: files never leave your device, and processing itself carries no per-file toll (downloads are quota-gated per day on free accounts, clearly shown before you hit limits). For sensitive contracts, that difference matters more than any feature list.
+
+## When NOT to Merge Here
+
+Scanned image-only PDFs merge fine but stay unsearchable — OCR first if you need text. Password-locked files need unlocking with the password before merging.
+
+## Related free tools
+
+- [Bulk PDF Merger](https://toolzum.com/pdf/bulk-pdf-merger/) — up to 100 files per Pro run
+- [PDF Splitter](https://toolzum.com/pdf/pdf-splitter/) — extract ranges first
+- [Bulk PDF Size Reducer](https://toolzum.com/pdf/bulk-pdf-size-reducer/) — shrink the merged file for email
 `,
   },
 ];
