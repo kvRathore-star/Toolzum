@@ -1160,6 +1160,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "gst-calculator",
         "gst-invoice-generator",
         "tax-saving-calculator",
+        "itr-filing-helper",
         "gstin-lookup",
         "ifsc-code-lookup", "seller-profit-calculator",
       ],

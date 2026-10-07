@@ -23,8 +23,8 @@ export const SITE_STATS = {
   totalImplemented: 1060,
   freeTierTotal: 995,
   localTools: 1024,
-  cloudTools: 33,
-  hybridTools: 2,
+  cloudTools: 31,
+  hybridTools: 4,
 } as const;
 
 export const MEGAMENU_COLUMNS: MegamenuColumn[] = [

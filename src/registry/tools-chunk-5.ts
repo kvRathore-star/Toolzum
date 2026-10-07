@@ -529,7 +529,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "iCal Event Generator",
     slug: "ical-event-generator",
     category: "Utility",
-    description: 'Build .ics calendar files with summary, dates, location, and description — import anywhere. Send invites that land in every calendar app — free, local download.',
+    description: 'Build .ics calendar event files with summary, dates, location, and description — import anywhere. Send invites that land in every calendar app — free, local download.',
     seoDescription: 'Free iCal generator — .ics with all fields. Free, local download.',
     dependencies: "Vanilla JS",
     seoTitle: "Free iCal Event Generator – ICS Files",
@@ -702,7 +702,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'Do numbers sort numerically?', answer: 'Yes — numeric columns sort by value (2 before 10), dates chronologically, text alphabetically. Mixed columns fall back to text order with a warning.' },
       { question: 'How large a file sorts?', answer: 'Tens of thousands of rows sort instantly locally. Past ~100k rows, split by month first for smoother handling.' },
       { question: 'Can I sort by multiple columns?', answer: 'Single-column per pass: sort the secondary key first, then the primary — stable sorting preserves the earlier order within ties.' },
-      { question: 'Is my data uploaded?', answer: 'No — sorting runs locally in your browser. Data never leaves your device.' },
+      { question: 'Does my spreadsheet leave the browser?', answer: 'No — sorting runs locally in your browser. Data never leaves your device.' },
     ],
   },
   {
@@ -906,7 +906,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "JWK Generator",
     slug: "jwk-generator",
     category: "Developer",
-    description: 'Generate JSON Web Keys (RSA, EC, oct) with kid and alg parameters — browser-crypto randomness, ready to use for auth systems that need them.',
+    description: 'Generate JSON Web Keys (JWK: RSA, EC, oct) with kid and alg parameters — browser-crypto randomness, ready to use for auth systems that need them.',
     seoTitle: "JWK Generator Online – Free Key Generator",
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for JWK first." },
@@ -2594,7 +2594,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'Why start favicons from TIFF?', answer: 'High-res TIFF masters downscale cleaner than small PNGs — 300 DPI art yields tack-sharp 16px icons. Best possible source for tiny outputs.' },
       { question: 'Which TIFF-icon sizes embed?', answer: 'Standard 16/32/48/256px ICO set. Simplify fine detail first — hairlines vanish at 16px regardless of source.' },
       { question: 'Color profiles?', answer: 'sRGB converts cleanly; CMYK press TIFFs shift on screen — convert a CMYK proof to sRGB first, then build icons.' },
-      { question: 'Do files upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do icon sources upload anywhere?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
     ],
   },
   {

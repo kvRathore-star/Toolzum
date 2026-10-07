@@ -770,7 +770,7 @@ export function defaultFaqsFor(tool: ToolMetadata): { question: string; answer: 
       answer:
         gated || pro
           ? 'The free tier carries fair daily limits, shown on the page before you hit them. Pro is unlimited.'
-          : 'No quotas or restrictions.',
+          : 'No quotas or restrictions — unlimited free use with no signup required.',
     },
     { question: "What are the system requirements?", answer: "Any modern web browser (Chrome, Firefox, Safari, Edge) on desktop or mobile. No installation needed." },
   ];

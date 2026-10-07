@@ -315,7 +315,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "Text Replacer",
     slug: "text-replacer",
     category: "Text",
-    description: 'Find-and-replace across full documents with case control — rebrand 200 mentions in one pass. Rename a product through a 50-page spec instantly — free, local, no signup.',
+    description: 'Find-and-replace text across full documents with case control — rebrand 200 mentions in one pass. Rename a product through a 50-page spec instantly — free, local, no signup.',
     seoDescription: 'Free text replacer — bulk find and replace. Free, local, no signup.',
     dependencies: "None",
     seoTitle: "Free Text Replacer – Find & Replace Online",
@@ -328,7 +328,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: 'How do I rename a product everywhere?', answer: 'Enter old and new names, run once: 200 mentions across a 50-page spec swap in seconds. Review the match count first — 200 expected vs 214 found means 14 need a human look.' },
       { question: 'Case-sensitive or not?', answer: 'Case-sensitive for code and brand names (Apple vs apple differ); insensitive for prose cleanup. Whole-word mode protects substrings — replacing \'art\' must not touch \'earth\'.' },
       { question: 'Can I replace across line breaks?', answer: 'Yes for multi-line patterns where supported; otherwise split into two passes. Always keep the original in a second tab until the replaced version reads clean.' },
-      { question: 'Is my document uploaded?', answer: 'No — replacement runs locally in your browser. Text never leaves your device.' },
+      { question: 'Does my edited document leave the browser?', answer: 'No — replacement runs locally in your browser. Text never leaves your device.' },
     ],
   },
   {
@@ -1156,7 +1156,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: 'Devine vs Robinson — which?', answer: 'Both estimate from height: Devine (1974, classic clinical) and Robinson (1983, slightly adjusted). The tool shows both plus the range midpoint — a 170 cm adult lands near 65–66 kg.' },
       { question: 'Is this my exact right weight?', answer: 'No — formulas ignore frame, muscle, and age. Athletes and older adults fall outside formula bands normally; treat output as a starting reference.' },
       { question: 'Should I set goals from this range?', answer: 'No — informational only. Weight goals involving health conditions deserve a doctor or dietitian, not a formula.' },
-      { question: 'Is health data uploaded?', answer: 'No — math runs locally in your browser. Health data never leaves your device.' },
+      { question: 'Does my height data leave the browser?', answer: 'No — math runs locally in your browser. Health data never leaves your device.' },
     ],
   },
   {
@@ -1735,7 +1735,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "XSS Protection Checker",
     slug: "xss-protection-checker",
     category: "Developer",
-    description: 'Probe inputs against classic cross-site scripting vectors — script tags, event handlers, and encoding tricks before shipping to production.',
+    description: 'Probe inputs against classic XSS cross-site scripting vectors — script tags, event handlers, and encoding tricks before shipping to production.',
     seoTitle: "XSS Protection Checker – Test Site Free",
     instructions: [
       { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for XSS Protection Checker." },

@@ -876,7 +876,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: 'Which output format should I choose?', answer: 'WOFF2 for all modern websites (smallest, fastest); WOFF only for decade-old browser support; TTF/OTF for desktop install use. A 120 KB TTF typically becomes an 80 KB WOFF2.' },
       { question: 'How does the preview work?', answer: 'Type any custom text to render the uploaded font instantly — pangrams like \'Sphinx of black quartz\' expose weak glyphs before converting. Preview is unlimited and local.' },
       { question: 'Will conversion keep font quality?', answer: 'Outlines transfer exactly; hinting may simplify slightly at tiny sizes. Test converted body text at 14px next to the original before shipping.' },
-      { question: 'Are my font files uploaded?', answer: 'No — conversion runs locally in your browser with opentype.js. Only the converted download counts on the free quota (3 a day anonymous, 5 signed-in). Check your license allows format conversion first.' },
+      { question: 'Do source fonts leave the browser?', answer: 'No — conversion runs locally in your browser with opentype.js. Only the converted download counts on the free quota (3 a day anonymous, 5 signed-in). Check your license allows format conversion first.' },
     ],
   },
   {
@@ -3241,7 +3241,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: 'Lanczos or Bicubic for my batch?', answer: 'Lanczos (sharp) for AI art, logos, and detailed illustrations — crisper edges at 3–4x. Bicubic (smooth) for photos and gradients — fewer ringing artifacts on skin and skies. Run 3 samples each way at 200% zoom, then batch the winner.' },
       { question: '2x, 3x, or 4x — how large should I go?', answer: 'Match the output: 2x for retina web (1024→2048), 3x for large prints, 4x for posters from small AI outputs. A 1024px Midjourney piece at 3x prints sharp at 10 inches/300 DPI — beyond that, expect softness, not new detail.' },
       { question: 'Does upscaling add real detail?', answer: 'No — interpolation enlarges cleanly but invents nothing, unlike AI reconstruction. Start from the largest clean source; upscaling a 256px thumbnail 4x gives a big soft image, while 1024px 2x stays crisp.' },
-      { question: 'Are my images uploaded when upscaling?', answer: 'No — scaling runs locally in your browser on Canvas; images never leave your device. Only the final ZIP counts as one Pro download — the full upscaled set in a single save.' },
+      { question: 'Does upscaling send images anywhere?', answer: 'No — scaling runs locally in your browser on Canvas; images never leave your device. Only the final ZIP counts as one Pro download — the full upscaled set in a single save.' },
     ],
   },
 {
