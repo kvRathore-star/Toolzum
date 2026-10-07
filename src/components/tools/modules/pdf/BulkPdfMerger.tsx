@@ -1,11 +1,12 @@
 "use client";
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Upload, Loader2, Download, FileText } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { withErrorHandling } from '@/lib/withErrorHandling';
 import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
 import { gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
 import { useBatchProgress } from '@/hooks/useBatchProgress';
+import { consumeHeroFiles } from '@/lib/heroFile';
 import { usePickerFocusReturn } from '@/components/buttonKeys';
 import { BatchProgressPanel } from '@/components/tools/BatchProgressPanel';
 
@@ -23,6 +24,22 @@ export default function BulkPdfMerger() {
     toast.success(`Added ${accepted.length} PDF(s)`);
     focusDrop();
   };
+
+  // Hero-box carry: PDFs dropped on the homepage arrive via IndexedDB (same
+  // browser, never uploaded) and enter through the batch intake — same path
+  // as picker and drop. Consume-once + 5-min TTL live in heroFile.ts.
+  const { addFiles: batchAddFiles } = batch;
+  const heroClaimed = useRef(false);
+  useEffect(() => {
+    if (heroClaimed.current) return;
+    heroClaimed.current = true;
+    consumeHeroFiles().then((incoming) => {
+      if (incoming.length > 0) {
+        batchAddFiles(incoming);
+        toast.success(`Added ${incoming.length} PDF(s)`);
+      }
+    }).catch(() => {});
+  }, [batchAddFiles]);
 
   const processor = async (file: File, onProgress: (pct: number) => void): Promise<Blob | null> => {
     return withErrorHandling(async () => {

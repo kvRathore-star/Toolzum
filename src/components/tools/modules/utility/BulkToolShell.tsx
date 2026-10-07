@@ -19,6 +19,12 @@ export interface ProcessedFile {
   blob: Blob;
 }
 
+// Accepts canvas can actually verify via createImageBitmap. Anything else
+// (audio/pdf/fonts/office) must never enter the bitmap probe.
+const IMAGE_ACCEPT_HINT = ['image/', '.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.avif'];
+// Canvas-blind even when image-targeted: skipped per-file, processFile owns errors.
+const CANVAS_BLIND_EXTS = new Set(['heic', 'heif', 'svg', 'tiff', 'tif', 'ico']);
+
 interface BulkToolShellProps {
   toolSlug: string;
   title: string;
@@ -81,10 +87,20 @@ export function BulkToolShell({
     if (withinSize.length !== accepted.length) {
       toast.error(`Some files exceed ${maxSizeMB}MB limit. ${withinSize.length} of ${accepted.length} accepted.`);
     }
-    // Validate file content — reject files that claim to be images but aren't
+    // Content probe: canvas can only verify bitmap-decodable images. It must
+    // not run for non-image accepts (audio/pdf/fonts… — createImageBitmap
+    // rejects them all, which used to block every such upload with a
+    // misleading message), nor per-file for canvas-blind formats
+    // (HEIC/SVG/TIFF/ICO — their processFile reports the real errors).
+    // The fake-image guard keeps working exactly where canvas can see.
+    const probeImages = accept !== '*/*' && IMAGE_ACCEPT_HINT.some((h) => accept.toLowerCase().includes(h));
     const validated = await Promise.all(withinSize.map(async (f) => {
-      if (accept === '*/*') return f; // skip validation for non-image tools
-      if (f.size === 0) return f; // empty files caught later by processFile
+      if (!probeImages) return f;
+      const ext = f.name.split('.').pop()?.toLowerCase() || '';
+      const looksDecodable =
+        (f.type.startsWith('image/') || ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'avif'].includes(ext)) &&
+        !CANVAS_BLIND_EXTS.has(ext);
+      if (f.size === 0 || !looksDecodable) return f; // empty files caught later by processFile
       try {
         const bitmap = await createImageBitmap(f);
         bitmap.close();

@@ -7,6 +7,7 @@ import { ProDownloadButton } from '../utility/ProDownloadButton';
 import { withErrorHandling } from '@/lib/withErrorHandling';
 import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
 import { gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
+import { consumeHeroFiles } from '@/lib/heroFile';
 import { useBatchProgress } from '@/hooks/useBatchProgress';
 import { usePickerFocusReturn } from '@/components/buttonKeys';
 import { BatchProgressPanel } from '@/components/tools/BatchProgressPanel';
@@ -45,6 +46,22 @@ export default function BulkVideoCompressor() {
     toast.success(`Added ${accepted.length} video(s)`);
     focusDrop();
   };
+
+  // Hero-box carry: videos dropped on the homepage arrive via IndexedDB (same
+  // browser, never uploaded) and enter through the batch intake — same path
+  // as picker and drop. Consume-once + 5-min TTL live in heroFile.ts.
+  const { addFiles: batchAddFiles } = batch;
+  const heroClaimed = useRef(false);
+  useEffect(() => {
+    if (heroClaimed.current) return;
+    heroClaimed.current = true;
+    consumeHeroFiles().then((incoming) => {
+      if (incoming.length > 0) {
+        batchAddFiles(incoming);
+        toast.success(`Added ${incoming.length} video(s)`);
+      }
+    }).catch(() => {});
+  }, [batchAddFiles]);
 
   const processor = async (file: File, onProgress: (pct: number) => void): Promise<Blob | null> => {
     const ff = ffmpeg!;

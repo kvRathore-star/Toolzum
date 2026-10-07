@@ -77,32 +77,39 @@ export interface HeroIntent {
   label: string;
   tool: string;
   route: string;
-  params?: string;
   /** Honesty disclosure shown on the chip before any click. */
   note?: string;
+  /**
+   * Destination's intake accept string, set ONLY when that tool enforces
+   * smartMax caps at intake (shared FileUploader). The box mirrors the
+   * tool's own limit so gating matches enforcement exactly. Tools without
+   * intake checks (custom shells, bulk 500MB, paste tools) omit it and the
+   * box falls back to the plan cap — their enforcement lives at save time.
+   */
+  capAccept?: string;
 }
 
 const IMAGE_INTENTS: HeroIntent[] = [
-  { id: 'compress', label: 'Compress', tool: 'Image Compressor', route: '/image/image-compressor' },
+  { id: 'compress', label: 'Compress', tool: 'Image Compressor', route: '/image/image-compressor', capAccept: 'image/jpeg,image/png,image/webp' },
   { id: 'convert', label: 'Convert', tool: 'Bulk Image Converter', route: '/image/bulk-image-converter' },
   { id: 'resize', label: 'Resize', tool: 'Image Resizer', route: '/image/image-resizer' },
   { id: 'bg-remove', label: 'Remove background', tool: 'AI BG Changer', route: '/image/ai-bg-changer', note: 'Sign-in unlocks AI' },
 ];
 
 const PDF_INTENTS: HeroIntent[] = [
-  { id: 'compress', label: 'Compress', tool: 'PDF Compressor', route: '/pdf/pdf-compressor' },
-  { id: 'merge', label: 'Merge', tool: 'PDF Merger', route: '/pdf/pdf-merger' },
-  { id: 'split', label: 'Split', tool: 'PDF Splitter', route: '/pdf/pdf-splitter' },
+  { id: 'compress', label: 'Compress', tool: 'PDF Compressor', route: '/pdf/pdf-compressor', capAccept: 'application/pdf' },
+  { id: 'merge', label: 'Merge', tool: 'PDF Merger', route: '/pdf/pdf-merger', capAccept: 'application/pdf' },
+  { id: 'split', label: 'Split', tool: 'PDF Splitter', route: '/pdf/pdf-splitter', capAccept: 'application/pdf' },
 ];
 
 const VIDEO_INTENTS: HeroIntent[] = [
-  { id: 'compress', label: 'Compress', tool: 'Video Compressor', route: '/video/video-compressor' },
+  { id: 'compress', label: 'Compress', tool: 'Video Compressor', route: '/video/video-compressor', capAccept: 'video/mp4,video/quicktime,video/x-matroska,video/webm' },
   { id: 'convert', label: 'Convert', tool: 'Video Converter', route: '/converter/video-converter' },
-  { id: 'to-mp3', label: 'Extract MP3', tool: 'Video to MP3', route: '/video/video-to-mp3' },
+  { id: 'to-mp3', label: 'Extract MP3', tool: 'Video to MP3', route: '/video/video-to-mp3', capAccept: 'video/*' },
 ];
 
 const AUDIO_INTENTS: HeroIntent[] = [
-  { id: 'compress', label: 'Compress', tool: 'Audio Compressor', route: '/audio/audio-compressor' },
+  { id: 'compress', label: 'Compress', tool: 'Audio Compressor', route: '/audio/audio-compressor', capAccept: 'audio/*' },
   { id: 'convert', label: 'Convert', tool: 'Audio Converter', route: '/audio/audio-converter' },
 ];
 
@@ -117,7 +124,7 @@ function heroImageIntents(ext: string): HeroIntent[] {
       return [{ id: 'convert', label: 'Convert to PNG', tool: 'SVG to PNG', route: '/image/svg-to-png' }];
     case 'gif':
       return [
-        { id: 'compress', label: 'Compress', tool: 'GIF Compressor', route: '/image/gif-compressor' },
+        { id: 'compress', label: 'Compress', tool: 'GIF Compressor', route: '/image/gif-compressor', capAccept: 'image/gif' },
         { id: 'convert', label: 'Convert', tool: 'Bulk Image Converter', route: '/image/bulk-image-converter' },
       ];
     case 'tiff':
@@ -196,10 +203,19 @@ export function heroIntentsFor(fileType: HeroFileType, ext: string): HeroIntent[
   }
 }
 
-/** Multi-file drops go to bulk hubs, never the single-file tools. */
-export function heroBulkIntentsFor(fileType: HeroFileType): HeroIntent[] {
+/** Multi-file drops go to bulk hubs, never the single-file tools. HEIC/SVG
+ *  batches get their dedicated bulk converters — the generic image batch
+ *  cannot decode them (canvas-blind), same rule as single files. */
+export function heroBulkIntentsFor(fileType: HeroFileType, ext = ''): HeroIntent[] {
+  if (fileType === 'image') {
+    const e = ext.toLowerCase();
+    if (e === 'heic' || e === 'heif')
+      return [{ id: 'bulk', label: 'Convert batch', tool: 'Bulk HEIC to JPG', route: '/image/bulk-heic-to-jpg' }];
+    if (e === 'svg')
+      return [{ id: 'bulk', label: 'Convert batch', tool: 'Bulk SVG to PNG', route: '/image/bulk-svg-to-png' }];
+    return [{ id: 'bulk', label: 'Convert batch', tool: 'Bulk Image Converter', route: '/image/bulk-image-converter' }];
+  }
   switch (fileType) {
-    case 'image': return [{ id: 'bulk', label: 'Convert batch', tool: 'Bulk Image Converter', route: '/image/bulk-image-converter' }];
     case 'video': return [{ id: 'bulk', label: 'Compress batch', tool: 'Bulk Video Compressor', route: '/video/bulk-video-compressor' }];
     case 'audio': return [{ id: 'bulk', label: 'Convert batch', tool: 'Bulk Audio Converter', route: '/audio/bulk-audio-converter' }];
     case 'pdf': return [{ id: 'bulk', label: 'Merge batch', tool: 'PDF Bulk Merger', route: '/pdf/bulk-pdf-merger' }];

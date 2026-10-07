@@ -22,6 +22,7 @@ import { useIsIndia } from '@/hooks/useIsIndia';
 import { useSession } from '@/lib/auth-client';
 import { getRemainingDownloads } from '@/utils/freeUsageGuard';
 import { resolvePlan, fileCaps } from '@/lib/planTiers';
+import { smartMax } from '@/utils/fileSizeLimits';
 import { detectFileType, heroIntentsFor, heroBulkIntentsFor, heroDefaultIntentId, heroBlockReason, heroTypeWarning, heroSizeState, heroExtOf, type HeroFileType, type HeroIntent } from '@/lib/fileRoute';
 import { stashHeroFiles } from '@/lib/heroFile';
 import { useRouter } from 'next/navigation';
@@ -784,7 +785,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
   const [typeWarn, setTypeWarn] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [carrying, setCarrying] = useState(false);
-  const { data: session } = useSession();
+  const { data: session, isPending: sessionPending } = useSession();
   const planCapMB = fileCaps(resolvePlan(!!session?.user, (session?.user as { plan?: string } | undefined)?.plan ?? null)).maxFileSizeMB;
   // User state (quota-aware box): cookie + local counters only — no request.
   // Server remains the source of truth at save time; this is a heads-up.
@@ -832,7 +833,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
     // dropping a PNG preselects Convert. Set once at drop (event handler,
     // never an effect) so an explicit chip choice always sticks.
     setSelectedId(arr.length > 1
-      ? heroBulkIntentsFor(kind)[0]!.id
+      ? heroBulkIntentsFor(kind, ext)[0]!.id
       : heroDefaultIntentId(kind, ext, activeTab));
   }, [planCapMB, activeTab]);
 
@@ -841,12 +842,19 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
   const fileType: HeroFileType | null = first ? detectFileType({ type: first.type, name: first.name }) : null;
   const ext = first ? heroExtOf(first.name) : '';
   const intents: HeroIntent[] = fileType
-    ? (multi ? heroBulkIntentsFor(fileType) : heroIntentsFor(fileType, ext))
+    ? (multi ? heroBulkIntentsFor(fileType, ext) : heroIntentsFor(fileType, ext))
     : [];
   const selected: HeroIntent | null = intents.find((i) => i.id === selectedId) ?? intents[0] ?? null;
 
-  const sizeState = first ? heroSizeState(first.size, planCapMB) : 'ok';
-  const overCap = sizeState === 'over-cap';
+  // Effective cap follows the SELECTED tool's intake (smartMax where the
+  // tool enforces it, plan cap otherwise) — gating always matches the
+  // enforcement the file will actually meet. Never gate while the session
+  // resolves (optimistic; destinations enforce strictly anyway).
+  const signedIn = !!session?.user;
+  const selectedCap = selected?.capAccept
+    ? (signedIn ? smartMax(selected.capAccept).signed : smartMax(selected.capAccept).free)
+    : planCapMB;
+  const overCap = !sessionPending && !!first && first.size > selectedCap * 1024 * 1024;
   const quotaOut = !!quota?.signedIn && quota.remaining <= 0;
   const gated = overCap || quotaOut;
 
@@ -867,8 +875,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
       // destination opens with them loaded — single tools and bulk batches
       // alike. Stash failures degrade to plain routing (one manual drop).
       await stashHeroFiles(files);
-      const url = intent.params ? `${intent.route}?${intent.params}` : intent.route;
-      router.push(url);
+      router.push(intent.route);
     } finally {
       setCarrying(false);
     }
@@ -932,7 +939,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
     { label: 'IMG', exts: 'JPG, PNG, WebP' },
     { label: 'VID', exts: 'MP4, WebM' },
     { label: 'PDF', exts: 'PDF docs' },
-    { label: 'DOC', exts: 'DOC, XLS, CSV' },
+    { label: 'DOC', exts: 'DOCX, XLS, CSV' },
     { label: 'AUD', exts: 'MP3, WAV, FLAC' },
   ];
 
@@ -982,7 +989,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
               {multi ? `${files.length} files · ${first.name}` : first.name}
             </p>
             <p className={`text-xs mt-0.5 ${overCap ? "text-amber-600 dark:text-amber-400 font-medium" : "text-[var(--text-muted)]"}`}>
-              {multi ? `${files.length} files` : formatSize(first.size)} &middot; {fileType.toUpperCase()} &middot; limit {planCapMB}MB
+              {multi ? `${files.length} files` : formatSize(first.size)} &middot; {(fileType === 'other' && ext ? ext : fileType)?.toUpperCase()} &middot; limit {selectedCap}MB
             </p>
             {typeWarn && (
               <p className="text-[11px] text-amber-600 dark:text-amber-400 max-w-[240px] text-center">{typeWarn}</p>
@@ -1046,7 +1053,11 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
         {first && gated && !blocked && (
           <div role="alert" className="mt-2 p-2.5 rounded-xl border border-amber-500/30 bg-amber-500/10 text-[11px] text-[var(--text-secondary)]">
             {overCap ? (
-              <>Too big for your {planCapMB}MB limit — <Link href="/sign-in" className="text-[var(--accent)] underline underline-offset-2">sign in free for 150MB</Link> or <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">go Pro (2GB)</Link>.</>
+              <>{formatSize(first.size)} exceeds {selected ? `${selected.tool}'s` : 'this tool’s'} {selectedCap}MB intake limit — {signedIn
+                ? (selected?.capAccept
+                  ? <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">view Pro plans</Link>
+                  : <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">go Pro (2GB)</Link>)
+                : <><Link href="/sign-in" className="text-[var(--accent)] underline underline-offset-2">sign in free for more</Link> or <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">view Pro plans</Link></>}.</>
             ) : (
               <>Daily limit reached — resets tomorrow · <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">View Pro</Link>.</>
             )}
@@ -1074,7 +1085,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
           <p className="mt-1"><strong className="text-[var(--text-primary)]">Audio</strong> (MP3, WAV, FLAC, OGG, M4A, AAC, WMA, Opus, AIFF) → compress, convert</p>
           <p className="mt-1"><strong className="text-[var(--text-primary)]">Documents</strong> (DOCX, ODT, EPUB…) → convert · <strong className="text-[var(--text-primary)]">Spreadsheets</strong> (XLS, XLSX, CSV) → to JSON · <strong className="text-[var(--text-primary)]">Text</strong> (.txt, .md, .json) → count, format</p>
           <p className="mt-1"><strong className="text-[var(--text-primary)]">PPT decks</strong> aren&apos;t supported yet — they land on the tool directory.</p>
-          <p className="mt-2 text-[var(--text-muted)]">Limits: {planCapMB}MB on your plan · files stay in this browser · executables refused · several files open the bulk tools.</p>
+          <p className="mt-2 text-[var(--text-muted)]">Limits: shown per file above (each tool states its own) · files stay in this browser · executables refused · several files open the bulk tools.</p>
         </div>
       </details>
 
