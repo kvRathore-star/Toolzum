@@ -1,9 +1,10 @@
 "use client";
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
 import { Section } from '../MiscToolsShared';
+import { consumeHeroFiles } from '@/lib/heroFile';
 
 const FORMATS = ['PDF', 'DOCX', 'TXT', 'HTML', 'Markdown', 'RTF', 'ODT', 'EPUB'];
 
@@ -75,6 +76,18 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
   const handleDragLeave = useCallback(() => {
     setIsDragOver(false);
   }, []);
+
+  // Hero-box carry: files dropped on the homepage arrive via IndexedDB (same
+  // browser, never uploaded) and enter through handleFiles — same intake as
+  // picker and drop, including source-format detection. Consume-once + TTL.
+  const heroClaimed = useRef(false);
+  useEffect(() => {
+    if (heroClaimed.current) return;
+    heroClaimed.current = true;
+    consumeHeroFiles().then((incoming) => {
+      if (incoming.length > 0) handleFiles(incoming);
+    }).catch(() => {});
+  }, [handleFiles]);
 
   const removeFile = (index: number) => {
     setFiles(prev => prev.filter((_, i) => i !== index));

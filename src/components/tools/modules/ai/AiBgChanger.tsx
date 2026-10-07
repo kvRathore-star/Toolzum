@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Upload, Download, RotateCcw, Scissors, Image, Eraser, RefreshCw, ZoomIn, Crown } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
@@ -14,6 +14,7 @@ import {
 } from '@/lib/selfieSegmentation';
 import { usePickerFocusReturn } from '@/components/buttonKeys';
 import { isLowEndDevice } from '@/lib/device';
+import { consumeHeroFile } from '@/lib/heroFile';
 
 export default function AiBgChanger() {
   const [image, setImage] = useState<string | null>(null);
@@ -97,21 +98,9 @@ export default function AiBgChanger() {
     ctx.fillText('Processed with Toolzum', canvas.width - 12, canvas.height - 12);
   };
 
-  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const url = URL.createObjectURL(file);
-    setImage(url);
-    setResult(null);
-    focusDrop();
-  };
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragging(false);
-    const file = e.dataTransfer.files?.[0];
-    if (!file || !file.type.startsWith('image/')) {
-      if (file) toast.error('Please drop an image file.');
+  const loadFile = (file: File) => {
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please choose an image file.');
       return;
     }
     const url = URL.createObjectURL(file);
@@ -119,6 +108,32 @@ export default function AiBgChanger() {
     setResult(null);
     focusDrop();
   };
+
+  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    loadFile(file);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const file = e.dataTransfer.files?.[0];
+    if (!file) return;
+    loadFile(file);
+  };
+
+  // Hero-box carry: an image dropped on the homepage arrives via IndexedDB
+  // (same browser, never uploaded) and enters through loadFile — same
+  // type guard as picker and drop. Consume-once + 5-min TTL.
+  const heroClaimed = useRef(false);
+  useEffect(() => {
+    if (heroClaimed.current) return;
+    heroClaimed.current = true;
+    consumeHeroFile().then((f) => {
+      if (f) loadFile(f);
+    }).catch(() => {});
+  }, []);
 
   const removeBackgroundAuto = () => {
     try {

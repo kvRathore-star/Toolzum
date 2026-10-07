@@ -1,8 +1,9 @@
 "use client";
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { downloadOrShare } from "@/utils/nativeShare";
+import { consumeHeroFile } from '@/lib/heroFile';
 
 const outputFormats = [
   { label: 'JSON', value: 'json' },
@@ -105,6 +106,18 @@ export default function BulkCsvExcelToJson() {
     const file = e.dataTransfer.files[0];
     if (file) processFile(file);
   };
+
+  // Hero-box carry: a spreadsheet dropped on the homepage arrives via
+  // IndexedDB (same browser, never uploaded) and enters through processFile
+  // — same parse path as picker and drop. Consume-once + 5-min TTL.
+  const heroClaimed = useRef(false);
+  useEffect(() => {
+    if (heroClaimed.current) return;
+    heroClaimed.current = true;
+    consumeHeroFile().then((f) => {
+      if (f) void processFile(f);
+    }).catch(() => {});
+  }, [processFile]);
 
   return (
     <div className="max-w-5xl mx-auto space-y-4 animate-in fade-in duration-500">

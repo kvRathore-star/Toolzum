@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { createDownloadBlob } from '@/utils/blob';
+import { consumeHeroFile } from '@/lib/heroFile';
 
 
 type FormatDef = {
@@ -223,14 +224,28 @@ export default function AudioFormatConverter({ slug }: AudioFormatConverterProps
     setOutputUrl(null);
   };
 
+  const loadFile = useCallback(async (f: File) => {
+    setFile(f);
+    setOutputUrl(null);
+    if (!isLoaded) await loadFFmpeg();
+  }, [isLoaded, loadFFmpeg]);
+
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
-    if (f) {
-      setFile(f);
-      setOutputUrl(null);
-      if (!isLoaded) await loadFFmpeg();
-    }
+    if (f) await loadFile(f);
   };
+
+  // Hero-box carry: an audio file dropped on the homepage arrives via
+  // IndexedDB (same browser, never uploaded) and enters through loadFile —
+  // same FFmpeg preload as a manual pick. Consume-once + 5-min TTL.
+  const heroClaimed = useRef(false);
+  useEffect(() => {
+    if (heroClaimed.current) return;
+    heroClaimed.current = true;
+    consumeHeroFile().then((f) => {
+      if (f) void loadFile(f);
+    }).catch(() => {});
+  }, [loadFile]);
 
   const convertAudio = async () => {
     if (!file || !ffmpeg || !isLoaded) return;
