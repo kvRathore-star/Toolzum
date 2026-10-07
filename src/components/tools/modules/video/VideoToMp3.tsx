@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { toast } from "react-hot-toast";
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { Music, Upload, Download, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { createDownloadBlob } from '@/utils/blob';
+import { consumeHeroFile } from '@/lib/heroFile';
 import { useUsageCounter } from '@/hooks/useUsageCounter';
 import { useProStatus } from '@/hooks/useProStatus';
 import { useSession } from '@/lib/auth-client';
@@ -28,25 +29,40 @@ export default function VideoToMp3() {
   const { usage, trackUsage } = useUsageCounter('videoToMp3Usage');
   const isProUser = useProStatus();
 
+  const loadFile = useCallback(async (f: File) => {
+    const limits = smartMax('video/*');
+    const effectiveLimit = isSignedIn ? limits.signed : limits.free;
+    if (f.size > effectiveLimit * 1024 * 1024) {
+      toast.error(
+        isSignedIn
+          ? `File exceeds ${effectiveLimit}MB limit`
+          : `Free users limited to ${effectiveLimit}MB. Sign in for up to ${limits.signed}MB.`,
+      );
+      return;
+    }
+    setFile(f);
+    setOutputUrl(null);
+    if (!isLoaded) await loadFFmpeg();
+  }, [isSignedIn, isLoaded, loadFFmpeg]);
+
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
-    if (f) {
-      const limits = smartMax('video/*');
-      const effectiveLimit = isSignedIn ? limits.signed : limits.free;
-      if (f.size > effectiveLimit * 1024 * 1024) {
-        toast.error(
-          isSignedIn
-            ? `File exceeds ${effectiveLimit}MB limit`
-            : `Free users limited to ${effectiveLimit}MB. Sign in for up to ${limits.signed}MB.`,
-        );
-        e.target.value = '';
-        return;
-      }
-      setFile(f);
-      setOutputUrl(null);
-      if (!isLoaded) await loadFFmpeg();
-    }
+    if (!f) return;
+    e.target.value = '';
+    await loadFile(f);
   };
+
+  // Hero-box carry: a video dropped on the homepage arrives via IndexedDB
+  // (same browser, never uploaded) and enters through loadFile — same size
+  // guard and FFmpeg preload as a manual pick. Consume-once + 5-min TTL.
+  const heroClaimed = useRef(false);
+  useEffect(() => {
+    if (heroClaimed.current) return;
+    heroClaimed.current = true;
+    consumeHeroFile().then((f) => {
+      if (f) void loadFile(f);
+    }).catch(() => {});
+  }, [loadFile]);
 
   const processVideo = async () => {
     if (!file || !ffmpeg || !isLoaded) return;

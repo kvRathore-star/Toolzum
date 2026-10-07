@@ -23,7 +23,7 @@ import { useSession } from '@/lib/auth-client';
 import { getRemainingDownloads } from '@/utils/freeUsageGuard';
 import { resolvePlan, fileCaps } from '@/lib/planTiers';
 import { detectFileType, heroIntentsFor, heroBulkIntentsFor, heroDefaultIntentId, heroBlockReason, heroTypeWarning, heroSizeState, heroExtOf, type HeroFileType, type HeroIntent } from '@/lib/fileRoute';
-import { stashHeroFile } from '@/lib/heroFile';
+import { stashHeroFiles } from '@/lib/heroFile';
 import { useRouter } from 'next/navigation';
 import { useFavorites } from '@/hooks/useFavorites';
 import { FavoriteStarButton } from '@/components/FavoriteStarButton';
@@ -780,6 +780,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
   const [files, setFiles] = useState<File[]>([]);
   const [dragOver, setDragOver] = useState(false);
   const [blocked, setBlocked] = useState<string | null>(null);
+  const [folderDrop, setFolderDrop] = useState(false);
   const [typeWarn, setTypeWarn] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [carrying, setCarrying] = useState(false);
@@ -803,6 +804,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
     if (!list || list.length === 0) return;
     const arr = Array.from(list);
     const first = arr[0]!;
+    setFolderDrop(false);
     // Abuse gate 1: executables/installers never enter the box.
     const block = heroBlockReason(first.name);
     if (block) {
@@ -852,24 +854,25 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
     setFiles([]);
     setSelectedId(null);
     setBlocked(null);
+    setFolderDrop(false);
     setTypeWarn(null);
     if (fileInputRef.current) fileInputRef.current.value = '';
   }, []);
 
   const go = useCallback(async (intent: HeroIntent) => {
-    if (gated || !first || carrying) return;
+    if (gated || files.length === 0 || carrying) return;
     setCarrying(true);
     try {
-      // Single files ride along via IndexedDB (same browser, never uploaded)
-      // so the destination opens with the file loaded — no second upload.
-      // Multi-file batches travel light: bulk tools take folders themselves.
-      if (!multi) await stashHeroFile(first);
+      // Files ride along via IndexedDB (same browser, never uploaded) so the
+      // destination opens with them loaded — single tools and bulk batches
+      // alike. Stash failures degrade to plain routing (one manual drop).
+      await stashHeroFiles(files);
       const url = intent.params ? `${intent.route}?${intent.params}` : intent.route;
       router.push(url);
     } finally {
       setCarrying(false);
     }
-  }, [gated, first, multi, carrying, router]);
+  }, [gated, files, carrying, router]);
 
   const formatSize = (bytes: number) => {
     if (bytes < 1024) return `${bytes} B`;
@@ -891,6 +894,19 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
     e.preventDefault();
     dragDepth.current = 0;
     setDragOver(false);
+    // Dropped folders arrive with an empty file list (browsers don't expose
+    // folder contents to div drops). Silence here strands users — say so.
+    if (e.dataTransfer.files.length === 0) {
+      if (Array.from(e.dataTransfer.types).includes('Files')) {
+        setBlocked(null);
+        setTypeWarn(null);
+        setFiles([]);
+        setSelectedId(null);
+        setFolderDrop(true);
+      }
+      return;
+    }
+    setFolderDrop(false);
     takeFiles(e.dataTransfer.files);
   }, [takeFiles]);
 
@@ -951,6 +967,11 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
           <div role="alert" className="flex flex-col items-center gap-2 p-4 text-center max-w-[260px]">
             <p className="text-sm font-medium text-[var(--text-primary)]">Can't take this file</p>
             <p className="text-xs text-[var(--text-secondary)]">{blocked}</p>
+          </div>
+        ) : folderDrop ? (
+          <div role="status" className="flex flex-col items-center gap-2 p-4 text-center max-w-[260px]">
+            <p className="text-sm font-medium text-[var(--text-primary)]">That's a folder, not files</p>
+            <p className="text-xs text-[var(--text-secondary)]">Browsers don&apos;t let pages look inside dropped folders. Open a bulk tool below and add the folder there — or drop the files themselves.</p>
           </div>
         ) : first && fileType ? (
           <div role="status" className="flex flex-col items-center gap-2 p-4 animate-fade-in">

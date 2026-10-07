@@ -12,7 +12,7 @@ import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
 import { getSignedInStatus, gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
 import { usePickerFocusReturn } from '@/components/buttonKeys';
 import { isLowEndDevice } from '@/lib/device';
-import { consumeHeroFile } from '@/lib/heroFile';
+import { consumeHeroFiles } from '@/lib/heroFile';
 
 export interface ProcessedFile {
   name: string;
@@ -153,8 +153,8 @@ export function BulkToolShell({
   useEffect(() => {
     if (heroClaimed.current) return;
     heroClaimed.current = true;
-    consumeHeroFile().then((f) => {
-      if (f) void addFiles([f]);
+    consumeHeroFiles().then((incoming) => {
+      if (incoming.length > 0) void addFiles(incoming);
     }).catch(() => {});
   }, [addFiles]);
 
