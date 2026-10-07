@@ -50,10 +50,22 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "INI to JSON Converter",
     slug: "ini-json-converter",
     category: "Converter",
-    description: 'Convert INI configs to JSON. Files are converted locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online INI to JSON Converter \u2014 Convert INI configs to JSON. ',
+    description: 'Convert INI files to JSON objects and back — legacy configs to modern tooling. Migrate .ini without hand-editing — local parsing, free, no signup.',
+    seoDescription: 'Free INI converter — sections to objects. Local, free, no signup.',
     dependencies: "None",
     showInCategory: false,
+    seoTitle: "Free INI to JSON Converter Online",
+    instructions: [
+      { title: "1. Paste INI or JSON", desc: "Legacy or modern configs." },
+      { title: "2. Convert direction", desc: "Sections map automatically." },
+      { title: "3. Copy converted config", desc: "Verify with target parser." },
+    ],
+    faqs: [
+      { question: 'Sections to objects?', answer: '[section] headers become nested keys with values typed (numbers, booleans detected). Comments drop — keep originals documented.' },
+      { question: 'JSON back to INI?', answer: 'Yes — nested objects flatten to sections; arrays join or index per setting. Round-trips preserve data, not comments.' },
+      { question: 'Duplicate keys?', answer: 'Last-wins with a warning — INI semantics vary by parser. Deduplicate sources before converting.' },
+      { question: 'Do INI files upload?', answer: 'No — parsing runs locally in your browser. Configs never leave your device.' },
+    ],
   },
   {
 
