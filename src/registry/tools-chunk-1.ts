@@ -727,11 +727,23 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Link in Bio Builder',
     slug: 'link-in-bio-builder',
-    description: 'Creates customizable link-in-bio landing pages with profile photo, bio, multiple social media links, and custom icon selection. Designs never leave your device — everything renders locally in your browser.',
-    seoDescription: 'Free online Link in Bio Builder — Creates customizable link-in-bio landing pages with profile photo, bio, multiple social media links, and custom icon selection. ',
+    description: 'Build link-in-bio pages with profile, links, and icons — your Instagram exit ramp. Route followers anywhere in one link — local building, free, no signup.',
+    seoDescription: 'Free bio pages — profile plus links. Local, free, no signup.',
     category: 'Branding',
     id:  "271",
-    dependencies: 'None'
+    dependencies: 'None',
+    seoTitle: "Free Link in Bio Builder Online",
+    instructions: [
+      { title: "1. Add profile and links", desc: "Photo, bio, 5–8 destinations." },
+      { title: "2. Tag with UTMs", desc: "source=bio on every outbound link." },
+      { title: "3. Publish and share", desc: "One link for the bio." },
+    ],
+    faqs: [
+      { question: 'How many links?', answer: '5–8 active maximum — more paralyzes taps. Rotate seasonally; archive old campaigns off the page.' },
+      { question: 'Track clicks?', answer: 'UTM-tag every outbound link (source=bio) to measure in analytics. Untagged bio traffic attributes nowhere.' },
+      { question: 'Custom domain?', answer: 'Subdomain hosting typically; custom domains need higher tiers on most platforms. Brand the slug regardless.' },
+      { question: 'Is page data uploaded?', answer: 'No — building runs locally in your browser. Nothing leaves your device.' },
+    ],
   },
   {
     name: 'PDF Editor',
