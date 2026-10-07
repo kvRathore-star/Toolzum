@@ -2462,7 +2462,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Secure Note Sharer",
     slug: "secure-note-sharer",
     category: "Privacy",
-    description: 'Share secrets via self-decrypting links — AES in the URL hash servers never see. Send passwords without trusting inboxes — local Web Crypto, free, no signup.',
+    description: 'Share secrets securely via self-decrypting note links — AES in the URL hash servers never see. Send passwords without trusting inboxes — local Web Crypto, free, no signup.',
     seoDescription: 'Free encrypted notes — servers never see content. Local crypto, free.',
     dependencies: "Web Crypto API",
     seoTitle: "Free Secure Note Sharer – Encrypted Links",
