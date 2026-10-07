@@ -2082,9 +2082,21 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Watermark PDF",
     slug: "watermark-pdf",
     category: "PDF",
-    description: 'Overlays text or image watermarks onto every page of a PDF with customizable position, rotation, opacity, and tiling. Documents stay on your device — editing and conversion run locally in your browser.',
-    seoDescription: 'Free online Watermark PDF — Overlays text or image watermarks onto every page of a PDF with customizable position, rotation, opacity, and tiling. ',
+    description: 'Stamp text watermarks across PDF pages — DRAFT, CONFIDENTIAL, custom text with opacity. Protect 50 filings before sharing — local pdf-lib work, free quota on saves.',
+    seoDescription: 'Free PDF watermarks — diagonal text stamps. Local, free quota on saves.',
     dependencies: "pdf-lib",
+    seoTitle: "Free Watermark PDF Online – Text Stamps",
+    instructions: [
+      { title: "1. Upload the PDF", desc: "Filings needing protection marks." },
+      { title: "2. Set text and style", desc: "Diagonal, opacity, position." },
+      { title: "3. Download stamped PDF", desc: "Flatten for adversarial shares (counts on free quota)." },
+    ],
+        faqs: [
+      { question: 'How do I stamp DRAFT everywhere?', answer: 'Enter text with diagonal placement at 25–30% opacity: readable but unobtrusive across all pages. One setting covers the whole file.' },
+      { question: 'Removable by recipients?', answer: 'Text watermarks flatten optionally — flattened marks resist casual removal; unflattened ones edit off. Flatten before adversarial sharing.' },
+      { question: 'Position and size?', answer: 'Diagonal center for documents, footer corners for branding. Size to page: 48pt suits A4, larger for posters.' },
+      { question: 'Are my PDFs uploaded?', answer: 'No — stamping runs locally in your browser. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+    ],
   },
   {
     id: "123",
