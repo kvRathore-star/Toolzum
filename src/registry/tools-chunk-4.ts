@@ -88,6 +88,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Does it work in the background?", answer: "The timer continues running if you switch browser tabs. However, some browsers may throttle JavaScript in background tabs, which could cause slight timing drift." },
       { question: "When using Timer, is my data stored?", answer: "No. The timer runs entirely in your browser. No data is transmitted or stored." },
     ],
+    seoTitle: "Timer – Free Online",
   },
   {
 
@@ -110,7 +111,8 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Stopwatch vs timer — which do I need?", answer: "Stopwatch counts up from zero (measuring how long something took); timer counts down to zero (alerting when time is up). This page is the former." },
       { question: "When using Stopwatch, is anything uploaded?", answer: "No. Everything runs locally in your browser. Nothing leaves your device." },
     ],
-},
+    seoTitle: "Free Online Stopwatch",
+  },
   {
 
     id: "784",
@@ -132,7 +134,8 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Can I share the countdown?", answer: "Yes — the event is encoded in the shareable link, so recipients see the same countdown live on their own devices." },
       { question: "When using Countdown Timer, is anything uploaded?", answer: "No. Everything runs locally in your browser. Nothing leaves your device." },
     ],
-},
+    seoTitle: "Free Countdown Timer Online",
+  },
   {
 
     id: "786",
@@ -154,7 +157,8 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Can I save workout presets?", answer: "Yes — named presets (e.g., 'Morning HIIT 20min') persist locally, so one tap starts repeat sessions without re-entering rounds." },
       { question: "When using Interval Timer, is anything uploaded?", answer: "No. Everything runs locally in your browser. Nothing leaves your device." },
     ],
-},
+    seoTitle: "Interval Timer – Free Online",
+  },
   {
 
     id: "787",
@@ -176,7 +180,8 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Why does the prep countdown matter?", answer: "3 seconds to set position prevents false starts and pulled muscles — most Tabata injuries come from launching cold into round 1." },
       { question: "When using Tabata Timer, is anything uploaded?", answer: "No. Everything runs locally in your browser. Nothing leaves your device." },
     ],
-},
+    seoTitle: "Tabata Timer – Free Online",
+  },
   {
 
     id: "788",
@@ -219,6 +224,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "What precision is the output?", answer: "Results are shown in hours, minutes, and seconds. For example, 3 hours 27 minutes 45 seconds (3:27:45)." },
       { question: "When using Time Duration Calculator, is my data stored?", answer: "No. All calculations run locally in your browser. No time data is transmitted." },
     ],
+    seoTitle: "Free Time Duration Calculator Online",
   },
   {
     id: "791",
@@ -542,7 +548,8 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "How do I check contrast for accessibility?", answer: "Pick foreground and background, then compare luminance: WCAG AA needs 4.5:1 for body text, 3:1 for large text. Aim darker text on light surfaces rather than guessing." },
       { question: "Are my images or colors uploaded?", answer: "No. Sampling and conversion run entirely in your browser. Nothing leaves your device." },
     ],
-},
+    seoTitle: "Free Online Color Picker",
+  },
   {
 
     id: "814",
@@ -564,7 +571,8 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Can I export the palette?", answer: "Yes — copy all HEX codes at once, or individual values per swatch, ready for CSS variables, Tailwind theme extension, or Figma styles." },
       { question: "When using Color Palette Generator, is anything uploaded?", answer: "No. Palette math runs entirely in your browser. Nothing leaves your device." },
     ],
-},
+    seoTitle: "Free Online Color Palette Generator",
+  },
   {
 
     id: "815",
@@ -597,7 +605,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online Contrast Checker \u2014 Check the contrast ratio between two colors against WCAG AA and AAA standards. Essential for accessible web design. ',
     dependencies: "None",
     showInCategory: false,
-},
+    seoTitle: "Contrast Checker – Free Online",
+  },
   {
 
     id: "817",
@@ -693,7 +702,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "Yes / No Picker",
     slug: "yes-no-picker",
     category: "Utility",
-    description: 'Get instant yes/no answers with streak tracking for micro-decisions. Settle it with one tap — free, local, no signup.',
+    description: 'Get instant yes/no answers with streak tracking for micro-decisions. Settle it with one tap — free, local, no signup. Best-of-three settles playground disputes fairly — free, local, no signup.',
     seoDescription: 'Free yes/no decider with streaks. Local, free, no signup.',
     dependencies: "None",
     showInCategory: false,
@@ -839,6 +848,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "What does a 0% result mean?", answer: "Both values are identical. The percentage difference is zero when there is no difference between the two numbers." },
       { question: "When using Percentage Difference Calculator, is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
     ],
+    seoTitle: "Free Percentage Difference Calculator Online",
   },
   {
     id: "832",
@@ -860,6 +870,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Does it handle large groups?", answer: "Yes. Split among any number of people. The calculator handles the arithmetic whether it's 2 people or 20." },
       { question: "When using Tip Calculator, is my data stored?", answer: "No. All calculations run locally in your browser. No bill amounts or tip data are transmitted." },
     ],
+    seoTitle: "Tip Calculator – Free Online",
   },
   {
     id: "833",
@@ -923,7 +934,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "CAGR vs XIRR vs IRR?", answer: "CAGR fits single lump-sum investments; XIRR handles irregular SIP-style cash flows with exact dates. Use this calculator for lump sums, XIRR for ongoing contributions." },
       { question: "Is my investment data stored?", answer: "No. All calculations run locally in your browser. Nothing is transmitted or stored." },
     ],
-
+    seoTitle: "Free CAGR Calculator Online",
   },
   {
     id: "840",
@@ -945,6 +956,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "What precision is used?", answer: "Results are displayed to 6-10 decimal places depending on the fraction. You can see both the exact fraction and the decimal approximation." },
       { question: "When using Fraction to Decimal Calculator, is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
     ],
+    seoTitle: "Fraction to Decimal Calculator – Free Online",
   },
   {
     id: "841",
@@ -1008,6 +1020,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "How is this different from combinations?", answer: "Permutations count arrangements where order matters (ABC ≠ BCA). Combinations count selections where order doesn't matter (ABC = BCA). Use the Combination Calculator for selections." },
       { question: "When using Permutation Calculator, is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
     ],
+    seoTitle: "Free Permutation Calculator Online",
   },
   {
     id: "847",
@@ -1029,6 +1042,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "What are common uses of factorials?", answer: "Permutations, combinations, probability calculations, Taylor series, binomial distribution, and various mathematical formulas in statistics and algebra." },
       { question: "When using Factorial Calculator, is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
     ],
+    seoTitle: "Free Online Factorial Calculator",
   },
   {
     id: "848",
@@ -1050,6 +1064,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Does it identify prime factors?", answer: "Yes. For composite numbers, the tool can show the prime factorization — the product of prime numbers that equals the original." },
       { question: "When using Prime Number Checker, is the calculation done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
     ],
+    seoTitle: "Free Prime Number Checker Online",
   },
   {
     id: "849",
@@ -1133,6 +1148,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "What is the visual long division?", answer: "It shows the complete division expression: dividend ÷ divisor = decimal, the integer quotient, and the remainder calculation (dividend − divisor × quotient = remainder). This helps verify the result step by step." },
       { question: "What is 'mod' used for in programming?", answer: "Common uses: checking if a number is even/odd (n % 2), cycling through array indices (i % length), implementing hash tables, clock arithmetic (hours % 12), and modular exponentiation in cryptography." },
     ],
+    seoTitle: "Free Online Modulo Calculator",
   },
   {
     id: "853",
@@ -1258,6 +1274,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Why does the step display matter?", answer: "It shows you exactly which digit is being rounded and why the result is what it is. For example, rounding 3.145 to 2 places: the third decimal digit is 5, so round-half-up rounds up to 3.15." },
       { question: "When should I use each rounding mode?", answer: "Round half up: everyday math. Banker's rounding: statistical/financial data. Floor: when you need the lower bound. Ceil: when you need the upper bound. Truncate: when you need to drop decimals without rounding (e.g., integer division)." },
     ],
+    seoTitle: "Free Rounding Calculator Online",
   },
   {
     id: "859",
@@ -1407,6 +1424,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "What can I use this converter for?", answer: "Converting between metric and imperial lengths — for example, feet to meters for construction, inches to centimeters for screen sizes, or miles to kilometers for running distances." },
       { question: "When using Length Converter, does this converter work offline?", answer: "Yes. All conversions run in your browser using JavaScript. No data is sent to any server." },
     ],
+    seoTitle: "Free Length Converter Online",
   },
   {
 
@@ -1429,6 +1447,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "What is a stone in weight?", answer: "A stone is a British unit equal to 14 pounds or approximately 6.35 kg. It is commonly used for body weight in the UK and Ireland." },
       { question: "When using Weight Converter, does this converter work offline?", answer: "Yes. All conversions run locally in your browser. No data is uploaded or stored." },
     ],
+    seoTitle: "Free Online Weight Converter",
   },
   {
 
@@ -1451,6 +1470,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "How big is a fluid ounce?", answer: "1 US fluid ounce = 29.5735 mL, roughly the volume of a tablespoon plus a teaspoon. It is a measure of volume, not weight." },
       { question: "When using Volume Converter, does this converter work offline?", answer: "Yes. All conversions run in your browser with no server calls." },
     ],
+    seoTitle: "Free Volume Converter Online",
   },
   {
 
@@ -1473,6 +1493,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "How many square meters are in a square foot?", answer: "1 square foot = 0.092903 square meters. Multiply any ft² value by this factor to get m²." },
       { question: "When using Area Converter, does this converter work offline?", answer: "Yes. All calculations run locally in your browser without sending data to any server." },
     ],
+    seoTitle: "Free Area Converter Online",
   },
   {
 
@@ -1495,6 +1516,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "How big is an HD movie file?", answer: "A typical HD movie is about 4–5 GB. A 4K movie can be 15–25 GB depending on length and compression." },
       { question: "When using Data Size Converter, does this converter work offline?", answer: "Yes. All conversions run locally in your browser. No data is uploaded." },
     ],
+    seoTitle: "Free Data Size Converter Online",
   },
   {
     id: "873",
@@ -1516,6 +1538,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "What inputs do I need?", answer: "Height, weight, age, and gender. The tool calculates BMI internally and applies the age/gender adjustment." },
       { question: "When using Body Fat Estimator, is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted." },
     ],
+    seoTitle: "Free Online Body Fat Estimator",
   },
   {
     id: "874",
@@ -1537,6 +1560,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Does it account for body composition?", answer: "The basic calculator uses weight, height, age, and gender. For more precision based on body fat percentage, use the Katch-McArdle formula variant." },
       { question: "When using Daily Calorie Needs, is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted." },
     ],
+    seoTitle: "Free Online Daily Calorie Needs",
   },
   {
     id: "875",
@@ -1579,6 +1603,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Does it include nap recommendations?", answer: "The total includes all sleep in a 24-hour period. For infants and toddlers, this includes naps. For adults, the recommendation is for consolidated nighttime sleep." },
       { question: "Is this medical advice?", answer: "No. This is informational only based on published guidelines. Individual needs may vary. Consult a healthcare provider for specific sleep concerns." },
     ],
+    seoTitle: "Free Online Sleep Requirements",
   },
   {
     id: "879",
@@ -1663,6 +1688,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "What are the legal BAC limits?", answer: "Most US states: 0.08% for drivers. Commercial drivers: 0.04%. Many European countries: 0.05%. Zero tolerance for drivers under 21." },
       { question: "Is this medical advice?", answer: "No. This is an educational tool only. Do not use it to make safety decisions. If you've been drinking, do not drive." },
     ],
+    seoTitle: "Free Online Blood Alcohol Estimator",
   },
   {
     id: "885",
@@ -1684,6 +1710,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Does it predict the next period?", answer: "Yes, by adding your average cycle length to the last period start. Log actual starts to keep predictions calibrated — the tracker improves as history grows." },
       { question: "Is my cycle data stored?", answer: "No. All tracking runs locally in your browser. No health data is transmitted or stored." },
     ],
+    seoTitle: "Ovulation Tracker – Free Online",
   },
   {
     id: "887",
@@ -1832,6 +1859,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Can I enter decimal hours for breaks?", answer: "Break duration is typically entered in minutes. The tool converts everything to decimal hours for consistent timesheet calculations." },
       { question: "When using Work Hours Calculator, is my data stored?", answer: "No. All calculations run locally in your browser. No work hours or timesheet data are transmitted." },
     ],
+    seoTitle: "Free Work Hours Calculator Online",
   },
   {
     id: "894",
@@ -1876,6 +1904,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Should I aim for maximum entropy?", answer: "Balance entropy with memorability. A 16-character passphrase with moderate entropy (Diceware-style) is often more practical than a short high-entropy random string. Use a password manager for truly random passwords." },
       { question: "Is my password data stored or transmitted?", answer: "No. All calculations run locally in your browser. No password or entropy data is sent to any server." },
     ],
+    seoTitle: "Password Entropy Calculator – Free Online",
   },
   {
 
@@ -1897,7 +1926,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online Two-Factor Auth Generator \u2014 Generate TOTP URIs for two-factor authentication setup with authenticator apps. ',
     dependencies: "None",
-},
+    seoTitle: "Two-Factor Auth Generator – Free Online",
+  },
   {
 
     id: "900",
@@ -1940,7 +1970,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online Hash Verifier \u2014 Verify that a hash matches a given input to check data integrity. ',
     dependencies: "None",
-},
+    seoTitle: "Free Online Hash Verifier",
+  },
   {
 
     id: "903",
@@ -1961,7 +1992,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online Hash Password Generator \u2014 Generate password hashes using PBKDF2-SHA256 with 600,000 iterations for secure password storage. ',
     dependencies: "None",
-},
+    seoTitle: "Hash Password Generator – Free Online",
+  },
   {
 
     id: "904",
@@ -1982,7 +2014,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online Content Hash Generator \u2014 Compute SHA-1, SHA-256, SHA-384, or SHA-512 hashes of text content using the Web Crypto API. ',
     dependencies: "None",
-},
+    seoTitle: "Content Hash Generator – Free Online",
+  },
   {
 
     id: "905",
@@ -2003,7 +2036,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online HMAC Generator \u2014 Generate HMAC signatures using a secret key and hash algorithm for API authentication. ',
     dependencies: "None",
-},
+    seoTitle: "Free HMAC Generator Online",
+  },
   {
 
     id: "906",
@@ -2046,7 +2080,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online HTTP Security Checker \u2014 live reachability and redirect analysis plus HSTS, X-Frame-Options, and CSP reference checklist. ',
     dependencies: "Fetch API",
-},
+    seoTitle: "Free HTTP Security Checker Online",
+  },
   {
 
     id: "909",
@@ -2089,7 +2124,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online Content Security Policy Generator \u2014 Build a Content Security Policy header by selecting directives and allowed sources. ',
     dependencies: "None",
-},
+    seoTitle: "Free Online Content Security Policy Generator",
+  },
   {
 
     id: "911",
@@ -2176,7 +2212,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online IP Range Expander \u2014 Expand an IP address range into a list of individual addresses. Useful for network planning and firewall rules. ',
     dependencies: "None",
-},
+    seoTitle: "IP Range Expander – Free Online",
+  },
   {
 
     id: "912d",
@@ -2241,7 +2278,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online CORS Inspector \u2014 real browser preflight test for cross-origin endpoints. ',
     dependencies: "Fetch API",
-},
+    seoTitle: "Free CORS Inspector Online",
+  },
   {
 
     id: "915",
@@ -2284,7 +2322,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online Env File Generator \u2014 Generate .env file templates with configurable variable names and default values. ',
     dependencies: "None",
-},
+    seoTitle: "Free Env File Generator Online",
+  },
   {
 
     id: "917",
@@ -2394,6 +2433,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "What token length is secure?", answer: "32 bytes (256 bits) is the recommended minimum for cryptographic security. This provides 2^256 possible values, making brute-force attacks computationally infeasible." },
       { question: "Is the token generation done locally?", answer: "Yes. Tokens are generated using the browser's Web Crypto API. No token data is sent to any server." },
     ],
+    seoTitle: "CSRF Token Generator – Free Online",
   },
   {
 
@@ -2437,7 +2477,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online SAML Decoder \u2014 Decode and inspect SAML assertions and responses for SSO troubleshooting. ',
     dependencies: "None",
-},
+    seoTitle: "Free Online SAML Decoder",
+  },
   {
 
     id: "924",
@@ -2458,7 +2499,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online CSP Policy Validator \u2014 Validate Content Security Policy headers against W3C spec and common pitfalls. ',
     dependencies: "None",
-},
+    seoTitle: "CSP Policy Validator – Free Online",
+  },
   {
 
     id: "925",
@@ -2545,7 +2587,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online SSL Certificate Decoder \u2014 Decode and view SSL certificate details including subject, issuer, and validity period. ',
     dependencies: "None",
-},
+    seoTitle: "Free Online SSL Certificate Decoder",
+  },
   {
 
     id: "929",
@@ -2566,7 +2609,8 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Is this exhaustive like Amass or Sublist3r?", answer: "No — those run wordlists of thousands plus brute-forcing from a server. This tool covers certificate history plus two dozen common names, which catches the usual suspects honestly labeled as such." },
       { question: "Is scanning my own domain allowed?", answer: "Yes — it uses passive public certificate records plus read-only DNS checks. Nothing intrusive touches your servers." },
     ],
-},
+    seoTitle: "Free Subdomain Finder Online",
+  },
   {
 
     id: "930",
@@ -2587,7 +2631,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online Email Validator \u2014 Validate email addresses for correct format, disposable domains, and MX record existence. ',
     dependencies: "None",
-},
+    seoTitle: "Email Validator – Free Online",
+  },
   {
 
     id: "931",
@@ -2608,7 +2653,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online Syntax Validator \u2014 Validate code syntax across multiple languages including JSON, XML, and JavaScript. ',
     dependencies: "None",
-},
+    seoTitle: "Validator – Free Online",
+  },
   {
     id: "933",
     name: "Annual Contract Value Calculator",
@@ -2671,7 +2717,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online Git Commit Linter \u2014 Validate git commit messages against the Conventional Commits specification. ',
     dependencies: "None",
-},
+    seoTitle: "Git Commit Linter – Free Online",
+  },
   {
 
     id: "936",
@@ -2693,6 +2740,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Why is Git still tracking a file I ignored?", answer: ".gitignore only applies to untracked files. For already-tracked files run: git rm --cached <path>, commit, and the ignore rule takes effect from then on." },
       { question: "Is my file list stored or transmitted?", answer: "No. Generation runs entirely in your browser. Nothing you select or type leaves your device." },
     ],
+    seoTitle: ".gitignore Generator – Free Online",
   },
   {
     id: "939",
@@ -2884,7 +2932,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online AES Encrypt — Encrypt text using AES symmetric encryption with a passphrase. Generate ciphertext that can be safely transmitted or stored. ',
     dependencies: "CryptoJS",
-},
+    seoTitle: "Free Online AES Encrypt",
+  },
   {
 
     id: "957",
@@ -2928,7 +2977,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online HTTP Header Analyzer — Analyze HTTP request and response headers — detect security headers, review formatting, and inspect value structure. ',
     dependencies: "None",
-},
+    seoTitle: "HTTP Header Analyzer – Free Online",
+  },
   {
 
     id: "959",
@@ -2972,7 +3022,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online HTTP Cache Header Generator — Generate Cache-Control directives with configurable max-age, scope, must-revalidate, and no-transform options. ',
     dependencies: "None",
-},
+    seoTitle: "Free Online HTTP Cache Header Generator",
+  },
   {
 
     id: "961",
@@ -2993,7 +3044,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online HTTP Status Code Checker — Look up HTTP status codes by number — view description, label, and response class. ',
     dependencies: "None",
-},
+    seoTitle: "HTTP Status Code Checker – Free Online",
+  },
   {
 
     id: "962",
@@ -3036,7 +3088,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online HTTP Retry Policy Builder — Build HTTP retry policies with exponential backoff, fixed delay, or circuit breaker strategies for resilient API clients. ',
     dependencies: "None",
-},
+    seoTitle: "HTTP Retry Policy Builder – Free Online",
+  },
   {
     id: "964",
     name: "Triangle Area Calculator",
@@ -3056,6 +3109,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online Triangle Area Calculator — Calculate the area of a triangle given base and height using the formula 0.5 × base × height. ',
     dependencies: "None",
+    seoTitle: "Free Triangle Area Calculator Online",
   },
   {
     id: "965",
@@ -3076,6 +3130,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online Gas Mileage Calculator — Calculate fuel economy in MPG (miles per gallon) from distance driven and fuel consumed. ',
     dependencies: "None",
+    seoTitle: "Gas Mileage Calculator – Free Online",
   },
   {
     id: "966",
@@ -3118,6 +3173,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Should I use cm or inches?", answer: "The ratio is the same regardless of unit. Use whichever measuring tape you have — the WHR value is unit-agnostic." },
       { question: "When using Waist-to-Hip Ratio Calculator, is my data stored?", answer: "No. All calculations run locally in your browser. No measurement data is transmitted." },
     ],
+    seoTitle: "Free Online Waist-to-Hip Ratio Calculator",
   },
   {
 
@@ -3161,6 +3217,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online JSON → Toon Converter — Convert JSON objects into a human-readable Toon format using → arrows instead of colons. ',
     dependencies: "None",
+    seoTitle: "Free JSON → Toon Converter Online",
   },
   {
 
@@ -3227,7 +3284,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     seoDescription: 'Free online CSV ↔ HTML Table Converter — Bidirectional converter between CSV data and HTML table markup with live preview. ',
     dependencies: "None",
     showInCategory: false,
-},
+    seoTitle: "Free Online CSV ↔ HTML Table Converter",
+  },
   {
     id: "974",
     name: "YAML Validator",
@@ -3247,7 +3305,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online YAML Validator — Validate YAML formatting, detect indentation issues, convert YAML to JSON, and minify YAML comments. ',
     dependencies: "None",
-},
+    seoTitle: "Free YAML Validator Online",
+  },
   {
     id: "975",
     name: "Duplicate Word Remover",
@@ -3267,6 +3326,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Does it keep the first occurrence?", answer: "Yes — the first instance stays and later repeats go, so sentence structure and emphasis stay intact." },
       { question: "Why preserve word order?", answer: "Removing words is safe only in place — reordering would scramble meaning, so the tool deletes without rearranging." },
     ],
+    seoTitle: "Free Duplicate Word Remover Online",
   },
   {
     id: "976",
@@ -3309,6 +3369,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Does it handle quoted CSV fields?", answer: "For basic splitting, quoted fields may be split incorrectly. For proper CSV parsing with quotes, use the CSV Analyzer or CSV tools instead." },
       { question: "Is my text data stored?", answer: "No. All splitting happens locally in your browser. No text data is sent to any server." },
     ],
+    seoTitle: "Free Text Splitter Online",
   },
   {
 
@@ -3459,7 +3520,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     ],
     seoDescription: 'Free online Query String Parser — Parse and inspect URL query parameters as structured key-value pairs. Decodes URL-encoded values. ',
     dependencies: "None",
-},
+    seoTitle: "Free Online Query String Parser",
+  },
   {
 
     id: "985",

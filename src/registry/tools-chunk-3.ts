@@ -249,7 +249,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "package.json Validator",
     slug: "package-json-validator",
     category: "Developer",
-    description: 'Validate package.json for required fields, semver format, and dependency presence.',
+    description: 'Validate package.json for required fields, semver format, and dependency presence. Catch missing fields and bad semver before installs fail — free, local, no signup.',
     seoDescription: 'Free online package.json Validator \u2014 Validate name, version, scripts, and dependencies. ',
     dependencies: "None",
     instructions: [
@@ -264,7 +264,8 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Does it check semver version ranges?", answer: "Yes. Version ranges in dependencies (e.g., ^1.2.3, ~1.2.3, >=1.0.0) are validated for correct semver syntax." },
       { question: "Is my package.json data stored?", answer: "No. All validation happens locally in your browser. No data is sent to any server." },
     ],
-},
+    seoTitle: "Free Online package.json Validator",
+  },
   {
 
     id: "549k",
@@ -315,7 +316,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "AWS IAM Policy Analyzer",
     slug: "aws-iam-policy-analyzer",
     category: "Developer",
-    description: 'Paste an AWS IAM policy JSON to check for wildcard resources, overly broad actions, and full admin access.',
+    description: 'Paste an AWS IAM policy JSON to check for wildcard resources, overly broad actions, and full admin access. Deny-by-default review with least-privilege guidance — free, local, no signup.',
     seoDescription: 'Free online AWS IAM Policy Analyzer \u2014 Check IAM policies for wildcard resources, overly broad actions, and admin access. ',
     dependencies: "None",
     instructions: [
@@ -330,13 +331,14 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can it fix the policy for me?", answer: "No. It identifies issues and provides recommendations. You must manually edit the policy in the AWS IAM console or via CLI to apply the suggested fixes." },
       { question: "Is my policy data stored or transmitted?", answer: "No. All analysis runs locally in your browser. Your IAM policy JSON is never sent to any server." },
     ],
+    seoTitle: "Free AWS IAM Policy Analyzer Online",
   },
   {
     id: "553a",
     name: "SCSS to CSS Converter",
     slug: "scss-to-css-converter",
     category: "Converter",
-    description: 'Convert SCSS variables and nesting to plain CSS. Files are converted locally in your browser — nothing is uploaded.',
+    description: 'Convert SCSS variables and nesting to plain CSS. Files are converted locally in your browser — nothing is uploaded. Variables and nesting compile cleanly — free, local, no signup.',
     seoDescription: 'Free online SCSS to CSS Converter \u2014 Convert SCSS variables and nesting to plain CSS. ',
     dependencies: "None",
     instructions: [
@@ -351,13 +353,14 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can I convert back from CSS to SCSS?", answer: "Use the CSS to SCSS Converter for the reverse direction. It adds nesting and variables to flat CSS." },
       { question: "Is my SCSS data stored?", answer: "No. All conversion happens locally in your browser. No SCSS data is sent to any server." },
     ],
+    seoTitle: "Free SCSS to CSS Converter Online",
   },
   {
     id: "553b",
     name: "Stylus to CSS Converter",
     slug: "stylus-to-css-converter",
     category: "Converter",
-    description: 'Convert Stylus syntax to plain CSS. Files are converted locally in your browser — nothing is uploaded.',
+    description: 'Convert Stylus syntax to plain CSS. Files are converted locally in your browser — nothing is uploaded. Indentation-based syntax compiles cleanly — free, local, no signup.',
     seoDescription: 'Free online Stylus to CSS Converter \u2014 Convert Stylus syntax to plain CSS. ',
     dependencies: "None",
     showInCategory: false,
@@ -373,13 +376,14 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can I convert back from CSS to Stylus?", answer: "Use the CSS to Stylus Converter tool for the reverse direction, which adds Stylus-style indentation and syntax." },
       { question: "Is my Stylus data stored?", answer: "No. All conversion happens locally in your browser. No Stylus data is transmitted." },
     ],
+    seoTitle: "Free Online Stylus to CSS Converter",
   },
   {
     id: "553c",
     name: "Tailwind to CSS Converter",
     slug: "tailwind-to-css-converter",
     category: "Converter",
-    description: 'Convert Tailwind utility classes to plain CSS. Files are converted locally in your browser — nothing is uploaded.',
+    description: 'Convert Tailwind utility classes to plain CSS. Files are converted locally in your browser — nothing is uploaded. Utility classes expand to vanilla CSS for non-Tailwind projects — free, local, no signup.',
     seoDescription: 'Free online Tailwind to CSS Converter \u2014 Convert Tailwind utility classes to plain CSS. ',
     dependencies: "None",
     instructions: [
@@ -394,6 +398,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can I convert custom Tailwind configs?", answer: "Custom theme values from tailwind.config.js are not automatically detected. The converter uses default Tailwind values. Custom colors and spacing may need manual adjustment." },
       { question: "When using Tailwind to CSS Converter, is my data stored?", answer: "No. All conversion happens locally in your browser. No data is sent to any server." },
     ],
+    seoTitle: "Free Online Tailwind to CSS Converter",
   },
   {
 
@@ -438,7 +443,8 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can this decode nested protobuf messages?", answer: "Yes. Length-delimited fields that contain valid protobuf structure are recursively decoded, showing nested fields indented under their parent." },
       { question: "Does this need a .proto schema file?", answer: "No. This decodes the raw wire format without a schema. Field names are shown as numbers — to get meaningful names, you'd need the .proto definition." },
     ],
-},
+    seoTitle: "Free Online Protobuf Decoder",
+  },
   {
 
     id: "553f",
@@ -547,7 +553,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Does extra principal really help?", answer: "Yes disproportionately early: one extra $2,000 payment in year 1 of the example loan saves ≈$7,000 interest and cuts ~4 months. Late-loan extra payments save far less." },
       { question: "Is my loan data stored?", answer: "No. All calculations run locally in your browser. No amounts or rates leave your device." },
     ],
-
+    seoTitle: "Free Mortgage Calculator Online",
   },
   {
     id: "602",
@@ -569,7 +575,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "New ARR vs net new ARR?", answer: "New ARR (new logos + expansion) shows sales output; net new subtracts churn for the growth truth. A team adding $300k while losing $280k grew $20k — celebrate the former, manage the latter." },
       { question: "Is my revenue data stored?", answer: "No. All calculations run locally in your browser. No revenue figures leave your device." },
     ],
-
+    seoTitle: "Free Online ARR Calculator",
   },
   {
     id: "603",
@@ -591,6 +597,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can I compare different scenarios?", answer: "Yes. Adjust interest rate, contribution amount, and compounding frequency to compare scenarios side by side. This helps optimize your savings strategy." },
       { question: "When using Compound Interest Calculator, is my financial data stored?", answer: "No. All calculations run locally in your browser. No investment data is transmitted." },
     ],
+    seoTitle: "Free Online Compound Interest Calculator",
   },
   {
     id: "605",
@@ -612,7 +619,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Should I put more down?", answer: "Yes if it avoids being underwater: put ≥20% down or cover the first-year depreciation gap. Gap insurance ($300–600) covers the remainder if you must finance with little down." },
       { question: "Is my loan data stored?", answer: "No. All calculations run locally in your browser. No amounts or rates leave your device." },
     ],
-
+    seoTitle: "Free Online Car Loan Calculator",
   },
   {
     id: "606",
@@ -655,7 +662,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Why cohort instead of average?", answer: "Average churn blends January signups (settled) with March signups (still onboarding). Cohort curves show whether each signup month retains better than the last — the only view that proves product improvements work." },
       { question: "Is my subscriber data stored?", answer: "No. All churn math runs locally in your browser. No customer counts or revenue figures leave your device." },
     ],
-
+    seoTitle: "Free Churn Rate Calculator Online",
   },
   {
     id: "609",
@@ -698,7 +705,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Sales tax: before or after discount?", answer: "After, in most jurisdictions — tax applies to the discounted price. $100 item at 30% off with 8% tax: $70 × 1.08 = $75.60, not $78." },
       { question: "Is anything stored?", answer: "No. All calculations run locally in your browser. Nothing leaves your device." },
     ],
-
+    seoTitle: "Free Discount Calculator Online",
   },
   {
     id: "611",
@@ -720,7 +727,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Does overtime change the math?", answer: "Yes — hourly workers earning 1.5× past 40 hrs can out-earn salaried peers. 5 OT hrs/week at $35 base adds ≈$13,650/yr. Enter effective weekly hours, not contracted ones." },
       { question: "Is my pay data stored?", answer: "No. All calculations run locally in your browser. No figures leave your device." },
     ],
-
+    seoTitle: "Free Online Hourly to Salary Calculator",
   },
   {
     id: "612",
@@ -784,7 +791,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "How are annual plans handled?", answer: "Divide the annual contract value by 12 to get normalized monthly MRR. A $1,200 annual plan contributes $100 MRR. This keeps monthly and annual customers comparable." },
       { question: "Is my revenue data stored or transmitted?", answer: "No. All calculations run locally in your browser. No customer counts, prices, or revenue figures leave your device." },
     ],
-
+    seoTitle: "Free Online MRR Calculator",
   },
   {
     id: "615",
@@ -827,7 +834,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "What about the down payment's opportunity cost?", answer: "Counted: a $40k down payment invested at 7% becomes ~$79k in 10 years. Buying must beat renting by more than that foregone growth — the calculator includes it automatically." },
       { question: "When using Rent vs Buy Calculator, is my financial data stored?", answer: "No. All calculations run locally in your browser. No amounts leave your device." },
     ],
-
+    seoTitle: "Free Rent vs Buy Calculator Online",
   },
   {
     id: "618",
@@ -849,6 +856,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Does it show monthly income in retirement?", answer: "The calculator projects total savings at retirement. For monthly income estimates, divide by your expected withdrawal period (e.g., 25 years for age 65-90)." },
       { question: "When using Retirement Calculator, is my financial data stored?", answer: "No. All calculations run locally in your browser. No retirement data is transmitted." },
     ],
+    seoTitle: "Free Retirement Calculator Online",
   },
   {
     id: "619",
@@ -870,6 +878,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can I use this for MRR/ARR calculations?", answer: "Yes. Enter MRR (Monthly Recurring Revenue) values for consecutive months to calculate MRR growth rate. Annualize with the ARR calculator." },
       { question: "Is my revenue data stored?", answer: "No. All calculations run locally in your browser. No revenue data is transmitted." },
     ],
+    seoTitle: "Free Revenue Growth Calculator Online",
   },
   {
     id: "620",
@@ -1017,6 +1026,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can extra credit save me?", answer: "Math, not hope: +3% extra credit on a 10%-weighted category adds 0.3% overall. Enter it as a bonus category with its weight to see the true (usually small) effect." },
       { question: "Is my grade data stored?", answer: "No. All calculations run locally in your browser. No grades leave your device." },
     ],
+    seoTitle: "Free Final Grade Calculator Online",
   },
   {
     id: "629",
@@ -1394,6 +1404,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     ],
     seoDescription: 'Free online Scientific Calculator — Evaluate mathematical expressions with sin, cos, tan, log, and sqrt functions. A versatile scientific calculator in your browser. ',
     dependencies: "None",
+    seoTitle: "Scientific Calculator – Free Online",
   },
   {
     id: "647",
@@ -1457,6 +1468,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "What are the body fat categories?", answer: "Essential fat (2-5% men, 10-13% women), athletes (6-13% men, 14-20% women), fitness (14-17% men, 21-24% women), acceptable (18-24% men, 25-31% women), obese (25%+ men, 32%+ women)." },
       { question: "Is my measurement data stored?", answer: "No. All calculations run locally in your browser. No body measurements are transmitted." },
     ],
+    seoTitle: "Free Online Body Fat Percentage Calculator",
   },
   {
     id: "650",
@@ -1520,6 +1532,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Should I be worried if my baby is below 50th percentile?", answer: "Not necessarily. What matters is consistent growth over time, not a single measurement. A baby growing steadily at the 25th percentile is healthy. Consult your pediatrician for concerns." },
       { question: "Is my baby's data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted or stored." },
     ],
+    seoTitle: "Free Baby Growth Percentile Calculator Online",
   },
   {
     id: "653",
@@ -1625,6 +1638,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Does exercise or diet matter more?", answer: "Diet dominates — you can't outrun intake (an hour of running ≈ 600 kcal ≈ one burger). Use exercise for health and muscle retention, the calorie target for the scale." },
       { question: "When using TDEE Calculator, is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted or stored." },
     ],
+    seoTitle: "TDEE Calculator – Free Online",
   },
   {
     id: "658",
@@ -1646,6 +1660,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "What zone for a beginner runner?", answer: "80% of runs in Zone 2 (conversational pace), 20% harder. Beginners going too hard is the top cause of burnout and injury — slow builds the aerobic base." },
       { question: "When using Heart Rate Zone Calculator, is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted or stored." },
     ],
+    seoTitle: "Free Online Heart Rate Zone Calculator",
   },
   {
     id: "660",
@@ -1757,7 +1772,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "Running Pace Calculator",
     slug: "running-pace-calculator",
     category: "Health",
-    description: 'Compute running pace, race times, and splits from any two knowns. Predict a 10K from your 5K — free, local, no signup.',
+    description: 'Compute running pace, race times, and splits from any two knowns. Predict a 10K from your 5K — free, local, no signup. Even pacing plus predictions from any two knowns — free, local, no signup.',
     seoDescription: 'Free pace calculator — race predictions. Local, free, no signup.',
     dependencies: "None",
     seoTitle: "Free Running Pace Calculator Online",
@@ -1856,6 +1871,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "When is simple interest used?", answer: "Short-term loans, car loans, some personal loans, and educational examples. Most mortgages and long-term investments use compound interest." },
       { question: "When using Simple Interest Calculator, is my data stored?", answer: "No. All calculations run locally in your browser. No financial data is transmitted." },
     ],
+    seoTitle: "Free Online Simple Interest Calculator",
   },
   {
     id: "671",
@@ -1877,6 +1893,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "What interest rates should I use?", answer: "Savings accounts: 2-5%. Fixed deposits: 5-7%. Index funds: 8-12% (historical average, not guaranteed). Use conservative estimates for realistic planning." },
       { question: "Is my savings data stored?", answer: "No. All calculations run locally in your browser. No financial data is transmitted." },
     ],
+    seoTitle: "Free Savings Calculator Online",
   },
   {
     id: "672",
@@ -1898,6 +1915,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can I factor in currency conversion?", answer: "Enter the price in your target currency. The calculator handles the arithmetic; use a separate currency converter for exchange rate conversion if needed." },
       { question: "When using Seat License Calculator, is my data stored?", answer: "No. All calculations run locally in your browser. No pricing or budget data is transmitted." },
     ],
+    seoTitle: "Free Seat License Calculator Online",
   },
   {
     id: "673",
@@ -2046,7 +2064,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     ],
     seoDescription: 'Free online API Tester — Test any HTTP endpoint by sending GET, POST, PUT, or DELETE requests directly from your browser. ',
     dependencies: "None",
-},
+    seoTitle: "API Tester – Free Online",
+  },
   {
 
     id: "680",
@@ -2156,7 +2175,8 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Does it generate sample data?", answer: "The tool generates the config structure. For sample data, pair it with the Fake Data Generator or populate the db.json manually with realistic entries." },
       { question: "How do I start the mock server?", answer: "Install JSON Server (npm install -g json-server), then run json-server --watch db.json. The server starts on port 3000 with full CRUD endpoints." },
     ],
-},
+    seoTitle: "Free Online API Mock Server Config",
+  },
   {
 
     id: "685",
@@ -2331,7 +2351,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     ],
     seoDescription: 'Free online API Gateway Rate Calculator — Calculate rate limits, burst capacities, and throttling thresholds for API gateway config. ',
     dependencies: "None",
-},
+    seoTitle: "Free API Gateway Rate Calculator Online",
+  },
   {
 
     id: "693",
@@ -2418,7 +2439,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     ],
     seoDescription: 'Free online REST Endpoint Documenter — Document REST API endpoints with method, path, and description. Generate formatted docs. ',
     dependencies: "None",
-},
+    seoTitle: "Free Online REST Endpoint Documenter",
+  },
   {
 
     id: "697",
@@ -2469,7 +2491,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "GraphQL Schema to JSON Schema",
     slug: "graphql-schema-to-json-schema",
     category: "Developer",
-    description: 'Convert GraphQL schema definitions to JSON Schema format. Bridge the gap between GraphQL and REST tooling ecosystems.',
+    description: 'Convert GraphQL schema definitions to JSON Schema format. Bridge the gap between GraphQL and REST tooling ecosystems. Types map with validation preserved — free, local, no signup.',
     seoDescription: 'Free online GraphQL Schema to JSON Schema — Convert GraphQL schema definitions to JSON Schema format. ',
     dependencies: "None",
     instructions: [
@@ -2484,7 +2506,8 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can I use the output with OpenAPI?", answer: "Yes. The generated JSON Schema can be embedded in OpenAPI definitions, used with schema validators, or fed into code generators that consume JSON Schema." },
       { question: "Is my schema data stored?", answer: "No. All conversion happens locally in your browser. No schema data is sent to any server." },
     ],
-},
+    seoTitle: "Free Online GraphQL Schema to JSON Schema",
+  },
   {
 
     id: "700",
@@ -2528,7 +2551,8 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Which WebSocket libraries work with the output?", answer: "The generated subscriptions work with Apollo Client, urql, graphql-ws, and any standards-compliant GraphQL WebSocket client." },
       { question: "Is my schema data stored?", answer: "No. All generation happens locally in your browser. No subscription definitions or schema data is sent to any server." },
     ],
-},
+    seoTitle: "Free Online GraphQL Subscription Builder",
+  },
   {
 
     id: "702",
@@ -2550,7 +2574,8 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Does it format the response?", answer: "Yes. If you paste a sample response JSON, it formats and validates it, showing the structure with proper indentation for easy inspection." },
       { question: "Is my query data stored?", answer: "No. All testing happens locally in your browser. No query or variable data is sent to any server." },
     ],
-},
+    seoTitle: "Free Online GraphQL Tester",
+  },
   {
 
     id: "703",
@@ -2725,7 +2750,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     ],
     seoDescription: 'Free online Postman to OpenAPI Converter — Convert Postman collections to OpenAPI 3.0 specs. Migrate your API documentation. ',
     dependencies: "None",
-},
+    seoTitle: "Postman to OpenAPI Converter – Free Online",
+  },
   {
 
     id: "711",
@@ -2747,7 +2773,8 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can I import an existing API?", answer: "Enter your endpoints manually. For existing APIs, describe each route and its parameters. The tool structures it into valid OpenAPI format." },
       { question: "Is my API data stored?", answer: "No. All generation happens locally in your browser. No API data is transmitted." },
     ],
-},
+    seoTitle: "Free Swagger/OpenAPI Generator Online",
+  },
   {
 
     id: "712",
@@ -2768,7 +2795,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     ],
     seoDescription: 'Free online Webhook Payload Generator — Generate realistic webhook payload examples with customizable events and fields. ',
     dependencies: "None",
-},
+    seoTitle: "Free Online Webhook Payload Generator",
+  },
   {
 
     id: "713",
@@ -2966,6 +2994,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Will it change my HTML semantics?", answer: "No. The formatter only adjusts whitespace, indentation, and formatting. It does not add, remove, or reorder any HTML elements or attributes." },
       { question: "Is my HTML stored or transmitted?", answer: "No. All formatting happens locally in your browser. No markup is sent to any server." },
     ],
+    seoTitle: "Free Online HTML Formatter",
   },
   {
 
@@ -2988,7 +3017,8 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Will it change my CSS logic?", answer: "No. The formatter only adjusts whitespace, indentation, and property ordering. It does not merge, remove, or modify any CSS rules or selectors." },
       { question: "When using CSS Formatter, is my CSS data stored?", answer: "No. All formatting happens locally in your browser. No CSS data is sent to any server." },
     ],
-},
+    seoTitle: "Free Online CSS Formatter",
+  },
   {
 
     id: "722",
@@ -3098,6 +3128,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Will it change my code logic?", answer: "No. The formatter only adjusts whitespace, indentation, and spacing. It does not rename variables, reorder statements, or modify any code logic." },
       { question: "Is my code stored or transmitted?", answer: "No. All formatting happens locally in your browser. No code is sent to any server." },
     ],
+    seoTitle: "Python Formatter – Free Online",
   },
   {
 
@@ -3119,7 +3150,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     ],
     seoDescription: 'Free online YAML Formatter — Format and beautify YAML configuration files with consistent indentation. ',
     dependencies: "None",
-},
+    seoTitle: "Free Online YAML Formatter",
+  },
   {
 
     id: "730",
@@ -3184,7 +3216,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     ],
     seoDescription: 'Free online CSS Generator — Generate CSS code interactively for box shadows, gradients, border radius, transforms, filters, and more. ',
     dependencies: "None",
-},
+    seoTitle: "CSS Generator – Free Online",
+  },
   {
 
     id: "733",
@@ -3229,7 +3262,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Border Radius Generator — Generate CSS border-radius values visually. Control each corner independently with live preview. ',
     dependencies: "None",
     showInCategory: false,
-},
+    seoTitle: "Free Online Border Radius Generator",
+  },
   {
 
     id: "736",
@@ -3252,6 +3286,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "What browsers support flexbox?", answer: "All modern browsers (Chrome, Firefox, Safari, Edge) fully support flexbox. For legacy IE11 support, the generator can output fallback syntax where needed." },
       { question: "Is the generated CSS production-ready?", answer: "Yes. The output is clean, standard CSS that you can copy directly into your stylesheets. No vendor prefixes are needed for modern browsers." },
     ],
+    seoTitle: "Flexbox CSS Generator – Free Online",
   },
   {
 
@@ -3274,7 +3309,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online CSS Grid Generator — Generate CSS Grid layout code interactively. Configure columns, rows, and gap with live preview. ',
     dependencies: "None",
     showInCategory: false,
-},
+    seoTitle: "Free Online CSS Grid Generator",
+  },
   {
 
     id: "738",
@@ -3296,7 +3332,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online Text Shadow Generator — Generate CSS text-shadow values with interactive preview. Configure offset, blur, color, and opacity. ',
     dependencies: "None",
     showInCategory: false,
-},
+    seoTitle: "Free Online Text Shadow Generator",
+  },
   {
 
     id: "739",
@@ -3341,7 +3378,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online CSS Animation Generator — Generate CSS keyframe animations interactively. Choose from fade-in, slide-in, and pulse animations. ',
     dependencies: "None",
     showInCategory: false,
-},
+    seoTitle: "Free Online CSS Animation Generator",
+  },
   {
 
     id: "741",
@@ -3370,10 +3408,11 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "Image Converter",
     slug: "image-converter",
     category: "Image",
-    description: 'Convert images between PNG, JPG, WebP, GIF, BMP, SVG, ICO, AVIF, and TIFF formats with format auto-detection.',
+    description: 'Convert images between PNG, JPG, WebP, GIF, BMP, SVG, ICO, AVIF, and TIFF formats with format auto-detection. Redirects to the live bulk converter.',
     seoDescription: 'Free online Image Converter — PNG, JPG, WebP, GIF, BMP, SVG, ICO, AVIF, TIFF with format auto-detection. Redirects to the live bulk converter.',
     dependencies: "None",
     showInCategory: false,
+    seoTitle: "Free Image Converter Online",
   },
   {
     id: "750",
@@ -3418,7 +3457,8 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can I use this to validate CSV before import?", answer: "Yes. Check for empty cells, unexpected data types, and encoding issues before importing into databases, spreadsheets, or analysis tools." },
       { question: "When using CSV Analyzer, is my CSV data stored?", answer: "No. All analysis happens locally in your browser. No CSV data is sent to any server." },
     ],
-},
+    seoTitle: "Free CSV Analyzer Online",
+  },
   {
 
     id: "du-7",
@@ -3439,14 +3479,15 @@ export const entries_chunk_3: ToolMetadata[] = [
     ],
     seoDescription: 'Free online JSON Path Query Builder — Query JSON data using dot-notation path expressions with wildcard support. ',
     dependencies: "None",
-},
+    seoTitle: "Free Online JSON Path Query Builder",
+  },
   {
 
     id: "du-8",
     name: "JSON Tree Viewer",
     slug: "json-tree-viewer",
     category: "Developer",
-    description: 'Visualize JSON structure as an indented tree — see nested objects and arrays at a glance.',
+    description: 'Visualize JSON structure as an indented tree — see nested objects and arrays at a glance. Collapse deep branches to navigate large payloads — free, local, no signup.',
     seoDescription: 'Free online JSON Tree Viewer — Visualize JSON structure as an indented tree with nested objects and arrays. ',
     dependencies: "None",
     instructions: [
@@ -3461,7 +3502,8 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Does it validate the JSON?", answer: "Yes. If the JSON is malformed, the viewer shows an error with the line number and position of the syntax issue." },
       { question: "When using JSON Tree Viewer, is my JSON data stored?", answer: "No. All visualization happens locally in your browser. No JSON data is sent to any server." },
     ],
-},
+    seoTitle: "JSON Tree Viewer – Free Online",
+  },
   {
 
     id: "du-9",
@@ -3636,7 +3678,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     ],
     seoDescription: 'Free online Dummy Text Generator — Generate dummy placeholder text at a specified character length for design mockups, UI prototypes, and content layout testing. ',
     dependencies: "None",
-},
+    seoTitle: "Free Online Dummy Text Generator",
+  },
   {
 
     id: "772",
@@ -3679,7 +3722,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     ],
     seoDescription: 'Free online Fake Identity Generator — Generate complete fake identities with name, email, phone, address, date of birth, and occupation. Includes a photo placeholder. ',
     dependencies: "None",
-},
+    seoTitle: "Free Online Fake Identity Generator",
+  },
   {
 
     id: "774",
@@ -3700,7 +3744,8 @@ export const entries_chunk_3: ToolMetadata[] = [
     ],
     seoDescription: 'Free online Fake Credit Card Generator — Generate fake credit card numbers with valid formats including Visa, Mastercard, Amex, and Discover. All numbers pass Luhn algorithm validation. ',
     dependencies: "None",
-},
+    seoTitle: "Fake Credit Card Generator – Free Online",
+  },
   {
 
     id: "775",

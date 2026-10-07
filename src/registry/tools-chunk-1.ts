@@ -21,6 +21,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "How far is a marathon?", answer: "A marathon is 42.195 km (26.2 miles). The exact distance was standardized by the IAAF in 1921." },
       { question: "When using Unit Converter, does this converter work offline?", answer: "Yes. All conversions run locally in your browser using JavaScript. No data is sent to any server." },
     ],
+    seoTitle: "Free Unit Converter Online",
   },
   {
     name: 'Video Watermark Adder',
@@ -129,6 +130,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Why convert GIF to MP4?", answer: "GIF (Graphics Interchange Format) is lossy (limited to 256 colors) \u2014 best for simple animations, memes, and images on platforms that support animated GIFs natively. MP4 (MPEG-4 Part 14) is lossy compressed \u2014 best for universal video playback on any device \u2014 phones, smart TVs, web browsers, and social media." },
       { question: "Where does MP4 fit best?", answer: "universal video playback on any device \u2014 phones, smart TVs, web browsers, and social media." },
     ],
+    seoTitle: "Free Online GIF to MP4 Converter",
   },
   {
     name: 'Video Trimmer',
@@ -469,6 +471,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "When using Blur Face Online, what image formats are supported?", answer: "JPG, PNG, WebP, and BMP inputs are accepted. Output is typically JPG or PNG with the blurred face regions." },
       { question: "When using Blur Face Online, is my image uploaded to a server?", answer: "Face detection and blurring happen locally in your browser using AI models. No image data is transmitted to external servers." },
     ],
+    seoTitle: "Free Blur Face Online Online",
   },
   {
     name: 'HTML to Image Converter',
@@ -490,6 +493,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "What is the maximum output size?", answer: "Output is limited by browser memory. Most modern browsers handle images up to 4096x4096 pixels. Very large HTML may need to be scaled down." },
       { question: "Is my HTML data stored?", answer: "No. All rendering happens locally in your browser using html2canvas. No HTML data is sent to any server." },
     ],
+    seoTitle: "Free Online HTML to Image Converter",
   },
   {
     name: 'Apple Music Preview Extractor',
@@ -510,6 +514,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Do I need an Apple Music account?", answer: "No. The preview clips are publicly available and don't require authentication. The tool fetches them directly from Apple's CDN." },
       { question: "Why only 30–90 seconds?", answer: "Apple publishes short preview clips, not full songs — the tool resolves a store URL to its public preview." },
     ],
+    seoTitle: "Free Apple Music Preview Extractor Online",
   },
   {
     name: 'Marriage Biodata Maker',
@@ -596,6 +601,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Does the chat analyzer read my messages?", answer: "No. The analyzer works on text you paste locally. It analyzes sentiment, word count, and message patterns without accessing your WhatsApp account." },
       { question: "When using WhatsApp Toolkit, is my data stored?", answer: "No. All generation and analysis happens locally in your browser. No WhatsApp data is transmitted." },
     ],
+    seoTitle: "WhatsApp Toolkit – Free Online",
   },
   {
     name: 'Indian Document Enhancer',
@@ -680,6 +686,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "What do draft and scheduled mean?", answer: "Drafts are ideas in progress; scheduled posts sit on their calendar dates. Only scheduled items count toward your plan." },
       { question: "Can I see a whole month at once?", answer: "Yes — the visual calendar shows the full month so gaps and pile-ups are obvious before the month starts." },
     ],
+    seoTitle: "Free Online Social Media Calendar",
   },
   {
     name: 'Bulk Background Changer',
@@ -1601,7 +1608,8 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Does it suggest alternative names?", answer: "Yes. If your preferred domain is taken, the tool suggests available alternatives with different TLDs or slight name variations." },
       { question: "Is the lookup data stored?", answer: "No. DNS queries are made directly from your browser. No domain search history is stored or transmitted to any third party." },
     ],
-},
+    seoTitle: "Domain Availability Checker – Free Online",
+  },
   {
     id: "auto-10051",
     name: "Pronunciation Tool",
@@ -1659,6 +1667,7 @@ export const entries_chunk_1: ToolMetadata[] = [
         answer: "No. All processing runs locally in your browser via FFmpeg — your video never leaves your device, nothing is stored, and there are no file size limits. Your videos are completely private."
       },
     ],
+    seoTitle: "Video Format Converter – Free Online",
   },
   {
     id: "audio-converter-1",
@@ -1681,6 +1690,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "What bitrate should I use for MP3 conversion?", answer: "192kbps is suitable for casual listening. 256kbps is a good balance of quality and size. 320kbps is near-transparent quality for most people. Higher bitrates produce diminishing returns." },
     ],
     showInCategory: true,
+    seoTitle: "Free Audio Format Converter Online",
   },
   {
     id: "image-format-converter-1",
@@ -1718,6 +1728,7 @@ export const entries_chunk_1: ToolMetadata[] = [
         answer: "No. Conversion happens entirely in your browser using canvas rendering — your image never leaves your device, and there is no file size limit imposed by the tool. It is fully private and works offline after the page loads."
       },
     ],
+    seoTitle: "Image Format Converter – Free Online",
   },
   {
     id: "data-format-converter-1",
@@ -1761,6 +1772,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Document Converter — Convert between PDF, Word, Excel, PowerPoint, JPG, EPUB, and HEIC document formats. Pick any input and output format. ',
     dependencies: "pdf-lib / pdf2docx / SheetJS / PptxGenJS",
     showInCategory: true,
+    seoTitle: "Free Document Converter Online",
   },
   {
     id: "311",
@@ -2312,6 +2324,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "What file format should I download the collage in?", answer: "PNG is best for sharp graphics and social media. JPG produces smaller files for web use. Choose based on where you plan to share the collage." },
     ],
     showInCategory: true,
+    seoTitle: "Free Online Collage Maker",
   },
   {
     id: "336",
@@ -2344,6 +2357,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Background Changer — replace photo backgrounds with solid color, gradient, or AI cutout. Redirects to the live AI background tool.',
     dependencies: "none",
     showInCategory: false,
+    seoTitle: "Free Online Background Changer",
   },
   {
     id: "338",
@@ -2494,6 +2508,7 @@ export const entries_chunk_1: ToolMetadata[] = [
         answer: "Yes. The FFmpeg engine loads once and then all processing happens locally in your browser. Your audio file is never uploaded, making this tool safe for unpublished songs or sensitive recordings."
       },
     ],
+    seoTitle: "Vocal Remover – Free Online",
   },
   {
     id: "344",
@@ -2516,6 +2531,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "What format is the output file?", answer: "The merged output defaults to MP3 for broad compatibility. You can also choose WAV, FLAC, or OGG depending on your quality and file size preferences." },
     ],
     showInCategory: true,
+    seoTitle: "Audio Merger – Free Online",
   },
   {
     id: "345",
@@ -2647,6 +2663,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Audio Fade In/Out — Apply smooth volume fades with linear, log, exp, or S-curve transitions. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
+    seoTitle: "Fade In/Out – Free Online",
   },
   {
     id: "351",
@@ -2693,6 +2710,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     ],
 
     showInCategory: true,
+    seoTitle: "Free Video Screenshot Online",
   },
   {
     id: "353",
@@ -2739,6 +2757,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     ],
 
     showInCategory: true,
+    seoTitle: "Free Screen Recorder Online",
   },
   {
     id: "355",
@@ -2895,6 +2914,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online MOBI Converter — Convert MOBI Kindle e-books to PDF or EPUB. Create MOBI files from PDF. ',
     dependencies: "pdf-lib, jszip, pdfjs-dist",
     showInCategory: true,
+    seoTitle: "Free MOBI Converter Online",
   },
   {
     id: "362",
@@ -2916,6 +2936,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online ODT/RTF to PDF — Convert OpenDocument and Rich Text Format files to PDF. Preserves formatting. ',
     dependencies: "pdf-lib, jszip",
     showInCategory: true,
+    seoTitle: "ODT/RTF to PDF – Free Online",
   },
   {
     id: "363",
@@ -2960,6 +2981,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Can I control the JPG quality?", answer: "Yes. The tool offers a quality slider. Higher values (90-100) produce larger files with fewer compression artifacts. Lower values (60-80) produce smaller files that are fine for thumbnails and previews." },
     ],
     showInCategory: false,
+    seoTitle: "Free SVG to JPG Online",
   },
   {
     id: "365",
@@ -2982,6 +3004,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Does it handle animated PNGs?", answer: "Animated PNG (APNG) files need the dedicated APNG to GIF converter. This tool handles single-frame PNGs only." },
       { question: "Is PNG to GIF conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
     ],
+    seoTitle: "PNG to GIF – Free Online",
   },
   {
     id: "366",
@@ -3004,6 +3027,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Does GIF support JPG's quality?", answer: "No. GIF is lossless but palette-limited. Photographic JPGs may show color banding in GIF output. For photos, JPG or PNG is generally preferred." },
       { question: "Is JPG to GIF conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
+    seoTitle: "Free Online JPG to GIF",
   },
   {
     id: "367",
@@ -3025,6 +3049,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Where does GIF fit best?", answer: "simple animations, memes, and images on platforms that support animated GIFs natively." },
       { question: "What WebP files convert best?", answer: "Complete, uncorrupted WebP files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
     ],
+    seoTitle: "WebP to GIF – Free Online",
   },
   {
     id: "368",
@@ -3047,6 +3072,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Will repeated JPG saves degrade quality?", answer: "Yes. JPG is lossy, so each re-save introduces small artifacts. Edit the BMP original and convert to JPG only for the final output." },
       { question: "Is BMP to JPG conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
+    seoTitle: "BMP to JPG – Free Online",
   },
   {
     id: "369",
@@ -3068,6 +3094,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "How long does BMP-to-PNG conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
       { question: "Will converting BMP lose quality?", answer: "From uncompressed to lossless: quality is preserved as far as the formats allow." },
     ],
+    seoTitle: "Free Online BMP to PNG",
   },
   {
     id: "370",
@@ -3105,6 +3132,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       },
     ],
     showInCategory: false,
+    seoTitle: "Free Online TIFF to JPG",
   },
   {
     id: "371",
@@ -3149,6 +3177,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Single frame or all frames?", answer: "Single selected frame by default. For storyboards, export multiple frames individually — batch filmstrip export isn't supported." },
       { question: "When using GIF to JPG, are my files uploaded?", answer: "No. Conversion runs entirely in your browser via Canvas. Files never leave your device." },
     ],
+    seoTitle: "Free GIF to JPG Online",
   },
   {
     id: "373",
@@ -3170,6 +3199,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "What GIF files convert best?", answer: "Complete, uncorrupted GIF files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
       { question: "Why convert GIF to PNG?", answer: "GIF (Graphics Interchange Format) is lossy (limited to 256 colors) \u2014 best for simple animations, memes, and images on platforms that support animated GIFs natively. PNG (Portable Network Graphics) is lossless \u2014 best for graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds." },
     ],
+    seoTitle: "Free GIF to PNG Online",
   },
   {
     id: "374",
@@ -3257,6 +3287,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Should I keep the original WMA files?", answer: "Yes \u2014 archive WMA originals before batch-converting. Re-converting from MP3 back to WMA never restores discarded data." },
       { question: "How long does WMA-to-MP3 conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
     ],
+    seoTitle: "Free WMA to MP3 Online",
   },
   {
     id: "378",
@@ -3278,6 +3309,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Opus to MP3 — Convert Opus audio files into the more widely supported MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Opus to MP3 – Free Online",
   },
   {
     id: "379",
@@ -3299,6 +3331,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online AIFF to MP3 — Convert Apple\'s AIFF audio files into space-saving MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Free Online AIFF to MP3",
   },
   {
 
@@ -3322,13 +3355,14 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Is the website data stored?", answer: "No. The tool renders the page in your browser and captures it using html2canvas. No website content is transmitted to any server." },
     ],
     showInCategory: true,
-},
+    seoTitle: "Website Screenshot – Free Online",
+  },
   {
     id: "381",
     name: "GIF to WebP/WebM",
     slug: "gif-to-webp-webm",
     category: "Converter",
-    description: 'Convert animated GIFs to modern WebP or WebM formats with transparency support — ~10x smaller files.',
+    description: 'Convert animated GIFs to modern WebP or WebM formats with transparency support — ~10x smaller files. Shrink GIFs dramatically for modern web use — local conversion, free quota on saves.',
     seoDescription: 'Free GIF to WebP/WebM converter — animations ~10x smaller with transparency. For web and chat. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
@@ -3344,6 +3378,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Does quality suffer?", answer: "At matched visual quality, no — the size saving comes from better compression, not visible degradation. Crank the quality slider until file size stops dropping, then stop." },
       { question: "Are my GIFs uploaded?", answer: "No. Conversion runs entirely in your browser. Files never leave your device." },
     ],
+    seoTitle: "Free GIF to WebP/WebM Online",
   },
   {
     id: "382",
@@ -3432,6 +3467,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "What about BMP transparency?", answer: "GIF supports 1-bit transparency (fully transparent or fully opaque). Semi-transparent areas in 32-bit BMPs will be rendered as either transparent or opaque." },
       { question: "Is BMP to GIF conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded to any server." },
     ],
+    seoTitle: "Free Online BMP to GIF",
   },
   {
     id: "386",
@@ -3454,6 +3490,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Which browsers support WebP?", answer: "Chrome, Firefox, Edge, Safari 14+, and all modern browsers. WebP is the recommended format for web images." },
       { question: "Is BMP to WEBP conversion done locally?", answer: "Yes. All conversion runs in your browser using Canvas API. No images are uploaded." },
     ],
+    seoTitle: "Free BMP to WebP Online",
   },
   {
     id: "387",
@@ -3497,6 +3534,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Will converting GIF lose quality?", answer: "From lossy (limited to 256 colors) to lossy or lossless: quality is preserved as far as the formats allow." },
       { question: "Should I keep the original GIF files?", answer: "Yes \u2014 archive GIF originals before batch-converting. Re-converting from WebP back to GIF never restores discarded data." },
     ],
+    seoTitle: "Free Online GIF to WebP",
   },
   {
     id: "389",
@@ -3534,6 +3572,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       },
     ],
     showInCategory: false,
+    seoTitle: "HEIC to AVIF – Free Online",
   },
   {
     id: "390",
@@ -3571,6 +3610,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       },
     ],
     showInCategory: false,
+    seoTitle: "Free Online HEIC to GIF",
   },
   {
     id: "391",
@@ -3592,6 +3632,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Why convert HEIC to WebP?", answer: "HEIC (High Efficiency Image Container) is lossy or lossless \u2014 best for Apple device photos \u2014 iPhone and Mac default format with excellent compression efficiency. WebP (Web Picture Format) is lossy or lossless \u2014 best for modern websites \u2014 Google-recommended format with superior compression for faster page loads." },
       { question: "Where does WebP fit best?", answer: "modern websites \u2014 Google-recommended format with superior compression for faster page loads." },
     ],
+    seoTitle: "Free Online HEIC to WebP",
   },
   {
     id: "392",
@@ -3657,6 +3698,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Where does JPEG XL fit best?", answer: "next-gen image archival \u2014 better compression than JPEG with support for wide gamut and HDR." },
       { question: "What JPEG files convert best?", answer: "Complete, uncorrupted JPEG files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
     ],
+    seoTitle: "Free Online JPG to JXL",
   },
   {
     id: "395",
@@ -3679,6 +3721,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Is there a better format than GIF for sharing JXL images?", answer: "For most cases, convert to JPG or PNG instead of GIF. JPG is better for photos, PNG for graphics with transparency. GIF only makes sense when the receiving platform specifically requires it." },
     ],
     showInCategory: false,
+    seoTitle: "Free JXL to GIF Online",
   },
   {
     id: "396",
@@ -3744,6 +3787,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "What SVG files convert best?", answer: "Complete, uncorrupted SVG files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
       { question: "Why convert SVG to AVIF?", answer: "SVG (Scalable Vector Graphics) is vector (resolution-independent) \u2014 best for logos, icons, illustrations, and any graphic that needs to scale cleanly to any size. AVIF (AV1 Image File Format) is lossy or lossless \u2014 best for next-gen web images \u2014 royalty-free format with better compression than WebP and JPEG." },
     ],
+    seoTitle: "Free SVG to AVIF Online",
   },
   {
     id: "399",
@@ -3809,6 +3853,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Will converting TIFF lose quality?", answer: "From lossless (supports layers) to lossy or lossless: yes, some detail is discarded \u2014 keep the original TIFF archived." },
       { question: "Should I keep the original TIFF files?", answer: "Yes \u2014 archive TIFF originals before batch-converting. Re-converting from AVIF back to TIFF never restores discarded data." },
     ],
+    seoTitle: "TIFF to AVIF – Free Online",
   },
   {
     id: "402",
@@ -3853,6 +3898,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Is WebP supported on all devices?", answer: "WebP works in all modern browsers (Chrome, Firefox, Safari, Edge) and most mobile devices. Windows Photo Viewer and some older image editors may not open WebP files natively." },
     ],
     showInCategory: false,
+    seoTitle: "TIFF to WebP – Free Online",
   },
   {
     id: "404",

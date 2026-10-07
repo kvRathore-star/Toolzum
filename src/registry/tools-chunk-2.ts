@@ -43,6 +43,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What AAC files convert best?", answer: "Complete, uncorrupted AAC files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
       { question: "Why convert AAC to FLAC?", answer: "AAC (Advanced Audio Coding) is lossy compressed \u2014 best for modern streaming services, YouTube, and devices where AAC is the native codec. FLAC (Free Lossless Audio Codec) is losslessly compressed \u2014 best for high-fidelity music archives and audiophile listening where quality matters more than file size." },
     ],
+    seoTitle: "Free Online AAC to FLAC",
   },
   {
     id: "406",
@@ -64,6 +65,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AAC to M4A — Convert AAC audio files into M4A container format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "AAC to M4A – Free Online",
   },
   {
     id: "407",
@@ -86,6 +88,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What players support OGG?", answer: "VLC, foobar2000, Chrome, Firefox, and most open-source media players. Windows Media Player and iTunes do not natively support OGG." },
       { question: "Is AAC to OGG conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded." },
     ],
+    seoTitle: "Free AAC to OGG Online",
   },
   {
     id: "408",
@@ -108,6 +111,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What sample rates are supported?", answer: "The converter preserves the original sample rate and bit depth. AAC at 44.1kHz will output WAV at 44.1kHz with 16-bit or 32-bit depth." },
       { question: "Is AAC to WAV conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
     ],
+    seoTitle: "Free AAC to WAV Online",
   },
   {
     id: "409",
@@ -129,6 +133,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Should I keep the original FLAC files?", answer: "Yes \u2014 archive FLAC originals before batch-converting. Re-converting from AAC back to FLAC never restores discarded data." },
       { question: "How long does FLAC-to-AAC conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
     ],
+    seoTitle: "Free Online FLAC to AAC",
   },
   {
     id: "410",
@@ -150,6 +155,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online FLAC to M4A — Convert lossless FLAC audio into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Free FLAC to M4A Online",
   },
   {
     id: "411",
@@ -171,6 +177,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Why convert FLAC to OGG?", answer: "FLAC (Free Lossless Audio Codec) is losslessly compressed \u2014 best for high-fidelity music archives and audiophile listening where quality matters more than file size. OGG (Ogg Vorbis) is lossy compressed \u2014 best for open-source software, Linux systems, game development, and streaming on open platforms." },
       { question: "Where does OGG fit best?", answer: "open-source software, Linux systems, game development, and streaming on open platforms." },
     ],
+    seoTitle: "FLAC to OGG – Free Online",
   },
   {
     id: "412",
@@ -192,6 +199,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online FLAC to WAV — Convert lossless FLAC audio into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Free Online FLAC to WAV",
   },
   {
     id: "413",
@@ -214,6 +222,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What sample rates are supported?", answer: "The converter preserves the original sample rate. Common values: 44.1kHz (CD quality), 48kHz (standard), 96kHz (high-res). The output matches the source properties." },
       { question: "Is M4A to AAC conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
     ],
+    seoTitle: "Free Online M4A to AAC",
   },
   {
     id: "414",
@@ -235,6 +244,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online M4A to FLAC — Convert M4A audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Free Online M4A to FLAC",
   },
   {
     id: "415",
@@ -256,6 +266,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online M4A to OGG — Convert M4A audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Free M4A to OGG Online",
   },
   {
     id: "416",
@@ -322,6 +333,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What sample rates are preserved?", answer: "The converter preserves the original sample rate. Common MP3 rates: 44.1kHz, 48kHz. The AIFF output matches the source properties." },
       { question: "Is MP3 to AIFF conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded." },
     ],
+    seoTitle: "Free Online MP3 to AIFF",
   },
   {
     id: "419",
@@ -343,6 +355,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online MP3 to FLAC — Convert MP3 audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "MP3 to FLAC – Free Online",
   },
   {
     id: "420",
@@ -364,6 +377,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What MP3 files convert best?", answer: "Complete, uncorrupted MP3 files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
       { question: "Why convert MP3 to M4A?", answer: "MP3 (MPEG-1 Audio Layer 3) is lossy compressed \u2014 best for universal music playback and sharing across all devices and platforms. M4A (MPEG-4 Audio) is lossy or lossless (AAC/ALAC) \u2014 best for Apple ecosystem \u2014 iTunes, iPhones, iPads, and macOS music libraries." },
     ],
+    seoTitle: "Free MP3 to M4A Online",
   },
   {
     id: "421",
@@ -386,6 +400,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Why does the first conversion take a while?", answer: "The FFmpeg engine (~30MB WASM) downloads once on first use and is cached after. Subsequent conversions start instantly, even offline." },
       { question: "Are my audio files uploaded?", answer: "No. Conversion runs entirely in your browser via FFmpeg.wasm. Files never leave your device." },
     ],
+    seoTitle: "MP3 to OGG – Free Online",
   },
   {
     id: "422",
@@ -407,6 +422,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online MP3 to Opus — Convert MP3 audio files into Opus format for superior compression. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Free MP3 to Opus Online",
   },
   {
     id: "423",
@@ -428,6 +444,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online MP3 to WMA — Convert MP3 audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Free MP3 to WMA Online",
   },
   {
     id: "424",
@@ -494,6 +511,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I play the M4A output on Android?", answer: "Yes. Modern Android devices and apps (Google Play Music, Poweramp, VLC) all support M4A playback. It is not Apple-exclusive — M4A is widely compatible across platforms." },
     ],
     showInCategory: false,
+    seoTitle: "Free OGG to M4A Online",
   },
   {
     id: "427",
@@ -515,6 +533,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What OGG files convert best?", answer: "Complete, uncorrupted OGG files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
       { question: "Why convert OGG to WAV?", answer: "OGG (Ogg Vorbis) is lossy compressed \u2014 best for open-source software, Linux systems, game development, and streaming on open platforms. WAV (Waveform Audio File Format) is uncompressed lossless \u2014 best for professional audio editing, mastering, and archival in DAWs and production software." },
     ],
+    seoTitle: "Free Online OGG to WAV",
   },
   {
     id: "428",
@@ -536,6 +555,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What WAV files convert best?", answer: "Complete, uncorrupted WAV files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
       { question: "Why convert WAV to AAC?", answer: "WAV (Waveform Audio File Format) is uncompressed lossless \u2014 best for professional audio editing, mastering, and archival in DAWs and production software. AAC (Advanced Audio Coding) is lossy compressed \u2014 best for modern streaming services, YouTube, and devices where AAC is the native codec." },
     ],
+    seoTitle: "Free WAV to AAC Online",
   },
   {
     id: "429",
@@ -557,6 +577,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WAV to AIFF — Convert WAV audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Free Online WAV to AIFF",
   },
   {
     id: "430",
@@ -600,6 +621,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WAV to M4A — Convert WAV audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "WAV to M4A – Free Online",
   },
   {
     id: "432",
@@ -621,6 +643,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WAV to OGG — Convert WAV audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Free WAV to OGG Online",
   },
   {
     id: "433",
@@ -642,6 +665,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WAV to Opus — Convert WAV audio files into Opus format for best compression. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Free Online WAV to Opus",
   },
   {
     id: "434",
@@ -663,6 +687,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WAV to WMA — Convert WAV audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "WAV to WMA – Free Online",
   },
   {
     id: "435",
@@ -707,6 +732,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Is there a minimum size I can resize to?", answer: "There is no hard minimum, but extremely small dimensions (under 10x10 pixels) may make the content unrecognizable. The tool works best when resizing to at least 50 pixels on the shortest side." },
     ],
     showInCategory: true,
+    seoTitle: "GIF Resizer – Free Online",
   },
   {
     id: "437",
@@ -751,6 +777,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it preserve animation speed?", answer: "Yes. Frame timing from the APNG source is preserved in the GIF output. The animation plays at the same speed as the original." },
       { question: "Is APNG to GIF conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg. No files are uploaded." },
     ],
+    seoTitle: "APNG to GIF – Free Online",
   },
   {
     id: "441",
@@ -801,7 +828,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "QR Code Reader",
     slug: "qr-code-reader",
     category: "Developer",
-    description: 'Decode QR codes from uploaded images. Scan any QR code image and extract the embedded text or URL.',
+    description: 'Decode QR codes from uploaded images. Scan any QR code image and extract the embedded text or URL. Point it at screenshots, photos, or documents — decoded URLs and text copy out instantly. Runs locally, free, no signup.',
     seoDescription: 'Free online QR Code Reader — Decode QR codes from images. Scan and extract text/URL from any QR code. ',
     dependencies: "jsQR",
     showInCategory: true,
@@ -817,7 +844,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it work with damaged QR codes?", answer: "The jsQR library has built-in error correction and can often read partially damaged or obscured QR codes, especially those encoded with high error correction level." },
       { question: "When using QR Code Reader, is my image uploaded to a server?", answer: "No. QR code decoding happens entirely in your browser using the jsQR library. Your image never leaves your device." },
     ],
-},
+    seoTitle: "QR Code Reader – Free Online",
+  },
   {
     id: "444",
     name: "Lorem Ipsum Generator",
@@ -839,6 +867,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Never ship lorem to production — right?", answer: "Right. Search engines index it, screen readers read it aloud, and clients screenshot it. Grep your build for 'lorem' before every launch." },
       { question: "When using Lorem Ipsum Generator, is anything uploaded?", answer: "No. Generation runs entirely in your browser. Nothing leaves your device." },
     ],
+    seoTitle: "Lorem Ipsum Generator – Free Online",
   },
   {
 
@@ -862,13 +891,14 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Why is registrant contact info redacted?", answer: "GDPR and other privacy regulations require registries to hide personal contact details. The lookup shows the registrar and public data, but personal info is masked." },
       { question: "Is the lookup query stored?", answer: "No. Queries are made directly from your browser to public RDAP servers. No search history is stored on any third-party server." },
     ],
-},
+    seoTitle: "WHOIS Lookup – Free Online",
+  },
   {
     id: "446",
     name: "SSL Checker",
     slug: "ssl-checker",
     category: "Developer",
-    description: 'Check SSL/TLS certificate details for any domain. View issuer, validity period, days remaining, and SANs.',
+    description: 'Check SSL/TLS certificate details for any domain. View issuer, validity period, days remaining, and SANs. Expiry alerts plus chain validation catch outages before users do — local checks, free, no signup.',
     seoDescription: 'Free online SSL Checker — Check SSL certificate details for any domain. Issuer, validity, days remaining, SANs. ',
     dependencies: "crt.sh / TLS endpoints",
     showInCategory: true,
@@ -884,7 +914,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What is a SAN (Subject Alternative Name)?", answer: "A SAN is an additional domain name or IP address covered by the same certificate. Many certificates secure multiple domains (e.g., example.com and www.example.com) via SANs." },
       { question: "Is the check query stored?", answer: "No. The tool queries the domain's TLS endpoint directly from your browser. No search history or domain data is stored on any server." },
     ],
-},
+    seoTitle: "Free Online SSL Checker",
+  },
   {
     id: "447",
     name: "PDF to TIFF",
@@ -993,6 +1024,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online CBZ to PDF — Convert comic book archives to PDF. Page ranges, double-page spreads, multiple sizes. ',
     dependencies: "jszip, pdf-lib",
     showInCategory: true,
+    seoTitle: "Free Online CBZ to PDF",
   },
   {
     id: "453",
@@ -1014,6 +1046,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it handle large files?", answer: "Files up to 1MB convert instantly. Larger files may slow the browser. For very large config files, consider CLI tools." },
       { question: "When using YAML ↔ JSON Converter, is my data stored?", answer: "No. All conversion happens locally in your browser. No data is sent to any server." },
     ],
+    seoTitle: "Free Online YAML ↔ JSON Converter",
   },
   {
     id: "454",
@@ -1103,6 +1136,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does converting back restore quality?", answer: "No. MP3→WAV inflates file size without recovering discarded detail. Always keep the original WAV if you might need full quality later." },
       { question: "When using WAV to MP3, are my files uploaded?", answer: "No. Conversion runs entirely in your browser via FFmpeg.wasm. Files never leave your device." },
     ],
+    seoTitle: "Free WAV to MP3 Online",
   },
   {
     id: "458",
@@ -1125,6 +1159,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "MP3 or AAC/Opus instead?", answer: "MP3 for universal compatibility; AAC for Apple ecosystems; Opus for voice/low-bitrate streaming. This tool targets MP3 because nothing refuses to play it." },
       { question: "When using FLAC to MP3, are my files uploaded?", answer: "No. Conversion runs entirely in your browser via FFmpeg.wasm. Files never leave your device." },
     ],
+    seoTitle: "FLAC to MP3 – Free Online",
   },
   {
     id: "459",
@@ -1146,6 +1181,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online FLAC to WMA — Convert lossless FLAC audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "FLAC to WMA – Free Online",
   },
   {
     id: "460",
@@ -1168,6 +1204,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I convert back from Opus to FLAC?", answer: "You can, but it is pointless. Opus discards audio data during compression. Converting Opus to FLAC creates a lossless file containing already-degraded audio — the quality does not improve." },
     ],
     showInCategory: false,
+    seoTitle: "FLAC to Opus – Free Online",
   },
   {
     id: "461",
@@ -1189,6 +1226,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online FLAC to AIFF — Convert lossless FLAC audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Free FLAC to AIFF Online",
   },
   {
     id: "462",
@@ -1210,6 +1248,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online OGG to MP3 — Convert OGG Vorbis audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "OGG to MP3 – Free Online",
   },
   {
     id: "463",
@@ -1232,6 +1271,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What is the typical file size comparison?", answer: "WMA and OGG have similar compression efficiency. File sizes are generally comparable at equivalent quality settings, though WMA may be slightly larger at low bitrates." },
       { question: "Is OGG to WMA conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
     ],
+    seoTitle: "Free OGG to WMA Online",
   },
   {
     id: "464",
@@ -1253,6 +1293,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online OGG to Opus — Convert OGG Vorbis audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "OGG to Opus – Free Online",
   },
   {
     id: "465",
@@ -1275,6 +1316,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "How large will the AIFF file be?", answer: "AIFF is uncompressed, so expect roughly 5-10x the OGG file size. A 5MB OGG may become 30-50MB as AIFF. This is normal for lossless audio formats." },
       { question: "Is OGG to AIFF conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded to any server." },
     ],
+    seoTitle: "Free Online OGG to AIFF",
   },
   {
     id: "466",
@@ -1296,6 +1338,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online M4A to MP3 — Convert M4A audio files into widely compatible MP3 format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Free Online M4A to MP3",
   },
   {
     id: "467",
@@ -1317,6 +1360,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Why convert M4A to WMA?", answer: "M4A (MPEG-4 Audio) is lossy or lossless (AAC/ALAC) \u2014 best for Apple ecosystem \u2014 iTunes, iPhones, iPads, and macOS music libraries. WMA (Windows Media Audio) is lossy compressed \u2014 best for Windows-based media libraries, legacy devices, and corporate audio systems." },
       { question: "Where does WMA fit best?", answer: "Windows-based media libraries, legacy devices, and corporate audio systems." },
     ],
+    seoTitle: "M4A to WMA – Free Online",
   },
   {
     id: "468",
@@ -1338,6 +1382,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online M4A to Opus — Convert M4A audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Free Online M4A to Opus",
   },
   {
     id: "469",
@@ -1403,6 +1448,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AAC to WMA — Convert AAC audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Free AAC to WMA Online",
   },
   {
     id: "472",
@@ -1446,6 +1492,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AAC to AIFF — Convert AAC audio files into AIFF format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "AAC to AIFF – Free Online",
   },
   {
     id: "474",
@@ -1467,6 +1514,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WMA to WAV — Convert Windows Media Audio (WMA) audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Free Online WMA to WAV",
   },
   {
     id: "475",
@@ -1510,6 +1558,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WMA to OGG — Convert Windows Media Audio (WMA) audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "WMA to OGG – Free Online",
   },
   {
     id: "477",
@@ -1531,6 +1580,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WMA to M4A — Convert Windows Media Audio (WMA) audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Free WMA to M4A Online",
   },
   {
     id: "478",
@@ -1574,6 +1624,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Where does Opus fit best?", answer: "voice-over-IP, real-time communication, and streaming at very low bitrates with excellent quality." },
       { question: "What WMA files convert best?", answer: "Complete, uncorrupted WMA files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
     ],
+    seoTitle: "Free WMA to Opus Online",
   },
   {
     id: "480",
@@ -1618,6 +1669,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I edit the WAV in Audacity or GarageBand?", answer: "Yes. WAV is universally supported in every audio editor. Open the converted file directly in Audacity, GarageBand, Logic Pro, Pro Tools, or any DAW." },
     ],
     showInCategory: false,
+    seoTitle: "Opus to WAV – Free Online",
   },
   {
     id: "482",
@@ -1639,6 +1691,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Opus to FLAC — Convert Opus audio files into lossless FLAC format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Free Online Opus to FLAC",
   },
   {
     id: "483",
@@ -1661,6 +1714,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Is OGG supported in web browsers?", answer: "Yes. OGG Vorbis is supported in Chrome, Firefox, and Edge. Safari added OGG support in macOS Ventura. It is widely used for web audio and game sound effects." },
     ],
     showInCategory: false,
+    seoTitle: "Free Online Opus to OGG",
   },
   {
     id: "484",
@@ -1705,6 +1759,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I use the AAC output on iPhone?", answer: "Yes. AAC is Apple's preferred audio format. The converted file plays natively in Apple Music, GarageBand, and any iOS audio app without additional conversion." },
     ],
     showInCategory: false,
+    seoTitle: "Opus to AAC – Free Online",
   },
   {
     id: "486",
@@ -1726,6 +1781,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Opus to WMA — Convert Opus audio files into Windows Media Audio format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Opus to WMA – Free Online",
   },
   {
     id: "487",
@@ -1747,6 +1803,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Why convert Opus to AIFF?", answer: "Opus (Opus Interactive Audio Codec) is lossy compressed \u2014 best for voice-over-IP, real-time communication, and streaming at very low bitrates with excellent quality. AIFF (Audio Interchange File Format) is uncompressed lossless \u2014 best for Apple professional audio \u2014 Logic Pro, GarageBand, and macOS music production workflows." },
       { question: "Where does AIFF fit best?", answer: "Apple professional audio \u2014 Logic Pro, GarageBand, and macOS music production workflows." },
     ],
+    seoTitle: "Free Opus to AIFF Online",
   },
   {
     id: "488",
@@ -1768,6 +1825,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online AIFF to WAV — Convert AIFF audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    seoTitle: "Free AIFF to WAV Online",
   },
   {
     id: "489",
@@ -1812,6 +1870,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I use OGG in my video projects?", answer: "OGG is supported in most video editors and web players. Some proprietary software like older versions of Final Cut or Adobe Premiere may not import OGG directly. Check your editor's format support." },
     ],
     showInCategory: false,
+    seoTitle: "AIFF to OGG – Free Online",
   },
   {
     id: "491",
@@ -1833,6 +1892,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "How long does AIFF-to-M4A conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
       { question: "Will converting AIFF lose quality?", answer: "From uncompressed lossless to lossy or lossless (AAC/ALAC): yes, some detail is discarded \u2014 keep the original AIFF archived." },
     ],
+    seoTitle: "Free AIFF to M4A Online",
   },
   {
     id: "492",
@@ -1899,6 +1959,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What browsers support Opus?", answer: "All modern browsers support Opus natively in WebM containers. For standalone .opus files, most media players (VLC, foobar2000) support them." },
       { question: "Is AIFF to OPUS conversion done locally?", answer: "Yes. All conversion runs in your browser using FFmpeg WASM. No audio files are uploaded." },
     ],
+    seoTitle: "Free Online AIFF to Opus",
   },
   {
 
@@ -1921,7 +1982,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What happens with non-printable bytes?", answer: "Bytes that don't correspond to printable ASCII characters are shown as dots (.) in the ASCII output. This helps identify binary data embedded in hex strings." },
       { question: "When using Hex ↔ ASCII Converter, is my data uploaded?", answer: "No. All conversion happens in your browser using simple byte manipulation. No data is transmitted to any server." },
     ],
-},
+    seoTitle: "Hex ↔ ASCII Converter – Free Online",
+  },
   {
     id: "496",
     name: "URL Encoder / Decoder",
@@ -1942,7 +2004,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I encode just the query string, not the whole URL?", answer: "Yes. Paste a full URL or just the query parameters. The tool can encode/decode the entire string or just specific parts." },
       { question: "When using URL Encoder / Decoder, is the conversion done locally?", answer: "Yes. All encoding and decoding happens in your browser. No data is sent to any server." },
     ],
-},
+    seoTitle: "Free Online URL Encoder / Decoder",
+  },
   {
 
     id: "497",
@@ -1987,7 +2050,8 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online Backslash Escape Unescape — Escape or unescape special characters with backslashes. Handles newlines, tabs, quotes, and more. ',
     dependencies: "None",
     showInCategory: false,
-},
+    seoTitle: "Backslash Escape / Unescape – Free Online",
+  },
   {
 
     id: "499",
@@ -2038,7 +2102,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "Line Sorter & Deduplicator",
     slug: "line-sorter",
     category: "Utility",
-    description: 'Sort lines alphabetically (A→Z, Z→A), reverse order, shuffle randomly, or remove duplicate lines.',
+    description: 'Sort lines alphabetically (A→Z, Z→A), reverse order, shuffle randomly, or remove duplicate lines. A–Z, Z–A, length, shuffle, and dedupe modes cover every ordering chore — local processing, free, no signup.',
     seoDescription: 'Free online Line Sorter and Deduplicator — Sort lines A→Z or Z→A, reverse, shuffle, or remove duplicates. ',
     dependencies: "None",
     instructions: [
@@ -2053,14 +2117,15 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I sort numbers in text lines?", answer: "Numeric sorting is available for lines that contain numbers. Alphabetical sorting treats numbers as text (e.g., '10' sorts before '2')." },
       { question: "When using Line Sorter & Deduplicator, is my data stored?", answer: "No. All processing happens locally in your browser. No text data is transmitted." },
     ],
-},
+    seoTitle: "Free Line Sorter & Deduplicator Online",
+  },
   {
 
     id: "502",
     name: "URL Parser",
     slug: "url-parser",
     category: "Developer",
-    description: 'Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more with copy-to-clipboard.',
+    description: 'Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more with copy-to-clipboard. Host, path, query, and fragment split with decoding — debug redirect chains precisely. Runs locally, free, no signup.',
     seoDescription: 'Free online URL Parser — Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more. ',
     dependencies: "None",
     instructions: [
@@ -2075,6 +2140,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I copy individual components?", answer: "Yes. Each parsed component has a copy-to-clipboard button for easy reuse. Copy the full URL or just the hostname, path, or query string." },
       { question: "When using URL Parser, is the parsing done locally?", answer: "Yes. All parsing happens in your browser using the URL API. No URL data is sent to any server." },
     ],
+    seoTitle: "Free URL Parser Online",
   },
   {
 
@@ -2097,13 +2163,14 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I use it to find non-ASCII characters?", answer: "Yes. The tool lists all non-ASCII characters in the string with their code points, helping you identify special characters that may cause encoding issues." },
       { question: "Is my string data uploaded?", answer: "No. All analysis happens locally in your browser. No string data is transmitted to any server." },
     ],
+    seoTitle: "String Inspector – Free Online",
   },
   {
     id: "504",
     name: "Unix Time Converter",
     slug: "unix-time-converter",
     category: "Utility",
-    description: 'Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time formats.',
+    description: 'Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time formats. Milliseconds, seconds, and ISO 8601 convert both directions with timezone clarity — local math, free, no signup.',
     seoDescription: 'Free online Unix Time Converter — Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time. ',
     dependencies: "None",
         instructions: [
@@ -2118,14 +2185,15 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I encode just the query string, not the whole URL?", answer: "Yes. Paste a full URL or just the query parameters. The tool can encode/decode the entire string or just specific parts." },
       { question: "When using Unix Time Converter, is the conversion done locally?", answer: "Yes. All encoding and decoding happens in your browser. No data is sent to any server." },
     ],
-},
+    seoTitle: "Free Unix Time Converter Online",
+  },
   {
 
     id: "505",
     name: "Code Beautifier & Minifier",
     slug: "code-beautifier",
     category: "Developer",
-    description: 'Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS with a single click.',
+    description: 'Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS with a single click. HTML, CSS, JS, XML, and more normalize in one pass — local processing, free, no signup.',
     seoDescription: 'Free online Code Beautifier and Minifier — Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS. ',
     dependencies: "None",
     instructions: [
@@ -2140,6 +2208,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it preserve my code logic?", answer: "Yes. Formatting changes are purely cosmetic. Your code's functionality, variable names, string values, and logic remain unchanged." },
       { question: "Is my code uploaded?", answer: "No. All beautification and minification happens locally in your browser. No code is sent to any server." },
     ],
+    seoTitle: "Free Online Code Beautifier & Minifier",
   },
   {
 
@@ -2162,6 +2231,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I convert inline styles?", answer: "Yes. HTML inline style strings (style='color: red') are converted to JSX style objects ({ color: 'red' }) with proper camelCase property names." },
       { question: "Is HTML to JSX conversion done locally?", answer: "Yes. All conversion happens in your browser. No HTML data is sent to any server." },
     ],
+    seoTitle: "HTML to JSX Converter – Free Online",
   },
   {
 
@@ -2184,6 +2254,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it handle PHP objects?", answer: "For JSON conversion, PHP objects are converted to JSON objects. For serialization, object notation (O:4:\"name\":...) is preserved in the serialized string." },
       { question: "When using PHP Tools, is my data uploaded?", answer: "No. All conversions happen locally in your browser. No PHP data is sent to any server." },
     ],
+    seoTitle: "PHP Tools – Free Online",
   },
   {
 
@@ -2206,7 +2277,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does encoding affect SVG quality?", answer: "No. Base64 or URL-encoded SVGs in CSS are rendered identically to external SVG files. The encoding is transparent to the browser." },
       { question: "Is SVG to CSS conversion done locally?", answer: "Yes. All conversion runs locally in your browser. No SVG data is sent to any server." },
     ],
-},
+    seoTitle: "Free SVG to CSS Converter Online",
+  },
   {
     id: "510",
     name: "JSON to Code Generator",
@@ -2228,6 +2300,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I customize the output?", answer: "Some generators offer options like naming conventions (camelCase, PascalCase), whether to use interfaces vs types, and whether to include JSDoc comments." },
       { question: "When using JSON to Code Generator, is my JSON data stored?", answer: "No. All generation happens locally in your browser. No JSON data is sent to any server." },
     ],
+    seoTitle: "JSON to Code Generator – Free Online",
   },
   {
 
@@ -2235,7 +2308,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "JWT Debugger",
     slug: "jwt-debugger",
     category: "Developer",
-    description: 'Decode and inspect JWT tokens — view header, payload, expiration, issuer, subject, and other standard claims.',
+    description: 'Decode and inspect JWT tokens — view header, payload, expiration, issuer, subject, and other standard claims. Header, payload, and expiry decode with signature guidance — local inspection, free, no signup.',
     seoDescription: 'Free online JWT Debugger — Decode and inspect JWT tokens. View header, payload, expiration, issuer, subject, and standard claims. ',
     dependencies: "None",
     instructions: [
@@ -2250,6 +2323,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it support all JWT algorithms?", answer: "It decodes headers for any algorithm (HS256, RS256, ES256, etc.). However, it only displays the content — it does not perform signature verification for any algorithm." },
       { question: "Is my token data uploaded?", answer: "No. All decoding happens locally in your browser. No JWT data is sent to any server." },
     ],
+    seoTitle: "JWT Debugger – Free Online",
   },
   {
 
@@ -2272,6 +2346,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it auto-refresh?", answer: "Yes. The preview updates automatically as you type. There's no manual refresh button needed — changes appear instantly." },
       { question: "Is my HTML uploaded?", answer: "No. All rendering happens locally in your browser. No HTML data is sent to any server." },
     ],
+    seoTitle: "Free Online HTML Preview",
   },
   {
 
@@ -2279,7 +2354,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "Cron Expression Parser",
     slug: "cron-parser",
     category: "Developer",
-    description: 'Parse cron expressions into human-readable descriptions. Includes common presets for quick reference.',
+    description: 'Parse cron expressions into human-readable descriptions. Includes common presets for quick reference. Presets plus plain-English schedules prevent 3am surprises — local parsing, free, no signup.',
     seoDescription: 'Free online Cron Expression Parser — Parse cron expressions into human-readable descriptions with common presets. ',
     dependencies: "None",
     instructions: [
@@ -2294,6 +2369,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I validate cron expressions?", answer: "Yes. Invalid expressions are flagged with error messages. The tool checks for valid ranges, correct field count, and proper syntax." },
       { question: "When using Cron Expression Parser, is the parsing done locally?", answer: "Yes. All parsing happens in your browser. No cron data is sent to any server." },
     ],
+    seoTitle: "Free Online Cron Expression Parser",
   },
   {
     id: "515",
@@ -2338,6 +2414,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it show my browser info?", answer: "Yes. The device info tool displays your current browser, OS, screen resolution, color depth, language, and connection details." },
       { question: "Is any data sent to a server?", answer: "No. All tools run locally in your browser. Device info and user-agent data stay in your browser and are not transmitted." },
     ],
+    seoTitle: "Free Online Web Inspector & HTTP Tools",
   },
   {
 
@@ -2367,7 +2444,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "ETA Calculator",
     slug: "eta-calculator",
     category: "Calculator",
-    description: 'Estimate travel time from distance and speed — with optional arrival time and traffic buffer.',
+    description: 'Estimate travel time from distance and speed — with optional arrival time and traffic buffer. Add traffic buffers and arrival targets for realistic plans — free, local, no signup.',
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter distance and average speed." },
       { title: "2. Read the arrival time", desc: "Check the arrival time with duration." },
@@ -2381,6 +2458,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     ],
     seoDescription: 'Free online ETA Calculator — Estimate travel time from distance and speed with optional arrival time. ',
     dependencies: "None",
+    seoTitle: "Free Online ETA Calculator",
   },
   {
 
@@ -2403,6 +2481,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it handle multi-line strings?", answer: "Yes. Block scalars (| and >) and flow scalars are preserved. The tool re-indents around them without breaking the string content." },
       { question: "Is my YAML uploaded?", answer: "No. All re-indentation happens locally in your browser. No YAML data is sent to any server." },
     ],
+    seoTitle: "YAML Re-indenter – Free Online",
   },
   {
 
@@ -2448,7 +2527,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I format numbers in different styles?", answer: "Yes. Output formats include E.164 (+1234567890), national (123 456 7890), and international (+1 123 456 7890) styles." },
       { question: "Is my phone data stored?", answer: "No. All parsing happens locally in your browser. No phone numbers are transmitted." },
     ],
-},
+    seoTitle: "Free Phone Number Parser Online",
+  },
   {
 
     id: "ou-4",
@@ -2470,7 +2550,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Is the conversion case-sensitive?", answer: "By default, slugs are lowercased. You can optionally preserve case if your use case requires it (e.g., for anchor IDs)." },
       { question: "When using Slugify, is my text stored or transmitted?", answer: "No. All slug generation happens locally in your browser. No text data is sent to any server." },
     ],
-},
+    seoTitle: "Free Slugify Online",
+  },
   {
 
     id: "mg-1",
@@ -2492,7 +2573,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "How many ULIDs can I generate?", answer: "Generate 1 to 1000 ULIDs at once. Each ULID is unique even at millisecond granularity due to the 80-bit random component." },
       { question: "Is generation done locally in ULID Generator?", answer: "Yes. All generation runs in your browser. No data is transmitted." },
     ],
-},
+    seoTitle: "Free ULID Generator Online",
+  },
   {
 
     id: "mg-2",
@@ -2514,7 +2596,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "When using Numeronym Generator, what are common use cases?", answer: "Numeronyms are widely used in tech: a11y (accessibility), i18n (internationalization), l10n (localization), n11n (normalization). They save space in code, URLs, and variable names." },
       { question: "When using Numeronym Generator, is my text stored or transmitted?", answer: "No. All generation happens locally in your browser. No text data is sent to any server." },
     ],
-},
+    seoTitle: "Numeronym Generator – Free Online",
+  },
   {
 
     id: "mg-3",
@@ -2536,7 +2619,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "How comprehensive is the vendor database?", answer: "The database includes thousands of OUI entries covering major manufacturers (Apple, Samsung, Cisco, Intel, etc.) and smaller vendors. It's updated regularly with new IEEE assignments." },
       { question: "Is the lookup done locally?", answer: "Yes. The OUI database is stored locally. No MAC address data is transmitted during lookups." },
     ],
-},
+    seoTitle: "Free Online MAC Vendor Lookup",
+  },
   {
 
     id: "523",
@@ -2580,6 +2664,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I use these keys for SSH?", answer: "The generated PEM keys can be converted to SSH format using OpenSSL commands. The tool exports standard keys compatible with SSH key generation tools." },
       { question: "Are my keys uploaded?", answer: "No. All key generation happens locally in your browser using the Web Crypto API. No keys are transmitted to any server." },
     ],
+    seoTitle: "Free Online RSA Key Pair Generator",
   },
   {
 
@@ -2624,7 +2709,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it support special characters?", answer: "Basic Latin letters and numbers work best. Special characters, emojis, and non-Latin scripts may not render correctly in ASCII art styles." },
       { question: "Is generation done locally in ASCII Art Generator?", answer: "Yes. All generation runs in your browser. No text data is sent to any server." },
     ],
-},
+    seoTitle: "Free Online ASCII Art Generator",
+  },
   {
 
     id: "ct-2b",
@@ -2762,7 +2848,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "PDF Background Color",
     slug: "pdf-background-color",
     category: "PDF",
-    description: 'Add a subtle color tint to all pages in a PDF document. Upload your PDF and pick a background color.',
+    description: 'Add a subtle color tint to all pages in a PDF document. Upload your PDF and pick a background color. Tint every page uniformly for branding or readability themes — local pdf-lib work, free quota on saves.',
     seoTitle: "PDF Background Color – Free Customizer",
     seoDescription: 'Free online PDF Background Color \u2014 Add a subtle color tint to all pages in a PDF document. ',
     dependencies: "pdf-lib",
@@ -2784,7 +2870,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "PDF Add Blank Page",
     slug: "pdf-add-blank-page",
     category: "PDF",
-    description: 'Insert blank pages at any position in a PDF document. Choose page size, count, and position.',
+    description: 'Insert blank pages at any position in a PDF document. Choose page size, count, and position. Choose page size and count to match the document — local pdf-lib work, free quota on saves.',
     seoDescription: 'Free online PDF Add Blank Page \u2014 Insert blank pages at any position in a PDF document. ',
     dependencies: "pdf-lib",
     instructions: [
@@ -2798,13 +2884,14 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can inserted pages differ in size from the original?", answer: "Yes — choose any page size per insert, useful for adding A4 separator sheets into a Letter document." },
       { question: "Does inserting shift later pages?", answer: "Yes — everything after the insert point moves down, so page numbers and the table of contents update accordingly." },
     ],
+    seoTitle: "Free PDF Add Blank Page Online",
   },
   {
     id: "950",
     name: "PDF Bates Numbering",
     slug: "pdf-bates-numbering",
     category: "PDF",
-    description: 'Add sequential Bates numbers to every page of your PDF. Customize prefix, starting number, and position.',
+    description: 'Add sequential Bates numbers to every page of your PDF. Customize prefix, starting number, and position. Prefixes, start numbers, and positioning per filing rules — local pdf-lib work, free quota on saves.',
     seoTitle: "Bates Numbering for PDF – Free Legal Stamping",
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
@@ -2989,6 +3076,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it account for headings and images?", answer: "The estimate is for text-only content. Headings, images, charts, and tables take additional space. Add 10-20% extra pages for content with formatting elements." },
       { question: "Is my text data stored?", answer: "No. All calculations run locally in your browser. No text data is transmitted." },
     ],
+    seoTitle: "Free Online Words Per Page Calculator",
   },
   {
     id: "534d",
@@ -3119,14 +3207,15 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I include PKCE code challenge?", answer: "Some providers support PKCE. The tool can generate the code_verifier and code_challenge for enhanced security in public clients." },
       { question: "Is my client data stored?", answer: "No. All URL generation happens locally in your browser. No client IDs or secrets are transmitted." },
     ],
-},
+    seoTitle: "OAuth Client Setup – Free Online",
+  },
   {
 
     id: "537b",
     name: "PKCE Verifier",
     slug: "pkce-verifier",
     category: "Developer",
-    description: 'Generate PKCE code_verifier and code_challenge (S256) pairs, or verify that a verifier matches a challenge.',
+    description: 'Generate PKCE code_verifier and code_challenge (S256) pairs, or verify that a verifier matches a challenge. Test mobile and SPA auth flows safely — free, local, no signup.',
     seoDescription: 'Free online PKCE Verifier \u2014 Generate and verify PKCE code_verifier / code_challenge pairs for secure OAuth flows. ',
     dependencies: "None",
     instructions: [
@@ -3141,6 +3230,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I verify an existing pair?", answer: "Yes. Paste a code_verifier and code_challenge to verify they match. The tool recalculates the challenge from the verifier and compares them." },
       { question: "Is generation done locally in PKCE Verifier?", answer: "Yes. All PKCE generation and verification happens in your browser. No data is transmitted to any server." },
     ],
+    seoTitle: "Free PKCE Verifier Online",
   },
   {
 
@@ -3148,7 +3238,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "OAuth Scope Builder",
     slug: "oauth-scope-builder",
     category: "Developer",
-    description: 'Build OAuth scope strings from comma-separated values with URL encoding and breakdown.',
+    description: 'Build OAuth scope strings from comma-separated values with URL encoding and breakdown. Space-delimited scopes with encoding handled — free, local, no signup.',
     seoDescription: 'Free online OAuth Scope Builder \u2014 Build and preview OAuth scope strings with URL encoding. ',
     dependencies: "None",
     instructions: [
@@ -3163,7 +3253,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I paste an existing scope string to decode it?", answer: "Yes. Paste a URL-encoded scope string and the builder decodes it into individual scopes with descriptions." },
       { question: "Is my scope data stored?", answer: "No. All building happens locally in your browser. No scope data is transmitted." },
     ],
-},
+    seoTitle: "Free OAuth Scope Builder Online",
+  },
   {
 
     id: "537d",
@@ -3185,6 +3276,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it validate the format?", answer: "Yes. Checks for minimum length (32 chars), URL-safe characters only, and no whitespace. Flags weak or predictable state values." },
       { question: "Is my state data uploaded?", answer: "No. All validation happens locally in your browser. No state data is transmitted to any server." },
     ],
+    seoTitle: "Free Online OAuth State Validator",
   },
   {
 
@@ -3192,7 +3284,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "PBKDF2 Hash Generator",
     slug: "pbkdf2-hash-generator",
     category: "Developer",
-    description: 'Generate PBKDF2 hashes with 10,000 iterations of SHA-256 for password storage simulation.',
+    description: 'Generate PBKDF2 hashes with 10,000 iterations of SHA-256 for password storage simulation. Tune iterations to hardware — slower hashes resist brute force — free, local, no signup.',
     seoDescription: 'Free online PBKDF2 Hash Generator \u2014 Generate PBKDF2 hashes with 10,000 SHA-256 iterations. ',
     dependencies: "None",
     instructions: [
@@ -3207,6 +3299,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What's the output format?", answer: "The hash is displayed as a hex-encoded string. The tool shows the derived key along with the salt used (randomly generated if not provided)." },
       { question: "Is my password uploaded?", answer: "No. All hashing happens locally in your browser using the Web Crypto API. No password or hash data is transmitted." },
     ],
+    seoTitle: "PBKDF2 Hash Generator – Free Online",
   },
   {
 
@@ -3214,7 +3307,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "Cookie Parser & Analyzer",
     slug: "cookie-parser",
     category: "Developer",
-    description: 'Parse Set-Cookie headers into structured JSON, or analyze cookie security flags (Secure, HttpOnly, SameSite, expiry).',
+    description: 'Parse Set-Cookie headers into structured JSON, or analyze cookie security flags (Secure, HttpOnly, SameSite, expiry). Flag missing Secure, HttpOnly, and SameSite attributes — free, local, no signup.',
     seoDescription: 'Free online Cookie Parser & Analyzer \u2014 Parse Set-Cookie headers and check security flags. ',
     dependencies: "None",
     instructions: [
@@ -3229,6 +3322,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I parse multiple cookies?", answer: "Yes. Paste multiple Set-Cookie headers and the tool parses each one separately, displaying structured data for every cookie." },
       { question: "Is my cookie data uploaded?", answer: "No. All parsing happens locally in your browser. No cookie data is transmitted to any server." },
     ],
+    seoTitle: "Free Cookie Parser & Analyzer Online",
   },
   {
 
@@ -3236,7 +3330,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "HTML Linter",
     slug: "html-linter",
     category: "Developer",
-    description: 'Lint HTML for missing DOCTYPE, unclosed tags, and unexpected closing tags. Paste your HTML and get instant feedback.',
+    description: 'Lint HTML for missing DOCTYPE, unclosed tags, and unexpected closing tags. Paste your HTML and get instant feedback. Catch errors before browsers guess wrong — free, local, no signup.',
     seoDescription: 'Free online HTML Linter \u2014 Lint HTML for missing DOCTYPE, unclosed tags, and unexpected closing tags. ',
     dependencies: "None",
     instructions: [
@@ -3251,14 +3345,15 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it check for accessibility?", answer: "Basic accessibility checks include missing alt attributes on images, missing form labels, and heading hierarchy issues." },
       { question: "Is my HTML data stored?", answer: "No. All linting happens locally in your browser. No HTML data is transmitted." },
     ],
-},
+    seoTitle: "HTML Linter – Free Online",
+  },
   {
 
     id: "539c",
     name: "XML Minifier / Validator",
     slug: "xml-minifier-validator",
     category: "Developer",
-    description: 'Minify XML by removing whitespace, or validate XML syntax. Paste your XML and choose an operation.',
+    description: 'Minify XML by removing whitespace, or validate XML syntax. Paste your XML and choose an operation. Minify for transit or validate for correctness — free, local, no signup.',
     seoDescription: 'Free online XML Minifier / Validator \u2014 Minify XML by removing whitespace, or validate XML syntax. ',
     dependencies: "None",
     instructions: [
@@ -3273,6 +3368,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it handle XML declarations?", answer: "Yes. XML declarations (<?xml version='1.0'?>) and processing instructions are preserved during minification and validated for correct syntax." },
       { question: "Is my XML uploaded?", answer: "No. All minification and validation happens locally in your browser. No XML data is transmitted to any server." },
     ],
+    seoTitle: "XML Minifier / Validator – Free Online",
   },
   {
     id: "948",
@@ -3338,6 +3434,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I decode Base32 to text?", answer: "Yes. Paste a Base32 string and the tool decodes it to the original text. The tool handles both standard and padded Base32 formats." },
       { question: "When using Base32 Encoder / Decoder, is the conversion done locally?", answer: "Yes. All encoding and decoding happens in your browser. No data is transmitted to any server." },
     ],
+    seoTitle: "Base32 Encoder / Decoder – Free Online",
   },
   {
 
@@ -3345,7 +3442,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "Base64 to JSON Decoder",
     slug: "base64-json-decoder",
     category: "Developer",
-    description: 'Decode Base64 strings and pretty-print JSON data — paste encoded text to see the decoded result instantly.',
+    description: 'Decode Base64 strings and pretty-print JSON data — paste encoded text to see the decoded result instantly. Inspect API payloads and tokens readably — free, local, no signup.',
     seoDescription: 'Free online Base64 to JSON Decoder \u2014 Decode Base64 and pretty-print JSON. ',
     dependencies: "None",
     instructions: [
@@ -3360,6 +3457,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it pretty-print nested objects?", answer: "Yes. Deeply nested JSON objects and arrays are formatted with proper indentation (2 spaces) and syntax highlighting for easy reading." },
       { question: "When using Base64 to JSON Decoder, is my data uploaded?", answer: "No. All decoding and formatting happens locally in your browser. No data is transmitted to any server." },
     ],
+    seoTitle: "Free Base64 to JSON Decoder Online",
   },
   {
 
@@ -3382,6 +3480,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What about non-printable bytes?", answer: "Non-printable bytes are displayed as their hex values with special indicators. Control characters (0x00-0x1F) are shown but not rendered as text." },
       { question: "When using Hex to Text Converter, is the conversion done locally?", answer: "Yes. All conversions happen in your browser. No data is transmitted to any server." },
     ],
+    seoTitle: "Free Hex to Text Converter Online",
   },
   {
 
@@ -3411,7 +3510,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "Character Encoding Converter",
     slug: "character-encoding-converter",
     category: "Developer",
-    description: 'Analyze each character to see its Unicode code point and ASCII/non-ASCII status.',
+    description: 'Analyze each character to see its Unicode code point and ASCII/non-ASCII status. Debug mojibake with byte-level views — free, local, no signup.',
     seoDescription: 'Free online Character Encoding Converter \u2014 Analyze Unicode code points and ASCII status. ',
     dependencies: "None",
     instructions: [
@@ -3426,6 +3525,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it identify non-ASCII characters?", answer: "Yes. ASCII (0x00-0x7F) and non-ASCII characters are clearly labeled. Non-ASCII characters are highlighted for easy identification." },
       { question: "When using Character Encoding Converter, is my text uploaded?", answer: "No. All analysis happens locally in your browser. No text data is transmitted to any server." },
     ],
+    seoTitle: "Character Encoding Converter – Free Online",
   },
   {
 
@@ -3433,7 +3533,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "Unicode Converter",
     slug: "unicode-converter",
     category: "Developer",
-    description: 'Convert text to Unicode code points with JavaScript escape sequences and HTML entities.',
+    description: 'Convert text to Unicode code points with JavaScript escape sequences and HTML entities. JavaScript escapes plus HTML entities covered — free, local, no signup.',
     seoDescription: 'Free online Unicode Converter \u2014 Get code points, JS escapes, and HTML entities. ',
     dependencies: "None",
     instructions: [
@@ -3448,6 +3548,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it support all Unicode planes?", answer: "Yes. All 17 Unicode planes are supported, including Basic Multilingual Plane (BMP), Supplementary Multilingual Plane (SMP), and others." },
       { question: "When using Unicode Converter, is the conversion done locally?", answer: "Yes. All conversions happen in your browser. No data is transmitted to any server." },
     ],
+    seoTitle: "Free Online Unicode Converter",
   },
   {
 
@@ -3492,7 +3593,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it handle negative values and decimals?", answer: "Yes. Both positive and negative values, as well as decimal PX and REM values (e.g., 0.75rem, 12.5px), are converted accurately." },
       { question: "When using PX to REM Converter, is the conversion done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
     ],
-},
+    seoTitle: "PX to REM Converter – Free Online",
+  },
   {
 
     id: "543i",
@@ -3514,6 +3616,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it handle embedded images?", answer: "Yes. Embedded raster images (base64-encoded) are preserved during optimization. Only SVG-specific metadata is removed." },
       { question: "Is my SVG uploaded?", answer: "No. All optimization happens locally in your browser. No SVG data is transmitted to any server." },
     ],
+    seoTitle: "Free SVG Optimizer Online",
   },
   {
 
@@ -3521,7 +3624,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "Power Converter",
     slug: "power-converter",
     category: "Utility",
-    description: 'Convert between kW, hp, bhp, W, MW, and BTU/hr — engine specs, solar sizing, and HVAC math in one place.',
+    description: 'Convert between kW, hp, bhp, W, MW, and BTU/hr — engine specs, solar sizing, and HVAC math in one place. Size solar arrays and compare engine outputs correctly — free, local, no signup.',
     seoDescription: 'Free online Power Converter \u2014 Convert between kW, hp, W, MW, and BTU/hr. ',
     dependencies: "None",
         instructions: [
@@ -3536,7 +3639,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Are the conversion factors accurate?", answer: "Yes. The converter uses standard SI conversion factors: 1 kW = 1.341 hp, 1 hp = 745.7 W, 1 kW = 3412 BTU/hr." },
       { question: "When using Power Converter, is the conversion done locally?", answer: "Yes. All conversions run in your browser. No data is transmitted." },
     ],
-},
+    seoTitle: "Power Converter – Free Online",
+  },
   {
 
     id: "543l",
@@ -3558,7 +3662,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I convert gauge pressure?", answer: "The converter uses absolute pressure by default. For gauge pressure, add atmospheric pressure (101.325 kPa) before converting." },
       { question: "When using Pressure Converter, is the conversion done locally?", answer: "Yes. All calculations run in your browser. No data is transmitted." },
     ],
-},
+    seoTitle: "Free Online Pressure Converter",
+  },
   {
     id: "548a",
     name: "Color Shades & Tints",
@@ -3607,7 +3712,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "Media Query Generator",
     slug: "media-query-generator",
     category: "Developer",
-    description: 'Generate CSS media queries with min/max width and optional device type conditions.',
+    description: 'Generate CSS media queries with min/max width and optional device type conditions. Mobile-first breakpoints with device conditions — free, local, no signup.',
     seoDescription: 'Free online Media Query Generator \u2014 Generate CSS media queries with width and device conditions. ',
     dependencies: "None",
     instructions: [
@@ -3622,7 +3727,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it support modern media features?", answer: "Supports prefers-color-scheme, prefers-reduced-motion, aspect-ratio, and other Level 4 media features for responsive design." },
       { question: "When using Media Query Generator, is my CSS data stored?", answer: "No. All generation happens locally in your browser. No CSS data is transmitted." },
     ],
-},
+    seoTitle: "Free Online Media Query Generator",
+  },
   {
 
     id: "548d",

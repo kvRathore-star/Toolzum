@@ -21,6 +21,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "When using Add Text to Photo, is my image uploaded to a server?", answer: "No. All text overlay processing happens entirely in your browser using Canvas API. Your image never leaves your device." },
       { question: "Can I adjust text opacity and rotation?", answer: "Yes. Full control over opacity (0-100%) and rotation angle (0-360°) is available for each text layer." },
     ],
+    seoTitle: "Free Online Add Text to Photo",
   },
   {
     id: "batch-edit-1",
@@ -64,6 +65,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Is there a maximum video file size?", answer: "There's no imposed limit, but very large files (1GB+) may require significant RAM and could process slowly on older devices." },
       { question: "Can I convert videos offline?", answer: "Yes. After the initial page load, the converter uses FFmpeg WASM running locally. No internet connection needed during conversion." },
     ],
+    seoTitle: "Video to MP3 Converter – Free Online",
   },
   {
     id: "crop-vid-1",
@@ -85,6 +87,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What's the maximum video length I can crop?", answer: "There's no strict limit, but longer videos (30+ minutes) may take several minutes to process depending on your device." },
       { question: "Is the cropped video downloaded automatically?", answer: "Yes. After processing completes, the cropped video is downloaded to your device. No server storage involved." },
     ],
+    seoTitle: "Free Online Crop Video",
   },
   {
     id: "json-xml-1",
@@ -106,6 +109,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Does the converter handle nested JSON objects?", answer: "Yes. Deeply nested JSON structures are converted to properly nested XML elements with correct hierarchy." },
       { question: "Can I use this offline?", answer: "Yes. All conversion happens locally in the browser. After the initial page load, no internet connection is required." },
     ],
+    seoTitle: "Free Online JSON to XML",
   },
   {
 
@@ -127,7 +131,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "How are months and years calculated?", answer: "Months use the average of 30.44 days (365.25 ÷ 12) and years use 365.24 days (accounting for leap years). These are approximate — exact conversion depends on the specific month and year." },
       { question: "Can I convert fractional time values?", answer: "Yes. You can enter decimal values like 1.5 hours or 0.5 days for precise conversions. Enter seconds to see the equivalent in all other units simultaneously." },
     ],
-},
+    seoTitle: "Time Converter – Free Online",
+  },
   {
 
     id: "du-1",
@@ -149,7 +154,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Are the generated ports guaranteed to be available?", answer: "No. The tool generates random port numbers, but it cannot check if ports are currently in use on your system. Use a port scanner for that." },
       { question: "Can I filter by TCP or UDP?", answer: "Yes. You can generate ports specifically for TCP, UDP, or both protocols." },
     ],
-},
+    seoTitle: "Free Random Port Generator Online",
+  },
   {
 
     id: "du-2",
@@ -171,7 +177,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Does this work for directories too?", answer: "The permission values are the same for files and directories, but the execute bit means different things (traverse for directories, execute for files)." },
       { question: "Can I use this offline?", answer: "Yes. The calculator works entirely offline after the initial page load." },
     ],
-},
+    seoTitle: "Free Chmod Calculator Online",
+  },
   {
 
     id: "du-3",
@@ -193,7 +200,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Can I customize the output format?", answer: "You can choose between YAML and JSON output formats, and set the compose file version." },
       { question: "Is the docker run command sent to a server?", answer: "No. All parsing and conversion happens locally in your browser. No command data is transmitted." },
     ],
-},
+    seoTitle: "Docker Run to Compose Converter – Free Online",
+  },
   {
 
     id: "du-4",
@@ -215,7 +223,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Does this work with all email providers?", answer: "Gmail-specific rules (dot removal, +tag stripping) are applied only to Gmail/Googlemail addresses. Other providers get standard normalization." },
       { question: "Are my email addresses stored?", answer: "No. All normalization happens locally in your browser. No email data is transmitted or stored." },
     ],
-},
+    seoTitle: "Email Normalizer – Free Online",
+  },
   {
     id: "arch-conv-1",
     name: "Archive Converter",
@@ -366,7 +375,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Why do results vary between runs?", answer: "Throughput depends on network congestion, Wi-Fi conditions, VPNs, and device load. Run twice and take the better reading for a fair number." },
       { question: "Does it measure upload speed too?", answer: "Not currently — it measures download speed and latency using a CDN test file." },
     ],
-},
+    seoTitle: "Speed Test – Free Online",
+  },
   {
     id: "14",
     name: "Compress Image to 50KB",
@@ -387,6 +397,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "When using Compress Image to 50KB, is my image uploaded to a server?", answer: "No. All compression happens locally in your browser using the browser-image-compression library. Your image never leaves your device." },
       { question: "Can I compress multiple images at once?", answer: "Yes. You can select multiple images and compress them all to your chosen target size in one batch operation." },
     ],
+    seoTitle: "Free Compress Image to 50KB Online",
   },
   {
     id: "15",
@@ -408,6 +419,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Does it handle crypto or street rates?", answer: "Fiat currencies only, at official market rates. Street rates in restricted economies differ substantially — this tool won't reflect those." },
       { question: "Is my conversion history stored?", answer: "Amounts stay in your browser session. Rate lookups hit the provider API; amounts are not logged with queries." },
     ],
+    seoTitle: "Free Online Currency Converter",
   },
   {
     id: "16",
@@ -494,6 +506,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "How precise are the results?", answer: "Full decimal precision (e.g., 33.333…% for 1/3), rounded for display only. Useful for tax and statistical comparisons where rounding early compounds errors." },
       { question: "Is my input stored?", answer: "No. All computation runs locally in your browser. Nothing is transmitted or stored." },
     ],
+    seoTitle: "Free Percentage Calculator Online",
   },
   {
     id: "22",
@@ -552,6 +565,7 @@ export const entries_chunk_0: ToolMetadata[] = [
         answer: "No. The calculation runs entirely in your browser — your date of birth never leaves your device and nothing is stored or uploaded. This tool is fully private and works offline after the page loads."
       },
     ],
+    seoTitle: "Free Online Age Calculator",
   },
   {
     id: "27",
@@ -589,6 +603,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       },
     ],
     showInCategory: false,
+    seoTitle: "HEIC to JPG – Free Online",
   },
   {
     id: "28",
@@ -652,6 +667,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Why do some styles show boxes (□)?", answer: "The device lacks that Unicode block (common with gothic and bubble styles on older Android). Stick to cursive, bold, and small-caps styles for maximum compatibility." },
       { question: "When using Fancy Text Generator, is anything uploaded?", answer: "No. Mapping runs entirely in your browser. Text never leaves your device." },
     ],
+    seoTitle: "Free Online Fancy Text Generator",
   },
   {
     id: "33",
@@ -674,6 +690,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Does it work on complex backgrounds?", answer: "The AI handles most backgrounds well, including solid colors, gradients, and moderately busy scenes. Very complex or similarly-colored foreground/background pairs may need manual touch-up in a dedicated editor." },
       { question: "When using Background Remover, is my image uploaded to a server?", answer: "No. Background removal runs locally in your browser using TensorFlow.js. Your image never leaves your device." },
     ],
+    seoTitle: "Free Online Background Remover",
   },
   {
     id: "34",
@@ -695,6 +712,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Should I keep the original WebP files?", answer: "Yes \u2014 archive WebP originals before batch-converting. Re-converting from JPEG back to WebP never restores discarded data." },
       { question: "How long does WebP-to-JPEG conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
     ],
+    seoTitle: "Free WebP to JPG Online",
   },
   {
     id: "34b",
@@ -717,6 +735,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Is the conversion really lossless?", answer: "No — PNG→JPG is always lossy by nature (JPG discards data). The original PNG pixels are read exactly; the size saving comes from JPEG compression. Archive the PNG if you need pixel-perfect originals." },
       { question: "Do pictures leave the browser during conversion?", answer: "No. Conversion runs entirely in your browser via Canvas. Images never leave your device." },
     ],
+    seoTitle: "PNG to JPG – Free Online",
   },
   {
 
@@ -760,6 +779,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What is the file size limit?", answer: "20MB per image. Larger files are rejected before processing so the browser tab stays responsive. Resize dimensions first if your file exceeds the limit." },
       { question: "Are my photos uploaded anywhere?", answer: "No. Compression runs entirely in your browser via Canvas. Your images never leave your device." },
     ],
+    seoTitle: "Free Image Compressor Online",
   },
   {
     id: "37",
@@ -823,6 +843,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Is the recording uploaded anywhere?", answer: "No. The extension records directly to a local file on your device using the MediaRecorder API. No video data is transmitted to any server." },
       { question: "How do I install the generated extension?", answer: "Download the generated .zip file, extract it, then load it as an unpacked extension in Chrome via chrome://extensions with Developer mode enabled." },
     ],
+    seoTitle: "Free Screen Recorder Extension Online",
   },
   {
     id: "41",
@@ -852,7 +873,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "QR Code Generator",
     slug: "qr-code-generator",
     category: "Utility",
-    description: 'Renders a scannable QR code from any text or URL using a client-side Reed-Solomon encoder. Download as PNG.',
+    description: 'Renders a scannable QR code from any text or URL using a client-side Reed-Solomon encoder. Download as PNG. Customize size and error correction, then download print-ready PNGs — free, local, no signup.',
     dependencies: "qrcode.js",
     seoDescription: 'Free QR code generator online — create QR codes for URLs and text. Download high-resolution PNG. Free to start with no account — fair daily limits apply, free accounts get more.',
     instructions: [
@@ -867,7 +888,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Is the QR code generation done locally?", answer: "Yes. QR codes are encoded entirely in your browser using a Reed-Solomon encoder. No data is sent to any server during generation." },
       { question: "How much data can a QR code hold?", answer: "A standard QR code can hold up to 4,296 alphanumeric characters or 7,089 numeric digits. URLs and short text strings use only a fraction of this capacity." },
     ],
-},
+    seoTitle: "Free QR Code Generator Online",
+  },
   {
     id: "44",
     name: "Excel to PDF",
@@ -909,6 +931,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Is the calculation accurate for Indian banks?", answer: "Yes. It uses the same reducing-balance EMI formula (EMI = P x r x (1+r)^n / ((1+r)^n - 1)) that all Indian banks use for home, car, and personal loan calculations." },
       { question: "Is my financial data stored or transmitted?", answer: "No. All calculations run locally in your browser. No loan amounts, interest rates, or other financial data is transmitted or stored anywhere." },
     ],
+    seoTitle: "Free Online EMI Calculator",
   },
   {
     id: "46",
@@ -972,6 +995,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Is there a speaking time estimate?", answer: "Yes. Based on average speaking rates (typically 130–150 words per minute), the tool estimates how long your text would take to read aloud — useful for presentations and voiceover scripts." },
       { question: "When using Word Counter, is my text stored or transmitted?", answer: "No. All analysis runs locally in your browser. Your text is never sent to any server or stored beyond the current session." },
     ],
+    seoTitle: "Word Counter – Free Online",
   },
   {
     id: "49",
@@ -1036,6 +1060,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What if my MKV has chapters?", answer: "MKV chapter markers transfer to MP4 if they use the standard format. Most players will recognize the chapters after conversion. Some MKV-specific metadata may not carry over." },
     ],
     showInCategory: false,
+    seoTitle: "MKV to MP4 – Free Online",
   },
   {
     id: "52",
@@ -1057,6 +1082,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Is the audio output downloadable?", answer: "As audio, no — browser speech synthesis can't export MP3/WAV. Download your text as .txt from the tool; audio recording needs a server-side TTS service." },
       { question: "Is my text stored?", answer: "No. Everything runs on-device in your browser — nothing is uploaded, recorded, or stored." },
     ],
+    seoTitle: "Free Online Text to Speech (TTS)",
   },
   {
     id: "53",
@@ -1101,14 +1127,15 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Integers or decimals?", answer: "Both: integers for dice, draws, and IDs; decimals for simulations and testing. Decimal precision is configurable to avoid floating-point artifacts like 0.30000000004." },
       { question: "When using Random Number Generator, is anything uploaded?", answer: "No. Generation runs entirely in your browser. Nothing leaves your device." },
     ],
-},
+    seoTitle: "Free Random Number Generator Online",
+  },
   {
 
     id: "55",
     name: "URL Shortener",
     slug: "url-shortener",
     category: "Utility",
-    description: 'Takes any long URL and generates a compact, shareable short link. Uses cloud-based processing.',
+    description: 'Takes any long URL and generates a compact, shareable short link. Uses cloud-based processing. Short links resolve through managed providers with automatic failover — free to start, sign in for full access.',
     seoDescription: 'Free online URL Shortener — Takes any long URL and generates a compact, shareable short link. ',
     dependencies: "TinyURL API, is.gd API",
     instructions: [
@@ -1122,6 +1149,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Is there a rate limit?", answer: "Yes — about 10 per minute per visitor, so pasting huge lists takes a while. Bulk shortening handles lists sequentially with automatic retries." },
       { question: "Why does shortening need cloud processing?", answer: "Short links must resolve from anywhere on the internet, so the mapping lives on our server — the one part that can't run in your browser." },
     ],
+    seoTitle: "URL Shortener – Free Online",
   },
   {
     id: "58",
@@ -1206,6 +1234,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Does it account for expense ratio and tax?", answer: "No — projected returns are pre-expense and pre-tax. A 1% expense ratio drags ~1% off annual returns; equity gains above ₹1.25 lakh/year face 12.5% LTCG. Treat the output as gross, then haircut it." },
       { question: "Is my investment data stored?", answer: "No. All projections run locally in your browser. No amounts, rates, or tenures are transmitted or stored." },
     ],
+    seoTitle: "SIP Calculator – Free Online",
   },
   {
     id: "62",
@@ -1227,6 +1256,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Can I save my BMI history?", answer: "The calculator shows your current result. For tracking over time, note your BMI values manually or use the companion health calculators on the site." },
       { question: "Is my data stored anywhere?", answer: "No. All calculations run locally in your browser. No height, weight, or BMI data is transmitted or stored on any server." },
     ],
+    seoTitle: "BMI Calculator – Free Online",
   },
   {
     id: "64",
@@ -1290,7 +1320,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Should I add a photo?", answer: "No photo for US/UK/India private-sector roles — it risks bias filtering and wastes space. Add one only where explicitly expected (e.g., some Gulf hospitality roles)." },
       { question: "Is my personal data stored?", answer: "No. Everything renders locally in your browser. Names, emails, phone numbers, and work history never leave your device." },
     ],
-},
+    seoTitle: "Free Online Resume Builder",
+  },
   {
     id: "69",
     name: "AI Image Upscaler",
@@ -1354,6 +1385,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What output format should I pick?", answer: "Match the source for fidelity (JPG→JPG, PNG→PNG) or switch to WebP for smallest size. Format conversion happens after resampling, so quality settings still apply." },
       { question: "Are my images uploaded?", answer: "No. Resizing runs entirely in your browser. Images never leave your device." },
     ],
+    seoTitle: "Free Online Image Resizer",
   },
   {
 
@@ -1376,7 +1408,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Should I reuse variations of one password?", answer: "No. One breach exposes the pattern. Generate a unique password per site and store them in a password manager — that is the threat model this tool is built for." },
       { question: "Are generated passwords sent anywhere?", answer: "No. Generation uses the browser Web Crypto API locally. Passwords never leave your device and are never logged." },
     ],
-},
+    seoTitle: "Free Password Generator Online",
+  },
   {
 
     id: "73",
@@ -1398,6 +1431,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Does it work offline?", answer: "Yes. After the initial page load, the comparison runs entirely in your browser using the diff-match-patch library. No data is sent to any server." },
       { question: "Can I copy the diff results?", answer: "The highlighted comparison is displayed visually. You can select and copy the text from either panel, or take a screenshot of the side-by-side view." },
     ],
+    seoTitle: "Free Diff Checker Online",
   },
   {
     id: "76",
@@ -1419,7 +1453,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What's the difference between IPv4 and IPv6?", answer: "IPv4 is the older 32-bit address format (e.g., 192.168.1.1). IPv6 is the newer 128-bit format (e.g., 2001:0db8::1) designed to replace IPv4 as addresses run out. The tool shows both if your network supports them." },
       { question: "Can I look up someone else's IP?", answer: "This tool shows your own public IP. To look up another IP's geolocation, you'd need a different WHOIS or IP geolocation service." },
     ],
-},
+    seoTitle: "Free IP Address Lookup Online",
+  },
   {
     id: "79",
     name: "Photo Retoucher",
@@ -1503,6 +1538,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Is this accurate for CTC vs take-home?", answer: "Enter your CTC (Cost to Company) and the tool separates employer contributions (PF, Gratuity) from your actual take-home salary after all employee-side deductions and taxes." },
       { question: "Is my salary data stored or shared?", answer: "No. All calculations run entirely in your browser. No salary figures, tax details, or personal financial data is transmitted to any server." },
     ],
+    seoTitle: "Free Online Salary Calculator",
   },
   {
     id: "86",
@@ -1524,6 +1560,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Can I remove a section from the middle of a file?", answer: "Yes. Set the start marker after the section you want to remove and the end marker before it. The tool joins the remaining parts into a single continuous output." },
       { question: "Is there a minimum or maximum length I can trim to?", answer: "You can trim to as short as one second. There is no maximum — the tool handles files of any length your browser can load into memory." },
     ],
+    seoTitle: "Audio Cutter – Free Online",
   },
   {
     id: "86b",
@@ -1545,6 +1582,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Will converting MP3 lose quality?", answer: "From lossy compressed to uncompressed lossless: quality is preserved as far as the formats allow." },
       { question: "Should I keep the original MP3 files?", answer: "Yes \u2014 archive MP3 originals before batch-converting. Re-converting from WAV back to MP3 never restores discarded data." },
     ],
+    seoTitle: "Free Online MP3 to WAV",
   },
   {
     id: "87",
@@ -1566,6 +1604,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Does it track completed sessions?", answer: "Yes — daily pomodoro counts persist locally, so you can see output trends (e.g., 6 focused sessions ≈ a strong deep-work day) without any account." },
       { question: "When using Pomodoro Timer, is anything uploaded?", answer: "No. Timing and counts stay in your browser via local storage. Nothing leaves your device." },
     ],
+    seoTitle: "Free Online Pomodoro Timer",
   },
   {
     id: "90",
@@ -1608,6 +1647,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "How long does EPUB-to-PDF conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
       { question: "Will converting EPUB lose quality?", answer: "From reflowable ebook to fixed-layout document: quality is preserved as far as the formats allow." },
     ],
+    seoTitle: "Free EPUB to PDF Online",
   },
   {
     id: "96",
@@ -1650,6 +1690,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "PDF or HTML output — which to send?", answer: "PDF for emailing to clients and record-keeping (fixed layout, prints cleanly); HTML when the client needs to copy line items or you embed the invoice in a portal." },
       { question: "Is my client and billing data stored?", answer: "No. Everything renders locally in your browser. No client names, amounts, or GSTINs are transmitted or stored." },
     ],
+    seoTitle: "Invoice Generator – Free Online",
   },
   {
     id: "98",
@@ -1671,6 +1712,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Are there pre-made templates?", answer: "Yes. Professional templates for various industries — tech, healthcare, creative, corporate. Customize colors, fonts, and layout to match your brand." },
       { question: "Is my design stored?", answer: "No. All editing happens locally in your browser. No design data is uploaded to any server." },
     ],
+    seoTitle: "Free Online Business Card Maker",
   },
   {
 
@@ -1693,7 +1735,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Does it explain what my regex does?", answer: "The tool highlights matches visually. For a detailed breakdown of what each part of your pattern means, use a regex explanation tool alongside this tester." },
       { question: "Is my regex pattern stored?", answer: "No. Your pattern and test strings stay in your browser and are never transmitted anywhere. Everything runs locally using the regex.js library." },
     ],
-},
+    seoTitle: "Free Online Regex Tester",
+  },
   {
 
     id: "101",
@@ -1742,7 +1785,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Speech to Text",
     slug: "speech-to-text",
     category: "Audio",
-    description: "Dictate live microphone speech to text in multiple languages using on-device browser recognition.",
+    description: 'Dictate live microphone speech to text in multiple languages through your browser\'s speech service. Live captions for meetings and notes — free to start, no Toolzum account needed.',
     seoDescription: 'Free online Speech to Text — live microphone dictation in multiple languages. On-device recognition, private. ',
     dependencies: "Web Speech API",
     instructions: [
@@ -1757,6 +1800,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "How private is it?", answer: "Recognition runs on-device in Chrome via the Web Speech API — your voice never leaves the browser for processing." },
       { question: "Are my recordings uploaded?", answer: "No. Everything runs on-device in your browser — nothing is recorded, uploaded, or stored." },
     ],
+    seoTitle: "Speech to Text – Free Online",
   },
   {
     id: "106",
@@ -1787,7 +1831,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Coin Flipper",
     slug: "coin-flipper",
     category: "Utility",
-    description: 'Flip a virtual coin with streak tracking for instant decisions. Settle it fairly in one tap — free, local, no signup.',
+    description: 'Flip a virtual coin with streak tracking for instant decisions. Settle it fairly in one tap — free, local, no signup. Best-of-three settles disputes fairly with streak tracking — free, local, no signup.',
     seoDescription: 'Free coin flipper with streaks. Local, free, no signup.',
     dependencies: "CSS3 Animations",
     seoTitle: "Free Coin Flip Online",
@@ -1844,6 +1888,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Should I strip before every upload?", answer: "For public posts, yes — always. For client deliveries and archives, keep originals with metadata intact (timestamps prove provenance). Clean copies for sharing, keep masters for records." },
       { question: "Are my photos uploaded?", answer: "No. Stripping runs entirely in your browser. Photos never leave your device." },
     ],
+    seoTitle: "Free Online EXIF Data Remover",
   },
   {
     id: "mp4-mkv-1",
@@ -1865,6 +1910,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "When using MP4 to MKV Converter, what MP4 files convert best?", answer: "Complete, uncorrupted MP4 files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
       { question: "Why convert MP4 to MKV?", answer: "MP4 (MPEG-4 Part 14) is lossy compressed \u2014 best for universal video playback on any device \u2014 phones, smart TVs, web browsers, and social media. MKV (Matroska Video) is lossless container \u2014 best for advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file." },
     ],
+    seoTitle: "MP4 to MKV Converter – Free Online",
   },
   {
     id: "mp4-mov-1",
@@ -1886,6 +1932,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Where does MOV fit best?", answer: "Apple ecosystem \u2014 Final Cut Pro, iMovie, and macOS video editing workflows." },
       { question: "When using MP4 to MOV Converter, what MP4 files convert best?", answer: "Complete, uncorrupted MP4 files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
     ],
+    seoTitle: "MP4 to MOV Converter – Free Online",
   },
   {
     id: "mkv-mov-1",
@@ -1907,6 +1954,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Should I keep the original MKV files?", answer: "Yes \u2014 archive MKV originals before batch-converting. Re-converting from MOV back to MKV never restores discarded data." },
       { question: "How long does MKV-to-MOV conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
     ],
+    seoTitle: "Free MKV to MOV Converter Online",
   },
   {
     id: "mov-mkv-1",
@@ -1928,6 +1976,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Why convert MOV to MKV?", answer: "MOV (QuickTime Movie) is lossless or lossy \u2014 best for Apple ecosystem \u2014 Final Cut Pro, iMovie, and macOS video editing workflows. MKV (Matroska Video) is lossless container \u2014 best for advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file." },
       { question: "Where does MKV fit best?", answer: "advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file." },
     ],
+    seoTitle: "Free Online MOV to MKV Converter",
   },
   {
     id: "111",
@@ -1949,6 +1998,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Can I preview quality before processing?", answer: "Yes. The tool includes a quality preview feature so you can check the visual result at your chosen CRF/bitrate settings before committing to the full compression." },
       { question: "Is my video uploaded to a server?", answer: "No. All compression runs locally in your browser using FFmpeg WASM. Your video never leaves your device." },
     ],
+    seoTitle: "Free Video Compressor Online",
   },
   {
     id: "112",
@@ -1992,7 +2042,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Can I sort JSON keys?", answer: "Yes. Toggle key sorting to arrange all object keys alphabetically. This is useful for comparing two JSON structures or making large configs easier to navigate." },
       { question: "Is my JSON data uploaded?", answer: "No. All formatting and validation happens locally in your browser using the JSONLint library. Your data never leaves your device." },
     ],
-},
+    seoTitle: "JSON Formatter – Free Online",
+  },
   {
     id: "114",
     name: "XML Sitemap Generator",
@@ -2012,6 +2063,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Does it respect robots.txt?", answer: "Yes. The crawler reads robots.txt first and skips disallowed paths, and seeds from your existing sitemap.xml when available." },
       { question: "Does it handle JavaScript sites?", answer: "Yes — React, Next.js, and Vue pages render before crawling, and broken links surface in the report." },
     ],
+    seoTitle: "XML Sitemap Generator – Free Online",
   },
   {
     id: "115",
@@ -2076,6 +2128,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Where does CSV fit best?", answer: "CSV fits best for spreadsheets, database exports, and data imports — anywhere tabular plain text beats nested JSON." },
       { question: "What JSON files convert best?", answer: "Complete, uncorrupted JSON files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
     ],
+    seoTitle: "Free JSON to CSV Online",
   },
   {
     id: "122",
@@ -2138,6 +2191,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Why convert PNG to SVG?", answer: "PNG (Portable Network Graphics) is lossless \u2014 best for graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds. SVG (Scalable Vector Graphics) is vector (resolution-independent) \u2014 best for logos, icons, illustrations, and any graphic that needs to scale cleanly to any size." },
       { question: "Where does SVG fit best?", answer: "logos, icons, illustrations, and any graphic that needs to scale cleanly to any size." },
     ],
+    seoTitle: "Free PNG to SVG Online",
   },
   {
     id: "125",
@@ -2180,6 +2234,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Does it handle taxes or discounts?", answer: "Enter tax-inclusive or post-discount figures directly. For a 10% discount off a $100 list price, run the numbers on $90 to see the true margin before quoting." },
       { question: "Is my pricing data stored?", answer: "No. All calculations run locally in your browser. No costs, prices, or margins are transmitted or stored." },
     ],
+    seoTitle: "Free Online Margin Calculator",
   },
   {
 
@@ -2244,6 +2299,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What does ROI miss?", answer: "Risk, timing, and intangibles: a 50% ROI bet that can go to zero differs from a 15% certain return. ROI also ignores brand, learning, and customer-lifetime effects — pair it with payback period." },
       { question: "When using ROI Calculator, is my data stored?", answer: "No. All calculations run locally in your browser. No figures leave your device." },
     ],
+    seoTitle: "ROI Calculator – Free Online",
   },
   {
     id: "132",
@@ -2265,7 +2321,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "How do I verify a VAT number?", answer: "Use the EU VIES database for real-time validation. Invalid numbers mean you must charge your local rate — the calculator can't verify, only compute." },
       { question: "When using VAT Calculator, is my data stored?", answer: "No. All calculations run locally in your browser. No figures leave your device." },
     ],
-},
+    seoTitle: "VAT Calculator – Free Online",
+  },
   {
     id: "134",
     name: "Password Strength Checker",
@@ -2286,6 +2343,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Does it check breach databases?", answer: "No — zxcvbn estimates guessability from patterns, it doesn't know if your exact password leaked. Check Have I Been Pwned separately; if breached, change it everywhere it was reused, immediately." },
       { question: "Is my password uploaded?", answer: "No. Analysis runs entirely in your browser via zxcvbn. Passwords never leave your device — which is the only safe way to check them." },
     ],
+    seoTitle: "Free Password Strength Checker Online",
   },
   {
 
@@ -2308,7 +2366,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "How much smaller does minified JS get?", answer: "Typically 30-70% reduction depending on how much whitespace and commenting your original code has. Code with extensive comments sees the largest savings." },
       { question: "Is my source code uploaded?", answer: "No. Minification runs entirely in your browser using the Terser library. Your JavaScript source never leaves your device." },
     ],
-},
+    seoTitle: "Free JS Minifier Online",
+  },
   {
 
     id: "136",
@@ -2331,7 +2390,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Does it handle Unicode text?", answer: "Yes — text is UTF-8 encoded before conversion, so emoji and non-Latin scripts round-trip correctly, unlike naive btoa() snippets that corrupt them." },
       { question: "When using Base64 Encode/Decode, are my files uploaded?", answer: "No. Encoding runs entirely in your browser. Files and text never leave your device." },
     ],
-},
+    seoTitle: "Base64 Encode/Decode – Free Online",
+  },
   {
     id: "137",
     name: "Text to Handwriting",
@@ -2352,6 +2412,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Can I add my own handwriting font?", answer: "The tool ships curated fonts only. For true personal handwriting, create a font from your writing (Calligraphr, FontForge) — beyond this tool's scope." },
       { question: "When using Text to Handwriting, is my text uploaded?", answer: "No. Rendering runs entirely in your browser via Canvas. Text never leaves your device." },
     ],
+    seoTitle: "Free Text to Handwriting Online",
   },
   {
     id: "138",
@@ -2373,6 +2434,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Can I reuse it for repeat customers?", answer: "Yes — merchant details persist per session; duplicate a previous receipt and edit items rather than retyping. For full customer records, step up to the Invoice Generator." },
       { question: "Is my sales data stored?", answer: "No. Everything renders locally in your browser. No amounts, items, or merchant details are transmitted or stored." },
     ],
+    seoTitle: "Free Online Receipt Generator",
   },
   {
     id: "139",
@@ -2436,7 +2498,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What is the maximum input file size?", answer: "Videos up to 500 MB are supported. Larger files may cause memory issues in the browser. For long videos, trimming to a short segment first is recommended." },
       { question: "Is my video uploaded to a server?", answer: "No. All conversion happens locally in your browser using FFmpeg WASM and gif.js. Your video never leaves your device." },
     ],
-},
+    seoTitle: "Free Online Video to GIF",
+  },
   {
 
     id: "142",
@@ -2523,6 +2586,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Should I keep the original CSV files?", answer: "Yes \u2014 archive CSV originals before batch-converting. Re-converting from JSON back to CSV never restores discarded data." },
       { question: "How long does CSV-to-JSON conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
     ],
+    seoTitle: "Free CSV to JSON Online",
   },
   {
     id: "151b",
@@ -2544,6 +2608,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What CSV files convert best?", answer: "Complete, uncorrupted CSV files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
       { question: "Why convert CSV to XML?", answer: "CSV (Comma-Separated Values) is tabular plain text \u2014 best for spreadsheets, database exports, and data imports. XML (Extensible Markup Language) is verbose hierarchical markup \u2014 best for enterprise systems, SOAP APIs, document formats like DOCX and SVG." },
     ],
+    seoTitle: "Free CSV to XML Online",
   },
   {
     id: "152",
@@ -2608,7 +2673,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Can it minify SQL instead of formatting?", answer: "Some formatters support minification. Check if this tool has a minify toggle — the primary function is pretty-printing for readability." },
       { question: "Is my query stored or transmitted?", answer: "No. All formatting happens locally in your browser using the sql-formatter library. No SQL is sent to any server." },
     ],
-},
+    seoTitle: "SQL Formatter – Free Online",
+  },
   {
 
     id: "155",
@@ -2645,6 +2711,7 @@ export const entries_chunk_0: ToolMetadata[] = [
         answer: "No. Everything runs entirely in your browser using the crypto API — no UUID is ever sent to a server, and no files or data leave your device. You can even use it after disconnecting from the internet once the page has loaded."
       },
     ],
+    seoTitle: "UUID Generator – Free Online",
   },
   {
     id: "156",
@@ -2687,6 +2754,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Does muscle raise BMR?", answer: "Yes, ~6 kcal/lb/day vs ~2 for fat — but the effect is modest: 5kg of extra muscle adds roughly 60–70 kcal/day. Strength training matters more for the calories it burns directly." },
       { question: "When using BMR Calculator, is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted or stored." },
     ],
+    seoTitle: "Free BMR Calculator Online",
   },
   // REMOVED: meta-tag-generator — merged into seo-meta-tag-generator (id:799)
   {
@@ -2754,6 +2822,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Does this handle special characters?", answer: "Yes. UTF-8 encoding supports all Unicode characters including accented letters, emoji, and non-Latin scripts." },
       { question: "How do I decode binary back to text?", answer: "Paste the binary string to decode it back to readable text — both directions work in the same tool." },
     ],
+    seoTitle: "Free Online Text ↔ Binary Converter",
   },
   {
     id: "161",
@@ -2775,6 +2844,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Can I use this for service businesses?", answer: "Yes. Enter your monthly fixed costs and set variable cost to zero (or per-client cost). The break-even point shows how many clients or projects you need to cover costs." },
       { question: "When using Break-Even Calculator, is my financial data stored?", answer: "No. All calculations run locally in your browser. No cost or pricing data is transmitted." },
     ],
+    seoTitle: "Free Break-Even Calculator Online",
   },
   {
     id: "162",
@@ -2945,7 +3015,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Does it handle large documents?", answer: "Yes — pastes of full articles convert instantly since it's pure string ops. Sentence case on long text: verify abbreviations (e.g., 'e.g.') didn't trigger false sentence breaks." },
       { question: "When using Case Converter, is my text uploaded?", answer: "No. Conversion runs entirely in your browser. Text never leaves your device." },
     ],
-      },
+    seoTitle: "Case Converter – Free Online",
+  },
   {
     id: "171",
     name: "Keyword Density Checker",
@@ -2996,7 +3067,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "MD5 & SHA Hash Generator",
     slug: "md5-hash-generator",
     category: "Developer",
-    description: 'Compute MD5, SHA-1, SHA-256, and SHA-512 hashes from text or file input using CryptoJS.',
+    description: 'Compute MD5, SHA-1, SHA-256, and SHA-512 hashes from text or file input using CryptoJS. Paste text or drop files; digests compute instantly for checksums and lookups — free, local, no signup.',
     seoDescription: 'Free online MD5 & SHA Hash Generator — Compute MD5, SHA-1, SHA-256, and SHA-512 cryptographic hashes from text or file input. All processing happens in your browser, nothing is uploaded.',
     dependencies: "CryptoJS",
     instructions: [
@@ -3011,7 +3082,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Are the hashes salted?", answer: "No. This tool computes raw hashes. For password hashing, you should add a random salt before hashing and use a slow algorithm like bcrypt or Argon2 instead." },
       { question: "Is my input data uploaded?", answer: "No. Hashing happens entirely in your browser using CryptoJS. Neither your text nor file contents are transmitted to any server." },
     ],
-},
+    seoTitle: "Free MD5 & SHA Hash Generator Online",
+  },
   {
 
     id: "175",
@@ -3056,7 +3128,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What size should I print?", answer: "EAN-13 at 100% is 37.3×25.9mm including quiet zones (mandatory blank margins). Keep quiet zones clear — text or borders inside them break scanning." },
       { question: "When using Barcode Generator, is my data uploaded?", answer: "No. Generation runs entirely in your browser via JsBarcode. Data never leaves your device." },
     ],
-},
+    seoTitle: "Free Online Barcode Generator",
+  },
   {
     id: "181",
     name: "PGP Key Generator",
@@ -3183,6 +3256,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "How does churn feed into LTV?", answer: "Lifetime ≈ 1 ÷ monthly churn rate: 5% monthly churn implies ~20 months average life. Cut churn from 5% to 3% and the same $50×80% base jumps from $800 to ~$1,333 LTV." },
       { question: "Where does margin come in?", answer: "Use gross margin (revenue minus cost of delivery), not revenue. A $50 plan at 80% margin contributes $40/month, not $50 — forgetting margin overstates LTV by 25% here." },
     ],
+    seoTitle: "LTV Calculator – Free Online",
   },
   {
     id: "188",
@@ -3204,6 +3278,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Blended CAC or channel CAC?", answer: "Both. Blended ($100) sets budgets; channel splits reveal waste — e.g., paid search at $60 vs events at $400. Kill or fix the $400 channel instead of averaging it away." },
       { question: "Why did my CAC spike this month?", answer: "Usual causes: experimental spend on a new channel, sales hiring ahead of ramp (cost now, customers later), or a denominator dip from seasonality. Compare 3-month rolling CAC before reacting." },
     ],
+    seoTitle: "Free CAC Calculator Online",
   },
   {
     id: "189",
@@ -3268,6 +3343,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Will converting XML lose quality?", answer: "From verbose hierarchical markup to tabular plain text: quality is preserved as far as the formats allow." },
       { question: "Should I keep the original XML files?", answer: "Yes \u2014 archive XML originals before batch-converting. Re-converting from CSV back to XML never restores discarded data." },
     ],
+    seoTitle: "XML to CSV – Free Online",
   },
   {
     id: "192",
@@ -3508,6 +3584,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What XML files convert best?", answer: "Complete, uncorrupted XML files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
       { question: "Why convert XML to JSON?", answer: "XML (Extensible Markup Language) is verbose hierarchical markup \u2014 best for enterprise systems, SOAP APIs, document formats like DOCX and SVG. JSON (JavaScript Object Notation) is human-readable structured data \u2014 best for APIs, configuration files, and data exchange between web services." },
     ],
+    seoTitle: "Free XML to JSON Online",
   },
   {
     id: "200",
@@ -3765,6 +3842,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Where does MP3 fit best?", answer: "universal music playback and sharing across all devices and platforms." },
       { question: "When using MP4 to MP3 Converter, what MP4 files convert best?", answer: "Complete, uncorrupted MP4 files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
     ],
+    seoTitle: "MP4 to MP3 Converter – Free Online",
   },
   {
     id: "221",
@@ -3786,6 +3864,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What if my MOV file has multiple audio tracks?", answer: "The converter extracts the primary audio track. If your MOV has multiple tracks (for example, different language audio), the tool uses the first or default track." },
       { question: "Can I convert MOV files from my iPhone?", answer: "Yes. Transfer the MOV file to your computer or load it directly from your phone's browser. The conversion runs in the browser, so any device with a modern browser works." },
     ],
+    seoTitle: "Free MOV to MP3 Converter Online",
   },
   {
     id: "222",
@@ -3806,6 +3885,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Why convert WebM to MP3?", answer: "WebM (WebM Video) is lossy compressed \u2014 best for web-optimized video \u2014 streaming, embedded players, and HTML5 video tags with fast loading. MP3 (MPEG-1 Audio Layer 3) is lossy compressed \u2014 best for universal music playback and sharing across all devices and platforms." },
       { question: "Where does MP3 fit best?", answer: "universal music playback and sharing across all devices and platforms." },
     ],
+    seoTitle: "WebM to MP3 Converter – Free Online",
   },
   {
     id: "1103",
@@ -3830,5 +3910,6 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Temp mail, fake email, disposable email — what's the difference?", answer: "Temp mail usually means one throwaway inbox that disappears after a while. Fake email is the same idea from the sender's point of view — an address not tied to your identity. Disposable email means use it once, then drop it. This tool is all three: a free temporary address, generated on demand, gone in 60 minutes." },
       { question: "What is it good for?", answer: "Confirming an email for a signup, registering on forums and Wi-Fi logins, creating test accounts, grabbing discount or promo codes, receiving one-time codes and files-as-text, and keeping your real inbox clean. Anything you wouldn't want spam from later." },
     ],
+    seoTitle: "Free Online Temporary Email Generator",
   },
 ];
