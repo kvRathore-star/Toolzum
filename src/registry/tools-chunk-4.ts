@@ -698,20 +698,42 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "Sales Tax Calculator",
     slug: "sales-tax-calculator",
     category: "Finance",
-    description: 'Calculate total price including sales tax. Enter the pre-tax amount and tax rate to see the exact tax amount and final total. Figures never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online Sales Tax Calculator \u2014 Calculate total price including sales tax. Enter the pre-tax amount and tax rate to see the exact tax amount and final total. ',
+    description: 'Add sales tax to prices instantly by rate — checkout totals, quotes, and receipts. Price a $49 item at 8% correctly — free, local, no signup.',
+    seoDescription: 'Free sales tax calculator — totals with tax. Free, local, no signup.',
     dependencies: "None",
-
+    seoTitle: "Free Sales Tax Calculator Online",
+    instructions: [
+      { title: "1. Enter price and rate", desc: "Pre-tax amount with local percent." },
+      { title: "2. Read total", desc: "Tax plus total together." },
+      { title: "3. Back out if needed", desc: "Enter totals to split tax portions." },
+    ],
+    faqs: [
+      { question: 'How much is $49 plus 8%?', answer: '$52.92 — enter price with rate; tax ($3.92) and total display together. Exempt items calculate separately.' },
+      { question: 'Which rate applies?', answer: 'Varies by jurisdiction (0–10%+ in the US; VAT/GST elsewhere). Confirm the buyer\'s local rate — this tool computes, it doesn\'t look up rates.' },
+      { question: 'Tax-inclusive pricing?', answer: 'Enter the total to back out pre-tax price and tax portion for receipts. Display both figures where required.' },
+      { question: 'Do tax figures upload?', answer: 'No — math runs locally in your browser. Numbers never leave your device.' },
+    ],
   },
   {
     id: "834",
     name: "Markup Calculator",
     slug: "markup-calculator",
     category: "Finance",
-    description: 'Calculate markup percentage, selling price, and gross profit from cost. Essential for retail pricing and margin analysis. Figures never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online Markup Calculator \u2014 Calculate markup percentage, selling price, and gross profit from cost. Essential for retail pricing and margin analysis. ',
+    description: 'Price products from cost with markup percent — margin, selling price, and profit united. Cost $20 at 50% markup sells $30 — free, local, no signup.',
+    seoDescription: 'Free markup calculator — cost to price. Free, local, no signup.',
     dependencies: "None",
-
+    seoTitle: "Free Markup Calculator – Price Products Online",
+    instructions: [
+      { title: "1. Enter cost and markup", desc: "Unit cost with percent over it." },
+      { title: "2. Read price and margin", desc: "Selling price plus both metrics." },
+      { title: "3. Check overhead coverage", desc: "Compare margin against real costs." },
+    ],
+    faqs: [
+      { question: 'Markup vs margin?', answer: 'Markup is percent over cost ($20 + 50% = $30); margin is percent of price ($10 profit on $30 = 33%). Mixing them misprices — the tool shows both.' },
+      { question: 'What markup covers overhead?', answer: 'Cost of goods plus overhead share plus profit target, as markup on cost. A 50% markup barely covers 30% overhead plus 10% profit.' },
+      { question: 'Volume discounts?', answer: 'Lower per-unit cost at volume changes optimal markup — recompute per tier rather than blanket-discounting.' },
+      { question: 'Are figures uploaded?', answer: 'No — math runs locally in your browser. Figures never leave your device.' },
+    ],
   },
   {
     id: "836",

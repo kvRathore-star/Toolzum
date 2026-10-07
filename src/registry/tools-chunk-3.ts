@@ -607,10 +607,21 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "Car Lease Calculator",
     slug: "car-lease-calculator",
     category: "Finance",
-    description: 'Calculate monthly lease payments using capitalized cost, residual value, term, and money factor. Compare lease vs buy for your next vehicle. Figures never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online Car Lease Calculator — Calculate monthly lease payments using capitalized cost, residual value, term, and money factor. Compare lease vs buy for your next vehicle. ',
+    description: 'Estimate monthly car lease payments from price, residual, and money factor. Know a $30k car\'s true monthly cost — free, local, no signup.',
+    seoDescription: 'Free lease estimator — monthly payments. Free, local, no signup.',
     dependencies: "None",
-
+    seoTitle: "Free Car Lease Calculator Online",
+    instructions: [
+      { title: "1. Enter price and residual", desc: "Cap cost with end value and term." },
+      { title: "2. Read monthly payment", desc: "Depreciation plus rent charge." },
+      { title: "3. Compare with buying", desc: "Total 3-year costs side by side." },
+    ],
+    faqs: [
+      { question: 'How is lease payment computed?', answer: 'Depreciation (price minus residual, divided by months) plus rent charge (money factor times sum). A $30k car at 60% residual over 36 months leases far below its loan payment.' },
+      { question: 'Money factor to APR?', answer: 'Multiply by 2400: 0.00250 equals 6% APR. Dealers quote factors to obscure rates — convert instantly.' },
+      { question: 'Lease vs buy?', answer: 'Lease for always-new cars and business write-offs; buy for long holds and high mileage. Compare total 3-year costs, not just monthlies.' },
+      { question: 'Is my data uploaded?', answer: 'No — math runs locally in your browser. Numbers never leave your device.' },
+    ],
   },
   {
     id: "607",
@@ -639,10 +650,21 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "Debt Payoff Calculator",
     slug: "debt-payoff-calculator",
     category: "Finance",
-    description: 'Calculate how long it will take to pay off debt with monthly payments. See total interest paid and create a payoff plan. Figures never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online Debt Payoff Calculator — Calculate how long it will take to pay off debt with monthly payments. See total interest paid and create a payoff plan. ',
+    description: 'Plan debt payoff with avalanche vs snowball strategies and extra payments. See a 5-year slog become 3 with $200 extra — free, local, no signup.',
+    seoDescription: 'Free debt planner — avalanche vs snowball. Free, local, no signup.',
     dependencies: "None",
-
+    seoTitle: "Free Debt Payoff Calculator – Get Debt Free",
+    instructions: [
+      { title: "1. List all debts", desc: "Balances, rates, and minimums each." },
+      { title: "2. Pick a strategy", desc: "Avalanche for math, snowball for momentum." },
+      { title: "3. Add extra payments", desc: "Watch years and interest fall." },
+    ],
+    faqs: [
+      { question: 'Avalanche or snowball?', answer: 'Avalanche (highest rate first) saves the most interest; snowball (smallest balance first) wins psychologically with quick kills. Pick the one you\'ll actually follow.' },
+      { question: 'How much do extra payments help?', answer: 'Enormously early: $200 extra monthly on typical cards cuts years and thousands in interest. The tool shows both timelines side by side.' },
+      { question: 'Which debts first?', answer: 'List all with rates and minimums; the strategies order them automatically. Never skip minimums chasing optimizations.' },
+      { question: 'Is debt data uploaded?', answer: 'No — planning runs locally in your browser. Sensitive figures never leave your device.' },
+    ],
   },
   {
     id: "610",
@@ -746,10 +768,21 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "Net Worth Calculator",
     slug: "net-worth-calculator",
     category: "Finance",
-    description: 'Calculate your net worth by subtracting total liabilities from total assets. Get a snapshot of your financial health. Figures never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online Net Worth Calculator — Calculate your net worth by subtracting total liabilities from total assets. Get a snapshot of your financial health. ',
+    description: 'Compute net worth from assets minus liabilities with category breakdowns. Track the number that actually matters yearly — free, local, no signup.',
+    seoDescription: 'Free net worth tracker — assets minus debt. Free, local, no signup.',
     dependencies: "None",
-
+    seoTitle: "Free Net Worth Calculator Online",
+    instructions: [
+      { title: "1. List assets", desc: "Cash, investments, equity at current values." },
+      { title: "2. List all liabilities", desc: "Every debt without exception." },
+      { title: "3. Track quarterly", desc: "Chart the trend, not the month." },
+    ],
+    faqs: [
+      { question: 'What counts as assets?', answer: 'Cash, investments at current value, property equity (value minus mortgage), business equity. Depreciating cars count at resale, not purchase price.' },
+      { question: 'Which debts subtract?', answer: 'All of them: mortgages, loans, cards, owed taxes. Net worth equals assets minus every liability — partial accounting lies.' },
+      { question: 'How often to update?', answer: 'Quarterly — monthly noise obscures trends, yearly misses drift. One number per quarter charted over years.' },
+      { question: 'Is wealth data uploaded?', answer: 'No — math runs locally in your browser. Figures never leave your device.' },
+    ],
   },
   {
     id: "617",
@@ -1640,10 +1673,21 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "Tax Calculator",
     slug: "tax-calculator",
     category: "Finance",
-    description: 'Estimate your income tax with progressive tax brackets. Enter income and deductions to calculate estimated tax liability and effective rate. Figures never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online Tax Calculator — Estimate your income tax with progressive tax brackets. Enter income and deductions to calculate estimated tax liability and effective rate. ',
+    description: 'Estimate income tax across progressive brackets with regime comparison. See what you keep before filing season — free, local, no signup.',
+    seoDescription: 'Free tax estimator — bracket math. Free, local, no signup. Verify locally.',
     dependencies: "None",
-
+    seoTitle: "Free Income Tax Calculator Online",
+    instructions: [
+      { title: "1. Enter income and regime", desc: "Annual income with deduction path." },
+      { title: "2. Read take-home", desc: "Tax with effective rate shown." },
+      { title: "3. Verify current law", desc: "Rules change yearly; confirm before filing." },
+    ],
+    faqs: [
+      { question: 'How do brackets work?', answer: 'Marginal rates apply per slice: income into a 30% bracket pays 30% only on that slice, not everything. Effective rate always trails the top bracket.' },
+      { question: 'Which regime/deductions?', answer: 'Compare standard vs itemized paths with your actual deductions (80C-style or local equivalents). The higher take-home wins; rules change yearly — verify current law.' },
+      { question: 'Estimate vs filing?', answer: 'Estimates guide planning and advance tax; filings follow official forms and current rules. Never submit estimates as returns.' },
+      { question: 'Is income data uploaded?', answer: 'No — math runs locally in your browser. Income never leaves your device.' },
+    ],
   },
   {
     id: "676",
