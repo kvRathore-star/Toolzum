@@ -4,10 +4,8 @@ import {
   Zap, 
   HelpCircle,
   Sparkles,
-  EyeOff,
-  Lock,
   Ban,
-  User
+  Mail
 } from "lucide-react";
 import Link from "next/link";
 import { getCachedToolCounts } from "@/registry/tools-helpers";
@@ -37,7 +35,7 @@ export default function AboutPage() {
             The browser is the new server.
           </h1>
           <p className="text-lg sm:text-xl text-[var(--text-secondary)]">
-            We believe your files should never leave your device. Toolzum brings server-grade processing to your browser via WebAssembly — {localTools} tools run entirely on your device, zero uploads required.
+            We believe your files should never leave your device. Toolzum brings server-grade processing to your browser — {localTools} tools run entirely on your device, zero uploads required.
           </p>
         </div>
 
@@ -47,7 +45,7 @@ export default function AboutPage() {
             The Browser is the Data Center.
           </p>
           <p className="text-sm text-[var(--text-secondary)] mt-2 max-w-xl mx-auto">
-            Most tools compile to WebAssembly and execute on your machine. No server racks, no cloud bills, no data leaving your device.
+            Local tools run entirely on your machine — heavy engines like video, OCR, and PDF compile to WebAssembly for near-native speed. No account, no uploads, no waiting room.
           </p>
         </div>
 
@@ -66,37 +64,28 @@ export default function AboutPage() {
               <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Client-Side</div>
             </div>
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 text-center">
-              <div className="text-4xl sm:text-5xl font-mono font-semibold text-purple-700 dark:text-purple-400 mb-2">&#60; 1s</div>
-              <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Execution Speed</div>
+              <div className="text-4xl sm:text-5xl font-mono font-semibold text-purple-700 dark:text-purple-400 mb-2">{totalCloud}</div>
+              <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Marked Cloud AI</div>
             </div>
           </div>
 
-        {/* The Story */}
+        {/* The Story — founder, timeline, contact in one block (was two overlapping sections) */}
         <div className="max-w-3xl mx-auto mb-20 text-center">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
             <Zap className="w-4 h-4" /> The Story
           </span>
           <h2 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl font-semibold text-[var(--text-primary)] mb-4">Built by you, for you.</h2>
           <p className="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed">
-            Built by a solo developer who was tired of uploading confidential PDFs and images to random cloud servers 
+            Built by solo founder <strong className="text-[var(--text-primary)]">Kirtiwardhan Rathore</strong> — bootstrapped,
+            no outside funding — who was tired of uploading confidential PDFs and images to random cloud servers
             just to compress or convert them. So I built <strong className="text-[var(--text-primary)]">{totalImplemented}+ tools</strong> 
             — {localTools} run entirely in your browser, no server needed.
           </p>
-          <p className="text-sm text-[var(--text-muted)] mt-4">
-            Privacy-first by design.
+          <p className="text-sm text-[var(--text-secondary)] mt-4">
+            Began as a private ToolHub staging preview · launched publicly on toolzum.com in <strong className="text-[var(--text-primary)]">July 2026</strong>
           </p>
-        </div>
-
-        {/* Company */}
-        <div className="max-w-3xl mx-auto mb-20 text-center">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-6">
-            <User className="w-4 h-4" /> The Company
-          </span>
-          <h2 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl font-semibold text-[var(--text-primary)] mb-4">Solo-built and bootstrapped.</h2>
-          <p className="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed">
-            Toolzum is built by solo founder <strong className="text-[var(--text-primary)]">Kirtiwardhan Rathore</strong> with
-            no outside funding. The project began as a private staging preview (built as ToolHub) and
-            launched publicly on toolzum.com in July 2026.
+          <p className="text-sm text-[var(--text-muted)] mt-2 inline-flex items-center gap-1.5">
+            <Mail className="w-3.5 h-3.5" /> Privacy-first by design · <a href="mailto:contact@toolzum.com" className="underline underline-offset-2 hover:text-[var(--text-secondary)]">contact@toolzum.com</a>
           </p>
         </div>
 
@@ -135,9 +124,9 @@ export default function AboutPage() {
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="text-xl font-semibold mb-3">Absolute Sandbox Isolation</h3>
+              <h3 className="text-xl font-semibold mb-3">Sandboxed by the browser itself</h3>
               <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                When you load Toolzum, all tool compilers execute exclusively inside your browser's sandboxed worker thread. No metadata trackers, no temporary folders, and zero risk of file leakage.
+                Local tools run inside your browser's sandbox — no ad trackers, no analytics on your files, and nothing to leak by design. Usage counts are aggregate-only and declinable.
               </p>
             </div>
           </div>
@@ -147,9 +136,9 @@ export default function AboutPage() {
               <Cpu className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="text-xl font-semibold mb-3">WebAssembly-Driven Engine</h3>
+              <h3 className="text-xl font-semibold mb-3">WebAssembly where it counts</h3>
               <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                We compile industry-standard processing libraries into WebAssembly binaries that run at near-native speed directly in your browser — Chrome, Safari, Firefox, or Edge. No plugins, no installs.
+                Heavy engines — video, OCR, PDF, photo formats — compile to WebAssembly and run at near-native speed directly in your browser — Chrome, Safari, Firefox, or Edge. No plugins, no installs.
               </p>
             </div>
           </div>
