@@ -717,7 +717,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "gif-resizer",
     category: "Image",
     description: 'Resize animated GIFs to exact dimensions while preserving animation. Choose from presets or custom width with aspect ratio lock.',
-    seoDescription: 'Free online GIF Resizer — Resize animated GIFs to exact dimensions while preserving animation. Presets or custom size. ',
+    seoDescription: 'Free GIF resizer — exact dimensions with animation preserved, presets or custom size. Local FFmpeg, unlimited saves, no signup needed. ',
     dependencies: "@ffmpeg/ffmpeg",
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
@@ -740,7 +740,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "gif-to-apng",
     category: "Image",
     description: 'Upgrade GIF animations to APNG for full color and smoother motion at smaller sizes. Modernize sticker packs for today\'s apps — local FFmpeg work, unlimited saves.',
-    seoDescription: 'Free GIF to APNG — full-color animation. Local FFmpeg, unlimited saves.',
+    seoDescription: 'Free GIF to APNG converter — full-color animation without the 256-color limit. Local FFmpeg, unlimited saves, no signup needed.',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
     seoTitle: "Free GIF to APNG Converter Online",
@@ -762,7 +762,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "apng-to-gif",
     category: "Image",
     description: 'Convert APNG images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.',
-    seoDescription: 'Free online APNG to GIF — Convert animated PNG files into universally compatible GIF format. ',
+    seoDescription: 'Free APNG to GIF converter — animated PNGs to universally compatible GIFs. Local FFmpeg, unlimited saves, no signup needed. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
     instructions: [
@@ -797,7 +797,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Where do I install it?", answer: "Link with rel=\"icon\" in HTML head; browsers pick it up automatically." },
       { question: "Is my work uploaded anywhere when using Image to ICO?", answer: "No — conversion runs locally in your browser; free tier carries fair daily limits." },
     ],
-    seoDescription: 'Free online Image to ICO — Convert any image to Windows ICO format for favicons and app icons. Multi-size support. ',
+    seoDescription: 'Free image to ICO converter — any image to multi-size Windows ICO favicons and app icons. Local Canvas, unlimited saves, no signup needed. ',
     dependencies: "Canvas API",
     showInCategory: true,
   },
@@ -807,7 +807,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "color-converter",
     category: "Design",
     description: 'Convert colors between HEX, RGB, HSL, and HSV with live swatches. Translate brand specs across formats — free, local, no signup.',
-    seoDescription: 'Free color converter — all formats live. Local, free, no signup.',
+    seoDescription: 'Free color converter — HEX, RGB, HSL and more, all converted live instantly. Local processing, free, no signup, nothing uploads.',
     dependencies: "none",
     seoTitle: "Free Color Converter – HEX RGB HSL Online",
     instructions: [
@@ -829,7 +829,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "qr-code-reader",
     category: "Developer",
     description: 'Decode QR codes from uploaded images. Scan any QR code image and extract the embedded text or URL. Point it at screenshots, photos, or documents — decoded URLs and text copy out instantly. Runs locally, free, no signup.',
-    seoDescription: 'Free online QR Code Reader — Decode QR codes from images. Scan and extract text/URL from any QR code. ',
+    seoDescription: 'Free QR code reader — decode QR images to text and URLs. Local jsQR, free, no signup, nothing uploads.',
     dependencies: "jsQR",
     showInCategory: true,
     instructions: [
@@ -920,7 +920,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "pdf-to-tiff",
     category: "PDF",
     description: 'Convert PDF pages to lossless TIFF images for print, fax, and archival workflows. Produce 300 DPI press-ready files — local rendering, unlimited saves.',
-    seoDescription: 'Free PDF to TIFF — lossless, press-ready. Local rendering, unlimited saves.',
+    seoDescription: 'Free PDF to TIFF converter — pages to lossless press-ready TIFF images. Local rendering, unlimited saves, no signup needed.',
     dependencies: "pdfjs-dist",
     showInCategory: true,
     seoTitle: "Free PDF to TIFF Converter Online",
@@ -954,7 +954,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: 'Are scanned TIFFs searchable after?', answer: 'Page images carry over as-is; run OCR first if you need selectable text.' },
       { question: 'Is my converted PDF uploaded anywhere when using TIFF to PDF?', answer: 'No — conversion runs locally in your browser; free tier carries fair daily limits.' },
     ],
-    seoDescription: 'Free online TIFF to PDF — Convert TIFF images to PDF documents. Multi-page support, page size options, margins. ',
+    seoDescription: 'Free TIFF to PDF converter — scanned TIFFs to multi-page PDFs with size and margin options. Local pdf-lib, unlimited saves, free. ',
     dependencies: "pdf-lib, utif",
     showInCategory: true,
   },
@@ -964,7 +964,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "font-converter",
     category: "Design",
     description: 'Convert fonts between TTF, OTF, WOFF, and WOFF2 with custom-text preview before downloading. Ship web-ready WOFF2 in one pass — local opentype.js work, unlimited saves.',
-    seoDescription: 'Free font converter — TTF, OTF, WOFF, WOFF2 with preview. Local, unlimited saves.',
+    seoDescription: 'Free font converter — TTF, OTF, WOFF and WOFF2 with live preview pane. Local opentype.js, unlimited saves, no signup needed.',
     dependencies: "opentype.js",
     showInCategory: true,
     seoTitle: "Free Font Converter – TTF OTF WOFF Online",
@@ -986,7 +986,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "font-subsetter",
     category: "Design",
     description: 'Subset fonts to used characters plus WOFF2 conversion — cut webfont weight by 90%. Ship 12 KB instead of 150 KB — local opentype.js work, unlimited saves.',
-    seoDescription: 'Free font subsetter — used glyphs only. Local, unlimited saves.',
+    seoDescription: 'Free font subsetter — used glyphs only for minimal webfont bytes shipped. Local opentype.js, unlimited saves, no signup needed.',
     dependencies: "opentype.js",
     showInCategory: true,
     seoTitle: "Free Font Subsetter – WOFF2 Online",
@@ -1019,7 +1019,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Quality preserved?", answer: "Images embed without recompression or quality loss, page for page." },
       { question: "Is my comics uploaded anywhere when using CBZ to PDF?", answer: "No — conversion runs locally in your browser; free tier carries fair daily limits." },
     ],
-    seoDescription: 'Free online CBZ to PDF — Convert comic book archives to PDF. Page ranges, double-page spreads, multiple sizes. ',
+    seoDescription: 'Free CBZ to PDF converter — comic archives to PDF with page ranges and double-page spreads. Local jszip, unlimited saves, no signup needed. ',
     dependencies: "jszip, pdf-lib",
     showInCategory: true,
     seoTitle: "Free Online CBZ to PDF",
@@ -1052,7 +1052,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "xlsx-csv-converter",
     category: "Converter",
     description: 'Convert between XLSX workbooks and CSV files preserving sheets and encoding. Move data across Excel and pipelines — local SheetJS work, unlimited saves.',
-    seoDescription: 'Free XLSX-CSV converter — sheets preserved. Local, unlimited saves.',
+    seoDescription: 'Free XLSX-CSV converter — spreadsheet sheets converted with all data preserved. Local SheetJS, unlimited saves, no signup needed.',
     dependencies: "xlsx",
     seoTitle: "Free XLSX CSV Converter – Both Ways Online",
     instructions: [
@@ -2057,7 +2057,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "random-string-generator",
     category: "Utility",
     description: 'Generate random alphanumeric strings for tokens, IDs, and test fixtures. Mint 32-char references in bulk — free, local, no signup.',
-    seoDescription: 'Free random strings — tokens plus IDs. Local, free, no signup.',
+    seoDescription: 'Free random string generator — tokens, IDs and passwords generated locally. Local crypto, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Random String Generator Online",
     instructions: [
@@ -2079,7 +2079,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "number-base-converter",
     category: "Converter",
     description: 'Convert numbers between binary, octal, decimal, and hex with bitwise views. Read 0xFF as 255 instantly — local math, free, no signup.',
-    seoDescription: 'Free base converter — all four systems. Local, free, no signup.',
+    seoDescription: 'Free number base converter — binary, octal, decimal and hex in all directions. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Number Base Converter – Bin Oct Dec Hex",
     instructions: [
@@ -2101,7 +2101,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "line-sorter",
     category: "Utility",
     description: 'Sort lines alphabetically (A→Z, Z→A), reverse order, shuffle randomly, or remove duplicate lines. A–Z, Z–A, length, shuffle, and dedupe modes cover every ordering chore — local processing, free, no signup.',
-    seoDescription: 'Free online Line Sorter and Deduplicator — Sort lines A→Z or Z→A, reverse, shuffle, or remove duplicates. ',
+    seoDescription: 'Free line sorter and deduplicator — A to Z, reverse, shuffle or dedupe lines. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Paste source for Line Sorter & Deduplicator", desc: "Paste source for Line Sorter & Deduplicator into the input area. Nothing runs until you trigger it." },
@@ -2261,7 +2261,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "svg-to-css",
     category: "Developer",
     description: 'Convert SVG images to CSS format in your browser. Code never leaves your device — formatting and validation run locally in your browser.',
-    seoDescription: 'Free online SVG to CSS Converter — Convert SVG markup to CSS background-image data URIs. Preview the result. ',
+    seoDescription: 'Free SVG to CSS converter — markup to background-image data URIs with preview. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Paste CSS", desc: "Paste CSS text into the input area. Nothing runs until you trigger it." },
@@ -2454,7 +2454,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Which units for ETA math?", answer: "Kilometers or miles with matching speed units, your free choice here." },
       { question: "Is my trip input uploaded anywhere?", answer: "No — calculation runs locally in your browser, free with no signup." },
     ],
-    seoDescription: 'Free online ETA Calculator — Estimate travel time from distance and speed with optional arrival time. ',
+    seoDescription: 'Free ETA calculator — travel time from distance and speed with arrival time. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Online ETA Calculator",
   },
@@ -2534,7 +2534,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "slugify-tool",
     category: "Utility",
     description: 'Convert text to URL-friendly slugs with configurable separators. Input never leaves your device — everything runs locally in your browser.',
-    seoDescription: 'Free online Slugify — Convert text to URL-friendly slugs with configurable separators. ',
+    seoDescription: 'Free slugify tool — text to URL-friendly slugs with configurable separators. Local processing, unlimited saves, no signup needed.',
     dependencies: "None",
     instructions: [
       { title: "1. Paste source for Slugify", desc: "Paste source for Slugify into the input area. Nothing runs until you trigger it." },
@@ -2557,7 +2557,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "ulid-generator",
     category: "Utility",
     description: 'Generate time-ordered ULID identifiers with Crockford base32 encoding. Input never leaves your device — everything runs locally in your browser.',
-    seoDescription: 'Free online ULID Generator — Generate time-ordered ULID identifiers with Crockford base32 encoding. ',
+    seoDescription: 'Free ULID generator — time-ordered identifiers with Crockford base32. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for ULID first." },
@@ -2580,7 +2580,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "numeronym-generator",
     category: "Utility",
     description: 'Convert words to numeronyms (a11y-style) and acronyms. Input never leaves your device — everything runs locally in your browser.',
-    seoDescription: 'Free online Numeronym Generator — Convert words to numeronyms (a11y-style) and acronyms. ',
+    seoDescription: 'Free numeronym generator — words to a11y-style numeronyms and acronyms. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Numeronym first." },
@@ -2625,7 +2625,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "list-converter",
     category: "Utility",
     description: 'Convert lists between comma, newline, JSON array, and quoted formats. Move data across tools without reformatting — free, local, no signup.',
-    seoDescription: 'Free list converter — delimiters plus JSON. Local, free, no signup.',
+    seoDescription: 'Free list converter — delimiters swapped plus JSON in and out cleanly. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free List Converter – Formats Online",
     instructions: [
@@ -2670,7 +2670,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "emoji-picker",
     category: "Utility",
     description: 'Pick emoji by keyword with skin-tone and variant options — copy anywhere. Find the exact reaction fast — free, local, no signup.',
-    seoDescription: 'Free emoji search — tones plus variants. Local, free, no signup.',
+    seoDescription: 'Free emoji picker — search with skin tones plus variants, click to copy. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Emoji Picker – Search & Copy",
     instructions: [
@@ -2692,7 +2692,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "ascii-art-generator",
     category: "Utility",
     description: 'Convert text to ASCII art with multiple font styles — download or copy the result for READMEs, code comments, and banners.',
-    seoDescription: 'Free online ASCII Art Generator — Convert text to ASCII art with block, bubble, fancy, and digital styles. ',
+    seoDescription: 'Free ASCII art generator — text to block, bubble, fancy and digital styles. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for ASCII Art first." },
@@ -2715,7 +2715,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "ascii-font-generator",
     category: "Utility",
     description: 'Generate ASCII-art text banners and figlet fonts for READMEs and terminals. Make headers that pop in plain text — free, local, no signup.',
-    seoDescription: 'Free ASCII art text — figlet banners. Local, free, no signup.',
+    seoDescription: 'Free ASCII figlet banners — big text art for READMEs and code comments. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free ASCII Font Generator – Figlet Online",
     instructions: [
@@ -2737,7 +2737,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "benchmark-builder",
     category: "Utility",
     description: 'Build JavaScript micro-benchmarks with warmup, iterations, and ops/sec stats. Prove which snippet is faster — local measurement, free, no signup.',
-    seoDescription: 'Free JS benchmarks — ops/sec stats. Local, free, no signup.',
+    seoDescription: 'Free JS benchmark builder — ops/sec stats comparing code snippets fairly. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Benchmark Builder – JS Speed Online",
     instructions: [
@@ -2802,7 +2802,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "pdf-info",
     category: "PDF",
     description: 'Read any PDF\'s metadata instantly — page count, size, author, creation date, encryption status. Verify a download before opening fully — local parsing, free, no signup.',
-    seoDescription: 'Free PDF metadata reader — pages, size, author. Local, free, no signup.',
+    seoDescription: 'Free PDF info reader — page count, file size, author and producer details. Local parsing, free, no signup, nothing uploads.',
     dependencies: "pdf-lib, pdfjs-dist",
     showInCategory: true,
     seoTitle: "Free PDF Info Reader Online",
@@ -2824,7 +2824,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "pdf-cleanup",
     category: "PDF",
     description: 'Remove blank pages, embedded junk, and bloat from PDFs in one pass — compress, clean, and standardize. Shrink a bloated 80 MB archive for sharing — local work, unlimited saves.',
-    seoDescription: 'Free PDF cleanup — blanks, bloat, junk removed. Local, unlimited saves.',
+    seoDescription: 'Free PDF cleanup tool — blank pages, metadata bloat and junk objects removed. Local pdf-lib, unlimited saves, no signup needed.',
     dependencies: "pdf-lib, pdfjs-dist",
     showInCategory: true,
     seoTitle: "Free PDF Cleanup Tool Online",
@@ -2847,7 +2847,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     category: "PDF",
     description: 'Add a subtle color tint to all pages in a PDF document. Upload your PDF and pick a background color. Tint every page uniformly for branding or readability themes — local pdf-lib work, unlimited saves.',
     seoTitle: "PDF Background Color – Free Customizer",
-    seoDescription: 'Free online PDF Background Color \u2014 Add a subtle color tint to all pages in a PDF document. ',
+    seoDescription: 'Free PDF background color tool — subtle tint across all pages for branding or readability. Local pdf-lib, unlimited saves, free.',
     dependencies: "pdf-lib",
     instructions: [
       { title: "1. Upload the PDF", desc: "The background applies to every page in the file." },
@@ -2868,7 +2868,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "pdf-add-blank-page",
     category: "PDF",
     description: 'Insert blank pages at any position in a PDF document. Choose page size, count, and position. Choose page size and count to match the document — local pdf-lib work, unlimited saves.',
-    seoDescription: 'Free online PDF Add Blank Page \u2014 Insert blank pages at any position in a PDF document. ',
+    seoDescription: 'Free add-blank-page tool — insert blank pages at any position for notes or section breaks. Local pdf-lib, unlimited saves, free.',
     dependencies: "pdf-lib",
     instructions: [
       { title: "1. Upload Your PDF", desc: "Drag and drop or select the PDF file you want to add blank pages to." },
@@ -2922,7 +2922,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: 'Does stamping work on scanned PDFs?', answer: 'Yes — the stamp overlays the page image, so scans work exactly like digital pages.' },
       { question: 'Is my stamped PDF uploaded anywhere when using PDF Stamp?', answer: 'No — stamping runs locally in your browser, free with no signup.' },
     ],
-    seoDescription: 'Free online PDF Stamp — Add diagonal watermark stamps like DRAFT or CONFIDENTIAL to every page. ',
+    seoDescription: 'Free PDF stamp tool — diagonal DRAFT/CONFIDENTIAL stamps on every page. Local pdf-lib, unlimited saves, no signup needed. ',
     dependencies: "pdf-lib",
   },
   {
@@ -2943,7 +2943,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: 'Will the timestamp print?', answer: 'Yes, it is part of the page content, so printing, exporting, and flattening all preserve it.' },
       { question: 'Is my timestamped PDF uploaded anywhere when using PDF Timestamp?', answer: 'No — stamping runs locally in your browser, free with no signup.' },
     ],
-    seoDescription: 'Free online PDF Timestamp — Add a generation timestamp to every page of your PDF. ',
+    seoDescription: 'Free PDF timestamp tool — generation timestamps stamped on every page. Local pdf-lib, unlimited saves, no signup needed. ',
     dependencies: "pdf-lib",
   },
   {
@@ -2952,7 +2952,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "pdf-table-of-contents",
     category: "PDF",
     description: 'Generate clickable tables of contents for PDFs from headings — navigate 300-page ebooks instantly. Add what the author forgot — local pdf-lib work, unlimited saves.',
-    seoDescription: 'Free PDF TOC maker — clickable outlines. Local pdf-lib, unlimited saves.',
+    seoDescription: 'Free PDF table-of-contents maker — clickable outlines built from your headings. Local pdf-lib, unlimited saves, no signup needed.',
     dependencies: "pdf-lib",
     seoTitle: "Free PDF Table of Contents Maker",
     instructions: [
@@ -3007,7 +3007,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: 'Will attachments bloat the file?', answer: 'Large payloads inflate size fast — keep them small when the PDF must be emailed.' },
       { question: 'Is my PDF with attachments uploaded anywhere when using PDF Attachments?', answer: 'No — embedding runs locally in your browser; free tier carries fair daily limits.' },
     ],
-    seoDescription: 'Free online PDF Attachments — View, add, and extract embedded files from PDF documents. Supports any file type. ',
+    seoDescription: 'Free PDF attachments tool — view, add and extract embedded files of any type. Local pdf-lib, unlimited saves, no signup needed. ',
     dependencies: "pdf-lib",
     showInCategory: true,
   },
@@ -3017,7 +3017,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "study-time-calculator",
     category: "Calculator",
     description: 'Plan study hours from syllabus weight and days left — pass with scheduled effort. Turn 5 chapters in 10 days into daily targets — free, local, no signup.',
-    seoDescription: 'Free study planner — hours per topic. Local, free, no signup.',
+    seoDescription: 'Free study time planner — hours per topic with exam-date pacing. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Study Time Calculator Online",
     instructions: [
@@ -3038,7 +3038,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "test-score-calculator",
     category: "Calculator",
     description: 'Compute test percentages and grades from correct/total with curve options. Turn 42/50 into 84% (B) instantly — free, local, no signup.',
-    seoDescription: 'Free test scorer — percent plus grade. Local, free, no signup.',
+    seoDescription: 'Free test score calculator — percent plus letter grade instantly. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Test Score Calculator – Percent & Grade",
     instructions: [
@@ -3059,7 +3059,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "words-per-page-calculator",
     category: "Calculator",
     description: 'Estimate how many pages your word count fills at different font sizes — compare 11pt vs 12pt, single vs double spacing, for essays and manuscripts.',
-    seoDescription: 'Free online Words Per Page Calculator \u2014 Estimate page count from word count and font size. ',
+    seoDescription: 'Free words-per-page calculator — page count from word count and font size. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter word count with page count." },
@@ -3081,7 +3081,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "profit-loss-calculator",
     category: "Finance",
     description: 'Compute profit and loss from revenue, costs, and expenses with margin percentages. Close the month knowing exact numbers — free, local, no signup.',
-    seoDescription: 'Free P&L calculator — profit with margins. Free, local, no signup.',
+    seoDescription: 'Free profit and loss calculator — revenue, costs and margins in one view. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Profit and Loss Calculator Online",
     instructions: [
@@ -3103,7 +3103,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "ring-size-converter",
     category: "Utility",
     description: 'Convert ring sizes across US, UK, EU, and Japanese standards with millimeter diameters. Buy a size 7 as EU 54 correctly — free, local, no signup.',
-    seoDescription: 'Free ring sizes — diameters included. Local, free, no signup.',
+    seoDescription: 'Free ring size converter — every system with diameters included clearly. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Ring Size Converter – US UK EU JP",
     instructions: [
@@ -3124,7 +3124,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "screen-size-converter",
     category: "Calculator",
     description: 'Convert screen sizes between inches, cm, resolution, and aspect — compare displays honestly. Check a 27-inch 4K pixel density — free, local, no signup.',
-    seoDescription: 'Free display math — size, PPI, aspect. Local, free, no signup.',
+    seoDescription: 'Free screen size math — diagonal, PPI and aspect from specs. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Screen Size Converter Online",
     instructions: [
@@ -3146,7 +3146,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "shoe-size-converter",
     category: "Utility",
     description: 'Convert shoe sizes across US, UK, EU, and CM Mondopoint with foot-length mapping. Translate EU 42 to US 9 accurately — free, local, no signup.',
-    seoDescription: 'Free shoe sizes — Mondopoint mapped. Local, free, no signup.',
+    seoDescription: 'Free shoe size converter — every system with Mondopoint mapped accurately. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Shoe Size Converter – US UK EU CM",
     instructions: [
@@ -3168,7 +3168,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "zip-file-extractor",
     category: "Utility",
     description: 'Peek inside any ZIP — list contents with sizes before extracting anything. Verify a 500 MB download\'s contents first — local fflate parsing, free, no signup.',
-    seoDescription: 'Free ZIP extractor — preview contents, extract all. Local fflate, free, no signup.',
+    seoDescription: 'Free ZIP file extractor — preview contents, extract everything locally. Local fflate, free, no signup, nothing uploads.',
     dependencies: "fflate",
     seoTitle: "Free ZIP File Extractor Online",
     instructions: [
@@ -3218,7 +3218,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Paste source for PKCE Verifier", desc: "Paste source for PKCE Verifier into the input area. Nothing runs until you trigger it." },
       { title: "2. Verify", desc: "Run verification and read the verdict." },
-      { title: "3. Confirm officially", desc: "Confirm on the official source." },
+      { title: "3. Test the real flow", desc: "Take the pair into your OAuth authorize + token calls and confirm the exchange." },
     ],
     faqs: [
       { question: "What is PKCE?", answer: "PKCE (Proof Key for Code Exchange) is a security extension to OAuth 2.0 that prevents authorization code interception attacks. Used with public clients like mobile and SPA apps." },
@@ -3236,7 +3236,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "oauth-scope-builder",
     category: "Developer",
     description: 'Build OAuth scope strings from comma-separated values with URL encoding and breakdown. Space-delimited scopes with encoding handled — free, local, no signup.',
-    seoDescription: 'Free online OAuth Scope Builder \u2014 Build and preview OAuth scope strings with URL encoding. ',
+    seoDescription: 'Free OAuth scope builder — scope strings with URL encoding previewed. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Complete each section", desc: "Fill the OAuth Scope Builder fields in order — required items first, optional details after." },
@@ -3259,7 +3259,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "oauth-state-validator",
     category: "Developer",
     description: 'Validate OAuth state parameters for format, length, and age — catch CSRF holes before they ship. Nothing leaves your browser.',
-    seoDescription: 'Free online OAuth State Validator \u2014 Validate state parameters for format, length, and age. ',
+    seoDescription: 'Free OAuth state validator — format, length and age checked. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Paste the state value", desc: "The OAuth state parameter your app generated for this login." },
@@ -3281,7 +3281,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "pbkdf2-hash-generator",
     category: "Developer",
     description: 'Generate PBKDF2 hashes with 10,000 iterations of SHA-256 for password storage simulation. Tune iterations to hardware — slower hashes resist brute force — free, local, no signup.',
-    seoDescription: 'Free online PBKDF2 Hash Generator \u2014 Generate PBKDF2 hashes with 10,000 SHA-256 iterations. ',
+    seoDescription: 'Free PBKDF2 hash generator — 10,000 SHA-256 iterations. Local crypto, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for PBKDF2 Hash first." },
@@ -3304,7 +3304,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "cookie-parser",
     category: "Developer",
     description: 'Parse Set-Cookie headers into structured JSON, or analyze cookie security flags (Secure, HttpOnly, SameSite, expiry). Flag missing Secure, HttpOnly, and SameSite attributes — free, local, no signup.',
-    seoDescription: 'Free online Cookie Parser & Analyzer \u2014 Parse Set-Cookie headers and check security flags. ',
+    seoDescription: 'Free cookie parser and analyzer — Set-Cookie headers with security flags. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Paste source for Cookie Parser & Analyzer", desc: "Paste source for Cookie Parser & Analyzer into the input area. Nothing runs until you trigger it." },
@@ -3327,7 +3327,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "html-linter",
     category: "Developer",
     description: 'Lint HTML for missing DOCTYPE, unclosed tags, and unexpected closing tags. Paste your HTML and get instant feedback. Catch errors before browsers guess wrong — free, local, no signup.',
-    seoDescription: 'Free online HTML Linter \u2014 Lint HTML for missing DOCTYPE, unclosed tags, and unexpected closing tags. ',
+    seoDescription: 'Free HTML linter — missing DOCTYPE, unclosed and stray tags flagged. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Paste HTML", desc: "Paste HTML text into the input area. Nothing runs until you trigger it." },
@@ -3350,7 +3350,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "xml-minifier-validator",
     category: "Developer",
     description: 'Minify XML by removing whitespace, or validate XML syntax. Paste your XML and choose an operation. Minify for transit or validate for correctness — free, local, no signup.',
-    seoDescription: 'Free online XML Minifier / Validator \u2014 Minify XML by removing whitespace, or validate XML syntax. ',
+    seoDescription: 'Free XML minifier and validator — whitespace stripped or syntax checked. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Paste the XML", desc: "Full document, then choose minify or validate." },
@@ -3393,7 +3393,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "typography-preview",
     category: "Design",
     description: 'Preview font size, line-height, letter-spacing, and weight combos live before committing CSS. Test a 32px/1.5 bold hero in seconds — free, local, no signup.',
-    seoDescription: 'Free typography preview — size, spacing, weight live. Free, local, no signup.',
+    seoDescription: 'Free typography preview — size, spacing and weight tested live side by side. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Typography Preview Tool Online",
     instructions: [
@@ -3415,7 +3415,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "base32-encoder",
     category: "Developer",
     description: 'Encode text to Base32 or decode Base32 strings back — the alphabet TOTP apps and authenticator URIs use. Both directions, fully local.',
-    seoDescription: 'Free online Base32 Encoder / Decoder \u2014 Encode and decode Base32 strings. ',
+    seoDescription: 'Free Base32 encoder and decoder — both directions handled cleanly. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Paste source for Base32 Encoder / Decoder", desc: "Paste source for Base32 Encoder / Decoder into the input area. Nothing runs until you trigger it." },
@@ -3438,7 +3438,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "base64-json-decoder",
     category: "Developer",
     description: 'Decode Base64 strings and pretty-print JSON data — paste encoded text to see the decoded result instantly. Inspect API payloads and tokens readably — free, local, no signup.',
-    seoDescription: 'Free online Base64 to JSON Decoder \u2014 Decode Base64 and pretty-print JSON. ',
+    seoDescription: 'Free Base64 to JSON decoder — decode and pretty-print JSON. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Paste JSON", desc: "Paste JSON text into the input area. Nothing runs until you trigger it." },
@@ -3461,7 +3461,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "hex-text-converter",
     category: "Developer",
     description: 'Convert between hex strings and text. Code never leaves your device — formatting and validation run locally in your browser.',
-    seoDescription: 'Free online Hex to Text Converter \u2014 Convert between hex strings and text. ',
+    seoDescription: 'Free hex to text converter — hex strings converted both directions. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Paste HEX", desc: "Paste or drop HEX source text into the input area." },
@@ -3484,7 +3484,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "svg-base64-converter",
     category: "Converter",
     description: 'Encode SVGs to Base64 data URIs for CSS embedding — icons without requests. Inline a logo in one line — local encoding, free, no signup.',
-    seoDescription: 'Free SVG data URIs — embed icons. Local, free, no signup.',
+    seoDescription: 'Free SVG to data-URI encoder — icons embedded straight into CSS and HTML. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free SVG to Base64 Encoder Online",
     instructions: [
@@ -3506,7 +3506,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "character-encoding-converter",
     category: "Developer",
     description: 'Analyze each character to see its Unicode code point and ASCII/non-ASCII status. Debug mojibake with byte-level views — free, local, no signup.',
-    seoDescription: 'Free online Character Encoding Converter \u2014 Analyze Unicode code points and ASCII status. ',
+    seoDescription: 'Free character encoding converter — Unicode points and ASCII status. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Paste source for Character Encoding Converter", desc: "Paste source for Character Encoding Converter into the input area. Nothing runs until you trigger it." },
@@ -3529,7 +3529,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "unicode-converter",
     category: "Developer",
     description: 'Convert text to Unicode code points with JavaScript escape sequences and HTML entities. JavaScript escapes plus HTML entities covered — free, local, no signup.',
-    seoDescription: 'Free online Unicode Converter \u2014 Get code points, JS escapes, and HTML entities. ',
+    seoDescription: 'Free Unicode converter — code points, JS escapes and HTML entities. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Paste Unicode", desc: "Paste Unicode text into the input area. Nothing runs until you trigger it." },
@@ -3552,7 +3552,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "markdown-slack-converter",
     category: "Converter",
     description: 'Convert Markdown to Slack mrkdwn — bold, italics, links, and code that actually render. Post formatted updates that work — local conversion, free, no signup.',
-    seoDescription: 'Free md to mrkdwn — Slack-ready posts. Local, free, no signup.',
+    seoDescription: 'Free Markdown to Slack converter — posts formatted as Slack mrkdwn automatically. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Markdown to Slack Converter Online",
     instructions: [
@@ -3574,7 +3574,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "px-rem-converter",
     category: "Developer",
     description: 'Convert between PX and REM with custom base size. Code never leaves your device — formatting and validation run locally in your browser.',
-    seoDescription: 'Free online PX to REM Converter \u2014 Convert between PX and REM with custom base size. ',
+    seoDescription: 'Free PX to REM converter — custom base size supported always. Local, free, no signup, nothing uploads.',
     dependencies: "None",
         instructions: [
       { title: "1. Fill the inputs", desc: "Enter rems with base font size." },
@@ -3597,7 +3597,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "svg-optimizer",
     category: "Developer",
     description: 'Minify SVG by removing whitespace, comments, and redundant attributes — typically cutting files 20–50% with zero visual change.',
-    seoDescription: 'Free online SVG Optimizer \u2014 Minify SVG by removing whitespace and comments. ',
+    seoDescription: 'Free SVG optimizer — whitespace and comments minified away. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Paste source for SVG Optimizer", desc: "Paste source for SVG Optimizer into the input area. Nothing runs until you trigger it." },
@@ -3620,7 +3620,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "power-converter",
     category: "Utility",
     description: 'Convert between kW, hp, bhp, W, MW, and BTU/hr — engine specs, solar sizing, and HVAC math in one place. Size solar arrays and compare engine outputs correctly — free, local, no signup.',
-    seoDescription: 'Free online Power Converter \u2014 Convert between kW, hp, W, MW, and BTU/hr. ',
+    seoDescription: 'Free power converter — kW, hp, W, MW and BTU/hr converted instantly. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
         instructions: [
       { title: "1. Fill the inputs", desc: "Enter watts with from- and to-units." },
@@ -3643,7 +3643,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "pressure-converter",
     category: "Utility",
     description: 'Convert between kPa, psi, bar, atm, Torr, and mbar. Input never leaves your device — everything runs locally in your browser.',
-    seoDescription: 'Free online Pressure Converter \u2014 Convert between kPa, psi, bar, atm, Torr, and mbar. ',
+    seoDescription: 'Free pressure converter — kPa, psi, bar, atm, Torr and mbar converted. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
         instructions: [
       { title: "1. Fill the inputs", desc: "Enter the pressure with from- and to-units." },
@@ -3665,7 +3665,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "color-shades-tints",
     category: "Design",
     description: 'Generate shade and tint scales from any base color — 10-step ramps for design systems. Build hover states systematically — free, local, no signup.',
-    seoDescription: 'Free shade scales — 10-step ramps. Local, free, no signup.',
+    seoDescription: 'Free color shade scales — 10-step ramps generated from any base color. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Color Shades & Tints Generator",
     instructions: [
@@ -3686,7 +3686,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "contrast-ratio-checker",
     category: "Design",
     description: 'Check any color pair\'s WCAG contrast ratio with AA/AAA verdicts for normal and large text. Prove 4.5:1 before shipping — free, local, no signup.',
-    seoDescription: 'Free contrast checker — AA/AAA verdicts. Local, free, no signup.',
+    seoDescription: 'Free contrast ratio checker — WCAG AA/AAA verdicts with fix hints included. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Contrast Ratio Checker – WCAG Online",
     instructions: [
@@ -3708,7 +3708,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "media-query-generator",
     category: "Developer",
     description: 'Generate CSS media queries with min/max width and optional device type conditions. Mobile-first breakpoints with device conditions — free, local, no signup.',
-    seoDescription: 'Free online Media Query Generator \u2014 Generate CSS media queries with width and device conditions. ',
+    seoDescription: 'Free media query generator — width and device conditions covered. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Media Query first." },
@@ -3743,7 +3743,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Copy where?", answer: "GitHub READMEs, docs, wikis — anywhere Markdown tables render." },
       { question: "Is my work uploaded anywhere when using Markdown Table Generator?", answer: "No — generation runs locally in your browser, free with no signup." },
     ],
-    seoDescription: 'Free online Markdown Table Generator \u2014 Generate Markdown table templates with custom dimensions. ',
+    seoDescription: 'Free Markdown table generator — templates with custom dimensions. Local, free, no signup, nothing uploads.',
     dependencies: "None",
 },
 {
@@ -3774,7 +3774,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "bulk-heic-converter",
     category: "Image",
     description: 'Convert iPhone HEIC/HEIF photos to JPG, PNG, or WebP in batch with quality control. Designers pull iPhone shots into any workflow — local heic2any work, 2 free batches a day.',
-    seoDescription: 'Free bulk HEIC converter — HEIF photos to JPG, PNG or WebP. Local heic2any engine, signed 2 batches/day, Pro 500 files.',
+    seoDescription: 'Free bulk HEIC converter — HEIF photo batches to JPG, PNG or WebP in one pass. Local heic2any engine, signed 2 batches/day, Pro 500 files.',
     dependencies: "heic2any, jszip",
     showInCategory: true,
     seoTitle: "Free Bulk HEIC Converter – HEIF to JPG",

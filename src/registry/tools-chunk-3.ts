@@ -8,7 +8,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "nginx-config-generator",
     category: "Developer",
     description: 'Generate Nginx server blocks — reverse proxy, SSL, gzip, caching headers — without syntax hunting. Ship a correct vhost first try — local generation, free, no signup.',
-    seoDescription: 'Free Nginx generator — proxy, SSL, caching. Local, free, no signup.',
+    seoDescription: 'Free Nginx config generator — proxy, SSL and caching blocks. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Nginx Config Generator Online",
     instructions: [
@@ -30,7 +30,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "ip-allowlist-generator",
     category: "Developer",
     description: 'Build IP allowlist rules for firewalls, security groups, and app configs from CIDR lists. Generate AWS, Nginx, and htaccess formats — local, free, no signup.',
-    seoDescription: 'Free allowlist builder — firewall formats. Local, free, no signup.',
+    seoDescription: 'Free IP allowlist builder — firewall formats generated fast. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free IP Allowlist Generator Online",
     instructions: [
@@ -74,7 +74,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "msgpack-inspector",
     category: "Developer",
     description: 'Decode MessagePack binary into readable JSON structures. Debug compact payloads without hex dumps — local decoding, free, no signup.',
-    seoDescription: 'Free MessagePack decoder — binary to JSON. Local, free, no signup.',
+    seoDescription: 'Free MessagePack decoder — binary payloads to JSON instantly. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free MessagePack Inspector Online",
     instructions: [
@@ -96,7 +96,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "cbor-inspector",
     category: "Developer",
     description: 'Decode CBOR binary (RFC 7049) into readable structures — inspect IoT and WebAuthn payloads. Read COSE keys without a parser library — local decoding, free, no signup.',
-    seoDescription: 'Free CBOR decoder — readable structures. Local, free, no signup.',
+    seoDescription: 'Free CBOR decoder — binary payloads to readable structures fast. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free CBOR Inspector Online (RFC 7049)",
     instructions: [
@@ -118,7 +118,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "data-anonymizer",
     category: "Developer",
     description: 'Mask PII in datasets — names, emails, phones, IDs — with consistent fake replacements. Share analytics safely under privacy rules — local processing, free, no signup.',
-    seoDescription: 'Free PII anonymizer — consistent fakes. Local, free, no signup.',
+    seoDescription: 'Free PII anonymizer — consistent fake replacements always local. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Data Anonymizer – Mask PII Online",
     instructions: [
@@ -152,7 +152,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Why curl at all?", answer: "Reproducible terminal debugging — share exact requests across machines." },
       { question: "Is my snippet uploaded anywhere when converting to curl?", answer: "No — conversion runs locally in your browser, free with no signup." },
     ],
-    seoDescription: 'Free online Code to cURL Converter \u2014 Convert fetch/axios code to cURL. ',
+    seoDescription: 'Free code to cURL converter — fetch and axios code converted. Local, free, no signup, nothing uploads.',
     dependencies: "None",
 },
   {
@@ -162,7 +162,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "curl-to-code-converter",
     category: "Developer",
     description: 'Convert curl commands to Fetch, Axios, Python, and Go snippets instantly. Move terminal wins into codebases — local conversion, free, no signup.',
-    seoDescription: 'Free curl to code — Fetch, Axios, Python, Go. Local, free, no signup.',
+    seoDescription: 'Free curl to code converter — Fetch, Axios, Python and Go out. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Curl to Code Converter Online",
     instructions: [
@@ -184,7 +184,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "jsonrpc-builder",
     category: "Developer",
     description: 'Build JSON-RPC 2.0 request envelopes with method, params, and IDs. Talk to Ethereum nodes and RPC APIs correctly — local building, free, no signup.',
-    seoDescription: 'Free JSON-RPC builder — valid envelopes. Local, free, no signup.',
+    seoDescription: 'Free JSON-RPC builder — valid request envelopes built fast. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free JSON-RPC Builder Online",
     instructions: [
@@ -206,7 +206,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "har-analyzer",
     category: "Developer",
     description: 'Analyze HAR network captures — waterfall timing, payload sizes, failed requests. Find the 3-second render blocker in minutes — local parsing, free, no signup.',
-    seoDescription: 'Free HAR analyzer — timings plus failures. Local, free, no signup.',
+    seoDescription: 'Free HAR analyzer — timings plus failed requests grouped clearly. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free HAR Analyzer – Waterfall Online",
     instructions: [
@@ -228,7 +228,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "log-analyzer",
     category: "Developer",
     description: 'Analyze log files — error grouping, level counts, time clustering. Find the 3am spike cause in minutes — local parsing, free, no signup.',
-    seoDescription: 'Free log analyzer — errors grouped. Local, free, no signup.',
+    seoDescription: 'Free log analyzer — errors grouped for fast triage daily free. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Log Analyzer Online",
     instructions: [
@@ -250,7 +250,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "package-json-validator",
     category: "Developer",
     description: 'Validate package.json for required fields, semver format, and dependency presence. Catch missing fields and bad semver before installs fail — free, local, no signup.',
-    seoDescription: 'Free online package.json Validator \u2014 Validate name, version, scripts, and dependencies. ',
+    seoDescription: 'Free package.json validator — name, version, scripts and dependencies. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Paste package.json", desc: "Full file content — name, version, dependencies intact." },
@@ -272,7 +272,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "mime-finder",
     category: "Developer",
     description: 'Find MIME types for any file extension — and extensions for MIME types. Set correct Content-Type headers fast — local reference, free, no signup.',
-    seoDescription: 'Free MIME lookup — extensions both ways. Local, free, no signup.',
+    seoDescription: 'Free MIME lookup — extensions resolved both directions fast. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free MIME Type Finder Online",
     instructions: [
@@ -294,7 +294,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "cidr-calculator",
     category: "Developer",
     description: 'Convert CIDR prefixes to masks, ranges, and host counts — /8 through /32 decoded. Answer \'how many IPs in a /22\' instantly — local math, free, no signup.',
-    seoDescription: 'Free CIDR calculator — masks, ranges, counts. Local, free, no signup.',
+    seoDescription: 'Free CIDR calculator — masks, ranges and host counts computed. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free CIDR Calculator Online",
     instructions: [
@@ -338,7 +338,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "scss-to-css-converter",
     category: "Converter",
     description: 'Convert SCSS variables and nesting to plain CSS. Files are converted locally in your browser — nothing is uploaded. Variables and nesting compile cleanly — free, local, no signup.',
-    seoDescription: 'Free online SCSS to CSS Converter \u2014 Convert SCSS variables and nesting to plain CSS. ',
+    seoDescription: 'Free SCSS to CSS converter — variables and nesting compiled to plain CSS. Local processing, unlimited saves, no signup needed.',
     dependencies: "None",
     instructions: [
       { title: "1. Paste SCSS", desc: "Paste or drop SCSS source text into the input area." },
@@ -383,7 +383,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "tailwind-to-css-converter",
     category: "Converter",
     description: 'Convert Tailwind utility classes to plain CSS. Files are converted locally in your browser — nothing is uploaded. Utility classes expand to vanilla CSS for non-Tailwind projects — free, local, no signup.',
-    seoDescription: 'Free online Tailwind to CSS Converter \u2014 Convert Tailwind utility classes to plain CSS. ',
+    seoDescription: 'Free Tailwind to CSS converter — utility classes expanded to plain CSS rules. Local processing, unlimited saves, no signup needed.',
     dependencies: "None",
     instructions: [
       { title: "1. Paste Tailwind", desc: "Paste or drop Tailwind source text into the input area." },
@@ -418,7 +418,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Why convert?", answer: "Bridge gRPC services with JSON tooling — docs, validators, and tests." },
       { question: "Is my work uploaded anywhere when using Proto Schema Converter?", answer: "No — conversion runs locally in your browser, free with no signup." },
     ],
-    seoDescription: 'Free online Proto Schema Converter \u2014 Convert Protobuf to TypeScript and JSON. ',
+    seoDescription: 'Free Protobuf schema converter — to TypeScript and JSON cleanly. Local, free, no signup, nothing uploads.',
     dependencies: "None",
 },
   {
@@ -451,7 +451,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "tsconfig-analyzer",
     category: "Developer",
     description: 'Audit tsconfig.json for strictness gaps, misconfigured paths, and target mismatches. Catch lax strictNullChecks before production does — local analysis, free, no signup.',
-    seoDescription: 'Free tsconfig analyzer — strictness plus paths. Local, free, no signup.',
+    seoDescription: 'Free tsconfig analyzer — strictness plus path mapping checked. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free tsconfig Analyzer Online",
     instructions: [
@@ -473,7 +473,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "typescript-formatter",
     category: "Developer",
     description: 'Format TypeScript with correct indentation, type-annotation spacing, and interface alignment. Clean up 500-line components before review — local processing, free, no signup.',
-    seoDescription: 'Free TypeScript formatter — indent, types, interfaces. Local, free, no signup.',
+    seoDescription: 'Free TypeScript formatter — indent, types and interfaces cleaned. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free TypeScript Formatter Online",
     instructions: [
@@ -507,7 +507,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Multiline strings?", answer: "Yes — backtick blocks evaluate with newlines intact, exactly like runtime." },
       { question: "Is my work uploaded anywhere when using String Template Tester?", answer: "No — evaluation runs locally in your browser, free with no signup." },
     ],
-    seoDescription: 'Free online String Template Tester \u2014 Test {{variable}} templates with JSON data. ',
+    seoDescription: 'Free string template tester — {{variable}} templates with JSON data. Local, free, no signup, nothing uploads.',
     dependencies: "None",
 },
   {
@@ -529,7 +529,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Realistic enough for UI tests?", answer: "Yes for layout and logic — never for deliverables or production." },
       { question: "Is my work uploaded anywhere when using Test Data Generator?", answer: "No — generation runs locally in your browser, free with no signup." },
     ],
-    seoDescription: 'Free online Test Data Generator \u2014 Generate test data from field name/type schemas. ',
+    seoDescription: 'Free test data generator — fixtures from field schemas fast. Local, free, no signup, nothing uploads.',
     dependencies: "None",
 },
   {
@@ -538,7 +538,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "mortgage-calculator",
     category: "Finance",
     description: 'Calculate monthly mortgage payments with amortization schedule. Enter loan amount, interest rate, and term to see total interest paid. Figures never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free mortgage calculator — monthly payment, total interest, and amortization. Test rates and terms. ',
+    seoDescription: 'Free mortgage calculator — monthly payment, total interest and amortization schedules. Test rates and terms, local, free, no signup, nothing uploads. ',
     dependencies: "None",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter home price, down payment, rate, and years." },
@@ -560,7 +560,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "arr-calculator",
     category: "Growth & Marketing",
     description: 'Calculate Annual Recurring Revenue from subscription revenue, expansion revenue, and churn. Essential for SaaS businesses tracking growth. Numbers never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online ARR Calculator — build the ARR bridge (new + expansion − churn) and avoid double-counting. ',
+    seoDescription: 'Free ARR calculator — build the ARR bridge of new plus expansion minus churn without double-counting. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter MRR with new, expansion, and churn splits." },
@@ -604,7 +604,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "car-loan-calculator",
     category: "Finance",
     description: 'Calculate monthly car loan payments, total interest, and total cost. Enter loan amount, rate, and term for a complete auto financing picture. Figures never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free car loan calculator — payment, total interest, and true cost with depreciation reality-check. ',
+    seoDescription: 'Free car loan calculator — payment, total interest and true cost with depreciation reality-check. Local, free, no signup, nothing uploads. ',
     dependencies: "None",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter principal, rate, and tenure." },
@@ -626,7 +626,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "car-lease-calculator",
     category: "Finance",
     description: 'Estimate monthly car lease payments from price, residual, and money factor. Know a $30k car\'s true monthly cost — free, local, no signup.',
-    seoDescription: 'Free lease estimator — monthly payments. Free, local, no signup.',
+    seoDescription: 'Free car lease estimator — monthly payments with fees and residual math. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Car Lease Calculator Online",
     instructions: [
@@ -647,7 +647,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "churn-rate-calculator",
     category: "Growth & Marketing",
     description: 'Calculate customer churn rate by dividing customers lost by total customers. Monitor retention health for your subscription business. Numbers never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online Churn Calculator — logo vs revenue churn, net revenue retention, and cohort math with examples. ',
+    seoDescription: 'Free churn calculator — logo vs revenue churn, net retention and cohorts with examples. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter lost and starting customers." },
@@ -669,7 +669,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "debt-payoff-calculator",
     category: "Finance",
     description: 'Plan debt payoff with avalanche vs snowball strategies and extra payments. See a 5-year slog become 3 with $200 extra — free, local, no signup.',
-    seoDescription: 'Free debt planner — avalanche vs snowball. Free, local, no signup.',
+    seoDescription: 'Free debt payoff planner — avalanche vs snowball strategies with payoff dates. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Debt Payoff Calculator – Get Debt Free",
     instructions: [
@@ -690,7 +690,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "discount-calculator",
     category: "Finance",
     description: 'Calculate savings and final price after a percentage discount. Perfect for shopping, sales, and budget planning. Figures never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free discount calculator — final price, savings, and stacked-discount math for smart shopping. ',
+    seoDescription: 'Free discount calculator — final price, savings and stacked-discount math for smart shopping. Local, free, no signup, nothing uploads. ',
     dependencies: "None",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter original price and discount percent." },
@@ -712,7 +712,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "hourly-to-salary-calculator",
     category: "Finance",
     description: 'Convert hourly wage to annual salary. Enter hourly rate and hours per week to see your projected yearly income. Figures never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free hourly-to-salary converter — annualize wages (2080-hr rule), compare offers, price freelance rates. ',
+    seoDescription: 'Free hourly-to-salary converter — annualize wages on the 2080-hour rule, compare offers, price freelance rates. Local, free, no signup, nothing uploads. ',
     dependencies: "None",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter CTC with city and regime." },
@@ -734,7 +734,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "inflation-calculator",
     category: "Finance",
     description: 'Project future prices and eroded buying power at any inflation rate — Rs.100 today at 6% for 10 years costs Rs.179. Plan savings targets honestly — free, runs locally.',
-    seoDescription: 'Free inflation calculator — future prices plus buying power. Free, local, no signup.',
+    seoDescription: 'Free inflation calculator — future prices plus buying-power erosion over time. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Inflation Calculator – Future Prices",
     instructions: [
@@ -755,7 +755,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "customer-ltv-calculator",
     category: "Growth & Marketing",
     description: 'Compute customer lifetime value from ARPA, margin, and churn — know what buyers are worth. Justify $500 CAC with $2,000 LTV — free, local, no signup.',
-    seoDescription: 'Free LTV calculator — worth per customer. Local, free, no signup.',
+    seoDescription: 'Free customer LTV calculator — lifetime worth per customer. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Customer LTV Calculator Online",
     instructions: [
@@ -798,7 +798,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "net-worth-calculator",
     category: "Finance",
     description: 'Compute net worth from assets minus liabilities with category breakdowns. Track the number that actually matters yearly — free, local, no signup.',
-    seoDescription: 'Free net worth tracker — assets minus debt. Free, local, no signup.',
+    seoDescription: 'Free net worth tracker — assets minus debt with full account breakdowns. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Net Worth Calculator Online",
     instructions: [
@@ -819,7 +819,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "rent-vs-buy-calculator",
     category: "Finance",
     description: 'Compare the total cost of renting versus buying a home over time. Factor in mortgage payments, rent, and equity growth. Figures never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free rent-vs-buy calculator — break-even horizon with equity, appreciation, and opportunity cost. ',
+    seoDescription: 'Free rent-vs-buy calculator — break-even horizon with equity, appreciation and opportunity cost. Local, free, no signup, nothing uploads. ',
     dependencies: "None",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter monthly rent with city and split." },
@@ -885,7 +885,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "runway-calculator",
     category: "Growth & Marketing",
     description: 'Compute startup runway from cash, burn, and revenue growth — months until decisions. Act at 12 months, not 3 — free, local, no signup.',
-    seoDescription: 'Free runway math — months remaining. Local, free, no signup.',
+    seoDescription: 'Free runway calculator — months remaining at current burn. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Startup Runway Calculator",
     instructions: [
@@ -906,7 +906,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "ab-test-calculator",
     category: "Growth & Marketing",
     description: 'Check A/B test significance — conversion lifts that are real vs noise. Stop shipping coin flips — free, local, no signup.',
-    seoDescription: 'Free A/B math — real lifts only. Local, free, no signup.',
+    seoDescription: 'Free A/B test calculator — real lifts only, noise excluded. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free A/B Test Significance Calculator",
     instructions: [
@@ -927,7 +927,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "business-days-calculator",
     category: "Calculator",
     description: 'Count working days between two dates excluding weekends — HR teams prorate leave and payroll accurately. A 20-day leave request spans 28 calendar days — free, no signup, runs locally.',
-    seoDescription: 'Free business days calculator — weekdays between dates, weekends excluded. Free, local, no signup.',
+    seoDescription: 'Free business days calculator — weekdays between dates, weekends excluded. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Business Days Calculator Online",
     instructions: [
@@ -948,7 +948,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "day-of-week-calculator",
     category: "Calculator",
     description: 'Find the weekday for any Gregorian date — plan anniversaries, verify old records, settle bets. Check what day you were born in seconds — free, no signup, runs locally.',
-    seoDescription: 'Free day-of-week calculator — weekday for any date. Free, local, no signup.',
+    seoDescription: 'Free day-of-week calculator — weekday for any past or future date. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Day of Week Calculator – What Day Was It",
     instructions: [
@@ -969,7 +969,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "day-of-year-calculator",
     category: "Calculator",
     description: 'Convert any date to its day-of-year number (1–365/366) with days remaining. Developers compute ordinal dates for logs and filenames — free, no signup, runs locally.',
-    seoDescription: 'Free day-of-year calculator — ordinal number plus days left. Free, local, no signup.',
+    seoDescription: 'Free day-of-year calculator — ordinal number plus days remaining. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Day of Year Calculator – Ordinal Date",
     instructions: [
@@ -990,7 +990,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "exponent-calculator",
     category: "Calculator",
     description: 'Raise any base to any power — squares, cubes, negative and fractional exponents with full precision. Students check 2^10 = 1024 homework in seconds — free, no signup, runs locally.',
-    seoDescription: 'Free exponent calculator — any base, any power, full precision. Free, local, no signup.',
+    seoDescription: 'Free exponent calculator — any base, any power, full precision. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Exponent Calculator – Powers Online",
     instructions: [
@@ -1011,7 +1011,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "final-grade-calculator",
     category: "Calculator",
     description: 'Calculate your final grade using weighted assignment scores. Enter grades and their weights to compute your overall percentage. Numbers never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free final grade calculator — what you need on the final, with weights that actually count. ',
+    seoDescription: 'Free final grade calculator — what you need on the final, with weights that count. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter marks with maximum." },
@@ -1033,7 +1033,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "gpa-calculator",
     category: "Calculator",
     description: 'Compute semester GPA from course grades on the standard 4.0 scale — quick academic snapshot. See what straight B\'s earn — free, local, no signup.',
-    seoDescription: 'Free GPA calculator — 4.0 grades averaged. Free, local, no signup.',
+    seoDescription: 'Free GPA calculator — 4.0 scale grades averaged per course. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free GPA Calculator Online",
     instructions: [
@@ -1054,7 +1054,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "grade-calculator",
     category: "Calculator",
     description: 'Compute course grades from weighted categories — what the final exam must deliver. Learn you need 92, not hope — free, local, no signup.',
-    seoDescription: 'Free grade math — required final scores. Local, free, no signup.',
+    seoDescription: 'Free grade calculator — required final scores from current marks. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Grade Calculator – What Do I Need",
     instructions: [
@@ -1075,7 +1075,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "college-gpa-calculator",
     category: "Calculator",
     description: 'Compute semester GPA from course grades and credit hours with weighted math. Students check what an A in a 4-credit lab does before finals — free, no signup, runs locally.',
-    seoDescription: 'Free college GPA calculator — credit-weighted grades. Free, local, no signup.',
+    seoDescription: 'Free college GPA calculator — credit-weighted grades per semester. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free College GPA Calculator Online",
     instructions: [
@@ -1096,7 +1096,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "leap-year-calculator",
     category: "Calculator",
     description: 'Test any year for leap status with the full Gregorian rule — divisible by 4, except centuries unless divisible by 400. Settle the 1900 vs 2000 debate instantly — free, runs locally.',
-    seoDescription: 'Free leap year calculator — full Gregorian rule. Free, local, no signup.',
+    seoDescription: 'Free leap year calculator — full Gregorian rule for any year. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Leap Year Calculator – Check Any Year",
     instructions: [
@@ -1117,7 +1117,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "probability-calculator",
     category: "Calculator",
     description: 'Compute probability for events — single, independent, conditional — with working shown. Price lottery dreams at true odds — free, local, no signup.',
-    seoDescription: 'Free probability math — working shown. Local, free, no signup.',
+    seoDescription: 'Free probability calculator — event odds with working shown. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Probability Calculator Online",
     instructions: [
@@ -1138,7 +1138,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "proportion-calculator",
     category: "Calculator",
     description: 'Solve proportions a/b = c/d for any missing term — recipes, maps, dosages scale correctly. Double a 4-serving recipe to 10 without breaking ratios — free, runs locally.',
-    seoDescription: 'Free proportion calculator — solve any missing term. Free, local, no signup.',
+    seoDescription: 'Free proportion calculator — solve any missing term step by step. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Proportion Calculator – Solve Ratios",
     instructions: [
@@ -1159,7 +1159,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "ratio-calculator",
     category: "Calculator",
     description: 'Simplify ratios to lowest terms and split quantities by ratio — paint mixes, profit shares, teams. Divide Rs.90,000 2:3:4 fairly in one pass — free, runs locally.',
-    seoDescription: 'Free ratio calculator — simplify ratios, split amounts. Free, local, no signup.',
+    seoDescription: 'Free ratio calculator — simplify ratios and split amounts fairly. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Ratio Calculator – Simplify & Split",
     instructions: [
@@ -1180,7 +1180,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "aspect-ratio-calculator",
     category: "Calculator",
     description: 'Get any image or screen\'s aspect ratio and compute fitting dimensions — 16:9, 4:3, 1:1 and custom. Fit a 4000px photo to 1920 wide without distortion — free, runs locally.',
-    seoDescription: 'Free aspect ratio calculator — ratios plus fitting sizes. Free, local, no signup.',
+    seoDescription: 'Free aspect ratio calculator — ratios plus fitting sizes for screens. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Aspect Ratio Calculator Online",
     instructions: [
@@ -1201,7 +1201,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "circle-calculator",
     category: "Calculator",
     description: 'Compute circle area, circumference, diameter, and radius from any one known — geometry homework solved. Get all circle measures at once — free, local, no signup.',
-    seoDescription: 'Free circle math — area, circumference. Local, free, no signup.',
+    seoDescription: 'Free circle calculator — area and circumference from radius. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Circle Calculator – Area & More",
     instructions: [
@@ -1222,7 +1222,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "dpi-calculator",
     category: "Calculator",
     description: 'Compute print DPI from pixel dimensions and print size — verify a photo prints sharp at 8×10. A 3000px file at 10 inches gives 300 DPI — free, runs locally.',
-    seoDescription: 'Free DPI calculator — pixels plus inches to DPI. Free, local, no signup.',
+    seoDescription: 'Free DPI calculator — pixels plus inches to print DPI for sharp output. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free DPI Calculator – Print Resolution",
     instructions: [
@@ -1243,7 +1243,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "fraction-calculator",
     category: "Calculator",
     description: 'Add, subtract, multiply, and divide fractions with simplification and decimal equivalents. Split 3/4 of a bill three ways without decimal drift — free, runs locally.',
-    seoDescription: 'Free fraction calculator — ops, simplification, decimals. Free, local, no signup.',
+    seoDescription: 'Free fraction calculator — operations, simplification and decimals. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Fraction Calculator with Steps",
     instructions: [
@@ -1264,7 +1264,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "mean-median-mode-calculator",
     category: "Calculator",
     description: 'Compute mean, median, and mode for any dataset with distribution insight. See why averages mislead skewed data — free, local, no signup.',
-    seoDescription: 'Free averages — mean, median, mode. Local, free, no signup.',
+    seoDescription: 'Free mean median mode calculator — all three averages at once. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Mean Median Mode Calculator",
     instructions: [
@@ -1285,7 +1285,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "ppi-calculator",
     category: "Calculator",
     description: 'Compute screen pixel density from resolution and diagonal size — compare phone sharpness honestly. A 1080p 6-inch display gives ~367 PPI — free, runs locally.',
-    seoDescription: 'Free PPI calculator — resolution plus inches to PPI. Free, local, no signup.',
+    seoDescription: 'Free PPI calculator — resolution plus inches to screen PPI. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free PPI Calculator – Screen Density",
     instructions: [
@@ -1306,7 +1306,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "pythagorean-theorem-calculator",
     category: "Calculator",
     description: 'The Pythagorean theorem solves a²+b²=c² for any missing side — ladders, ramps, screen diagonals. A 3-4-5 triangle checks square corners on site — free, runs locally.',
-    seoDescription: 'Free Pythagoras calculator — solve any side. Free, local, no signup.',
+    seoDescription: 'Free Pythagoras calculator — solve any triangle side instantly. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Pythagorean Theorem Calculator",
     instructions: [
@@ -1327,7 +1327,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "quadratic-equation-solver",
     category: "Calculator",
     description: 'This quadratic equation solver handles ax²+bx+c=0 with roots and discriminant shown — real, repeated, or complex. Check x²−5x+6=0 gives 2 and 3 before submission — free, runs locally.',
-    seoDescription: 'Free quadratic solver — roots plus discriminant. Free, local, no signup.',
+    seoDescription: 'Free quadratic solver — roots plus discriminant explained. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Quadratic Equation Solver Online",
     instructions: [
@@ -1348,7 +1348,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "rectangle-area-calculator",
     category: "Calculator",
     description: 'Compute rectangle area and perimeter from length and width — flooring, paint, fencing estimates. A 12×15 ft room needs 180 sq ft of flooring — free, runs locally.',
-    seoDescription: 'Free rectangle area calculator — area plus perimeter. Free, local, no signup.',
+    seoDescription: 'Free rectangle area calculator — area plus perimeter together. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Rectangle Area Calculator Online",
     instructions: [
@@ -1369,7 +1369,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "square-root-calculator",
     category: "Calculator",
     description: 'Compute square roots with full precision plus perfect-square detection. Verify √144 = 12 and spot irrational results instantly — free, runs locally.',
-    seoDescription: 'Free square root calculator — exact plus decimals. Free, local, no signup.',
+    seoDescription: 'Free square root calculator — exact plus decimal answers always. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Square Root Calculator Online",
     instructions: [
@@ -1411,7 +1411,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "fluid-typography-calculator",
     category: "Developer",
     description: 'Compute fluid clamp() type scales that flex between viewport sizes — no breakpoints needed. Set 16→20px body that just works — local math, free, no signup.',
-    seoDescription: 'Free fluid type — clamp scales computed. Local, free, no signup.',
+    seoDescription: 'Free fluid type calculator — clamp scales computed live free. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Fluid Typography Calculator – clamp()",
     instructions: [
@@ -1432,7 +1432,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "bmi-calculator-for-kids",
     category: "Health",
     description: 'Compute children\'s BMI with age-and-gender percentile context for growth tracking. See where a 10-year-old sits on the chart — free, local, informational only.',
-    seoDescription: 'Free child BMI calculator — age and gender context. Informational, local, free.',
+    seoDescription: 'Free child BMI calculator — age and gender context percentiles. Informational only, local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Child BMI Calculator Online",
     instructions: [
@@ -1475,7 +1475,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "body-surface-area-calculator",
     category: "Health",
     description: 'Compute body surface area (Du Bois) for medication dosing and physiology. Get m² from height and weight — free, local, informational only.',
-    seoDescription: 'Free BSA calculator — Du Bois formula. Informational, local, free.',
+    seoDescription: 'Free BSA calculator — Du Bois formula for dosing surface. Informational only, local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free BSA Calculator – Body Surface Area",
     instructions: [
@@ -1496,7 +1496,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "baby-formula-calculator",
     category: "Health",
     description: 'Calculate infant formula amounts by age and weight with feeding schedules. Get daily ounces and bottle splits right — free, local, informational only.',
-    seoDescription: 'Free formula calculator — amounts plus schedules. Informational, local, free.',
+    seoDescription: 'Free baby formula calculator — amounts plus feeding schedules. Informational only, local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Baby Formula Calculator Online",
     instructions: [
@@ -1539,7 +1539,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "baby-sleep-schedule-calculator",
     category: "Health",
     description: 'Build age-appropriate baby sleep schedules — naps, bedtimes, wake windows. End the 5am party phase with structure — free, local, informational only.',
-    seoDescription: 'Free baby sleep planner — naps plus bedtimes. Informational, local, free.',
+    seoDescription: 'Free baby sleep planner — naps plus bedtimes by age. Informational only, local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Baby Sleep Schedule Calculator",
     instructions: [
@@ -1560,7 +1560,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "breastfeeding-calorie-calculator",
     category: "Health",
     description: 'Estimate extra calories needed while breastfeeding by baby age and feeding frequency. Fuel milk production without guessing — free, local, informational only.',
-    seoDescription: 'Free nursing calorie needs — extra intake. Informational, local, free.',
+    seoDescription: 'Free nursing calorie needs — extra intake while breastfeeding. Informational only, local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Breastfeeding Calorie Calculator",
     instructions: [
@@ -1581,7 +1581,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "child-height-predictor",
     category: "Health",
     description: 'Estimate a child\'s adult height from parents\' heights with the mid-parental method. Get a ±10 cm range in seconds — free, local, estimate only.',
-    seoDescription: 'Free height predictor — mid-parental estimate. Estimate only, local, free.',
+    seoDescription: 'Free child height predictor — mid-parental estimate range. Estimate only, local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Child Height Predictor Online",
     instructions: [
@@ -1602,7 +1602,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "cycling-calorie-calculator",
     category: "Health",
     description: 'Estimate cycling burn from weight, speed, distance, and terrain. Price a 40 km weekend ride in calories — free, local, estimate only.',
-    seoDescription: 'Free cycling burn — speed plus terrain. Estimate only, local, free.',
+    seoDescription: 'Free cycling calorie burn — speed plus terrain adjusted. Estimate only, local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Cycling Calorie Calculator Online",
     instructions: [
@@ -1623,7 +1623,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "calorie-calculator",
     category: "Health",
     description: 'Calculate your Total Daily Energy Expenditure (TDEE) from BMR and activity level. Find how many calories you burn per day.',
-    seoDescription: 'Free online TDEE Calculator — daily calorie burn from BMR × activity level, with deficit/surplus targets. ',
+    seoDescription: 'Free TDEE calorie calculator — daily burn from BMR times activity, with deficit and surplus targets. Estimate only, local, free, no signup.',
     dependencies: "None",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter age, weight, height, and activity level." },
@@ -1645,7 +1645,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "heart-rate-zone-calculator",
     category: "Health",
     description: 'Calculate heart rate training zones by age. Find your target heart rate ranges for different exercise intensity levels. Health data never leaves your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online Heart Rate Zone Calculator — 5 training zones by age, with max-HR math explained. ',
+    seoDescription: 'Free heart rate zone calculator — 5 training zones by age with max-HR math explained. Estimate only, local, free, no signup.',
     dependencies: "None",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter age and resting rate." },
@@ -1667,7 +1667,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "keto-calculator",
     category: "Health",
     description: 'Compute keto macros — 70% fat targets in grams for your calories and protein needs. Hit ketosis without math errors — free, local, informational only.',
-    seoDescription: 'Free keto macros — fat-forward grams. Informational, local, free.',
+    seoDescription: 'Free keto macro calculator — fat-forward grams that fit macros. Informational only, local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Keto Macro Calculator Online",
     instructions: [
@@ -1688,7 +1688,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "lean-body-mass-calculator",
     category: "Health",
     description: 'Estimate lean body mass from weight and body-fat percent — the number training actually moves. Track muscle, not just scale weight — free, local, informational only.',
-    seoDescription: 'Free LBM calculator — muscle tracking. Informational, local, free.',
+    seoDescription: 'Free lean body mass calculator — muscle tracking over time. Informational only, local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Lean Body Mass Calculator",
     instructions: [
@@ -1709,7 +1709,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "macro-calculator",
     category: "Health",
     description: 'Compute daily protein, carb, and fat macro targets from calories, weight, and goals. Turn any diet into gram numbers — free, local, informational only.',
-    seoDescription: 'Free macro targets — goal-based grams. Informational, local, free.',
+    seoDescription: 'Free macro target calculator — goal-based protein, carb and fat grams. Informational only, local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Macro Calculator – Protein Carbs Fat",
     instructions: [
@@ -1730,7 +1730,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "pregnancy-due-date-calculator",
     category: "Health",
     description: 'Estimate due date from last period with trimester milestones. Get the 40-week roadmap instantly — free, local, informational only.',
-    seoDescription: 'Free due date estimator — milestones included. Informational, local, free.',
+    seoDescription: 'Free pregnancy due date estimator — date plus milestone weeks. Informational only, local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Due Date Calculator – Pregnancy",
     instructions: [
@@ -1751,7 +1751,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "protein-calculator",
     category: "Health",
     description: 'Compute daily protein needs from weight, goal, and activity — lifters to dieters covered. Hit 120g without guessing portions — free, local, informational only.',
-    seoDescription: 'Free protein needs — goal-based grams. Informational, local, free.',
+    seoDescription: 'Free protein needs calculator — goal-based daily grams. Informational only, local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Protein Calculator – Daily Needs",
     instructions: [
@@ -1772,7 +1772,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "running-pace-calculator",
     category: "Health",
     description: 'Compute running pace, race times, and splits from any two knowns. Predict a 10K from your 5K — free, local, no signup. Even pacing plus predictions from any two knowns — free, local, no signup.',
-    seoDescription: 'Free pace calculator — race predictions. Local, free, no signup.',
+    seoDescription: 'Free running pace calculator — splits plus race predictions. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Running Pace Calculator Online",
     instructions: [
@@ -1793,7 +1793,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "sleep-calculator",
     category: "Health",
     description: 'Compute ideal bedtimes and wake times in 90-minute sleep cycles. Wake refreshed at cycle ends, not mid-dream — free, local, no signup.',
-    seoDescription: 'Free sleep cycles — bedtimes that work. Local, free, no signup.',
+    seoDescription: 'Free sleep cycle calculator — bedtimes that complete cycles. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Sleep Calculator – Cycle Bedtimes",
     instructions: [
@@ -1814,7 +1814,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "steps-to-calories-calculator",
     category: "Health",
     description: 'Convert step counts to calorie burn with weight-adjusted math. Learn what 12,000 steps really cost — free, local, estimate only.',
-    seoDescription: 'Free steps-to-calories — weight adjusted. Estimate only, local, free.',
+    seoDescription: 'Free steps-to-calories converter — weight-adjusted burn estimates. Estimate only, local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Steps to Calories Calculator",
     instructions: [
@@ -1835,7 +1835,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "water-intake-calculator",
     category: "Health",
     description: 'Compute daily water needs from weight, activity, and climate. Drink the right amount, not 8 glasses blindly — free, local, no signup.',
-    seoDescription: 'Free hydration needs — weight plus climate. Local, free, no signup.',
+    seoDescription: 'Free hydration calculator — needs by weight plus climate. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Water Intake Calculator Online",
     instructions: [
@@ -1922,7 +1922,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "semver-calculator",
     category: "Developer",
     description: 'Compute next semantic versions from change types — breaking bumps major automatically. Tag v2.4.1 correctly after that breaking fix — local logic, free, no signup.',
-    seoDescription: 'Free semver bumps — correct next version. Local, free, no signup.',
+    seoDescription: 'Free semver calculator — correct next version bumps always. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Semver Calculator Online",
     instructions: [
@@ -1943,7 +1943,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "standard-deviation-calculator",
     category: "Calculator",
     description: 'Compute standard deviation with variance and mean for any dataset — exam scores, lab readings, quality checks. A class scoring 70±8 reads spread at a glance — free, runs locally.',
-    seoDescription: 'Free SD calculator — variance plus mean included. Free, local, no signup.',
+    seoDescription: 'Free standard deviation calculator — variance plus mean included. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Standard Deviation Calculator",
     instructions: [
@@ -1964,7 +1964,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "tax-calculator",
     category: "Finance",
     description: 'Estimate income tax across progressive brackets with regime comparison. See what you keep before filing season — free, local, no signup.',
-    seoDescription: 'Free tax estimator — bracket math. Free, local, no signup. Verify locally.',
+    seoDescription: 'Free tax estimator — progressive bracket math with take-home preview. Rules change yearly; verify locally. Free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Income Tax Calculator Online",
     instructions: [
@@ -1985,7 +1985,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "tds-calculator-india",
     category: "Finance",
     description: 'Compute TDS on salary, rent, and professional fees under current Indian slabs. Know monthly deductions upfront — free, local, verify rules yearly.',
-    seoDescription: 'Free TDS estimator — salary, rent, fees. Local, free. Verify slabs.',
+    seoDescription: 'Free India TDS estimator — salary, rent and fee deductions with current slabs. Verify slabs yearly; local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free TDS Calculator India Online",
     instructions: [
@@ -2006,7 +2006,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "trial-conversion-calculator",
     category: "Growth & Marketing",
     description: 'Compute trial-to-paid conversion with activation splits — find funnel leaks. Lift 15% trials to 25% deliberately — free, local, no signup.',
-    seoDescription: 'Free trial math — activation splits. Local, free, no signup.',
+    seoDescription: 'Free trial conversion math — activation splits that convert. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Trial Conversion Calculator",
     instructions: [
@@ -2028,7 +2028,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "api-request-builder",
     category: "Developer",
     description: 'Build HTTP requests with method, URL, headers, and body — then generate matching curl commands. Prototype endpoints without leaving the tab — local, free, no signup.',
-    seoDescription: 'Free API request builder — requests plus curl output. Local, free, no signup.',
+    seoDescription: 'Free API request builder — requests plus cURL output free fast. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free API Request Builder Online",
     instructions: [
@@ -2072,7 +2072,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "api-response-formatter",
     category: "Developer",
     description: 'Prettify raw JSON and XML API responses with indentation, key sorting, and syntax validation. Read nested payloads at a glance — local processing, free, no signup.',
-    seoDescription: 'Free API response formatter — JSON/XML readable. Local, free, no signup.',
+    seoDescription: 'Free API response formatter — JSON and XML made readable fast. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free API Response Formatter Online",
     instructions: [
@@ -2128,7 +2128,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Does it flag sensitive data?", answer: "Keys named like token, secret, or password surface for review before you share logs." },
       { question: "Is my payload uploaded anywhere?", answer: "No — analysis runs locally in your browser, free with no signup." },
     ],
-    seoDescription: 'Free online API Payload Analyzer — Analyze JSON payload size, structure, nesting depth, and key count. ',
+    seoDescription: 'Free API payload analyzer — size, structure, depth and key counts. Local, free, no signup, nothing uploads.',
     dependencies: "None",
 },
   {
@@ -2138,7 +2138,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "api-mock-data-generator",
     category: "Developer",
     description: 'Generate realistic mock JSON from field specs — names, emails, dates, nested objects. Fill frontends before backends exist — local generation, free, no signup.',
-    seoDescription: 'Free mock data generator — realistic JSON fixtures. Local, free, no signup.',
+    seoDescription: 'Free mock data generator — realistic JSON fixtures fast free. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Mock Data Generator for APIs",
     instructions: [
@@ -2183,7 +2183,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "mock-api-response-generator",
     category: "Developer",
     description: 'Craft canned API responses with status codes, headers, and bodies for testing error paths. Simulate 404s and 500s without a server — local, free, no signup.',
-    seoDescription: 'Free mock responses — statuses, headers, bodies. Local, free, no signup.',
+    seoDescription: 'Free mock API responses — statuses, headers and bodies free. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Mock API Response Generator",
     instructions: [
@@ -2314,7 +2314,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "api-cost-estimator",
     category: "Developer",
     description: 'Estimate API bills from call volumes and per-call pricing — OpenAI, maps, SMS tiers. Forecast a 1M-call month before committing — local math, free, no signup.',
-    seoDescription: 'Free API cost estimator — volume times pricing. Local, free, no signup.',
+    seoDescription: 'Free API cost estimator — volume times pricing modeled. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free API Cost Estimator Online",
     instructions: [
@@ -2402,7 +2402,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "api-documentation-generator",
     category: "Developer",
     description: 'Turn endpoint descriptions into clean API docs with parameters, responses, and curl samples. Document as you build, not after — local generation, free, no signup.',
-    seoDescription: 'Free API docs generator — params, responses, curl. Local, free, no signup.',
+    seoDescription: 'Free API docs generator — params, responses and curl samples. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free API Documentation Generator",
     instructions: [
@@ -2480,7 +2480,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Variables formatted too?", answer: "Query and variable blocks both normalize with consistent indentation." },
       { question: "Is my query uploaded anywhere?", answer: "No — formatting runs locally in your browser, free with no signup." },
     ],
-    seoDescription: 'Free online GraphQL Query Formatter — Format and prettify GraphQL queries with proper indentation. ',
+    seoDescription: 'Free GraphQL query formatter — format and prettify queries with proper indentation. Local, free, no signup, nothing uploads.',
     dependencies: "None",
 },
   {
@@ -2580,7 +2580,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "graphql-variables-formatter",
     category: "Developer",
     description: 'Format GraphQL variables JSON with validation against query structure. Stop malformed-variables errors before sending — local processing, free, no signup.',
-    seoDescription: 'Free GraphQL variables formatter — validated JSON. Local, free, no signup.',
+    seoDescription: 'Free GraphQL variables formatter — validated JSON variables. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free GraphQL Variables Formatter",
     instructions: [
@@ -2667,7 +2667,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "openapi-to-postman",
     category: "Developer",
     description: 'Convert OpenAPI specs into Postman collections with requests, auth, and examples. Import 50 endpoints in one click — local conversion, free, no signup.',
-    seoDescription: 'Free OpenAPI to Postman — full collections. Local, free, no signup.',
+    seoDescription: 'Free OpenAPI to Postman converter — full collections generated. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free OpenAPI to Postman Converter",
     instructions: [
@@ -2799,7 +2799,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "webhook-retry-config",
     category: "Developer",
     description: 'Design webhook retry policies — attempts, backoff curves, dead-letter thresholds. Stop losing events to blips — local planning, free, no signup.',
-    seoDescription: 'Free webhook retry designer — backoff, DLQ. Local, free, no signup.',
+    seoDescription: 'Free webhook retry designer — backoff schedules plus DLQ. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Webhook Retry Config Builder",
     instructions: [
@@ -2821,7 +2821,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "webhook-signature-verifier",
     category: "Developer",
     description: 'Verify webhook HMAC signatures to prove payloads came from the provider untampered. Reject forged events before processing — local crypto, free, no signup.',
-    seoDescription: 'Free webhook verifier — HMAC proof. Local crypto, free, no signup.',
+    seoDescription: 'Free webhook signature verifier — HMAC proof checked. Local crypto, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Webhook Signature Verifier – HMAC",
     instructions: [
@@ -2908,7 +2908,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "api-docs-generator",
     category: "Developer",
     description: 'Generate Markdown API documentation from OpenAPI specs with endpoints and examples. Publish clean reference docs fast — local conversion, free, no signup.',
-    seoDescription: 'Free OpenAPI docs — Markdown reference pages. Local, free, no signup.',
+    seoDescription: 'Free OpenAPI docs generator — Markdown reference pages built. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free OpenAPI Docs Generator – Markdown",
     instructions: [
@@ -2930,7 +2930,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "conventional-commit-generator",
     category: "Developer",
     description: 'Generate Conventional Commits messages — type, scope, breaking flags — that changelogs can parse. Write feat(api): add retry in seconds — local generation, free, no signup.',
-    seoDescription: 'Free commit generator — conventional format. Local, free, no signup.',
+    seoDescription: 'Free conventional commit generator — proper format every time. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Conventional Commit Generator",
     instructions: [
@@ -2952,7 +2952,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "code-formatter",
     category: "Developer",
     description: 'Auto-detect language and format mixed code snippets — JS, CSS, HTML, JSON in one paste. Clean Stack Overflow answers before using — local processing, free, no signup.',
-    seoDescription: 'Free code formatter — auto-detects language. Local, free, no signup.',
+    seoDescription: 'Free code formatter — auto-detects language and style. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Code Formatter – Auto Detect Online",
     instructions: [
@@ -3020,7 +3020,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "javascript-formatter",
     category: "Developer",
     description: 'Format JavaScript with consistent indentation, semicolons, quotes, and brace style. Standardize legacy scripts before refactor — local processing, free, no signup.',
-    seoDescription: 'Free JS formatter — indent, quotes, semicolons. Local, free, no signup.',
+    seoDescription: 'Free JavaScript formatter — indent, quotes and semicolons fixed. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free JavaScript Formatter Online",
     instructions: [
@@ -3042,7 +3042,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "jsx-formatter",
     category: "Developer",
     description: 'Format JSX with component indentation, prop alignment, and expression-container spacing. Read nested component trees at a glance — local processing, free, no signup.',
-    seoDescription: 'Free JSX formatter — components, props aligned. Local, free, no signup.',
+    seoDescription: 'Free JSX formatter — components and props aligned. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free JSX Formatter Online",
     instructions: [
@@ -3076,7 +3076,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Broken code input?", answer: "Unparseable files highlight the error location instead of silently reformatting." },
       { question: "Is my code uploaded anywhere?", answer: "No — formatting runs locally in your browser, free with no signup." },
     ],
-    seoDescription: 'Free online TSX Formatter — Format and beautify TSX/React TypeScript code with proper indentation. ',
+    seoDescription: 'Free TSX formatter — format and beautify React TypeScript with proper indentation. Local, free, no signup, nothing uploads.',
     dependencies: "None",
 },
   {
@@ -3086,7 +3086,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "scss-formatter",
     category: "Developer",
     description: 'Format SCSS with nested-rule indentation, variable alignment, and mixin spacing. Tidy sprawling stylesheets before merging — local processing, free, no signup.',
-    seoDescription: 'Free SCSS formatter — nesting, variables, mixins. Local, free, no signup.',
+    seoDescription: 'Free SCSS formatter — nesting, variables and mixins cleaned. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free SCSS Formatter Online",
     instructions: [
@@ -3165,7 +3165,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Namespaces preserved?", answer: "Yes — namespace prefixes and URIs survive formatting untouched." },
       { question: "Is my XML uploaded anywhere?", answer: "No — formatting runs locally in your browser, free with no signup." },
     ],
-    seoDescription: 'Free online XML Formatter — Format and beautify XML documents with proper tree indentation. ',
+    seoDescription: 'Free XML formatter — format and beautify documents with proper tree indentation. Local, free, no signup, nothing uploads.',
     dependencies: "None",
 },
   {
@@ -3175,7 +3175,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "markdown-formatter",
     category: "Developer",
     description: 'Format Markdown with consistent headings, lists, code fences, and table alignment. Make READMEs render perfectly on GitHub — local processing, free, no signup.',
-    seoDescription: 'Free Markdown formatter — headings, tables. Local, free, no signup.',
+    seoDescription: 'Free Markdown formatter — headings and tables tidied. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Markdown Formatter Online",
     instructions: [
@@ -3505,7 +3505,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "json-diff-checker",
     category: "Developer",
     description: 'Diff two JSON documents with path-level change listing — spot breaking API changes instantly. Review a 500-line response diff in minutes — local processing, free, no signup.',
-    seoDescription: 'Free JSON diff — path-level changes. Local, free, no signup.',
+    seoDescription: 'Free JSON diff checker — path-level changes highlighted. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free JSON Diff Checker Online",
     instructions: [
@@ -3527,7 +3527,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "random-color-generator",
     category: "Utility",
     description: 'Generate random hex colors with lockable favorites for palettes and placeholders. Find happy accidents fast — free, local, no signup.',
-    seoDescription: 'Free random colors — lockable palette. Local, free, no signup.',
+    seoDescription: 'Free random color generator — lockable palettes you can refine endlessly. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Random Color Generator – Hex Online",
     instructions: [
@@ -3549,7 +3549,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "random-team-generator",
     category: "Utility",
     description: 'Split names into fair random teams with sizes and captains options. Divide 20 players in seconds — free, local, no signup.',
-    seoDescription: 'Free team splitter — fair random groups. Local, free, no signup.',
+    seoDescription: 'Free random team splitter — fair random groups in one single click. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Random Team Generator Online",
     instructions: [
@@ -3571,7 +3571,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "random-picker-generator",
     category: "Utility",
     description: 'Pick random items from lists with weighted options — winners, samples, draws. Draw fairly with visible odds — free, local, no signup.',
-    seoDescription: 'Free random picker — weighted draws. Local, free, no signup.',
+    seoDescription: 'Free random picker — weighted draws for raffles and tough decisions. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Random Picker Generator Online",
     instructions: [
@@ -3593,7 +3593,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "random-decision-maker",
     category: "Utility",
     description: 'Make random calls between options with best-of logic for quick settles. End debates with a fair draw — free, local, no signup.',
-    seoDescription: 'Free decision draws — fair picks. Local, free, no signup.',
+    seoDescription: 'Free random decision maker — fair picks when you cannot choose alone. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Random Decision Maker Online",
     instructions: [
@@ -3615,7 +3615,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "random-username-generator",
     category: "Utility",
     description: 'Generate available-style usernames with adjectives, nouns, and numbers. Find handles that stick — free, local, no signup.',
-    seoDescription: 'Free usernames — adjectives plus numbers. Local, free, no signup.',
+    seoDescription: 'Free username generator — adjectives plus numbers in endless combos. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Random Username Generator",
     instructions: [
@@ -3637,7 +3637,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "random-token-generator",
     category: "Developer",
     description: 'Generate cryptographically secure random tokens — hex, base64, URL-safe — for secrets and sessions. Mint a 256-bit API secret in one click — local crypto, free, no signup.',
-    seoDescription: 'Free secure tokens — hex, base64, URL-safe. Local crypto, free.',
+    seoDescription: 'Free secure token generator — hex, base64 and URL-safe. Local crypto, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Random Token Generator – Secure",
     instructions: [
@@ -3681,7 +3681,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "fake-data-generator",
     category: "Developer",
     description: 'Generate realistic fake datasets — users, orders, addresses — for demos and load tests. Fill staging with 10k believable rows — local generation, free, no signup.',
-    seoDescription: 'Free fake datasets — realistic rows. Local, free, no signup.',
+    seoDescription: 'Free fake dataset generator — realistic rows for testing. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Fake Data Generator for Testing",
     instructions: [
@@ -3747,7 +3747,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "sequence-generator",
     category: "Utility",
     description: 'Generate number and letter sequences — arithmetic, geometric, Fibonacci, custom steps. Fill spreadsheets and test series — free, local, no signup.',
-    seoDescription: 'Free sequences — arithmetic, Fibonacci. Local, free, no signup.',
+    seoDescription: 'Free sequence generator — arithmetic, Fibonacci and custom progressions. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Sequence Generator – Number Series",
     instructions: [
@@ -3769,7 +3769,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "coupon-code-generator",
     category: "Developer",
     description: 'Generate memorable coupon codes in bulk with prefixes and exclusions — WELCOME10-style campaigns. Create 500 trackable codes in one batch — local generation, free, no signup.',
-    seoDescription: 'Free coupon generator — bulk, trackable codes. Local, free, no signup.',
+    seoDescription: 'Free coupon code generator — bulk trackable codes made. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Coupon Code Generator – Bulk Online",
     instructions: [

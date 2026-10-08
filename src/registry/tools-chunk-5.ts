@@ -8,7 +8,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "rate-limit-header-parser",
     category: "Developer",
     description: 'Parse RateLimit/Limit headers — limits, remaining, reset times — from any API response. Read 429s correctly before retrying — local parsing, free, no signup.',
-    seoDescription: 'Free rate-limit parser — remaining plus reset. Local, free, no signup.',
+    seoDescription: 'Free rate-limit parser — remaining plus reset times. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Rate Limit Header Parser",
     instructions: [
@@ -30,7 +30,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "pricing-tier-builder",
     category: "Developer",
     description: 'Design SaaS pricing tiers with feature matrices and monthly/annual math. Model Starter/Growth/Scale before committing — local planning, free, no signup.',
-    seoDescription: 'Free pricing builder — tiers, matrices, math. Local, free, no signup.',
+    seoDescription: 'Free pricing builder — tiers, matrices and math modeled. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Pricing Tier Builder – SaaS Online",
     instructions: [
@@ -52,7 +52,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "ssh-key-generator",
     category: "Developer",
     description: 'Generate SSH key pairs (ed25519/RSA) with copy-ready public and private parts. Set up server access in a minute — local Web Crypto, free, no signup.',
-    seoDescription: 'Free SSH keys — ed25519 plus RSA. Local crypto, free.',
+    seoDescription: 'Free SSH key generator — ed25519 plus RSA keypairs fast. Local crypto, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free SSH Key Generator – ed25519/RSA",
     instructions: [
@@ -97,7 +97,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "security-txt-generator",
     category: "Developer",
     description: 'Generate RFC 9116 security.txt files with contact, policy, and expiry fields. Give researchers a reporting path — local generation, free, no signup.',
-    seoDescription: 'Free security.txt generator — RFC 9116 valid. Local, free, no signup.',
+    seoDescription: 'Free security.txt generator — RFC 9116 valid files. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free security.txt Generator (RFC 9116)",
     instructions: [
@@ -119,7 +119,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "robots-txt-validator",
     category: "Developer",
     description: 'Validate robots.txt syntax — user-agents, allow/disallow, sitemaps, wildcards. Catch the Disallow: / that deindexed everything — local validation, free, no signup.',
-    seoDescription: 'Free robots.txt validator — syntax plus traps. Local, free, no signup.',
+    seoDescription: 'Free robots.txt validator — syntax plus crawler traps. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free robots.txt Validator Online",
     instructions: [
@@ -141,7 +141,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "dns-record-validator",
     category: "Developer",
     description: 'Validate DNS records — A, MX, TXT, SPF, DKIM, DMARC syntax and coherence. Catch the missing SPF that tanks deliverability — local checks, free, no signup.',
-    seoDescription: 'Free DNS validator — SPF, DKIM, DMARC. Local, free, no signup.',
+    seoDescription: 'Free DNS validator — SPF, DKIM and DMARC checked. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free DNS Record Validator Online",
     instructions: [
@@ -163,7 +163,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "docker-compose-validator",
     category: "Developer",
     description: 'Validate docker-compose.yml — YAML syntax, indentation, tabs, and services presence. Catch the tab indent breaking deploys — local validation, free, no signup.',
-    seoDescription: 'Free compose validator — syntax plus services. Local, free, no signup.',
+    seoDescription: 'Free compose validator — syntax plus services verified. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Docker Compose Validator",
     instructions: [
@@ -229,7 +229,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "kubernetes-yaml-validator",
     category: "Developer",
     description: 'Validate Kubernetes manifests — apiVersion/kind, required metadata, probe and resource sanity. Catch CrashLoop configs before apply — local validation, free, no signup.',
-    seoDescription: 'Free K8s validator — manifests checked. Local, free, no signup.',
+    seoDescription: 'Free K8s validator — manifests checked thoroughly. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Kubernetes YAML Validator",
     instructions: [
@@ -295,7 +295,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "rss-feed-validator",
     category: "Developer",
     description: 'Validate RSS/Atom feeds for spec compliance — required fields, date formats, enclosures. Fix podcast feeds Apple rejects — local validation, free, no signup.',
-    seoDescription: 'Free RSS validator — spec compliance. Local, free, no signup.',
+    seoDescription: 'Free RSS validator — spec compliance verified fully. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free RSS Feed Validator Online",
     instructions: [
@@ -339,7 +339,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "xpath-validator",
     category: "Developer",
     description: 'Test XPath expressions against XML documents with match highlighting. Debug //book[price>30] before committing scrapers — local evaluation, free, no signup.',
-    seoDescription: 'Free XPath tester — match highlighting. Local, free, no signup.',
+    seoDescription: 'Free XPath tester — match highlighting included. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free XPath Tester & Validator Online",
     instructions: [
@@ -361,7 +361,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "cron-expression-validator",
     category: "Developer",
     description: 'Validate cron schedules and preview next run times — catch the Sunday-vs-7 bug before production. Verify 0 2 * * * runs 2am daily — local parsing, free, no signup.',
-    seoDescription: 'Free cron validator — next-run preview. Local, free, no signup.',
+    seoDescription: 'Free cron validator — next-run preview shown free. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Cron Expression Validator",
     instructions: [
@@ -406,7 +406,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "random-time-generator",
     category: "Utility",
     description: 'Generate random times in 12/24-hour format with seconds and range control. Schedule surprise drills and test fixtures — free, local, no signup.',
-    seoDescription: 'Free random time generator — ranges, formats. Free, local, no signup.',
+    seoDescription: 'Free random time generator — times in ranges and formats you set. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Random Time Generator Online",
     instructions: [
@@ -474,7 +474,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "random-sentence-generator",
     category: "Utility",
     description: 'Generate random sentences for writing prompts, test data, and brainstorming. Break writer\'s block in one click — free, local, no signup.',
-    seoDescription: 'Free writing prompts — random sentences. Local, free, no signup.',
+    seoDescription: 'Free random sentence generator — writing prompts on demand free daily. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Random Sentence Generator",
     instructions: [
@@ -496,7 +496,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "random-word-generator",
     category: "Utility",
     description: 'Generate random words by part of speech and length for games, passwords, and naming. Find startup names that aren\'t taken — free, local, no signup.',
-    seoDescription: 'Free random words — parts of speech. Local, free, no signup.',
+    seoDescription: 'Free random word generator — words by part of speech selected free. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Random Word Generator Online",
     instructions: [
@@ -540,7 +540,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "license-key-generator",
     category: "Developer",
     description: 'Generate formatted software license keys with segments and validation patterns. Issue XXXX-XXXX keys for releases — local generation, free, no signup.',
-    seoDescription: 'Free license keys — formatted segments. Local, free, no signup.',
+    seoDescription: 'Free license keys — formatted segments generated. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free License Key Generator Online",
     instructions: [
@@ -562,7 +562,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "image-placeholder-generator",
     category: "Design",
     description: 'Generate placeholder images by URL with custom size, text, and colors — wireframes that look intentional. Fill layouts before assets arrive — local generation, free, no signup.',
-    seoDescription: 'Free placeholders — size, text, colors. Local, free, no signup.',
+    seoDescription: 'Free image placeholder generator — any size, text and colors on demand fast. Local Canvas, free, no signup, nothing uploads.',
     dependencies: "Canvas API",
     seoTitle: "Free Placeholder Image Generator Online",
     instructions: [
@@ -584,7 +584,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "logo-placeholder-generator",
     category: "Design",
     description: 'Generate text-based logo placeholders with fonts and styling for mockups. Brand wireframes convincingly — local generation, free, no signup.',
-    seoDescription: 'Free logo placeholders — text styled. Local, free, no signup.',
+    seoDescription: 'Free logo placeholder maker — styled text marks for fast client mockups. Local Canvas, free, no signup, nothing uploads.',
     dependencies: "Canvas API",
     seoTitle: "Free Logo Placeholder Generator",
     instructions: [
@@ -606,7 +606,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "open-graph-generator",
     category: "Developer",
     description: 'Generate Open Graph and Twitter Card meta tags with image specs for perfect link previews. Fix blank Discord embeds in minutes — local generation, free, no signup.',
-    seoDescription: 'Free OG generator — previews that render. Local, free, no signup.',
+    seoDescription: 'Free OG tag generator — previews that render correctly. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Open Graph Generator – Social Previews",
     instructions: [
@@ -650,7 +650,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "cooking-measurement-converter",
     category: "Utility",
     description: 'Convert cooking measurements: cups, grams, ounces, and milliliters for any ingredient — bake American recipes anywhere. Translate 1 cup flour to 120g exactly — free, local, no signup.',
-    seoDescription: 'Free cooking converter — cups, grams, ml. Free, local, no signup.',
+    seoDescription: 'Free cooking converter — cups, grams and ml for any ingredient listed. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Cooking Converter – Cups to Grams",
     instructions: [
@@ -672,7 +672,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "fuel-consumption-converter",
     category: "Utility",
     description: 'Convert MPG, L/100km, and km/L to compare fuel consumption across systems. Translate 30 MPG for European buyers — free, local, no signup.',
-    seoDescription: 'Free fuel converter — MPG, L/100km. Free, local, no signup.',
+    seoDescription: 'Free fuel converter — MPG and L/100km efficiency compared clearly. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Fuel Consumption Converter – MPG Online",
     instructions: [
@@ -694,7 +694,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "paper-size-converter",
     category: "Utility",
     description: 'Convert paper sizes — A4, Letter, Legal — with millimeter and inch dimensions. Fit US Letter content onto A4 correctly — free, local, no signup.',
-    seoDescription: 'Free paper sizes — dimensions plus fit. Local, free, no signup.',
+    seoDescription: 'Free paper size converter — dimensions plus fit guidance included. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Paper Size Converter – A4 Letter Online",
     instructions: [
@@ -716,7 +716,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "clothing-size-converter",
     category: "Utility",
     description: 'Convert clothing sizes across US, UK, EU, and Asian systems for tops, shoes, and rings. Order a EU 42 as US 9 confidently — free, local, no signup.',
-    seoDescription: 'Free size converter — clothes, shoes, rings. Local, free, no signup.',
+    seoDescription: 'Free clothing size converter — clothes, shoes and rings across systems. Local processing, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Clothing Size Converter – US UK EU",
     instructions: [
@@ -738,7 +738,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "large-text-viewer",
     category: "Developer",
     description: 'Open multi-megabyte text files that crash editors — chunked rendering keeps scrolling smooth. Read 50 MB logs without freezing — local FileReader streaming, free, no signup.',
-    seoDescription: 'Free big-file viewer — chunked rendering. Local, free, no signup.',
+    seoDescription: 'Free big-file viewer — chunked rendering that stays fast. Local FileReader, free, no signup, nothing uploads.',
     dependencies: "FileReader API",
     seoTitle: "Free Large Text Viewer Online",
     instructions: [
@@ -806,7 +806,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "ical-event-generator",
     category: "Utility",
     description: 'Build .ics calendar event files with summary, dates, location, and description — import anywhere. Send invites that land in every calendar app — free, local download.',
-    seoDescription: 'Free iCal generator — .ics with all fields. Free, local download.',
+    seoDescription: 'Free iCal event generator — .ics files with all fields for calendars. Local processing, free download, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free iCal Event Generator – ICS Files",
     instructions: [
@@ -828,7 +828,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "column-extractor",
     category: "Utility",
     description: 'Extract single CSV columns by name or index into clean lists. Pull all emails from row 3 in seconds — local parsing, free, no signup.',
-    seoDescription: 'Free column puller — by name or index. Local, free, no signup.',
+    seoDescription: 'Free CSV column extractor — pull columns by name or index fast. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free CSV Column Extractor Online",
     instructions: [
@@ -850,7 +850,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "column-renamer",
     category: "Utility",
     description: 'Rename CSV headers in bulk with old:new mapping — standardize client exports fast. Fix 40 messy columns before import — local parsing, free, no signup.',
-    seoDescription: 'Free column renamer — bulk header mapping. Local, free, no signup.',
+    seoDescription: 'Free CSV column renamer — bulk header mapping in one fast pass. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free CSV Column Renamer Online",
     instructions: [
@@ -872,7 +872,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "data-type-converter",
     category: "Converter",
     description: 'Convert values between string, number, boolean, array, and object types with validation. Fix API type mismatches fast — local conversion, free, no signup.',
-    seoDescription: 'Free type converter — string, number, bool. Local, free, no signup.',
+    seoDescription: 'Free data type converter — string, number and boolean with explicit rules. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Data Type Converter Online",
     instructions: [
@@ -917,7 +917,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "format-validator",
     category: "Utility",
     description: 'Validate data formats — emails, phones, dates, UUIDs — with pattern diagnostics. Catch bad rows before import — local validation, free, no signup.',
-    seoDescription: 'Free format checker — patterns diagnosed. Local, free, no signup.',
+    seoDescription: 'Free format checker — patterns diagnosed with fix hints shown. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Format Validator – Data Patterns Online",
     instructions: [
@@ -939,7 +939,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "csv-merger",
     category: "Utility",
     description: 'Merge multiple CSV files into one with header alignment — combine monthly exports instantly. Join 12 reports into one sheet — local merging, free, no signup.',
-    seoDescription: 'Free CSV merge — headers aligned. Local, free, no signup.',
+    seoDescription: 'Free CSV merger — files combined with headers aligned neatly. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free CSV Merger – Combine Files Online",
     instructions: [
@@ -984,7 +984,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "pivot-generator",
     category: "Utility",
     description: 'Pivot CSV rows into summary tables — group, count, and sum without spreadsheets. Summarize 10k sales rows by region instantly — local pivoting, free, no signup.',
-    seoDescription: 'Free CSV pivots — group and sum. Local, free, no signup.',
+    seoDescription: 'Free CSV pivot generator — group and sum data instantly online. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Pivot Table Generator – CSV Online",
     instructions: [
@@ -1006,7 +1006,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "row-filter",
     category: "Utility",
     description: 'Filter CSV rows by column value matching. Includes exact match, contains, and not-equal operators for flexible data selection.',
-    seoDescription: 'Free online CSV Row Filter — Filter CSV rows by column value with exact match, contains, and not-equal operators. ',
+    seoDescription: 'Free CSV row filter — filter rows by column with exact, contains and not-equal operators. Local, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Paste source for CSV Row Filter", desc: "Paste source for CSV Row Filter into the input area. Nothing runs until you trigger it." },
@@ -1029,7 +1029,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "csv-row-sorter",
     category: "Utility",
     description: 'Sort CSV rows by any column ascending or descending — dates, numbers, names handled right. Order 10,000 sales rows in seconds — local parsing, free, no signup.',
-    seoDescription: 'Free CSV sorter — any column, either direction. Local, free, no signup.',
+    seoDescription: 'Free CSV sorter — any column, either direction, stable order kept. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free CSV Row Sorter Online",
     instructions: [
@@ -1051,7 +1051,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "csv-splitter",
     category: "Utility",
     description: 'Split large CSVs by row count or column value — chunks that tools accept. Break 1M rows into importable parts — local splitting, free, no signup.',
-    seoDescription: 'Free CSV splitter — by rows or values. Local, free, no signup.',
+    seoDescription: 'Free CSV splitter — split by row count or column values cleanly. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free CSV Splitter – Chunk Files Online",
     instructions: [
@@ -1165,7 +1165,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "json-escape-unescape",
     category: "Developer",
     description: 'Escape JSON strings for embedding or unescape back to readable text in one click. Fix double-escaped API fixtures fast — local processing, free, no signup.',
-    seoDescription: 'Free JSON escaper — embed or readable. Local, free, no signup.',
+    seoDescription: 'Free JSON escaper — embed or readable forms fast. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free JSON Escape Unescape Tool",
     instructions: [
@@ -1277,7 +1277,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "json-size-analyzer",
     category: "Developer",
     description: 'Profile JSON payload weight — byte size, key counts, nesting depth, and heavy branches. Find the 2 MB field bloating responses — local analysis, free, no signup.',
-    seoDescription: 'Free JSON size profiler — bytes, keys, depth. Local, free, no signup.',
+    seoDescription: 'Free JSON size profiler — bytes, keys and depth mapped. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free JSON Size Analyzer Online",
     instructions: [
@@ -1344,7 +1344,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "jsonl-formatter",
     category: "Developer",
     description: 'Format JSON Lines files with per-line pretty-printing and validation. Read streaming logs like structured data — local processing, free, no signup.',
-    seoDescription: 'Free JSONL formatter — pretty lines plus validation. Local, free, no signup.',
+    seoDescription: 'Free JSONL formatter — pretty lines plus validation. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free JSONL Formatter Online",
     instructions: [
@@ -1366,7 +1366,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "ndjson-to-json",
     category: "Developer",
     description: 'Convert newline-delimited JSON streams to JSON arrays for analysis. Turn 10,000 log lines into queryable data — local conversion, free, no signup.',
-    seoDescription: 'Free NDJSON converter — streams to arrays. Local, free, no signup.',
+    seoDescription: 'Free NDJSON converter — streams to JSON arrays fast. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free NDJSON to JSON Converter",
     instructions: [
@@ -1388,7 +1388,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "json-to-url-params",
     category: "Developer",
     description: 'Flatten JSON objects into URL query strings — nest with bracket notation. Build ?filter[x]=1 links from API objects — local conversion, free, no signup.',
-    seoDescription: 'Free JSON to query string — nested supported. Local, free, no signup.',
+    seoDescription: 'Free JSON to query string — nested objects supported. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free JSON to URL Params Converter",
     instructions: [
@@ -1410,7 +1410,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "csv-json-row-generator",
     category: "Utility",
     description: 'Generate CSV rows from JSON objects for fixtures and imports — nested keys flattened. Seed databases from API shapes — local conversion, free, no signup.',
-    seoDescription: 'Free JSON to CSV rows — flattened. Local, free, no signup.',
+    seoDescription: 'Free JSON to CSV converter — nested objects flattened to rows neatly. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free CSV JSON Row Generator Online",
     instructions: [
@@ -1478,7 +1478,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "css-specificity-calculator",
     category: "Developer",
     description: 'Compute CSS selector specificity (a,b,c scores) and settle override battles with math. Prove #id beats .class chains — local calculation, free, no signup.',
-    seoDescription: 'Free specificity scorer — a,b,c math. Local, free, no signup.',
+    seoDescription: 'Free specificity scorer — a,b,c selector math done. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free CSS Specificity Calculator",
     instructions: [
@@ -1545,7 +1545,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "css-validator",
     category: "Developer",
     description: 'Validate CSS syntax — unclosed braces, bad properties, bad values — with line numbers. Catch the missing } breaking layouts — local validation, free, no signup.',
-    seoDescription: 'Free CSS validator — errors with lines. Local, free, no signup.',
+    seoDescription: 'Free CSS validator — errors reported with line numbers. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free CSS Validator Online",
     instructions: [
@@ -1567,7 +1567,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "code-obfuscator",
     category: "Developer",
     description: 'Obfuscate JavaScript with Base64 layering and reversal for casual code-sharing protection. Deter copy-paste without real crypto claims — local processing, free, no signup.',
-    seoDescription: 'Free JS obfuscator — casual protection. Local, free, no signup.',
+    seoDescription: 'Free JS obfuscator — casual copy protection done right. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Code Obfuscator Online",
     instructions: [
@@ -1589,7 +1589,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "code-to-curl-parser",
     category: "Developer",
     description: 'Parse curl commands into method, URL, headers, and body parts for debugging. Dissect a failing Stripe call field by field — local parsing, free, no signup.',
-    seoDescription: 'Free curl parser — method, URL, headers. Local, free, no signup.',
+    seoDescription: 'Free curl parser — method, URL and headers extracted. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Curl Parser – Split Commands Online",
     instructions: [
@@ -1633,7 +1633,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "pug-to-html-converter",
     category: "Developer",
     description: 'Convert Pug/Jade templates to plain HTML for migration and debugging. Move legacy views to modern stacks — local conversion, free, no signup.',
-    seoDescription: 'Free Pug converter — templates to HTML. Local, free, no signup.',
+    seoDescription: 'Free Pug converter — templates to clean HTML fast. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Pug to HTML Converter Online",
     instructions: [
@@ -1677,7 +1677,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "json-formatter-tool",
     category: "Developer",
     description: 'All-in-one JSON output hub — format, validate, convert to Zod, URL params, flat pairs, JSON-LD, and size analysis. One tab for every JSON chore — local processing, free, no signup.',
-    seoDescription: 'Free JSON hub — format, Zod, URL params, size. Local, free, no signup.',
+    seoDescription: 'Free JSON hub — format, Zod, URL params and size tools. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     showInCategory: true,
     seoTitle: "Free JSON Tools Hub – Format & Convert",
@@ -1700,7 +1700,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "csv-formatter",
     category: "Converter",
     description: 'Format and validate CSV files — consistent delimiters, quoting, and line endings. Fix files Excel mangles on export — local processing, free, no signup.',
-    seoDescription: 'Free CSV formatter — delimiters plus quoting. Local, free, no signup.',
+    seoDescription: 'Free CSV formatter — delimiters normalized with correct quoting throughout. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     showInCategory: true,
     seoTitle: "Free CSV Formatter Online",
@@ -1722,7 +1722,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "import-to-csv",
     category: "Converter",
     description: 'Convert pasted tables, lists, and structured text into clean CSV rows. Turn copied web tables into spreadsheet data — local parsing, free, no signup.',
-    seoDescription: 'Free to-CSV importer — tables to rows. Local, free, no signup.',
+    seoDescription: 'Free table to CSV importer — pasted tables to clean comma-separated rows. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     showInCategory: true,
     seoTitle: "Free Import to CSV Converter Online",
@@ -1746,7 +1746,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "color-blindness-simulator",
     category: "Design",
     description: 'Simulate color blindness: preview designs through protanopia, deuteranopia, and tritanopia filters — catch invisible-to-some UI. Fix red-green errors before users suffer — local Canvas work, free, no signup.',
-    seoDescription: 'Free CVD simulator — protanopia plus more. Local, free, no signup.',
+    seoDescription: 'Free color-blindness simulator — protanopia, deuteranopia and tritanopia previews. Local Canvas, free, no signup, nothing uploads.',
     dependencies: "Canvas API",
     seoTitle: "Free Color Blindness Simulator Online",
     instructions: [
@@ -1768,7 +1768,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "cpp-formatter",
     category: "Developer",
     description: 'Format C++ with brace style, pointer alignment, and include ordering. Tame legacy codebases before review — local processing, free, no signup.',
-    seoDescription: 'Free C++ formatter — braces, pointers. Local, free, no signup.',
+    seoDescription: 'Free C++ formatter — braces and pointers tidied. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free C++ Formatter Online",
     instructions: [
@@ -1790,7 +1790,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "go-formatter",
     category: "Developer",
     description: 'Format Go with gofmt-compatible indentation, import grouping, and alignment. Keep goroutines readable across the repo — local processing, free, no signup.',
-    seoDescription: 'Free Go formatter — gofmt-compatible output. Local, free, no signup.',
+    seoDescription: 'Free Go formatter — gofmt-compatible output always. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Go Formatter Online – gofmt Style",
     instructions: [
@@ -1812,7 +1812,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "kotlin-formatter",
     category: "Developer",
     description: 'Format Kotlin with indentation, null-safety spacing, and data-class layout. Clean Android sources consistently — local processing, free, no signup.',
-    seoDescription: 'Free Kotlin formatter — null-safety, layouts. Local, free, no signup.',
+    seoDescription: 'Free Kotlin formatter — null-safety and layouts fixed. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Kotlin Formatter Online",
     instructions: [
@@ -1834,7 +1834,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "php-beautifier",
     category: "Developer",
     description: 'Beautify PHP with PSR-12 indentation, spacing, and brace placement. Modernize legacy templates safely — local processing, free, no signup.',
-    seoDescription: 'Free PHP beautifier — PSR-12 style. Local, free, no signup.',
+    seoDescription: 'Free PHP beautifier — PSR-12 style enforced always. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free PHP Beautifier – PSR-12 Online",
     instructions: [
@@ -1856,7 +1856,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "ruby-formatter",
     category: "Developer",
     description: 'Format Ruby with end alignment, block style, and hash syntax consistency. Unify Rails codebases effortlessly — local processing, free, no signup.',
-    seoDescription: 'Free Ruby formatter — ends, blocks, hashes. Local, free, no signup.',
+    seoDescription: 'Free Ruby formatter — ends, blocks and hashes aligned. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Ruby Formatter Online",
     instructions: [
@@ -1878,7 +1878,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "rust-formatter",
     category: "Developer",
     description: 'Format Rust with rustfmt-style indentation, match-arm layout, and trait organization. Keep ownership code readable — local processing, free, no signup.',
-    seoDescription: 'Free Rust formatter — rustfmt-style output. Local, free, no signup.',
+    seoDescription: 'Free Rust formatter — rustfmt-style output guaranteed. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Rust Formatter Online – rustfmt Style",
     instructions: [
@@ -1900,7 +1900,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "jwt-encoder-signer",
     category: "Developer",
     description: 'Build and sign JWTs with HS256/RS256 — headers, claims, expiry, and signature verification. Mint test tokens without backend roundtrips — local crypto, free, no signup.',
-    seoDescription: 'Free JWT signer — HS256/RS256 test tokens. Local crypto, free, no signup.',
+    seoDescription: 'Free JWT signer — HS256/RS256 test tokens minted fast. Local crypto, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free JWT Encoder & Signer Online",
     instructions: [
@@ -1922,7 +1922,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "memorable-password-generator",
     category: "Developer",
     description: 'Generate strong yet memorable passwords — word-based passphrases with real entropy. Get correct-horse grade security you can type — local crypto, free, no signup.',
-    seoDescription: 'Free passphrase generator — strong plus typable. Local crypto, free.',
+    seoDescription: 'Free passphrase generator — strong plus typable words. Local crypto, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Memorable Password Generator",
     instructions: [
@@ -4002,7 +4002,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "text-repeater",
     category: "Text",
     description: 'Repeat text blocks N times with custom separators and numbering — test data, chants, drills. Generate 100 lines in one click — free, local, no signup.',
-    seoDescription: 'Free text repeater — N times with separators. Free, local, no signup.',
+    seoDescription: 'Free text repeater — repeat any text N times with custom separators. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Text Repeater Online",
     instructions: [
@@ -4023,7 +4023,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "small-text-generator",
     category: "Text",
     description: 'Shrink text to tiny superscript and subscript Unicode for captions and footnotes. Fit more in bios elegantly — free, local, copy-paste ready.',
-    seoDescription: 'Free small text — superscript, subscript. Local, free, no signup.',
+    seoDescription: 'Free small text generator — superscript and subscript Unicode for bios. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Small Text Generator Online",
     instructions: [
@@ -4044,7 +4044,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "big-text-generator",
     category: "Text",
     description: 'Blow text up to huge display sizes with styles for banners and headers. Make announcements unmissable — free, local, copy-paste ready.',
-    seoDescription: 'Free big text — display sizes. Local, free, no signup.',
+    seoDescription: 'Free big text generator — large display-size Unicode for headlines and banners. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Big Text Generator Online",
     instructions: [
@@ -4065,7 +4065,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "writing-tools",
     category: "Text",
     description: 'Writing toolkit — readability scores, passive-voice flags, adverb alerts, sentence variety. Lift drafts from decent to publishable — local analysis, free, no signup.',
-    seoDescription: 'Free writing toolkit — readability plus style. Local, free, no signup.',
+    seoDescription: 'Free writing toolkit — readability scores plus style suggestions that ship better drafts. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Writing Tools – Readability Online",
     instructions: [
@@ -4086,7 +4086,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "citation-generator",
     category: "Text",
     description: 'Generate APA, MLA, and Chicago citations from URLs, DOIs, and ISBNs. Cite sources correctly in seconds — local generation, free, no signup.',
-    seoDescription: 'Free citations — APA, MLA, Chicago. Local, free, no signup.',
+    seoDescription: 'Free citation generator — APA, MLA and Chicago references in seconds. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Citation Generator – APA MLA Chicago",
     instructions: [
@@ -4107,7 +4107,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "text-reverser",
     category: "Text",
     description: 'Reverse text character-by-character or word-by-word for puzzles and effects. Flip sentences backwards instantly — free, local, no signup.',
-    seoDescription: 'Free text reverser — chars or words. Local, free, no signup.',
+    seoDescription: 'Free text reverser — flip characters, words or lines backwards instantly. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Text Reverser Online",
     instructions: [
@@ -4128,7 +4128,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "upside-down-text",
     category: "Text",
     description: 'Flip text upside-down with Unicode rotation for playful posts and puzzles. Write uʍop ǝpᴉsdn — free, local, copy-paste ready.',
-    seoDescription: 'Free flipped text — upside-down Unicode. Local, free, no signup.',
+    seoDescription: 'Free upside-down text generator — flipped Unicode for jokes and bios. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Upside Down Text Generator",
     instructions: [
@@ -4149,7 +4149,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "glitch-text",
     category: "Text",
     description: 'Corrupt text with Zalgo-style combining marks and glitch effects for edgy posts. Break headings beautifully — free, local, copy-paste ready.',
-    seoDescription: 'Free glitch text — corrupted headings. Local, free, no signup.',
+    seoDescription: 'Free glitch text generator — corrupted zalgo headings for style and memes. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Glitch Text Generator Online",
     instructions: [
@@ -4170,7 +4170,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "invisible-character",
     category: "Text",
     description: 'Copy invisible Unicode characters — zero-width spaces and joiners — for spacing tricks and testing. Insert the unseeable on purpose — free, local, no signup.',
-    seoDescription: 'Free invisible chars — zero-width copy. Local, free, no signup.',
+    seoDescription: 'Free invisible character sender — zero-width Unicode that copies invisibly. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Invisible Character Copier",
     instructions: [
@@ -4215,7 +4215,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "unicode-viewer",
     category: "Utility",
     description: 'Inspect any character\'s Unicode code points, names, blocks, and UTF-8 bytes. Debug invisible text issues precisely — local inspection, free, no signup.',
-    seoDescription: 'Free Unicode inspector — points plus bytes. Local, free, no signup.',
+    seoDescription: 'Free Unicode inspector — code points plus UTF-8 bytes explained clearly. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Unicode Viewer – Code Points Online",
     instructions: [

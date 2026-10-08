@@ -186,7 +186,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "docker-run-to-compose",
     category: "Developer",
     description: 'Convert docker run commands to docker-compose.yml format. Supports ports, volumes, environment variables, networks, restart policies, and container names.',
-    seoDescription: 'Free online Docker Run to Compose Converter — Convert docker run commands to docker-compose.yml format. ',
+    seoDescription: 'Free docker run to compose converter — CLI commands to docker-compose.yml. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Paste the docker run command", desc: "Full command with flags, ports, volumes, and environment variables." },
@@ -209,7 +209,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "email-normalizer",
     category: "Developer",
     description: 'Normalize email addresses by removing dots (Gmail), stripping +tags, and lowercasing. Process multiple emails at once for deduplication and cleaning.',
-    seoDescription: 'Free online Email Normalizer — Normalize email addresses by removing dots, stripping +tags, and lowercasing. ',
+    seoDescription: 'Free email normalizer — dots removed, plus-tags stripped, lowercased. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Paste source for Email Normalizer", desc: "Paste source for Email Normalizer into the input area. Nothing runs until you trigger it." },
@@ -229,7 +229,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     id: "arch-conv-1",
     name: "Archive Converter",
     description: 'Convert between ZIP, TAR, GZ, and 7z archives right in your browser. Repackage downloads for any platform — local fflate work, unlimited saves.',
-    seoDescription: 'Free archive converter — ZIP, TAR, GZ, 7z. Local, unlimited saves.',
+    seoDescription: 'Free archive converter — ZIP, TAR, GZ and 7z repackaged in your browser. Local fflate work, unlimited saves, no signup needed.',
     category: "Converter",
     slug: "archive-converter",
     dependencies: "jszip",
@@ -273,7 +273,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: 'privacy-cleaner',
     category: 'Privacy',
     description: 'Scan and clear cookies, localStorage, and cache for the current site — see what\'s stored first. Audit trackers before wiping — local inspection, free, no signup.',
-    seoDescription: 'Free privacy scan — see then clear storage. Local, free, no signup.',
+    seoDescription: 'Free privacy storage scan — see then clear cookies and site storage. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: 'Vanilla JS',
     seoTitle: "Free Privacy Cleaner – Cookies & Cache",
     instructions: [
@@ -318,7 +318,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Extract PDF content into editable DOCX files. Preserves formatting, tables, and layout — review complex layouts after conversion.',
     seoTitle: "PDF to Word Converter – Free Online",
     dependencies: "pdf2docx / PDF.js",
-    seoDescription: 'Convert PDF to Word online free — editable DOCX with layout kept. Know the limits first. ',
+    seoDescription: 'Free PDF to Word converter — editable DOCX with tables, fonts and layout kept. Complex layouts need review; local parsing, unlimited saves. ',
     instructions: [
       { title: "1. Drop PDF file(s)", desc: "Upload your PDF source. Runs locally on PDF.js." },
       { title: "2. Set Word (DOCX) options", desc: "Adjust output settings for Word (DOCX) — presets fit most jobs without further tuning." },
@@ -405,7 +405,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "currency-converter",
     category: "Finance",
     description: 'Converts between 160+ world currencies using real-time exchange rates sourced from central banks and financial data providers. Uses cloud-based processing.',
-    seoDescription: 'Free currency converter — 160+ currencies at live bank rates. Travel, shopping, and forex math. ',
+    seoDescription: 'Free currency converter — 160+ currencies at live bank rates for travel, shopping and forex math. Live ExchangeRate API, free, no signup needed. ',
     dependencies: "ExchangeRate-API",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter the amount with from- and to-currencies." },
@@ -428,7 +428,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Branding",
     description: 'Design simple logos with text, shapes, and icons on canvas — export PNG/SVG. Draft startup marks in an afternoon — local Canvas work, unlimited saves.',
     dependencies: "Fabric.js / Canvas API",
-    seoDescription: 'Free logo designer — text, shapes, export. Local Canvas, unlimited saves.',
+    seoDescription: 'Free logo designer — text and shapes composed and exported as crisp PNG. Local Canvas, unlimited saves, no signup needed.',
     seoTitle: "Free Logo Maker Online",
     instructions: [
       { title: "1. Add text and shapes", desc: "Name plus one strong mark." },
@@ -471,7 +471,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Converts .docx and .doc files to PDF while preserving fonts, tables, images, headers, and embedded formatting. Uses cloud-based processing.',
     seoTitle: "Word to PDF Converter – Free Online",
-    seoDescription: 'Free online Word to PDF — convert DOCX/DOC with fonts, tables, and images intact. Server-side for fidelity. ',
+    seoDescription: 'Free Word to PDF converter — DOCX/DOC with fonts, tables and images intact. Server-side conversion for fidelity; files handled securely, unlimited saves. ',
     dependencies: "None",
     instructions: [
       { title: "1. Drop Word (DOCX) file(s)", desc: "Upload your Word (DOCX) source. Runs locally in your browser." },
@@ -515,7 +515,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Convert JPG images to PDF format in your browser. Documents stay on your device — editing and conversion run locally in your browser.',
     seoTitle: "JPG to PDF Converter – Free Online",
-    seoDescription: 'Free online JPG to PDF — merge JPG photos into one multi-page PDF in your order. Lossless, private, no uploads. ',
+    seoDescription: 'Free JPG to PDF converter — merge JPG photos into one ordered multi-page PDF. Lossless quality, local Canvas work, private, unlimited saves. ',
     dependencies: "jsPDF / Canvas API",
     instructions: [
       { title: "1. Drop JPG file(s)", desc: "Upload your JPG source. Runs locally on Canvas." },
@@ -653,7 +653,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "fancy-text-generator",
     category: "Text",
     description: 'Creates stylish Unicode text in 40+ decorative font styles including double-struck, bubble, cursive, gothic, and small caps. Perfect for social media bios, gaming usernames, Discord profiles, and Instagram captions where standard fonts will not render.',
-    seoDescription: 'Free online Fancy Text Generator — 40+ Unicode styles for bios, usernames, and captions. Copy-paste anywhere. ',
+    seoDescription: 'Free fancy text generator — 40+ Unicode styles for bios, usernames and captions. Copy-paste anywhere, local, free, no signup needed. ',
     dependencies: "Unicode mapping",
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for Fancy Text first." },
@@ -744,7 +744,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "wheel-of-names",
     category: "Utility",
     description: 'Spin a colorful prize wheel with your names — giveaways, classrooms, team picks. Draw winners live with drama — free, local, no signup.',
-    seoDescription: 'Free prize wheel — names with drama. Local, free, no signup.',
+    seoDescription: 'Free prize wheel spinner — names with drama for classrooms and giveaways. Local Canvas/GSAP, free, no signup, nothing uploads.',
     dependencies: "Canvas API / GSAP",
     seoTitle: "Free Wheel of Names – Spin to Pick",
     instructions: [
@@ -787,7 +787,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "object-remover",
     category: "Image",
     description: 'Brush over unwanted objects and erase them with patch-fill reconstruction — tourists, signs, photobombers. Clean vacation shots in minutes — local Canvas work, unlimited saves.',
-    seoDescription: 'Free object remover — brush, patch-fill erase. Local Canvas, unlimited saves.',
+    seoDescription: 'Free object remover — brush over photobombers and wires for patch-fill erase. Local Canvas, unlimited saves, no signup needed.',
     dependencies: "Canvas API",
     seoTitle: "Free Object Remover from Photos Online",
     instructions: [
@@ -808,7 +808,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "ppt-to-pdf",
     category: "PDF",
     description: 'Convert PowerPoint decks to locked PDFs for sharing — fonts embedded, layout frozen. Send a 40-slide pitch that renders identically everywhere — local conversion, unlimited saves.',
-    seoDescription: 'Free PPT to PDF — layout frozen. Local conversion, unlimited saves.',
+    seoDescription: 'Free PPT to PDF converter — slides frozen to print-ready PDF pages with layout intact. Local conversion, unlimited saves, no signup needed.',
     dependencies: "PDF.js / pdf-lib",
     seoTitle: "Free PPT to PDF Converter Online",
     instructions: [
@@ -896,7 +896,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "excel-to-pdf",
     category: "PDF",
     description: 'Convert Excel workbooks to print-ready PDFs with layout preserved — quotes, reports, price lists. Send a client quote that prints identically everywhere — local conversion, unlimited saves.',
-    seoDescription: 'Free Excel to PDF — layout preserved. Local conversion, unlimited saves.',
+    seoDescription: 'Free Excel to PDF converter — sheets to print-ready PDF with tables and formatting preserved. Local conversion, unlimited saves, no signup needed.',
     dependencies: "SheetJS / jsPDF",
     seoTitle: "Free Excel to PDF Converter Online",
     instructions: [
@@ -939,7 +939,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "character-counter",
     category: "Text",
     description: 'Count characters, words, sentences, and reading time as you type — with and without spaces. Fit a 280-character post or 1500-word brief exactly — free, local, no signup.',
-    seoDescription: 'Free character counter — chars, words, reading time. Free, local, no signup.',
+    seoDescription: 'Free character and word counter — counts, reading time and keyword density. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Character Counter – Words Online",
     instructions: [
@@ -1003,7 +1003,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "crop-image",
     category: "Image",
     description: 'Crop photos with aspect presets and free selection plus rotation correction. Frame 50 portraits to 4:5 for feeds — local Cropper.js work, unlimited saves.',
-    seoDescription: 'Free image crop — presets, rotation fix. Local Cropper.js, unlimited saves.',
+    seoDescription: 'Free image cropper — social presets, free ratio and rotation fix included. Local Cropper.js, unlimited saves, no signup needed.',
     dependencies: "Cropper.js",
     seoTitle: "Free Crop Image Online – Aspect Presets",
     instructions: [
@@ -1024,7 +1024,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "social-media-post-maker",
     category: "Branding",
     description: 'Design sized social posts with text overlays and brand colors for every network. Ship a week of creatives in one sitting — local Canvas work, unlimited saves.',
-    seoDescription: 'Free post designer — every network size. Local Canvas, unlimited saves.',
+    seoDescription: 'Free social post designer — every network size from one shared canvas file. Local Canvas, unlimited saves, no signup needed.',
     dependencies: "Fabric.js",
     seoTitle: "Free Social Media Post Maker Online",
     instructions: [
@@ -1136,7 +1136,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "url-shortener",
     category: "Utility",
     description: 'Takes any long URL and generates a compact, shareable short link. Uses cloud-based processing. Short links resolve through managed providers with automatic failover — free to start, sign in for full access.',
-    seoDescription: 'Free online URL Shortener — Takes any long URL and generates a compact, shareable short link. ',
+    seoDescription: 'Free URL shortener — long URLs to compact shareable links. Via TinyURL/is.gd; third-party service receives URLs, sign in free to start.',
     dependencies: "TinyURL API, is.gd API",
     instructions: [
       { title: "1. Paste the long URL", desc: "Any public http(s) address. The destination stays visible to the shortening service — never shorten links with secrets or tokens." },
@@ -1158,7 +1158,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Convert PDF tables into editable Excel spreadsheets with rows and columns preserved. Turn 30 bank statements into one workbook — local parsing, unlimited saves.',
     dependencies: "pdf2json / SheetJS",
-    seoDescription: 'Free PDF to Excel — tables preserved. Local parsing, unlimited saves.',
+    seoDescription: 'Free PDF to Excel converter — data tables extracted to editable XLSX sheets. Local parsing, nothing uploads, unlimited saves, no signup needed.',
     seoTitle: "Free PDF to Excel Converter Online",
     instructions: [
       { title: "1. Upload table PDFs", desc: "Statements and reports with real tables." },
@@ -1178,7 +1178,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "unlock-pdf",
     category: "PDF",
     description: 'Remove known passwords from your own PDFs in bulk — owner restrictions and open passwords. Reclaim 20 archived files you own — local qpdf work, unlimited saves.',
-    seoDescription: 'Free PDF unlock — remove known passwords. Local, unlimited saves. Your files only.',
+    seoDescription: 'Free PDF unlocker — remove known passwords from your own files in seconds. Local qpdf processing, only your files, unlimited saves.',
     dependencies: "qpdf",
     seoTitle: "Free Unlock PDF Online – Remove Password",
     instructions: [
@@ -1190,7 +1190,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: 'Do I need to know the password?', answer: 'Yes for user-password files — enter it once per batch. This removes restrictions from files you own; it cannot crack unknown passwords.' },
       { question: 'Owner vs user password?', answer: 'Owner passwords (print/copy limits) remove instantly with the password; user-password files need it to open at all. Both stay local — passwords never upload.' },
       { question: 'Is unlocking legal?', answer: 'For files you own or are authorized to process, yes. Bypassing others\' protections without permission violates law in most jurisdictions — this tool assumes your ownership.' },
-      { question: 'Are passwords uploaded anywhere?', answer: 'No — unlocking runs locally in your browser. Passwords never leave your device; only saves count on the free quota.' },
+      { question: 'Are passwords uploaded anywhere?', answer: 'No — unlocking runs locally in your browser. Passwords never leave your device; saves download with no quota.' },
     ],
   },
   {
@@ -1199,7 +1199,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "image-enhancer",
     category: "Image",
     description: 'Enhance image detail with AI reconstruction — upscale plus texture recovery beyond plain interpolation. Rescue low-res product shots for listings — local Real-ESRGAN work, unlimited saves.',
-    seoDescription: 'Free AI enhancer — detail reconstruction. Local Real-ESRGAN, unlimited saves.',
+    seoDescription: 'Free AI image enhancer — detail reconstruction for soft and compressed photos. Local Real-ESRGAN engine, unlimited saves, no signup needed.',
     dependencies: "Real-ESRGAN",
     seoTitle: "Free AI Image Enhancer Online",
     instructions: [
@@ -1372,7 +1372,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Image",
     description: 'Scales images to exact pixel dimensions or percentage-based sizes with intelligent resampling algorithms that preserve sharpness.',
     dependencies: "Canvas API / Sharp",
-    seoDescription: 'Resize images online free — exact pixels or percentage, with resampling that keeps edges sharp. ',
+    seoDescription: 'Free image resizer — exact pixels or percentage with edge-sharp resampling. Width/height lock, local Canvas, unlimited saves, no signup needed.',
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on Canvas." },
       { title: "2. Configure resize", desc: "Set the resize options once — one configuration applies to the whole batch." },
@@ -1460,7 +1460,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "photo-retoucher",
     category: "Image",
     description: 'Retouch portraits with this photo retoucher — blemish healing, skin smoothing, and teeth whitening brushes. Polish headshots naturally in minutes — local OpenCV work, unlimited saves.',
-    seoDescription: 'Free portrait retoucher — heal, smooth, whiten. Local OpenCV, unlimited saves.',
+    seoDescription: 'Free portrait retoucher — heal blemishes, smooth skin, whiten teeth naturally. Local OpenCV, unlimited saves, no signup needed.',
     dependencies: "OpenCV",
     seoTitle: "Free Photo Retoucher Online – Portraits",
     instructions: [
@@ -1482,7 +1482,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Split PDFs by page ranges, every-N-pages, or single-page extraction. Break a 200-page manual into chapters — local pdf-lib split, unlimited saves.',
     dependencies: "pdf-lib",
-    seoDescription: 'Free PDF splitter — ranges, chapters, singles. Local pdf-lib, unlimited saves.',
+    seoDescription: 'Free PDF splitter — extract page ranges, chapters or single pages into new files. Local pdf-lib, unlimited saves, no signup needed.',
     seoTitle: "Free PDF Splitter – Extract Pages Online",
     instructions: [
       { title: "1. Upload the PDF", desc: "Manuals, batches, or compilations to divide." },
@@ -1502,7 +1502,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "font-generator",
     category: "Text",
     description: 'Turn plain text into 50+ Unicode styled font variants — bold, italic, script, monospace, circled. Make bios and headlines stand out anywhere — free, local, copy-paste ready.',
-    seoDescription: 'Free font generator — 50+ Unicode styles, copy anywhere. Free, local, no signup.',
+    seoDescription: 'Free font style generator — 50+ Unicode styles, copy anywhere online. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Font Generator – Stylish Text Online",
     instructions: [
@@ -1523,7 +1523,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "salary-calculator",
     category: "Finance",
     description: "Calculate net salary after taxes — enter gross salary, deductions, and tax brackets to see your take-home pay with a full breakdown.",
-    seoDescription: 'Free online Salary Calculator — Calculate net salary after taxes ',
+    seoDescription: 'Free salary calculator — net pay after taxes and deductions with monthly breakdown. Local Vanilla JS, free, no signup, nothing uploads. ',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter CTC with city and regime." },
@@ -1545,7 +1545,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "audio-cutter",
     category: "Audio",
     description: "Trim and cut audio files online — MP3, WAV, M4A, FLAC, and OGG. Select start and end points visually on the waveform, then download the trimmed clip.",
-    seoDescription: 'Free online Audio Cutter — Trim and cut audio files online ',
+    seoDescription: 'Free audio cutter and trimmer — cut heads, tails and middles precisely. Local Web Audio, unlimited saves, no signup needed. ',
     dependencies: "Web Audio API / FFmpeg",
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
@@ -1589,7 +1589,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "pomodoro-timer",
     category: "Productivity",
     description: 'Pomodoro Timer manages work and break intervals with fully customizable session lengths and auto-start options. Tasks never leave your device — everything stores locally in your browser.',
-    seoDescription: 'Free online Pomodoro Timer — 25/5 focus cycles with custom lengths and auto-start. Beat procrastination. ',
+    seoDescription: 'Free Pomodoro timer — 25/5 focus cycles with custom lengths and auto-start. Beat procrastination, local, free, no signup, nothing uploads.',
     dependencies: "Web Audio API / Vanilla JS",
     instructions: [
       { title: "1. Set focus and break", desc: "Classic 25 focus / 5 break, or tune to your rhythm." },
@@ -1632,7 +1632,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "epub-to-pdf",
     category: "Converter",
     description: 'Converts EPUB files to PDF format — e-readers, mobile devices, and accessible digital books to document sharing, printing, and archival with consistent formatting. All conversion happens locally in your browser with no file size limits.',
-    seoDescription: 'Free online EPUB to PDF — Convert e-books to PDF format. Preserves structure, images, and formatting. ',
+    seoDescription: 'Free EPUB to PDF converter — e-books to PDF with structure, images and formatting kept. Local parsing, unlimited saves, no signup needed. ',
     dependencies: "jszip, pdf-lib",
     showInCategory: true,
     instructions: [
@@ -1654,7 +1654,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "protect-pdf",
     category: "PDF",
     description: 'Lock PDFs with user and owner passwords — control opening, printing, and copying. Protect 10 client files before sending — local pdf-lib encryption, unlimited saves.',
-    seoDescription: 'Free PDF protection — passwords plus permissions. Local, unlimited saves.',
+    seoDescription: 'Free PDF protector — passwords plus print/copy permissions on your documents. Local pdf-lib, unlimited saves, no signup needed.',
     dependencies: "pdf-lib",
     seoTitle: "Free Protect PDF with Password Online",
     instructions: [
@@ -1743,7 +1743,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "dice-roller",
     category: "Utility",
     description: 'Roll 3D dice — d4 through d20 plus custom counts — for games and decisions. Roll 4d6 drop-lowest for stats — free, local, no signup.',
-    seoDescription: 'Free 3D dice — any set, modifiers. Local, free, no signup.',
+    seoDescription: 'Free 3D dice roller — any dice set with modifiers for RPG campaigns. Local Three.js, free, no signup, nothing uploads.',
     dependencies: "Three.js",
     seoTitle: "Free Dice Roller – d4 to d20 Online",
     instructions: [
@@ -1764,7 +1764,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "profit-margin-calculator",
     category: "Finance",
     description: 'Compute gross and net margins from revenue and costs — know exact profitability. A $30 sale at $20 cost margins 33% — free, local, no signup.',
-    seoDescription: 'Free margin calculator — gross plus net. Free, local, no signup.',
+    seoDescription: 'Free profit margin calculator — gross and net margins with markup conversion. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Profit Margin Calculator Online",
     instructions: [
@@ -1785,7 +1785,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "speech-to-text",
     category: "Audio",
     description: 'Dictate live microphone speech to text in multiple languages through your browser\'s speech service. Live captions for meetings and notes — free to start, no Toolzum account needed.',
-    seoDescription: 'Free online Speech to Text — live microphone dictation in multiple languages. On-device recognition, private. ',
+    seoDescription: 'Free speech to text — live microphone dictation in multiple languages. On-device recognition, private, unlimited saves, free. ',
     dependencies: "Web Speech API",
     instructions: [
       { title: "1. Allow the microphone", desc: "Grant mic access once; speak clearly 6–12 inches away in a quiet room." },
@@ -1831,7 +1831,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "coin-flipper",
     category: "Utility",
     description: 'Flip a virtual coin with streak tracking for instant decisions. Settle it fairly in one tap — free, local, no signup. Best-of-three settles disputes fairly with streak tracking — free, local, no signup.',
-    seoDescription: 'Free coin flipper with streaks. Local, free, no signup.',
+    seoDescription: 'Free coin flipper with streak tracking for fair calls and ties. Local CSS3 animation, free, no signup, nothing uploads.',
     dependencies: "CSS3 Animations",
     seoTitle: "Free Coin Flip Online",
     instructions: [
@@ -1852,7 +1852,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "image-colorizer",
     category: "Image",
     description: 'Colorize black-and-white photos with on-device AI — family archives brought to life. Guess-era colors, not ground truth — local DeOldify work, unlimited saves.',
-    seoDescription: 'Free AI photo colorizer — B&W to color. Local DeOldify, unlimited saves.',
+    seoDescription: 'Free AI photo colorizer — black-and-white photos to lifelike color automatically. Local DeOldify, unlimited saves, no signup needed.',
     dependencies: "DeOldify",
     seoTitle: "Free B&W Photo Colorizer Online",
     instructions: [
@@ -1873,7 +1873,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "exif-data-remover",
     category: "Privacy",
     description: 'Strips GPS coordinates, camera metadata, timestamps, and software fingerprints from JPEG and PNG images. Sensitive data never leaves your device — encryption runs locally in your browser.',
-    seoDescription: 'Free online EXIF Remover — strip GPS, camera, and timestamp metadata from photos before sharing. Local, instant. ',
+    seoDescription: 'Free EXIF remover — strip GPS, camera and timestamp metadata before sharing. Local exifr engine, instant, unlimited saves, no signup needed. ',
     dependencies: "exifr / Piexifjs",
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on exifr." },
@@ -2135,7 +2135,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "watermark-pdf",
     category: "PDF",
     description: 'Stamp text watermarks across PDF pages — DRAFT, CONFIDENTIAL, custom text with opacity. Protect 50 filings before sharing — local pdf-lib work, unlimited saves.',
-    seoDescription: 'Free PDF watermarks — diagonal text stamps. Local, unlimited saves.',
+    seoDescription: 'Free PDF watermarker — diagonal DRAFT/CONFIDENTIAL text stamps on every page. Local pdf-lib, unlimited saves, no signup needed.',
     dependencies: "pdf-lib",
     seoTitle: "Free Watermark PDF Online – Text Stamps",
     instructions: [
@@ -2198,7 +2198,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "email-signature-generator",
     category: "Branding",
     description: 'Build professional HTML email signatures with photo, links, and disclaimers. Sign every mail like a company — local generation, free, copy-paste.',
-    seoDescription: 'Free signature builder — HTML, copy-paste. Local, free.',
+    seoDescription: 'Free email signature builder — HTML signatures with links and icons, copy-paste ready. Local React, free, no signup, nothing uploads.',
     dependencies: "React",
     seoTitle: "Free Email Signature Generator – HTML",
     instructions: [
@@ -2242,7 +2242,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "morse-code-translator",
     category: "Converter",
     description: 'Translate text to Morse code and decode Morse back — with timing-accurate playback. Learn SOS (···---···) properly — local processing, free, no signup.',
-    seoDescription: 'Free Morse translator — text both ways plus audio. Local, free, no signup.',
+    seoDescription: 'Free Morse code translator — text to Morse and back, plus playable audio tones. Local processing, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Morse Code Translator + Audio",
     instructions: [
@@ -2263,7 +2263,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "cursive-text-generator",
     category: "Text",
     description: 'Turn plain text into elegant cursive Unicode script for bios and invitations. Style names beautifully anywhere text renders — free, local, copy-paste ready.',
-    seoDescription: 'Free cursive text — elegant Unicode script. Local, free, no signup.',
+    seoDescription: 'Free cursive text generator — elegant Unicode script for names and quotes. Local processing, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Cursive Text Generator Online",
     instructions: [
@@ -2284,7 +2284,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "roi-calculator",
     category: "Finance",
     description: 'Measures return on investment by comparing net gain or loss against the original cost, expressed as both a percentage and a dollar amount. Essential for marketing campaign evaluation, equipment purchase decisions, real estate investment analysis, and comparing investment opportunities.',
-    seoDescription: 'Free ROI calculator — percentage and dollar returns, annualized, with the metric traps flagged. ',
+    seoDescription: 'Free ROI calculator — percentage and dollar returns annualized, with metric traps flagged. Local Vanilla JS, free, no signup, nothing uploads. ',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter gain and cost." },
@@ -2306,7 +2306,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "vat-calculator",
     category: "Finance",
     description: 'Computes VAT-inclusive and VAT-exclusive amounts for EU member-state rates (standard and reduced) with country-specific rules for digital services. Figures never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free EU VAT calculator — add/strip VAT by country, standard and reduced rates, digital-goods rules. ',
+    seoDescription: 'Free EU VAT calculator — add or strip VAT by country with standard and reduced rates plus digital-goods rules. Local, free, no signup, nothing uploads. ',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter net amount and VAT rate." },
@@ -2328,7 +2328,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "password-strength-checker",
     category: "Privacy",
     description: 'Evaluates password strength using zxcvbn entropy analysis: score, crack time estimate, length, character diversity, dictionary words, and pattern repetition.',
-    seoDescription: 'Free password strength checker — zxcvbn entropy score, crack-time estimate, and fixes. ',
+    seoDescription: 'Free password strength checker — zxcvbn entropy score, crack-time estimate and fixes. Local analysis, free, no signup, nothing uploads. ',
     dependencies: "zxcvbn",
     instructions: [
       { title: "1. Type the password", desc: "Evaluated locally by zxcvbn — keystrokes never leave the page." },
@@ -2418,7 +2418,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "receipt-generator",
     category: "Finance",
     description: 'Creates printer-friendly receipt pages with itemized purchases, payment method, date, and merchant details in a compact single-page layout. Figures never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online Receipt Generator — printer-friendly single-page receipts with items, tax, payment, and merchant details. ',
+    seoDescription: 'Free receipt generator — printer-friendly single-page receipts with items, tax, payment and merchant details. Local Canvas/jsPDF, unlimited saves, free. ',
     dependencies: "Canvas API / jsPDF",
     instructions: [
       { title: "1. Complete each section", desc: "Fill the Receipt Generator fields in order — required items first, optional details after." },
@@ -2461,7 +2461,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "secure-note-sharer",
     category: "Privacy",
     description: 'Share secrets securely via self-decrypting note links — AES in the URL hash servers never see. Send passwords without trusting inboxes — local Web Crypto, free, no signup.',
-    seoDescription: 'Free encrypted notes — servers never see content. Local crypto, free.',
+    seoDescription: 'Free encrypted note sharing — self-decrypting links servers never see. Local Web Crypto, free, no signup, nothing uploads.',
     dependencies: "Web Crypto API",
     seoTitle: "Free Secure Note Sharer – Encrypted Links",
     instructions: [
@@ -2482,7 +2482,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "video-to-gif",
     category: "Video",
     description: "Convert MP4/WebM to GIF animations. Videos up to 250MB. Videos never leave your device — compression and conversion run locally in your browser with FFmpeg WASM.",
-    seoDescription: 'Free online Video to GIF — Convert MP4/WebM to GIF animations. Up to 250MB videos, free for everyone. ',
+    seoDescription: 'Free video to GIF converter — MP4/WebM clips to shareable GIF animations. Up to 250MB videos, local FFmpeg, free for everyone, no signup.',
     dependencies: "FFmpeg / gif.js",
     instructions: [
       { title: "1. Drop video file(s)", desc: "Upload your video source. Runs locally on FFmpeg." },
@@ -2505,7 +2505,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "image-to-base64",
     category: "Converter",
     description: 'Encode images to Base64 data URIs for CSS embedding and API payloads. Inline a logo without extra requests — local encoding, free, no signup.',
-    seoDescription: 'Free image to Base64 — data URIs. Local, free, no signup.',
+    seoDescription: 'Free image to Base64 encoder — images to data URIs for CSS and HTML embedding. Local FileReader, free, no signup, nothing uploads.',
     dependencies: "FileReader API",
     seoTitle: "Free Image to Base64 Encoder Online",
     instructions: [
@@ -2548,7 +2548,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "iban-validator",
     category: "Finance",
     description: 'Validate IBAN structure, length, and mod-97 check digits for 80+ countries. Catch transfer typos before money moves — local ibantools work, free, no signup.',
-    seoDescription: 'Free IBAN validator — 80+ countries. Local, free, no signup.',
+    seoDescription: 'Free IBAN validator — bank account numbers checked across 80+ countries. Local ibantools, free, no signup, nothing uploads.',
     dependencies: "ibantools"
   ,
     seoTitle: "Free IBAN Validator Online",
@@ -2614,7 +2614,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "rotate-pdf",
     category: "PDF",
     description: 'Rotate sideways or upside-down PDF pages 90/180/270° — fix phone scans in bulk. Straighten 60 landscape pages at once — local pdf-lib rotation, unlimited saves.',
-    seoDescription: 'Free PDF rotate — 90/180/270 degrees. Local pdf-lib, unlimited saves.',
+    seoDescription: 'Free PDF rotator — rotate pages 90/180/270 degrees, single pages or whole files. Local pdf-lib, unlimited saves, no signup needed.',
     dependencies: "pdf-lib",
     seoTitle: "Free Rotate PDF Pages Online",
     instructions: [
@@ -2635,7 +2635,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "extract-images-from-pdf",
     category: "PDF",
     description: 'Pull every embedded image from a PDF at native resolution — photos, charts, logos. Recover 40 figures from a report without screenshots — local PDF.js work, unlimited saves.',
-    seoDescription: 'Free PDF image extractor — native resolution. Local PDF.js, unlimited saves.',
+    seoDescription: 'Free PDF image extractor — pull embedded images out at native resolution quality. Local PDF.js rendering, unlimited saves, no signup needed.',
     dependencies: "pdf.js",
     seoTitle: "Free Extract Images from PDF Online",
     instructions: [
@@ -2717,7 +2717,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "hex-to-rgb-converter",
     category: "Design",
     description: 'Convert HEX colors to RGB/RGBA values instantly with alpha support. Translate #4F46E5 for CSS rgba() use — free, local, no signup.',
-    seoDescription: 'Free HEX to RGB — alpha included. Local, free, no signup.',
+    seoDescription: 'Free HEX to RGB converter — alpha channel included, copy-ready values. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free HEX to RGB Converter Online",
     instructions: [
@@ -2850,7 +2850,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "conversion-rate-calculator",
     category: "Growth & Marketing",
     description: 'Compute conversion rates from visitors and conversions with segment splits. Turn 2% into 3% deliberately — free, local, no signup.',
-    seoDescription: 'Free CRO math — rates plus segments. Local, free, no signup.',
+    seoDescription: 'Free conversion rate calculator — rates plus segment splits. Local processing, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Conversion Rate Calculator Online",
     instructions: [
@@ -2871,7 +2871,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "cpm-calculator",
     category: "Growth & Marketing",
     description: 'Compute cost per mille for ad campaigns — compare display, video, and social CPMs. Judge a $12 CPM against returns — free, local, no signup.',
-    seoDescription: 'Free CPM calculator — compare ad costs. Free, local, no signup.',
+    seoDescription: 'Free CPM calculator — compare ad costs per mille. Local processing, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free CPM Calculator – Ad Cost Online",
     instructions: [
@@ -2892,7 +2892,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "roas-calculator",
     category: "Growth & Marketing",
     description: 'Compute return on ad spend from revenue and cost — know every dollar\'s payback. Prove 4:1 ROAS before scaling — free, local, no signup.',
-    seoDescription: 'Free ROAS calculator — revenue per ad dollar. Free, local, no signup.',
+    seoDescription: 'Free ROAS calculator — revenue per ad dollar spent. Local processing, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free ROAS Calculator Online",
     instructions: [
@@ -2957,7 +2957,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "compare-pdf-files",
     category: "PDF",
     description: 'Diff two PDFs side by side — spot changed clauses, figures, and pages before signing. Review a 20-page contract revision in minutes — local PDF.js comparison, free, no signup.',
-    seoDescription: 'Free PDF compare — side-by-side text diff. Local PDF.js, free, no signup.',
+    seoDescription: 'Free PDF comparison tool — side-by-side text diff of two documents. Local PDF.js, free, no signup, nothing uploads ever.',
     dependencies: "pdf.js",
     seoTitle: "Free Compare PDF Files Online",
     instructions: [
@@ -2978,7 +2978,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "favicon-generator",
     category: "Design",
     description: 'Generate complete favicon packages — ICO plus PNG and Apple touch icons — from one image. Ship every platform icon in one pass — local generation, unlimited saves.',
-    seoDescription: 'Free favicon package — ICO, PNG, Apple. Local, unlimited saves.',
+    seoDescription: 'Free favicon package generator — ICO, PNG and Apple touch icons together. Local processing, unlimited saves, no signup needed.',
     dependencies: "Sharp / jimp",
     seoTitle: "Free Favicon Generator – ICO + PNG Online",
     instructions: [
@@ -2999,7 +2999,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "case-converter",
     category: "Text",
     description: 'Transform text between uppercase, lowercase, title case, camelCase, snake_case, kebab-case, sentence case, and alternating case with a single click. All processing is local.',
-    seoDescription: 'Free online Case Converter — UPPER, lower, Title, camelCase, snake_case, kebab-case in one click. For code and prose. ',
+    seoDescription: 'Free case converter — UPPER, lower, Title, camelCase, snake_case and kebab-case in one click. For code and prose, local, free, no signup. ',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Paste source for Case Converter", desc: "Paste source for Case Converter into the input area. Nothing runs until you trigger it." },
@@ -3021,7 +3021,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "keyword-density-checker",
     category: "SEO",
     description: 'Measure keyword density per term with safe-range flags for on-page SEO. Keep primary terms at 1–2%, never 5% — local analysis, free, no signup.',
-    seoDescription: 'Free density checker — per-term percentages. Local, free, no signup.',
+    seoDescription: 'Free keyword density checker — per-term percentages with stuffing flags. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Keyword Density Checker – SEO",
     instructions: [
@@ -3112,7 +3112,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "barcode-generator",
     category: "Utility",
     description: 'Generates scannable barcodes in major symbologies including EAN-13, Code 128, QR Code, and UPC-A from typed input or pasted data. Input never leaves your device — everything runs locally in your browser.',
-    seoDescription: 'Free barcode generator — EAN-13, UPC-A, Code 128, and QR. Retail-ready, scannable output. ',
+    seoDescription: 'Free barcode generator — EAN-13, UPC-A, Code 128 and QR, retail-ready scannable output. Local JsBarcode, unlimited saves, no signup needed.',
     dependencies: "JsBarcode",
     instructions: [
       { title: "1. Set format and size first", desc: "Set format and size first so the output matches your need." },
@@ -3134,7 +3134,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "pgp-key-generator",
     category: "Privacy",
     description: 'Generate PGP key pairs with OpenPGP.js — public for sharing, private stays local. Encrypt mail like it\'s 1991 but working — local crypto, unlimited saves.',
-    seoDescription: 'Free PGP keys — OpenPGP.js local. Free quota on key saves.',
+    seoDescription: 'Free PGP key generator — RSA keypairs generated locally via OpenPGP.js. Keys never upload, unlimited saves, no signup needed.',
     dependencies: "OpenPGP.js",
     seoTitle: "Free PGP Key Generator Online",
     instructions: [
@@ -3176,7 +3176,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "markdown-tools",
     category: "Converter",
     description: 'Markdown toolbox — convert, preview, lint, and format Markdown with GFM tables and task lists. Own every .md workflow in one tab — local processing, free, no signup.',
-    seoDescription: 'Free Markdown toolbox — convert, lint, format. Local, free, no signup.',
+    seoDescription: 'Free Markdown toolbox — convert, lint and format Markdown documents. Local marked.js engine, free, no signup, nothing uploads.',
     dependencies: "marked.js, Turndown",
     seoTitle: "Free Markdown Tools – Convert & Format",
     instructions: [
@@ -3219,7 +3219,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "invisible-text-generator",
     category: "Text",
     description: 'Generate invisible Unicode characters and blank text for bios, usernames, and formatting tricks. Post empty messages anywhere — free, local, copy-paste ready.',
-    seoDescription: 'Free invisible characters — blank text tricks. Local, free, no signup.',
+    seoDescription: 'Free invisible character tool — blank Unicode text for bios and messages. Local processing, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Invisible Text Generator – Blank Text",
     instructions: [
@@ -3284,7 +3284,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "burn-rate-calculator",
     category: "Growth & Marketing",
     description: 'Compute monthly burn and runway from cash balance and net outflow. Know exactly how many months remain — free, local, no signup.',
-    seoDescription: 'Free burn calculator — runway in months. Free, local, no signup.',
+    seoDescription: 'Free burn rate calculator — runway left in months. Local processing, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS"
   ,
     seoTitle: "Free Burn Rate Calculator – Runway Online",
@@ -3306,7 +3306,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "net-promoter-score-calculator",
     category: "Growth & Marketing",
     description: 'Compute NPS from promoter/passive/detractor counts — loyalty in one number. Score above 50 for world-class loyalty — free, local, no signup.',
-    seoDescription: 'Free NPS scorer — promoters minus detractors. Local, free, no signup.',
+    seoDescription: 'Free NPS calculator — promoters minus detractors scored. Local processing, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free NPS Calculator Online",
     instructions: [
@@ -3349,7 +3349,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "pdf-metadata-editor",
     category: "PDF",
     description: 'Edit PDF title, author, keywords, and document info — fix \'Untitled\' exports before sharing. Brand 20 client deliverables correctly — local pdf-lib edit, unlimited saves.',
-    seoDescription: 'Free PDF metadata editor — title, author, keywords. Local pdf-lib, unlimited saves.',
+    seoDescription: 'Free PDF metadata editor — title, author, keywords and producer fields. Local pdf-lib, unlimited saves, no signup needed.',
     dependencies: "pdf-lib",
     seoTitle: "Free PDF Metadata Editor Online",
     instructions: [
@@ -3370,7 +3370,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "svg-editor",
     category: "Design",
     description: 'Edit SVG code with live preview — paths, fills, transforms — plus SVGO optimization. Tweak icons without Illustrator — local editing, unlimited saves.',
-    seoDescription: 'Free SVG editor — live preview plus optimize. Local, unlimited saves.',
+    seoDescription: 'Free SVG editor — live preview plus SVGO optimization built right in. Local processing, unlimited saves, no signup needed.',
     dependencies: "SVGO / Fabric.js",
     seoTitle: "Free SVG Editor – Code + Preview Online",
     instructions: [
@@ -3391,7 +3391,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "robots-txt-generator",
     category: "SEO",
     description: 'Generate valid robots.txt with user-agents, allows, disallows, and sitemap lines. Never accidentally deindex with Disallow: / — local generation, free, no signup.',
-    seoDescription: 'Free robots.txt builder — valid syntax. Local, free, no signup.',
+    seoDescription: 'Free robots.txt builder — valid syntax with sitemap lines and crawl rules. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free robots.txt Generator Online",
     instructions: [
@@ -3412,7 +3412,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "saas-pricing-calculator",
     category: "Growth & Marketing",
     description: 'Model SaaS pricing with tier math — ARPA, conversion, and expansion effects. Price the Growth tier that converts — free, local, no signup.',
-    seoDescription: 'Free pricing modeler — tiers plus ARPA. Local, free, no signup.',
+    seoDescription: 'Free SaaS pricing modeler — tiers plus ARPA math. Local processing, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS"
   ,
     seoTitle: "Free SaaS Pricing Calculator Online",
@@ -3504,7 +3504,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "employee-turnover-calculator",
     category: "Growth & Marketing",
     description: 'Compute annualized turnover rates and replacement cost impact. Price a 20% churn problem correctly — free, local, no signup.',
-    seoDescription: 'Free turnover math — rates plus costs. Local, free, no signup.',
+    seoDescription: 'Free turnover calculator — rates plus replacement costs. Local processing, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS"
   ,
     seoTitle: "Free Employee Turnover Calculator",
@@ -3526,7 +3526,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "mac-address-generator",
     category: "Privacy",
     description: 'Generate random MAC addresses with valid OUI structure for labs and testing. Fill virtual networks credibly — local generation, free, no signup.',
-    seoDescription: 'Free MAC addresses — valid OUI structure. Local, free, no signup.',
+    seoDescription: 'Free MAC address generator — valid OUI structure for lab testing needs. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free MAC Address Generator Online",
     instructions: [
@@ -3547,7 +3547,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "ip-anonymizer",
     category: "Privacy",
     description: 'Anonymize IP addresses in logs — mask octets or hash consistently for analytics. Share logs without exposing users — local processing, free, no signup.',
-    seoDescription: 'Free IP anonymizer — mask or hash consistently. Local, free, no signup.',
+    seoDescription: 'Free IP anonymizer — mask or consistently hash addresses for safe logs. Local Vanilla JS, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free IP Anonymizer for Logs Online",
     instructions: [
@@ -3590,7 +3590,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "braille-translator",
     category: "Converter",
     description: 'Translate text to Braille Unicode patterns and back for accessibility work. Check ⠓⠑⠇⠇⠕ renders correctly — local conversion, free, no signup.',
-    seoDescription: 'Free Braille translator — text both ways. Local, free, no signup.',
+    seoDescription: 'Free Braille translator — text to Braille dots and back again accurately. Local processing, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     seoTitle: "Free Braille Translator Online",
     instructions: [
@@ -3655,7 +3655,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "live-transcription",
     category: "Transcription",
     description: 'Dictate live with real-time browser speech recognition and interim results — meetings, lectures, notes. Capture a 30-minute talk as editable text — free to start, transcript saves on free quota.',
-    seoDescription: 'Free live transcription — real-time mic dictation. Browser speech, unlimited saves.',
+    seoDescription: 'Free live transcription — real-time mic dictation in your browser. Browser speech recognition, unlimited saves, no signup needed.',
     dependencies: "Web Speech API",
     seoTitle: "Free Live Transcription – Dictate Online",
     instructions: [
@@ -3699,7 +3699,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "esign-pdf",
     category: "PDF",
     description: 'Sign PDFs electronically — draw, type, or upload signature images onto any page. Execute a 5-page agreement without printing — local pdf-lib + canvas, unlimited saves.',
-    seoDescription: 'Free PDF e-signature — draw, type, or upload. Local, unlimited saves.',
+    seoDescription: 'Free PDF e-signature tool — draw, type or upload signatures onto any page. Local pdf-lib, unlimited saves, no signup needed.',
     dependencies: "pdf-lib / fabric",
     seoTitle: "Free eSign PDF Online – Sign Documents",
     instructions: [
@@ -3720,7 +3720,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "pdf-ocr",
     category: "PDF",
     description: 'OCR scanned PDFs into searchable, selectable text with Tesseract.js — 100+ languages. Convert a 50-page scan into researchable text — local processing, unlimited saves.',
-    seoDescription: 'Free PDF OCR — scans to searchable text. Local Tesseract, unlimited saves.',
+    seoDescription: 'Free PDF OCR tool — scanned pages to searchable selectable text, tables kept. Local Tesseract engine, unlimited saves, no signup needed.',
     dependencies: "tesseract.js",
     seoTitle: "Free PDF OCR – Searchable Text Online",
     instructions: [
@@ -3741,7 +3741,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "pdf-form-filler",
     category: "PDF",
     description: 'Fill any PDF form digitally — text fields, checkboxes, dropdowns, signatures. Complete government forms without print-scan cycles — local pdf-lib, unlimited saves.',
-    seoDescription: 'Free PDF form filler — fields, checks, signatures. Local pdf-lib, unlimited saves.',
+    seoDescription: 'Free PDF form filler — text fields, checkboxes and signatures on fillable forms. Local pdf-lib, unlimited saves, no signup needed.',
     dependencies: "pdf-lib",
     seoTitle: "Free PDF Form Filler Online",
     instructions: [
@@ -3784,7 +3784,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "otp-generator",
     category: "Utility",
     description: 'Generate time-based one-time passwords from your TOTP secrets — 2FA codes without a phone app. Get 30-second codes on desktop — local crypto, free, no signup.',
-    seoDescription: 'Free TOTP codes — 30-second refresh. Local crypto, free. Test secrets only.',
+    seoDescription: 'Free TOTP code generator — 30-second refresh from your test secrets. Local crypto, test secrets only, free, no signup, nothing uploads.',
     dependencies: "Crypto API",
     seoTitle: "Free OTP Generator – TOTP Codes Online",
     instructions: [
@@ -3827,7 +3827,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "mp4-to-mp3",
     category: "Converter",
     description: 'Extracts the audio track from MP4 video files and saves it as a standalone MP3 file. All processing runs locally in your browser with FFmpeg WASM — nothing is uploaded.',
-    seoDescription: 'Free online MP4 to MP3 Converter — Extract audio from MP4 video files and save as MP3. 100% browser-based, no uploads.',
+    seoDescription: 'Free MP4 to MP3 converter — extract audio tracks from MP4 videos to MP3. 100% browser-based FFmpeg, no uploads, unlimited saves.',
     dependencies: "ffmpeg",
     instructions: [
       { title: "1. Drop MP4 file(s)", desc: "Upload your MP4 source. Runs locally on FFmpeg." },
