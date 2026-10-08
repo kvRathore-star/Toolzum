@@ -26,8 +26,8 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Video Watermark Adder',
     slug: 'video-watermark-adder',
-    description: 'Burn logo or text watermarks into videos with position, size, and opacity control. Brand 10 course lessons in one pass — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free video watermark — logos plus text. Local FFmpeg, free quota on saves.',
+    description: 'Burn logo or text watermarks into videos with position, size, and opacity control. Brand 10 course lessons in one pass — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free video watermark — logos plus text. Local FFmpeg, unlimited saves.',
     category: 'Video',
     id:  "223",
     dependencies: 'None',
@@ -35,13 +35,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload videos", desc: "Lessons or clips to brand." },
       { title: "2. Set mark and position", desc: "Logo or text with size and opacity." },
-      { title: "3. Download watermarked", desc: "Save the files (counts on the free download quota)." },
+      { title: "3. Download watermarked", desc: "Save the files (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Logo or text watermark?', answer: 'Logos for brand protection across catalogs; text for episode numbers and URLs. A 10-lesson course stamps one logo identically — set once, batch all.' },
       { question: 'Where should watermarks sit?', answer: 'Bottom-right corner at 80% opacity: visible without blocking faces or captions. Center marks deter theft best but annoy viewers — reserve for paid content.' },
       { question: 'Does watermarking re-encode?', answer: 'Yes — expect export times like normal conversion. Keep masters archived; distribute watermarked copies.' },
-      { question: 'Do branded videos upload?', answer: 'No — watermarking runs locally in your browser with FFmpeg. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do branded videos upload?', answer: 'No — watermarking runs locally in your browser with FFmpeg. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -52,7 +52,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Complete each section", desc: "Fill the GST Invoice Generator fields in order — required items first, optional details after." },
       { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
-      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+      { title: "3. Download or submit", desc: "Save the finished document (downloads are unlimited) or copy details into the official portal." },
     ],
     faqs: [
       { question: "What GST slabs apply?", answer: "5%, 12%, 18%, and 28% depending on item category — the tool applies the right slab per line item." },
@@ -93,8 +93,8 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'MP3 Compressor',
     slug: 'mp3-compressor',
-    description: 'Shrink MP3 files by lowering bitrate with quality presets — fit podcasts into feed limits. Cut a 50 MB episode to 15 MB cleanly — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free MP3 compressor — bitrate presets. Local FFmpeg, free quota on saves.',
+    description: 'Shrink MP3 files by lowering bitrate with quality presets — fit podcasts into feed limits. Cut a 50 MB episode to 15 MB cleanly — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free MP3 compressor — bitrate presets. Local FFmpeg, unlimited saves.',
     category: 'Audio',
     id:  "231",
     dependencies: 'FFmpeg WASM',
@@ -102,13 +102,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload MP3s", desc: "Episodes or tracks to slim down." },
       { title: "2. Set target bitrate", desc: "96–128k voice, 128–192k music." },
-      { title: "3. Download compressed", desc: "Save the files (counts on the free download quota)." },
+      { title: "3. Download compressed", desc: "Save the files (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'What bitrate for spoken word?', answer: '96–128 kbps mono for talk: a 50 MB stereo music-encode episode drops near 15 MB with zero audible loss on voices. Music needs 128–192 kbps stereo minimum.' },
       { question: 'Will listeners hear the difference?', answer: 'Not on voice at 96k+ or music at 128k+ through earbuds and laptop speakers. Audiophile setups reveal artifacts first — keep FLAC masters regardless.' },
       { question: 'How small do shared files get?', answer: 'Roughly proportional to bitrate ratio: 320→128 kbps cuts ~60%. A 30-minute 320k file (~72 MB) lands near 29 MB at 128k.' },
-      { question: 'Are my MP3s uploaded?', answer: 'No — compression runs locally in your browser with FFmpeg. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Are my MP3s uploaded?', answer: 'No — compression runs locally in your browser with FFmpeg. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -122,7 +122,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on FFmpeg." },
       { title: "2. Set MP4 options", desc: "Set resolution and frame rate — 1080p for feeds, smaller dimensions for stickers and replies." },
-      { title: "3. Download MP4", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download MP4", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does GIF to MP4 Converter do?", answer: "Convert GIF animations to MP4 videos for drastically smaller file sizes. Content creators use this to shrink animated GIFs by up to 90% for social media, Discord, and web pages \u2014 all in your browser, nothing uploaded." },
@@ -135,8 +135,8 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Video Trimmer',
     slug: 'video-trimmer',
-    description: 'Cut start/end segments from any video with frame-accurate trimming in your browser. Remove a 45-second cold open from a 10-minute upload — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free video trimmer — cut heads and tails precisely. Local FFmpeg, free quota on saves.',
+    description: 'Cut start/end segments from any video with frame-accurate trimming in your browser. Remove a 45-second cold open from a 10-minute upload — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free video trimmer — cut heads and tails precisely. Local FFmpeg, unlimited saves.',
     category: 'Video',
     id:  "233",
     dependencies: 'FFmpeg WASM',
@@ -144,13 +144,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload the video", desc: "MP4, MOV, or WebM of any length." },
       { title: "2. Set start and end", desc: "Drag markers or type timestamps for the kept segment." },
-      { title: "3. Export the cut", desc: "Save the trimmed file (counts on the free download quota)." },
+      { title: "3. Export the cut", desc: "Save the trimmed file (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'How do I cut the first 45 seconds?', answer: 'Upload, set start to 0:45 and end to the video\'s end: a 10-minute video becomes 9:15 keeping full quality. Trimming heads and tails re-encodes only the cut zone.' },
       { question: 'Will trimming reduce quality?', answer: 'Barely — only seconds around the cut re-encode; the kept body passes through. Export at the same resolution and CRF as the source for visually identical output.' },
       { question: 'How long does trimming take?', answer: 'Under a minute for most clips on a laptop — FFmpeg seeks to the cut point instead of reprocessing everything. Hour-long 4K files take a few minutes; keep the tab open.' },
-      { question: 'Are my videos uploaded when trimming?', answer: 'No — trimming runs locally in your browser with FFmpeg WASM. Only the final save counts on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Are my videos uploaded when trimming?', answer: 'No — trimming runs locally in your browser with FFmpeg WASM. Only the final save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -161,7 +161,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on Canvas." },
       { title: "2. Configure process", desc: "Set the process options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does masked mean?", answer: "First 8 digits become Xs, last 4 visible (XXXX-XXXX-1234) per UIDAI convention." },
@@ -180,9 +180,9 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Verifies PAN card number format and structure locally. Extracts the taxpayer category from the PAN code — Individual, Company, Trust, etc. No data is sent to any server.',
     seoTitle: "PAN Verification Online – Free PAN Check",
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for PAN Card Verification." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "1. Enter the 10-character PAN", desc: "5 letters, 4 digits, 1 letter — e.g. ABCDE1234F. The 4th letter reveals the holder type." },
+      { title: "2. Run the structure check", desc: "Valid/invalid verdict is instant and local; invalid names the broken position." },
+      { title: "3. Use it where asked", desc: "Copy the verified PAN into the form. Structure-valid is not identity proof — the issuer confirms that." },
     ],
     faqs: [
       { question: "What is the PAN structure?", answer: "10 characters: 5 letters, 4 digits, 1 letter (e.g., ABCDE1234F)." },
@@ -205,10 +205,9 @@ export const entries_chunk_1: ToolMetadata[] = [
     id:  "236",
     dependencies: 'IFSC API',
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for IFSC Code Lookup." },
-      { title: "2. Run the lookup", desc: "Read every returned field slowly — one wrong character voids the check." },
-      { title: "3. Confirm officially", desc: "Confirm high-stakes results on the official source before acting on them." },
-    ],
+      { title: "1. Enter the 11-character IFSC", desc: "Bank code, zero, branch code — e.g. HDFC0001234." },
+      { title: "2. Read bank and branch", desc: "Bank name, branch, address, city and contact render instantly." },
+      { title: "3. Copy into the transfer", desc: "Take the verified branch details to your NEFT/RTGS form." },    ],
     faqs: [
       { question: "What details does the IFSC lookup return?", answer: "Bank name, branch name, full address, city, district, state, contact number, and MICR code. The IFSC code uniquely identifies a specific bank branch in India." },
       { question: "What is an IFSC code?", answer: "IFSC (Indian Financial System Code) is an 11-character alphanumeric code assigned by the RBI to identify bank branches for electronic fund transfers (NEFT, RTGS, IMPS). Format: AAAA0NNNNNN (first 4 = bank, 5th = 0, last 6 = branch)." },
@@ -248,10 +247,9 @@ export const entries_chunk_1: ToolMetadata[] = [
     id:  "238",
     dependencies: 'Postal API',
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for India Pincode Finder." },
-      { title: "2. Run the lookup", desc: "Inspect each field in the response; mismatches mean re-enter, not proceed." },
-      { title: "3. Confirm officially", desc: "Screen with this tool, decide with the authority record." },
-    ],
+      { title: "1. Enter pincode or place", desc: "6-digit code or location/area name anywhere in India." },
+      { title: "2. Read post offices", desc: "Matching branches with delivery status, office type and contact." },
+      { title: "3. Use the right office", desc: "Ship to the branch showing active delivery status." },    ],
     faqs: [
       { question: "Is my search sent anywhere?", answer: "Yes. Lookups query the live postal API, so the pincode or name you search is transmitted for the lookup. Nothing is stored — there is no search history beyond your own browser session." },
       { question: "How current is the data?", answer: "Results come live from the official postal API on every search — no stale built-in database. For critical address verification, cross-check with India Post." },
@@ -335,7 +333,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop PDF file(s)", desc: "Upload your PDF source. Runs locally on PDF.js." },
       { title: "2. Set HTML options", desc: "Adjust output settings for HTML — presets fit most jobs without further tuning." },
-      { title: "3. Download HTML", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download HTML", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does PDF to HTML do?", answer: "Converts PDF files to HTML format \u2014 document sharing, printing, and archival with consistent formatting to web pages, email templates, and content rendering. All conversion happens locally in your browser with no file size limits." },
@@ -356,7 +354,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop HTML file(s)", desc: "Upload your HTML source. Runs locally on jsPDF." },
       { title: "2. Set PDF options", desc: "Adjust output settings for PDF — presets fit most jobs without further tuning." },
-      { title: "3. Download PDF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download PDF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does HTML to PDF do?", answer: "Converts HTML files to PDF format \u2014 web pages, email templates, and content rendering to document sharing, printing, and archival with consistent formatting. All conversion happens locally in your browser with no file size limits." },
@@ -368,8 +366,8 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Generic PDF Processor',
     slug: 'generic-pdf-processor',
-    description: 'Run everyday PDF operations from one toolbox — merge, split, rotate, compress presets without hunting tools. Handle 90% of PDF chores in one tab — local processing, free quota on saves.',
-    seoDescription: 'Free PDF toolbox — merge, split, rotate presets. Local, free quota on saves.',
+    description: 'Run everyday PDF operations from one toolbox — merge, split, rotate, compress presets without hunting tools. Handle 90% of PDF chores in one tab — local processing, unlimited saves.',
+    seoDescription: 'Free PDF toolbox — merge, split, rotate presets. Local, unlimited saves.',
     category: 'PDF',
     id:  "244",
     dependencies: 'pdf-lib',
@@ -377,7 +375,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Pick the operation", desc: "Merge, split, rotate, or compress preset." },
       { title: "2. Upload and configure", desc: "Settings match the chosen operation." },
-      { title: "3. Download result", desc: "Save the file (counts on the free download quota)." },
+      { title: "3. Download result", desc: "Save the file (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Which operations are included?', answer: 'Merge, split, rotate, compress presets, and page tools from one panel — the 90% of PDF chores that need no specialist tool. Pick the operation first, then upload.' },
@@ -390,8 +388,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: 'JFIF to PNG Converter',
     slug: 'jfif-to-png',
     showInCategory: false,
-    description: 'Convert JFIF images (JPEG variant from cameras and iPhones) to lossless PNG. Open mislabeled photo files anywhere — local Canvas work, free quota on saves.',
-    seoDescription: 'Free JFIF to PNG — open mislabeled photos. Local Canvas, free quota on saves.',
+    description: 'Convert JFIF images (JPEG variant from cameras and iPhones) to lossless PNG. Open mislabeled photo files anywhere — local Canvas work, unlimited saves.',
+    seoDescription: 'Free JFIF to PNG — open mislabeled photos. Local Canvas, unlimited saves.',
     category: 'Image',
     id:  "246",
     dependencies: 'Canvas API',
@@ -399,21 +397,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload JFIF files", desc: "Camera and iPhone mislabeled photos." },
       { title: "2. Convert to PNG", desc: "Lossless output for editing." },
-      { title: "3. Download PNGs", desc: "Clean extensions included (counts on the free download quota)." },
+      { title: "3. Download PNGs", desc: "Clean extensions included (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'What is JFIF?', answer: 'JFIF is JPEG data with a different container label — common from cameras, iPhones, and scanners. Many apps reject the .jfif extension despite understanding the pixels perfectly.' },
       { question: 'Why PNG output?', answer: 'Lossless PNG preserves every pixel for editing; JPG re-encodes smaller for sharing. Convert to PNG for work, JPG for send.' },
       { question: 'Batch-rename too?', answer: 'Extensions normalize to .png on export automatically — folders of .jfif become clean .png sets ready for any software.' },
-      { question: 'Do camera files leave the browser?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota.' },
+      { question: 'Do camera files leave the browser?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
     name: 'Image to JPG Converter',
     slug: 'convert-to-jpg',
     showInCategory: false,
-    description: 'Convert any mix of PNG, WebP, AVIF, GIF, or BMP images to universal JPG in one batch. Make 100 mixed uploads email-ready — local conversion, free quota on saves.',
-    seoDescription: 'Free batch to-JPG converter — any input, universal JPG. Local, free quota on saves.',
+    description: 'Convert any mix of PNG, WebP, AVIF, GIF, or BMP images to universal JPG in one batch. Make 100 mixed uploads email-ready — local conversion, unlimited saves.',
+    seoDescription: 'Free batch to-JPG converter — any input, universal JPG. Local, unlimited saves.',
     category: 'Image',
     id:  "248",
     dependencies: 'Canvas API',
@@ -421,20 +419,20 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop mixed images", desc: "Any common formats together in one batch." },
       { title: "2. Set JPG quality", desc: "80–85 for sharing; watch transparency flattening." },
-      { title: "3. Download JPGs", desc: "Save the batch (counts on the free download quota)." },
+      { title: "3. Download JPGs", desc: "Save the batch (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Which inputs convert to JPG?', answer: 'PNG, WebP, AVIF, GIF stills, BMP, and TIFF mix freely in one batch — every file lands as JPG. Transparency flattens onto white, so check logos before converting.' },
       { question: 'What quality for email attachments?', answer: 'Quality 80–85: a 100-photo batch averages ~150 KB each, fitting Gmail\'s 25 MB wall in groups. Higher only for print-bound copies.' },
       { question: 'Why JPG over the originals?', answer: 'Universal readability — every device, CMS, and email client opens JPG. Convert for distribution; archive originals separately.' },
-      { question: 'Does batch conversion upload anything?', answer: 'No — conversion runs locally in your browser. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Does batch conversion upload anything?', answer: 'No — conversion runs locally in your browser. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
     name: 'Rotate Image Online',
     slug: 'rotate-image',
-    description: 'Rotate images 90/180/270° or flip horizontal/vertical with lossless precision. Fix sideways phone shots in seconds — local Canvas work, free quota on saves.',
-    seoDescription: 'Free image rotate — 90/180/270 plus flip. Local Canvas, free quota on saves.',
+    description: 'Rotate images 90/180/270° or flip horizontal/vertical with lossless precision. Fix sideways phone shots in seconds — local Canvas work, unlimited saves.',
+    seoDescription: 'Free image rotate — 90/180/270 plus flip. Local Canvas, unlimited saves.',
     category: 'Image',
     id:  "249",
     dependencies: 'Canvas API',
@@ -442,13 +440,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload images", desc: "Sideways shots needing correction." },
       { title: "2. Set angle or flip", desc: "Quarter turns stay lossless; mirror for selfies." },
-      { title: "3. Download rotated", desc: "Save the files (counts on the free download quota)." },
+      { title: "3. Download rotated", desc: "Save the files (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Rotate vs EXIF orientation?', answer: 'This rewrites actual pixels — permanent and universal. EXIF flags only suggest rotation that some viewers ignore; rotated pixels display correctly everywhere.' },
       { question: 'Does rotation lose quality?', answer: '90° steps are lossless rearrangements; arbitrary angles resample once with tiny softening. Stick to quarter turns for pixel-perfect results.' },
       { question: 'Batch-rotate an album?', answer: 'Apply one rotation per batch run — mixed-orientation albums need a run per direction. Sort by orientation first.' },
-      { question: 'Do photos upload?', answer: 'No — rotation runs locally in your browser on Canvas. Only saves count on the free download quota.' },
+      { question: 'Do photos upload?', answer: 'No — rotation runs locally in your browser on Canvas. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -462,7 +460,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on TensorFlow.js." },
       { title: "2. Configure blur", desc: "Set the blur options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "How does face detection work?", answer: "The tool uses an AI-powered computer vision model to detect faces in the image. It identifies face bounding boxes and applies a configurable Gaussian blur effect to each detected region." },
@@ -484,7 +482,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop HTML file(s)", desc: "Upload your HTML source. Runs locally on Canvas." },
       { title: "2. Set image options", desc: "Adjust output settings for image — presets fit most jobs without further tuning." },
-      { title: "3. Download image", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download image", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What HTML can I convert to an image?", answer: "Any valid HTML and CSS — including text, layout, gradients, shadows, borders, and images. Complex layouts with flexbox and grid are supported." },
@@ -564,7 +562,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: 'Resume ATS Score Checker',
     slug: 'resume-ats-score-checker',
     description: 'Score your resume against a job description for ATS compatibility — keyword gaps, formatting flags, and fix suggestions. Applicants lift a 52/100 resume past 80 before applying — 1 credit per check, sign in free.',
-    seoDescription: 'Free ATS resume checker — score vs the job post, keyword gaps, fixes. 2 free checks daily signed-in.',
+    seoDescription: 'Free ATS resume checker — score your resume against the job post with keyword gaps and fixes. 1 credit per check, 2 free checks daily signed-in.',
     category: 'AI',
     id:  "259",
     dependencies: 'AI API',
@@ -630,7 +628,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: 'indian-voice-transcriber',
     description: 'Transcribe Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Punjabi, Odia, Urdu, or English voice notes to text. Record or upload — students dictate answers in seconds — 1 credit per minute.',
     seoTitle: "Hindi Voice to Text – Free Transcription",
-    seoDescription: 'Free Indian voice transcriber — 12 languages to text, 1 credit per minute. Record or upload audio.',
+    seoDescription: 'Free Indian voice transcriber — 12 languages speech-to-text, record or upload audio. 1 credit per minute, 5-minute trial, works in browser.',
     category: 'indian-utilities',
     id:  "264",
     dependencies: 'AI speech recognition API',
@@ -650,7 +648,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: 'Bank Statement Analyser',
     slug: 'bank-statement-analyser',
     description: 'Upload bank statement PDFs or CSVs and get income, expense, and transfer categories with visual spending breakdowns. Budgeters spot where Rs.18,000 leaks monthly — sign in free for 2 analyses a day.',
-    seoDescription: 'Free bank statement analyser — PDF/CSV to spending categories. 2 free analyses daily signed-in.',
+    seoDescription: 'Free bank statement analyser — PDF/CSV statements to spending categories and totals. 1 credit per file, 2 free analyses daily signed-in.',
     category: 'Utility',
     id:  "265",
     dependencies: 'PDF.js',
@@ -692,7 +690,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: 'Bulk Background Changer',
     slug: 'bulk-bg-changer',
     description: 'Strip or swap backgrounds on whole photo batches with color-key sampling and tolerance control. Sellers turn 40 supplier shots into clean white listings in one run — local Canvas work, 2 free batches a day.',
-    seoDescription: 'Free bulk background changer — whole batches, color-key removal. Local processing, 2 batches daily free.',
+    seoDescription: 'Free bulk background changer — color-key removal across whole batches with one click. Local processing, signed 2 batches/day, Pro 500 files.',
     category: 'Image',
     id:  "269",
     dependencies: 'Canvas API',
@@ -714,7 +712,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: 'AI Background Changer',
     slug: 'ai-bg-changer',
     description: 'Remove and replace image backgrounds with edge-aware detection — no green screen needed. Sellers shoot product photos on any table, then swap to clean white. Runs locally on canvas — free to start, fair limits.',
-    seoDescription: 'Free AI background changer — edge-aware removal, any-color replacement. Local processing, free to start.',
+    seoDescription: 'Free AI background remover — edge-aware subject detection with any-color or transparent replacement. On-device MediaPipe, sign-in unlocks AI mode, free.',
     category: 'Image',
     id:  "270",
     dependencies: 'Canvas API',
@@ -780,8 +778,8 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'PDF Page Manager',
     slug: 'pdf-page-manager',
-    description: 'Reorder, duplicate, delete, and rotate PDF pages with thumbnail drag-and-drop. Assemble a 40-page pack from three sources — local pdf-lib work, free quota on saves.',
-    seoDescription: 'Free PDF page manager — reorder, delete, rotate. Local pdf-lib, free quota on saves.',
+    description: 'Reorder, duplicate, delete, and rotate PDF pages with thumbnail drag-and-drop. Assemble a 40-page pack from three sources — local pdf-lib work, unlimited saves.',
+    seoDescription: 'Free PDF page manager — reorder, delete, rotate. Local pdf-lib, unlimited saves.',
     category: 'PDF',
     id:  "274",
     dependencies: 'pdf-lib',
@@ -789,20 +787,20 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload source PDFs", desc: "All files contributing pages." },
       { title: "2. Arrange thumbnails", desc: "Drag to order; rotate or delete per page." },
-      { title: "3. Export assembled PDF", desc: "Save the pack (counts on the free download quota)." },
+      { title: "3. Export assembled PDF", desc: "Save the pack (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'How do I assemble packs from multiple PDFs?', answer: 'Upload all sources, drag thumbnails into final order across files, delete extras: a 40-page pack from three reports builds visually in minutes.' },
       { question: 'Rotate vs delete — when?', answer: 'Rotate fixes sideways scans; delete drops covers and blanks. Both apply per-page with thumbnails confirming before export.' },
       { question: 'Do links survive rearranging?', answer: 'Internal links usually follow their pages; complex cross-references may break. Verify the table of contents clicks after big reorders.' },
-      { question: 'Do managed pages leave the browser?', answer: 'No — management runs locally in your browser on pdf-lib. Only the final save counts on the free download quota.' },
+      { question: 'Do managed pages leave the browser?', answer: 'No — management runs locally in your browser on pdf-lib. Only the final save touches the network — downloads are unlimited.' },
     ],
   },
   {
     name: 'Bulk QR Code Generator',
     slug: 'bulk-qr-code-generator',
     description: 'Turn a CSV of URLs, text, or contacts into hundreds of styled QR PNGs in one batch — event badges, inventory labels, menus. Organizers code 500 tables in minutes — local qrcode.js work, 2 free batches a day.',
-    seoDescription: 'Free bulk QR generator — CSV to hundreds of QR PNGs, ZIP output. Local, 2 batches daily free.',
+    seoDescription: 'Free bulk QR code generator — CSV lists to hundreds of scannable QR PNGs with ZIP export. Local generation, signed 2 batches/day, Pro 500 files.',
     category: 'Utility',
     id:  "275",
     dependencies: 'qrcode.js, JSZip',
@@ -824,7 +822,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: 'PDF AI Summariser',
     slug: 'pdf-ai-summariser',
     description: 'Condense any PDF into bullet, paragraph, or executive summaries with native text extraction plus LLM condensing. Analysts digest a 50-page report over coffee — 1 credit per summary, sign in free.',
-    seoDescription: 'Free PDF summariser — 50-page PDFs to bullets or executive summary. 1 credit each, 5-use trial.',
+    seoDescription: 'Free AI PDF summariser — 50-page PDFs to bullet points or executive summaries in seconds. 1 credit per file, 5-use trial, works in browser.',
     category: 'AI',
     id:  "276",
     dependencies: 'AI API, PDF.js',
@@ -848,7 +846,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-image-watermark",
     category: "Image",
     description: 'Stamp text, logo, or timestamp watermarks across dozens of photos with position, opacity, and rotation control. Photographers protect 200 wedding proofs before sharing — local Canvas work, 2 free batches a day.',
-    seoDescription: 'Free bulk watermark — text, logo, timestamp across dozens. Local canvas, 2 batches daily free.',
+    seoDescription: 'Free bulk image watermarker — text, logo and timestamp across dozens of photos at once. Local Canvas, signed 2 batches/day, Pro 500 files.',
     dependencies: "Canvas API, jszip",
     seoTitle: "Free Bulk Image Watermark Tool Online",
     instructions: [
@@ -869,7 +867,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-pdf-data-extractor",
     category: "PDF",
     description: 'Pull tables, form fields, and key-value pairs from stacks of PDFs into one clean CSV. Accountants turn 60 invoices into a spreadsheet in an afternoon — local pdf-lib parsing, 2 free batches a day.',
-    seoDescription: 'Free bulk PDF extractor — tables and forms to one CSV. Local parsing, 2 batches daily free.',
+    seoDescription: 'Free bulk PDF data extractor — tables and form fields from many PDFs into one clean CSV. Local parsing, signed 2 batches/day, Pro unlimited.',
     dependencies: "pdf-lib, SheetJS",
     seoTitle: "Free Bulk PDF Data Extractor – PDF to CSV",
     instructions: [
@@ -890,7 +888,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-image-to-pdf",
     category: "PDF",
     description: 'Bind hundreds of JPG, PNG, or WebP images into one multi-page PDF with page size, orientation, and fit control. Agents compile 80 property photos into a brochure — local jsPDF work, 2 free batches a day.',
-    seoDescription: 'Free images-to-PDF — hundreds of photos, one document. Local jsPDF, 2 batches daily free.',
+    seoDescription: 'Free images-to-PDF converter — hundreds of photos into one ordered PDF document. Local jsPDF, signed 2 batches/day, Pro 500 files.',
     dependencies: "jsPDF, Canvas API",
     seoTitle: "Free Bulk Images to PDF Converter",
     instructions: [
@@ -922,7 +920,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: 'Does converting improve poor audio?', answer: 'No — conversion preserves at best and degrades at worst, especially lossy-to-lossy. Fix noise and levels in the WAV masters first, then convert outward. Never upconvert MP3 to FLAC expecting quality gains; the file grows with zero fidelity added.' },
       { question: 'Does converting audio upload my files?', answer: 'No — conversion runs locally in your browser with FFmpeg WASM; audio never leaves your device. Only the final ZIP save counts as one Pro download (signed-in free: 2 a day; Pro unlimited).' },
     ],
-    seoDescription: 'Free bulk audio converter — 6 formats, uniform settings. FFmpeg WASM local, 2 batches daily.',
+    seoDescription: 'Free bulk audio converter — 9 formats with uniform bitrate settings across the batch. Local FFmpeg WASM, signed 2 batches/day, Pro unlimited.',
     dependencies: "FFmpeg WASM",
     seoTitle: "Free Bulk Audio Converter – Batch Online",
   },
@@ -932,7 +930,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-svg-to-png",
     category: "Image",
     description: 'Rasterize hundreds of SVG vectors to crisp PNGs at any resolution with filename preservation. Developers ship full icon sets at 1x, 2x, and 3x in three runs — local Canvas work, 2 free batches a day.',
-    seoDescription: 'Free bulk SVG to PNG — any resolution, sharp output. Local canvas, 2 batches daily free.',
+    seoDescription: 'Free bulk SVG to PNG rasterizer — entire icon sets to crisp PNGs at any resolution. Local Canvas, signed 2 batches/day, Pro 500 files.',
     dependencies: "Canvas API, jszip",
     seoTitle: "Free Bulk SVG to PNG Converter Online",
     instructions: [
@@ -953,7 +951,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-image-compressor",
     category: "Image",
     description: 'Shrink image batches (JPG, PNG, WebP) by 40–80% with one quality slider and live size preview. Store owners compress 300 product shots before upload — local processing, 2 free batches a day.',
-    seoDescription: 'Free bulk image compressor — 40-80% smaller, quality slider. Local, 2 batches daily free.',
+    seoDescription: 'Free bulk image compressor — 40–80% smaller files with a live quality slider across the batch. Local Canvas, signed 2 batches/day, Pro unlimited.',
     dependencies: "browser-image-compression, jszip",
     seoTitle: "Free Bulk Image Compressor Online",
     instructions: [
@@ -975,7 +973,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "PDF",
     description: 'Shrink stacks of PDFs 40–90% with Maximum, Balanced, or High-Quality tiers that recompress images and strip metadata. Firms email 25 filings instead of courier — local pdf-lib work, 2 free batches a day.',
     seoTitle: "Free Bulk PDF Compressor – Reduce Size",
-    seoDescription: 'Free bulk PDF size reducer — 40-90% smaller, 3 tiers. Local pdf-lib, 2 batches daily free.',
+    seoDescription: 'Free bulk PDF compressor — 40–90% smaller across 3 quality tiers per batch. Local pdf-lib, signed 2 batches/day, Pro unlimited.',
     dependencies: "pdf-lib",
     instructions: [
       { title: "1. Add PDF Files", desc: "Drag and drop multiple PDF files or click to select them from your device." },
@@ -995,7 +993,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-image-resizer",
     category: "Image",
     description: 'Resize hundreds of photos to exact pixels, percentage scale, or social presets in one pass with aspect control. Photographers deliver 400 wedding shots at uniform 2048px — local Canvas work, 2 free batches a day.',
-    seoDescription: 'Free bulk image resizer — exact pixels, presets, aspect lock. Local canvas, 2 batches daily.',
+    seoDescription: 'Free bulk image resizer — exact pixel dimensions, presets and aspect lock across folders. Local Canvas, signed 2 batches/day, Pro 500 files.',
     dependencies: "Canvas API, jszip",
         instructions: [
       { title: "1. Upload the batch", desc: "Wedding sets, catalogs, galleries — hundreds of files in one pass." },
@@ -1017,7 +1015,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-video-compressor",
     category: "Video",
     description: 'Compress multiple videos with consistent CRF, resolution, and codec presets for web, email, and archive. Studios batch 20 daily uploads at CRF 28 — local FFmpeg WASM, 2 free batches a day.',
-    seoDescription: 'Free bulk video compressor — CRF presets, consistent output. FFmpeg WASM, 2 batches daily.',
+    seoDescription: 'Free bulk video compressor — CRF presets with consistent output across daily uploads. Local FFmpeg WASM, signed 2 batches/day, files to 250MB.',
     dependencies: "FFmpeg WASM",
     seoTitle: "Free Bulk Video Compressor – CRF Online",
     instructions: [
@@ -1039,7 +1037,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "PDF",
     description: 'Join up to 100 PDFs into one document per Pro run with order control and preserved links. Legal teams bind 40 exhibits into one filing — local pdf-lib merge, 2 free batches a day.',
     seoTitle: "Free Bulk PDF Merger – Combine PDFs",
-    seoDescription: 'Free bulk PDF merger — up to 100 files, order control. Local pdf-lib, 2 batches daily free.',
+    seoDescription: 'Free bulk PDF merger — combine up to 100 PDFs with drag-to-reorder control. Local pdf-lib, signed 2 batches/day, Pro unlimited.',
     dependencies: "pdf-lib",
     instructions: [
       { title: "1. Add PDF Files", desc: "Drag and drop multiple PDF files or click to select them from your device." },
@@ -1059,7 +1057,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-face-anonymizer",
     category: "Image",
     description: 'Detect and blur, pixelate, or cover faces across whole photo batches with on-device TensorFlow.js. Newsrooms anonymize 100 protest photos before publishing — local processing, 2 free batches a day.',
-    seoDescription: 'Free bulk face anonymizer — blur or pixelate every face. On-device AI, 2 batches daily.',
+    seoDescription: 'Free bulk face anonymizer — blur or pixelate every face across photo batches. On-device AI, nothing uploads, signed 2 batches/day, Pro unlimited.',
     dependencies: "TensorFlow.js, Canvas API, jszip",
     seoTitle: "Free Bulk Face Anonymizer – Blur Faces",
     instructions: [
@@ -1080,7 +1078,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-pdf-form-extractor",
     category: "PDF",
     description: 'Aggregate filled fields from hundreds of identical PDF forms into one CSV — survey responses, applications, feedback. HR compiles 300 applications into a shortlist sheet — local pdf-lib work, 2 free batches a day.',
-    seoDescription: 'Free bulk form extractor — hundreds of forms, one CSV. Local pdf-lib, 2 batches daily free.',
+    seoDescription: 'Free bulk PDF form extractor — hundreds of filled forms into one structured CSV. Local pdf-lib parsing, signed 2 batches/day, Pro unlimited.',
     dependencies: "pdf-lib",
     seoTitle: "Free Bulk PDF Form Extractor to CSV",
     instructions: [
@@ -1101,7 +1099,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-video-size-reducer",
     category: "Video",
     description: 'Hit exact file-size targets (10/25/50 MB) across video batches for email and messaging caps. Teams fit 15 clips under Gmail\'s 25 MB wall — local FFmpeg WASM, 2 free batches a day.',
-    seoDescription: 'Free bulk video size reducer — hit MB targets per file. FFmpeg WASM local, 2 batches daily.',
+    seoDescription: 'Free bulk video size reducer — hit exact MB targets per file for email and messaging caps. Local FFmpeg WASM, signed 2 batches/day, to 250MB.',
     dependencies: "FFmpeg WASM",
     seoTitle: "Free Bulk Video Size Reducer – MB Target",
     instructions: [
@@ -1122,7 +1120,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-audio-normalizer",
     category: "Audio",
     description: 'Level whole audio batches to broadcast LUFS targets (-14 podcast, -16 music) without crushing dynamics. Networks even out 30 episodes so listeners stop riding volume — local Web Audio work, 2 free batches a day.',
-    seoDescription: 'Free bulk audio normalizer — broadcast LUFS levels. Local Web Audio, 2 batches daily free.',
+    seoDescription: 'Free bulk audio normalizer — even out podcast batches to broadcast LUFS loudness. Local Web Audio, signed 2 batches/day, Pro unlimited.',
     dependencies: "Web Audio API",
     instructions: [
       { title: "1. Add Audio Files", desc: "Drag and drop multiple audio files (MP3, WAV, OGG, M4A) or click to select them." },
@@ -1143,7 +1141,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-video-subtitle-burner",
     category: "Video",
     description: 'Burn SRT/VTT subtitles permanently into batches of videos with font, size, color, and position control. Course creators hard-sub 20 lessons for platforms that ignore caption files — FFmpeg WASM, 2 free batches a day.',
-    seoDescription: 'Free bulk subtitle burner — permanent captions, styled. FFmpeg WASM local, 2 batches daily.',
+    seoDescription: 'Free bulk subtitle burner — burn styled permanent captions into video batches. Local FFmpeg WASM, signed 2 batches/day, files to 250MB.',
     dependencies: "FFmpeg WASM",
     seoTitle: "Free Bulk Subtitle Burner – Burn SRT In",
     instructions: [
@@ -1164,7 +1162,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-invoice-receipt-parser",
     category: "Finance",
     description: 'Drop 100 invoice or receipt PDFs and images; get vendor, date, amount, tax, and line items in one CSV. Bookkeepers close month-end without retyping — local Tesseract + pdf-lib, 2 free batches a day.',
-    seoDescription: 'Free bulk invoice parser — 100 receipts to one CSV. Local OCR, 2 batches daily free.',
+    seoDescription: 'Free bulk invoice parser — 100 receipts and invoices to one categorized CSV. Local OCR, nothing uploads, signed 2 batches/day, Pro unlimited.',
     dependencies: "Tesseract.js, pdf-lib, SheetJS",
     seoTitle: "Free Bulk Invoice Parser – PDF to CSV",
     instructions: [
@@ -1185,7 +1183,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-csv-excel-to-json",
     category: "Converter",
     description: 'Turn messy client CSV and Excel sheets into clean JSON arrays or keyed objects with column mapping. Developers convert 50 exports without hand-editing — local SheetJS work, 2 free batches a day.',
-    seoDescription: 'Free bulk CSV/Excel to JSON — mapping, arrays or objects. Local SheetJS, 2 batches daily.',
+    seoDescription: 'Free bulk CSV/Excel to JSON converter — column mapping to arrays or objects. Local SheetJS parsing, signed 2 batches/day, Pro unlimited.',
     dependencies: "SheetJS",
     seoTitle: "Free Bulk CSV Excel to JSON Converter",
     instructions: [
@@ -1206,7 +1204,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-url-status-checker",
     category: "SEO",
     description: 'Scan hundreds of URLs for status codes, redirect chains, and dead pages with CSV export for audits. SEOs check 500 links before a migration — local fetch with auto-paced backend, 2 free batches a day.',
-    seoDescription: 'Free bulk URL checker — statuses, redirects, dead pages. Auto-paced scans, 2 batches daily.',
+    seoDescription: 'Free bulk URL status checker — statuses, redirects and dead pages across whole sites. Auto-paced scans, signed 2 batches/day, Pro unlimited.',
     dependencies: "fetch API",
         instructions: [
       { title: "1. Paste or upload URLs", desc: "Hundreds per batch, one per line or CSV. Dedupe first — repeats waste scan budget." },
@@ -1241,7 +1239,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: 'What quality setting balances size and looks?', answer: 'Quality 80 for photos (visually identical, ~65% smaller), 90+ for product shots where texture matters, PNG/AVIF-lossless for graphics with text. Convert 5 samples at 75/80/85 once, compare at 200% zoom, then batch the winner.' },
       { question: 'Can it convert iPhone HEIC photos?', answer: 'Yes — HEIC to JPG, PNG, or WebP pairs handle iPhone originals locally via heic2any. A 2 MB HEIC typically becomes a 1.2 MB JPG at quality 85, universally readable on Windows and older software that rejects HEIC.' },
     ],
-    seoDescription: 'Free bulk image converter — 100+ pairs, ZIP output, quality control. Local, 2 batches daily free.',
+    seoDescription: 'Free bulk image converter — 100+ format pairs with ZIP output and quality control. Local Canvas, signed 2 batches/day, Pro 500 files.',
     dependencies: "Canvas API, jszip, heic2any",
   
     },
@@ -1263,7 +1261,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: 'What credits can I inject instead?', answer: 'Copyright notice, author name, contact, description, and usage rights — ideal for photographers delivering 200 proofs. Inject once per batch so every file carries your ownership downstream.' },
       { question: 'Does stripping change image quality?', answer: 'Never — only metadata bytes are removed or added; pixels are bit-identical. Stripped files also shrink slightly (typically 10–100 KB each) since thumbnails go too.' },
     ],
-    seoDescription: 'Free bulk EXIF tool — strip GPS and serials, or inject credits. Local, 2 batches daily free.',
+    seoDescription: 'Free bulk EXIF tool — strip GPS coordinates and camera serials, or inject credits. Privacy-first local work, signed 2 batches/day, Pro unlimited.',
     dependencies: "exifr, piexifjs, jszip",
   
     },
@@ -1273,7 +1271,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-app-icon-generator",
     category: "Image",
     description: 'Export 30+ correctly sized icons for iOS, Android, PWA, and social from one high-res source. Indie devs ship full icon sets an hour before release — local Canvas work, 2 free batches a day.',
-    seoDescription: 'Free app icon generator — iOS, Android, PWA sets. Local canvas, 2 batches daily free.',
+    seoDescription: 'Free app icon generator — complete iOS, Android and PWA icon sets from one source image. Local Canvas, signed 2 batches/day, Pro 500 files.',
     dependencies: "Canvas API, jszip",
     seoTitle: "Free Bulk App Icon Generator Online",
     instructions: [
@@ -1294,7 +1292,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-markdown-to-pdf-html",
     category: "Converter",
     description: 'Convert 100+ Markdown files to styled PDFs or web-ready HTML with custom CSS and auto tables of contents. Docs teams publish whole wikis in one run — local Marked + jsPDF, 2 free batches a day.',
-    seoDescription: 'Free bulk Markdown converter — styled PDF or HTML, custom CSS. Local, 2 batches daily free.',
+    seoDescription: 'Free bulk Markdown converter — styled PDF or HTML with custom CSS across file sets. Local processing, signed 2 batches/day, Pro unlimited.',
     dependencies: "marked.js, jsPDF, jszip",
     seoTitle: "Free Bulk Markdown to PDF Converter",
     instructions: [
@@ -1315,7 +1313,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-font-subsetter",
     category: "Developer",
     description: 'Convert TTF/OTF to WOFF2 subset to only your used characters and cut 50–200 KB fonts to 2–15 KB. Performance engineers fix the render-blocking font in one batch — local opentype.js, 2 free batches a day.',
-    seoDescription: 'Free font subsetter — WOFF2, used-characters only. Local opentype.js, 2 batches daily free.',
+    seoDescription: 'Free font subsetter — WOFF2 output with used-characters-only for minimal webfont bytes. Local opentype.js, signed 2 batches/day, Pro unlimited.',
     dependencies: "opentype.js, jszip",
         instructions: [
       { title: "1. Upload fonts", desc: "Drop TTF/OTF files — a whole family at once works. Licensed fonts stay local in your browser." },
@@ -1337,7 +1335,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-subtitle-time-shifter",
     category: "Video",
     description: 'Shift subtitle timing across a whole season of SRT/VTT files by ±seconds with millisecond precision. Localizers fix a 2.5s broadcast delay on 24 episodes at once — local parsing, 2 free batches a day.',
-    seoDescription: 'Free subtitle time shifter — whole seasons, ms precision. Local parsing, 2 batches daily.',
+    seoDescription: 'Free subtitle time shifter — resync whole seasons with millisecond precision. Local parsing, SRT/VTT kept intact, signed 2 batches/day, Pro unlimited.',
     dependencies: "Vanilla JS, jszip",
     seoTitle: "Free Bulk Subtitle Time Shifter – Sync SRT",
     instructions: [
@@ -1358,7 +1356,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-regex-extractor-replacer",
     category: "Developer",
     description: 'Hunt IPs, API keys, emails, and URLs across thousands of logs or code files — extract matches or replace in place. SREs scrub 5,000 logs before sharing — local JS RegExp, 2 free batches a day.',
-    seoDescription: 'Free bulk regex tool — extract or replace across files. Local JS engine, 2 batches daily free.',
+    seoDescription: 'Free bulk regex tool — extract or replace patterns across many files at once. Local JS engine, nothing uploads, signed 2 batches/day, Pro unlimited.',
     dependencies: "Vanilla JS, jszip",
         instructions: [
       { title: "1. Upload text files", desc: "Logs, code, CSVs, configs. Back up folders containing .env or .git internals before replace mode." },
@@ -1392,7 +1390,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: 'TXT, DOCX, or PDF output?', answer: 'TXT for further processing, DOCX for editable documents, searchable PDF to preserve layout. A 200-page archive exports as one compiled document per batch.' },
       { question: 'Are my scans uploaded anywhere?', answer: 'No — OCR runs locally in your browser with Tesseract.js; documents never leave your device. Only the final export counts as one Pro download.' },
     ],
-    seoDescription: 'Free bulk OCR — scans to text, 100+ languages. Local Tesseract, 2 batches daily free.',
+    seoDescription: 'Free bulk OCR — scans and photos to text in 100+ languages. Local Tesseract engine, signed 2 batches/day, Pro unlimited.',
     dependencies: "Tesseract.js, jszip",
   
     },
@@ -1402,7 +1400,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-ebook-converter",
     category: "Converter",
     description: 'Convert whole libraries between EPUB, MOBI, and PDF with metadata and covers preserved. Readers move 100 books to a new device in an afternoon — local processing, 2 free batches a day.',
-    seoDescription: 'Free bulk ebook converter — EPUB, MOBI, PDF libraries. Metadata kept, 2 batches daily.',
+    seoDescription: 'Free bulk ebook converter — EPUB, MOBI and PDF libraries with metadata kept. Local processing, signed 2 batches/day, Pro unlimited.',
     dependencies: "EPUB.js, jszip",
     seoTitle: "Free Bulk Ebook Converter – EPUB MOBI PDF",
     instructions: [
@@ -1423,7 +1421,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-heic-to-jpg",
     category: "Image",
     description: 'Convert hundreds of iPhone HEIC photos to universal JPGs in one batch with quality control. Families share 300 vacation shots with Windows relatives — local libheif WASM, 2 free batches a day.',
-    seoDescription: 'Free bulk HEIC to JPG — iPhone photos, universal JPGs. Local WASM, 2 batches daily free.',
+    seoDescription: 'Free bulk HEIC to JPG — iPhone photo libraries to universal JPGs. Local WASM conversion, signed 2 batches/day, Pro 500 files.',
     dependencies: "libheif WASM, jszip",
     seoTitle: "Free Bulk HEIC to JPG Converter Online",
     instructions: [
@@ -1468,10 +1466,9 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Verifies any GSTIN (Goods and Services Tax Identification Number) instantly — returns legal name, trade name, address, registration date, and filing status. Supports bulk CSV export for accounts teams.',
     seoTitle: "GSTIN Lookup – Verify GST Numbers Free",
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for GSTIN Lookup." },
-      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
-      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
-    ],
+      { title: "1. Enter the 15-character GSTIN", desc: "State code, PAN, entity, checksum — exactly as printed." },
+      { title: "2. Read legal identity", desc: "Legal name, trade name, address and registration status." },
+      { title: "3. Verify before invoicing", desc: "Match the GSTIN on the vendor invoice to this record." },    ],
     faqs: [
       { question: "How is GSTIN structured?", answer: "15 characters: 2-digit state code + 10-char PAN + entity code + Z + checksum." },
       { question: "What can I verify?", answer: "Format validity instantly; active status needs the GST portal." },
@@ -1509,7 +1506,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "indian-utilities",
     description: 'Draft formal Indian consumer complaints citing Consumer Protection Act 2019, RERA, TRAI, or RBI rules — telecom, banking, real estate, e-commerce. Each letter costs 1 credit; sign in free for a 5-letter trial.',
     seoTitle: "Complaint Letter Generator India – Free",
-    seoDescription: 'Free complaint letter generator India — Consumer Protection Act 2019, RERA, TRAI, RBI drafts. Your own AI key.',
+    seoDescription: 'Free India complaint-letter generator — Consumer Protection Act 2019, RERA, TRAI, RBI drafts. 1 credit per letter, no signup to try.',
     dependencies: "AI API",
         instructions: [
       { title: "1. Enter facts, pick dispute", desc: "Names, dates, amounts, and your demand — plus Consumer Act, RERA, TRAI, or RBI track. Never paste passwords or OTPs." },
@@ -1530,7 +1527,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "brand-color-palette-generator",
     category: "Branding",
     description: 'Describe your brand in one line and get a complete 6-color palette with hex codes and designer usage notes. Founders go from \'trustworthy fintech\' to a working palette in a minute — 1 credit per palette.',
-    seoDescription: 'Free brand palette generator — 6 colors with hex and usage notes. 1 credit per palette, 5-use trial.',
+    seoDescription: 'Free brand palette generator — 6-color palettes with hex codes and usage notes. 1 credit per palette, 5-use trial, no signup to try.',
     dependencies: "AI API",
     seoTitle: "Free Brand Color Palette Generator",
     instructions: [
@@ -1557,7 +1554,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Add brand colors", desc: "Enter valid 6-digit hex codes with names (Primary, Accent…)." },
       { title: "2. Add fonts", desc: "Pick display and body fonts for the kit." },
-      { title: "3. Export JSON", desc: "Download the kit for developers (counts on free quota); local copy auto-saves." },
+      { title: "3. Export JSON", desc: "Download the kit for developers (downloads are unlimited); local copy auto-saves." },
     ],
     faqs: [
       { question: 'How do I build a starter palette?', answer: 'Add 5 colors by hex: primary, secondary, accent, background, and text (e.g. #4F46E5 indigo primary). Name each as you go — the kit stays readable when the team grows.' },
@@ -1597,10 +1594,9 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: "Free online Domain Availability Checker — Check if a domain name is available across major TLDs. Instantly verify domain availability, lookup registration status, and get suggestions for alternative names. No signup required.",
     dependencies: "DNS API",
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Domain Availability Checker." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
-    ],
+      { title: "1. Type the name", desc: "Without extension first — TLD coverage is checked across majors." },
+      { title: "2. Read availability per TLD", desc: "Registered, available, or premium status with registrar pointers." },
+      { title: "3. Register the winner", desc: "Claim available names at any registrar before someone else does." },    ],
     faqs: [
       { question: "Which TLDs does it check?", answer: "Major TLDs including .com, .net, .org, .io, .dev, .co, .app, and more. The checker queries DNS records to determine if a domain is registered or available." },
       { question: "How accurate are the results?", answer: "Results are based on DNS queries and WHOIS data. A domain showing as 'available' may still be registered but not actively hosted — always verify with a registrar before purchasing." },
@@ -1643,7 +1639,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
       { title: "2. Configure conversion", desc: "Set the conversion options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       {
@@ -1680,7 +1676,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
       { title: "2. Configure conversion", desc: "Set the conversion options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Which format should I choose for the best quality?", answer: "FLAC and WAV are lossless — they preserve every detail of the original audio. For smaller files with good quality, use AAC at 256kbps or OGG at 320kbps. MP3 at 320kbps is a safe universal choice." },
@@ -1704,7 +1700,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on Canvas." },
       { title: "2. Configure conversion", desc: "Set the conversion options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       {
@@ -1761,7 +1757,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
       { title: "2. Configure conversion", desc: "Set the conversion options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Which documents?", answer: "Office formats, PDFs, and text convert between each other freely." },
@@ -1784,7 +1780,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop PDF file(s)", desc: "Upload your PDF source. Runs locally on PDF.js." },
       { title: "2. Set Markdown options", desc: "Adjust output settings for Markdown — presets fit most jobs without further tuning." },
-      { title: "3. Download Markdown", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download Markdown", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'Do headings and lists survive?', answer: 'Yes — headings, lists, and structure convert cleanly to Markdown syntax.' },
@@ -1806,7 +1802,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
       { title: "2. Configure extract", desc: "Set the extract options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'How do I write page ranges?', answer: 'Use 1-3,5,7-9 style: individual pages, ranges, or mixes in one expression.' },
@@ -1831,7 +1827,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload scans or photos", desc: "JPG/PNG pages in reading order; flat, legible captures work best." },
       { title: "2. Order the pages", desc: "Drag into final sequence before binding." },
-      { title: "3. Download PDF", desc: "One multi-page document. The save counts toward free download quota (3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download PDF", desc: "One multi-page document. The save downloads with no quota — local saves are unlimited." },
     ],
     faqs: [
       { question: "What image formats can I use?", answer: "JPG, PNG, WebP, BMP, and TIFF images. The tool combines multiple images into a multi-page PDF document." },
@@ -1846,21 +1842,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Repair PDF",
     slug: "repair-pdf",
     category: "PDF",
-    description: 'Fix corrupted PDFs that refuse to open — rebuild cross-references and salvage readable pages. Recover a deadline file from a bad download — local pdf-lib repair, free quota on saves.',
-    seoDescription: 'Free PDF repair — rebuild broken files. Local, free quota on saves.',
+    description: 'Fix corrupted PDFs that refuse to open — rebuild cross-references and salvage readable pages. Recover a deadline file from a bad download — local pdf-lib repair, unlimited saves.',
+    seoDescription: 'Free PDF repair — rebuild broken files. Local, unlimited saves.',
     dependencies: "pdf-lib",
     showInCategory: true,
     seoTitle: "Free Repair Corrupted PDF Online",
     instructions: [
       { title: "1. Upload the broken PDF", desc: "Corrupted downloads and transfers." },
       { title: "2. Rebuild structure", desc: "Cross-references reconstruct automatically." },
-      { title: "3. Verify and download", desc: "Check page counts first (counts on the free download quota)." },
+      { title: "3. Verify and download", desc: "Check page counts first (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'What corruption gets fixed?', answer: 'Truncated downloads, broken cross-reference tables, and malformed headers — the common download-damage trio. Password-locked files need unlocking first, not repair.' },
       { question: 'What if pages are missing?', answer: 'Salvageable pages recover; bytes that never downloaded cannot be invented. A 90%-downloaded file usually opens fully after xref rebuild.' },
       { question: 'Will formatting survive?', answer: 'Mostly — text and images recover; complex interactive elements may simplify. Compare page counts before and after as the integrity check.' },
-      { question: 'Is the damaged file uploaded?', answer: 'No — repair runs locally in your browser. Only the fixed save counts on the free download quota.' },
+      { question: 'Is the damaged file uploaded?', answer: 'No — repair runs locally in your browser. Only the fixed save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -1873,7 +1869,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop PDF file(s)", desc: "Upload your PDF source. Runs locally on pdf-lib." },
       { title: "2. Set PDF/A options", desc: "Adjust output settings for PDF/A — presets fit most jobs without further tuning." },
-      { title: "3. Download PDF/A", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download PDF/A", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'What is PDF/A?', answer: 'The ISO archival standard — self-contained files guaranteed readable decades from now.' },
@@ -1890,21 +1886,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Crop PDF",
     slug: "crop-pdf",
     category: "PDF",
-    description: 'Trim margins off every page of a PDF at once — remove scanner shadows and overscan. Clean a 50-page scan set for reading — local pdf-lib work, free quota on saves.',
-    seoDescription: 'Free PDF crop — trim margins on all pages. Local pdf-lib, free quota on saves.',
+    description: 'Trim margins off every page of a PDF at once — remove scanner shadows and overscan. Clean a 50-page scan set for reading — local pdf-lib work, unlimited saves.',
+    seoDescription: 'Free PDF crop — trim margins on all pages. Local pdf-lib, unlimited saves.',
     dependencies: "pdf-lib",
     showInCategory: true,
     seoTitle: "Free Crop PDF Margins Online",
     instructions: [
       { title: "1. Upload the PDF", desc: "Scanned sets with excess margins." },
       { title: "2. Set crop margins", desc: "Preview first and middle pages before batching." },
-      { title: "3. Download cropped PDF", desc: "Save the file (counts on the free download quota)." },
+      { title: "3. Download cropped PDF", desc: "Save the file (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'How much margin should I crop?', answer: 'Trim to 5–10 mm of content breathing room: scanner shadows and feeder marks vanish while text stays safe. Preview page 1 and a middle page before applying to all 50.' },
       { question: 'Does cropping delete content?', answer: 'Crop boxes hide margins; content streams stay intact and most readers honor the box. For guaranteed removal (redaction-grade), use the redact tool instead.' },
       { question: 'Can different pages crop differently?', answer: 'One crop applies uniformly — best for consistently scanned sets. Mixed-orientation files split by orientation first, then crop each group.' },
-      { question: 'Do cropped files leave the browser?', answer: 'No — cropping runs locally in your browser on pdf-lib. Only the final save counts on the free download quota.' },
+      { question: 'Do cropped files leave the browser?', answer: 'No — cropping runs locally in your browser on pdf-lib. Only the final save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -1912,21 +1908,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Redact PDF",
     slug: "redact-pdf",
     category: "PDF",
-    description: 'Redact sensitive text permanently — PII, prices, names — with true content removal from PDFs. Share contracts safely, not just covered visually — local processing, free quota on saves.',
-    seoDescription: 'Free PDF redaction — true content removal. Local, free quota on saves.',
+    description: 'Redact sensitive text permanently — PII, prices, names — with true content removal from PDFs. Share contracts safely, not just covered visually — local processing, unlimited saves.',
+    seoDescription: 'Free PDF redaction — true content removal. Local, unlimited saves.',
     dependencies: "pdf-lib, pdfjs-dist",
     showInCategory: true,
     seoTitle: "Free Redact PDF – Black Out Text Online",
     instructions: [
       { title: "1. Upload the PDF", desc: "Contracts with sensitive passages." },
       { title: "2. Mark for redaction", desc: "Select every occurrence, not just the first." },
-      { title: "3. Download redacted PDF", desc: "Verify text cannot be selected beneath (counts on free quota)." },
+      { title: "3. Download redacted PDF", desc: "Verify text cannot be selected beneath (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Redact vs black highlight — different?', answer: 'Completely: highlights draw over text that copies out underneath; redaction deletes the content stream. Share a \'highlighted\' contract and the other side reads everything beneath.' },
       { question: 'What should I redact?', answer: 'Names, IDs, account numbers, prices, and signatures per your policy. Search all occurrences — one missed instance on page 47 defeats 46 redactions.' },
       { question: 'Can redaction be reversed?', answer: 'No — removed content is gone from the file. Keep an unredacted master under access control; distribute only redacted copies.' },
-      { question: 'Does redaction upload my file?', answer: 'No — redaction runs locally in your browser. Only the final save counts on the free download quota.' },
+      { question: 'Does redaction upload my file?', answer: 'No — redaction runs locally in your browser. Only the final save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -1956,21 +1952,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Flatten PDF",
     slug: "flatten-pdf",
     category: "PDF",
-    description: 'Bake fillable form fields and annotations permanently into page content — lock applications before sending. Freeze a signed offer letter exactly as seen — local pdf-lib, free quota on saves.',
-    seoDescription: 'Free PDF flattener — bake fields permanently. Local pdf-lib, free quota on saves.',
+    description: 'Bake fillable form fields and annotations permanently into page content — lock applications before sending. Freeze a signed offer letter exactly as seen — local pdf-lib, unlimited saves.',
+    seoDescription: 'Free PDF flattener — bake fields permanently. Local pdf-lib, unlimited saves.',
     dependencies: "pdf-lib",
     showInCategory: true,
     seoTitle: "Free Flatten PDF Forms Online",
     instructions: [
       { title: "1. Upload the filled form", desc: "Keep an unflattened master copy aside." },
       { title: "2. Flatten all fields", desc: "Fields and annotations bake into static content." },
-      { title: "3. Download locked PDF", desc: "Send the flattened copy (counts on the free download quota)." },
+      { title: "3. Download locked PDF", desc: "Send the flattened copy (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why flatten before sending?', answer: 'Unflattened forms render differently across readers — filled values can vanish or shift. Flattening bakes everything into static content so recipients see exactly what you see.' },
       { question: 'Can I unflatten later?', answer: 'No — flattening is one-way. Keep an unflattened master copy, flatten only the sending copy.' },
       { question: 'Do signatures survive flattening?', answer: 'Yes — drawn, typed, and image signatures bake in like everything else. Sign first, flatten last, then send.' },
-      { question: 'Does flattening send files anywhere?', answer: 'No — flattening runs locally in your browser on pdf-lib. Only the final save counts on the free download quota.' },
+      { question: 'Does flattening send files anywhere?', answer: 'No — flattening runs locally in your browser on pdf-lib. Only the final save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -1978,21 +1974,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Grayscale PDF",
     slug: "grayscale-pdf",
     category: "PDF",
-    description: 'Convert color PDFs to grayscale for cheap B&W printing and smaller files. Cut a 50-page deck\'s print cost in half — local processing, free quota on saves.',
-    seoDescription: 'Free PDF to grayscale — cheap B&W prints. Local, free quota on saves.',
+    description: 'Convert color PDFs to grayscale for cheap B&W printing and smaller files. Cut a 50-page deck\'s print cost in half — local processing, unlimited saves.',
+    seoDescription: 'Free PDF to grayscale — cheap B&W prints. Local, unlimited saves.',
     dependencies: "pdfjs-dist, pdf-lib",
     showInCategory: true,
     seoTitle: "Free Grayscale PDF Converter Online",
     instructions: [
       { title: "1. Upload the color PDF", desc: "Decks, reports, or manuals to economize." },
       { title: "2. Convert to grayscale", desc: "Check one chart page for readability first." },
-      { title: "3. Download B&W PDF", desc: "Save for printing (counts on the free download quota)." },
+      { title: "3. Download B&W PDF", desc: "Save for printing (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'How much printing does grayscale save?', answer: 'B&W prints cost a fraction of color per page — a 50-page deck drops from color rates to mono rates, often halving the bill. Convert the print copy, keep a color master.' },
       { question: 'Do charts stay readable?', answer: 'Mostly — but red/green distinctions collapse to similar grays. Check one chart page after converting; patterned fills survive better than color-only coding.' },
       { question: 'Does grayscale shrink files?', answer: 'Yes, typically 20–40% — single-channel data compresses better. Archive the grayscale copy for email and keep color for presentation.' },
-      { question: 'Do converted files leave the browser?', answer: 'No — conversion runs locally in your browser. Only the final save counts on the free download quota.' },
+      { question: 'Do converted files leave the browser?', answer: 'No — conversion runs locally in your browser. Only the final save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2005,7 +2001,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
       { title: "2. Configure whiteout", desc: "Set the whiteout options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'Whiteout vs redaction — which?', answer: 'Whiteout covers visually; true redaction (burned removal) is needed for sensitive data leaving your hands.' },
@@ -2022,21 +2018,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Resize PDF Pages",
     slug: "resize-pdf-pages",
     category: "PDF",
-    description: 'Scale all PDF pages to standard sizes — A4, Letter, or custom — for print shops and archives. Normalize mixed-size scans to uniform A4 — local work, free quota on saves.',
-    seoDescription: 'Free PDF page resize — standard sizes. Local, free quota on saves.',
+    description: 'Scale all PDF pages to standard sizes — A4, Letter, or custom — for print shops and archives. Normalize mixed-size scans to uniform A4 — local work, unlimited saves.',
+    seoDescription: 'Free PDF page resize — standard sizes. Local, unlimited saves.',
     dependencies: "pdf-lib",
     showInCategory: true,
     seoTitle: "Free Resize PDF Pages – A4 Letter Online",
     instructions: [
       { title: "1. Upload the PDF", desc: "Mixed-size scans or exports." },
       { title: "2. Pick target size", desc: "A4, Letter, or custom dimensions." },
-      { title: "3. Download resized PDF", desc: "Check one dense page (counts on the free download quota)." },
+      { title: "3. Download resized PDF", desc: "Check one dense page (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'A4 or Letter — which?', answer: 'A4 for most of the world (210×297 mm), Letter for US workflows (8.5×11 in). Mismatched sizes jam office printers — normalize before bulk printing.' },
       { question: 'Does content scale or crop?', answer: 'Scales to fit with margins preserved by default; content never crops silently. Check one dense page — tiny original text may shrink below readable size.' },
       { question: 'Mixed sizes in one file?', answer: 'Each page scales to the target independently, so mixed sets normalize uniformly. Verify landscape pages didn\'t rotate unexpectedly.' },
-      { question: 'Does resizing upload pages?', answer: 'No — scaling runs locally in your browser. Only the final save counts on the free download quota.' },
+      { question: 'Does resizing upload pages?', answer: 'No — scaling runs locally in your browser. Only the final save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2044,21 +2040,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Add Text to PDF",
     slug: "add-text-to-pdf",
     category: "PDF",
-    description: 'Type directly onto any PDF page — fill forms, add notes, stamp corrections without printing. Complete a 3-page application in minutes — local pdf-lib editing, free quota on saves.',
-    seoDescription: 'Free add-text-to-PDF — type on any page. Local pdf-lib, free quota on saves.',
+    description: 'Type directly onto any PDF page — fill forms, add notes, stamp corrections without printing. Complete a 3-page application in minutes — local pdf-lib editing, unlimited saves.',
+    seoDescription: 'Free add-text-to-PDF — type on any page. Local pdf-lib, unlimited saves.',
     dependencies: "pdf-lib",
     showInCategory: true,
     seoTitle: "Free Add Text to PDF Online",
     instructions: [
       { title: "1. Upload the PDF", desc: "Any fillable or flat PDF form." },
       { title: "2. Click and type", desc: "Place text boxes where needed; match existing font and size." },
-      { title: "3. Download filled PDF", desc: "Save the file (counts on the free download quota)." },
+      { title: "3. Download filled PDF", desc: "Save the file (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'How do I fill a PDF form without printing?', answer: 'Upload, click anywhere, and type: text boxes place exactly where you click with size control. A 3-page job application fills in about 5 minutes — then download the flattened copy.' },
       { question: 'Do added text boxes stay editable?', answer: 'Text stays editable until you flatten or download-flatten the file. Save an unflattened copy if HR might request changes, and send the flattened version as final.' },
       { question: 'What fonts and sizes work?', answer: 'Standard PDF fonts (Helvetica, Times, Courier) at any size render identically everywhere. Match the form\'s existing type — 11pt Helvetica disappears into most official forms.' },
-      { question: 'Do filled forms leave the browser?', answer: 'No — editing runs locally in your browser on pdf-lib. Only the final save counts on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do filled forms leave the browser?', answer: 'No — editing runs locally in your browser on pdf-lib. Only the final save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2071,7 +2067,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop image file(s)", desc: "Upload your image source. Runs locally on pdf-lib." },
       { title: "2. Set PDF options", desc: "Adjust output settings for PDF — presets fit most jobs without further tuning." },
-      { title: "3. Download PDF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download PDF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'Which image formats work?', answer: 'PNG and JPG — placed at any size on any page, with PNG transparency preserved.' },
@@ -2088,21 +2084,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Header and Footer",
     slug: "header-footer-pdf",
     category: "PDF",
-    description: 'Stamp headers and footers on every PDF page — page numbers, dates, confidentiality lines. Number a 100-page report in one pass — local pdf-lib work, free quota on saves.',
-    seoDescription: 'Free PDF headers/footers — numbers, dates, stamps. Local pdf-lib, free quota on saves.',
+    description: 'Stamp headers and footers on every PDF page — page numbers, dates, confidentiality lines. Number a 100-page report in one pass — local pdf-lib work, unlimited saves.',
+    seoDescription: 'Free PDF headers/footers — numbers, dates, stamps. Local pdf-lib, unlimited saves.',
     dependencies: "pdf-lib",
     showInCategory: true,
     seoTitle: "Free PDF Header Footer Adder Online",
     instructions: [
       { title: "1. Upload the PDF", desc: "Reports, filings, or manuscripts to stamp." },
       { title: "2. Design header/footer", desc: "Text, page numbers, position, and font size." },
-      { title: "3. Download stamped PDF", desc: "Verify first/middle/last pages (counts on free quota)." },
+      { title: "3. Download stamped PDF", desc: "Verify first/middle/last pages (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'How do I number 100 pages?', answer: 'Enter the pattern (Page X of 100) with position and font size: all pages stamp identically in seconds. Verify first, middle, and last pages before downloading.' },
       { question: 'Can I add dates and stamps too?', answer: 'Yes — dates, CONFIDENTIAL/DRAFT labels, and document IDs share the same header/footer bands. Keep bands slim so body text never overlaps.' },
       { question: 'What if pages have different sizes?', answer: 'Uniform stamping assumes uniform pages — mixed A4/Letter sets stamp per-page-size correctly where supported, otherwise split by size first.' },
-      { question: 'Do stamped files leave the browser?', answer: 'No — stamping runs locally in your browser on pdf-lib. Only the final save counts on the free download quota.' },
+      { question: 'Do stamped files leave the browser?', answer: 'No — stamping runs locally in your browser on pdf-lib. Only the final save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2110,21 +2106,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "N-up PDF",
     slug: "nup-pdf",
     category: "PDF",
-    description: 'Print multiple PDF pages per sheet — 2-up handouts, 4-up booklets, 6-up slides. Fit a 60-slide deck on 10 sheets — local processing, free quota on saves.',
-    seoDescription: 'Free N-up PDF — multi-page sheets. Local processing, free quota on saves.',
+    description: 'Print multiple PDF pages per sheet — 2-up handouts, 4-up booklets, 6-up slides. Fit a 60-slide deck on 10 sheets — local processing, unlimited saves.',
+    seoDescription: 'Free N-up PDF — multi-page sheets. Local processing, unlimited saves.',
     dependencies: "pdfjs-dist, pdf-lib",
     showInCategory: true,
     seoTitle: "Free N-Up PDF Printing Online",
     instructions: [
       { title: "1. Upload the PDF", desc: "Decks, reports, or manuals to condense." },
       { title: "2. Pick pages per sheet", desc: "2, 4, or 6-up with order preserved." },
-      { title: "3. Download imposed PDF", desc: "Test-print one sheet first (counts on free quota)." },
+      { title: "3. Download imposed PDF", desc: "Test-print one sheet first (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'What layout for slide handouts?', answer: '6-up for slide decks (60 slides on 10 sheets), 2-up for reading handouts, 4-up for booklets. Text stays legible at 6-up for projected slides; dense reports stop at 4-up.' },
       { question: 'Do page numbers stay correct?', answer: 'Yes — original order preserves left-to-right, top-to-bottom across sheets. Add header-footers after N-up (not before) so numbers sit on finished sheets.' },
       { question: 'Duplex printing with N-up?', answer: 'Combine freely — N-up lays out faces, duplex flips sheets. Test one double-sided sheet before the full 100-copy run.' },
-      { question: 'Does imposition upload anything?', answer: 'No — imposition runs locally in your browser. Only the final save counts on the free download quota.' },
+      { question: 'Does imposition upload anything?', answer: 'No — imposition runs locally in your browser. Only the final save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2137,7 +2133,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
       { title: "2. Configure annotate", desc: "Set the annotate options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'Highlights, underlines, strikeouts — which when?', answer: 'Highlights for key lines, underlines for definitions, strikeouts for deletions under review.' },
@@ -2154,21 +2150,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Deskew PDF",
     slug: "deskew-pdf",
     category: "PDF",
-    description: 'Deskew skewed scan pages automatically — fix feeder tilt across whole PDF documents. Rescue a 30-page crooked scan in one pass — local processing, free quota on saves.',
-    seoDescription: 'Free PDF deskew — straighten tilted scans. Local processing, free quota on saves.',
+    description: 'Deskew skewed scan pages automatically — fix feeder tilt across whole PDF documents. Rescue a 30-page crooked scan in one pass — local processing, unlimited saves.',
+    seoDescription: 'Free PDF deskew — straighten tilted scans. Local processing, unlimited saves.',
     dependencies: "pdfjs-dist, pdf-lib",
     showInCategory: true,
     seoTitle: "Free Deskew PDF Scans Online",
     instructions: [
       { title: "1. Upload the scan", desc: "Tilted multi-page PDFs from feeders or phone scans." },
       { title: "2. Auto-straighten", desc: "Tilt detection corrects each page; check the worst one first." },
-      { title: "3. Download straight PDF", desc: "Save the file (counts on the free download quota)." },
+      { title: "3. Download straight PDF", desc: "Save the file (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'How skewed is too skewed?', answer: 'Feeder tilt under ~10° corrects cleanly with text detection; pages past 15° or with curved book-spread distortion need manual rotation first. Preview the worst page before batching all 30.' },
       { question: 'Does deskewing hurt OCR later?', answer: 'It helps enormously — straight text lines OCR at 95%+ versus 70% tilted. Always deskew before OCR, never after.' },
       { question: 'Will margins change?', answer: 'Slightly — rotation re-frames content with small edge variance. Run crop after deskew for uniform clean margins.' },
-      { question: 'Are my scans uploaded?', answer: 'No — deskewing runs locally in your browser. Only the final save counts on the free download quota.' },
+      { question: 'Are my scans uploaded?', answer: 'No — deskewing runs locally in your browser. Only the final save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2203,7 +2199,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop Markdown file(s)", desc: "Upload your Markdown source. Runs locally on pdf-lib." },
       { title: "2. Set PDF options", desc: "Adjust output settings for PDF — presets fit most jobs without further tuning." },
-      { title: "3. Download PDF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download PDF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'What markdown renders?', answer: 'Headings, bold, italic, code blocks, and lists — the core set, cleanly typeset.' },
@@ -2225,7 +2221,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
       { title: "2. Configure bookmark", desc: "Set the bookmark options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'How do nested hierarchies work?', answer: 'Chapters contain sections contain subsections — readers expand and jump at any depth.' },
@@ -2247,7 +2243,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop email files file(s)", desc: "Upload your email files source. Runs locally on pdf-lib." },
       { title: "2. Set PDF options", desc: "Adjust output settings for PDF — presets fit most jobs without further tuning." },
-      { title: "3. Download PDF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download PDF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'When should I convert EML to PDF?', answer: 'Email backup, archival, and forensic records — anywhere a stable shareable document beats a mail file.' },
@@ -2264,21 +2260,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "RAW Image Converter",
     slug: "raw-image-converter",
     category: "Image",
-    description: 'Convert camera RAW files to viewable JPG or PNG for sharing and editing. Open CR2, NEF, and ARW shots anywhere — local processing, free quota on saves.',
-    seoDescription: 'Free RAW converter — camera files to JPG/PNG. Local, free quota on saves.',
+    description: 'Convert camera RAW files to viewable JPG or PNG for sharing and editing. Open CR2, NEF, and ARW shots anywhere — local processing, unlimited saves.',
+    seoDescription: 'Free RAW converter — camera files to JPG/PNG. Local, unlimited saves.',
     dependencies: "none",
     showInCategory: true,
     seoTitle: "Free RAW Image Converter – CR2 NEF Online",
     instructions: [
       { title: "1. Upload RAW files", desc: "Camera originals needing viewable versions." },
       { title: "2. Convert to JPG/PNG", desc: "JPG for sharing, PNG for lossless editing." },
-      { title: "3. Download images", desc: "Archive RAW masters separately (counts on the free download quota)." },
+      { title: "3. Download images", desc: "Archive RAW masters separately (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Which RAW formats open?', answer: 'Common Canon, Nikon, and Sony RAW containers decode to viewable images. Brand-new camera models may lag support — update or export via manufacturer software first.' },
       { question: 'RAW or JPG for editing?', answer: 'RAW for exposure recovery and white balance latitude; converted JPG/PNG for sharing and quick edits. Convert working selects, archive RAW masters.' },
       { question: 'Quality loss in conversion?', answer: 'Developed output bakes in exposure choices — keep RAW originals for re-edits. JPG at 90+ preserves visible quality for all practical sharing.' },
-      { question: 'Do RAW files upload?', answer: 'No — conversion runs locally in your browser. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do RAW files upload?', answer: 'No — conversion runs locally in your browser. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -2291,7 +2287,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop PSD images file(s)", desc: "Upload your PSD images source. Runs locally in your browser." },
       { title: "2. Set JPG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download JPG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download JPG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'Do PSD layers survive?', answer: 'No — JPG and PNG flatten to one layer, so keep the PSD as your editable master.' },
@@ -2364,21 +2360,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Unblur / Sharpen",
     slug: "unblur-sharpen",
     category: "Image",
-    description: 'Sharpen slightly soft photos with deconvolution-style enhancement — rescue mild blur, not motion smear. Save a good shot gone soft — local processing, free quota on saves.',
-    seoDescription: 'Free photo sharpener — rescue soft shots. Local, free quota on saves. Honest limits.',
+    description: 'Sharpen slightly soft photos with deconvolution-style enhancement — rescue mild blur, not motion smear. Save a good shot gone soft — local processing, unlimited saves.',
+    seoDescription: 'Free photo sharpener — rescue soft shots. Local, unlimited saves. Honest limits.',
     dependencies: "none",
     showInCategory: true,
     seoTitle: "Free Unblur Photo Online – Sharpen Images",
     instructions: [
       { title: "1. Upload the soft photo", desc: "Mild blur cases work; motion smear won't." },
       { title: "2. Set sharpening", desc: "Stop at first halos — 40–60% typical." },
-      { title: "3. Download sharpened", desc: "Compare at 100% first (counts on the free download quota)." },
+      { title: "3. Download sharpened", desc: "Compare at 100% first (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'What blur can it actually fix?', answer: 'Mild softness and slight misfocus sharpen well — edges tighten visibly. Heavy motion streaks and severe defocus barely improve; no tool recovers detail that was never captured.' },
       { question: 'How far should I push sharpening?', answer: 'Stop at the first sign of halos along edges or gritty noise in skies — typically 40–60% strength. Preview at 100% zoom, not fit-to-screen.' },
       { question: 'Sharpen before or after resize?', answer: 'After — sharpen the final-size image once. Pre-resize sharpening wastes effort and amplifies artifacts.' },
-      { question: 'Do soft photos leave the browser?', answer: 'No — enhancement runs locally in your browser. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do soft photos leave the browser?', answer: 'No — enhancement runs locally in your browser. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -2391,7 +2387,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
       { title: "2. Configure edit", desc: "Set the edit options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What can I edit?", answer: "Crop frames, add text overlays, trim clips, and resize — frame-aware throughout." },
@@ -2408,8 +2404,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Video Speed Changer",
     slug: "video-speed-changer",
     category: "Video",
-    description: 'Speed up or slow down video from 0.25x to 4x with pitch-safe audio. Make a 20-minute lecture watchable at 2x — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free speed changer — slow motion plus fast. Local FFmpeg, free quota on saves.',
+    description: 'Speed up or slow down video from 0.25x to 4x with pitch-safe audio. Make a 20-minute lecture watchable at 2x — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free speed changer — slow motion plus fast. Local FFmpeg, unlimited saves.',
     dependencies: "@ffmpeg/ffmpeg",
 
     showInCategory: true,
@@ -2417,13 +2413,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload the video", desc: "Lectures, sports, or tutorials." },
       { title: "2. Set the speed", desc: "0.25x–4x with pitch-safe audio." },
-      { title: "3. Download retimed", desc: "Save the file (counts on the free download quota)." },
+      { title: "3. Download retimed", desc: "Save the file (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'What speeds work best?', answer: '1.5–2x for lectures (comprehension holds), 0.25–0.5x for sports analysis and tutorials. Beyond 3x, speech unintelligibility defeats the purpose.' },
       { question: 'Does audio stay in sync?', answer: 'Yes — audio stretches with pitch correction at moderate speeds. Past 2.5x, consider muting and adding captions instead.' },
       { question: 'Slow motion quality?', answer: '0.5x halves effective frame rate — 60fps sources stay smooth, 30fps stutters slightly. Shoot high frame rate when slow-mo matters.' },
-      { question: 'Do retimed clips upload?', answer: 'No — speed changes run locally in your browser with FFmpeg. Only saves count on the free download quota.' },
+      { question: 'Do retimed clips upload?', answer: 'No — speed changes run locally in your browser with FFmpeg. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2431,8 +2427,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Reverse Video",
     slug: "reverse-video",
     category: "Video",
-    description: 'Play any video backwards — video, audio, or both independently. Create rewind effects for social clips — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free video reverser — video, audio, or both. Local FFmpeg, free quota on saves.',
+    description: 'Play any video backwards — video, audio, or both independently. Create rewind effects for social clips — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free video reverser — video, audio, or both. Local FFmpeg, unlimited saves.',
     dependencies: "@ffmpeg/ffmpeg",
 
     showInCategory: true,
@@ -2440,13 +2436,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload the clip", desc: "Short clips reverse fastest." },
       { title: "2. Pick what reverses", desc: "Video, audio, or both tracks." },
-      { title: "3. Download reversed", desc: "Save the effect (counts on the free download quota)." },
+      { title: "3. Download reversed", desc: "Save the effect (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Reverse video, audio, or both?', answer: 'Independently selectable: reversed video with normal audio suits magic tricks; both reversed sells full rewind effects. Pick per creative intent.' },
       { question: 'Does reversing lose quality?', answer: 'No — frame order changes, pixels don\'t. Re-encode settings decide output quality, not direction.' },
       { question: 'How long does it take?', answer: 'Roughly real-time on laptops — FFmpeg buffers the whole file first. A 5-minute clip reverses in a few minutes; keep the tab open.' },
-      { question: 'Is my footage uploaded?', answer: 'No — reversing runs locally in your browser with FFmpeg. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Is my footage uploaded?', answer: 'No — reversing runs locally in your browser with FFmpeg. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -2454,8 +2450,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Mute Video",
     slug: "mute-video",
     category: "Video",
-    description: 'Strip the audio track from any video in one click — clean B-roll, GIF sources, confidential calls. Keep full visual quality with zero re-encode waste — local FFmpeg, free quota on saves.',
-    seoDescription: 'Free mute-video tool — strip audio tracks instantly. Local FFmpeg, free quota on saves.',
+    description: 'Strip the audio track from any video in one click — clean B-roll, GIF sources, confidential calls. Keep full visual quality with zero re-encode waste — local FFmpeg, unlimited saves.',
+    seoDescription: 'Free mute-video tool — strip audio tracks instantly. Local FFmpeg, unlimited saves.',
     dependencies: "@ffmpeg/ffmpeg",
 
     showInCategory: true,
@@ -2469,7 +2465,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: 'Why mute instead of lowering volume?', answer: 'Muting drops the audio stream entirely: smaller files, no accidental background chatter, and platforms treat it as safe-for-feed. Lowering volume keeps the stream bytes and the risk.' },
       { question: 'Does muting change video quality?', answer: 'No — the video stream copies untouched while only the audio track is removed. A 100 MB clip returns at ~95 MB with identical frames.' },
       { question: 'Can I mute only part of a video?', answer: 'This tool mutes the whole file in one pass. For partial mutes, trim the segment first, mute it, then merge the parts back together.' },
-      { question: 'Is my footage uploaded?', answer: 'No — muting runs locally in your browser with FFmpeg WASM. Only the final save counts on the free download quota.' },
+      { question: 'Is my footage uploaded?', answer: 'No — muting runs locally in your browser with FFmpeg WASM. Only the final save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2484,7 +2480,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
       { title: "2. Configure removal", desc: "Set the removal options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       {
@@ -2521,7 +2517,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
       { title: "2. Configure merge", desc: "Set the merge options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "How many audio files can I merge together?", answer: "There is no limit. Add as many files as you need — the merger concatenates them in the order you arrange. Each file is processed sequentially from your browser." },
@@ -2538,21 +2534,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Voice Recorder",
     slug: "voice-recorder",
     category: "Audio",
-    description: 'Record voice memos straight from your microphone with live levels — interviews, notes, ideas. Capture clean audio without installing apps — local recording, free quota on saves.',
-    seoDescription: 'Free voice recorder — mic capture with levels. Local, free quota on saves.',
+    description: 'Record voice memos straight from your microphone with live levels — interviews, notes, ideas. Capture clean audio without installing apps — local recording, unlimited saves.',
+    seoDescription: 'Free voice recorder — mic capture with levels. Local, unlimited saves.',
     dependencies: "none",
     showInCategory: true,
     seoTitle: "Free Voice Recorder Online – Mic to Audio",
     instructions: [
       { title: "1. Allow the microphone", desc: "Grant mic access once per browser." },
       { title: "2. Record with levels", desc: "Speak close; keep peaks near -12 dB." },
-      { title: "3. Save the take", desc: "Download audio (counts on the free download quota)." },
+      { title: "3. Save the take", desc: "Download audio (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'How do I get clear recordings?', answer: 'Close mic (6–12 inches), quiet room, steady gain below clipping: watch live levels peak around -12 dB. Laptop mics work; phone earbuds beat them.' },
       { question: 'What format records?', answer: 'Browser-native compressed audio (typically WebM/Opus or WAV depending on browser) — universally playable, convertible anywhere afterward.' },
       { question: 'Maximum length?', answer: 'Minutes to an hour depending on device memory — the tab must stay open while recording. Long interviews split into 15-minute takes for safety.' },
-      { question: 'Is my voice uploaded?', answer: 'No — capture runs locally in your browser. Only the recording save counts on the free download quota. Avoid recording secrets regardless.' },
+      { question: 'Is my voice uploaded?', answer: 'No — capture runs locally in your browser. Only the recording save touches the network — downloads are unlimited. Avoid recording secrets regardless.' },
     ],
   },
   {
@@ -2560,21 +2556,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Noise Reducer",
     slug: "noise-reducer",
     category: "Audio",
-    description: 'Remove hiss, hum, and background noise from recordings with profile-based reduction. Rescue fan-noisy interviews in one pass — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free noise reducer — hiss and hum removal. Local FFmpeg, free quota on saves.',
+    description: 'Remove hiss, hum, and background noise from recordings with profile-based reduction. Rescue fan-noisy interviews in one pass — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free noise reducer — hiss and hum removal. Local FFmpeg, unlimited saves.',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
     seoTitle: "Free Noise Reducer – Clean Audio Online",
     instructions: [
       { title: "1. Upload the noisy file", desc: "Interviews with steady background noise." },
       { title: "2. Set reduction strength", desc: "Moderate first; preview before committing." },
-      { title: "3. Download cleaned audio", desc: "Save the file (counts on the free download quota)." },
+      { title: "3. Download cleaned audio", desc: "Save the file (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'What noise removes cleanly?', answer: 'Constant hiss, fan hum, and room tone — steady profiles the tool learns from a noise-only sample. Sudden sounds (doors, coughs) need manual editing instead.' },
       { question: 'How strong should reduction be?', answer: 'Moderate: over-reduction warbles voices underwater. Preview at 6–12 dB reduction first; intelligibility beats silence.' },
       { question: 'Will voices sound robotic?', answer: 'Only if pushed too far — conservative settings preserve natural timbre while dropping background 10–15 dB. A/B the bypass toggle honestly.' },
-      { question: 'Does noise reduction upload audio?', answer: 'No — reduction runs locally in your browser with FFmpeg. Only saves count on the free download quota.' },
+      { question: 'Does noise reduction upload audio?', answer: 'No — reduction runs locally in your browser with FFmpeg. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2582,21 +2578,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Audio Equalizer",
     slug: "audio-equalizer",
     category: "Audio",
-    description: 'Shape audio with multi-band EQ — boost bass, cut mud, add air to dull recordings. Fix a boomy room recording fast — local processing, free quota on saves.',
-    seoDescription: 'Free audio EQ — multi-band shaping. Local, free quota on saves.',
+    description: 'Shape audio with multi-band EQ — boost bass, cut mud, add air to dull recordings. Fix a boomy room recording fast — local processing, unlimited saves.',
+    seoDescription: 'Free audio EQ — multi-band shaping. Local, unlimited saves.',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
     seoTitle: "Free Audio Equalizer Online",
     instructions: [
       { title: "1. Upload audio", desc: "Tracks needing tonal shaping." },
       { title: "2. Adjust bands", desc: "Cut mud, lift presence gently." },
-      { title: "3. Download EQ'd file", desc: "Save with fresh ears (counts on the free download quota)." },
+      { title: "3. Download EQ'd file", desc: "Save with fresh ears (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'How do I fix muddy audio?', answer: 'Cut 200–400 Hz a few dB — muddiness lives there. Then add a gentle high shelf above 8 kHz for air. Small moves; ears fatigue fast.' },
       { question: ' presets for voice?', answer: 'High-pass at 80 Hz (rumble out), slight presence lift 2–5 kHz, de-ess harshness 6–8 kHz if needed. Podcast chains start here.' },
       { question: 'Can EQ fix clipping?', answer: 'No — clipped peaks are destroyed data, and EQ can\'t restore them. Re-record hot takes; EQ polishes clean captures only.' },
-      { question: 'Does EQ upload my audio?', answer: 'No — EQ runs locally in your browser. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Does EQ upload my audio?', answer: 'No — EQ runs locally in your browser. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -2604,21 +2600,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Audio Compressor",
     slug: "audio-compressor",
     category: "Audio",
-    description: 'Even out loud and quiet parts of any audio with dynamics compression — podcasts at one steady volume. Stop riding the volume knob — local processing, free quota on saves.',
-    seoDescription: 'Free dynamics compressor — steady loudness. Local, free quota on saves.',
+    description: 'Even out loud and quiet parts of any audio with dynamics compression — podcasts at one steady volume. Stop riding the volume knob — local processing, unlimited saves.',
+    seoDescription: 'Free dynamics compressor — steady loudness. Local, unlimited saves.',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
     seoTitle: "Free Audio Compressor – Even Volume Online",
     instructions: [
       { title: "1. Upload uneven audio", desc: "Podcasts with loud/soft swings." },
       { title: "2. Set gentle compression", desc: "Low ratio, medium attack first." },
-      { title: "3. Download leveled file", desc: "Save steady audio (counts on the free download quota)." },
+      { title: "3. Download leveled file", desc: "Save steady audio (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'What settings for podcasts?', answer: 'Gentle 2:1–3:1 ratio with medium attack: whispers lift, shouts tame, nothing pumps. Start there, adjust by ear.' },
       { question: 'Compression vs normalization?', answer: 'Compression squeezes dynamics first (then makeup gain); normalization only shifts overall level. Uneven recordings need compression; uniformly quiet ones need normalization.' },
       { question: 'Will it sound squashed?', answer: 'Only with aggressive ratios (8:1+) and fast release — pumping artifacts. Conservative podcast settings stay transparent.' },
-      { question: 'Does leveling upload audio?', answer: 'No — compression runs locally in your browser. Only saves count on the free download quota.' },
+      { question: 'Does leveling upload audio?', answer: 'No — compression runs locally in your browser. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2626,21 +2622,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Waveform Generator",
     slug: "waveform-generator",
     category: "Audio",
-    description: 'Render audio waveforms as shareable PNG images — audiograms, episode art, visual proof. Turn a soundbite into social content — local rendering, free quota on saves.',
-    seoDescription: 'Free waveform images — audiograms made easy. Local, free quota on saves.',
+    description: 'Render audio waveforms as shareable PNG images — audiograms, episode art, visual proof. Turn a soundbite into social content — local rendering, unlimited saves.',
+    seoDescription: 'Free waveform images — audiograms made easy. Local, unlimited saves.',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
     seoTitle: "Free Waveform Generator – Audio to Image",
     instructions: [
       { title: "1. Upload audio", desc: "Clips to visualize." },
       { title: "2. Style the waveform", desc: "Bars, colors, and background." },
-      { title: "3. Download image", desc: "Share audiograms anywhere (counts on the free download quota)." },
+      { title: "3. Download image", desc: "Share audiograms anywhere (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'What makes a good audiogram?', answer: 'Waveform plus captions plus branding on a 1080×1080 canvas — the social clip format. Keep clips under 60 seconds for feed algorithms.' },
       { question: 'Can I style the waveform?', answer: 'Yes — bars or mirrored style with brand colors and background images. Match show art for recognition.' },
       { question: 'Static or animated?', answer: 'Static PNGs here for posts and thumbnails; animated audiograms need video tools. Export the still, animate elsewhere.' },
-      { question: 'Do clips upload for visualizing?', answer: 'No — rendering runs locally in your browser. Only image saves count on the free download quota.' },
+      { question: 'Do clips upload for visualizing?', answer: 'No — rendering runs locally in your browser. Only image saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2652,7 +2648,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
       { title: "2. Configure fade", desc: "Set the fade options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What fades can I shape?", answer: "Linear, logarithmic, and S-curve fades with adjustable length." },
@@ -2670,8 +2666,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Video Stabilizer",
     slug: "video-stabilizer",
     category: "Video",
-    description: 'Smooth shaky handheld footage with motion-compensated stabilization. Salvage walking tour videos without gimbals — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free stabilizer — smooth handheld clips. Local FFmpeg, free quota on saves.',
+    description: 'Smooth shaky handheld footage with motion-compensated stabilization. Salvage walking tour videos without gimbals — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free stabilizer — smooth handheld clips. Local FFmpeg, unlimited saves.',
     dependencies: "@ffmpeg/ffmpeg",
 
     showInCategory: true,
@@ -2679,13 +2675,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload shaky footage", desc: "Handheld clips with moderate shake." },
       { title: "2. Stabilize", desc: "Motion compensation with edge crop preview." },
-      { title: "3. Download smooth video", desc: "Save the file (counts on the free download quota)." },
+      { title: "3. Download smooth video", desc: "Save the file (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'How shaky is too shaky?', answer: 'Walking bob and hand tremor stabilize beautifully; running footage and whip-pans exceed motion vectors and warp. Preview a 10-second sample first.' },
       { question: 'Does stabilization crop?', answer: 'Yes — edges sacrifice ~10% for the steady frame. Shoot slightly wide when planning to stabilize.' },
       { question: 'Rolling shutter too?', answer: 'Partially — jello wobble reduces but rarely vanishes. Global-shutter cameras avoid it; phones need slower pans.' },
-      { question: 'Does stabilized footage upload?', answer: 'No — stabilization runs locally in your browser with FFmpeg. Only saves count on the free download quota.' },
+      { question: 'Does stabilized footage upload?', answer: 'No — stabilization runs locally in your browser with FFmpeg. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2699,7 +2695,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
       { title: "2. Configure screenshot", desc: "Set the screenshot options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "How do I capture a frame at an exact timestamp?", answer: "Use the timestamp input to enter the precise time (in seconds or HH:MM:SS format) where you want to capture. The tool extracts that exact frame from the video." },
@@ -2717,8 +2713,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Video Filters",
     slug: "video-filters",
     category: "Video",
-    description: 'Grade videos with brightness, contrast, saturation, and grayscale filters plus live preview. Rescue flat 7am footage before posting — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free video filters — brightness, contrast, vintage looks. Local FFmpeg, free quota on saves.',
+    description: 'Grade videos with brightness, contrast, saturation, and grayscale filters plus live preview. Rescue flat 7am footage before posting — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free video filters — brightness, contrast, vintage looks. Local FFmpeg, unlimited saves.',
     dependencies: "@ffmpeg/ffmpeg",
 
     showInCategory: true,
@@ -2732,7 +2728,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: 'How do I fix dull morning footage?', answer: 'Raise brightness +10, contrast +15, saturation +10 as a starting recipe: flat 7am clips gain punch without clipping highlights. Preview on the brightest frame before exporting.' },
       { question: 'Which filter for a vintage look?', answer: 'Lower saturation to −30, warm the tones, add slight contrast: instant film feel. Grayscale at full strength suits dramatic B-roll and title backgrounds.' },
       { question: 'Do filters slow down export?', answer: 'Slightly — each filter adds a processing pass, roughly 20–30% longer than plain conversion. A 5-minute 1080p clip still finishes in a few minutes on a laptop.' },
-      { question: 'Are my videos uploaded for filtering?', answer: 'No — filtering runs locally in your browser with FFmpeg WASM. Only the final save counts on the free download quota.' },
+      { question: 'Are my videos uploaded for filtering?', answer: 'No — filtering runs locally in your browser with FFmpeg WASM. Only the final save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2746,7 +2742,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
       { title: "2. Configure record", desc: "Set the record options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Can I record just one application window?", answer: "Yes. When you start recording, the browser asks you to choose between recording your entire screen, a specific application window, or a browser tab. Pick the option that fits your needs." },
@@ -2765,7 +2761,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "ai-chat-pdf",
     category: "AI",
     description: 'Chat with any PDF: ask questions, get answers, and extract insights with intelligent in-browser search. Students quiz a textbook chapter in minutes — free to start, fair daily limits apply.',
-    seoDescription: 'Free chat with PDF — ask questions, extract insights, instant search. Local parsing, free to start.',
+    seoDescription: 'Free chat with your PDFs — ask questions, extract insights, instant search across pages. Local parsing, free to start, no signup needed.',
     dependencies: "pdfjs-dist",
     showInCategory: true,
     seoTitle: "Free AI Chat with PDF – Ask Anything",
@@ -2787,7 +2783,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "grammar-checker",
     category: "AI",
     description: 'Catch grammar, spelling, and punctuation errors with in-browser pattern matching — homophones, run-ons, misplaced commas. Writers proofread a 1,000-word draft in seconds — runs locally, free to start with fair limits.',
-    seoDescription: 'Free grammar checker — spelling, punctuation, homophones. Local processing, works offline, free to start.',
+    seoDescription: 'Free grammar checker — spelling, punctuation and homophone fixes with explanations. Local processing, works offline, free, no signup needed.',
     dependencies: "none",
     showInCategory: true,
     instructions: [
@@ -2809,7 +2805,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "ai-humanizer",
     category: "AI",
     description: 'Rewrite stiff AI-sounding text into natural human-like prose in 5 tones — casual, professional, friendly, natural, storytelling. Bloggers convert robotic drafts into readable posts — runs locally, free to start with fair limits.',
-    seoDescription: 'Free AI humanizer — 5 tones, robotic to natural rewrite. Local processing, free to start.',
+    seoDescription: 'Free AI humanizer — 5 tones from robotic to natural rewrite with meaning kept. Local processing, free to start, no signup needed.',
     dependencies: "none",
     showInCategory: true,
     seoTitle: "Free AI Humanizer – Make Text Natural",
@@ -2832,7 +2828,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "ai-detector",
     category: "AI",
     description: 'Score text for AI authorship with burstiness, repetition, and trigger-phrase analysis — percentage plus per-section breakdown. Teachers screen a 2,000-word essay in seconds — runs locally, free to start with fair limits.',
-    seoDescription: 'Free AI detector — burstiness and pattern scoring with breakdown. Local analysis, free to start.',
+    seoDescription: 'Free AI content detector — burstiness and pattern scoring with per-section breakdown. Local analysis, free to start, no signup needed.',
     dependencies: "none",
     showInCategory: true,
         instructions: [
@@ -2854,21 +2850,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Article Writer",
     slug: "article-writer",
     category: "AI",
-    description: 'Draft structured articles from outlines — intro, body, conclusion with FAQ and takeaways. Beat blank-page block in minutes — local templates, free quota on saves.',
-    seoDescription: 'Free article drafter — outlines to drafts. Local templates, free quota on saves.',
+    description: 'Draft structured articles from outlines — intro, body, conclusion with FAQ and takeaways. Beat blank-page block in minutes — local templates, unlimited saves.',
+    seoDescription: 'Free article drafter — outlines to drafts. Local templates, unlimited saves.',
     dependencies: "none",
     showInCategory: true,
     seoTitle: "Free Article Writer – Structured Drafts Online",
     instructions: [
       { title: "1. Enter topic and outline", desc: "Points to expand per section." },
       { title: "2. Generate structure", desc: "Intro, body, FAQ, takeaways assemble." },
-      { title: "3. Add expertise", desc: "Examples and voice make it yours; export (counts on free quota)." },
+      { title: "3. Add expertise", desc: "Examples and voice make it yours; export (downloads are unlimited)." },
     ],
         faqs: [
       { question: 'How structured are drafts?', answer: 'Intro hook, headed body sections, conclusion, plus FAQ and key-takeaway blocks — the full article skeleton from your outline points.' },
       { question: 'AI-generated text?', answer: 'No — template-structured drafting from your inputs, not LLM generation. You supply ideas; the tool supplies structure. Add expertise and examples yourself.' },
       { question: 'Export formats?', answer: 'Text, Markdown, and HTML for CMS paste. Each preserves headings and lists correctly.' },
-      { question: 'Is my writing uploaded?', answer: 'No — drafting runs locally in your browser. Only exports count on the free download quota.' },
+      { question: 'Is my writing uploaded?', answer: 'No — drafting runs locally in your browser. Only exports touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2876,21 +2872,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Social Caption Generator",
     slug: "social-caption-generator",
     category: "AI",
-    description: 'Generate platform-tuned social captions with mood, tone, hashtags, and CTA in one click. Fill a week of posts in minutes — local template engine, free quota on saves.',
-    seoDescription: 'Free social captions — platform, mood, hashtags, CTA. Local templates, free quota on saves.',
+    description: 'Generate platform-tuned social captions with mood, tone, hashtags, and CTA in one click. Fill a week of posts in minutes — local template engine, unlimited saves.',
+    seoDescription: 'Free social captions — platform, mood, hashtags, CTA. Local templates, unlimited saves.',
     dependencies: "none",
     showInCategory: true,
     seoTitle: "Free Social Caption Generator Online",
     instructions: [
       { title: "1. Enter topic", desc: "Product, event, or idea in a few words." },
       { title: "2. Set platform, mood, tone", desc: "Counts and style adapt per network automatically." },
-      { title: "3. Generate and save", desc: "Copy free anywhere, or export .txt (counts on free quota)." },
+      { title: "3. Generate and save", desc: "Copy free anywhere, or export .txt (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'How many hashtags per platform?', answer: 'Built-in counts follow platform norms: 3 for Twitter/X, 15 for Instagram, 8 elsewhere — generated from your topic words plus proven performers. Swap any tag that misses your niche.' },
       { question: 'How do I get captions that sound like me?', answer: 'Set mood (Casual, Hype, Professional) plus tone (Formal expands contractions for LinkedIn polish). Generate three, keep the best lines of each — the blend beats any single output.' },
       { question: 'Should I use the CTA line?', answer: 'Yes for growth posts — question CTAs (\'which would you pick?\') earn the most replies. Drop it for announcements where the news is the point.' },
-      { question: 'Can I save caption packs?', answer: 'Yes — export .txt per platform, counting on the free download quota (3 a day anonymous, 5 signed-in). Copy-paste to schedulers is always free.' },
+      { question: 'Can I save caption packs?', answer: 'Yes — export .txt per platform, with downloads unlimited. Copy-paste to schedulers is always free.' },
       { question: 'Is my topic data sent anywhere?', answer: 'No — generation runs on local templates in your browser. Topics never leave your device and no credits are involved.' },
     ],
   },
@@ -2903,7 +2899,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
       { title: "2. Configure conversion", desc: "Set the conversion options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "MOBI still relevant?", answer: "Legacy Kindle format — converts for archival or migration off old devices." },
@@ -2925,7 +2921,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop RTF documents file(s)", desc: "Upload your RTF documents source. Runs locally on pdf-lib." },
       { title: "2. Set PDF options", desc: "Adjust output settings for PDF — presets fit most jobs without further tuning." },
-      { title: "3. Download PDF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download PDF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Which inputs?", answer: "ODT open documents and RTF rich text, both converting to PDF." },
@@ -2948,7 +2944,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop SVG file(s)", desc: "Upload your SVG source. Runs locally on Canvas." },
       { title: "2. Set PNG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download PNG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download PNG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'What size should I export?', answer: 'Any — vectors scale infinitely, so export exactly the pixels you need, from favicon to poster.' },
@@ -2971,7 +2967,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop SVG file(s)", desc: "Upload your SVG source. Runs locally on Canvas." },
       { title: "2. Set JPG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download JPG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download JPG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Will my SVG lose vector quality as a JPG?", answer: "Yes. JPG is a raster format, so the SVG is rendered at a fixed pixel resolution during conversion. The result looks sharp at the chosen size but cannot be scaled up infinitely like the original SVG." },
@@ -2995,7 +2991,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop PNG file(s)", desc: "Upload your PNG source. Runs locally on Canvas." },
       { title: "2. Set GIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download GIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download GIF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert PNG to GIF?", answer: "GIF is supported by legacy platforms, older messaging apps, and some web contexts that don't handle PNG. Converting ensures compatibility." },
@@ -3018,7 +3014,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop JPG file(s)", desc: "Upload your JPG source. Runs locally on Canvas." },
       { title: "2. Set GIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download GIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download GIF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert JPG to GIF?", answer: "GIF is supported by legacy platforms, older messaging apps, and some web contexts that don't accept JPG. Converting ensures compatibility while keeping visual quality acceptable." },
@@ -3041,7 +3037,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WebP file(s)", desc: "Upload your WebP source. Runs locally on Canvas." },
       { title: "2. Set GIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download GIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download GIF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does WebP to GIF do?", answer: "Convert WEBP images to GIF format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
@@ -3063,7 +3059,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop BMP file(s)", desc: "Upload your BMP source. Runs locally on Canvas." },
       { title: "2. Set JPG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download JPG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download JPG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert BMP to JPG?", answer: "BMP files are uncompressed and very large. Converting to JPG reduces file size by 90%+ while maintaining good visual quality. JPG is universally supported for web, email, and social media." },
@@ -3086,7 +3082,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop BMP file(s)", desc: "Upload your BMP source. Runs locally on Canvas." },
       { title: "2. Set PNG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download PNG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download PNG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does BMP to PNG do?", answer: "Convert BMP images to PNG format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
@@ -3107,7 +3103,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop TIFF file(s)", desc: "Upload your TIFF source. Runs locally on Canvas." },
       { title: "2. Set JPG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download JPG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download JPG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       {
@@ -3139,21 +3135,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "TIFF to PNG",
     slug: "tiff-to-png",
     category: "Image",
-    description: 'Convert TIFF scans and archives to universal PNG for viewing and editing anywhere. Open press files on any device — local Canvas work, free quota on saves.',
-    seoDescription: 'Free TIFF to PNG — universal viewing format. Local Canvas, free quota on saves.',
+    description: 'Convert TIFF scans and archives to universal PNG for viewing and editing anywhere. Open press files on any device — local Canvas work, unlimited saves.',
+    seoDescription: 'Free TIFF to PNG — universal viewing format. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free TIFF to PNG Converter Online",
     instructions: [
       { title: "1. Upload TIFFs", desc: "Press scans needing universal copies." },
       { title: "2. Convert to PNG", desc: "Pixel-exact viewing versions." },
-      { title: "3. Download PNGs", desc: "Downscale viewing copies as needed (counts on free quota)." },
+      { title: "3. Download PNGs", desc: "Downscale viewing copies as needed (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why PNG from TIFF?', answer: 'Universal readability — phones, browsers, and editors open PNG; TIFF needs specialist software. Convert view copies, archive TIFF masters.' },
       { question: 'Is TIFF quality preserved exactly?', answer: 'Pixel-exact for the decoded image. Multi-page TIFFs export per page — select ranges for large documents.' },
       { question: 'How large are PNG outputs?', answer: 'PNGs run large from print-resolution TIFFs — downscale viewing copies to screen size, keep full-res for print work.' },
-      { question: 'Do scans upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota.' },
+      { question: 'Do scans upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -3168,7 +3164,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on Canvas." },
       { title: "2. Set JPG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download JPG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download JPG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Which frame becomes the JPG?", answer: "You pick: scrub the animation and export the exact frame. GIFs store full frames, so the still is pixel-faithful to that moment — no motion blur beyond what the frame contains." },
@@ -3191,7 +3187,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on Canvas." },
       { title: "2. Set PNG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download PNG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download PNG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does GIF to PNG do?", answer: "Convert GIF images to PNG format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
@@ -3211,7 +3207,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop ICO file(s)", desc: "Upload your ICO source. Runs locally on Canvas." },
       { title: "2. Set PNG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download PNG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download PNG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'Which size exports from a multi-size ICO?', answer: 'The largest embedded size, for maximum quality to work down from.' },
@@ -3233,7 +3229,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop JPEG XL file(s)", desc: "Upload your JPEG XL source. Runs locally on Canvas." },
       { title: "2. Set PNG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download PNG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download PNG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'Any quality loss?', answer: 'None meaningful — JXL lossless sources stay lossless in PNG.' },
@@ -3255,7 +3251,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop JPEG XL file(s)", desc: "Upload your JPEG XL source. Runs locally on Canvas." },
       { title: "2. Set JPG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download JPG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download JPG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'What\'s the quality tradeoff?', answer: 'JPG recompresses, so fine detail softens slightly versus lossless PNG — pick JPG for small files.' },
@@ -3279,7 +3275,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WMA file(s)", desc: "Upload your WMA source. Runs locally on FFmpeg." },
       { title: "2. Set MP3 options", desc: "Set MP3 bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download MP3", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does WMA to MP3 do?", answer: "Convert WMA audio files to MP3 format directly in your browser. High-quality conversion with no file size limits." },
@@ -3298,7 +3294,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop Opus file(s)", desc: "Upload your Opus source. Runs locally on FFmpeg." },
       { title: "2. Set MP3 options", desc: "Set MP3 bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download MP3", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why MP3 from Opus?", answer: "Opus shines in VoIP and streaming — MP3 plays everywhere else." },
@@ -3320,7 +3316,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AIFF file(s)", desc: "Upload your AIFF source. Runs locally on FFmpeg." },
       { title: "2. Set MP3 options", desc: "Set MP3 bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download MP3", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why MP3 from AIFF?", answer: "Shrinking studio masters to portable size for everyday listening." },
@@ -3345,7 +3341,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Paste the page URL", desc: "Any public http(s) address. Login-walled pages capture the login screen, not the content." },
       { title: "2. Capture", desc: "The tool renders the page and snapshots full-page or viewport as set." },
-      { title: "3. Download the image", desc: "Save the PNG for docs, decks, or bug reports (counts toward free download quota)." },
+      { title: "3. Download the image", desc: "Save the PNG for docs, decks, or bug reports (downloads are unlimited)." },
     ],
     faqs: [
       { question: "What viewport sizes can I capture?", answer: "Common presets include desktop (1920x1080), tablet (768x1024), and mobile (375x812). You can also enter custom width and height values for any screen size." },
@@ -3362,14 +3358,14 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "GIF to WebP/WebM",
     slug: "gif-to-webp-webm",
     category: "Converter",
-    description: 'Convert animated GIFs to modern WebP or WebM formats with transparency support — ~10x smaller files. Shrink GIFs dramatically for modern web use — local conversion, free quota on saves.',
+    description: 'Convert animated GIFs to modern WebP or WebM formats with transparency support — ~10x smaller files. Shrink GIFs dramatically for modern web use — local conversion, unlimited saves.',
     seoDescription: 'Free GIF to WebP/WebM converter — animations ~10x smaller with transparency. For web and chat. ',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
     instructions: [
       { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on FFmpeg." },
       { title: "2. Set WebP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download WebP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WebP", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "How much smaller really?", answer: "Typically 8–12×: a 5MB reaction GIF becomes ~500KB WebP. GIF is a 1989 format with 256 colors; WebP/WebM use modern video compression on the same animation." },
@@ -3390,7 +3386,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AVIF file(s)", desc: "Upload your AVIF source. Runs locally on Canvas." },
       { title: "2. Set JPG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download JPG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download JPG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why leave AVIF?", answer: "Compatibility — JPG opens absolutely everywhere AVIF still doesn't." },
@@ -3412,7 +3408,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AVIF file(s)", desc: "Upload your AVIF source. Runs locally on Canvas." },
       { title: "2. Set PNG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download PNG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download PNG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Does transparency survive AVIF to PNG conversion?", answer: "Yes — PNG keeps the full alpha channel AVIF carries, ready for editing and compositing." },
@@ -3434,7 +3430,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop BMP file(s)", desc: "Upload your BMP source. Runs locally on Canvas." },
       { title: "2. Set AVIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download AVIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AVIF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why AVIF specifically?", answer: "Royalty-free and modern — smaller than WebP with wider quality range." },
@@ -3458,7 +3454,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop BMP file(s)", desc: "Upload your BMP source. Runs locally on Canvas." },
       { title: "2. Set GIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download GIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download GIF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert BMP to GIF?", answer: "GIF is supported by legacy platforms, older browsers, and some messaging apps that don't handle BMP. Converting ensures compatibility while keeping file sizes manageable." },
@@ -3481,7 +3477,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop BMP file(s)", desc: "Upload your BMP source. Runs locally on Canvas." },
       { title: "2. Set WebP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download WebP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WebP", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "How much smaller are WebP files?", answer: "WebP typically produces 25-35% smaller files than BMP at equivalent visual quality. A 5MB BMP may become 1-2MB as WebP." },
@@ -3502,7 +3498,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on Canvas." },
       { title: "2. Set AVIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download AVIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AVIF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Do animations convert?", answer: "Still frames convert reliably; true animation belongs in video formats." },
@@ -3526,7 +3522,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on Canvas." },
       { title: "2. Set WebP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download WebP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WebP", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does GIF to WebP do?", answer: "Converts GIF files to WebP format \u2014 simple animations, memes, and images on platforms that support animated GIFs natively to modern websites. All conversion happens locally in your browser with no file size limits." },
@@ -3547,7 +3543,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop HEIC file(s)", desc: "Upload your HEIC source. Runs locally on Canvas." },
       { title: "2. Set AVIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download AVIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AVIF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       {
@@ -3585,7 +3581,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop HEIC file(s)", desc: "Upload your HEIC source. Runs locally on Canvas." },
       { title: "2. Set GIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download GIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download GIF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       {
@@ -3624,7 +3620,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop HEIC file(s)", desc: "Upload your HEIC source. Runs locally on Canvas." },
       { title: "2. Set WebP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download WebP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WebP", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does HEIC to WebP do?", answer: "Convert HEIC images to WEBP format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
@@ -3639,21 +3635,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "ICO to JPG",
     slug: "ico-to-jpg",
     category: "Image",
-    description: 'Extract Windows icon images to shareable JPGs for docs and presentations. Show favicon designs in slide decks — local Canvas work, free quota on saves.',
-    seoDescription: 'Free ICO to JPG — icons as shareable images. Local Canvas, free quota on saves.',
+    description: 'Extract Windows icon images to shareable JPGs for docs and presentations. Show favicon designs in slide decks — local Canvas work, unlimited saves.',
+    seoDescription: 'Free ICO to JPG — icons as shareable images. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free ICO to JPG Converter Online",
     instructions: [
       { title: "1. Upload ICO files", desc: "Favicon designs to present." },
       { title: "2. Extract at max size", desc: "Largest embedded resolution for sharp slides." },
-      { title: "3. Download JPGs", desc: "Drop into decks and docs (counts on the free download quota)." },
+      { title: "3. Download JPGs", desc: "Drop into decks and docs (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why JPG from icons?', answer: 'Slide decks, docs, and emails can\'t embed .ico files — JPG versions present designs anywhere. Extract at 256px for crisp slides.' },
       { question: 'Background color?', answer: 'Transparency flattens to white (or chosen matte) since JPG has no alpha. Preview on slide backgrounds before finalizing brand decks.' },
       { question: 'Multi-size ICOs?', answer: 'Largest embedded size extracts by default for sharpest output. Small 16px extractions look blurry blown up — always take the biggest.' },
-      { question: 'Do icon files upload anywhere?', answer: 'No — extraction runs locally in your browser on Canvas. Only saves count on the free download quota.' },
+      { question: 'Do icon files upload anywhere?', answer: 'No — extraction runs locally in your browser on Canvas. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -3666,7 +3662,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop ICO file(s)", desc: "Upload your ICO source. Runs locally on Canvas." },
       { title: "2. Set WebP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download WebP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WebP", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why WebP from an icon?", answer: "Modern web favicons — smaller than PNG, supported everywhere that matters." },
@@ -3690,7 +3686,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop JPG file(s)", desc: "Upload your JPG source. Runs locally on Canvas." },
       { title: "2. Set JPEG XL options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download JPEG XL", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download JPEG XL", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does JPG to JXL do?", answer: "Convert JPG images to JXL format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
@@ -3711,7 +3707,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop JPEG XL file(s)", desc: "Upload your JPEG XL source. Runs locally on Canvas." },
       { title: "2. Set GIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download GIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download GIF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why would I convert JXL to GIF?", answer: "GIF is universally supported on every platform, social media site, and messaging app. If you need to share a JXL image on a platform that does not support it, GIF is a safe fallback format." },
@@ -3728,21 +3724,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "JXL to WebP",
     slug: "jxl-to-webp",
     category: "Image",
-    description: 'Convert JPEG XL images to WebP for today\'s browsers while keeping files small. Bridge next-gen masters to current web — local Canvas work, free quota on saves.',
-    seoDescription: 'Free JXL to WebP — masters to current web. Local Canvas, free quota on saves.',
+    description: 'Convert JPEG XL images to WebP for today\'s browsers while keeping files small. Bridge next-gen masters to current web — local Canvas work, unlimited saves.',
+    seoDescription: 'Free JXL to WebP — masters to current web. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free JXL to WebP Converter Online",
     instructions: [
       { title: "1. Upload JXL masters", desc: "Next-gen sources for current browsers." },
       { title: "2. Set WebP quality", desc: "85 photos, 75 thumbnails." },
-      { title: "3. Download WebPs", desc: "Serve today, archive JXL (counts on the free download quota)." },
+      { title: "3. Download WebPs", desc: "Serve today, archive JXL (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why step down to WebP?', answer: 'JXL browser support trails WebP\'s ubiquity. Serve WebP today from JXL masters, keep JXL archived for the future.' },
       { question: 'Size comparison?', answer: 'WebP runs ~20–30% larger than JXL at equal quality — still far smaller than JPEG. Acceptable bridge cost.' },
       { question: 'Quality setting?', answer: '85 for photos preserves JXL fidelity visibly; 75 for thumbnails. One batch per use-case.' },
-      { question: 'Do next-gen files upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota.' },
+      { question: 'Do next-gen files upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -3750,21 +3746,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "PNG to JXL",
     slug: "png-to-jxl",
     category: "Image",
-    description: 'Convert PNG graphics to JPEG XL for next-gen lossless storage at smaller sizes. Archive design assets in the future-proof format — local Canvas work, free quota on saves.',
-    seoDescription: 'Free PNG to JXL — lossless next-gen storage. Local Canvas, free quota on saves.',
+    description: 'Convert PNG graphics to JPEG XL for next-gen lossless storage at smaller sizes. Archive design assets in the future-proof format — local Canvas work, unlimited saves.',
+    seoDescription: 'Free PNG to JXL — lossless next-gen storage. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free PNG to JXL Converter Online",
     instructions: [
       { title: "1. Upload PNGs", desc: "Graphics and UI assets for archival." },
       { title: "2. Convert to lossless JXL", desc: "Alpha and quality preserve exactly." },
-      { title: "3. Download JXLs", desc: "Archive masters (counts on the free download quota)." },
+      { title: "3. Download JXLs", desc: "Archive masters (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'PNG vs JXL for archives?', answer: 'JXL lossless runs 30–50% smaller than PNG with wider gamut and HDR headroom. Migrate cold design archives; keep PNG for active compatibility.' },
       { question: 'Transparency in JXL?', answer: 'Fully preserved with alpha. UI assets with transparency convert losslessly — verify one file on dark backgrounds.' },
       { question: 'Who opens JXL now?', answer: 'Safari and archival tools lead; Chrome/Edge trail. Archive in JXL, export PNG/WebP derivatives for production use.' },
-      { question: 'Do files upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota.' },
+      { question: 'Do files upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -3779,7 +3775,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop SVG file(s)", desc: "Upload your SVG source. Runs locally on Canvas." },
       { title: "2. Set AVIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download AVIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AVIF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does SVG to AVIF do?", answer: "Convert SVG images to AVIF format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
@@ -3794,21 +3790,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "SVG to GIF",
     slug: "svg-to-gif",
     category: "Image",
-    description: 'Rasterize SVG vectors to GIFs for legacy animation and universal compatibility. Animate icons where only GIF plays — local Canvas work, free quota on saves.',
-    seoDescription: 'Free SVG to GIF — vectors to universal format. Local Canvas, free quota on saves.',
+    description: 'Rasterize SVG vectors to GIFs for legacy animation and universal compatibility. Animate icons where only GIF plays — local Canvas work, unlimited saves.',
+    seoDescription: 'Free SVG to GIF — vectors to universal format. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free SVG to GIF Converter Online",
     instructions: [
       { title: "1. Upload SVGs", desc: "Icons and illustrations for legacy targets." },
       { title: "2. Set GIF resolution", desc: "2–3x for retina sharpness." },
-      { title: "3. Download GIFs", desc: "Save universal files (counts on the free download quota)." },
+      { title: "3. Download GIFs", desc: "Save universal files (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why GIF from vectors?', answer: 'Legacy email clients, old phones, and GIF-only platforms reject SVG. Rasterizing keeps designs visible everywhere — at 256 colors, flat icons survive best.' },
       { question: 'What GIF resolution?', answer: 'Export 2–3x display size for retina sharpness: a 24px icon renders from 72px GIF. Vectors scale freely, so pick generously.' },
       { question: 'Animated SVGs?', answer: 'SMIL/CSS animation exports as stills here; true frame animation needs a video pipeline. Export the key frame, animate there.' },
-      { question: 'Does vector conversion upload files?', answer: 'No — rasterization runs locally in your browser on Canvas. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Does vector conversion upload files?', answer: 'No — rasterization runs locally in your browser on Canvas. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -3816,21 +3812,21 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "SVG to WebP",
     slug: "svg-to-webp",
     category: "Image",
-    description: 'Rasterize SVG vectors to WebP for fast modern websites. Ship icons at a tenth of PNG bytes — local Canvas work, free quota on saves.',
-    seoDescription: 'Free SVG to WebP — vectors for fast sites. Local Canvas, free quota on saves.',
+    description: 'Rasterize SVG vectors to WebP for fast modern websites. Ship icons at a tenth of PNG bytes — local Canvas work, unlimited saves.',
+    seoDescription: 'Free SVG to WebP — vectors for fast sites. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free SVG to WebP Converter Online",
     instructions: [
       { title: "1. Upload SVG icons", desc: "Web-bound vector art." },
       { title: "2. Rasterize to WebP", desc: "2–3x display size for sharpness." },
-      { title: "3. Download WebPs", desc: "Deploy fast icons (counts on the free download quota)." },
+      { title: "3. Download WebPs", desc: "Deploy fast icons (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'How much smaller than PNG?', answer: 'Typically 70–90% smaller for icon-style art — a 50 KB PNG icon becomes ~8 KB WebP. Multiply across sprite sets for real load wins.' },
       { question: 'What size for web icons?', answer: '2–3x CSS display size balances sharpness and bytes. A 24px UI icon ships at 72px WebP.' },
       { question: 'Does alpha transparency survive?', answer: 'Fully preserved. Icons with alpha convert losslessly enough for UI use — verify on varied backgrounds.' },
-      { question: 'Do WebP renders upload source vectors?', answer: 'No — rasterization runs locally in your browser on Canvas. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do WebP renders upload source vectors?', answer: 'No — rasterization runs locally in your browser on Canvas. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -3845,7 +3841,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop TIFF file(s)", desc: "Upload your TIFF source. Runs locally on Canvas." },
       { title: "2. Set AVIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download AVIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AVIF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does TIFF to AVIF do?", answer: "Convert TIFF images to AVIF format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
@@ -3865,7 +3861,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop TIFF file(s)", desc: "Upload your TIFF source. Runs locally on Canvas." },
       { title: "2. Set GIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download GIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download GIF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why GIF from TIFF?", answer: "Compact previews and animations where full TIFFs are overkill." },
@@ -3888,7 +3884,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop TIFF file(s)", desc: "Upload your TIFF source. Runs locally on Canvas." },
       { title: "2. Set WebP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download WebP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WebP", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "How much smaller is WebP compared to TIFF?", answer: "WebP files are typically 80-90% smaller than uncompressed TIFF. A 50MB TIFF might become 3-5MB as WebP while maintaining visually similar quality, making it ideal for web delivery." },
@@ -3910,10 +3906,9 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online UPI ID Validator and QR Generator — Validate UPI IDs for @paytm, @okhdfcbank, @ybl, @sbi handles. Generate UPI payment QR codes with merchant name, amount, and transaction note. Local processing, no uploads.',
     dependencies: "QRCode.js",
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for UPI ID Validator & QR Generator." },
-      { title: "2. Run the lookup", desc: "Inspect each field in the response; mismatches mean re-enter, not proceed." },
-      { title: "3. Confirm officially", desc: "Screen with this tool, decide with the authority record." },
-    ],
+      { title: "1. Enter the UPI ID", desc: "name@handle — paytm, okhdfcbank, ybl, sbi, upi, axl, icici and more." },
+      { title: "2. Read format verdict", desc: "Handle rules checked per provider pattern." },
+      { title: "3. Generate the QR", desc: "Valid IDs render a scannable payment QR instantly." },    ],
     faqs: [
       { question: "Which UPI handles are validated?", answer: "All major Indian UPI handles: @paytm, @okhdfcbank, @ybl, @sbi, @upi, @axl, @icici, @okaxis, @oksbi, @payzapp, @amazonpay, and more. The validator checks format rules specific to each handle." },
       { question: "What does the validator check?", answer: "It verifies the UPI ID format: valid characters, handle suffix, minimum/maximum length, and correct structure. A valid format does not guarantee the UPI ID is active — it only confirms it follows the correct pattern." },
@@ -3954,10 +3949,9 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Vehicle Registration Number Checker — Parse Indian vehicle registration numbers. Identify state/UT codes, RTO codes, and series for all Indian states and union territories. Instant local parsing.',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Vehicle Registration Checker." },
-      { title: "2. Run the lookup", desc: "Read every returned field slowly — one wrong character voids the check." },
-      { title: "3. Confirm officially", desc: "Confirm high-stakes results on the official source before acting on them." },
-    ],
+      { title: "1. Enter the plate number", desc: "Indian format — state code, RTO code, series letters, digits." },
+      { title: "2. Read decoded parts", desc: "State/UT, RTO office and series identified from the format." },
+      { title: "3. Verify the vehicle", desc: "Format-decode is not ownership proof — check the RC for that." },    ],
     faqs: [
       { question: "What information does it extract from a registration number?", answer: "State/UT code (e.g., MH for Maharashtra, DL for Delhi), RTO code (e.g., 01 for South Mumbai), series letters, and unique number. It decodes the standard Indian license plate format." },
       { question: "Which states and UTs are covered?", answer: "All 28 states and 8 union territories. The database includes RTO codes for every registered RTO across India, from major metros to smaller districts." },
@@ -3976,10 +3970,9 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Aadhaar Number Validator — check any 12-digit Aadhaar with Verhoeff checksum. Spot fakes, learn the structure. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Aadhaar Number Validator." },
-      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
-      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
-    ],
+      { title: "1. Enter the 12-digit UID", desc: "Digits only — Verhoeff checksum decides validity, all local." },
+      { title: "2. Read the verdict", desc: "Valid/invalid plus format-rule breakdown; fakes fail the checksum." },
+      { title: "3. Never share the number", desc: "A valid structure is not consent — mask it (XXXX-XXXX-1234) everywhere public." },    ],
     faqs: [
       { question: "How does Aadhaar validation work?", answer: "The 12-digit number must satisfy the Verhoeff checksum (last digit validates the first 11) and format rules — first digit 2–9, no obvious patterns like 11 repeated digits. The tool checks all of these instantly." },
       { question: "Does a valid number mean a genuine card?", answer: "No. Validation proves the number is well-formed, not that UIDAI issued it to the holder. For onboarding or KYC, always verify against UIDAI e-KYC or masked-Aadhaar XML — never trust format alone." },
@@ -4016,7 +4009,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "bulk-pdf-suite",
     category: "PDF",
     description: 'Rotate, protect, unlock, split, watermark, crop, resize, or flatten dozens of PDFs in one batch. Law firms prep 50 filings for email in an afternoon — runs locally on pdf-lib, 2 free batches a day.',
-    seoDescription: 'Free bulk PDF suite — rotate, protect, split, watermark 50+ files. Local processing, 2 batches daily.',
+    seoDescription: 'Free bulk PDF suite — rotate, protect, split and watermark 50+ files per batch. Local processing, signed 2 batches/day, Pro unlimited.',
     dependencies: "pdf-lib",
     seoTitle: "Free Bulk PDF Suite – 9 Tools in One",
     instructions: [

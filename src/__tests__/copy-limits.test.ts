@@ -21,6 +21,10 @@ const STALE_STRINGS: [string, string][] = [
   // Batch tiers (5 / 25 / 500 since Oct 2026)
   ["Guests process 1 file at a time", "Guests batch up to 5 files"],
   ["Continue with 1 file at a time", "Continue with fewer files"],
+  ["free quota on saves", "unlimited saves"],
+  ["counts on the free download quota", "downloads are unlimited"],
+  ["counts toward free download quota", "downloads are unlimited"],
+  ["counts on free quota", "downloads are unlimited"],
   ["10 files/batch", "25 files/batch"],
   ["up to 10 files", "up to 25 files"],
   ["10-file batches", "25-file batches"],

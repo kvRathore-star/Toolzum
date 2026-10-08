@@ -98,7 +98,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Archive Converter",
     "slug": "archive-converter",
     "category": "Converter",
-    "description": "Convert between ZIP, TAR, GZ, and 7z archives right in your browser. Repackage downloads for any platform — local fflate work, free quota on saves.",
+    "description": "Convert between ZIP, TAR, GZ, and 7z archives right in your browser. Repackage downloads for any platform — local fflate work, unlimited saves.",
     "isPro": false
   },
   {
@@ -170,7 +170,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Logo Maker",
     "slug": "logo-maker",
     "category": "Branding",
-    "description": "Design simple logos with text, shapes, and icons on canvas — export PNG/SVG. Draft startup marks in an afternoon — local Canvas work, free quota on saves.",
+    "description": "Design simple logos with text, shapes, and icons on canvas — export PNG/SVG. Draft startup marks in an afternoon — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -290,7 +290,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Object Remover",
     "slug": "object-remover",
     "category": "Image",
-    "description": "Brush over unwanted objects and erase them with patch-fill reconstruction — tourists, signs, photobombers. Clean vacation shots in minutes — local Canvas work, free quota on saves.",
+    "description": "Brush over unwanted objects and erase them with patch-fill reconstruction — tourists, signs, photobombers. Clean vacation shots in minutes — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -298,7 +298,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PPT to PDF",
     "slug": "ppt-to-pdf",
     "category": "PDF",
-    "description": "Convert PowerPoint decks to locked PDFs for sharing — fonts embedded, layout frozen. Send a 40-slide pitch that renders identically everywhere — local conversion, free quota on saves.",
+    "description": "Convert PowerPoint decks to locked PDFs for sharing — fonts embedded, layout frozen. Send a 40-slide pitch that renders identically everywhere — local conversion, unlimited saves.",
     "isPro": false
   },
   {
@@ -330,7 +330,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Excel to PDF",
     "slug": "excel-to-pdf",
     "category": "PDF",
-    "description": "Convert Excel workbooks to print-ready PDFs with layout preserved — quotes, reports, price lists. Send a client quote that prints identically everywhere — local conversion, free quota on saves.",
+    "description": "Convert Excel workbooks to print-ready PDFs with layout preserved — quotes, reports, price lists. Send a client quote that prints identically everywhere — local conversion, unlimited saves.",
     "isPro": false
   },
   {
@@ -370,7 +370,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Crop Image",
     "slug": "crop-image",
     "category": "Image",
-    "description": "Crop photos with aspect presets and free selection plus rotation correction. Frame 50 portraits to 4:5 for feeds — local Cropper.js work, free quota on saves.",
+    "description": "Crop photos with aspect presets and free selection plus rotation correction. Frame 50 portraits to 4:5 for feeds — local Cropper.js work, unlimited saves.",
     "isPro": false
   },
   {
@@ -378,7 +378,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Social Media Post Maker",
     "slug": "social-media-post-maker",
     "category": "Branding",
-    "description": "Design sized social posts with text overlays and brand colors for every network. Ship a week of creatives in one sitting — local Canvas work, free quota on saves.",
+    "description": "Design sized social posts with text overlays and brand colors for every network. Ship a week of creatives in one sitting — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -426,7 +426,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF to Excel",
     "slug": "pdf-to-excel",
     "category": "PDF",
-    "description": "Convert PDF tables into editable Excel spreadsheets with rows and columns preserved. Turn 30 bank statements into one workbook — local parsing, free quota on saves.",
+    "description": "Convert PDF tables into editable Excel spreadsheets with rows and columns preserved. Turn 30 bank statements into one workbook — local parsing, unlimited saves.",
     "isPro": false
   },
   {
@@ -434,7 +434,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Unlock PDF",
     "slug": "unlock-pdf",
     "category": "PDF",
-    "description": "Remove known passwords from your own PDFs in bulk — owner restrictions and open passwords. Reclaim 20 archived files you own — local qpdf work, free quota on saves.",
+    "description": "Remove known passwords from your own PDFs in bulk — owner restrictions and open passwords. Reclaim 20 archived files you own — local qpdf work, unlimited saves.",
     "isPro": false
   },
   {
@@ -442,7 +442,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image Enhancer",
     "slug": "image-enhancer",
     "category": "Image",
-    "description": "Enhance image detail with AI reconstruction — upscale plus texture recovery beyond plain interpolation. Rescue low-res product shots for listings — local Real-ESRGAN work, free quota on saves.",
+    "description": "Enhance image detail with AI reconstruction — upscale plus texture recovery beyond plain interpolation. Rescue low-res product shots for listings — local Real-ESRGAN work, unlimited saves.",
     "isPro": false
   },
   {
@@ -538,7 +538,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Photo Retoucher",
     "slug": "photo-retoucher",
     "category": "Image",
-    "description": "Retouch portraits with this photo retoucher — blemish healing, skin smoothing, and teeth whitening brushes. Polish headshots naturally in minutes — local OpenCV work, free quota on saves.",
+    "description": "Retouch portraits with this photo retoucher — blemish healing, skin smoothing, and teeth whitening brushes. Polish headshots naturally in minutes — local OpenCV work, unlimited saves.",
     "isPro": false
   },
   {
@@ -546,7 +546,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Splitter",
     "slug": "pdf-splitter",
     "category": "PDF",
-    "description": "Split PDFs by page ranges, every-N-pages, or single-page extraction. Break a 200-page manual into chapters — local pdf-lib split, free quota on saves.",
+    "description": "Split PDFs by page ranges, every-N-pages, or single-page extraction. Break a 200-page manual into chapters — local pdf-lib split, unlimited saves.",
     "isPro": false
   },
   {
@@ -610,7 +610,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Protect PDF",
     "slug": "protect-pdf",
     "category": "PDF",
-    "description": "Lock PDFs with user and owner passwords — control opening, printing, and copying. Protect 10 client files before sending — local pdf-lib encryption, free quota on saves.",
+    "description": "Lock PDFs with user and owner passwords — control opening, printing, and copying. Protect 10 client files before sending — local pdf-lib encryption, unlimited saves.",
     "isPro": false
   },
   {
@@ -682,7 +682,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image Colorizer",
     "slug": "image-colorizer",
     "category": "Image",
-    "description": "Colorize black-and-white photos with on-device AI — family archives brought to life. Guess-era colors, not ground truth — local DeOldify work, free quota on saves.",
+    "description": "Colorize black-and-white photos with on-device AI — family archives brought to life. Guess-era colors, not ground truth — local DeOldify work, unlimited saves.",
     "isPro": false
   },
   {
@@ -786,7 +786,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Watermark PDF",
     "slug": "watermark-pdf",
     "category": "PDF",
-    "description": "Stamp text watermarks across PDF pages — DRAFT, CONFIDENTIAL, custom text with opacity. Protect 50 filings before sharing — local pdf-lib work, free quota on saves.",
+    "description": "Stamp text watermarks across PDF pages — DRAFT, CONFIDENTIAL, custom text with opacity. Protect 50 filings before sharing — local pdf-lib work, unlimited saves.",
     "isPro": false
   },
   {
@@ -962,7 +962,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Rotate PDF",
     "slug": "rotate-pdf",
     "category": "PDF",
-    "description": "Rotate sideways or upside-down PDF pages 90/180/270° — fix phone scans in bulk. Straighten 60 landscape pages at once — local pdf-lib rotation, free quota on saves.",
+    "description": "Rotate sideways or upside-down PDF pages 90/180/270° — fix phone scans in bulk. Straighten 60 landscape pages at once — local pdf-lib rotation, unlimited saves.",
     "isPro": false
   },
   {
@@ -970,7 +970,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Extract Images from PDF",
     "slug": "extract-images-from-pdf",
     "category": "PDF",
-    "description": "Pull every embedded image from a PDF at native resolution — photos, charts, logos. Recover 40 figures from a report without screenshots — local PDF.js work, free quota on saves.",
+    "description": "Pull every embedded image from a PDF at native resolution — photos, charts, logos. Recover 40 figures from a report without screenshots — local PDF.js work, unlimited saves.",
     "isPro": false
   },
   {
@@ -1090,7 +1090,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Favicon Generator",
     "slug": "favicon-generator",
     "category": "Design",
-    "description": "Generate complete favicon packages — ICO plus PNG and Apple touch icons — from one image. Ship every platform icon in one pass — local generation, free quota on saves.",
+    "description": "Generate complete favicon packages — ICO plus PNG and Apple touch icons — from one image. Ship every platform icon in one pass — local generation, unlimited saves.",
     "isPro": false
   },
   {
@@ -1114,7 +1114,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Base64 to Image",
     "slug": "base64-to-image",
     "category": "Developer",
-    "description": "Decode Base64 data URIs back into viewable and downloadable images. Recover pictures from API payloads — local decoding, free quota on saves.",
+    "description": "Decode Base64 data URIs back into viewable and downloadable images. Recover pictures from API payloads — local decoding, unlimited saves.",
     "isPro": false
   },
   {
@@ -1146,7 +1146,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PGP Key Generator",
     "slug": "pgp-key-generator",
     "category": "Privacy",
-    "description": "Generate PGP key pairs with OpenPGP.js — public for sharing, private stays local. Encrypt mail like it\\'s 1991 but working — local crypto, free quota on saves.",
+    "description": "Generate PGP key pairs with OpenPGP.js — public for sharing, private stays local. Encrypt mail like it\\'s 1991 but working — local crypto, unlimited saves.",
     "isPro": false
   },
   {
@@ -1226,7 +1226,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Metadata Editor",
     "slug": "pdf-metadata-editor",
     "category": "PDF",
-    "description": "Edit PDF title, author, keywords, and document info — fix \\'Untitled\\' exports before sharing. Brand 20 client deliverables correctly — local pdf-lib edit, free quota on saves.",
+    "description": "Edit PDF title, author, keywords, and document info — fix \\'Untitled\\' exports before sharing. Brand 20 client deliverables correctly — local pdf-lib edit, unlimited saves.",
     "isPro": false
   },
   {
@@ -1234,7 +1234,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG Editor",
     "slug": "svg-editor",
     "category": "Design",
-    "description": "Edit SVG code with live preview — paths, fills, transforms — plus SVGO optimization. Tweak icons without Illustrator — local editing, free quota on saves.",
+    "description": "Edit SVG code with live preview — paths, fills, transforms — plus SVGO optimization. Tweak icons without Illustrator — local editing, unlimited saves.",
     "isPro": false
   },
   {
@@ -1354,7 +1354,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "eSign PDF",
     "slug": "esign-pdf",
     "category": "PDF",
-    "description": "Sign PDFs electronically — draw, type, or upload signature images onto any page. Execute a 5-page agreement without printing — local pdf-lib + canvas, free quota on saves.",
+    "description": "Sign PDFs electronically — draw, type, or upload signature images onto any page. Execute a 5-page agreement without printing — local pdf-lib + canvas, unlimited saves.",
     "isPro": false
   },
   {
@@ -1362,7 +1362,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF OCR (Scanned Docs)",
     "slug": "pdf-ocr",
     "category": "PDF",
-    "description": "OCR scanned PDFs into searchable, selectable text with Tesseract.js — 100+ languages. Convert a 50-page scan into researchable text — local processing, free quota on saves.",
+    "description": "OCR scanned PDFs into searchable, selectable text with Tesseract.js — 100+ languages. Convert a 50-page scan into researchable text — local processing, unlimited saves.",
     "isPro": false
   },
   {
@@ -1370,7 +1370,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Form Filler",
     "slug": "pdf-form-filler",
     "category": "PDF",
-    "description": "Fill any PDF form digitally — text fields, checkboxes, dropdowns, signatures. Complete government forms without print-scan cycles — local pdf-lib, free quota on saves.",
+    "description": "Fill any PDF form digitally — text fields, checkboxes, dropdowns, signatures. Complete government forms without print-scan cycles — local pdf-lib, unlimited saves.",
     "isPro": false
   },
   {
@@ -1442,7 +1442,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Watermark Adder",
     "slug": "video-watermark-adder",
     "category": "Video",
-    "description": "Burn logo or text watermarks into videos with position, size, and opacity control. Brand 10 course lessons in one pass — local FFmpeg work, free quota on saves.",
+    "description": "Burn logo or text watermarks into videos with position, size, and opacity control. Brand 10 course lessons in one pass — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -1466,7 +1466,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MP3 Compressor",
     "slug": "mp3-compressor",
     "category": "Audio",
-    "description": "Shrink MP3 files by lowering bitrate with quality presets — fit podcasts into feed limits. Cut a 50 MB episode to 15 MB cleanly — local FFmpeg work, free quota on saves.",
+    "description": "Shrink MP3 files by lowering bitrate with quality presets — fit podcasts into feed limits. Cut a 50 MB episode to 15 MB cleanly — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -1482,7 +1482,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Trimmer",
     "slug": "video-trimmer",
     "category": "Video",
-    "description": "Cut start/end segments from any video with frame-accurate trimming in your browser. Remove a 45-second cold open from a 10-minute upload — local FFmpeg work, free quota on saves.",
+    "description": "Cut start/end segments from any video with frame-accurate trimming in your browser. Remove a 45-second cold open from a 10-minute upload — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -1570,7 +1570,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Generic PDF Processor",
     "slug": "generic-pdf-processor",
     "category": "PDF",
-    "description": "Run everyday PDF operations from one toolbox — merge, split, rotate, compress presets without hunting tools. Handle 90% of PDF chores in one tab — local processing, free quota on saves.",
+    "description": "Run everyday PDF operations from one toolbox — merge, split, rotate, compress presets without hunting tools. Handle 90% of PDF chores in one tab — local processing, unlimited saves.",
     "isPro": false
   },
   {
@@ -1578,7 +1578,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JFIF to PNG Converter",
     "slug": "jfif-to-png",
     "category": "Image",
-    "description": "Convert JFIF images (JPEG variant from cameras and iPhones) to lossless PNG. Open mislabeled photo files anywhere — local Canvas work, free quota on saves.",
+    "description": "Convert JFIF images (JPEG variant from cameras and iPhones) to lossless PNG. Open mislabeled photo files anywhere — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -1586,7 +1586,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image to JPG Converter",
     "slug": "convert-to-jpg",
     "category": "Image",
-    "description": "Convert any mix of PNG, WebP, AVIF, GIF, or BMP images to universal JPG in one batch. Make 100 mixed uploads email-ready — local conversion, free quota on saves.",
+    "description": "Convert any mix of PNG, WebP, AVIF, GIF, or BMP images to universal JPG in one batch. Make 100 mixed uploads email-ready — local conversion, unlimited saves.",
     "isPro": false
   },
   {
@@ -1594,7 +1594,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Rotate Image Online",
     "slug": "rotate-image",
     "category": "Image",
-    "description": "Rotate images 90/180/270° or flip horizontal/vertical with lossless precision. Fix sideways phone shots in seconds — local Canvas work, free quota on saves.",
+    "description": "Rotate images 90/180/270° or flip horizontal/vertical with lossless precision. Fix sideways phone shots in seconds — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -1722,7 +1722,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Page Manager",
     "slug": "pdf-page-manager",
     "category": "PDF",
-    "description": "Reorder, duplicate, delete, and rotate PDF pages with thumbnail drag-and-drop. Assemble a 40-page pack from three sources — local pdf-lib work, free quota on saves.",
+    "description": "Reorder, duplicate, delete, and rotate PDF pages with thumbnail drag-and-drop. Assemble a 40-page pack from three sources — local pdf-lib work, unlimited saves.",
     "isPro": false
   },
   {
@@ -2106,7 +2106,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Repair PDF",
     "slug": "repair-pdf",
     "category": "PDF",
-    "description": "Fix corrupted PDFs that refuse to open — rebuild cross-references and salvage readable pages. Recover a deadline file from a bad download — local pdf-lib repair, free quota on saves.",
+    "description": "Fix corrupted PDFs that refuse to open — rebuild cross-references and salvage readable pages. Recover a deadline file from a bad download — local pdf-lib repair, unlimited saves.",
     "isPro": false
   },
   {
@@ -2122,7 +2122,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Crop PDF",
     "slug": "crop-pdf",
     "category": "PDF",
-    "description": "Trim margins off every page of a PDF at once — remove scanner shadows and overscan. Clean a 50-page scan set for reading — local pdf-lib work, free quota on saves.",
+    "description": "Trim margins off every page of a PDF at once — remove scanner shadows and overscan. Clean a 50-page scan set for reading — local pdf-lib work, unlimited saves.",
     "isPro": false
   },
   {
@@ -2130,7 +2130,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Redact PDF",
     "slug": "redact-pdf",
     "category": "PDF",
-    "description": "Redact sensitive text permanently — PII, prices, names — with true content removal from PDFs. Share contracts safely, not just covered visually — local processing, free quota on saves.",
+    "description": "Redact sensitive text permanently — PII, prices, names — with true content removal from PDFs. Share contracts safely, not just covered visually — local processing, unlimited saves.",
     "isPro": false
   },
   {
@@ -2146,7 +2146,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Flatten PDF",
     "slug": "flatten-pdf",
     "category": "PDF",
-    "description": "Bake fillable form fields and annotations permanently into page content — lock applications before sending. Freeze a signed offer letter exactly as seen — local pdf-lib, free quota on saves.",
+    "description": "Bake fillable form fields and annotations permanently into page content — lock applications before sending. Freeze a signed offer letter exactly as seen — local pdf-lib, unlimited saves.",
     "isPro": false
   },
   {
@@ -2154,7 +2154,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Grayscale PDF",
     "slug": "grayscale-pdf",
     "category": "PDF",
-    "description": "Convert color PDFs to grayscale for cheap B&W printing and smaller files. Cut a 50-page deck\\'s print cost in half — local processing, free quota on saves.",
+    "description": "Convert color PDFs to grayscale for cheap B&W printing and smaller files. Cut a 50-page deck\\'s print cost in half — local processing, unlimited saves.",
     "isPro": false
   },
   {
@@ -2170,7 +2170,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Resize PDF Pages",
     "slug": "resize-pdf-pages",
     "category": "PDF",
-    "description": "Scale all PDF pages to standard sizes — A4, Letter, or custom — for print shops and archives. Normalize mixed-size scans to uniform A4 — local work, free quota on saves.",
+    "description": "Scale all PDF pages to standard sizes — A4, Letter, or custom — for print shops and archives. Normalize mixed-size scans to uniform A4 — local work, unlimited saves.",
     "isPro": false
   },
   {
@@ -2178,7 +2178,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Add Text to PDF",
     "slug": "add-text-to-pdf",
     "category": "PDF",
-    "description": "Type directly onto any PDF page — fill forms, add notes, stamp corrections without printing. Complete a 3-page application in minutes — local pdf-lib editing, free quota on saves.",
+    "description": "Type directly onto any PDF page — fill forms, add notes, stamp corrections without printing. Complete a 3-page application in minutes — local pdf-lib editing, unlimited saves.",
     "isPro": false
   },
   {
@@ -2194,7 +2194,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Header and Footer",
     "slug": "header-footer-pdf",
     "category": "PDF",
-    "description": "Stamp headers and footers on every PDF page — page numbers, dates, confidentiality lines. Number a 100-page report in one pass — local pdf-lib work, free quota on saves.",
+    "description": "Stamp headers and footers on every PDF page — page numbers, dates, confidentiality lines. Number a 100-page report in one pass — local pdf-lib work, unlimited saves.",
     "isPro": false
   },
   {
@@ -2202,7 +2202,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "N-up PDF",
     "slug": "nup-pdf",
     "category": "PDF",
-    "description": "Print multiple PDF pages per sheet — 2-up handouts, 4-up booklets, 6-up slides. Fit a 60-slide deck on 10 sheets — local processing, free quota on saves.",
+    "description": "Print multiple PDF pages per sheet — 2-up handouts, 4-up booklets, 6-up slides. Fit a 60-slide deck on 10 sheets — local processing, unlimited saves.",
     "isPro": false
   },
   {
@@ -2218,7 +2218,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Deskew PDF",
     "slug": "deskew-pdf",
     "category": "PDF",
-    "description": "Deskew skewed scan pages automatically — fix feeder tilt across whole PDF documents. Rescue a 30-page crooked scan in one pass — local processing, free quota on saves.",
+    "description": "Deskew skewed scan pages automatically — fix feeder tilt across whole PDF documents. Rescue a 30-page crooked scan in one pass — local processing, unlimited saves.",
     "isPro": false
   },
   {
@@ -2258,7 +2258,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "RAW Image Converter",
     "slug": "raw-image-converter",
     "category": "Image",
-    "description": "Convert camera RAW files to viewable JPG or PNG for sharing and editing. Open CR2, NEF, and ARW shots anywhere — local processing, free quota on saves.",
+    "description": "Convert camera RAW files to viewable JPG or PNG for sharing and editing. Open CR2, NEF, and ARW shots anywhere — local processing, unlimited saves.",
     "isPro": false
   },
   {
@@ -2298,7 +2298,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Unblur / Sharpen",
     "slug": "unblur-sharpen",
     "category": "Image",
-    "description": "Sharpen slightly soft photos with deconvolution-style enhancement — rescue mild blur, not motion smear. Save a good shot gone soft — local processing, free quota on saves.",
+    "description": "Sharpen slightly soft photos with deconvolution-style enhancement — rescue mild blur, not motion smear. Save a good shot gone soft — local processing, unlimited saves.",
     "isPro": false
   },
   {
@@ -2314,7 +2314,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Speed Changer",
     "slug": "video-speed-changer",
     "category": "Video",
-    "description": "Speed up or slow down video from 0.25x to 4x with pitch-safe audio. Make a 20-minute lecture watchable at 2x — local FFmpeg work, free quota on saves.",
+    "description": "Speed up or slow down video from 0.25x to 4x with pitch-safe audio. Make a 20-minute lecture watchable at 2x — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -2322,7 +2322,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Reverse Video",
     "slug": "reverse-video",
     "category": "Video",
-    "description": "Play any video backwards — video, audio, or both independently. Create rewind effects for social clips — local FFmpeg work, free quota on saves.",
+    "description": "Play any video backwards — video, audio, or both independently. Create rewind effects for social clips — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -2330,7 +2330,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Mute Video",
     "slug": "mute-video",
     "category": "Video",
-    "description": "Strip the audio track from any video in one click — clean B-roll, GIF sources, confidential calls. Keep full visual quality with zero re-encode waste — local FFmpeg, free quota on saves.",
+    "description": "Strip the audio track from any video in one click — clean B-roll, GIF sources, confidential calls. Keep full visual quality with zero re-encode waste — local FFmpeg, unlimited saves.",
     "isPro": false
   },
   {
@@ -2354,7 +2354,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Voice Recorder",
     "slug": "voice-recorder",
     "category": "Audio",
-    "description": "Record voice memos straight from your microphone with live levels — interviews, notes, ideas. Capture clean audio without installing apps — local recording, free quota on saves.",
+    "description": "Record voice memos straight from your microphone with live levels — interviews, notes, ideas. Capture clean audio without installing apps — local recording, unlimited saves.",
     "isPro": false
   },
   {
@@ -2362,7 +2362,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Noise Reducer",
     "slug": "noise-reducer",
     "category": "Audio",
-    "description": "Remove hiss, hum, and background noise from recordings with profile-based reduction. Rescue fan-noisy interviews in one pass — local FFmpeg work, free quota on saves.",
+    "description": "Remove hiss, hum, and background noise from recordings with profile-based reduction. Rescue fan-noisy interviews in one pass — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -2370,7 +2370,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Audio Equalizer",
     "slug": "audio-equalizer",
     "category": "Audio",
-    "description": "Shape audio with multi-band EQ — boost bass, cut mud, add air to dull recordings. Fix a boomy room recording fast — local processing, free quota on saves.",
+    "description": "Shape audio with multi-band EQ — boost bass, cut mud, add air to dull recordings. Fix a boomy room recording fast — local processing, unlimited saves.",
     "isPro": false
   },
   {
@@ -2378,7 +2378,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Audio Compressor",
     "slug": "audio-compressor",
     "category": "Audio",
-    "description": "Even out loud and quiet parts of any audio with dynamics compression — podcasts at one steady volume. Stop riding the volume knob — local processing, free quota on saves.",
+    "description": "Even out loud and quiet parts of any audio with dynamics compression — podcasts at one steady volume. Stop riding the volume knob — local processing, unlimited saves.",
     "isPro": false
   },
   {
@@ -2386,7 +2386,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Waveform Generator",
     "slug": "waveform-generator",
     "category": "Audio",
-    "description": "Render audio waveforms as shareable PNG images — audiograms, episode art, visual proof. Turn a soundbite into social content — local rendering, free quota on saves.",
+    "description": "Render audio waveforms as shareable PNG images — audiograms, episode art, visual proof. Turn a soundbite into social content — local rendering, unlimited saves.",
     "isPro": false
   },
   {
@@ -2402,7 +2402,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Stabilizer",
     "slug": "video-stabilizer",
     "category": "Video",
-    "description": "Smooth shaky handheld footage with motion-compensated stabilization. Salvage walking tour videos without gimbals — local FFmpeg work, free quota on saves.",
+    "description": "Smooth shaky handheld footage with motion-compensated stabilization. Salvage walking tour videos without gimbals — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -2418,7 +2418,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Filters",
     "slug": "video-filters",
     "category": "Video",
-    "description": "Grade videos with brightness, contrast, saturation, and grayscale filters plus live preview. Rescue flat 7am footage before posting — local FFmpeg work, free quota on saves.",
+    "description": "Grade videos with brightness, contrast, saturation, and grayscale filters plus live preview. Rescue flat 7am footage before posting — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -2466,7 +2466,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Article Writer",
     "slug": "article-writer",
     "category": "AI",
-    "description": "Draft structured articles from outlines — intro, body, conclusion with FAQ and takeaways. Beat blank-page block in minutes — local templates, free quota on saves.",
+    "description": "Draft structured articles from outlines — intro, body, conclusion with FAQ and takeaways. Beat blank-page block in minutes — local templates, unlimited saves.",
     "isPro": false
   },
   {
@@ -2474,7 +2474,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Social Caption Generator",
     "slug": "social-caption-generator",
     "category": "AI",
-    "description": "Generate platform-tuned social captions with mood, tone, hashtags, and CTA in one click. Fill a week of posts in minutes — local template engine, free quota on saves.",
+    "description": "Generate platform-tuned social captions with mood, tone, hashtags, and CTA in one click. Fill a week of posts in minutes — local template engine, unlimited saves.",
     "isPro": false
   },
   {
@@ -2562,7 +2562,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to PNG",
     "slug": "tiff-to-png",
     "category": "Image",
-    "description": "Convert TIFF scans and archives to universal PNG for viewing and editing anywhere. Open press files on any device — local Canvas work, free quota on saves.",
+    "description": "Convert TIFF scans and archives to universal PNG for viewing and editing anywhere. Open press files on any device — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -2642,7 +2642,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to WebP/WebM",
     "slug": "gif-to-webp-webm",
     "category": "Converter",
-    "description": "Convert animated GIFs to modern WebP or WebM formats with transparency support — ~10x smaller files. Shrink GIFs dramatically for modern web use — local conversion, free quota on saves.",
+    "description": "Convert animated GIFs to modern WebP or WebM formats with transparency support — ~10x smaller files. Shrink GIFs dramatically for modern web use — local conversion, unlimited saves.",
     "isPro": false
   },
   {
@@ -2730,7 +2730,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to JPG",
     "slug": "ico-to-jpg",
     "category": "Image",
-    "description": "Extract Windows icon images to shareable JPGs for docs and presentations. Show favicon designs in slide decks — local Canvas work, free quota on saves.",
+    "description": "Extract Windows icon images to shareable JPGs for docs and presentations. Show favicon designs in slide decks — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -2762,7 +2762,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to WebP",
     "slug": "jxl-to-webp",
     "category": "Image",
-    "description": "Convert JPEG XL images to WebP for today\\'s browsers while keeping files small. Bridge next-gen masters to current web — local Canvas work, free quota on saves.",
+    "description": "Convert JPEG XL images to WebP for today\\'s browsers while keeping files small. Bridge next-gen masters to current web — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -2770,7 +2770,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to JXL",
     "slug": "png-to-jxl",
     "category": "Image",
-    "description": "Convert PNG graphics to JPEG XL for next-gen lossless storage at smaller sizes. Archive design assets in the future-proof format — local Canvas work, free quota on saves.",
+    "description": "Convert PNG graphics to JPEG XL for next-gen lossless storage at smaller sizes. Archive design assets in the future-proof format — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -2786,7 +2786,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to GIF",
     "slug": "svg-to-gif",
     "category": "Image",
-    "description": "Rasterize SVG vectors to GIFs for legacy animation and universal compatibility. Animate icons where only GIF plays — local Canvas work, free quota on saves.",
+    "description": "Rasterize SVG vectors to GIFs for legacy animation and universal compatibility. Animate icons where only GIF plays — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -2794,7 +2794,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to WebP",
     "slug": "svg-to-webp",
     "category": "Image",
-    "description": "Rasterize SVG vectors to WebP for fast modern websites. Ship icons at a tenth of PNG bytes — local Canvas work, free quota on saves.",
+    "description": "Rasterize SVG vectors to WebP for fast modern websites. Ship icons at a tenth of PNG bytes — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -2970,7 +2970,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "M4A to WAV",
     "slug": "m4a-to-wav",
     "category": "Audio",
-    "description": "Convert M4A audio to uncompressed WAV for DAWs and archival — bit-perfect from ALAC sources. Prep Apple recordings for Pro Tools — local FFmpeg work, free quota on saves.",
+    "description": "Convert M4A audio to uncompressed WAV for DAWs and archival — bit-perfect from ALAC sources. Prep Apple recordings for Pro Tools — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -2978,7 +2978,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MP3 to AAC",
     "slug": "mp3-to-aac",
     "category": "Audio",
-    "description": "Convert MP3 to AAC for better quality per bit on Apple devices and streaming. Modernize libraries for smaller sizes — local FFmpeg work, free quota on saves.",
+    "description": "Convert MP3 to AAC for better quality per bit on Apple devices and streaming. Modernize libraries for smaller sizes — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3034,7 +3034,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OGG to AAC",
     "slug": "ogg-to-aac",
     "category": "Audio",
-    "description": "Convert OGG Vorbis to AAC for Apple and streaming compatibility. Move open audio into mainstream players — local FFmpeg work, free quota on saves.",
+    "description": "Convert OGG Vorbis to AAC for Apple and streaming compatibility. Move open audio into mainstream players — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3042,7 +3042,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OGG to FLAC",
     "slug": "ogg-to-flac",
     "category": "Audio",
-    "description": "Convert OGG Vorbis to FLAC for lossless archival uniformity. Standardize libraries on FLAC without quality illusions — local FFmpeg work, free quota on saves.",
+    "description": "Convert OGG Vorbis to FLAC for lossless archival uniformity. Standardize libraries on FLAC without quality illusions — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3082,7 +3082,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WAV to FLAC",
     "slug": "wav-to-flac",
     "category": "Audio",
-    "description": "Compress WAV masters to FLAC at ~60% size with zero loss — the archival standard. Archive studio recordings properly — local FFmpeg work, free quota on saves.",
+    "description": "Compress WAV masters to FLAC at ~60% size with zero loss — the archival standard. Archive studio recordings properly — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3138,7 +3138,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to APNG",
     "slug": "gif-to-apng",
     "category": "Image",
-    "description": "Upgrade GIF animations to APNG for full color and smoother motion at smaller sizes. Modernize sticker packs for today\\'s apps — local FFmpeg work, free quota on saves.",
+    "description": "Upgrade GIF animations to APNG for full color and smoother motion at smaller sizes. Modernize sticker packs for today\\'s apps — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3202,7 +3202,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF to TIFF",
     "slug": "pdf-to-tiff",
     "category": "PDF",
-    "description": "Convert PDF pages to lossless TIFF images for print, fax, and archival workflows. Produce 300 DPI press-ready files — local rendering, free quota on saves.",
+    "description": "Convert PDF pages to lossless TIFF images for print, fax, and archival workflows. Produce 300 DPI press-ready files — local rendering, unlimited saves.",
     "isPro": false
   },
   {
@@ -3218,7 +3218,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Font Converter",
     "slug": "font-converter",
     "category": "Design",
-    "description": "Convert fonts between TTF, OTF, WOFF, and WOFF2 with custom-text preview before downloading. Ship web-ready WOFF2 in one pass — local opentype.js work, free quota on saves.",
+    "description": "Convert fonts between TTF, OTF, WOFF, and WOFF2 with custom-text preview before downloading. Ship web-ready WOFF2 in one pass — local opentype.js work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3226,7 +3226,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Font Subsetter",
     "slug": "font-subsetter",
     "category": "Design",
-    "description": "Subset fonts to used characters plus WOFF2 conversion — cut webfont weight by 90%. Ship 12 KB instead of 150 KB — local opentype.js work, free quota on saves.",
+    "description": "Subset fonts to used characters plus WOFF2 conversion — cut webfont weight by 90%. Ship 12 KB instead of 150 KB — local opentype.js work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3250,7 +3250,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "XLSX ↔ CSV Converter",
     "slug": "xlsx-csv-converter",
     "category": "Converter",
-    "description": "Convert between XLSX workbooks and CSV files preserving sheets and encoding. Move data across Excel and pipelines — local SheetJS work, free quota on saves.",
+    "description": "Convert between XLSX workbooks and CSV files preserving sheets and encoding. Move data across Excel and pipelines — local SheetJS work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3258,7 +3258,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "VCF ↔ CSV Converter",
     "slug": "vcf-csv-converter",
     "category": "Converter",
-    "description": "Convert vCard contacts to CSV spreadsheets and back — migrate address books anywhere. Move 500 iPhone contacts to Google — local parsing, free quota on saves.",
+    "description": "Convert vCard contacts to CSV spreadsheets and back — migrate address books anywhere. Move 500 iPhone contacts to Google — local parsing, unlimited saves.",
     "isPro": false
   },
   {
@@ -3266,7 +3266,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICS ↔ CSV Converter",
     "slug": "ics-csv-converter",
     "category": "Converter",
-    "description": "Convert calendar ICS files to CSV rows — audit events in spreadsheets. Turn a year of meetings into data — local parsing, free quota on saves.",
+    "description": "Convert calendar ICS files to CSV rows — audit events in spreadsheets. Turn a year of meetings into data — local parsing, unlimited saves.",
     "isPro": false
   },
   {
@@ -3370,7 +3370,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "M4A to AIFF",
     "slug": "m4a-to-aiff",
     "category": "Audio",
-    "description": "Convert M4A to AIFF for Logic Pro and GarageBand native ingest. Move Apple audio into pro workflows — local FFmpeg work, free quota on saves.",
+    "description": "Convert M4A to AIFF for Logic Pro and GarageBand native ingest. Move Apple audio into pro workflows — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3378,7 +3378,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AAC to MP3",
     "slug": "aac-to-mp3",
     "category": "Audio",
-    "description": "Convert AAC to universally compatible MP3 for legacy players and sharing. Reach every device ever made — local FFmpeg work, free quota on saves.",
+    "description": "Convert AAC to universally compatible MP3 for legacy players and sharing. Reach every device ever made — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3394,7 +3394,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AAC to Opus",
     "slug": "aac-to-opus",
     "category": "Audio",
-    "description": "Convert AAC to ultra-efficient Opus for voice streaming, bots, and VoIP. Shrink spoken audio to tiny bitrates — local FFmpeg work, free quota on saves.",
+    "description": "Convert AAC to ultra-efficient Opus for voice streaming, bots, and VoIP. Shrink spoken audio to tiny bitrates — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3418,7 +3418,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WMA to FLAC",
     "slug": "wma-to-flac",
     "category": "Audio",
-    "description": "Convert WMA to FLAC for lossless Windows-library archival. Escape legacy codecs without further loss — local FFmpeg work, free quota on saves.",
+    "description": "Convert WMA to FLAC for lossless Windows-library archival. Escape legacy codecs without further loss — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3442,7 +3442,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WMA to AAC",
     "slug": "wma-to-aac",
     "category": "Audio",
-    "description": "Convert legacy WMA to efficient AAC for modern players and phones. Rescue Windows Media libraries for today — local FFmpeg work, free quota on saves.",
+    "description": "Convert legacy WMA to efficient AAC for modern players and phones. Rescue Windows Media libraries for today — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3458,7 +3458,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WMA to AIFF",
     "slug": "wma-to-aiff",
     "category": "Audio",
-    "description": "Convert WMA to uncompressed AIFF for Apple pro audio workflows. Bring legacy libraries into Logic — local FFmpeg work, free quota on saves.",
+    "description": "Convert WMA to uncompressed AIFF for Apple pro audio workflows. Bring legacy libraries into Logic — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3490,7 +3490,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Opus to M4A",
     "slug": "opus-to-m4a",
     "category": "Audio",
-    "description": "Convert Opus voice files to M4A for Apple Podcasts and iTunes compatibility. Publish voice content where Opus won\\'t play — local FFmpeg work, free quota on saves.",
+    "description": "Convert Opus voice files to M4A for Apple Podcasts and iTunes compatibility. Publish voice content where Opus won\\'t play — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3530,7 +3530,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AIFF to FLAC",
     "slug": "aiff-to-flac",
     "category": "Audio",
-    "description": "Compress AIFF masters to FLAC at half size with zero loss — universal archival. Move Logic bounces into long-term storage — local FFmpeg work, free quota on saves.",
+    "description": "Compress AIFF masters to FLAC at half size with zero loss — universal archival. Move Logic bounces into long-term storage — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3554,7 +3554,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AIFF to AAC",
     "slug": "aiff-to-aac",
     "category": "Audio",
-    "description": "Convert AIFF masters to efficient AAC for sharing and streaming previews. Send listenable links without huge uploads — local FFmpeg work, free quota on saves.",
+    "description": "Convert AIFF masters to efficient AAC for sharing and streaming previews. Send listenable links without huge uploads — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3562,7 +3562,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AIFF to WMA",
     "slug": "aiff-to-wma",
     "category": "Audio",
-    "description": "Convert AIFF to WMA for legacy Windows systems that accept nothing else. Serve corporate libraries stuck on old codecs — local FFmpeg work, free quota on saves.",
+    "description": "Convert AIFF to WMA for legacy Windows systems that accept nothing else. Serve corporate libraries stuck on old codecs — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3882,7 +3882,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Cleanup",
     "slug": "pdf-cleanup",
     "category": "PDF",
-    "description": "Remove blank pages, embedded junk, and bloat from PDFs in one pass — compress, clean, and standardize. Shrink a bloated 80 MB archive for sharing — local work, free quota on saves.",
+    "description": "Remove blank pages, embedded junk, and bloat from PDFs in one pass — compress, clean, and standardize. Shrink a bloated 80 MB archive for sharing — local work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3890,7 +3890,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Background Color",
     "slug": "pdf-background-color",
     "category": "PDF",
-    "description": "Add a subtle color tint to all pages in a PDF document. Upload your PDF and pick a background color. Tint every page uniformly for branding or readability themes — local pdf-lib work, free quota on saves.",
+    "description": "Add a subtle color tint to all pages in a PDF document. Upload your PDF and pick a background color. Tint every page uniformly for branding or readability themes — local pdf-lib work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3898,7 +3898,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Add Blank Page",
     "slug": "pdf-add-blank-page",
     "category": "PDF",
-    "description": "Insert blank pages at any position in a PDF document. Choose page size, count, and position. Choose page size and count to match the document — local pdf-lib work, free quota on saves.",
+    "description": "Insert blank pages at any position in a PDF document. Choose page size, count, and position. Choose page size and count to match the document — local pdf-lib work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3906,7 +3906,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Bates Numbering",
     "slug": "pdf-bates-numbering",
     "category": "PDF",
-    "description": "Add sequential Bates numbers to every page of your PDF. Customize prefix, starting number, and position. Prefixes, start numbers, and positioning per filing rules — local pdf-lib work, free quota on saves.",
+    "description": "Add sequential Bates numbers to every page of your PDF. Customize prefix, starting number, and position. Prefixes, start numbers, and positioning per filing rules — local pdf-lib work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3930,7 +3930,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Table of Contents",
     "slug": "pdf-table-of-contents",
     "category": "PDF",
-    "description": "Generate clickable tables of contents for PDFs from headings — navigate 300-page ebooks instantly. Add what the author forgot — local pdf-lib work, free quota on saves.",
+    "description": "Generate clickable tables of contents for PDFs from headings — navigate 300-page ebooks instantly. Add what the author forgot — local pdf-lib work, unlimited saves.",
     "isPro": false
   },
   {
@@ -6410,7 +6410,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SSL/TLS Checker",
     "slug": "ssl-tls-checker",
     "category": "Developer",
-    "description": "Inspect TLS cipher suites and protocol versions a server offers — flag deprecated RC4, DES, and TLS 1.0 relics before attackers inventory them.",
+    "description": "Test what a live server offers over HTTPS — cipher suites, protocol versions, certificate validity, issuer and expiry. Flag RC4, DES, and TLS 1.0 relics before attackers inventory them.",
     "isPro": false
   },
   {
@@ -6578,7 +6578,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TLS Cipher Checker",
     "slug": "tls-cipher-checker",
     "category": "Developer",
-    "description": "Inspect which TLS cipher suites a server offers — flag weak RC4, DES, and TLS 1.0 relics before attackers do before attackers inventory them.",
+    "description": "Look up any TLS cipher suite name — TLS_AES_256_GCM_SHA384, TLS_RSA_WITH_RC4_128_SHA — and get its strength rating from Strong to Insecure, with the reason in plain words.",
     "isPro": false
   },
   {
@@ -6714,7 +6714,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV to SQLite Web Terminal",
     "slug": "csv-to-sqlite",
     "category": "Converter",
-    "description": "Convert CSV files into queryable SQLite databases in your browser. Turn 100k-row exports into SELECT-able tables — local sql.js work, free quota on saves.",
+    "description": "Convert CSV files into queryable SQLite databases in your browser. Turn 100k-row exports into SELECT-able tables — local sql.js work, unlimited saves.",
     "isPro": false
   },
   {
@@ -6722,7 +6722,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Vector Pen Canvas",
     "slug": "vector-pen-canvas",
     "category": "Design",
-    "description": "Draw bezier vector paths with a pen tool on canvas — anchor handles included. Sketch icons and illustrations freehand — local Fabric work, free quota on saves.",
+    "description": "Draw bezier vector paths with a pen tool on canvas — anchor handles included. Sketch icons and illustrations freehand — local Fabric work, unlimited saves.",
     "isPro": false
   },
   {
@@ -7690,7 +7690,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MKV to AVI",
     "slug": "mkv-to-avi",
     "category": "Video",
-    "description": "Convert MKV to legacy AVI for old players and embedded systems. Reach hardware that accepts nothing newer — local FFmpeg work, free quota on saves.",
+    "description": "Convert MKV to legacy AVI for old players and embedded systems. Reach hardware that accepts nothing newer — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -7698,7 +7698,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MP4 to WEBM",
     "slug": "mp4-to-webm",
     "category": "Video",
-    "description": "Convert MP4 to WebM for fast web embedding with smaller files. Make homepage videos load instantly — local FFmpeg work, free quota on saves.",
+    "description": "Convert MP4 to WebM for fast web embedding with smaller files. Make homepage videos load instantly — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -7714,7 +7714,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MOV to WEBM",
     "slug": "mov-to-webm",
     "category": "Video",
-    "description": "Convert Apple MOV files to web-ready WebM for fast HTML5 playback. Shrink a 200 MB screen recording for embedding — local FFmpeg conversion, free quota on saves.",
+    "description": "Convert Apple MOV files to web-ready WebM for fast HTML5 playback. Shrink a 200 MB screen recording for embedding — local FFmpeg conversion, unlimited saves.",
     "isPro": false
   },
   {
@@ -7738,7 +7738,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WEBM to MOV",
     "slug": "webm-to-mov",
     "category": "Video",
-    "description": "Convert WebM videos to Apple-friendly MOV for Final Cut and QuickTime workflows. Bring web clips into Mac editing — local FFmpeg work, free quota on saves.",
+    "description": "Convert WebM videos to Apple-friendly MOV for Final Cut and QuickTime workflows. Bring web clips into Mac editing — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -7778,7 +7778,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to PNG",
     "slug": "jpg-to-png",
     "category": "Image",
-    "description": "Convert JPG photos to lossless PNG for transparency-ready editing and graphics work. Prep images for design tools without recompression loss — local Canvas work, free quota on saves.",
+    "description": "Convert JPG photos to lossless PNG for transparency-ready editing and graphics work. Prep images for design tools without recompression loss — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -7794,7 +7794,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to WEBP",
     "slug": "jpg-to-webp",
     "category": "Image",
-    "description": "Convert JPG photos to modern WebP at ~30% smaller sizes for faster websites. Optimize entire image libraries before deploy — local Canvas work, free quota on saves.",
+    "description": "Convert JPG photos to modern WebP at ~30% smaller sizes for faster websites. Optimize entire image libraries before deploy — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -7834,7 +7834,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to HEIC",
     "slug": "png-to-heic",
     "category": "Image",
-    "description": "Convert PNG graphics to HEIC for Apple-optimized storage at half the bytes. Shrink screenshot libraries for iCloud — local Canvas work, free quota on saves.",
+    "description": "Convert PNG graphics to HEIC for Apple-optimized storage at half the bytes. Shrink screenshot libraries for iCloud — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -7858,7 +7858,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to ICO",
     "slug": "png-to-ico",
     "category": "Image",
-    "description": "Generate multi-size Windows ICO favicons from PNG graphics in batch. Ship crisp taskbar icons from transparent art — local Canvas work, free quota on saves.",
+    "description": "Generate multi-size Windows ICO favicons from PNG graphics in batch. Ship crisp taskbar icons from transparent art — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -7874,7 +7874,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to SVG",
     "slug": "jpg-to-svg",
     "category": "Image",
-    "description": "Trace JPG photos and logos into SVG vectors — rescue raster logos as scalable art. Rebuild brand marks from compressed copies — local tracing, free quota on saves.",
+    "description": "Trace JPG photos and logos into SVG vectors — rescue raster logos as scalable art. Rebuild brand marks from compressed copies — local tracing, unlimited saves.",
     "isPro": false
   },
   {
@@ -7930,7 +7930,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WEBP to TIFF",
     "slug": "webp-to-tiff",
     "category": "Image",
-    "description": "Convert WebP images to lossless TIFF for print and archival handoff. Take web art into press workflows — local Canvas work, free quota on saves.",
+    "description": "Convert WebP images to lossless TIFF for print and archival handoff. Take web art into press workflows — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -7954,7 +7954,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to SVG",
     "slug": "heic-to-svg",
     "category": "Image",
-    "description": "Trace iPhone HEIC photos into SVG vectors for logos salvaged from snapshots. Rebuild brand art from a phone pic — local tracing, free quota on saves.",
+    "description": "Trace iPhone HEIC photos into SVG vectors for logos salvaged from snapshots. Rebuild brand art from a phone pic — local tracing, unlimited saves.",
     "isPro": false
   },
   {
@@ -7970,7 +7970,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to TIFF",
     "slug": "heic-to-tiff",
     "category": "Image",
-    "description": "Convert iPhone HEIC shots to lossless TIFF for print and professional handoff. Take phone photos into press workflows — local Canvas work, free quota on saves.",
+    "description": "Convert iPhone HEIC shots to lossless TIFF for print and professional handoff. Take phone photos into press workflows — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -7986,7 +7986,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to JXL",
     "slug": "heic-to-jxl",
     "category": "Image",
-    "description": "Migrate iPhone HEIC photos to JPEG XL for the most advanced archival available. Move Apple libraries to future-proof storage — local Canvas work, free quota on saves.",
+    "description": "Migrate iPhone HEIC photos to JPEG XL for the most advanced archival available. Move Apple libraries to future-proof storage — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -7994,7 +7994,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to WEBP",
     "slug": "avif-to-webp",
     "category": "Image",
-    "description": "Convert AVIF images to WebP for broader browser compatibility without ballooning size. Serve next-gen art to the 5% on older browsers — local Canvas work, free quota on saves.",
+    "description": "Convert AVIF images to WebP for broader browser compatibility without ballooning size. Serve next-gen art to the 5% on older browsers — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -8010,7 +8010,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to SVG",
     "slug": "avif-to-svg",
     "category": "Image",
-    "description": "Trace AVIF rasters into scalable SVG vectors for logos resurrected from compressed copies. Rebuild a lost logo as infinite-resolution art — local tracing, free quota on saves.",
+    "description": "Trace AVIF rasters into scalable SVG vectors for logos resurrected from compressed copies. Rebuild a lost logo as infinite-resolution art — local tracing, unlimited saves.",
     "isPro": false
   },
   {
@@ -8018,7 +8018,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to BMP",
     "slug": "avif-to-bmp",
     "category": "Image",
-    "description": "Convert AVIF images to uncompressed BMP for legacy pipelines and pixel-level analysis. Feed modern photos into older lab software — local Canvas work, free quota on saves.",
+    "description": "Convert AVIF images to uncompressed BMP for legacy pipelines and pixel-level analysis. Feed modern photos into older lab software — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -8026,7 +8026,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to TIFF",
     "slug": "avif-to-tiff",
     "category": "Image",
-    "description": "Convert AVIF photos to lossless TIFF for print publishing and professional archives. Prepare press-ready files from next-gen originals — local Canvas work, free quota on saves.",
+    "description": "Convert AVIF photos to lossless TIFF for print publishing and professional archives. Prepare press-ready files from next-gen originals — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -8034,7 +8034,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to GIF",
     "slug": "avif-to-gif",
     "category": "Image",
-    "description": "Turn AVIF images into universally compatible GIFs for legacy platforms and simple animations. Post next-gen art where only GIF uploads work — local Canvas work, free quota on saves.",
+    "description": "Turn AVIF images into universally compatible GIFs for legacy platforms and simple animations. Post next-gen art where only GIF uploads work — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -8058,7 +8058,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to HEIC",
     "slug": "svg-to-heic",
     "category": "Image",
-    "description": "Rasterize SVG vectors to HEIC for Apple-optimized asset delivery. Ship tiny icons into iOS apps — local Canvas work, free quota on saves.",
+    "description": "Rasterize SVG vectors to HEIC for Apple-optimized asset delivery. Ship tiny icons into iOS apps — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -8082,7 +8082,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to ICO",
     "slug": "svg-to-ico",
     "category": "Image",
-    "description": "Generate Windows ICO favicons directly from SVG masters at any resolution. Build razor-sharp icon sets from vectors — local Canvas work, free quota on saves.",
+    "description": "Generate Windows ICO favicons directly from SVG masters at any resolution. Build razor-sharp icon sets from vectors — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -8090,7 +8090,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to JXL",
     "slug": "svg-to-jxl",
     "category": "Image",
-    "description": "Rasterize SVG vectors to next-gen JPEG XL for archival icon libraries. Store infinite-resolution art in future-proof pixels — local Canvas work, free quota on saves.",
+    "description": "Rasterize SVG vectors to next-gen JPEG XL for archival icon libraries. Store infinite-resolution art in future-proof pixels — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -8106,7 +8106,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to SVG",
     "slug": "bmp-to-svg",
     "category": "Image",
-    "description": "Vectorize BMP bitmaps into scalable SVGs — rescue legacy clip-art for modern use. Turn pixelated 90s graphics into clean vectors — local tracing, free quota on saves.",
+    "description": "Vectorize BMP bitmaps into scalable SVGs — rescue legacy clip-art for modern use. Turn pixelated 90s graphics into clean vectors — local tracing, unlimited saves.",
     "isPro": false
   },
   {
@@ -8114,7 +8114,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to TIFF",
     "slug": "bmp-to-tiff",
     "category": "Image",
-    "description": "Convert BMP bitmaps to lossless TIFF for print archives and professional handoff. Move legacy scans into press workflows — local Canvas work, free quota on saves.",
+    "description": "Convert BMP bitmaps to lossless TIFF for print archives and professional handoff. Move legacy scans into press workflows — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -8138,7 +8138,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to HEIC",
     "slug": "tiff-to-heic",
     "category": "Image",
-    "description": "Convert lossless TIFF archives to efficient HEIC for Apple storage and sharing. Halve archival bytes for the Apple ecosystem — local Canvas work, free quota on saves.",
+    "description": "Convert lossless TIFF archives to efficient HEIC for Apple storage and sharing. Halve archival bytes for the Apple ecosystem — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -8146,7 +8146,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to SVG",
     "slug": "tiff-to-svg",
     "category": "Image",
-    "description": "Trace TIFF scans into SVG vectors — rescue high-contrast art from print archives. Rebuild logos from press files — local tracing, free quota on saves.",
+    "description": "Trace TIFF scans into SVG vectors — rescue high-contrast art from print archives. Rebuild logos from press files — local tracing, unlimited saves.",
     "isPro": false
   },
   {
@@ -8162,7 +8162,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to ICO",
     "slug": "tiff-to-ico",
     "category": "Image",
-    "description": "Generate Windows ICO favicons from high-res TIFF masters. Build icons from press-quality sources — local Canvas work, free quota on saves.",
+    "description": "Generate Windows ICO favicons from high-res TIFF masters. Build icons from press-quality sources — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -8178,7 +8178,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to HEIC",
     "slug": "gif-to-heic",
     "category": "Image",
-    "description": "Convert GIF animations and stills to space-efficient HEIC for Apple workflows. Halve sticker libraries for iOS apps — local Canvas work, free quota on saves.",
+    "description": "Convert GIF animations and stills to space-efficient HEIC for Apple workflows. Halve sticker libraries for iOS apps — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -8218,7 +8218,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to JXL",
     "slug": "gif-to-jxl",
     "category": "Image",
-    "description": "Convert GIFs to next-gen JPEG XL for archival-grade stills at tiny sizes. Future-proof meme libraries with full-color frames — local Canvas work, free quota on saves.",
+    "description": "Convert GIFs to next-gen JPEG XL for archival-grade stills at tiny sizes. Future-proof meme libraries with full-color frames — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -8226,7 +8226,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to HEIC",
     "slug": "ico-to-heic",
     "category": "Image",
-    "description": "Convert ICO icons to HEIC for Apple ecosystem asset catalogs. Feed Windows artwork into Xcode projects — local Canvas work, free quota on saves.",
+    "description": "Convert ICO icons to HEIC for Apple ecosystem asset catalogs. Feed Windows artwork into Xcode projects — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -8234,7 +8234,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to AVIF",
     "slug": "ico-to-avif",
     "category": "Image",
-    "description": "Convert Windows ICO icons to ultra-efficient AVIF for modern web use. Shrink favicon libraries for the fast web — local Canvas work, free quota on saves.",
+    "description": "Convert Windows ICO icons to ultra-efficient AVIF for modern web use. Shrink favicon libraries for the fast web — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -8242,7 +8242,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to SVG",
     "slug": "ico-to-svg",
     "category": "Image",
-    "description": "Trace Windows ICO icons into scalable SVG vectors for modern icon systems. Rebuild favicon sets as infinite-resolution art — local tracing, free quota on saves.",
+    "description": "Trace Windows ICO icons into scalable SVG vectors for modern icon systems. Rebuild favicon sets as infinite-resolution art — local tracing, unlimited saves.",
     "isPro": false
   },
   {
@@ -8306,7 +8306,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to BMP",
     "slug": "jxl-to-bmp",
     "category": "Image",
-    "description": "Convert JPEG XL images to raw BMP bitmaps for legacy analysis pipelines. Feed next-gen captures into older lab tools — local Canvas work, free quota on saves.",
+    "description": "Convert JPEG XL images to raw BMP bitmaps for legacy analysis pipelines. Feed next-gen captures into older lab tools — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -8322,7 +8322,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to ICO",
     "slug": "jxl-to-ico",
     "category": "Image",
-    "description": "Generate Windows ICO favicons from JPEG XL sources in batch. Build icon sets from next-gen art — local Canvas work, free quota on saves.",
+    "description": "Generate Windows ICO favicons from JPEG XL sources in batch. Build icon sets from next-gen art — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {

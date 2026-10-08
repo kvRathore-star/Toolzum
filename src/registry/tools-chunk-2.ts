@@ -11,7 +11,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WebP file(s)", desc: "Upload your WebP source. Runs locally on Canvas." },
       { title: "2. Set AVIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download AVIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AVIF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Worth converting?", answer: "Marginal but real — smaller files in the same compatibility class." },
@@ -35,7 +35,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AAC file(s)", desc: "Upload your AAC source. Runs locally on FFmpeg." },
       { title: "2. Set FLAC options", desc: "Set FLAC bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download FLAC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download FLAC", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does AAC to FLAC do?", answer: "Convert AAC audio files to FLAC format directly in your browser. High-quality conversion with no file size limits." },
@@ -54,7 +54,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AAC file(s)", desc: "Upload your AAC source. Runs locally on FFmpeg." },
       { title: "2. Set M4A options", desc: "Set M4A bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download M4A", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download M4A", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert AAC to M4A?", answer: "Same codec family — container swap for Apple compatibility only." },
@@ -79,7 +79,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AAC file(s)", desc: "Upload your AAC source. Runs locally on FFmpeg." },
       { title: "2. Set OGG options", desc: "Set OGG bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download OGG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download OGG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert AAC to OGG?", answer: "OGG Vorbis is open-source and royalty-free, while AAC has patent licensing requirements. Converting to OGG is useful for open-source projects, web games, and platforms that prefer free formats." },
@@ -102,7 +102,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AAC file(s)", desc: "Upload your AAC source. Runs locally on FFmpeg." },
       { title: "2. Set WAV options", desc: "Set WAV bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download WAV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WAV", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert AAC to WAV?", answer: "WAV is uncompressed and universally supported by audio editing software (Audacity, Pro Tools, Logic Pro). Converting AAC to WAV provides lossless output for professional editing and mastering workflows." },
@@ -125,7 +125,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop FLAC file(s)", desc: "Upload your FLAC source. Runs locally on FFmpeg." },
       { title: "2. Set AAC options", desc: "Set AAC bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download AAC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AAC", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does FLAC to AAC do?", answer: "Convert FLAC audio files to AAC format directly in your browser. High-quality conversion with no file size limits." },
@@ -144,7 +144,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop FLAC file(s)", desc: "Upload your FLAC source. Runs locally on FFmpeg." },
       { title: "2. Set M4A options", desc: "Set M4A bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download M4A", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download M4A", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why M4A from FLAC?", answer: "Apple libraries — M4A (AAC or ALAC) plays where FLAC doesn't." },
@@ -169,7 +169,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop FLAC file(s)", desc: "Upload your FLAC source. Runs locally on FFmpeg." },
       { title: "2. Set OGG options", desc: "Set OGG bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download OGG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download OGG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does FLAC to OGG do?", answer: "Convert FLAC audio files to OGG format directly in your browser. High-quality conversion with no file size limits." },
@@ -188,7 +188,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop FLAC file(s)", desc: "Upload your FLAC source. Runs locally on FFmpeg." },
       { title: "2. Set WAV options", desc: "Set WAV bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download WAV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WAV", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why WAV from FLAC?", answer: "DAW editing and archival workflows that want raw PCM. DAW editing and archival workflows that want raw PCM data." },
@@ -213,7 +213,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop M4A file(s)", desc: "Upload your M4A source. Runs locally on FFmpeg." },
       { title: "2. Set AAC options", desc: "Set AAC bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download AAC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AAC", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What is the difference between M4A and AAC?", answer: "M4A is a container format (MPEG-4) that typically holds AAC audio. AAC is the raw audio codec. Converting M4A to AAC strips the container, producing a raw .aac file for direct playback or editing." },
@@ -233,7 +233,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop M4A file(s)", desc: "Upload your M4A source. Runs locally on FFmpeg." },
       { title: "2. Set FLAC options", desc: "Set FLAC bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download FLAC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download FLAC", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why FLAC from M4A?", answer: "Escaping Apple format into universal lossless archival. Escaping Apple format into universal lossless archival storage." },
@@ -255,7 +255,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop M4A file(s)", desc: "Upload your M4A source. Runs locally on FFmpeg." },
       { title: "2. Set OGG options", desc: "Set OGG bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download OGG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download OGG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert M4A to OGG?", answer: "Open-source playback on Linux and open platforms, free forever." },
@@ -273,21 +273,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "M4A to WAV",
     slug: "m4a-to-wav",
     category: "Audio",
-    description: 'Convert M4A audio to uncompressed WAV for DAWs and archival — bit-perfect from ALAC sources. Prep Apple recordings for Pro Tools — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free M4A to WAV — uncompressed DAW-ready. Local FFmpeg, free quota on saves.',
+    description: 'Convert M4A audio to uncompressed WAV for DAWs and archival — bit-perfect from ALAC sources. Prep Apple recordings for Pro Tools — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free M4A to WAV — uncompressed DAW-ready. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     seoTitle: "Free M4A to WAV Converter Online",
     instructions: [
       { title: "1. Upload M4A files", desc: "Apple recordings of either codec." },
       { title: "2. Convert to WAV", desc: "Uncompressed PCM output automatically." },
-      { title: "3. Download WAVs", desc: "Import straight into DAWs (counts on the free download quota)." },
+      { title: "3. Download WAVs", desc: "Import straight into DAWs (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'ALAC or AAC source — matters?', answer: 'Hugely: ALAC converts bit-perfectly (lossless to uncompressed); AAC loses a generation (transparent at high bitrates, but lossy). Check the source codec first.' },
       { question: 'Why WAV for DAWs?', answer: 'Pro Tools, Logic, and Audition ingest WAV natively with sample-accurate editing. M4A containers complicate timelines — convert once at project start.' },
       { question: 'How big are WAV outputs?', answer: 'Roughly 10 MB per stereo minute at 44.1 kHz/16-bit. A 60-minute session needs ~600 MB disk — plan before batching.' },
-      { question: 'Do Apple files leave the browser?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do Apple files leave the browser?', answer: 'No — conversion runs locally in your browser with FFmpeg. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -295,21 +295,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "MP3 to AAC",
     slug: "mp3-to-aac",
     category: "Audio",
-    description: 'Convert MP3 to AAC for better quality per bit on Apple devices and streaming. Modernize libraries for smaller sizes — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free MP3 to AAC — modern efficient codec. Local FFmpeg, free quota on saves.',
+    description: 'Convert MP3 to AAC for better quality per bit on Apple devices and streaming. Modernize libraries for smaller sizes — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free MP3 to AAC — modern efficient codec. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     seoTitle: "Free MP3 to AAC Converter Online",
     instructions: [
       { title: "1. Upload MP3s", desc: "Libraries to modernize." },
       { title: "2. Set AAC bitrate", desc: "128k portable, 192k+ archival." },
-      { title: "3. Download AACs", desc: "Save efficient files (counts on the free download quota)." },
+      { title: "3. Download AACs", desc: "Save efficient files (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why AAC over MP3?', answer: 'AAC sounds equal at ~75% the bitrate — 128k AAC matches 192k MP3 roughly. Apple devices and YouTube prefer AAC natively.' },
       { question: 'What bitrate?', answer: '128 kbps AAC for portable listening, 192+ for archiving transcoded music. Never transcode below the source bitrate tier.' },
       { question: 'Quality loss transcoding?', answer: 'Lossy-to-lossy always loses a generation — keep it transparent with generous bitrates. Re-rip from CD/lossless where quality truly matters.' },
-      { question: 'Do modernized files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves count on the free download quota.' },
+      { question: 'Do modernized files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -324,7 +324,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop MP3 file(s)", desc: "Upload your MP3 source. Runs locally on FFmpeg." },
       { title: "2. Set AIFF options", desc: "Set AIFF bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download AIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AIFF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert MP3 to AIFF?", answer: "AIFF is uncompressed and supported by professional DAWs (Logic Pro, Pro Tools). Converting MP3 to AIFF provides lossless output for editing workflows, though quality is limited by the original MP3 compression." },
@@ -344,7 +344,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop MP3 file(s)", desc: "Upload your MP3 source. Runs locally on FFmpeg." },
       { title: "2. Set FLAC options", desc: "Set FLAC bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download FLAC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download FLAC", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Does FLAC improve MP3?", answer: "No — it preserves exactly, file grows with zero quality gain." },
@@ -369,7 +369,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop MP3 file(s)", desc: "Upload your MP3 source. Runs locally on FFmpeg." },
       { title: "2. Set M4A options", desc: "Set M4A bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download M4A", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download M4A", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does MP3 to M4A do?", answer: "Convert MP3 audio files to M4A format directly in your browser. High-quality conversion with no file size limits." },
@@ -391,7 +391,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop MP3 file(s)", desc: "Upload your MP3 source. Runs locally on FFmpeg." },
       { title: "2. Set OGG options", desc: "Set OGG bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download OGG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download OGG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert MP3 to OGG?", answer: "OGG Vorbis is patent-free and typically 10–20% smaller than MP3 at the same perceived quality — useful for game assets, web audio, and open-source projects that avoid MP3 licensing friction." },
@@ -411,7 +411,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop MP3 file(s)", desc: "Upload your MP3 source. Runs locally on FFmpeg." },
       { title: "2. Set Opus options", desc: "Set Opus bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download Opus", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download Opus", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why Opus from MP3?", answer: "Voice streaming, Discord bots, and VoIP at tiny bitrates. Voice streaming, Discord bots, and VoIP at tiny bitrates." },
@@ -433,7 +433,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop MP3 file(s)", desc: "Upload your MP3 source. Runs locally on FFmpeg." },
       { title: "2. Set WMA options", desc: "Set WMA bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download WMA", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WMA", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why WMA?", answer: "Legacy Windows media libraries and corporate systems need it." },
@@ -451,21 +451,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "OGG to AAC",
     slug: "ogg-to-aac",
     category: "Audio",
-    description: 'Convert OGG Vorbis to AAC for Apple and streaming compatibility. Move open audio into mainstream players — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free OGG to AAC — open to mainstream. Local FFmpeg, free quota on saves.',
+    description: 'Convert OGG Vorbis to AAC for Apple and streaming compatibility. Move open audio into mainstream players — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free OGG to AAC — open to mainstream. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     seoTitle: "Free OGG to AAC Converter Online",
     instructions: [
       { title: "1. Upload OGG files", desc: "Vorbis audio needing compatibility." },
       { title: "2. Set AAC bitrate", desc: "192k for music, 128k for voice." },
-      { title: "3. Download AACs", desc: "Check tags after (counts on the free download quota)." },
+      { title: "3. Download AACs", desc: "Check tags after (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why leave OGG?', answer: 'Car stereos, Apple devices, and many apps skip OGG entirely. AAC plays everywhere OGG doesn\'t, at better efficiency.' },
       { question: 'What bitrate preserves quality?', answer: '192 kbps AAC minimum when transcoding lossy Vorbis — lower audibly degrades. Voice-only content survives 128k.' },
       { question: 'Tags preserved?', answer: 'Standard Vorbis comments map to AAC tags; exotic fields may drop. Verify artwork and album fields after converting libraries.' },
-      { question: 'Do OGG files leave the browser?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves count on the free download quota.' },
+      { question: 'Do OGG files leave the browser?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -473,21 +473,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "OGG to FLAC",
     slug: "ogg-to-flac",
     category: "Audio",
-    description: 'Convert OGG Vorbis to FLAC for lossless archival uniformity. Standardize libraries on FLAC without quality illusions — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free OGG to FLAC — archival uniformity. Local FFmpeg, free quota on saves.',
+    description: 'Convert OGG Vorbis to FLAC for lossless archival uniformity. Standardize libraries on FLAC without quality illusions — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free OGG to FLAC — archival uniformity. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     seoTitle: "Free OGG to FLAC Converter Online",
     instructions: [
       { title: "1. Upload OGG files", desc: "Vorbis libraries to standardize." },
       { title: "2. Convert to FLAC", desc: "Exact preservation, larger files." },
-      { title: "3. Download FLACs", desc: "Uniform archives (counts on the free download quota)." },
+      { title: "3. Download FLACs", desc: "Uniform archives (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Does FLAC improve OGG quality?', answer: 'No — FLAC preserves exactly, including compression artifacts. Files grow ~3x with zero fidelity gain; do it for uniformity, never for quality.' },
       { question: 'Why do it then?', answer: 'Single-format libraries simplify players, tagging, and backups. Standardize containers while understanding the tradeoff.' },
       { question: 'Better path to lossless?', answer: 'Re-rip CDs or re-download FLAC originals instead of transcoding. Transcode only irreplaceable recordings.' },
-      { question: 'Do archival files upload anywhere?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do archival files upload anywhere?', answer: 'No — conversion runs locally in your browser with FFmpeg. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -501,7 +501,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop OGG file(s)", desc: "Upload your OGG source. Runs locally on FFmpeg." },
       { title: "2. Set M4A options", desc: "Set M4A bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download M4A", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download M4A", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why would I convert OGG to M4A?", answer: "M4A (AAC) is the default audio format for Apple devices and iTunes. If your OGG files do not play on an iPhone, iPod, or in Apple Music, converting to M4A fixes the compatibility issue." },
@@ -525,7 +525,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop OGG file(s)", desc: "Upload your OGG source. Runs locally on FFmpeg." },
       { title: "2. Set WAV options", desc: "Set WAV bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download WAV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WAV", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does OGG to WAV do?", answer: "Convert OGG audio files to WAV format directly in your browser. High-quality conversion with no file size limits." },
@@ -547,7 +547,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WAV file(s)", desc: "Upload your WAV source. Runs locally on FFmpeg." },
       { title: "2. Set AAC options", desc: "Set AAC bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download AAC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AAC", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does WAV to AAC do?", answer: "Convert WAV audio files to AAC format directly in your browser. High-quality conversion with no file size limits." },
@@ -566,7 +566,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WAV file(s)", desc: "Upload your WAV source. Runs locally on FFmpeg." },
       { title: "2. Set AIFF options", desc: "Set AIFF bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download AIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AIFF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why AIFF from WAV?", answer: "Apple pro workflows — Logic Pro and GarageBand prefer AIFF. Apple pro workflows — Logic Pro and GarageBand prefer AIFF." },
@@ -584,21 +584,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "WAV to FLAC",
     slug: "wav-to-flac",
     category: "Audio",
-    description: 'Compress WAV masters to FLAC at ~60% size with zero loss — the archival standard. Archive studio recordings properly — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free WAV to FLAC — 60% smaller, lossless. Local FFmpeg, free quota on saves.',
+    description: 'Compress WAV masters to FLAC at ~60% size with zero loss — the archival standard. Archive studio recordings properly — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free WAV to FLAC — 60% smaller, lossless. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     seoTitle: "Free WAV to FLAC Converter Online",
     instructions: [
       { title: "1. Upload WAV masters", desc: "Studio recordings to archive." },
       { title: "2. Compress to FLAC", desc: "Bit-identical at half the bytes." },
-      { title: "3. Download FLACs", desc: "Tag before archiving (counts on the free download quota)." },
+      { title: "3. Download FLACs", desc: "Tag before archiving (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'How small are FLAC archives?', answer: 'Typically 50–60% of WAV size with bit-identical audio — a 600 MB session folder lands near 300 MB. Decompression is instant on any player.' },
       { question: 'Tags and artwork?', answer: 'FLAC carries Vorbis-comment tags plus embedded covers — richer metadata than WAV\'s limited support. Tag thoroughly at archive time.' },
       { question: 'FLAC vs ALAC?', answer: 'Equivalent quality; FLAC is universal, ALAC is Apple-preferred. Archive FLAC, convert copies for Apple workflows.' },
-      { question: 'Are my masters uploaded?', answer: 'No — compression runs locally in your browser with FFmpeg. Only saves count on the free download quota.' },
+      { question: 'Are my masters uploaded?', answer: 'No — compression runs locally in your browser with FFmpeg. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -610,7 +610,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WAV file(s)", desc: "Upload your WAV source. Runs locally on FFmpeg." },
       { title: "2. Set M4A options", desc: "Set M4A bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download M4A", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download M4A", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why M4A?", answer: "A tenth the size of WAV with AAC quality — fully Apple-ready." },
@@ -632,7 +632,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WAV file(s)", desc: "Upload your WAV source. Runs locally on FFmpeg." },
       { title: "2. Set OGG options", desc: "Set OGG bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download OGG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download OGG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert WAV to OGG?", answer: "Open, efficient streaming format for the open web, widely supported." },
@@ -654,7 +654,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WAV file(s)", desc: "Upload your WAV source. Runs locally on FFmpeg." },
       { title: "2. Set Opus options", desc: "Set Opus bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download Opus", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download Opus", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why Opus from WAV?", answer: "Maximum compression for voice — podcasts and calls. Maximum compression for voice — podcasts and phone calls." },
@@ -676,7 +676,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WAV file(s)", desc: "Upload your WAV source. Runs locally on FFmpeg." },
       { title: "2. Set WMA options", desc: "Set WMA bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download WMA", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WMA", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why WMA from WAV?", answer: "Legacy Windows libraries that accept nothing else — modern cases should stay WAV or FLAC." },
@@ -699,7 +699,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
       { title: "2. Configure compress", desc: "Set the compress options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "How small can GIFs go?", answer: "30–60% typical — trim frames and cap dimensions first for the biggest wins." },
@@ -722,7 +722,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
       { title: "2. Configure resize", desc: "Set the resize options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Will resizing break my GIF animation?", answer: "No. The resizer preserves all frames and their timing. Your animation plays at the same speed — only the frame dimensions change." },
@@ -739,21 +739,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "GIF to APNG",
     slug: "gif-to-apng",
     category: "Image",
-    description: 'Upgrade GIF animations to APNG for full color and smoother motion at smaller sizes. Modernize sticker packs for today\'s apps — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free GIF to APNG — full-color animation. Local FFmpeg, free quota on saves.',
+    description: 'Upgrade GIF animations to APNG for full color and smoother motion at smaller sizes. Modernize sticker packs for today\'s apps — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free GIF to APNG — full-color animation. Local FFmpeg, unlimited saves.',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
     seoTitle: "Free GIF to APNG Converter Online",
     instructions: [
       { title: "1. Upload GIFs", desc: "Animated files to modernize." },
       { title: "2. Convert to APNG", desc: "Color and timing carry over automatically." },
-      { title: "3. Download APNGs", desc: "Save the files (counts on the free download quota)." },
+      { title: "3. Download APNGs", desc: "Save the files (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'APNG vs GIF — what improves?', answer: '24-bit color (no 256-color banding) plus alpha transparency and typically 20–30% smaller files. Sticker packs look dramatically better on modern messengers.' },
       { question: 'Where does APNG play?', answer: 'All modern browsers, iMessage, and most 2020+ apps; legacy GIF-only systems still need GIF. Ship APNG primary with GIF fallback.' },
       { question: 'Does frame rate survive?', answer: 'Yes — timing transfers per frame. Very high-frame GIFs may cap at display rates; preview motion smoothness before batching hundreds.' },
-      { question: 'Do animations upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do animations upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -768,7 +768,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on FFmpeg." },
       { title: "2. Configure process", desc: "Set the process options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What is APNG?", answer: "APNG (Animated PNG) is an extension of PNG that supports animation. It offers better quality than GIF with full alpha transparency and 24-bit color, but has limited browser support." },
@@ -789,7 +789,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop image file(s)", desc: "Upload your image source. Runs locally on Canvas." },
       { title: "2. Set ICO options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download ICO", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download ICO", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What sizes come out?", answer: "16, 32, and 48 px packed into one ICO for tabs and shortcuts." },
@@ -880,10 +880,9 @@ export const entries_chunk_2: ToolMetadata[] = [
     dependencies: "RDAP API",
     showInCategory: true,
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for WHOIS Lookup." },
-      { title: "2. Run the lookup", desc: "Inspect each field in the response; mismatches mean re-enter, not proceed." },
-      { title: "3. Confirm officially", desc: "Screen with this tool, decide with the authority record." },
-    ],
+      { title: "1. Enter the domain", desc: "Bare domain — RDAP lookup runs against public registries." },
+      { title: "2. Read registration", desc: "Registrar, expiry date and name servers." },
+      { title: "3. Act on dates", desc: "Near-expiry domains get renewed; suspicious ones get researched." },    ],
     faqs: [
       { question: "What information does the WHOIS lookup return?", answer: "Domain registrar name, registration and expiration dates, name servers, DNSSEC status, and the RDAP registry where the domain is managed." },
       { question: "What's the difference between WHOIS and RDAP?", answer: "WHOIS is the legacy protocol. RDAP (Registration Data Access Protocol) is the modern replacement that provides structured JSON data and respects privacy laws by redacting personal info." },
@@ -903,10 +902,9 @@ export const entries_chunk_2: ToolMetadata[] = [
     dependencies: "crt.sh / TLS endpoints",
     showInCategory: true,
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for SSL Checker." },
-      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
-      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
-    ],
+      { title: "1. Enter the domain", desc: "Any hostname — certificate fetched live with chain." },
+      { title: "2. Read validity and issuer", desc: "Issuer, validity window, days remaining and SANs." },
+      { title: "3. Renew before expiry", desc: "Under 30 days means renew now; re-check after install." },    ],
     faqs: [
       { question: "What SSL certificate details does it show?", answer: "Certificate issuer (e.g., Let's Encrypt, DigiCert), validity period (not-before and not-after dates), days remaining until expiration, serial number, and Subject Alternative Names (SANs)." },
       { question: "Can I check if a certificate is about to expire?", answer: "Yes. The tool shows the exact expiration date and calculates days remaining. Use this to monitor your own domains or verify a site's certificate is current." },
@@ -921,21 +919,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "PDF to TIFF",
     slug: "pdf-to-tiff",
     category: "PDF",
-    description: 'Convert PDF pages to lossless TIFF images for print, fax, and archival workflows. Produce 300 DPI press-ready files — local rendering, free quota on saves.',
-    seoDescription: 'Free PDF to TIFF — lossless, press-ready. Local rendering, free quota on saves.',
+    description: 'Convert PDF pages to lossless TIFF images for print, fax, and archival workflows. Produce 300 DPI press-ready files — local rendering, unlimited saves.',
+    seoDescription: 'Free PDF to TIFF — lossless, press-ready. Local rendering, unlimited saves.',
     dependencies: "pdfjs-dist",
     showInCategory: true,
     seoTitle: "Free PDF to TIFF Converter Online",
     instructions: [
       { title: "1. Upload the PDF", desc: "Documents bound for print or fax." },
       { title: "2. Set DPI and mode", desc: "300 for print, Group 4 for B&W fax." },
-      { title: "3. Download TIFFs", desc: "Save multi or single files (counts on free quota)." },
+      { title: "3. Download TIFFs", desc: "Save multi or single files (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why TIFF instead of PNG?', answer: 'Print and fax pipelines demand TIFF (Group 4 for B&W, LZW for color); PNG suits screens. A legal archive takes TIFF; a blog takes PNG from the same pages.' },
       { question: 'What DPI should I render?', answer: '300 DPI for print and OCR, 150 for screen review, 600 only for fine engineering drawings. File sizes scale with the square of DPI — 600 costs 4x the bytes of 300.' },
       { question: 'Multi-page or single files?', answer: 'Both: multi-page TIFF keeps documents together; single files suit per-page processing. Fax systems usually want single-page Group 4.' },
-      { question: 'Does rendering upload pages?', answer: 'No — rendering runs locally in your browser. Only image saves count on the free download quota.' },
+      { question: 'Does rendering upload pages?', answer: 'No — rendering runs locally in your browser. Only image saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -948,7 +946,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop TIFF file(s)", desc: "Upload your TIFF source. Runs locally on pdf-lib." },
       { title: "2. Set PDF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download PDF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download PDF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'Do multi-page TIFFs stay together?', answer: 'Yes — every TIFF page becomes a PDF page in order, so faxes and scans stay whole.' },
@@ -965,15 +963,15 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "Font Converter",
     slug: "font-converter",
     category: "Design",
-    description: 'Convert fonts between TTF, OTF, WOFF, and WOFF2 with custom-text preview before downloading. Ship web-ready WOFF2 in one pass — local opentype.js work, free quota on saves.',
-    seoDescription: 'Free font converter — TTF, OTF, WOFF, WOFF2 with preview. Local, free quota on saves.',
+    description: 'Convert fonts between TTF, OTF, WOFF, and WOFF2 with custom-text preview before downloading. Ship web-ready WOFF2 in one pass — local opentype.js work, unlimited saves.',
+    seoDescription: 'Free font converter — TTF, OTF, WOFF, WOFF2 with preview. Local, unlimited saves.',
     dependencies: "opentype.js",
     showInCategory: true,
     seoTitle: "Free Font Converter – TTF OTF WOFF Online",
     instructions: [
       { title: "1. Upload the font", desc: "TTF, OTF, WOFF, or WOFF2 source file." },
       { title: "2. Preview and pick output", desc: "Render custom text, then choose WOFF2 for web or TTF/OTF for desktop." },
-      { title: "3. Download converted font", desc: "Save the file (counts on the free download quota)." },
+      { title: "3. Download converted font", desc: "Save the file (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Which output format should I choose?', answer: 'WOFF2 for all modern websites (smallest, fastest); WOFF only for decade-old browser support; TTF/OTF for desktop install use. A 120 KB TTF typically becomes an 80 KB WOFF2.' },
@@ -987,21 +985,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "Font Subsetter",
     slug: "font-subsetter",
     category: "Design",
-    description: 'Subset fonts to used characters plus WOFF2 conversion — cut webfont weight by 90%. Ship 12 KB instead of 150 KB — local opentype.js work, free quota on saves.',
-    seoDescription: 'Free font subsetter — used glyphs only. Local, free quota on saves.',
+    description: 'Subset fonts to used characters plus WOFF2 conversion — cut webfont weight by 90%. Ship 12 KB instead of 150 KB — local opentype.js work, unlimited saves.',
+    seoDescription: 'Free font subsetter — used glyphs only. Local, unlimited saves.',
     dependencies: "opentype.js",
     showInCategory: true,
     seoTitle: "Free Font Subsetter – WOFF2 Online",
     instructions: [
       { title: "1. Upload the font", desc: "Check license allows subsetting." },
       { title: "2. Select characters", desc: "Locales actually served." },
-      { title: "3. Download WOFF2", desc: "Deploy subset (counts on the free download quota)." },
+      { title: "3. Download WOFF2", desc: "Deploy subset (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'How small do subsets get?', answer: 'Latin-only subsets land 85–95% smaller: 150 KB becomes ~12 KB. Biggest single webfont win available.' },
       { question: 'Which characters to keep?', answer: 'Site\'s actual alphabet per language served — English plus each supported locale\'s set. Missing glyphs render tofu boxes, so audit coverage.' },
       { question: 'License check?', answer: 'Many commercial licenses forbid subsetting or web use — verify rights before converting client fonts. Open fonts (OFL) subset freely.' },
-      { question: 'Are fonts uploaded?', answer: 'No — subsetting runs locally in your browser. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Are fonts uploaded?', answer: 'No — subsetting runs locally in your browser. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -1013,7 +1011,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop CBZ pages file(s)", desc: "Upload your CBZ pages source. Runs locally on pdf-lib." },
       { title: "2. Set PDF options", desc: "Adjust output settings for PDF — presets fit most jobs without further tuning." },
-      { title: "3. Download PDF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download PDF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What is CBZ?", answer: "Zipped comic-book images — sequential pages in one handy archive." },
@@ -1053,20 +1051,20 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "XLSX ↔ CSV Converter",
     slug: "xlsx-csv-converter",
     category: "Converter",
-    description: 'Convert between XLSX workbooks and CSV files preserving sheets and encoding. Move data across Excel and pipelines — local SheetJS work, free quota on saves.',
-    seoDescription: 'Free XLSX-CSV converter — sheets preserved. Local, free quota on saves.',
+    description: 'Convert between XLSX workbooks and CSV files preserving sheets and encoding. Move data across Excel and pipelines — local SheetJS work, unlimited saves.',
+    seoDescription: 'Free XLSX-CSV converter — sheets preserved. Local, unlimited saves.',
     dependencies: "xlsx",
     seoTitle: "Free XLSX CSV Converter – Both Ways Online",
     instructions: [
       { title: "1. Upload XLSX or CSV", desc: "Workbooks or flat files." },
       { title: "2. Convert direction", desc: "Sheets split or combine accordingly." },
-      { title: "3. Download converted", desc: "Verify encoding after (counts on the free download quota)." },
+      { title: "3. Download converted", desc: "Verify encoding after (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Multiple sheets?', answer: 'Each sheet converts to its own CSV (or selective sheets only). Single-sheet workbooks map one-to-one.' },
       { question: 'Encoding issues?', answer: 'UTF-8 with BOM for Excel compatibility; formulas export as computed values. Verify accented text after converting.' },
       { question: 'CSV back to XLSX?', answer: 'Yes — CSVs combine into worksheets with type inference. Formatting rebuilds manually; data transfers exactly.' },
-      { question: 'Are workbooks uploaded?', answer: 'No — conversion runs locally in your browser with SheetJS. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Are workbooks uploaded?', answer: 'No — conversion runs locally in your browser with SheetJS. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -1075,21 +1073,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "VCF ↔ CSV Converter",
     slug: "vcf-csv-converter",
     category: "Converter",
-    description: 'Convert vCard contacts to CSV spreadsheets and back — migrate address books anywhere. Move 500 iPhone contacts to Google — local parsing, free quota on saves.',
-    seoDescription: 'Free vCard converter — contacts to sheets. Local, free quota on saves.',
+    description: 'Convert vCard contacts to CSV spreadsheets and back — migrate address books anywhere. Move 500 iPhone contacts to Google — local parsing, unlimited saves.',
+    seoDescription: 'Free vCard converter — contacts to sheets. Local, unlimited saves.',
     dependencies: "vcard-parser",
     showInCategory: false,
     seoTitle: "Free VCF to CSV Converter – Contacts Online",
     instructions: [
       { title: "1. Upload vCard file", desc: "Exported .vcf contacts." },
       { title: "2. Convert to CSV", desc: "Fields map to columns." },
-      { title: "3. Import anywhere", desc: "Spot-check after (counts on the free download quota)." },
+      { title: "3. Import anywhere", desc: "Spot-check after (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'What fields transfer?', answer: 'Names, phones (typed), emails, addresses, organizations, and notes map to columns. Photos export separately where supported.' },
       { question: 'iPhone to Google?', answer: 'Export vCards from iCloud, convert to CSV, import to Google Contacts — 500 contacts migrate in minutes with a spot-check after.' },
       { question: 'Duplicate contacts?', answer: 'Merges flag exact duplicates; near-dupes (Jon vs Jonathan) need human review. Dedupe after importing, not before.' },
-      { question: 'Are contacts uploaded?', answer: 'No — parsing runs locally in your browser. Only saves count on the free download quota. Personal data stays private.' },
+      { question: 'Are contacts uploaded?', answer: 'No — parsing runs locally in your browser. Only saves touch the network — downloads are unlimited. Personal data stays private.' },
     ],
   },
   {
@@ -1098,21 +1096,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "ICS ↔ CSV Converter",
     slug: "ics-csv-converter",
     category: "Converter",
-    description: 'Convert calendar ICS files to CSV rows — audit events in spreadsheets. Turn a year of meetings into data — local parsing, free quota on saves.',
-    seoDescription: 'Free calendar converter — events to rows. Local, free quota on saves.',
+    description: 'Convert calendar ICS files to CSV rows — audit events in spreadsheets. Turn a year of meetings into data — local parsing, unlimited saves.',
+    seoDescription: 'Free calendar converter — events to rows. Local, unlimited saves.',
     dependencies: "ical",
     showInCategory: false,
     seoTitle: "Free ICS to CSV Converter – Calendar Online",
     instructions: [
       { title: "1. Upload ICS file", desc: "Exported calendar data." },
       { title: "2. Convert to rows", desc: "Events with timezone columns." },
-      { title: "3. Analyze in sheets", desc: "Time audits and reports (counts on the free download quota)." },
+      { title: "3. Analyze in sheets", desc: "Time audits and reports (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'What columns result?', answer: 'Summary, start/end with timezones, location, description, and recurrence rules per event. A year of meetings becomes analyzable rows.' },
       { question: 'Timezones?', answer: 'UTC-normalized with original zones preserved in columns. Recurring events expand per setting or stay as rules.' },
       { question: 'Privacy?', answer: 'Meeting titles and attendees are sensitive — convert locally (as here) and share aggregates, never raw attendee lists.' },
-      { question: 'Are calendars uploaded?', answer: 'No — parsing runs locally in your browser. Only saves count on the free download quota.' },
+      { question: 'Are calendars uploaded?', answer: 'No — parsing runs locally in your browser. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -1127,7 +1125,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WAV file(s)", desc: "Upload your WAV source. Runs locally on FFmpeg." },
       { title: "2. Set MP3 options", desc: "Set MP3 bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download MP3", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "How much smaller does MP3 get?", answer: "Roughly 10×: a 50MB WAV becomes ~5MB at 192 kbps. WAV stores every sample; MP3 discards what ears can't hear. Archive masters as WAV/FLAC, share as MP3." },
@@ -1150,7 +1148,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop FLAC file(s)", desc: "Upload your FLAC source. Runs locally on FFmpeg." },
       { title: "2. Set MP3 options", desc: "Set MP3 bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download MP3", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why keep FLAC if MP3 is smaller?", answer: "FLAC is bit-perfect: every future conversion starts from full quality. Convert FLAC→MP3 for phones and cars, but archive the FLAC — re-encoding MP3→MP3 compounds quality loss each generation." },
@@ -1170,7 +1168,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop FLAC file(s)", desc: "Upload your FLAC source. Runs locally on FFmpeg." },
       { title: "2. Set WMA options", desc: "Set WMA bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download WMA", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WMA", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why WMA from FLAC?", answer: "Legacy Windows systems that accept nothing newer. Legacy Windows systems that accept nothing newer exist." },
@@ -1194,7 +1192,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop FLAC file(s)", desc: "Upload your FLAC source. Runs locally on FFmpeg." },
       { title: "2. Set Opus options", desc: "Set Opus bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download Opus", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download Opus", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert lossless FLAC to lossy Opus?", answer: "Opus files are 80-90% smaller than FLAC while sounding nearly identical at normal listening volumes. This is ideal for portable devices, streaming, or reducing storage usage without noticeable quality loss." },
@@ -1215,7 +1213,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop FLAC file(s)", desc: "Upload your FLAC source. Runs locally on FFmpeg." },
       { title: "2. Set AIFF options", desc: "Set AIFF bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download AIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AIFF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why AIFF from FLAC?", answer: "Apple pro workflows — Logic and GarageBand ingest AIFF natively." },
@@ -1237,7 +1235,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop OGG file(s)", desc: "Upload your OGG source. Runs locally on FFmpeg." },
       { title: "2. Set MP3 options", desc: "Set MP3 bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download MP3", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why MP3 from OGG?", answer: "Universal playback — MP3 plays on devices OGG never reached." },
@@ -1262,7 +1260,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop OGG file(s)", desc: "Upload your OGG source. Runs locally on FFmpeg." },
       { title: "2. Set WMA options", desc: "Set WMA bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download WMA", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WMA", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert OGG to WMA?", answer: "WMA is the native audio format for Windows Media Player and older Windows applications. Converting OGG to WMA ensures playback on legacy Windows devices and software that don't support OGG." },
@@ -1282,7 +1280,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop OGG file(s)", desc: "Upload your OGG source. Runs locally on FFmpeg." },
       { title: "2. Set Opus options", desc: "Set Opus bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download Opus", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download Opus", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Vorbis to Opus — why?", answer: "Newer codec, better quality per bit, same open family. Newer codec, better quality per bit, same open-source family." },
@@ -1307,7 +1305,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop OGG file(s)", desc: "Upload your OGG source. Runs locally on FFmpeg." },
       { title: "2. Set AIFF options", desc: "Set AIFF bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download AIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AIFF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert OGG to AIFF?", answer: "AIFF is an uncompressed audio format widely supported by professional audio software, DAWs (Logic Pro, Pro Tools), and Apple devices. Converting from OGG provides lossless quality for editing and mastering." },
@@ -1327,7 +1325,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop M4A file(s)", desc: "Upload your M4A source. Runs locally on FFmpeg." },
       { title: "2. Set MP3 options", desc: "Set MP3 bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download MP3", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download MP3", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why MP3 from M4A?", answer: "Leaving Appleland — MP3 plays on every non-Apple device ever made." },
@@ -1352,7 +1350,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop M4A file(s)", desc: "Upload your M4A source. Runs locally on FFmpeg." },
       { title: "2. Set WMA options", desc: "Set WMA bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download WMA", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WMA", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does M4A to WMA do?", answer: "Convert M4A audio files to WMA format directly in your browser. High-quality conversion with no file size limits." },
@@ -1371,7 +1369,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop M4A file(s)", desc: "Upload your M4A source. Runs locally on FFmpeg." },
       { title: "2. Set Opus options", desc: "Set Opus bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download Opus", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download Opus", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why Opus from M4A?", answer: "Shrinking Apple audio for voice streaming and bots. Shrinking Apple audio for voice streaming and bot use." },
@@ -1389,21 +1387,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "M4A to AIFF",
     slug: "m4a-to-aiff",
     category: "Audio",
-    description: 'Convert M4A to AIFF for Logic Pro and GarageBand native ingest. Move Apple audio into pro workflows — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free M4A to AIFF — Logic-ready audio. Local FFmpeg, free quota on saves.',
+    description: 'Convert M4A to AIFF for Logic Pro and GarageBand native ingest. Move Apple audio into pro workflows — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free M4A to AIFF — Logic-ready audio. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     seoTitle: "Free M4A to AIFF Converter Online",
     instructions: [
       { title: "1. Upload M4A files", desc: "Apple audio bound for Logic." },
       { title: "2. Convert to AIFF", desc: "Native pro-workflow format." },
-      { title: "3. Download AIFFs", desc: "Import to timelines (counts on the free download quota)." },
+      { title: "3. Download AIFFs", desc: "Import to timelines (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why AIFF for Logic?', answer: 'Logic and GarageBand ingest AIFF natively with full metadata and region support. M4A works but AIFF edits smoother on Apple timelines.' },
       { question: 'Quality cost?', answer: 'None from ALAC sources (bit-perfect); one lossy generation from AAC (transparent at high bitrates). Check the source codec first.' },
       { question: 'How big are AIFF outputs?', answer: 'Uncompressed like WAV — ~10 MB per stereo minute. Large but edit-friendly; archive FLAC separately.' },
-      { question: 'Do Logic-bound files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves count on the free download quota.' },
+      { question: 'Do Logic-bound files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -1411,21 +1409,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "AAC to MP3",
     slug: "aac-to-mp3",
     category: "Audio",
-    description: 'Convert AAC to universally compatible MP3 for legacy players and sharing. Reach every device ever made — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free AAC to MP3 — universal playback. Local FFmpeg, free quota on saves.',
+    description: 'Convert AAC to universally compatible MP3 for legacy players and sharing. Reach every device ever made — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free AAC to MP3 — universal playback. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     seoTitle: "Free AAC to MP3 Converter Online",
     instructions: [
       { title: "1. Upload AAC files", desc: "DRM-free copies you own." },
       { title: "2. Set MP3 bitrate", desc: "192k music, 128k voice minimum." },
-      { title: "3. Download MP3s", desc: "Universal playback files (counts on the free download quota)." },
+      { title: "3. Download MP3s", desc: "Universal playback files (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why MP3 from AAC?', answer: 'Car stereos, cheap players, and legacy software play MP3 exclusively. Leaving Apple\'s ecosystem demands the universal format.' },
       { question: 'What bitrate hides the loss?', answer: '192 kbps minimum for music transcoded from AAC; 128k suffices for podcasts. Lossy-to-lossy always costs a generation — pay bitrate to hide it.' },
       { question: 'DRM purchases?', answer: 'Protected store files can\'t convert — only DRM-free copies you own. Subscription downloads stay locked by design.' },
-      { question: 'Do legacy files upload anywhere?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do legacy files upload anywhere?', answer: 'No — conversion runs locally in your browser with FFmpeg. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -1437,7 +1435,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AAC file(s)", desc: "Upload your AAC source. Runs locally on FFmpeg." },
       { title: "2. Set WMA options", desc: "Set WMA bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download WMA", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WMA", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why WMA from AAC?", answer: "Corporate Windows systems that standardized on WMA long ago." },
@@ -1455,21 +1453,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "AAC to Opus",
     slug: "aac-to-opus",
     category: "Audio",
-    description: 'Convert AAC to ultra-efficient Opus for voice streaming, bots, and VoIP. Shrink spoken audio to tiny bitrates — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free AAC to Opus — tiny voice files. Local FFmpeg, free quota on saves.',
+    description: 'Convert AAC to ultra-efficient Opus for voice streaming, bots, and VoIP. Shrink spoken audio to tiny bitrates — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free AAC to Opus — tiny voice files. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     seoTitle: "Free AAC to Opus Converter Online",
     instructions: [
       { title: "1. Upload AAC files", desc: "Voice content bound for streaming." },
       { title: "2. Set Opus bitrate", desc: "24–32k voice, 64k+ music." },
-      { title: "3. Download Opus files", desc: "Tiny streaming-ready audio (counts on the free download quota)." },
+      { title: "3. Download Opus files", desc: "Tiny streaming-ready audio (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'What bitrate for voice?', answer: '24–32 kbps Opus delivers clear voice — a 60-minute show shrinks near 15 MB. Music needs 64+ kbps to avoid artifacts.' },
       { question: 'Discord bots and VoIP?', answer: 'Opus is their native codec — converting upfront skips server transcoding and sounds better than MP3 at these rates.' },
       { question: 'Quality cost from AAC?', answer: 'One lossy generation; voice survives transparently, music suffers audibly. Keep AAC/FLAC masters for music.' },
-      { question: 'Do streaming files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves count on the free download quota.' },
+      { question: 'Do streaming files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -1481,7 +1479,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AAC file(s)", desc: "Upload your AAC source. Runs locally on FFmpeg." },
       { title: "2. Set AIFF options", desc: "Set AIFF bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download AIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AIFF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why AIFF from AAC?", answer: "Pro Apple workflows needing uncompressed audio. Pro Apple workflows needing uncompressed audio masters." },
@@ -1503,7 +1501,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WMA file(s)", desc: "Upload your WMA source. Runs locally on FFmpeg." },
       { title: "2. Set WAV options", desc: "Set WAV bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download WAV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WAV", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why WAV from WMA?", answer: "Escaping legacy format into editable uncompressed audio. for editable uncompressed audio masters." },
@@ -1521,21 +1519,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "WMA to FLAC",
     slug: "wma-to-flac",
     category: "Audio",
-    description: 'Convert WMA to FLAC for lossless Windows-library archival. Escape legacy codecs without further loss — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free WMA to FLAC — lossless archival. Local FFmpeg, free quota on saves.',
+    description: 'Convert WMA to FLAC for lossless Windows-library archival. Escape legacy codecs without further loss — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free WMA to FLAC — lossless archival. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     seoTitle: "Free WMA to FLAC Converter Online",
     instructions: [
       { title: "1. Upload WMA files", desc: "Legacy Windows libraries." },
       { title: "2. Convert to FLAC", desc: "Exact preservation, no further loss." },
-      { title: "3. Download FLACs", desc: "Modern archives (counts on the free download quota)." },
+      { title: "3. Download FLACs", desc: "Modern archives (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why FLAC from WMA?', answer: 'WMA is legacy and lossy; FLAC preserves exactly what\'s left while moving to a supported format. Archive once, stop transcoding.' },
       { question: 'Quality restored?', answer: 'No — FLAC holds the WMA fidelity exactly, artifacts included. It prevents further loss; it cannot reverse past loss.' },
       { question: 'Tags survive?', answer: 'Standard title/artist/album map over; exotic WMA attributes may drop. Verify a converted album before batching hundreds.' },
-      { question: 'Do Windows files upload anywhere?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do Windows files upload anywhere?', answer: 'No — conversion runs locally in your browser with FFmpeg. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -1547,7 +1545,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WMA file(s)", desc: "Upload your WMA source. Runs locally on FFmpeg." },
       { title: "2. Set OGG options", desc: "Set OGG bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download OGG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download OGG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why OGG from WMA?", answer: "Open-source playback on Linux and open platforms. on Linux and other open platforms consistently." },
@@ -1569,7 +1567,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WMA file(s)", desc: "Upload your WMA source. Runs locally on FFmpeg." },
       { title: "2. Set M4A options", desc: "Set M4A bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download M4A", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download M4A", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why M4A from WMA?", answer: "Moving a Windows library into Apple devices and apps. into Apple devices and apps cleanly." },
@@ -1587,21 +1585,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "WMA to AAC",
     slug: "wma-to-aac",
     category: "Audio",
-    description: 'Convert legacy WMA to efficient AAC for modern players and phones. Rescue Windows Media libraries for today — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free WMA to AAC — legacy to modern. Local FFmpeg, free quota on saves.',
+    description: 'Convert legacy WMA to efficient AAC for modern players and phones. Rescue Windows Media libraries for today — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free WMA to AAC — legacy to modern. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     seoTitle: "Free WMA to AAC Converter Online",
     instructions: [
       { title: "1. Upload WMA files", desc: "Unprotected rips you own." },
       { title: "2. Set AAC bitrate", desc: "128k typical, lower for voice." },
-      { title: "3. Download AACs", desc: "Modern compatible files (counts on the free download quota)." },
+      { title: "3. Download AACs", desc: "Modern compatible files (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why AAC instead of MP3?', answer: 'Better quality per bit — 128k AAC matches 192k MP3 roughly. Modern phones and apps prefer AAC; legacy-only players still need MP3.' },
       { question: 'What bitrate for old WMA?', answer: '128 kbps AAC for typical rips; the source already lost quality once, so generous rates hide a second generation. Voice-only survives lower.' },
       { question: 'DRM-protected WMA?', answer: 'PlaysForSure-era DRM files cannot convert — only unprotected rips you own. Subscription downloads stay locked.' },
-      { question: 'Do library files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do library files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -1616,7 +1614,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WMA file(s)", desc: "Upload your WMA source. Runs locally on FFmpeg." },
       { title: "2. Set Opus options", desc: "Set Opus bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download Opus", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download Opus", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does WMA to Opus do?", answer: "Convert WMA audio files to OPUS format directly in your browser. High-quality conversion with no file size limits." },
@@ -1631,21 +1629,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "WMA to AIFF",
     slug: "wma-to-aiff",
     category: "Audio",
-    description: 'Convert WMA to uncompressed AIFF for Apple pro audio workflows. Bring legacy libraries into Logic — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free WMA to AIFF — legacy to Logic-ready. Local FFmpeg, free quota on saves.',
+    description: 'Convert WMA to uncompressed AIFF for Apple pro audio workflows. Bring legacy libraries into Logic — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free WMA to AIFF — legacy to Logic-ready. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     seoTitle: "Free WMA to AIFF Converter Online",
     instructions: [
       { title: "1. Upload WMA files", desc: "Legacy audio bound for Logic." },
       { title: "2. Convert to AIFF", desc: "Uncompressed output automatically." },
-      { title: "3. Download AIFFs", desc: "Import to timelines (counts on the free download quota)." },
+      { title: "3. Download AIFFs", desc: "Import to timelines (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why AIFF from WMA?', answer: 'Logic Pro and GarageBand ingest AIFF natively — the cleanest path for legacy Windows audio into Apple production.' },
       { question: 'Quality expectations?', answer: 'Lossy WMA to lossless AIFF preserves exactly, artifacts included. Upsampling rates or depths adds nothing — keep source specs.' },
       { question: 'How large are AIFF outputs?', answer: '~10 MB per stereo minute uncompressed. Batch selectively — full libraries balloon fast.' },
-      { question: 'Do audio files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves count on the free download quota.' },
+      { question: 'Do audio files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -1659,7 +1657,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop Opus file(s)", desc: "Upload your Opus source. Runs locally on FFmpeg." },
       { title: "2. Set WAV options", desc: "Set WAV bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download WAV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WAV", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why would I convert lossy Opus to lossless WAV?", answer: "Some professional audio software, DAWs, and hardware only accept WAV input. Converting Opus to WAV makes the audio compatible with these tools, though it cannot recover lost quality." },
@@ -1680,7 +1678,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop Opus file(s)", desc: "Upload your Opus source. Runs locally on FFmpeg." },
       { title: "2. Set FLAC options", desc: "Set FLAC bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download FLAC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download FLAC", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why FLAC from Opus?", answer: "Archive uniformity — lossy sources in a lossless container. Archive uniformity — lossy sources in a lossless container." },
@@ -1704,7 +1702,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop Opus file(s)", desc: "Upload your Opus source. Runs locally on FFmpeg." },
       { title: "2. Set OGG options", desc: "Set OGG bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download OGG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download OGG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert Opus to OGG?", answer: "Opus is newer and more efficient, but OGG Vorbis has broader device and software support. Some older media players, car stereos, and gaming consoles recognize OGG but not Opus." },
@@ -1721,21 +1719,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "Opus to M4A",
     slug: "opus-to-m4a",
     category: "Audio",
-    description: 'Convert Opus voice files to M4A for Apple Podcasts and iTunes compatibility. Publish voice content where Opus won\'t play — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free Opus to M4A — voice to Apple player. Local FFmpeg, free quota on saves.',
+    description: 'Convert Opus voice files to M4A for Apple Podcasts and iTunes compatibility. Publish voice content where Opus won\'t play — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free Opus to M4A — voice to Apple player. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     seoTitle: "Free Opus to M4A Converter Online",
     instructions: [
       { title: "1. Upload Opus files", desc: "Voice content for Apple players." },
       { title: "2. Set M4A bitrate", desc: "128k voice, 192k music-origin." },
-      { title: "3. Download M4As", desc: "Podcast-ready files (counts on the free download quota)." },
+      { title: "3. Download M4As", desc: "Podcast-ready files (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why M4A from Opus?', answer: 'Apple Podcasts, iTunes, and iOS players skip Opus — M4A (AAC) plays universally there. Voice shows convert cleanly upward in compatibility.' },
       { question: 'What M4A bitrate?', answer: '128 kbps AAC preserves voice fully from 32k Opus sources; music-origin Opus deserves 192k. Match content, not habit.' },
       { question: 'Podcast RSS ready?', answer: 'Yes — M4A with proper tags feeds Apple Podcasts directly. Add chapter marks and artwork before submitting the feed.' },
-      { question: 'Do voice files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do voice files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -1749,7 +1747,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop Opus file(s)", desc: "Upload your Opus source. Runs locally on FFmpeg." },
       { title: "2. Set AAC options", desc: "Set AAC bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download AAC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AAC", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert Opus to AAC?", answer: "AAC is the universal standard for music downloads, streaming platforms, and Apple devices. If you need to submit audio to a service that requires AAC, this conversion gets you there." },
@@ -1770,7 +1768,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop Opus file(s)", desc: "Upload your Opus source. Runs locally on FFmpeg." },
       { title: "2. Set WMA options", desc: "Set WMA bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download WMA", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WMA", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why WMA from Opus?", answer: "Legacy Windows targets that predate modern codecs. Legacy Windows targets that predate all modern codecs." },
@@ -1795,7 +1793,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop Opus file(s)", desc: "Upload your Opus source. Runs locally on FFmpeg." },
       { title: "2. Set AIFF options", desc: "Set AIFF bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download AIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AIFF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does Opus to AIFF do?", answer: "Convert OPUS audio files to AIFF format directly in your browser. High-quality conversion with no file size limits." },
@@ -1814,7 +1812,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AIFF file(s)", desc: "Upload your AIFF source. Runs locally on FFmpeg." },
       { title: "2. Set WAV options", desc: "Set WAV bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download WAV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WAV", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why WAV from AIFF?", answer: "Windows and DAW compatibility — same audio, wider support. Windows and DAW compatibility — same audio, wider support." },
@@ -1832,21 +1830,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "AIFF to FLAC",
     slug: "aiff-to-flac",
     category: "Audio",
-    description: 'Compress AIFF masters to FLAC at half size with zero loss — universal archival. Move Logic bounces into long-term storage — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free AIFF to FLAC — half size, lossless. Local FFmpeg, free quota on saves.',
+    description: 'Compress AIFF masters to FLAC at half size with zero loss — universal archival. Move Logic bounces into long-term storage — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free AIFF to FLAC — half size, lossless. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     seoTitle: "Free AIFF to FLAC Converter Online",
     instructions: [
       { title: "1. Upload AIFF bounces", desc: "Finished Logic sessions to archive." },
       { title: "2. Compress to FLAC", desc: "Bit-identical at half bytes." },
-      { title: "3. Download FLACs", desc: "Tag then vault (counts on the free download quota)." },
+      { title: "3. Download FLACs", desc: "Tag then vault (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'How small do FLAC archives get?', answer: 'Typically 50–60% — a 600 MB Logic bounce folder lands near 300 MB FLAC. Bit-identical audio, instant decoding everywhere.' },
       { question: 'Keep AIFF too?', answer: 'Working sessions stay AIFF for DAW speed; archive finished bounces as FLAC. Two tiers: fast workspace, dense vault.' },
       { question: 'Tags carry over?', answer: 'Core title/artist/album map to Vorbis comments; take notes and artwork verify after. Tag at archive time, not later.' },
-      { question: 'Do masters upload?', answer: 'No — compression runs locally in your browser with FFmpeg. Only saves count on the free download quota.' },
+      { question: 'Do masters upload?', answer: 'No — compression runs locally in your browser with FFmpeg. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -1860,7 +1858,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AIFF file(s)", desc: "Upload your AIFF source. Runs locally on FFmpeg." },
       { title: "2. Set OGG options", desc: "Set OGG bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download OGG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download OGG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What is AIFF and why would I have these files?", answer: "AIFF (Audio Interchange File Format) is Apple's equivalent of WAV — lossless, uncompressed audio. Mac users often have AIFF files from GarageBand, iTunes, or professional audio workflows." },
@@ -1884,7 +1882,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AIFF file(s)", desc: "Upload your AIFF source. Runs locally on FFmpeg." },
       { title: "2. Set M4A options", desc: "Set M4A bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download M4A", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download M4A", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does AIFF to M4A do?", answer: "Convert AIFF audio files to M4A format directly in your browser. High-quality conversion with no file size limits." },
@@ -1899,21 +1897,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "AIFF to AAC",
     slug: "aiff-to-aac",
     category: "Audio",
-    description: 'Convert AIFF masters to efficient AAC for sharing and streaming previews. Send listenable links without huge uploads — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free AIFF to AAC — shareable previews. Local FFmpeg, free quota on saves.',
+    description: 'Convert AIFF masters to efficient AAC for sharing and streaming previews. Send listenable links without huge uploads — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free AIFF to AAC — shareable previews. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     seoTitle: "Free AIFF to AAC Converter Online",
     instructions: [
       { title: "1. Upload AIFF files", desc: "Masters needing light previews." },
       { title: "2. Set AAC bitrate", desc: "128k for approvals." },
-      { title: "3. Download AACs", desc: "Shareable links (counts on the free download quota)." },
+      { title: "3. Download AACs", desc: "Shareable links (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'What bitrate for previews?', answer: '128 kbps AAC — full-bandwidth enough for approvals on any device. Masters stay AIFF/FLAC; previews travel light.' },
       { question: 'Why not MP3?', answer: 'AAC sounds better per bit and Apple prefers it; MP3 only where legacy demands. Default AAC for 2026 sharing.' },
       { question: 'Loudness for sharing?', answer: 'Normalize previews to −14 LUFS so clients hear intended balance on phones. Masters keep headroom separately.' },
-      { question: 'Do bounce files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do bounce files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -1921,21 +1919,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "AIFF to WMA",
     slug: "aiff-to-wma",
     category: "Audio",
-    description: 'Convert AIFF to WMA for legacy Windows systems that accept nothing else. Serve corporate libraries stuck on old codecs — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free AIFF to WMA — legacy Windows audio. Local FFmpeg, free quota on saves.',
+    description: 'Convert AIFF to WMA for legacy Windows systems that accept nothing else. Serve corporate libraries stuck on old codecs — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free AIFF to WMA — legacy Windows audio. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
     seoTitle: "Free AIFF to WMA Converter Online",
     instructions: [
       { title: "1. Upload AIFF files", desc: "Masters for legacy Windows targets." },
       { title: "2. Set WMA bitrate", desc: "192k music minimum." },
-      { title: "3. Download WMAs", desc: "Legacy-compatible files (counts on the free download quota)." },
+      { title: "3. Download WMAs", desc: "Legacy-compatible files (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why WMA in 2026?', answer: 'Some corporate and embedded Windows systems standardized on WMA long ago. Serve them without rebuilding pipelines — convert copies, keep AIFF masters.' },
       { question: 'What WMA bitrate?', answer: '192 kbps minimum for music; voice-only survives 96k. Lossless-to-lossy always costs something — pay bitrate.' },
       { question: 'Better alternative?', answer: 'MP3 or WAV where the system allows — WMA only where nothing else plays. Confirm requirements before batching hundreds.' },
-      { question: 'Do source files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves count on the free download quota.' },
+      { question: 'Do source files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -1950,7 +1948,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AIFF file(s)", desc: "Upload your AIFF source. Runs locally on FFmpeg." },
       { title: "2. Set Opus options", desc: "Set Opus bitrate and sample rate — 128 kbps MP3 for sharing, WAV for editing masters." },
-      { title: "3. Download Opus", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download Opus", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert AIFF to Opus?", answer: "Opus offers excellent quality at very low bitrates, making it ideal for streaming, VoIP, and web audio. Converting from large AIFF files to Opus dramatically reduces file size." },
@@ -2608,10 +2606,9 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online MAC Vendor Lookup — Look up device manufacturer from MAC address OUI prefix with extensive vendor database. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for MAC Vendor Lookup." },
-      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
-      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
-    ],
+      { title: "1. Enter the MAC address", desc: "Full address or just the first 3 bytes (OUI prefix)." },
+      { title: "2. Read the manufacturer", desc: "Registered vendor from Apple and Samsung to Intel and Espressif." },
+      { title: "3. Identify the device", desc: "Match vendor plus device behavior on your network inventory." },    ],
     faqs: [
       { question: "What is a MAC address OUI?", answer: "The OUI (Organizationally Unique Identifier) is the first 3 octets (6 hex characters) of a MAC address. It uniquely identifies the device manufacturer or vendor, assigned by IEEE." },
       { question: "What information does the lookup return?", answer: "The vendor/manufacturer name associated with the MAC address OUI prefix. For example, looking up 00:1A:2B returns the manufacturer who owns that OUI block." },
@@ -2765,7 +2762,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop PDF file(s)", desc: "Upload your PDF source. Runs locally on PDF.js." },
       { title: "2. Set PNG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download PNG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download PNG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'PNG or JPG for PDF pages — which?', answer: 'PNG for crisp text and diagrams (lossless); JPG for smaller photo-heavy pages.' },
@@ -2787,7 +2784,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
       { title: "2. Configure create", desc: "Set the create options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'What inputs become PDFs?', answer: 'Plain text, CSV tables, JSON data, or XML — each rendered with title, font size, and table formatting.' },
@@ -2826,21 +2823,21 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "PDF Cleanup",
     slug: "pdf-cleanup",
     category: "PDF",
-    description: 'Remove blank pages, embedded junk, and bloat from PDFs in one pass — compress, clean, and standardize. Shrink a bloated 80 MB archive for sharing — local work, free quota on saves.',
-    seoDescription: 'Free PDF cleanup — blanks, bloat, junk removed. Local, free quota on saves.',
+    description: 'Remove blank pages, embedded junk, and bloat from PDFs in one pass — compress, clean, and standardize. Shrink a bloated 80 MB archive for sharing — local work, unlimited saves.',
+    seoDescription: 'Free PDF cleanup — blanks, bloat, junk removed. Local, unlimited saves.',
     dependencies: "pdf-lib, pdfjs-dist",
     showInCategory: true,
     seoTitle: "Free PDF Cleanup Tool Online",
     instructions: [
       { title: "1. Upload the bloated PDF", desc: "Archives with blanks and junk objects." },
       { title: "2. Review removals", desc: "Check the blank-page list for false positives." },
-      { title: "3. Download clean PDF", desc: "Save the file (counts on the free download quota)." },
+      { title: "3. Download clean PDF", desc: "Save the file (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'What gets removed?', answer: 'Blank pages, duplicate metadata, orphaned objects, and uncompressed streams — an 80 MB scanned archive typically drops 30–60% with zero visible change.' },
       { question: 'Will cleanup delete real content?', answer: 'No — only provably empty pages and structural junk go. Review the removed-page list before downloading; restore any false-positive blank with form content.' },
       { question: 'Cleanup vs compressor — which?', answer: 'Cleanup removes waste (blank pages, junk objects); compressor recompresses images. Bloated scans need both: cleanup first, then compress — total savings compound.' },
-      { question: 'Does cleanup send files anywhere?', answer: 'No — cleanup runs locally in your browser. Only the final save counts on the free download quota.' },
+      { question: 'Does cleanup send files anywhere?', answer: 'No — cleanup runs locally in your browser. Only the final save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2848,14 +2845,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "PDF Background Color",
     slug: "pdf-background-color",
     category: "PDF",
-    description: 'Add a subtle color tint to all pages in a PDF document. Upload your PDF and pick a background color. Tint every page uniformly for branding or readability themes — local pdf-lib work, free quota on saves.',
+    description: 'Add a subtle color tint to all pages in a PDF document. Upload your PDF and pick a background color. Tint every page uniformly for branding or readability themes — local pdf-lib work, unlimited saves.',
     seoTitle: "PDF Background Color – Free Customizer",
     seoDescription: 'Free online PDF Background Color \u2014 Add a subtle color tint to all pages in a PDF document. ',
     dependencies: "pdf-lib",
     instructions: [
       { title: "1. Upload the PDF", desc: "The background applies to every page in the file." },
       { title: "2. Pick the color", desc: "Choose a readable shade — dark text needs light backgrounds and vice versa." },
-      { title: "3. Download PDF", desc: "Save the recolored file (counts toward free download quota)." },
+      { title: "3. Download PDF", desc: "Save the recolored file (downloads are unlimited)." },
     ],
     faqs: [
       { question: "When using PDF Background Color, what does this tool do?", answer: "Adds a colored background layer to every page in a PDF. Choose any color and the tool inserts a full-page colored rectangle behind the existing content." },
@@ -2870,7 +2867,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "PDF Add Blank Page",
     slug: "pdf-add-blank-page",
     category: "PDF",
-    description: 'Insert blank pages at any position in a PDF document. Choose page size, count, and position. Choose page size and count to match the document — local pdf-lib work, free quota on saves.',
+    description: 'Insert blank pages at any position in a PDF document. Choose page size, count, and position. Choose page size and count to match the document — local pdf-lib work, unlimited saves.',
     seoDescription: 'Free online PDF Add Blank Page \u2014 Insert blank pages at any position in a PDF document. ',
     dependencies: "pdf-lib",
     instructions: [
@@ -2891,12 +2888,12 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "PDF Bates Numbering",
     slug: "pdf-bates-numbering",
     category: "PDF",
-    description: 'Add sequential Bates numbers to every page of your PDF. Customize prefix, starting number, and position. Prefixes, start numbers, and positioning per filing rules — local pdf-lib work, free quota on saves.',
+    description: 'Add sequential Bates numbers to every page of your PDF. Customize prefix, starting number, and position. Prefixes, start numbers, and positioning per filing rules — local pdf-lib work, unlimited saves.',
     seoTitle: "Bates Numbering for PDF – Free Legal Stamping",
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
       { title: "2. Configure number", desc: "Set the number options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'What prefix and numbering can I set?', answer: 'Custom prefix, starting number, and page position — e.g., ACME-0001 in the footer from page one.' },
@@ -2917,7 +2914,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
       { title: "2. Configure stamp", desc: "Set the stamp options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'Which stamp texts are available?', answer: 'DRAFT, CONFIDENTIAL, and other common markings — applied diagonally across every page.' },
@@ -2938,7 +2935,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on pdf-lib." },
       { title: "2. Configure stamp", desc: "Set the stamp options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'Where does the timestamp appear?', answer: 'Bottom-right corner of every page, stamped at generation time — proof of when each copy was produced.' },
@@ -2954,20 +2951,20 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "PDF Table of Contents",
     slug: "pdf-table-of-contents",
     category: "PDF",
-    description: 'Generate clickable tables of contents for PDFs from headings — navigate 300-page ebooks instantly. Add what the author forgot — local pdf-lib work, free quota on saves.',
-    seoDescription: 'Free PDF TOC maker — clickable outlines. Local pdf-lib, free quota on saves.',
+    description: 'Generate clickable tables of contents for PDFs from headings — navigate 300-page ebooks instantly. Add what the author forgot — local pdf-lib work, unlimited saves.',
+    seoDescription: 'Free PDF TOC maker — clickable outlines. Local pdf-lib, unlimited saves.',
     dependencies: "pdf-lib",
     seoTitle: "Free PDF Table of Contents Maker",
     instructions: [
       { title: "1. Upload the PDF", desc: "Ebooks and reports missing navigation." },
       { title: "2. Generate and edit outline", desc: "Auto-detect headings, prune false entries." },
-      { title: "3. Download with TOC", desc: "Save the navigable file (counts on the free download quota)." },
+      { title: "3. Download with TOC", desc: "Save the navigable file (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'How are entries detected?', answer: 'From font-size headings and existing structure: a 300-page ebook gains a nested outline in one pass. Review generated entries — decorative large text sometimes sneaks in as false headings.' },
       { question: 'Clickable in all readers?', answer: 'Standard PDF outlines work in Acrobat, Preview, Chrome, and mobile readers alike. Test two readers before distributing widely.' },
       { question: 'Can I edit entries?', answer: 'Yes — rename, reorder, and nest entries before baking in. Fix auto-detected junk titles in the same pass.' },
-      { question: 'Does outlining upload my ebook?', answer: 'No — outlining runs locally in your browser on pdf-lib. Only the final save counts on the free download quota.' },
+      { question: 'Does outlining upload my ebook?', answer: 'No — outlining runs locally in your browser on pdf-lib. Only the final save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2980,7 +2977,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload the PDF", desc: "Native PDFs with selectable text work best." },
       { title: "2. Apply advanced options", desc: "Compression, metadata, and optimization toggles per the panel." },
-      { title: "3. Download PDF", desc: "Save the optimized file (counts toward free download quota)." },
+      { title: "3. Download PDF", desc: "Save the optimized file (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Overlay vs merge — what\'s the difference?', answer: 'Overlay stacks pages visually (letterhead onto content); merge appends pages end to end.' },
@@ -3002,7 +2999,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload the PDF", desc: "Files with or without existing embedded attachments." },
       { title: "2. Manage attachments", desc: "List, add, or remove embedded files from the document package." },
-      { title: "3. Download PDF", desc: "Save with attachments embedded (counts toward free download quota)." },
+      { title: "3. Download PDF", desc: "Save with attachments embedded (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Which file types can attach?', answer: 'Any — images, spreadsheets, archives, documents. The PDF carries them as embedded payloads.' },
@@ -3244,7 +3241,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Complete each section", desc: "Fill the OAuth Scope Builder fields in order — required items first, optional details after." },
       { title: "2. Review everything", desc: "Re-read names, numbers, and dates before finishing; most rejections come from typos, not eligibility." },
-      { title: "3. Download or submit", desc: "Save the finished document (counts toward free download quota) or copy details into the official portal." },
+      { title: "3. Download or submit", desc: "Save the finished document (downloads are unlimited) or copy details into the official portal." },
     ],
     faqs: [
       { question: "What does the scope builder do?", answer: "It takes individual OAuth scope values (comma-separated) and builds a properly formatted scope string with URL encoding. It also breaks down existing scope strings into individual permissions." },
@@ -3265,10 +3262,9 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online OAuth State Validator \u2014 Validate state parameters for format, length, and age. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for OAuth State Validator." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
-    ],
+      { title: "1. Paste the state value", desc: "The OAuth state parameter your app generated for this login." },
+      { title: "2. Read format, length, age", desc: "Short, predictable or stale states flag CSRF holes before they ship." },
+      { title: "3. Harden generation", desc: "Use cryptographic randomness with expiry, then revalidate." },    ],
     faqs: [
       { question: "What does the state parameter do?", answer: "The OAuth state parameter prevents CSRF attacks by ensuring the authorization response matches your original request. It must be unpredictable and tied to the user's session." },
       { question: "What makes a state parameter valid?", answer: "A valid state is a cryptographically random string (at least 32 characters), properly encoded for URL use, and not expired. It should be stored server-side for verification." },
@@ -3357,10 +3353,9 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online XML Minifier / Validator \u2014 Minify XML by removing whitespace, or validate XML syntax. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for XML Minifier / Validator." },
-      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
-      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
-    ],
+      { title: "1. Paste the XML", desc: "Full document, then choose minify or validate." },
+      { title: "2. Run the operation", desc: "Minify strips whitespace for transit; validate reports syntax breaks." },
+      { title: "3. Take the output", desc: "Copy minified XML or fix flagged lines and revalidate." },    ],
     faqs: [
       { question: "What does minification remove?", answer: "Removes all unnecessary whitespace, line breaks, and indentation between elements and attributes. Comments and CDATA sections are preserved." },
       { question: "Does it validate XML?", answer: "Yes. The validator checks for well-formed XML: proper tag nesting, closed elements, valid attribute syntax, and correct entity references." },
@@ -3779,7 +3774,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "bulk-heic-converter",
     category: "Image",
     description: 'Convert iPhone HEIC/HEIF photos to JPG, PNG, or WebP in batch with quality control. Designers pull iPhone shots into any workflow — local heic2any work, 2 free batches a day.',
-    seoDescription: 'Free bulk HEIC converter — HEIF to JPG, PNG, WebP. Local heic2any, 2 batches daily.',
+    seoDescription: 'Free bulk HEIC converter — HEIF photos to JPG, PNG or WebP. Local heic2any engine, signed 2 batches/day, Pro 500 files.',
     dependencies: "heic2any, jszip",
     showInCategory: true,
     seoTitle: "Free Bulk HEIC Converter – HEIF to JPG",
@@ -3801,7 +3796,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "bulk-image-upscaler",
     category: "Image",
     description: 'Upscale batches of AI art and regular images 2x, 3x, or 4x with Lanczos sharp or Bicubic smooth resampling. Creators print 50 Midjourney pieces at poster size — local Canvas work, 2 free batches a day.',
-    seoDescription: 'Free bulk image upscaler — 2x/3x/4x, Lanczos or Bicubic. Local canvas, 2 batches daily.',
+    seoDescription: 'Free bulk image upscaler — 2x/3x/4x enlargement, Lanczos or Bicubic, across folders. Local Canvas, signed 2 batches/day, Pro unlimited.',
     dependencies: "Canvas API, jszip",
     showInCategory: true,
     seoTitle: "Free Bulk Image Upscaler – 2x 3x 4x",
@@ -3823,7 +3818,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "bulk-avif-optimizer",
     category: "Image",
     description: 'Convert and compress images to next-gen AVIF with quality presets and max-width caps. Performance teams cut hero images 50% smaller than WebP — local Canvas work, 2 free batches a day.',
-    seoDescription: 'Free bulk AVIF optimizer — quality presets, width caps. Local canvas, 2 batches daily free.',
+    seoDescription: 'Free bulk AVIF optimizer — quality presets and max-width caps for next-gen images. Local Canvas, signed 2 batches/day, Pro unlimited.',
     dependencies: "Canvas API, jszip",
     showInCategory: true,
     seoTitle: "Free Bulk AVIF Optimizer Online",

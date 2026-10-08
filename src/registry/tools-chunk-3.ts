@@ -253,10 +253,9 @@ export const entries_chunk_3: ToolMetadata[] = [
     seoDescription: 'Free online package.json Validator \u2014 Validate name, version, scripts, and dependencies. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for package.json Validator." },
-      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
-      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
-    ],
+      { title: "1. Paste package.json", desc: "Full file content — name, version, dependencies intact." },
+      { title: "2. Read field errors", desc: "Missing required fields and bad semver ranges flagged." },
+      { title: "3. Fix before install", desc: "Correct version ranges and missing fields, then npm install clean." },    ],
     faqs: [
       { question: "What fields does it validate?", answer: "Required fields (name, version), semver format compliance, valid dependency declarations, script definitions, and common best practices like license and description fields." },
       { question: "Does it check for security issues?", answer: "It validates dependency syntax and detects common issues like missing version ranges, duplicate dependencies, and invalid package names. For vulnerability scanning, use npm audit." },
@@ -2296,10 +2295,9 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Validate API key format and structure — charset, length, and provider prefix patterns checked instantly without exposing secrets anywhere.',
     seoTitle: "API Key Validator – Check Keys Free",
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for API Key Validator." },
-      { title: "2. Run the lookup", desc: "Inspect each field in the response; mismatches mean re-enter, not proceed." },
-      { title: "3. Confirm officially", desc: "Screen with this tool, decide with the authority record." },
-    ],
+      { title: "1. Paste the key", desc: "Checks run fully local — charset, length and provider prefix patterns." },
+      { title: "2. Read structure verdict", desc: "Which format rules pass, which fail, and the detected provider shape." },
+      { title: "3. Rotate weak keys", desc: "Short or malformed keys get regenerated at the provider dashboard." },    ],
     faqs: [
       { question: "Format or live check?", answer: "Both — structure validation instantly, live verification where the provider allows." },
       { question: "What makes a key valid?", answer: "Charset, length, and prefix patterns per provider convention." },
@@ -2517,10 +2515,9 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Validate GraphQL schema syntax and structure. Detect missing root types, unknown type references, and common schema issues.',
     seoTitle: "GraphQL Schema Validator – Free",
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for GraphQL Schema Validator." },
-      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
-      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
-    ],
+      { title: "1. Paste the schema", desc: "Type definitions with Query/Mutation roots intact." },
+      { title: "2. Read reference errors", desc: "Missing root types and unknown type references listed." },
+      { title: "3. Fix types first", desc: "Define or import the flagged types, then revalidate." },    ],
     faqs: [
       { question: "Spec compliance?", answer: "Validated against the GraphQL spec — types, fields, and nullability rules." },
       { question: "Error messages useful?", answer: "Each violation cites the exact type and field path for direct fixing." },
@@ -2607,10 +2604,9 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Look up all 17 gRPC status codes (0–16) with meanings — from OK and CANCELLED through resource and network errors for backend debugging.',
     seoTitle: "gRPC Status Codes List – All 17 Free",
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for gRPC Status Code Lookup." },
-      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
-      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
-    ],
+      { title: "1. Enter the code 0–16", desc: "Numeric code from your RPC error or logs." },
+      { title: "2. Read meaning and retry rule", desc: "What OK through UNAUTHENTICATED means plus whether retrying is safe." },
+      { title: "3. Handle it in code", desc: "Map retryable codes to backoff, terminal ones to user-facing errors." },    ],
     faqs: [
       { question: "How many gRPC codes exist?", answer: "Seventeen, numbered 0–16 — from OK through CANCELLED, UNKNOWN, and resource errors." },
       { question: "Which codes appear most?", answer: "0 OK, 2 UNKNOWN, 5 NOT_FOUND, 13 INTERNAL, 14 UNAVAILABLE cover nearly all debugging." },
@@ -2695,10 +2691,9 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Validate OpenAPI/Swagger spec syntax. Check for required fields, missing paths, and structural issues in your API specification.',
     seoTitle: "OpenAPI Validator – Check Specs Free",
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for OpenAPI Validator." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
-    ],
+      { title: "1. Paste the spec", desc: "OpenAPI/Swagger YAML or JSON with paths and components." },
+      { title: "2. Read structural errors", desc: "Missing required fields, empty paths, broken references listed." },
+      { title: "3. Fix and regenerate", desc: "Repair flagged sections, revalidate, then regenerate clients." },    ],
     faqs: [
       { question: "Which OpenAPI versions?", answer: "2.0 and 3.x structures, including nested $ref chains and Schema Objects." },
       { question: "What breaks most?", answer: "Missing required fields, wrong types, and unresolvable $refs." },
@@ -2872,10 +2867,9 @@ export const entries_chunk_3: ToolMetadata[] = [
     description: 'Validate webhook payload structure including required fields (id, event, data, created). Ensure your webhooks meet the standard format.',
     seoTitle: "Webhook Validator – Verify Free Online",
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Webhook Validator." },
-      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
-      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
-    ],
+      { title: "1. Paste the payload", desc: "Full JSON body — id, event, data, created fields." },
+      { title: "2. Read missing fields", desc: "Required-field gaps listed against the standard shape." },
+      { title: "3. Fix the sender", desc: "Align the producer to the standard shape, then revalidate." },    ],
     faqs: [
       { question: "What gets verified?", answer: "HMAC signatures against your secret — proving the payload is genuine." },
       { question: "Test payloads?", answer: "Craft sample events to exercise handlers without waiting on providers." },

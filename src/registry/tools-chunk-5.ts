@@ -208,9 +208,9 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Developer",
     description: 'Validate .htaccess files against 30+ known Apache directives. Checks RewriteEngine, RewriteRule, ErrorDocument, Redirect, Header, Options, and block directives. Flags unknown directives.',
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for htaccess Validator." },
-      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
-      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
+      { title: "1. Paste the .htaccess content", desc: "Directives exactly as on the server — RewriteRules, auth blocks, headers." },
+      { title: "2. Read directive errors", desc: "Unknown directives and bad flag syntax flagged per line." },
+      { title: "3. Test on staging", desc: "Upload to a staging host and request the affected URLs — syntax-valid still needs behavior proof." },
     ],
     faqs: [
       { question: "What rules get checked?", answer: "Rewrite, redirect, auth, and caching directives against Apache best practices." },
@@ -254,10 +254,9 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online GitHub Actions Validator — Validate workflow YAML for name, on trigger, jobs section, and YAML structure. ',
     dependencies: "None",
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for GitHub Actions Validator." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
-    ],
+      { title: "1. Paste the workflow YAML", desc: "Full .github/workflows file — name, on triggers, jobs." },
+      { title: "2. Read structural errors", desc: "Missing jobs, bad triggers, YAML breaks flagged per line." },
+      { title: "3. Commit green", desc: "Fix flagged blocks and push — a clean local check means CI starts clean." },    ],
     faqs: [
       { question: "What does the validator check?", answer: "Valid YAML syntax, required top-level keys (name, on, jobs), correct trigger format, job structure (runs-on, steps), and common mistakes like indentation errors." },
       { question: "Does it check action versions?", answer: "The validator focuses on YAML structure and required fields. It does not verify action version pinning or action marketplace availability." },
@@ -275,9 +274,9 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Developer",
     description: 'Validate GeoJSON objects against the GeoJSON specification. Checks feature, geometry, point coordinates, FeatureCollection structure, and bounding box format.',
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for GeoJSON Validator." },
-      { title: "2. Run the lookup", desc: "Inspect each field in the response; mismatches mean re-enter, not proceed." },
-      { title: "3. Confirm officially", desc: "Screen with this tool, decide with the authority record." },
+      { title: "1. Paste the GeoJSON document", desc: "Full FeatureCollection per RFC 7946 — coordinates in longitude, latitude order." },
+      { title: "2. Read geometry errors", desc: "Unclosed rings, wrong winding, and out-of-range coordinates flagged per feature." },
+      { title: "3. Fix and revalidate", desc: "Correct flagged features and run again until the document validates clean." },
     ],
     faqs: [
       { question: "Which spec?", answer: "RFC 7946 — the current GeoJSON standard, enforced strictly here." },
@@ -319,9 +318,9 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Developer",
     description: 'Validate XML sitemaps — checks urlset/sitemapindex root, loc entries, XML declaration, and URL count. Supports standard sitemap protocol formatting.',
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for Sitemap Validator." },
-      { title: "2. Run the lookup", desc: "Verify the returned details — name, status, dates — line by line." },
-      { title: "3. Confirm officially", desc: "Cross-check critical results on the issuing authority site before acting on them." },
+      { title: "1. Enter the sitemap URL or XML", desc: "A live /sitemap.xml address or pasted sitemap markup." },
+      { title: "2. Read URL-level errors", desc: "Malformed loc entries, non-200 targets, and protocol violations listed per URL." },
+      { title: "3. Resubmit to Search Console", desc: "Fix flagged URLs, then resubmit the sitemap so Google recrawls clean." },
     ],
     faqs: [
       { question: "XML validity first?", answer: "Malformed XML fails fast with the error location highlighted." },
@@ -1613,9 +1612,9 @@ export const entries_chunk_5: ToolMetadata[] = [
     category: "Developer",
     description: 'Check JavaScript code for syntax errors using the Function constructor. Validate code before execution. Code never leaves your device — formatting and validation run locally in your browser.',
     instructions: [
-      { title: "1. Enter the value", desc: "Type or paste the number, code, or address to check for JavaScript Syntax Checker." },
-      { title: "2. Run the lookup", desc: "Cross-read all fields against what you submitted before trusting the verdict." },
-      { title: "3. Confirm officially", desc: "For decisions that matter, reconfirm on the issuer's own portal first." },
+      { title: "1. Paste the JavaScript", desc: "The function or file exactly as written — brackets and semicolons intact." },
+      { title: "2. Read errors by line", desc: "Each syntax break reported with line number and expected token." },
+      { title: "3. Fix top-down", desc: "Repair the first error first — later ones are usually its cascade; then run the code." },
     ],
     faqs: [
       { question: "What errors surface?", answer: "Missing brackets, bad tokens, and reserved-word misuse with line numbers." },
@@ -2017,7 +2016,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop MKV file(s)", desc: "Upload your MKV source. Runs locally on FFmpeg." },
       { title: "2. Set WebM options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
-      { title: "3. Download WebM", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WebM", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does MKV to WEBM do?", answer: "Convert MKV video files to WEBM format directly in your browser. 100% free, private \u2014 your files never leave your device." },
@@ -2032,8 +2031,8 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "MKV to AVI",
     slug: "mkv-to-avi",
     category: "Video",
-    description: 'Convert MKV to legacy AVI for old players and embedded systems. Reach hardware that accepts nothing newer — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free MKV to AVI — legacy compatibility. Local FFmpeg, free quota on saves.',
+    description: 'Convert MKV to legacy AVI for old players and embedded systems. Reach hardware that accepts nothing newer — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free MKV to AVI — legacy compatibility. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg",
 
     showInCategory: false,
@@ -2041,13 +2040,13 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload MKV files", desc: "Modern videos for legacy targets." },
       { title: "2. Convert to AVI", desc: "High-bitrate legacy-compatible output." },
-      { title: "3. Download AVIs", desc: "Play on old hardware (counts on the free download quota)." },
+      { title: "3. Download AVIs", desc: "Play on old hardware (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why AVI in 2026?', answer: 'Car stereos, old TVs, industrial players, and legacy software accept only AVI. Converting modern MKVs keeps old hardware useful.' },
       { question: 'Quality settings?', answer: 'High-bitrate MPEG-4 video with MP3 audio maximizes legacy compatibility. File sizes grow — legacy costs bytes.' },
       { question: 'Subtitles survive?', answer: 'Usually not — AVI subtitle support is poor. Burn subtitles in first for players needing captions.' },
-      { question: 'Do legacy files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do legacy files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -2055,8 +2054,8 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "MP4 to WEBM",
     slug: "mp4-to-webm",
     category: "Video",
-    description: 'Convert MP4 to WebM for fast web embedding with smaller files. Make homepage videos load instantly — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free MP4 to WebM — fast web video. Local FFmpeg, free quota on saves.',
+    description: 'Convert MP4 to WebM for fast web embedding with smaller files. Make homepage videos load instantly — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free MP4 to WebM — fast web video. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg",
 
     showInCategory: false,
@@ -2064,13 +2063,13 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload MP4s", desc: "Homepage and embed videos." },
       { title: "2. Convert to WebM", desc: "CRF 30–33 for web delivery." },
-      { title: "3. Download WebMs", desc: "Embed with MP4 fallback (counts on the free download quota)." },
+      { title: "3. Download WebMs", desc: "Embed with MP4 fallback (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'How much smaller is WebM?', answer: 'Typically 30–50% smaller than H.264 MP4 at equal quality — a 100 MB homepage video lands near 60 MB. Multiply across a media library for real bandwidth wins.' },
       { question: 'Which browsers play WebM?', answer: 'All modern browsers play WebM; Safari joined fully in recent versions. Serve WebM primary with MP4 fallback for certainty.' },
       { question: 'What settings?', answer: 'CRF 30–33 for web embeds balances size and looks. Talking heads compress further than action footage.' },
-      { question: 'Do embed files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves count on the free download quota.' },
+      { question: 'Do embed files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2084,7 +2083,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop MP4 file(s)", desc: "Upload your MP4 source. Runs locally on FFmpeg." },
       { title: "2. Set AVI options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
-      { title: "3. Download AVI", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AVI", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert MP4 to AVI?", answer: "AVI is required by legacy media players, older video editing software, and some Windows applications that don't support MP4. Converting ensures compatibility with older systems." },
@@ -2101,8 +2100,8 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "MOV to WEBM",
     slug: "mov-to-webm",
     category: "Video",
-    description: 'Convert Apple MOV files to web-ready WebM for fast HTML5 playback. Shrink a 200 MB screen recording for embedding — local FFmpeg conversion, free quota on saves.',
-    seoDescription: 'Free MOV to WebM converter — web-ready output. Local FFmpeg, free quota on saves.',
+    description: 'Convert Apple MOV files to web-ready WebM for fast HTML5 playback. Shrink a 200 MB screen recording for embedding — local FFmpeg conversion, unlimited saves.',
+    seoDescription: 'Free MOV to WebM converter — web-ready output. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg",
 
     showInCategory: false,
@@ -2110,13 +2109,13 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload the MOV", desc: "Apple recordings of any length." },
       { title: "2. Convert to WebM", desc: "Web-optimized settings apply automatically; keep the tab open." },
-      { title: "3. Download and embed", desc: "Save the file (counts on free quota) and drop it in a video tag." },
+      { title: "3. Download and embed", desc: "Save the file (downloads are unlimited) and drop it in a video tag." },
     ],
     faqs: [
       { question: 'Why convert MOV to WebM?', answer: 'WebM streams faster in browsers with smaller files: a 200 MB MOV screen recording lands near 40–60 MB WebM at 1080p. Embed with the HTML5 video tag for instant playback, no player needed.' },
       { question: 'Will I lose the alpha channel?', answer: 'WebM with VP9 preserves transparency where the source has it — lower-thirds and overlays survive. Odd dimensions get padded to even numbers automatically.' },
       { question: 'How long does conversion take?', answer: 'Roughly real-time to 2x on a laptop: a 10-minute MOV converts in 10–20 minutes. Keep the tab open; closing it cancels the FFmpeg worker.' },
-      { question: 'Are my videos uploaded?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only the final save counts on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Are my videos uploaded?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only the final save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2130,7 +2129,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop MOV file(s)", desc: "Upload your MOV source. Runs locally on FFmpeg." },
       { title: "2. Set AVI options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
-      { title: "3. Download AVI", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AVI", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert MOV to AVI?", answer: "AVI is required by legacy media players, older video editing software, and Windows applications that don't support QuickTime MOV format." },
@@ -2156,7 +2155,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WebM file(s)", desc: "Upload your WebM source. Runs locally on FFmpeg." },
       { title: "2. Set MKV options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
-      { title: "3. Download MKV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download MKV", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does WEBM to MKV do?", answer: "Convert WEBM video files to MKV format directly in your browser. 100% free, private \u2014 your files never leave your device." },
@@ -2171,8 +2170,8 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "WEBM to MOV",
     slug: "webm-to-mov",
     category: "Video",
-    description: 'Convert WebM videos to Apple-friendly MOV for Final Cut and QuickTime workflows. Bring web clips into Mac editing — local FFmpeg work, free quota on saves.',
-    seoDescription: 'Free WebM to MOV — Apple editing format. Local FFmpeg, free quota on saves.',
+    description: 'Convert WebM videos to Apple-friendly MOV for Final Cut and QuickTime workflows. Bring web clips into Mac editing — local FFmpeg work, unlimited saves.',
+    seoDescription: 'Free WebM to MOV — Apple editing format. Local FFmpeg, unlimited saves.',
     dependencies: "FFmpeg",
 
     showInCategory: false,
@@ -2180,13 +2179,13 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload WebM files", desc: "Web clips bound for Mac editing." },
       { title: "2. Convert to MOV", desc: "High-bitrate Apple-friendly output." },
-      { title: "3. Download MOVs", desc: "Import to Final Cut (counts on the free download quota)." },
+      { title: "3. Download MOVs", desc: "Import to Final Cut (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why MOV for Mac editing?', answer: 'Final Cut Pro and QuickTime ingest MOV smoothly with full metadata. WebM works on the web but fights Apple timelines.' },
       { question: 'Is WebM quality preserved?', answer: 'Yes with high-bitrate output — transcode once at generous settings. Repeated WebM↔MOV cycles degrade visibly.' },
       { question: 'Alpha channels?', answer: 'VP9 WebM alpha converts to ProRes 4444 alpha where supported. Verify transparency in QuickTime before editing.' },
-      { question: 'Do Mac-bound files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves count on the free download quota.' },
+      { question: 'Do Mac-bound files upload?', answer: 'No — conversion runs locally in your browser with FFmpeg. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2202,7 +2201,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WebM file(s)", desc: "Upload your WebM source. Runs locally on FFmpeg." },
       { title: "2. Set AVI options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
-      { title: "3. Download AVI", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AVI", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does WEBM to AVI do?", answer: "Convert WEBM video files to AVI format directly in your browser. 100% free, private \u2014 your files never leave your device." },
@@ -2223,7 +2222,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AVI file(s)", desc: "Upload your AVI source. Runs locally on FFmpeg." },
       { title: "2. Set MKV options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
-      { title: "3. Download MKV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download MKV", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert AVI to MKV?", answer: "MKV supports more modern codecs (H.264, H.265), multiple audio tracks, subtitles, and chapter markers. Converting from legacy AVI to MKV enables these advanced features." },
@@ -2248,7 +2247,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AVI file(s)", desc: "Upload your AVI source. Runs locally on FFmpeg." },
       { title: "2. Set MOV options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
-      { title: "3. Download MOV", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download MOV", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does AVI to MOV do?", answer: "Convert AVI video files to MOV format directly in your browser. 100% free, private \u2014 your files never leave your device." },
@@ -2269,7 +2268,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AVI file(s)", desc: "Upload your AVI source. Runs locally on FFmpeg." },
       { title: "2. Set WebM options", desc: "Set CRF and resolution — CRF 23 balanced, 28 for small web files. Keep the tab open while it works." },
-      { title: "3. Download WebM", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WebM", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert AVI to WEBM?", answer: "WEBM uses the VP8/VP9 codec which is royalty-free and natively supported by all modern browsers. Converting legacy AVI to WEBM enables web playback without plugins." },
@@ -2287,21 +2286,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "JPG to PNG",
     slug: "jpg-to-png",
     category: "Image",
-    description: 'Convert JPG photos to lossless PNG for transparency-ready editing and graphics work. Prep images for design tools without recompression loss — local Canvas work, free quota on saves.',
-    seoDescription: 'Free JPG to PNG — lossless editing format. Local Canvas, free quota on saves.',
+    description: 'Convert JPG photos to lossless PNG for transparency-ready editing and graphics work. Prep images for design tools without recompression loss — local Canvas work, unlimited saves.',
+    seoDescription: 'Free JPG to PNG — lossless editing format. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free JPG to PNG Converter Online",
     instructions: [
       { title: "1. Upload JPGs", desc: "Photos bound for editing pipelines." },
       { title: "2. Convert to PNG", desc: "Lossless freeze before edit cycles." },
-      { title: "3. Download PNGs", desc: "Edit freely without added loss (counts on the free download quota)." },
+      { title: "3. Download PNGs", desc: "Edit freely without added loss (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Does JPG to PNG improve quality?', answer: 'No — PNG preserves exactly what the JPG held, blocking further degradation through edit cycles. Convert once at workflow start, not repeatedly.' },
       { question: 'When is PNG actually better?', answer: 'Graphics with text, screenshots, and transparency work — plus any multi-save editing pipeline. Photos for web stay JPG/WebP for size.' },
       { question: 'File size shock?', answer: 'Expect 3–5x larger files — PNG compression can\'t undo JPEG entropy. A 500 KB photo becomes ~2 MB PNG; normal and worth it for editing.' },
-      { question: 'Do source photos upload anywhere?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do source photos upload anywhere?', answer: 'No — conversion runs locally in your browser on Canvas. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -2315,7 +2314,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop PNG file(s)", desc: "Upload your PNG source. Runs locally on Canvas." },
       { title: "2. Set WebP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download WebP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download WebP", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Does WebP support PNG transparency?", answer: "Yes. WebP supports alpha channel transparency just like PNG. Your transparent backgrounds and soft edges are preserved through the conversion." },
@@ -2332,21 +2331,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "JPG to WEBP",
     slug: "jpg-to-webp",
     category: "Image",
-    description: 'Convert JPG photos to modern WebP at ~30% smaller sizes for faster websites. Optimize entire image libraries before deploy — local Canvas work, free quota on saves.',
-    seoDescription: 'Free JPG to WebP — 30% smaller photos. Local Canvas, free quota on saves.',
+    description: 'Convert JPG photos to modern WebP at ~30% smaller sizes for faster websites. Optimize entire image libraries before deploy — local Canvas work, unlimited saves.',
+    seoDescription: 'Free JPG to WebP — 30% smaller photos. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free JPG to WebP Converter Online",
     instructions: [
       { title: "1. Upload JPGs", desc: "Photo libraries bound for web." },
       { title: "2. Set WebP quality", desc: "80–85 for heroes, 75 for thumbnails." },
-      { title: "3. Download WebPs", desc: "Deploy with JPEG fallback (counts on the free download quota)." },
+      { title: "3. Download WebPs", desc: "Deploy with JPEG fallback (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'How much smaller is WebP?', answer: 'Typically 25–35% smaller than equivalent-quality JPEG — a 300 KB photo becomes ~200 KB WebP. Multiply across 500 images for real bandwidth wins.' },
       { question: 'What WebP quality should I use?', answer: 'Quality 80–85 matches JPEG-90 look. Batch once per use-case (hero vs thumbnail) rather than re-converting.' },
       { question: 'Browser support in 2026?', answer: 'Universal in modern browsers (95%+) — serve WebP primary with JPEG fallback for the last stragglers.' },
-      { question: 'Do gallery photos upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do gallery photos upload?', answer: 'No — conversion runs locally in your browser on Canvas. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -2361,7 +2360,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WebP file(s)", desc: "Upload your WebP source. Runs locally on Canvas." },
       { title: "2. Set PNG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download PNG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download PNG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does WEBP to PNG do?", answer: "Converts WebP files to PNG format \u2014 modern websites to graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds. All conversion happens locally in your browser with no file size limits." },
@@ -2383,7 +2382,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop HEIC file(s)", desc: "Upload your HEIC source. Runs locally on Canvas." },
       { title: "2. Set PNG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download PNG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download PNG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does HEIC to PNG do?", answer: "Converts HEIC files to PNG format \u2014 Apple device photos to graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds. All conversion happens locally in your browser with no file size limits." },
@@ -2403,7 +2402,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop PNG file(s)", desc: "Upload your PNG source. Runs locally on Canvas." },
       { title: "2. Set AVIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download AVIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AVIF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "How much smaller than PNG?", answer: "Typically 30–50% smaller than PNG with transparency intact — biggest wins on photos." },
@@ -2427,7 +2426,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop JPG file(s)", desc: "Upload your JPG source. Runs locally on Canvas." },
       { title: "2. Set AVIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download AVIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AVIF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert JPG to AVIF?", answer: "AVIF offers 50% better compression than JPG at the same visual quality. Converting to AVIF reduces file sizes significantly while maintaining or improving image clarity — ideal for web performance." },
@@ -2443,21 +2442,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "PNG to HEIC",
     slug: "png-to-heic",
     category: "Image",
-    description: 'Convert PNG graphics to HEIC for Apple-optimized storage at half the bytes. Shrink screenshot libraries for iCloud — local Canvas work, free quota on saves.',
-    seoDescription: 'Free PNG to HEIC — Apple-ready compression. Local Canvas, free quota on saves.',
+    description: 'Convert PNG graphics to HEIC for Apple-optimized storage at half the bytes. Shrink screenshot libraries for iCloud — local Canvas work, unlimited saves.',
+    seoDescription: 'Free PNG to HEIC — Apple-ready compression. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free PNG to HEIC Converter Online",
     instructions: [
       { title: "1. Upload PNGs", desc: "Screenshots and graphics for Apple storage." },
       { title: "2. Convert to HEIC", desc: "Transparency and quality carry over." },
-      { title: "3. Download HEICs", desc: "Archive PNG masters separately (counts on the free download quota)." },
+      { title: "3. Download HEICs", desc: "Archive PNG masters separately (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why HEIC from PNG?', answer: 'HEIC compresses photographic PNGs ~50% smaller with transparency intact — iCloud libraries and Apple apps reward the switch. Flat UI graphics with sharp text may artifact; test those first.' },
       { question: 'Transparency preserved?', answer: 'Yes — alpha channels carry into HEIC. Verify on checkered backgrounds before converting thousands.' },
       { question: 'Windows compatibility?', answer: 'Windows 10+ with the free HEIF extension opens them; older systems need PNG originals. Convert working copies, archive PNG masters.' },
-      { question: 'Do PNG libraries upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do PNG libraries upload?', answer: 'No — conversion runs locally in your browser on Canvas. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -2470,7 +2469,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop PNG file(s)", desc: "Upload your PNG source. Runs locally on Canvas." },
       { title: "2. Set BMP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download BMP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download BMP", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'Why is BMP enormous?', answer: 'No compression — every pixel stored raw. Expect 5–10x the PNG size.' },
@@ -2494,7 +2493,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop PNG file(s)", desc: "Upload your PNG source. Runs locally on Canvas." },
       { title: "2. Set TIFF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download TIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download TIFF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert PNG to TIFF?", answer: "TIFF is preferred for print publishing, archival storage, and professional photography. It supports higher bit depths, lossless compression, and is accepted by most print services and publishing workflows." },
@@ -2510,21 +2509,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "PNG to ICO",
     slug: "png-to-ico",
     category: "Image",
-    description: 'Generate multi-size Windows ICO favicons from PNG graphics in batch. Ship crisp taskbar icons from transparent art — local Canvas work, free quota on saves.',
-    seoDescription: 'Free PNG to ICO — multi-size favicons. Local Canvas, free quota on saves.',
+    description: 'Generate multi-size Windows ICO favicons from PNG graphics in batch. Ship crisp taskbar icons from transparent art — local Canvas work, unlimited saves.',
+    seoDescription: 'Free PNG to ICO — multi-size favicons. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free PNG to ICO Converter – Favicons Online",
     instructions: [
       { title: "1. Upload transparent PNGs", desc: "512px+ masters for sharp icon sets." },
       { title: "2. Generate ICO", desc: "Multi-size package builds automatically." },
-      { title: "3. Download ICOs", desc: "Deploy favicons (counts on the free download quota)." },
+      { title: "3. Download ICOs", desc: "Deploy favicons (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Which sizes land in the ICO?', answer: '16, 32, 48, and 256px standard set from one transparent PNG — crisp from browser tab to desktop shortcut. Square sources convert cleanest.' },
       { question: 'Does transparency survive?', answer: 'Yes — alpha channels embed per size. Test the 16px version: fine detail vanishes small, so simplify source art first.' },
       { question: 'PNG source quality matters?', answer: 'Enormously — start from 512px+ masters. A 64px PNG stretched into a 256px ICO layer looks soft on HiDPI taskbars.' },
-      { question: 'Do graphics upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do graphics upload?', answer: 'No — conversion runs locally in your browser on Canvas. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -2539,7 +2538,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop JPG file(s)", desc: "Upload your JPG source. Runs locally on Canvas." },
       { title: "2. Set HEIC options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download HEIC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download HEIC", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert JPG to HEIC?", answer: "HEIC offers 50% better compression than JPG at similar visual quality. Converting JPGs to HEIC saves storage on Apple devices and iCloud." },
@@ -2555,21 +2554,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "JPG to SVG",
     slug: "jpg-to-svg",
     category: "Image",
-    description: 'Trace JPG photos and logos into SVG vectors — rescue raster logos as scalable art. Rebuild brand marks from compressed copies — local tracing, free quota on saves.',
-    seoDescription: 'Free JPG to SVG — raster logos to vectors. Local tracing, free quota on saves.',
+    description: 'Trace JPG photos and logos into SVG vectors — rescue raster logos as scalable art. Rebuild brand marks from compressed copies — local tracing, unlimited saves.',
+    seoDescription: 'Free JPG to SVG — raster logos to vectors. Local tracing, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free JPG to SVG Vectorizer Online",
     instructions: [
       { title: "1. Upload JPG logos", desc: "Largest cleanest copy available." },
       { title: "2. Trace to vector", desc: "Flat high-contrast art works best." },
-      { title: "3. Download SVGs", desc: "Recolor and simplify (counts on the free download quota)." },
+      { title: "3. Download SVGs", desc: "Recolor and simplify (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Photos or logos — what traces?', answer: 'Flat logos with clean edges trace beautifully; photographs trace into posterized blobs. Match tool to content: vectorize graphics, convert photos to PNG.' },
       { question: 'How do I prep the JPG?', answer: 'Largest version available, tight crop, boosted contrast. JPEG artifacts trace as wobble — cleaner source, cleaner paths.' },
       { question: 'Output editable?', answer: 'Yes — standard SVG paths with grouped fills. Simplify nodes and recolor to brand specs in any vector app.' },
-      { question: 'Does tracing send images anywhere?', answer: 'No — tracing runs locally in your browser. Only the SVG save counts on the free download quota.' },
+      { question: 'Does tracing send images anywhere?', answer: 'No — tracing runs locally in your browser. Only the SVG save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2584,7 +2583,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop JPG file(s)", desc: "Upload your JPG source. Runs locally on Canvas." },
       { title: "2. Set BMP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download BMP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download BMP", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert JPG to BMP?", answer: "BMP is uncompressed and supported by virtually all image software. Converting JPG to BMP is useful for legacy applications, medical imaging, or when you need lossless output for further editing." },
@@ -2606,7 +2605,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop JPG file(s)", desc: "Upload your JPG source. Runs locally on Canvas." },
       { title: "2. Set TIFF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download TIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download TIFF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why would I convert JPG to TIFF?", answer: "TIFF preserves image quality without compression artifacts. If you need to edit a JPG repeatedly (retouching, color grading, printing), converting to TIFF first prevents quality degradation from re-saving." },
@@ -2628,7 +2627,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop JPG file(s)", desc: "Upload your JPG source. Runs locally on Canvas." },
       { title: "2. Set ICO options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download ICO", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download ICO", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'What favicon sizes do I get?', answer: '16, 32, and 48 px packed into one ICO — covering tabs, bookmarks, and shortcuts.' },
@@ -2652,7 +2651,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WebP file(s)", desc: "Upload your WebP source. Runs locally on Canvas." },
       { title: "2. Set HEIC options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download HEIC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download HEIC", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert WEBP to HEIC?", answer: "HEIC is the default format for Apple devices and offers excellent compression. Converting to HEIC is useful for importing WEBP images into Apple Photos, iOS apps, or macOS workflows." },
@@ -2675,7 +2674,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WebP file(s)", desc: "Upload your WebP source. Runs locally on Canvas." },
       { title: "2. Set SVG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download SVG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download SVG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "When should I convert WEBP to SVG?", answer: "SVG is a vector format, so WEBP-to-SVG conversion is best for simple graphics, logos, and icons where you need scalability. Complex photographs will produce very large SVGs with embedded raster data." },
@@ -2698,7 +2697,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WebP file(s)", desc: "Upload your WebP source. Runs locally on Canvas." },
       { title: "2. Set BMP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download BMP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download BMP", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert WEBP to BMP?", answer: "BMP is an uncompressed format supported by legacy Windows applications, image editors, and embedded systems that don't handle WEBP. Converting to BMP ensures compatibility with older software." },
@@ -2714,21 +2713,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "WEBP to TIFF",
     slug: "webp-to-tiff",
     category: "Image",
-    description: 'Convert WebP images to lossless TIFF for print and archival handoff. Take web art into press workflows — local Canvas work, free quota on saves.',
-    seoDescription: 'Free WebP to TIFF — web art to press files. Local Canvas, free quota on saves.',
+    description: 'Convert WebP images to lossless TIFF for print and archival handoff. Take web art into press workflows — local Canvas work, unlimited saves.',
+    seoDescription: 'Free WebP to TIFF — web art to press files. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free WebP to TIFF Converter Online",
     instructions: [
       { title: "1. Upload WebPs", desc: "Finished web art bound for print." },
       { title: "2. Set TIFF output", desc: "300 DPI where pixels allow." },
-      { title: "3. Download TIFFs", desc: "Verify physical size first (counts on the free download quota)." },
+      { title: "3. Download TIFFs", desc: "Verify physical size first (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why TIFF from WebP?', answer: 'Press and archive pipelines require TIFF; WebP stays web-only. Converting bridges finished web art into print without re-sourcing.' },
       { question: 'Quality ceiling?', answer: 'WebP source quality caps the result — lossy WebP artifacts bake into the TIFF permanently. Start from highest-quality WebP available.' },
       { question: 'What DPI?', answer: '300 for print from large WebPs; small web images print tiny regardless of DPI games. Check physical dimensions before promising press.' },
-      { question: 'Do images upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota.' },
+      { question: 'Do images upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2744,7 +2743,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WebP file(s)", desc: "Upload your WebP source. Runs locally on Canvas." },
       { title: "2. Set ICO options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download ICO", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download ICO", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert WEBP to ICO?", answer: "WEBP is not supported as favicon format by browsers. ICO is the standard format for favicons and Windows icons. Converting WEBP to ICO makes your image usable as a favicon." },
@@ -2766,7 +2765,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop WebP file(s)", desc: "Upload your WebP source. Runs locally on Canvas." },
       { title: "2. Set JPEG XL options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download JPEG XL", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download JPEG XL", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert WEBP to JXL?", answer: "JXL offers better compression than WEBP with faster decode times and progressive rendering. It's the next-generation format designed to replace both JPEG and PNG with superior quality-to-size ratios." },
@@ -2782,21 +2781,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "HEIC to SVG",
     slug: "heic-to-svg",
     category: "Image",
-    description: 'Trace iPhone HEIC photos into SVG vectors for logos salvaged from snapshots. Rebuild brand art from a phone pic — local tracing, free quota on saves.',
-    seoDescription: 'Free HEIC to SVG — snapshots to vectors. Local tracing, free quota on saves.',
+    description: 'Trace iPhone HEIC photos into SVG vectors for logos salvaged from snapshots. Rebuild brand art from a phone pic — local tracing, unlimited saves.',
+    seoDescription: 'Free HEIC to SVG — snapshots to vectors. Local tracing, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free HEIC to SVG Vectorizer Online",
     instructions: [
       { title: "1. Upload HEIC snapshot", desc: "Crop tight to flat high-contrast subjects first." },
       { title: "2. Trace to vector", desc: "Paths generate from edges automatically." },
-      { title: "3. Download SVG", desc: "Simplify and recolor in a vector app (counts on free quota)." },
+      { title: "3. Download SVG", desc: "Simplify and recolor in a vector app (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Snapshots to logos — really?', answer: 'For flat high-contrast subjects (signage, printed logos): yes, tracing extracts clean paths. Photographic scenes trace into unusable noise — convert those to PNG instead.' },
       { question: 'How do I prep the HEIC first?', answer: 'Crop tight to the subject and boost contrast before tracing — half the quality comes from preparation. Phone snapshots need tighter crops than scans.' },
       { question: 'Editable output?', answer: 'Yes — standard SVG paths open in Figma and Illustrator. Simplify nodes and recolor to brand specs after tracing.' },
-      { question: 'Do snapshots upload?', answer: 'No — tracing runs locally in your browser. Only the SVG save counts on the free download quota.' },
+      { question: 'Do snapshots upload?', answer: 'No — tracing runs locally in your browser. Only the SVG save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2811,7 +2810,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop HEIC file(s)", desc: "Upload your HEIC source. Runs locally on Canvas." },
       { title: "2. Set BMP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download BMP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download BMP", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert HEIC to BMP?", answer: "HEIC is Apple's default format but isn't natively supported by many Windows applications and legacy software. Converting to BMP ensures universal compatibility across all platforms." },
@@ -2827,21 +2826,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "HEIC to TIFF",
     slug: "heic-to-tiff",
     category: "Image",
-    description: 'Convert iPhone HEIC shots to lossless TIFF for print and professional handoff. Take phone photos into press workflows — local Canvas work, free quota on saves.',
-    seoDescription: 'Free HEIC to TIFF — lossless press files. Local Canvas, free quota on saves.',
+    description: 'Convert iPhone HEIC shots to lossless TIFF for print and professional handoff. Take phone photos into press workflows — local Canvas work, unlimited saves.',
+    seoDescription: 'Free HEIC to TIFF — lossless press files. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free HEIC to TIFF Converter Online",
     instructions: [
       { title: "1. Upload HEIC shots", desc: "Selects bound for print, not whole rolls." },
       { title: "2. Set TIFF output", desc: "300 DPI for press handoff." },
-      { title: "3. Download TIFFs", desc: "Save press files (counts on the free download quota)." },
+      { title: "3. Download TIFFs", desc: "Save press files (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why TIFF from a phone photo?', answer: 'Print shops and stock agencies accept TIFF, not HEIC. Converting bridges the gap — pixels stay identical, compatibility becomes universal.' },
       { question: 'What DPI for print?', answer: '300 DPI from 12 MP iPhone files prints sharp 10×13 inch pages. Set dimensions from pixel count before sending to press.' },
       { question: 'File sizes?', answer: 'Expect 30–70 MB TIFFs from 2–3 MB HEICs — lossless costs bytes. Convert selects, not entire camera rolls.' },
-      { question: 'Do phone photos upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do phone photos upload?', answer: 'No — conversion runs locally in your browser on Canvas. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -2855,7 +2854,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop HEIC file(s)", desc: "Upload your HEIC source. Runs locally on Canvas." },
       { title: "2. Set ICO options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download ICO", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download ICO", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       {
@@ -2887,21 +2886,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "HEIC to JXL",
     slug: "heic-to-jxl",
     category: "Image",
-    description: 'Migrate iPhone HEIC photos to JPEG XL for the most advanced archival available. Move Apple libraries to future-proof storage — local Canvas work, free quota on saves.',
-    seoDescription: 'Free HEIC to JXL — future-proof archival. Local Canvas, free quota on saves.',
+    description: 'Migrate iPhone HEIC photos to JPEG XL for the most advanced archival available. Move Apple libraries to future-proof storage — local Canvas work, unlimited saves.',
+    seoDescription: 'Free HEIC to JXL — future-proof archival. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free HEIC to JXL Converter Online",
     instructions: [
       { title: "1. Upload HEIC photos", desc: "iPhone libraries bound for archival." },
       { title: "2. Convert to lossless JXL", desc: "Exact pixel preservation for storage." },
-      { title: "3. Download JXLs", desc: "Archive masters (counts on the free download quota)." },
+      { title: "3. Download JXLs", desc: "Archive masters (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'HEIC vs JXL — which to keep?', answer: 'JXL for decades-long archives (royalty-free, lossless modes, wide gamut); HEIC for today\'s Apple workflows. Migrate cold storage to JXL, keep HEIC for active editing.' },
       { question: 'Quality loss in migration?', answer: 'Lossless JXL preserves every decoded HEIC pixel exactly. File sizes often shrink further — the rare win-win migration.' },
       { question: 'Can anything display the results?', answer: 'Archival viewers and Safari open JXL; general sharing still needs JPG/WebP derivatives. Migrate storage, export for sharing.' },
-      { question: 'Do iPhone photos leave the browser?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do iPhone photos leave the browser?', answer: 'No — conversion runs locally in your browser on Canvas. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -2909,21 +2908,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "AVIF to WEBP",
     slug: "avif-to-webp",
     category: "Image",
-    description: 'Convert AVIF images to WebP for broader browser compatibility without ballooning size. Serve next-gen art to the 5% on older browsers — local Canvas work, free quota on saves.',
-    seoDescription: 'Free AVIF to WebP — wider compatibility. Local Canvas, free quota on saves.',
+    description: 'Convert AVIF images to WebP for broader browser compatibility without ballooning size. Serve next-gen art to the 5% on older browsers — local Canvas work, unlimited saves.',
+    seoDescription: 'Free AVIF to WebP — wider compatibility. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free AVIF to WebP Converter Online",
     instructions: [
       { title: "1. Upload AVIF files", desc: "Masters for compatibility conversion." },
       { title: "2. Set WebP quality", desc: "85 for photos, 75 for thumbnails." },
-      { title: "3. Download WebPs", desc: "Serve with AVIF-first markup (counts on free quota)." },
+      { title: "3. Download WebPs", desc: "Serve with AVIF-first markup (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why step down from AVIF to WebP?', answer: 'A small share of older browsers and apps reject AVIF while accepting WebP. Converting keeps one modern pipeline with a compatibility fallback — ~20% larger files, universal rendering.' },
       { question: 'Quality or size priority?', answer: 'WebP at quality 85 preserves AVIF look for photos; quality 75 halves bytes for thumbnails. Batch once per use-case rather than re-converting.' },
       { question: 'Should I keep AVIF masters?', answer: 'Yes — archive AVIF originals and serve WebP derivatives. Re-converting WebP back to AVIF later cannot recover the ~20% efficiency gap.' },
-      { question: 'Does conversion upload images?', answer: 'No — everything runs locally in your browser on Canvas. Only the WebP save counts on the free download quota.' },
+      { question: 'Does conversion upload images?', answer: 'No — everything runs locally in your browser on Canvas. Only the WebP save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2938,7 +2937,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AVIF file(s)", desc: "Upload your AVIF source. Runs locally on Canvas." },
       { title: "2. Set HEIC options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download HEIC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download HEIC", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does AVIF to HEIC do?", answer: "Convert AVIF images to HEIC format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
@@ -2953,21 +2952,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "AVIF to SVG",
     slug: "avif-to-svg",
     category: "Image",
-    description: 'Trace AVIF rasters into scalable SVG vectors for logos resurrected from compressed copies. Rebuild a lost logo as infinite-resolution art — local tracing, free quota on saves.',
-    seoDescription: 'Free AVIF to SVG — raster to vector tracing. Local, free quota on saves.',
+    description: 'Trace AVIF rasters into scalable SVG vectors for logos resurrected from compressed copies. Rebuild a lost logo as infinite-resolution art — local tracing, unlimited saves.',
+    seoDescription: 'Free AVIF to SVG — raster to vector tracing. Local, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free AVIF to SVG Vectorizer Online",
     instructions: [
       { title: "1. Upload AVIF logos", desc: "High-contrast flat graphics trace best." },
       { title: "2. Trace to vector", desc: "Edges convert to scalable paths." },
-      { title: "3. Download SVGs", desc: "Edit fills in any vector app (counts on free quota)." },
+      { title: "3. Download SVGs", desc: "Edit fills in any vector app (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'When does tracing beat the original?', answer: 'When the vector master is lost: a 200px AVIF logo traces into a clean SVG for signage and print. Simple flat logos trace beautifully; detailed photos trace poorly — use PNG for those.' },
       { question: 'How clean are traced edges?', answer: 'High-contrast edges trace sharply; noisy or low-res sources produce wobbly paths. Start from the largest AVIF available and simplify paths after.' },
       { question: 'Can I edit the SVG after?', answer: 'Yes — standard vector output opens in Illustrator, Figma, and Inkscape. Ungroup and recolor fills to match brand specs.' },
-      { question: 'Do my images upload for tracing?', answer: 'No — tracing runs locally in your browser. Only the SVG save counts on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do my images upload for tracing?', answer: 'No — tracing runs locally in your browser. Only the SVG save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2975,21 +2974,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "AVIF to BMP",
     slug: "avif-to-bmp",
     category: "Image",
-    description: 'Convert AVIF images to uncompressed BMP for legacy pipelines and pixel-level analysis. Feed modern photos into older lab software — local Canvas work, free quota on saves.',
-    seoDescription: 'Free AVIF to BMP — raw bitmap output. Local Canvas, free quota on saves.',
+    description: 'Convert AVIF images to uncompressed BMP for legacy pipelines and pixel-level analysis. Feed modern photos into older lab software — local Canvas work, unlimited saves.',
+    seoDescription: 'Free AVIF to BMP — raw bitmap output. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free AVIF to BMP Converter Online",
     instructions: [
       { title: "1. Upload AVIF images", desc: "Modern-format sources of any size." },
       { title: "2. Convert to BMP", desc: "Raw uncompressed output, no quality settings to tune." },
-      { title: "3. Download BMPs", desc: "Save the files (counts on the free download quota)." },
+      { title: "3. Download BMPs", desc: "Save the files (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why would anyone want BMP?', answer: 'Legacy lab, forensic, and industrial software accepts only uncompressed BMP. Converting AVIF captures into BMP feeds modern photos into those pipelines without intermediate formats.' },
       { question: 'How large do BMP files get?', answer: 'Roughly width × height × 3 bytes: a 4000×3000 photo becomes ~36 MB BMP. Convert only what the pipeline needs — archive the AVIF originals.' },
       { question: 'Does conversion lose quality?', answer: 'No further loss beyond the source AVIF compression — BMP stores every decoded pixel exactly. The file grows enormously; fidelity does not improve.' },
-      { question: 'Do AVIF files leave the browser?', answer: 'No — conversion runs locally in your browser on Canvas. Only the BMP save counts on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do AVIF files leave the browser?', answer: 'No — conversion runs locally in your browser on Canvas. Only the BMP save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -2997,21 +2996,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "AVIF to TIFF",
     slug: "avif-to-tiff",
     category: "Image",
-    description: 'Convert AVIF photos to lossless TIFF for print publishing and professional archives. Prepare press-ready files from next-gen originals — local Canvas work, free quota on saves.',
-    seoDescription: 'Free AVIF to TIFF — lossless press files. Local Canvas, free quota on saves.',
+    description: 'Convert AVIF photos to lossless TIFF for print publishing and professional archives. Prepare press-ready files from next-gen originals — local Canvas work, unlimited saves.',
+    seoDescription: 'Free AVIF to TIFF — lossless press files. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free AVIF to TIFF Converter Online",
     instructions: [
       { title: "1. Upload AVIF photos", desc: "Next-gen originals bound for print." },
       { title: "2. Set TIFF output", desc: "300 DPI for press, 150 for proofs." },
-      { title: "3. Download TIFFs", desc: "Save press-ready files (counts on the free download quota)." },
+      { title: "3. Download TIFFs", desc: "Save press-ready files (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why TIFF for print?', answer: 'Print shops and publishers standardize on TIFF (300 DPI, CMYK/LZW options) — AVIF never enters a prepress workflow. Convert finals here after editing elsewhere.' },
       { question: 'Lossless from lossy AVIF?', answer: 'TIFF preserves every decoded pixel exactly; it cannot restore compression already baked into the AVIF. Quality equals the source, files grow large.' },
       { question: 'What DPI should I export?', answer: '300 DPI for print, 150 for proofs. Set dimensions from the pixel count: a 4500px-wide file prints 15 inches at 300 DPI.' },
-      { question: 'Do my photos upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only the TIFF save counts on the free download quota.' },
+      { question: 'Do my photos upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only the TIFF save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -3019,21 +3018,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "AVIF to GIF",
     slug: "avif-to-gif",
     category: "Image",
-    description: 'Turn AVIF images into universally compatible GIFs for legacy platforms and simple animations. Post next-gen art where only GIF uploads work — local Canvas work, free quota on saves.',
-    seoDescription: 'Free AVIF to GIF — universal compatibility. Local Canvas, free quota on saves.',
+    description: 'Turn AVIF images into universally compatible GIFs for legacy platforms and simple animations. Post next-gen art where only GIF uploads work — local Canvas work, unlimited saves.',
+    seoDescription: 'Free AVIF to GIF — universal compatibility. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Convert AVIF to GIF Free Online",
     instructions: [
       { title: "1. Upload AVIF files", desc: "Next-gen sources for legacy targets." },
       { title: "2. Convert to GIF", desc: "256-color output, best for flat graphics." },
-      { title: "3. Download GIFs", desc: "Save the files (counts on the free download quota)." },
+      { title: "3. Download GIFs", desc: "Save the files (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why convert AVIF to GIF?', answer: 'Legacy CMSs, old phones, and GIF-only platforms reject AVIF. Converting keeps your art postable everywhere — at 256 colors, flat graphics survive best.' },
       { question: 'What happens to photo quality?', answer: 'GIF caps at 256 colors, so gradients band visibly. Use it for logos, memes, and simple art; keep photos in AVIF or JPG for quality.' },
       { question: 'Animated AVIF to animated GIF?', answer: 'First frames convert to still GIFs in this tool; full animation mapping needs a video converter. Extract the key frame here, animate there.' },
-      { question: 'Does anything upload during conversion?', answer: 'No — everything runs locally in your browser on Canvas. Only the GIF save counts on the free download quota.' },
+      { question: 'Does anything upload during conversion?', answer: 'No — everything runs locally in your browser on Canvas. Only the GIF save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -3048,7 +3047,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AVIF file(s)", desc: "Upload your AVIF source. Runs locally on Canvas." },
       { title: "2. Set ICO options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download ICO", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download ICO", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert AVIF to ICO?", answer: "ICO is the required format for Windows application icons and website favicons. AVIF is not supported as favicon format. Converting lets you use modern AVIF content as traditional icons." },
@@ -3070,7 +3069,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop AVIF file(s)", desc: "Upload your AVIF source. Runs locally on Canvas." },
       { title: "2. Set JPEG XL options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download JPEG XL", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download JPEG XL", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why would I convert AVIF to JXL?", answer: "JXL offers better lossless compression and supports higher bit depths than AVIF. If you are archiving images or working in a professional photography pipeline, JXL preserves more data." },
@@ -3087,21 +3086,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "SVG to HEIC",
     slug: "svg-to-heic",
     category: "Image",
-    description: 'Rasterize SVG vectors to HEIC for Apple-optimized asset delivery. Ship tiny icons into iOS apps — local Canvas work, free quota on saves.',
-    seoDescription: 'Free SVG to HEIC — vectors for Apple apps. Local Canvas, free quota on saves.',
+    description: 'Rasterize SVG vectors to HEIC for Apple-optimized asset delivery. Ship tiny icons into iOS apps — local Canvas work, unlimited saves.',
+    seoDescription: 'Free SVG to HEIC — vectors for Apple apps. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free SVG to HEIC Converter Online",
     instructions: [
       { title: "1. Upload SVGs", desc: "Icons bound for Apple apps." },
       { title: "2. Rasterize to HEIC", desc: "3x size for retina clarity." },
-      { title: "3. Download HEICs", desc: "Ship with PNG fallback (counts on the free download quota)." },
+      { title: "3. Download HEICs", desc: "Ship with PNG fallback (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why HEIC for app assets?', answer: 'Apple decodes HEIC natively at half the bytes of PNG — icon libraries and onboarding art shrink dramatically with zero visible change on Apple displays.' },
       { question: 'What raster size?', answer: '3x display size for retina (72px from 24pt icons). Vectors render perfectly at any size — choose per placement.' },
       { question: 'Android compatibility?', answer: 'Android 9+ reads HEIC widely; older devices need WebP/PNG fallbacks. Ship HEIC primary with PNG backup for full coverage.' },
-      { question: 'Do HEIC renders upload source vectors?', answer: 'No — rasterization runs locally in your browser on Canvas. Only saves count on the free download quota.' },
+      { question: 'Do HEIC renders upload source vectors?', answer: 'No — rasterization runs locally in your browser on Canvas. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -3114,7 +3113,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop SVG file(s)", desc: "Upload your SVG source. Runs locally on Canvas." },
       { title: "2. Set BMP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download BMP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download BMP", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: 'Why BMP from SVG?', answer: 'Only when legacy compatibility demands it — BMP is otherwise the worst tradeoff.' },
@@ -3136,7 +3135,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop SVG file(s)", desc: "Upload your SVG source. Runs locally on Canvas." },
       { title: "2. Set TIFF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download TIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download TIFF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why TIFF from SVG?", answer: "Print publishing — TIFF is the print industry's raster standard." },
@@ -3153,21 +3152,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "SVG to ICO",
     slug: "svg-to-ico",
     category: "Image",
-    description: 'Generate Windows ICO favicons directly from SVG masters at any resolution. Build razor-sharp icon sets from vectors — local Canvas work, free quota on saves.',
-    seoDescription: 'Free SVG to ICO — vectors to favicons. Local Canvas, free quota on saves.',
+    description: 'Generate Windows ICO favicons directly from SVG masters at any resolution. Build razor-sharp icon sets from vectors — local Canvas work, unlimited saves.',
+    seoDescription: 'Free SVG to ICO — vectors to favicons. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free SVG to ICO Converter – Favicons Online",
     instructions: [
       { title: "1. Upload SVG masters", desc: "Logos and icons in vector form." },
       { title: "2. Generate ICO", desc: "Multi-size package from infinite resolution." },
-      { title: "3. Download ICOs", desc: "Deploy favicons (counts on the free download quota)." },
+      { title: "3. Download ICOs", desc: "Deploy favicons (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why start favicons from SVG?', answer: 'Vectors rasterize perfectly at every embedded size (16–256px) — no blurry upscaling like PNG sources. One SVG master beats a folder of rasters.' },
       { question: 'Which ICO sizes embed?', answer: 'Standard 16/32/48/256px set in one ICO. Test 16px rendering: simplify tiny details in the SVG first.' },
       { question: 'Brand colors accurate?', answer: 'Yes — flat vector fills rasterize exactly. Gradients dither slightly at 16px; flatten tiny gradients to solids.' },
-      { question: 'Do icon vectors upload anywhere?', answer: 'No — rasterization runs locally in your browser on Canvas. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do icon vectors upload anywhere?', answer: 'No — rasterization runs locally in your browser on Canvas. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -3175,21 +3174,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "SVG to JXL",
     slug: "svg-to-jxl",
     category: "Image",
-    description: 'Rasterize SVG vectors to next-gen JPEG XL for archival icon libraries. Store infinite-resolution art in future-proof pixels — local Canvas work, free quota on saves.',
-    seoDescription: 'Free SVG to JXL — vectors to next-gen pixels. Local Canvas, free quota on saves.',
+    description: 'Rasterize SVG vectors to next-gen JPEG XL for archival icon libraries. Store infinite-resolution art in future-proof pixels — local Canvas work, unlimited saves.',
+    seoDescription: 'Free SVG to JXL — vectors to next-gen pixels. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free SVG to JXL Converter Online",
     instructions: [
       { title: "1. Upload SVG masters", desc: "Icons for pixel archival." },
       { title: "2. Rasterize large", desc: "1024px+ for future-proof masters." },
-      { title: "3. Download JXLs", desc: "Vault pixels; keep SVG editable (counts on free quota)." },
+      { title: "3. Download JXLs", desc: "Vault pixels; keep SVG editable (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why JXL from vectors?', answer: 'Lossless JXL at any size archives icon art smaller than PNG with wider gamut headroom. Future-proof masters from today\'s vectors.' },
       { question: 'What raster size for archives?', answer: 'Oversize generously (1024px+) — storage is cheap, re-rendering is not. Downscale derivatives later without returning.' },
       { question: 'Editable later?', answer: 'Keep the SVG masters alongside — JXL archives pixels, not paths. Vectors stay the edit source; JXL is the pixel vault.' },
-      { question: 'Do JXL renders upload vectors?', answer: 'No — rasterization runs locally in your browser on Canvas. Only saves count on the free download quota.' },
+      { question: 'Do JXL renders upload vectors?', answer: 'No — rasterization runs locally in your browser on Canvas. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -3204,7 +3203,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop BMP file(s)", desc: "Upload your BMP source. Runs locally on Canvas." },
       { title: "2. Set HEIC options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download HEIC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download HEIC", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert BMP to HEIC?", answer: "HEIC offers 50% better compression than BMP while maintaining visual quality. Converting large BMP files to HEIC dramatically reduces storage requirements, especially useful for Apple device users." },
@@ -3220,21 +3219,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "BMP to SVG",
     slug: "bmp-to-svg",
     category: "Image",
-    description: 'Vectorize BMP bitmaps into scalable SVGs — rescue legacy clip-art for modern use. Turn pixelated 90s graphics into clean vectors — local tracing, free quota on saves.',
-    seoDescription: 'Free BMP to SVG — legacy bitmaps to vectors. Local tracing, free quota on saves.',
+    description: 'Vectorize BMP bitmaps into scalable SVGs — rescue legacy clip-art for modern use. Turn pixelated 90s graphics into clean vectors — local tracing, unlimited saves.',
+    seoDescription: 'Free BMP to SVG — legacy bitmaps to vectors. Local tracing, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free BMP to SVG Vectorizer Online",
     instructions: [
       { title: "1. Upload BMP files", desc: "Legacy clip-art and logos." },
       { title: "2. Trace to SVG", desc: "Flat high-contrast art converts cleanest." },
-      { title: "3. Download vectors", desc: "Recolor in any vector app (counts on free quota)." },
+      { title: "3. Download vectors", desc: "Recolor in any vector app (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Which BMPs trace well?', answer: 'High-contrast logos, icons, and line art with flat colors. Dithered photos and gradients trace into thousands of junk paths — convert those to PNG instead.' },
       { question: 'What about huge BMP files?', answer: 'Size doesn\'t matter for tracing quality — a 50 MB scan traces the same as its content dictates. Downscale preview copies for speed, trace full-res for finals.' },
       { question: 'Can I recolor traced SVGs?', answer: 'Yes — fills arrive as editable vector shapes. Map them to brand palettes in Figma or Illustrator in minutes.' },
-      { question: 'Do bitmaps upload for tracing?', answer: 'No — tracing runs locally in your browser. Only the SVG save counts on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do bitmaps upload for tracing?', answer: 'No — tracing runs locally in your browser. Only the SVG save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -3242,21 +3241,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "BMP to TIFF",
     slug: "bmp-to-tiff",
     category: "Image",
-    description: 'Convert BMP bitmaps to lossless TIFF for print archives and professional handoff. Move legacy scans into press workflows — local Canvas work, free quota on saves.',
-    seoDescription: 'Free BMP to TIFF — archive-ready output. Local Canvas, free quota on saves.',
+    description: 'Convert BMP bitmaps to lossless TIFF for print archives and professional handoff. Move legacy scans into press workflows — local Canvas work, unlimited saves.',
+    seoDescription: 'Free BMP to TIFF — archive-ready output. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free BMP to TIFF Converter Online",
     instructions: [
       { title: "1. Upload BMP archives", desc: "Legacy bitmap folders of any size." },
       { title: "2. Convert to TIFF", desc: "LZW compression with metadata support." },
-      { title: "3. Download TIFFs", desc: "Save archive-ready files (counts on the free download quota)." },
+      { title: "3. Download TIFFs", desc: "Save archive-ready files (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'BMP vs TIFF — both lossless?', answer: 'Both preserve pixels, but TIFF adds metadata, compression options, and print-industry acceptance that raw BMP lacks. Archives take TIFF; nothing professional takes BMP.' },
       { question: 'Will files shrink?', answer: 'Yes with LZW compression — typically 30–50% smaller than BMP with zero pixel change. Same image, smarter container.' },
       { question: 'Batch-convert whole archives?', answer: 'Yes — drop entire folders of legacy BMPs; structure preserves in the ZIP. A 2 GB bitmap archive becomes ~1 GB of TIFFs in one run.' },
-      { question: 'Do archive files leave the browser?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota.' },
+      { question: 'Do archive files leave the browser?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -3271,7 +3270,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop BMP file(s)", desc: "Upload your BMP source. Runs locally on Canvas." },
       { title: "2. Set ICO options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download ICO", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download ICO", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert BMP to ICO?", answer: "ICO is the required format for Windows application icons and website favicons. BMP is not supported as favicon format. Converting lets you use BMP content as traditional icons." },
@@ -3292,7 +3291,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop BMP file(s)", desc: "Upload your BMP source. Runs locally on Canvas." },
       { title: "2. Set JPEG XL options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download JPEG XL", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download JPEG XL", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert BMP at all?", answer: "Uncompressed BMPs are enormous — JPEG XL archives them at a fraction with modern efficiency." },
@@ -3309,21 +3308,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "TIFF to HEIC",
     slug: "tiff-to-heic",
     category: "Image",
-    description: 'Convert lossless TIFF archives to efficient HEIC for Apple storage and sharing. Halve archival bytes for the Apple ecosystem — local Canvas work, free quota on saves.',
-    seoDescription: 'Free TIFF to HEIC — archives for Apple. Local Canvas, free quota on saves.',
+    description: 'Convert lossless TIFF archives to efficient HEIC for Apple storage and sharing. Halve archival bytes for the Apple ecosystem — local Canvas work, unlimited saves.',
+    seoDescription: 'Free TIFF to HEIC — archives for Apple. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free TIFF to HEIC Converter Online",
     instructions: [
       { title: "1. Upload TIFFs", desc: "Archival scans for Apple viewing." },
       { title: "2. Set HEIC quality", desc: "90+ for fidelity, 80 for sharing." },
-      { title: "3. Download HEICs", desc: "Keep TIFF masters (counts on the free download quota)." },
+      { title: "3. Download HEICs", desc: "Keep TIFF masters (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why HEIC from TIFF archives?', answer: 'HEIC keeps near-lossless quality at ~50% of TIFF bytes with Apple-native decoding. Migrate view copies; keep TIFF masters for press.' },
       { question: 'What TIFF quality setting?', answer: '90+ preserves TIFF fidelity visibly; 80 halves bytes again for sharing. One batch per purpose from the same masters.' },
       { question: 'Multi-page TIFFs?', answer: 'Pages convert individually — select key pages or split first. Multi-page HEIC playback varies by app.' },
-      { question: 'Do archives upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota.' },
+      { question: 'Do archives upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -3331,21 +3330,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "TIFF to SVG",
     slug: "tiff-to-svg",
     category: "Image",
-    description: 'Trace TIFF scans into SVG vectors — rescue high-contrast art from print archives. Rebuild logos from press files — local tracing, free quota on saves.',
-    seoDescription: 'Free TIFF to SVG — press art to vectors. Local tracing, free quota on saves.',
+    description: 'Trace TIFF scans into SVG vectors — rescue high-contrast art from print archives. Rebuild logos from press files — local tracing, unlimited saves.',
+    seoDescription: 'Free TIFF to SVG — press art to vectors. Local tracing, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free TIFF to SVG Vectorizer Online",
     instructions: [
       { title: "1. Upload high-DPI TIFFs", desc: "Print art with clean edges." },
       { title: "2. Trace to vector", desc: "High-contrast regions convert best." },
-      { title: "3. Download SVGs", desc: "Simplify and recolor (counts on the free download quota)." },
+      { title: "3. Download SVGs", desc: "Simplify and recolor (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Which TIFF art traces well?', answer: 'High-contrast logos and line work from print archives. Continuous-tone photos trace into noise — convert those to PNG instead.' },
       { question: '300 DPI advantage?', answer: 'Print-resolution sources trace far cleaner than 72 DPI scans — edges resolve precisely. Always trace from the highest-DPI TIFF available.' },
       { question: 'Output editable?', answer: 'Yes — standard SVG paths for Illustrator and Figma. Simplify nodes and map fills to brand colors after.' },
-      { question: 'Do scans upload for tracing?', answer: 'No — tracing runs locally in your browser. Only the SVG save counts on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do scans upload for tracing?', answer: 'No — tracing runs locally in your browser. Only the SVG save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -3360,7 +3359,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop TIFF file(s)", desc: "Upload your TIFF source. Runs locally on Canvas." },
       { title: "2. Set BMP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download BMP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download BMP", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does TIFF to BMP do?", answer: "Convert TIFF images to BMP format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
@@ -3375,21 +3374,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "TIFF to ICO",
     slug: "tiff-to-ico",
     category: "Image",
-    description: 'Generate Windows ICO favicons from high-res TIFF masters. Build icons from press-quality sources — local Canvas work, free quota on saves.',
-    seoDescription: 'Free TIFF to ICO — press art to favicons. Local Canvas, free quota on saves.',
+    description: 'Generate Windows ICO favicons from high-res TIFF masters. Build icons from press-quality sources — local Canvas work, unlimited saves.',
+    seoDescription: 'Free TIFF to ICO — press art to favicons. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free TIFF to ICO Converter – Favicons Online",
     instructions: [
       { title: "1. Upload TIFF masters", desc: "High-res press-quality sources." },
       { title: "2. Generate ICO", desc: "Multi-size package with sRGB color." },
-      { title: "3. Download ICOs", desc: "Deploy favicons (counts on the free download quota)." },
+      { title: "3. Download ICOs", desc: "Deploy favicons (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why start favicons from TIFF?', answer: 'High-res TIFF masters downscale cleaner than small PNGs — 300 DPI art yields tack-sharp 16px icons. Best possible source for tiny outputs.' },
       { question: 'Which TIFF-icon sizes embed?', answer: 'Standard 16/32/48/256px ICO set. Simplify fine detail first — hairlines vanish at 16px regardless of source.' },
       { question: 'Color profiles?', answer: 'sRGB converts cleanly; CMYK press TIFFs shift on screen — convert a CMYK proof to sRGB first, then build icons.' },
-      { question: 'Do icon sources upload anywhere?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do icon sources upload anywhere?', answer: 'No — conversion runs locally in your browser on Canvas. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -3404,7 +3403,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop TIFF file(s)", desc: "Upload your TIFF source. Runs locally on Canvas." },
       { title: "2. Set JPEG XL options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download JPEG XL", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download JPEG XL", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert TIFF to JXL?", answer: "JXL offers 50-60% better compression than TIFF while maintaining visual quality. Archival TIFF files can be dramatically reduced in size for web distribution and storage." },
@@ -3420,21 +3419,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "GIF to HEIC",
     slug: "gif-to-heic",
     category: "Image",
-    description: 'Convert GIF animations and stills to space-efficient HEIC for Apple workflows. Halve sticker libraries for iOS apps — local Canvas work, free quota on saves.',
-    seoDescription: 'Free GIF to HEIC — Apple-ready compression. Local Canvas, free quota on saves.',
+    description: 'Convert GIF animations and stills to space-efficient HEIC for Apple workflows. Halve sticker libraries for iOS apps — local Canvas work, unlimited saves.',
+    seoDescription: 'Free GIF to HEIC — Apple-ready compression. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free GIF to HEIC Converter Online",
     instructions: [
       { title: "1. Upload GIFs", desc: "Animations or stills bound for Apple targets." },
       { title: "2. Convert to HEIC", desc: "Efficient compression with broad Apple support." },
-      { title: "3. Download HEICs", desc: "Save the files (counts on the free download quota)." },
+      { title: "3. Download HEICs", desc: "Save the files (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why HEIC for Apple targets?', answer: 'iOS/macOS decode HEIC natively with half the bytes of GIF sequences. Sticker libraries and asset catalogs shrink dramatically with zero visible change on Apple displays.' },
       { question: 'Do non-Apple devices open HEIC?', answer: 'Windows 10+ with the free HEIF extension yes; older systems no. Ship HEIC for Apple channels, keep GIF masters for universal fallback.' },
       { question: 'Quality vs size?', answer: 'HEIC stills at quality 85 run ~50% smaller than equivalent GIFs with better color. Animation support varies — verify motion playback per target app.' },
-      { question: 'Does conversion upload files?', answer: 'No — everything runs locally in your browser on Canvas. Only saves count on the free download quota.' },
+      { question: 'Does conversion upload files?', answer: 'No — everything runs locally in your browser on Canvas. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -3448,7 +3447,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on Canvas." },
       { title: "2. Set SVG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download SVG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download SVG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Does this convert the GIF into a vector SVG?", answer: "No. GIF is a raster (pixel) format and cannot be truly vectorized. The converter embeds the raster image inside an SVG container, which provides SVG compatibility without vector scalability." },
@@ -3472,7 +3471,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on Canvas." },
       { title: "2. Set BMP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download BMP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download BMP", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert GIF to BMP?", answer: "BMP is uncompressed and supported by legacy image editors, medical imaging software, and embedded systems. Converting GIF to BMP provides lossless output for further processing in tools that don't support GIF." },
@@ -3493,7 +3492,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on Canvas." },
       { title: "2. Set TIFF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download TIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download TIFF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why TIFF from GIF?", answer: "Print frames from animations or archive stills losslessly for publishing." },
@@ -3517,7 +3516,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop GIF file(s)", desc: "Upload your GIF source. Runs locally on Canvas." },
       { title: "2. Set ICO options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download ICO", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download ICO", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert GIF to ICO?", answer: "ICO is the required format for website favicons and Windows application icons. Converting a GIF to ICO lets you use your animated or static graphic as a favicon or desktop icon." },
@@ -3533,21 +3532,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "GIF to JXL",
     slug: "gif-to-jxl",
     category: "Image",
-    description: 'Convert GIFs to next-gen JPEG XL for archival-grade stills at tiny sizes. Future-proof meme libraries with full-color frames — local Canvas work, free quota on saves.',
-    seoDescription: 'Free GIF to JXL — next-gen archival stills. Local Canvas, free quota on saves.',
+    description: 'Convert GIFs to next-gen JPEG XL for archival-grade stills at tiny sizes. Future-proof meme libraries with full-color frames — local Canvas work, unlimited saves.',
+    seoDescription: 'Free GIF to JXL — next-gen archival stills. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free GIF to JXL Converter Online",
     instructions: [
       { title: "1. Upload GIFs", desc: "Stills and animations for archival." },
       { title: "2. Convert to JXL", desc: "Lossless for masters, lossy for derivatives." },
-      { title: "3. Download JXLs", desc: "Archive masters; export derivatives to share (counts on free quota)." },
+      { title: "3. Download JXLs", desc: "Archive masters; export derivatives to share (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why JPEG XL for GIFs?', answer: 'JXL stores full-color frames at a fraction of GIF bytes with lossless options — archival quality for meme and art libraries that GIF\'s 256 colors degrade.' },
       { question: 'Who can open JXL today?', answer: 'Growing support (Safari, image tools) but not universal — treat JXL as the archive master and export GIF/WebP derivatives for sharing.' },
       { question: 'Lossy or lossless?', answer: 'Lossless for masters (still smaller than GIF), high-quality lossy for web derivatives. One conversion per purpose from the GIF source.' },
-      { question: 'Does archival conversion upload files?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota.' },
+      { question: 'Does archival conversion upload files?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -3555,21 +3554,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "ICO to HEIC",
     slug: "ico-to-heic",
     category: "Image",
-    description: 'Convert ICO icons to HEIC for Apple ecosystem asset catalogs. Feed Windows artwork into Xcode projects — local Canvas work, free quota on saves.',
-    seoDescription: 'Free ICO to HEIC — icons for Apple apps. Local Canvas, free quota on saves.',
+    description: 'Convert ICO icons to HEIC for Apple ecosystem asset catalogs. Feed Windows artwork into Xcode projects — local Canvas work, unlimited saves.',
+    seoDescription: 'Free ICO to HEIC — icons for Apple apps. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free ICO to HEIC Converter Online",
     instructions: [
       { title: "1. Upload ICO sets", desc: "Favicon folders with names intact." },
       { title: "2. Convert to HEIC", desc: "Efficient Apple-ready compression." },
-      { title: "3. Download HEICs", desc: "Map into Xcode catalogs (counts on the free download quota)." },
+      { title: "3. Download HEICs", desc: "Map into Xcode catalogs (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why HEIC icons for Apple?', answer: 'Xcode asset catalogs and Apple design tools ingest HEIC efficiently. Converting Windows ICO sets smooths cross-platform app ports.' },
       { question: 'Resolution limits?', answer: 'Icons are small (16–256px) — HEIC preserves them exactly with tiny files. Don\'t upscale icons expecting detail gains.' },
       { question: 'Batch-convert icon sets?', answer: 'Yes — whole favicon folders convert in one run with names preserved. Map outputs straight into the asset catalog.' },
-      { question: 'Do icons upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do icons upload?', answer: 'No — conversion runs locally in your browser on Canvas. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -3577,21 +3576,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "ICO to AVIF",
     slug: "ico-to-avif",
     category: "Image",
-    description: 'Convert Windows ICO icons to ultra-efficient AVIF for modern web use. Shrink favicon libraries for the fast web — local Canvas work, free quota on saves.',
-    seoDescription: 'Free ICO to AVIF — icons for modern web. Local Canvas, free quota on saves.',
+    description: 'Convert Windows ICO icons to ultra-efficient AVIF for modern web use. Shrink favicon libraries for the fast web — local Canvas work, unlimited saves.',
+    seoDescription: 'Free ICO to AVIF — icons for modern web. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free ICO to AVIF Converter Online",
     instructions: [
       { title: "1. Upload ICO files", desc: "Favicon and icon libraries." },
       { title: "2. Convert to AVIF", desc: "Largest embedded size converts automatically." },
-      { title: "3. Download AVIFs", desc: "Save web-ready icons (counts on the free download quota)." },
+      { title: "3. Download AVIFs", desc: "Save web-ready icons (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why AVIF from icons?', answer: 'Icon libraries in AVIF load in a fraction of ICO bytes with transparency intact. Web apps serving dozens of icons feel the difference on slow networks.' },
       { question: 'Which icon size converts best?', answer: 'Largest embedded size (usually 256px) — multi-resolution ICOs carry several; the tool takes the biggest for cleanest output.' },
       { question: 'Transparency preserved?', answer: 'Yes — alpha channels carry into AVIF. Verify one icon on dark and light backgrounds before batching hundreds.' },
-      { question: 'Do icon files upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota.' },
+      { question: 'Do icon files upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -3599,21 +3598,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "ICO to SVG",
     slug: "ico-to-svg",
     category: "Image",
-    description: 'Trace Windows ICO icons into scalable SVG vectors for modern icon systems. Rebuild favicon sets as infinite-resolution art — local tracing, free quota on saves.',
-    seoDescription: 'Free ICO to SVG — icons to vectors. Local tracing, free quota on saves.',
+    description: 'Trace Windows ICO icons into scalable SVG vectors for modern icon systems. Rebuild favicon sets as infinite-resolution art — local tracing, unlimited saves.',
+    seoDescription: 'Free ICO to SVG — icons to vectors. Local tracing, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free ICO to SVG Vectorizer Online",
     instructions: [
       { title: "1. Upload ICO icons", desc: "Largest sizes trace cleanest." },
       { title: "2. Trace to SVG", desc: "Geometric shapes convert best." },
-      { title: "3. Download vectors", desc: "Tune in Figma (counts on the free download quota)." },
+      { title: "3. Download vectors", desc: "Tune in Figma (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Tiny icons to vectors — quality?', answer: 'Simple geometric favicons trace beautifully; detailed 16px art traces into mush. Start from 256px ICOs or SVG masters where possible.' },
       { question: 'Why vectorize icons?', answer: 'One SVG replaces a dozen fixed-size PNGs across responsive breakpoints. Modern icon systems (web components, design tokens) consume SVG natively.' },
       { question: 'Rounded corners and effects?', answer: 'Flat shapes trace perfectly; gradients and shadows approximate. Hand-tune effects in Figma after tracing.' },
-      { question: 'Do icons upload for tracing?', answer: 'No — tracing runs locally in your browser. Only the SVG save counts on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Do icons upload for tracing?', answer: 'No — tracing runs locally in your browser. Only the SVG save touches the network — downloads are unlimited.' },
     ],
   },
   {
@@ -3626,7 +3625,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop ICO file(s)", desc: "Upload your ICO source. Runs locally on Canvas." },
       { title: "2. Set BMP options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download BMP", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download BMP", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why BMP from an icon?", answer: "Legacy Windows software that accepts nothing else — modern cases should use PNG." },
@@ -3650,7 +3649,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop ICO file(s)", desc: "Upload your ICO source. Runs locally on Canvas." },
       { title: "2. Set TIFF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download TIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download TIFF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What does ICO to TIFF do?", answer: "Convert ICO images to TIFF format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
@@ -3672,7 +3671,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop ICO file(s)", desc: "Upload your ICO source. Runs locally on Canvas." },
       { title: "2. Set GIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download GIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download GIF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert ICO to GIF?", answer: "GIF is supported by platforms and messaging apps that don't handle ICO files. Converting ICO to GIF makes your icon usable in chat apps, social media, and legacy web contexts." },
@@ -3695,7 +3694,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop ICO file(s)", desc: "Upload your ICO source. Runs locally on Canvas." },
       { title: "2. Set JPEG XL options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download JPEG XL", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download JPEG XL", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert ICO to JXL?", answer: "JXL (JPEG XL) offers superior compression and quality compared to ICO's embedded bitmap formats. It's useful for archival or web use where you want modern compression for icon imagery." },
@@ -3716,7 +3715,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop JPEG XL file(s)", desc: "Upload your JPEG XL source. Runs locally on Canvas." },
       { title: "2. Set HEIC options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download HEIC", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download HEIC", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why HEIC?", answer: "Apple's native format — iPhone libraries and macOS handle it best." },
@@ -3739,7 +3738,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop JPEG XL file(s)", desc: "Upload your JPEG XL source. Runs locally on Canvas." },
       { title: "2. Set AVIF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download AVIF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download AVIF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why convert between JXL and AVIF instead of just using one?", answer: "JXL has better lossless compression while AVIF has wider browser support. Converting JXL to AVIF lets you use your library of JXL images on websites where AVIF is better supported." },
@@ -3762,7 +3761,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop JPEG XL file(s)", desc: "Upload your JPEG XL source. Runs locally on Canvas." },
       { title: "2. Set SVG options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download SVG", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download SVG", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Can a raster JXL image become a true vector SVG?", answer: "No. SVG is a vector format, but JXL is raster (pixel-based). The converter embeds the raster image inside an SVG wrapper, which preserves compatibility but does not add vector scalability." },
@@ -3779,21 +3778,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "JXL to BMP",
     slug: "jxl-to-bmp",
     category: "Image",
-    description: 'Convert JPEG XL images to raw BMP bitmaps for legacy analysis pipelines. Feed next-gen captures into older lab tools — local Canvas work, free quota on saves.',
-    seoDescription: 'Free JXL to BMP — raw bitmap output. Local Canvas, free quota on saves.',
+    description: 'Convert JPEG XL images to raw BMP bitmaps for legacy analysis pipelines. Feed next-gen captures into older lab tools — local Canvas work, unlimited saves.',
+    seoDescription: 'Free JXL to BMP — raw bitmap output. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free JXL to BMP Converter Online",
     instructions: [
       { title: "1. Upload JXL files", desc: "Next-gen sources for legacy targets." },
       { title: "2. Convert to BMP", desc: "Raw output, no settings to tune." },
-      { title: "3. Download BMPs", desc: "Feed lab pipelines (counts on the free download quota)." },
+      { title: "3. Download BMPs", desc: "Feed lab pipelines (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why BMP from JXL?', answer: 'Forensic and industrial software that accepts only raw bitmaps. JXL masters decode fully, then BMP carries pixels into those pipelines.' },
       { question: 'File sizes?', answer: 'Huge — width × height × 3 bytes uncompressed. Convert working subsets, not whole archives.' },
       { question: 'Quality preserved?', answer: 'Bit-exact decode of whatever the JXL held. BMP adds no quality, only compatibility.' },
-      { question: 'Do JXL masters upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota.' },
+      { question: 'Do JXL masters upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves touch the network — downloads are unlimited.' },
     ],
   },
   {
@@ -3806,7 +3805,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop JPEG XL file(s)", desc: "Upload your JPEG XL source. Runs locally on Canvas." },
       { title: "2. Set TIFF options", desc: "Set quality and output options — quality 80 suits photos, PNG suits graphics with text." },
-      { title: "3. Download TIFF", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download TIFF", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "Why TIFF?", answer: "Archival masters and print — lossless, layered-capable, universal." },
@@ -3823,21 +3822,21 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "JXL to ICO",
     slug: "jxl-to-ico",
     category: "Image",
-    description: 'Generate Windows ICO favicons from JPEG XL sources in batch. Build icon sets from next-gen art — local Canvas work, free quota on saves.',
-    seoDescription: 'Free JXL to ICO — favicons from next-gen art. Local Canvas, free quota on saves.',
+    description: 'Generate Windows ICO favicons from JPEG XL sources in batch. Build icon sets from next-gen art — local Canvas work, unlimited saves.',
+    seoDescription: 'Free JXL to ICO — favicons from next-gen art. Local Canvas, unlimited saves.',
     dependencies: "Canvas API",
     showInCategory: false,
     seoTitle: "Free JXL to ICO Converter – Favicons Online",
     instructions: [
       { title: "1. Upload JXL art", desc: "Square next-gen sources." },
       { title: "2. Generate ICO", desc: "Multi-size package builds automatically." },
-      { title: "3. Download ICOs", desc: "Deploy favicons (counts on the free download quota)." },
+      { title: "3. Download ICOs", desc: "Deploy favicons (downloads are unlimited)." },
     ],
     faqs: [
       { question: 'Why ICO in 2026?', answer: 'Windows taskbar, shortcuts, and legacy browsers still want .ico. One JXL master generates the full multi-size ICO package.' },
       { question: 'Which sizes embed?', answer: '16, 32, 48, and 256px standard set — crisp from tab icon to desktop shortcut. Square sources convert cleanest.' },
       { question: 'Transparency?', answer: 'Alpha carries through where the JXL has it. Test on dark taskbar themes before shipping.' },
-      { question: 'Does favicon conversion upload?', answer: 'No — conversion runs locally in your browser on Canvas. Only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Does favicon conversion upload?', answer: 'No — conversion runs locally in your browser on Canvas. Saves never touch a meter — downloads on local tools are unlimited.' },
     ],
   },
   {
@@ -3874,7 +3873,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Drop JSON file(s)", desc: "Upload your JSON source. Runs locally in your browser." },
       { title: "2. Set YAML options", desc: "Adjust output settings for YAML — presets fit most jobs without further tuning." },
-      { title: "3. Download YAML", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download YAML", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What JSON features are preserved in YAML?", answer: "Objects, arrays, strings, numbers, booleans, and null values are mapped to YAML equivalents. Nested structures become indented YAML blocks." },
@@ -3982,7 +3981,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "bulk-url-shortener",
     category: "Utility",
     description: 'Shorten hundreds of URLs in one batch with automatic provider failover — paste a list, get clean links for campaigns and bios. Marketers prep 200 UTM links before launch — managed shortening (~10/min pace), sign in free.',
-    seoDescription: 'Free bulk URL shortener — hundreds of links, one batch. Server-side, sign in free to start.',
+    seoDescription: 'Free bulk URL shortener — hundreds of links shortened in one batch via provider API. Third-party service receives URLs; signed 2 batches/day.',
     dependencies: "TinyURL API, is.gd API",
         instructions: [
       { title: "1. Paste URLs", desc: "One per line — campaign links, UTM URLs, bio links. Invalid entries report as errors, not blockers." },
@@ -4198,7 +4197,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Everything runs locally." },
       { title: "2. Configure conversion", desc: "Set the conversion options once — one configuration applies to the whole batch." },
-      { title: "3. Download results", desc: "Saves save straight to your device (free quota: 3 a day anonymous, 5 signed-in)." },
+      { title: "3. Download results", desc: "Files save straight to your device — downloads on local tools are unlimited." },
     ],
     faqs: [
       { question: "What is the NATO phonetic alphabet?", answer: "The NATO phonetic alphabet assigns a word to each letter: Alpha (A), Bravo (B), Charlie (C), Delta (D), through Zulu (Z). It is the international standard for spelling out letters clearly over radio and电话." },
