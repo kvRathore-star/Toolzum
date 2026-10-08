@@ -171,10 +171,11 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
                 <span className="ml-4 text-[11px] text-[var(--text-muted)] font-mono">toolzum — browser-supercomputer</span>
               </div>
 
-              {/* Column fills the 600px panel: tabs, then the zone stretches.
-                  justify-start (not between) so no dead void opens up. */}
+              {/* Column fills the 600px panel. Slack rule: ONLY the dropzone
+                  absorbs leftover space (flex-1 + min-h). Every sibling is
+                  shrink-0 so the gap can never migrate elsewhere. */}
               <div className="flex-1 p-6 flex flex-col justify-start gap-4 min-h-0">
-                <div className="flex gap-4" role="tablist" aria-label="Demo actions" onKeyDown={onDemoTabsKeyDown}>
+                <div className="flex gap-4 shrink-0" role="tablist" aria-label="Demo actions" onKeyDown={onDemoTabsKeyDown}>
                   {DEMO_TABS.map(tab => (
                     <button
                       key={tab}
@@ -953,7 +954,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
 
   return (
     <div className="flex-1 flex flex-col">
-      <div className="mb-4">
+      <div className="mb-4 shrink-0">
         <p className="text-sm font-semibold text-[var(--text-primary)]">What are you working with?</p>
         <p className="text-xs text-[var(--text-muted)] mt-0.5">Pick an action above — or just drop a file and we&apos;ll match its format</p>
       </div>
@@ -969,7 +970,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
         tabIndex={0}
         role="button"
         aria-label="Drop a file here, paste from clipboard, or click to browse"
-        className={`max-h-[320px] flex-1 min-h-[180px] border-2 border-dashed rounded-[var(--radius-xl)] flex flex-col items-center justify-center gap-3 transition-all cursor-pointer group outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/50 ${
+        className={`max-h-[320px] flex-1 min-h-[220px] border-2 border-dashed rounded-[var(--radius-xl)] flex flex-col items-center justify-center gap-3 transition-all cursor-pointer group outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/50 ${
           dragOver
             ? 'border-[var(--accent)] bg-[var(--accent-ink)]/5 scale-[1.01]'
             : first
@@ -1025,7 +1026,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
       {/* Intent chips: WHAT the file is -> WHY the user came. Rendered only
           with a file present — no reserved void when idle. */}
       {first && fileType && !blocked && (
-        <div className="mt-3" aria-live="polite">
+        <div className="mt-3 shrink-0" aria-live="polite">
           <div className="flex flex-col gap-2">
             <p className="text-[11px] text-[var(--text-muted)]">
               {multi
@@ -1070,7 +1071,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
         </div>
       )}
 
-      <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3" aria-label="Accepted formats">
+      <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3 shrink-0" aria-label="Accepted formats">
         {formatBadges.map((b) => (
           <span key={b.label} className="inline-flex items-baseline gap-1 text-[10px] font-mono text-[var(--text-muted)]">
             {b.label} <span className="hidden sm:inline text-[9px] opacity-60">{b.exts}</span>
@@ -1078,7 +1079,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
         ))}
       </div>
 
-      <details className="mt-3 group/guide">
+      <details className="mt-3 group/guide shrink-0">
         <summary className="text-[11px] text-[var(--text-muted)] hover:text-[var(--accent)] cursor-pointer transition-colors list-none flex items-center gap-1.5 min-h-[32px]">
           <span aria-hidden="true" className="inline-block transition-transform group-open/guide:rotate-90">▸</span>
           What can you drop here?
@@ -1094,7 +1095,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
         </div>
       </details>
 
-      <div className="mt-4 flex items-center justify-between bg-[var(--bg-overlay)] p-3 rounded-[var(--radius-lg)] border border-[var(--border-subtle)]">
+      <div className="mt-4 flex items-center justify-between bg-[var(--bg-overlay)] p-3 rounded-[var(--radius-lg)] border border-[var(--border-subtle)] shrink-0">
         <div className="flex items-center gap-2">
           <Shield className="w-3.5 h-3.5 text-[var(--success)]" />
           <span className="text-[10px] text-[var(--text-muted)]">Your file is only inspected in this browser</span>
