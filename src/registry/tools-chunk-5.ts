@@ -639,7 +639,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "S256 or plain?", answer: "S256 always — the plain challenge method is deprecated upstream." },
       { question: "Is my values uploaded anywhere when using OAuth PKCE Generator?", answer: "No — generation runs locally in your browser; unlimited saves on local tools." },
     ],
-    seoDescription: 'Free online OAuth PKCE Generator — Generate RFC 7636 OAuth PKCE code_verifier + code_challenge (S256 method) pairs. Verifier uses 48 bytes → 64-char base64url, challenge uses SHA-256. ',
+    seoDescription: 'Free OAuth PKCE generator — RFC 7636 verifier plus challenge pairs, S256 ready. Local crypto, free, no signup, nothing uploads.',
     dependencies: "Crypto API (Web Crypto)",
     seoTitle: "Free Online OAuth PKCE Generator",
   },
@@ -876,7 +876,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     dependencies: "Vanilla JS",
     seoTitle: "Free Data Type Converter Online",
     instructions: [
-      { title: "1. Enter the value", desc: "Strings, numbers, or structures." },
+      { title: "1. Enter a value of any type", desc: "Strings, numbers, booleans, arrays, or objects." },
       { title: "2. Pick target type", desc: "Explicit conversion, no truthiness traps." },
       { title: "3. Copy converted value", desc: "Use in code or payloads." },
     ],
@@ -4192,7 +4192,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     slug: "nato-phonetic-converter",
     category: "Converter",
     description: 'Bidirectional NATO phonetic alphabet converter. Convert text to NATO words (Alpha, Bravo, Charlie) and back. Perfect for radio communication, spelling clarification, and aviation.',
-    seoDescription: 'Free online NATO Phonetic Converter — Convert text to NATO phonetic alphabet (Alpha, Bravo, Charlie) and back. Perfect for radio communication and spelling clarification. ',
+    seoDescription: 'Free NATO phonetic converter — text to Alpha-Bravo-Charlie and back. For radio and spelling, local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Everything runs locally." },

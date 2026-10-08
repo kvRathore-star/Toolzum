@@ -829,7 +829,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "screen-recorder-extension",
     category: "Extension",
     description: 'Generates a browser extension that captures browser tabs, full screens, or specific application windows with configurable resolution, frame rate. No signup or account required.',
-    seoDescription: 'Free online Screen Recorder Extension — Generates a browser extension that captures browser tabs, full screens, or specific application windows with configurable resolution, frame rate. ',
+    seoDescription: 'Free screen recorder extension — capture tabs, screens or windows with resolution and frame-rate control. Local, free, no signup needed.',
     dependencies: "MediaRecorder API",
     instructions: [
       { title: "1. Pick what to share", desc: "Choose tab, window, or full screen when the browser prompts; grant mic if narrating." },
@@ -917,7 +917,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "emi-calculator",
     category: "Finance",
     description: 'Splits a loan principal into equal monthly installments using the standard reducing-balance formula with configurable annual interest and tenure. Figures never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online EMI Calculator — Splits a loan principal into equal monthly installments using the standard reducing-balance formula with configurable annual interest and tenure. ',
+    seoDescription: 'Free EMI calculator — loan principal to equal monthly installments on reducing balance. Configurable rate and tenure, local, free, no signup.',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter loan principal, annual interest rate, and tenure in months." },
@@ -982,7 +982,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Text",
     description: 'Analyzes your writing with real-time word count, sentence count, syllable count, paragraphs, and advanced readability metrics — Flesch-Kincaid Reading Ease, Grade Level, estimated speaking time, and keyword density. Essential for writers, students, and SEO professionals optimizing content for readability.',
     dependencies: "Vanilla JS",
-    seoDescription: 'Free online Word Counter — analyze writing with real-time word, sentence, syllable, and paragraph counts plus Flesch-Kincaid readability scores, grade level, speaking time, and keyword density. ',
+    seoDescription: 'Free word counter — real-time words, sentences, syllables plus Flesch-Kincaid readability and speaking time. Local, free, no signup, nothing uploads.',
     instructions: [
       { title: "1. Paste your content", desc: "Drop the text into Word Counter — full documents are fine, length is free." },
       { title: "2. Read the counts", desc: "Check each metric row; toggle options (with/without spaces) to match your target definition." },
@@ -1069,7 +1069,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Audio",
     description: "Generate natural-sounding speech from text using your browser's built-in voices, including Hindi, Tamil, Telugu, Bengali, and more Indian languages. Adjust speed, pitch, and volume — download your text as .txt.",
     dependencies: "Web Speech API",
-    seoDescription: 'Free text to speech online with Indian accents — convert text to natural-sounding audio using browser voices. Hindi, Tamil, Telugu, and more. Free, local, no signup. Text downloads free; audio export needs server TTS elsewhere.',
+    seoDescription: 'Free text to speech with Indian accents — natural audio from browser voices in Hindi, Tamil, Telugu and more. Local, free, no signup, nothing uploads.',
     instructions: [
       { title: "1. Paste or type text", desc: "Articles, scripts, or notes up to the visible limit. Plain sentences speak cleanest." },
       { title: "2. Pick voice and speed", desc: "Choose language, voice, and rate; preview 10 seconds before the full read." },
@@ -1439,7 +1439,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "ip-address-lookup",
     category: "Developer",
     description: 'Displays your public IPv4 and IPv6 addresses with geolocation data (city, ISP, ASN, timezone). Network engineers use it to verify VPN connectivity. Uses cloud-based processing.',
-    seoDescription: 'Free online IP Address Lookup — Displays your public IPv4 and IPv6 addresses with geolocation data (city, ISP, ASN, timezone). Network engineers use it to verify VPN connectivity. ',
+    seoDescription: 'Free IP address lookup — public IPv4/IPv6 with city, ISP, ASN and timezone. Verify VPN connectivity, local, free, no signup, nothing uploads.',
     dependencies: "MaxMind / IP-API",
     instructions: [
       { title: "1. Load the page", desc: "Your public IPv4/IPv6 resolve automatically — no input needed." },
@@ -1720,7 +1720,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "regex-tester",
     category: "Developer",
     description: 'Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match. Code never leaves your device — formatting and validation run locally in your browser.',
-    seoDescription: 'Free online Regex Tester — Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match. ',
+    seoDescription: 'Free regex tester — write patterns, test against samples, see live matches. Local processing, free, no signup, nothing uploads.',
     dependencies: "regex.js",
     instructions: [
       { title: "1. Paste Regex", desc: "Paste Regex text into the input area. Nothing runs until you trigger it." },
@@ -2049,7 +2049,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "xml-sitemap-generator",
     category: "SEO",
     description: 'Crawls any website and generates a standards-compliant XML sitemap. Supports JavaScript sites (React, Next.js, Vue), detects broken links, and provides SEO health insights.',
-    seoDescription: 'Free online XML Sitemap Generator — Crawl any website and generate a standards-compliant XML sitemap. Supports JavaScript sites (React, Next.js, Vue), detects broken links, and provides SEO health insights. ',
+    seoDescription: 'Free XML sitemap generator — crawl any site to a standards-compliant sitemap. JS sites supported, broken links flagged, local, free, no signup.',
     dependencies: "Fetch API / DOMParser",
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for XML Sitemap first." },
@@ -2219,7 +2219,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "margin-calculator",
     category: "Finance",
     description: 'Calculates gross margin percentage, markup percentage, cost, and selling price from any two known variables — perfect for retail pricing, wholesale negotiations, and e-commerce product listing optimization where you need to work backwards from a target margin.',
-    seoDescription: 'Free online Margin Calculator — calculate gross margin %, markup %, cost, or selling price from any two known variables. Perfect for retail pricing, wholesale, and e-commerce. ',
+    seoDescription: 'Free margin calculator — gross margin, markup, cost or price from any two numbers. For retail and wholesale, local, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter revenue and cost." },
@@ -2828,7 +2828,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "break-even-calculator",
     category: "Finance",
     description: 'Determines the exact unit volume or revenue required to cover fixed and variable costs, with a built-in sensitivity slider for price changes. Essential for startup pricing strategy, product launch planning, and manufacturing cost analysis where knowing your break-even point is critical before committing to production.',
-    seoDescription: 'Free online Break-Even Calculator — find the exact unit volume or revenue needed to cover fixed and variable costs. Price sensitivity slider for what-if analysis. Perfect for startups and product launches. ',
+    seoDescription: 'Free break-even calculator — exact unit volume or revenue to cover costs, with price slider. For startups, local, free, no signup, nothing uploads.',
     dependencies: "Vanilla JS",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter fixed costs, unit price, and variable cost." },
@@ -2840,7 +2840,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "What is the sensitivity slider?", answer: "The price sensitivity slider lets you adjust the selling price to see how it affects your break-even point. It answers 'what if I raise/lower my price?' without recalculating everything manually." },
       { question: "Does it show profit above break-even?", answer: "Yes. The calculator shows profit at any volume above the break-even point, helping you understand margins at different sales levels." },
       { question: "Can I use this for service businesses?", answer: "Yes. Enter your monthly fixed costs and set variable cost to zero (or per-client cost). The break-even point shows how many clients or projects you need to cover costs." },
-      { question: "When using Break-Even Calculator, is my financial data stored?", answer: "No. All calculations run locally in your browser. No cost or pricing data is transmitted." },
+
+      { question: 'Show me a break-even example with numbers?', answer: 'Fixed costs $10,000, price $50, variable cost $30: contribution is $20 per unit, so break-even is 10,000 ÷ 20 = 500 units. Sell unit 501 onward and every $20 is profit.' },      { question: "When using Break-Even Calculator, is my financial data stored?", answer: "No. All calculations run locally in your browser. No cost or pricing data is transmitted." },
     ],
     seoTitle: "Free Break-Even Calculator Online",
   },
@@ -3066,7 +3067,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "md5-hash-generator",
     category: "Developer",
     description: 'Compute MD5, SHA-1, SHA-256, and SHA-512 hashes from text or file input using CryptoJS. Paste text or drop files; digests compute instantly for checksums and lookups — free, local, no signup.',
-    seoDescription: 'Free online MD5 & SHA Hash Generator — Compute MD5, SHA-1, SHA-256, and SHA-512 cryptographic hashes from text or file input. All processing happens in your browser, nothing is uploaded.',
+    seoDescription: 'Free MD5 and SHA hash generator — MD5, SHA-1/256/512 from text or files. All local, nothing uploads, free, no signup, nothing uploads.',
     dependencies: "CryptoJS",
     instructions: [
       { title: "1. Set options", desc: "Adjust the settings for MD5 & SHA Hash first." },
@@ -3167,7 +3168,7 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: 'Roman numerals for preface?', answer: 'Use any sequence style the tool offers for front matter vs body.' },
       { question: 'Is my numbered PDF uploaded anywhere when using Add Page Numbers to PDF?', answer: 'No — editing runs locally in your browser; unlimited saves on local tools.' },
     ],
-    seoDescription: 'Free online Add Page Numbers to PDF — Inserts page number labels at user-chosen positions (bottom-center, top-right, etc.) with configurable font, size, and starting offset. ',
+    seoDescription: 'Free add-page-numbers tool — labels at any position with font, size and offset control. Local pdf-lib, unlimited saves, no signup needed.',
     dependencies: "pdf-lib",
   },
   {
@@ -3634,7 +3635,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "indian-utilities",
     description: 'Crops Aadhaar card images to the standard 3.5 x 3.5 cm wallet-photo size with automatic face detection using OpenCV Haar cascades. All processing is local and private.',
     seoTitle: "Aadhaar Card Photo Cropper – Free Online",
-    seoDescription: 'Free online Aadhaar Wallet Cropper — Crop Aadhaar card photos to standard 3.5x3.5 cm wallet size with auto face detection using OpenCV Haar cascades. 100% private, no uploads.',
+    seoDescription: 'Free Aadhaar wallet cropper — card photos to 3.5x3.5 cm with auto face detection. 100% private OpenCV, no uploads, unlimited saves, free.',
     dependencies: "Canvas API",
     instructions: [
       { title: "1. Upload files", desc: "Drop the batch. Processing runs on Canvas." },
@@ -3891,7 +3892,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "temp-email-generator",
     category: "Privacy",
     description: 'Generate a free disposable email address (temp mail / throwaway email) that receives mail for 60 minutes. Inbound only — you cannot send or reply. Perfect for signups you don\u2019t trust, confirmation codes, and keeping your real inbox spam-free.',
-    seoDescription: 'Free Temporary Email Generator (temp mail, 10 minute mail, throwaway email, fake email generator, burner mail) \u2014 disposable inbox live for 60 minutes. Inbound only, auto-refreshing every 10 seconds, destroyed on expiry. ',
+    seoDescription: 'Free temporary email generator — disposable 60-minute inbox, inbound only, auto-refreshing. Destroyed on expiry, free, no signup needed.',
     dependencies: "Cloudflare Email Routing",
     instructions: [
       { title: "1. Complete the verification", desc: "Check the human-verification box so bots can't farm inboxes." },

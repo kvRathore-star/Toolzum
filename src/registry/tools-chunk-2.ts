@@ -707,7 +707,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Quality slider guidance?", answer: "Start high, lower until motion artifacts show, then step back up once." },
       { question: "Is my work uploaded anywhere when using GIF Compressor?", answer: "No — compression runs locally in your browser; unlimited saves on local tools." },
     ],
-    seoDescription: 'Free online GIF Compressor — reduce animated GIF file size by up to 80% with color reduction, frame dedup, and lossy optimization. Essential for faster website loading and email attachments. ',
+    seoDescription: 'Free GIF compressor — up to 80% smaller via color reduction and frame dedup. Faster sites and emails, local FFmpeg, unlimited saves, no signup.',
     dependencies: "@ffmpeg/ffmpeg",
     showInCategory: true,
   },
@@ -2398,7 +2398,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "web-inspector",
     category: "Developer",
     description: 'Browser device info, user-agent parser, HTTP status codes reference, MIME types lookup, Basic Auth header generator, Open Graph meta tags generator, and keycode inspector.',
-    seoDescription: 'Free online Web Inspector & HTTP Tools — Browser device info, user-agent parser, HTTP status codes, MIME types, Basic Auth generator, OG meta tags, and keycode inspector. ',
+    seoDescription: 'Free web inspector toolkit — device info, status codes, MIME types, auth and keycodes. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Enter the site URL", desc: "Any public site. Login-walled pages inspect the public surface only." },
@@ -2453,7 +2453,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Traffic delays?", answer: "Add buffer manually; the math is pure distance-over-speed. Add buffer manually; the math itself is pure distance-over-speed." },
       { question: "Which units for ETA math?", answer: "Kilometers or miles with matching speed units, your free choice here." },
       { question: "Is my trip input uploaded anywhere?", answer: "No — calculation runs locally in your browser, free with no signup." },
-    ],
+
+      { question: 'Work an ETA example?', answer: '120 km at a steady 60 km/h takes exactly 2 hours — depart 9:00, arrive 11:00. The tool does the same division live and formats the arrival clock time.' },    ],
     seoDescription: 'Free ETA calculator — travel time from distance and speed with arrival time. Local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Online ETA Calculator",
@@ -3093,7 +3094,8 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: 'What goes into P&L?', answer: 'Revenue minus COGS (gross), minus operating expenses (operating), minus interest/tax (net). Enter all three layers for the true bottom line.' },
       { question: 'Profitable but cash-poor?', answer: 'Common — unpaid invoices count as revenue before cash arrives. Track receivables aging alongside P&L, not instead of it.' },
       { question: 'Monthly or annual?', answer: 'Monthly for operations, annual for strategy — same math, different decisions. Compare month-over-month trends, not single points.' },
-      { question: 'Are figures uploaded?', answer: 'No — math runs locally in your browser. Figures never leave your device.' },
+
+      { question: 'Work a P&L example?', answer: 'Revenue $50,000 minus $32,000 costs leaves $18,000 profit — a 36% margin. Enter your own two numbers and the tool splits profit from margin the same way.' },      { question: 'Are figures uploaded?', answer: 'No — math runs locally in your browser. Figures never leave your device.' },
     ],
   },
   {
@@ -3764,7 +3766,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: 'How does Gemini watermark removal work?', answer: 'Gemini AI stamps a small sparkle mark (48 or 96 pixels) in the bottom-right corner. The tool auto-detects the size from image dimensions, then mathematically reverses the alpha blending to recover the original pixels underneath.' },
       { question: 'Does it work on other watermarks?', answer: 'No — only Gemini\'s sparkle mark, whose exact blending is known. Stock-photo watermarks, logos, and text overlays need manual clone work; this tool refuses them rather than smudging.' },
       { question: 'What is batch mode?', answer: 'Pro-only multi-file removal with queue controls and ZIP output. Single images stay free for everyone with no account and no credits.' },
-      { question: 'Does watermark removal upload images?', answer: 'No — detection and reversal run entirely in your browser. Nothing leaves your device; only saves count on the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Does watermark removal upload images?', answer: 'No — detection and reversal run entirely in your browser. Nothing leaves your device; saves download with no quota.' },
     ],
     seoTitle: "Free Watermark Remover from Images",
   },

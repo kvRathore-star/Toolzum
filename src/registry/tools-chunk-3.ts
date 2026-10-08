@@ -594,7 +594,8 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can I include regular contributions?", answer: "Yes. Add monthly or annual contributions to see how consistent investing accelerates growth. The tool calculates compound interest on both the principal and accumulated contributions." },
       { question: "What does the growth chart show?", answer: "A visual breakdown of your investment over time: principal contributions (blue), compound interest earned (green), and total value. Hover over any point to see exact values." },
       { question: "Can I compare different scenarios?", answer: "Yes. Adjust interest rate, contribution amount, and compounding frequency to compare scenarios side by side. This helps optimize your savings strategy." },
-      { question: "When using Compound Interest Calculator, is my financial data stored?", answer: "No. All calculations run locally in your browser. No investment data is transmitted." },
+
+      { question: 'What does $1,000 at 5% become in 10 years?', answer: 'Compounded yearly: 1,000 × 1.05^10 = $1,628.89. Monthly compounding lands a touch higher at $1,647.01 — frequency is free money the chart makes visible.' },      { question: "When using Compound Interest Calculator, is my financial data stored?", answer: "No. All calculations run locally in your browser. No investment data is transmitted." },
     ],
     seoTitle: "Free Online Compound Interest Calculator",
   },
@@ -811,7 +812,8 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: 'Which debts subtract?', answer: 'All of them: mortgages, loans, cards, owed taxes. Net worth equals assets minus every liability — partial accounting lies.' },
       { question: 'How often to update?', answer: 'Quarterly — monthly noise obscures trends, yearly misses drift. One number per quarter charted over years.' },
       { question: 'Is wealth data uploaded?', answer: 'No — math runs locally in your browser. Figures never leave your device.' },
-    ],
+
+      { question: 'Work a net-worth example?', answer: 'Assets $250,000 home + $40,000 savings = $290,000; debts $180,000 mortgage + $12,000 loan = $192,000. Net worth: $98,000. Update the inputs and yours computes identically.' },    ],
   },
   {
     id: "617",
@@ -841,7 +843,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "retirement-calculator",
     category: "Finance",
     description: 'Project your retirement savings based on current age, savings, monthly contributions, and expected returns. Plan for a comfortable retirement. Figures never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online Retirement Calculator — Project your retirement savings based on current age, savings, monthly contributions, and expected returns. Plan for a comfortable retirement. ',
+    seoDescription: 'Free retirement calculator — project savings from age, contributions and returns. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter current savings, contribution, and years." },
@@ -1277,7 +1279,8 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: 'What is mode?', answer: 'Most frequent value(s) — sizes, votes, categories. Datasets can be bimodal; the tool lists all modes.' },
       { question: 'Skew detection?', answer: 'Mean far above median signals right skew (a few huge values). Report both, never mean alone.' },
       { question: 'Do datasets upload?', answer: 'No — statistics compute locally in your browser. Data never leaves your device.' },
-    ],
+
+      { question: 'Work mean, median and mode on one dataset?', answer: 'For 2, 4, 4, 4, 5: mean is 19 ÷ 5 = 3.8, median (middle value) is 4, mode (most frequent) is 4. Same average family, three different stories.' },    ],
   },
   {
     id: "641",
@@ -1400,7 +1403,8 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Degrees or radians?", answer: "Both modes, switchable — wrong mode is the classic error source." },
       { question: "Parentheses?", answer: "Full nesting supported with proper precedence. Full nesting supported with proper precedence throughout." },
       { question: "Is my calculation uploaded anywhere?", answer: "No — calculation runs locally in your browser, free with no signup." },
-    ],
+
+      { question: 'What is sin(30 degrees)?', answer: 'Exactly 0.5 — the classic check that degree mode is on. In radian mode the same input reads sin(0.524) ≈ 0.5; mismatched modes explain most wrong answers.' },    ],
     seoDescription: 'Free online Scientific Calculator — Evaluate mathematical expressions with sin, cos, tan, log, and sqrt functions. A versatile scientific calculator in your browser. ',
     dependencies: "None",
     seoTitle: "Scientific Calculator – Free Online",
@@ -1517,7 +1521,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "baby-growth-percentile-calculator",
     category: "Health",
     description: 'Estimate baby growth percentiles from weight, height, and age. Monitor your childs growth compared to population averages. Health data never leaves your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online Baby Growth Percentile Calculator — Estimate baby growth percentiles from weight, height, and age. Monitor your childs growth compared to population averages. ',
+    seoDescription: 'Free baby growth percentile calculator — weight, height and age vs averages. Informational only, local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter age, weight, height, and gender." },
@@ -1856,7 +1860,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "simple-interest-calculator",
     category: "Finance",
     description: 'Calculate simple interest using principal, rate, and time. Find total interest earned and final amount for basic interest calculations. Figures never leave your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online Simple Interest Calculator — Calculate simple interest using principal, rate, and time. Find total interest earned and final amount for basic interest calculations. ',
+    seoDescription: 'Free simple interest calculator — principal, rate and time to interest and totals. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter principal, rate, and time." },
@@ -3736,7 +3740,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Which brands?", answer: "Visa, Mastercard, Amex, and Discover test patterns included." },
       { question: "Is my test cards uploaded anywhere when using Fake Credit Card Generator?", answer: "No — generation runs locally in your browser; unlimited saves on local tools." },
     ],
-    seoDescription: 'Free online Fake Credit Card Generator — Generate fake credit card numbers with valid formats including Visa, Mastercard, Amex, and Discover. All numbers pass Luhn algorithm validation. ',
+    seoDescription: 'Free test card generator — Luhn-valid Visa, Mastercard, Amex and Discover numbers for testing only. Local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Fake Credit Card Generator – Free Online",
   },

@@ -379,7 +379,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     slug: "seo-headline-analyzer",
     category: "SEO",
     description: 'Analyze headlines for word count, character count, sentiment, power words, and overall SEO score. Optimize your titles for better engagement. Analysis runs locally in your browser — nothing you enter is uploaded.',
-    seoDescription: 'Free online SEO Headline Analyzer — Analyze headlines for word count, character count, sentiment, power words, and overall SEO score. Optimize your titles for better engagement. ',
+    seoDescription: 'Free SEO headline analyzer — word count, sentiment, power words and 0–100 score. Optimize titles, local, free, no signup, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Headline Analyzer – SEO Title Score",
     instructions: [
@@ -1352,6 +1352,7 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: 'Steps shown?', answer: 'Yes — each operation (add, divide both sides) displays in classroom order. Copy the working, not just answers.' },
       { question: 'Fractions involved?', answer: 'Cleared first via LCD multiplication. Fractional coefficients never survive step one.' },
       { question: 'Do equations upload anywhere?', answer: 'No — solving runs locally in your browser. Nothing leaves your device.' },
+      { question: 'Solve 2x + 6 = 14 step by step?', answer: 'Subtract 6: 2x = 8. Divide by 2: x = 4. The tool shows each isolation step so a sign error has nowhere to hide.' },
     ],
   },
   {
@@ -1373,7 +1374,8 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: 'Units?', answer: 'Consistent input units yield squared/cubed outputs. Mixing cm and m silently corrupts — convert first.' },
       { question: 'Steps shown?', answer: 'Yes — formula with substituted values per calculation. Copy working into homework directly.' },
       { question: 'Do shape measures upload?', answer: 'No — math runs locally in your browser. Numbers never leave your device.' },
-    ],
+
+      { question: 'Area of a circle with radius 5?', answer: 'π × 25 ≈ 78.54 square units. Enter any radius and the tool pairs area with circumference the same way.' },    ],
   },
   {
     id: "862",
@@ -1394,7 +1396,8 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: 'Midpoint too?', answer: 'Yes — average of x\'s and y\'s alongside distance. Both results serve different homework parts.' },
       { question: 'Negative coordinates?', answer: 'Handled naturally across all quadrants. Signs matter — double-check point entry.' },
       { question: 'Do point pairs upload?', answer: 'No — math runs locally in your browser. Numbers never leave your device.' },
-    ],
+
+      { question: 'Distance and midpoint of (0,0) and (3,4)?', answer: 'Distance is √(9+16) = 5; midpoint is (1.5, 2). The classic 3-4-5 triangle, computed live from your two points.' },    ],
   },
   {
     id: "863",
@@ -1415,7 +1418,8 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: 'Undefined slope?', answer: 'Vertical lines (x₁=x₂) divide by zero — undefined, not infinite. The tool reports it correctly.' },
       { question: 'Intercept too?', answer: 'Yes — y = mx + b fully determined from two points. Graph-ready equation output.' },
       { question: 'Do line points upload?', answer: 'No — math runs locally in your browser. Numbers never leave your device.' },
-    ],
+
+      { question: 'Slope through (1,2) and (5,10)?', answer: 'Rise 8 over run 4 gives m = 2; back-substituting, 2 = 2(1) + b so the intercept is 0. The tool draws the same line it computes.' },    ],
   },
   {
     id: "866",
@@ -1582,7 +1586,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     slug: "calorie-intake-calculator",
     category: "Health",
     description: 'Calculate your daily calorie needs using BMR and activity level. Shows maintenance, cutting, and bulking calorie targets for fitness planning. Health data never leaves your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online Daily Calorie Needs \u2014 Calculate your daily calorie needs using BMR and activity level. Shows maintenance, cutting, and bulking calorie targets for fitness planning. ',
+    seoDescription: 'Free daily calorie calculator — BMR plus activity with cutting and bulking targets. Estimate only, local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter age, weight, height, and activity level." },
@@ -1710,7 +1714,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     slug: "blood-alcohol-calculator",
     category: "Health",
     description: 'Estimate your blood alcohol concentration (BAC) based on drinks consumed, weight, gender, and time elapsed. For educational purposes only. Health data never leaves your device — every calculation runs locally in your browser.',
-    seoDescription: 'Free online Blood Alcohol Estimator \u2014 Estimate your blood alcohol concentration (BAC) based on drinks consumed, weight, gender, and time elapsed. For educational purposes only. ',
+    seoDescription: 'Free blood alcohol estimator — BAC from drinks, weight, gender and time. Educational purposes only, local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Fill the inputs", desc: "Enter drinks, weight, gender, and hours since first drink." },
@@ -1830,7 +1834,8 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: 'Timezone handling?', answer: 'Browser-local consistently for both endpoints. Cross-zone events need explicit conversion first.' },
       { question: 'Future dates?', answer: 'Switch to countdown mode automatically — one tool tracks both directions from now.' },
       { question: 'Do elapsed spans upload?', answer: 'No — math runs locally in your browser. Nothing leaves your device.' },
-    ],
+
+      { question: 'How many days from Jan 1 2020 to Jan 1 2026?', answer: 'Six years totalling 2,192 days — 2020 and 2024 contribute leap days. Enter any two dates and the tool counts exact spans the same way.' },    ],
   },
   {
 
@@ -1873,7 +1878,8 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: 'Who skips DST?', answer: 'Most of Asia, Africa (except parts), Arizona, Hawaii — plus Southern Hemisphere on flipped schedules. The checker names each zone\'s rule.' },
       { question: 'Meeting across DST boundaries?', answer: 'Check both zones\' transition weeks: a standing meeting shifts for one side only. Reconfirm March and October slots yearly.' },
       { question: 'Do timezone checks upload?', answer: 'No — checks run locally in your browser. Nothing leaves your device.' },
-    ],
+
+      { question: 'When do US and EU clocks change in 2026?', answer: 'US: March 8 to November 1. EU: March 29 to October 25. Enter any date and the tool reports whether DST applies and the UTC offset in force.' },    ],
   },
   {
     id: "893",
@@ -2707,7 +2713,8 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: 'New vs expansion?', answer: 'Track separately — expansion ACV reveals land-and-expand health that blended numbers hide. New-logo ACV guides sales targeting.' },
       { question: 'What moves ACV?', answer: 'Multi-year terms, seat expansion, and premium tiers lift it; discounts and churn drag. Review drivers, not just the number.' },
       { question: 'Do contract figures upload?', answer: 'No — math runs locally in your browser. Figures never leave your device.' },
-    ],
+
+      { question: 'Work an ACV example?', answer: '$120,000 in new ARR across 10 customers is a $12,000 ACV. Add expansion revenue and watch ACV climb without a single new logo.' },    ],
   },
   {
     id: "934",
@@ -3139,7 +3146,8 @@ export const entries_chunk_4: ToolMetadata[] = [
       { question: "Which units for triangle area?", answer: "Any consistent unit — output squares it automatically for your convenience." },
       { question: "Why three methods?", answer: "Different knowns need different formulas — pick what you have." },
       { question: "Is my triangle input uploaded anywhere?", answer: "No — calculation runs locally in your browser, free with no signup." },
-    ],
+
+      { question: 'Area of a triangle with base 10 and height 6?', answer: 'Half times base times height: 0.5 × 10 × 6 = 30 square units. Pick any of the three methods and the tool shows the same worked path.' },    ],
     seoDescription: 'Free online Triangle Area Calculator — Calculate the area of a triangle given base and height using the formula 0.5 × base × height. ',
     dependencies: "None",
     seoTitle: "Free Triangle Area Calculator Online",
@@ -3346,7 +3354,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     slug: "duplicate-word-remover",
     category: "Text",
     description: 'Remove duplicate words from text while preserving the first occurrence and original word order. Leaves line structure intact — only targets repeated words, not lines.',
-    seoDescription: 'Free online Duplicate Word Remover — Remove repeated words from text while preserving first occurrence and original order. Keeps line structure intact. Instant local processing.',
+    seoDescription: 'Free duplicate word remover — repeated words out, order and lines intact. Instant local processing, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Paste Your Text", desc: "Enter the text containing duplicate words into the input area." },
@@ -3388,7 +3396,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     slug: "text-splitter",
     category: "Text",
     description: 'Split text by any delimiter (comma, space, tab, newline, or custom) and view numbered parts. Essential for parsing CSV data, extracting fields, and breaking structured text into components.',
-    seoDescription: 'Free online Text Splitter — Split text by any delimiter (comma, space, tab, newline, or custom) and view numbered parts. Parse CSV data, extract fields, and break structured text into components.',
+    seoDescription: 'Free text splitter — split by any delimiter into numbered parts. Parse CSV and fields, local, free, no signup, nothing uploads.',
     dependencies: "None",
     instructions: [
       { title: "1. Paste source for Text Splitter", desc: "Paste source for Text Splitter into the input area. Nothing runs until you trigger it." },
