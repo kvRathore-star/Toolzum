@@ -51,7 +51,7 @@ export const CATEGORY_CAPS = {
   image: 50,
   pdf: 125,
   audio: 100,
-  video: 300,
+  video: 250,
   other: 150,
 } as const;
 

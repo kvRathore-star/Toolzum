@@ -57,7 +57,7 @@ export function SuccessSignupNudge() {
     >
       <p className="text-sm font-semibold text-[var(--text-primary)]">Nice work — that was free, no account needed.</p>
       <p className="mt-1 text-xs text-[var(--text-secondary)]">
-        A free account saves your history and adds 5 one-time AI credits.
+        A free account lets you try AI summarize and translate (5 free credits) and process up to 25 files at once.
       </p>
       <div className="mt-3 flex items-center gap-2">
         <Link

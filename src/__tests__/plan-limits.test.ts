@@ -37,9 +37,9 @@ describe('plan limits alignment (Option A)', () => {
     for (const accept of CATEGORIES) {
       const { signed, free } = smartMax(accept);
       expect(signed, `smartMax signed for ${accept}`).toBe(free);
-      expect([50, 100, 125, 150, 300]).toContain(free);
+      expect([50, 100, 125, 150, 250]).toContain(free);
     }
-    expect(smartMax('video/*')).toEqual({ signed: 300, free: 300 });
+    expect(smartMax('video/*')).toEqual({ signed: 250, free: 250 });
     expect(smartMax('application/pdf')).toEqual({ signed: 125, free: 125 });
     expect(smartMax('audio/*')).toEqual({ signed: 100, free: 100 });
     expect(smartMax('image/*')).toEqual({ signed: 50, free: 50 });

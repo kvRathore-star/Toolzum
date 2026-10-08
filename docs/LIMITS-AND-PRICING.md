@@ -296,7 +296,7 @@ same numbers. Test-locked in `plan-limits.test.ts`.
 | Image | 50 MB |
 | PDF | 125 MB |
 | Audio | 100 MB |
-| Video | 300 MB |
+| Video | 250 MB |
 | Other (text, docs, data) | 150 MB |
 
 Ceilings exist for browser memory and abuse only — local compute is free.

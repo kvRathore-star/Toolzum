@@ -124,7 +124,7 @@ describe("hero upload routing (trustworthy file -> tool)", () => {
     // Contract with smartMax: the box shows these numbers, tools enforce them.
     // Generous ceilings (Oct 2026): same anon and signed.
     expect(smartMax("image/jpeg,image/png,image/webp")).toEqual({ signed: 50, free: 50 });
-    expect(smartMax("video/mp4,video/quicktime,video/x-matroska,video/webm")).toEqual({ signed: 300, free: 300 });
+    expect(smartMax("video/mp4,video/quicktime,video/x-matroska,video/webm")).toEqual({ signed: 250, free: 250 });
     expect(smartMax("audio/*")).toEqual({ signed: 100, free: 100 });
     expect(smartMax("application/pdf")).toEqual({ signed: 125, free: 125 });
     expect(smartMax("image/gif")).toEqual({ signed: 50, free: 50 });

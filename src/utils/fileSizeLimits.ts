@@ -12,7 +12,7 @@ export interface CategoryLimits {
 const IMAGE_EXT_HINTS = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg', '.avif', '.heic', '.heif', '.tiff', '.tif', '.ico'];
 
 export function smartMax(accept: string): CategoryLimits {
-  if (accept.includes('video/')) return { signed: 300, free: 300 };
+  if (accept.includes('video/')) return { signed: 250, free: 250 };
   if (accept.includes('application/pdf') || accept.includes('.pdf')) return { signed: 125, free: 125 };
   if (accept.includes('audio/')) return { signed: 100, free: 100 };
   const lower = accept.toLowerCase();
