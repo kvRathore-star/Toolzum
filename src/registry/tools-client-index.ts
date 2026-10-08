@@ -34,7 +34,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video to MP3 Converter",
     "slug": "video-to-mp3",
     "category": "Video",
-    "description": "Extracts the audio track from uploaded video files (MP4, MOV, AVI, WebM) and encodes it as a high-quality MP3 file. Free to start with no signup — fair daily limits apply.",
+    "description": "Extracts the audio track from uploaded video files (MP4, MOV, AVI, WebM) and encodes it as a high-quality MP3 file. Free to start with no signup.",
     "isPro": false
   },
   {
@@ -42,7 +42,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Crop Video",
     "slug": "crop-video",
     "category": "Video",
-    "description": "Crop the visual area of your MP4, MOV, AVI, or WebM video directly in the browser with preset aspect ratios or custom selections. Free to start with no signup — fair daily limits apply.",
+    "description": "Crop the visual area of your MP4, MOV, AVI, or WebM video directly in the browser with preset aspect ratios or custom selections. Free to start with no signup.",
     "isPro": false
   },
   {
@@ -178,7 +178,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Compressor",
     "slug": "pdf-compressor",
     "category": "PDF",
-    "description": "Reduces PDF file size by compressing embedded images, removing redundant metadata, and optimizing object streams. Three compression tiers let you choose between maximum size reduction and high-quality preservation. Handles PDFs up to 50MB.",
+    "description": "Reduces PDF file size by compressing embedded images, removing redundant metadata, and optimizing object streams. Three compression tiers let you choose between maximum size reduction and high-quality preservation. Handles PDFs up to 125MB.",
     "isPro": false
   },
   {
@@ -738,7 +738,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Face Swap",
     "slug": "ai-face-swap",
     "category": "AI",
-    "description": "Composite a face from one photo onto another with manual position, scale, and blend controls on canvas. Meme makers and designers align swaps by hand — runs locally, free to start with fair daily limits.",
+    "description": "Composite a face from one photo onto another with manual position, scale, and blend controls on canvas. Meme makers and designers align swaps by hand — runs locally, free to start with unlimited saves.",
     "isPro": true
   },
   {
@@ -1602,7 +1602,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Blur Face Online",
     "slug": "blur-face",
     "category": "Image",
-    "description": "Detects faces in uploaded images using on-device AI computer vision and applies an adjustable blur effect to each detected face. Free to start with no signup — fair daily limits apply.",
+    "description": "Detects faces in uploaded images using on-device AI computer vision and applies an adjustable blur effect to each detected face. Free to start with no signup.",
     "isPro": false
   },
   {
@@ -1610,7 +1610,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HTML to Image Converter",
     "slug": "html-to-image",
     "category": "Converter",
-    "description": "Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser. Free to start with no signup — fair daily limits apply.",
+    "description": "Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser. Free to start with no signup.",
     "isPro": false
   },
   {
@@ -1618,7 +1618,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Apple Music Preview Extractor",
     "slug": "apple-music-preview-extractor",
     "category": "Audio",
-    "description": "Extracts publicly available 30-to-90-second audio preview clips from Apple Music by resolving the store URL. Free to start with no signup — fair daily limits apply.",
+    "description": "Extracts publicly available 30-to-90-second audio preview clips from Apple Music by resolving the store URL. Free to start with no signup.",
     "isPro": false
   },
   {
@@ -1714,7 +1714,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Editor",
     "slug": "pdf-editor",
     "category": "PDF",
-    "description": "Add text, highlights, drawings, shapes, notes, signatures, and images to any PDF. Rotate, duplicate, and OCR pages (8 languages), or use one-click AI to summarize, fix, or translate. Editing runs 100% locally. AI actions are optional and cost credits, shown on each button before you click. Free, no watermark — no signup needed to start, fair daily limits apply.",
+    "description": "Add text, highlights, drawings, shapes, notes, signatures, and images to any PDF. Rotate, duplicate, and OCR pages (8 languages), or use one-click AI to summarize, fix, or translate. Editing runs 100% locally. AI actions are optional and cost credits, shown on each button before you click. Free, no watermark — no signup needed to start, unlimited saves.",
     "isPro": false
   },
   {
@@ -2434,7 +2434,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Chat PDF",
     "slug": "ai-chat-pdf",
     "category": "AI",
-    "description": "Chat with any PDF: ask questions, get answers, and extract insights with intelligent in-browser search. Students quiz a textbook chapter in minutes — free to start, fair daily limits apply.",
+    "description": "Chat with any PDF: ask questions, get answers, and extract insights with intelligent in-browser search. Students quiz a textbook chapter in minutes — free to start.",
     "isPro": true
   },
   {
@@ -7122,7 +7122,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random User-Agent Generator",
     "slug": "random-user-agent-generator",
     "category": "Developer",
-    "description": "Generate random browser user-agent strings from a curated list covering Chrome, Firefox, Safari, Edge, and mobile browsers. Free to start with no signup — fair daily limits apply.",
+    "description": "Generate random browser user-agent strings from a curated list covering Chrome, Firefox, Safari, Edge, and mobile browsers. Free to start with no signup.",
     "isPro": false
   },
   {

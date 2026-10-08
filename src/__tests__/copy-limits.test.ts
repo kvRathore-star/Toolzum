@@ -26,6 +26,7 @@ const STALE_STRINGS: [string, string][] = [
   ["counts toward free download quota", "downloads are unlimited"],
   ["counts on free quota", "downloads are unlimited"],
   ["saves on free quota", "saves unlimited"],
+  ["fair daily limits", "no daily limits on local tools"],
   ["10 files/batch", "25 files/batch"],
   ["up to 10 files", "up to 25 files"],
   ["10-file batches", "25-file batches"],

@@ -12,7 +12,7 @@ export const metadata = {
 const FACTS: [string, string][] = [
   ["What", "1,000+ free online tools (PDF, image, video, audio, AI, text, developer, finance and more) that run in the browser."],
   ["Privacy model", "Local tools never upload files; cloud AI features are marked and cost credits."],
-  ["Price", "Free tier with fair daily limits; Pro unlocks unlimited use."],
+  ["Price", "Free tier with unlimited local tools; Pro unlocks 500-file batches, 2GB files and AI credits."],
   ["Launched", "2026. Privacy-first from day one."],
   ["Contact", "See /contact for press inquiries. Logo: /favicon.svg (SVG), /favicon.png (PNG)."],
 ];

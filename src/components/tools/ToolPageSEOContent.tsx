@@ -654,7 +654,7 @@ export const categoryFaqTemplates: Record<string, ((tool: ToolMetadata) => { que
       (proSlugs as readonly string[]).includes(tool.slug) ||
       classifyDependencies(tool.dependencies || '') !== 'local';
     const freeAnswer = gated
-      ? `Yes — free to start with no signup, under fair daily limits. Pro removes all limits.`
+      ? `Yes — free to start with no signup. Local tools are unlimited; Pro tools include 2 free downloads a day.`
       : `Yes. Completely free with no usage limits, registration, or hidden charges.`;
     const localOnly = classifyDependencies(tool.dependencies || '') === 'local';
     return [
@@ -746,7 +746,7 @@ export function defaultFaqsFor(tool: ToolMetadata): { question: string; answer: 
     {
       question: 'Is this tool free to use?',
       answer: gated
-        ? 'Free to start with fair daily limits — no signup needed to try it. Pro removes all limits.'
+        ? 'Free to start with no signup. Local downloads are unlimited; Pro tools include 2 free downloads a day.'
         : 'Yes, completely free with no signup. No account, no credit card, no quotas.',
     },
     {
@@ -769,7 +769,7 @@ export function defaultFaqsFor(tool: ToolMetadata): { question: string; answer: 
       question: 'Are there any usage limits?',
       answer:
         gated || pro
-          ? 'The free tier carries fair daily limits, shown on the page before you hit them. Pro is unlimited.'
+          ? 'Free to use; metered extras — AI credits and Pro-tool downloads — always show their cost before you spend. Local tools are unlimited.'
           : 'No quotas or restrictions — unlimited free use with no signup required.',
     },
     { question: "What are the system requirements?", answer: "Any modern web browser (Chrome, Firefox, Safari, Edge) on desktop or mobile. No installation needed." },
