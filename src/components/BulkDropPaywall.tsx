@@ -22,9 +22,9 @@ export function BulkDropPaywall() {
       const items = e.clipboardData?.files;
       if (items && items.length > 1) {
         const fileList = Array.from(items);
-        // Cap-aware: guests 1, signed-in 10 (matches check-plan.ts). Pasting
+        // Cap-aware: guests 5, signed-in 25 (matches check-plan.ts). Pasting
         // within the free batch is fine — don't push Pro, just confirm.
-        const cap = getSignedInStatus() ? 10 : 1;
+        const cap = getSignedInStatus() ? 25 : 5;
         if (fileList.length <= cap) {
           e.preventDefault();
           toast.success(`${fileList.length} files ready — drop them into the tool (up to ${cap}/batch free)`);
@@ -69,11 +69,11 @@ export function BulkDropPaywall() {
               <button
                 onClick={() => {
                   setShowModal(false);
-                  toast.success('Drop individual files one at a time');
+                  toast.success('Drop fewer files at a time (5 guests · 25 signed in)');
                 }}
                 className="w-full text-center text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] underline transition-colors"
               >
-                Continue with 1 file at a time
+                Continue with fewer files
               </button>
             </div>
           </div>

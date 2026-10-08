@@ -172,8 +172,13 @@ Enforcement: `claims-integrity.test.ts` (absolute forms) + `tool-content-standar
 (all-templates guard) + `defaultFaqsFor`/`categoryFaqTemplates` branch on
 tier+verdict at render time. Re-audit quarterly with `claims5` method.
 
-**Quota doctrine (Oct 5 verdict: KEEP quotas, reform disclosure):**
-Tiers are anon 3/day → signed-up 5/day (+5 trial credits, 10-file batch) → Pro.
+**Quota doctrine — SUPERSEDED Oct 8 2026 by the generous-limits migration
+(see LIMITS-AND-PRICING.md §11). What follows is the Oct 5 record, kept for
+history; its numbers (3/day, 5/day, 1/10 batches) no longer apply. Local
+downloads are unlimited; quotas survive only for Pro-tool taste.**
+
+> Oct 5 verdict: KEEP quotas, reform disclosure.
+> Tiers are anon 3/day → signed-up 5/day (+5 trial credits, 10-file batch) → Pro.
 Keep them: (1) server AI/transcription calls cost real money per use — unlimited
 anon = bankruptcy + bot abuse; (2) quotas fund the free tier via Pro conversion;
 (3) quotas gate download ACTIONS, never page content, so indexing is unaffected

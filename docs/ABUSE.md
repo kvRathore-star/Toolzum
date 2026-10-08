@@ -6,9 +6,10 @@ cannot, and each fails where the next one holds.
 ## 1. Browser fingerprint hash (anonymous convenience)
 
 - **What:** `th_fp` (UA + screen + language + timezone hash), sent as
-  `x-download-fingerprint`, keys the 3/day anonymous download quota.
-- **Stops:** casual overuse without an account.
-- **Fails:** self-reported — rotate the hash, reset the quota. This is
+  `x-download-fingerprint`, identifies anonymous download events.
+- **Stops:** nothing by itself since Oct 2026 (local downloads unlimited) —
+  it keys analytics rows and the Pro-taste bucket separation.
+- **Fails:** self-reported — rotate the hash, reset identity. This is
   accepted (friction-free trial matters more), NOT relied upon.
 - **Backstop:** `checkAnonDlVelocity` caps total download attempts per
   IP per day (500, `functions/api/_abuse.ts`). Farm-scale only.

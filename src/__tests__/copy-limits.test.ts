@@ -20,6 +20,7 @@ const STALE_STRINGS: [string, string][] = [
   ["Daily download limit reached", "Daily Pro-tool taste used"],
   // Batch tiers (5 / 25 / 500 since Oct 2026)
   ["Guests process 1 file at a time", "Guests batch up to 5 files"],
+  ["Continue with 1 file at a time", "Continue with fewer files"],
   ["10 files/batch", "25 files/batch"],
   ["up to 10 files", "up to 25 files"],
   ["10-file batches", "25-file batches"],

@@ -77,10 +77,11 @@ export async function checkAiIpVelocity(
 }
 
 /**
- * Anonymous quota-rotation backstop: the per-device fingerprint quota
- * (x-download-fingerprint) is self-reported and rotatable, so a farm
- * gets 3 downloads per forged hash. This caps total attempts per IP
- * per day — legitimate shared IPs rarely approach it (see ABUSE.md).
+ * Anonymous quota-rotation backstop: the per-device fingerprint identity
+ * (x-download-fingerprint) is self-reported and rotatable. Local downloads
+ * are unlimited, so this no longer guards a quota — it caps total attempts
+ * per IP per day against rotation farms (signed-in users are identity-bound
+ * already, so they skip this). See ABUSE.md.
  */
 export async function checkAnonDlVelocity(
   DB: D1Database,
