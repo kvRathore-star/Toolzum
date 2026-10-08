@@ -120,13 +120,14 @@ describe("hero upload routing (trustworthy file -> tool)", () => {
     // MP3 extraction honors the broad video/* acceptor, not the mp4-only one.
     expect(heroIntentsFor("video", "mp4").find((i) => i.id === "to-mp3")!.route).toBe("/video/video-to-mp3");
   });
-
-  it("chip caps mirror destination intake (box gating matches enforcement)", () => {    // Contract with smartMax: the box shows these numbers, tools enforce them.
-    expect(smartMax("image/jpeg,image/png,image/webp")).toEqual({ signed: 20, free: 10 });
-    expect(smartMax("video/mp4,video/quicktime,video/x-matroska,video/webm")).toEqual({ signed: 150, free: 30 });
-    expect(smartMax("audio/*")).toEqual({ signed: 50, free: 20 });
-    expect(smartMax("application/pdf")).toEqual({ signed: 40, free: 15 });
-    expect(smartMax("image/gif")).toEqual({ signed: 20, free: 10 });
+  it("chip caps mirror destination intake (box gating matches enforcement)", () => {
+    // Contract with smartMax: the box shows these numbers, tools enforce them.
+    // Generous ceilings (Oct 2026): same anon and signed.
+    expect(smartMax("image/jpeg,image/png,image/webp")).toEqual({ signed: 50, free: 50 });
+    expect(smartMax("video/mp4,video/quicktime,video/x-matroska,video/webm")).toEqual({ signed: 300, free: 300 });
+    expect(smartMax("audio/*")).toEqual({ signed: 100, free: 100 });
+    expect(smartMax("application/pdf")).toEqual({ signed: 125, free: 125 });
+    expect(smartMax("image/gif")).toEqual({ signed: 50, free: 50 });
     // Every capAccept on a chip resolves through smartMax (no dead strings).
     const all = [
       ...heroIntentsFor("image", "png"),
@@ -193,11 +194,17 @@ describe("hero upload routing (trustworthy file -> tool)", () => {
       }
     }
   });
-
-  it("heroCapFor resolves explicit, smartMax, then plan caps", () => {    expect(heroCapFor({ id: "x", label: "x", tool: "x", route: "/tools", capMB: { anon: 125, signed: 125 } }, false, 30)).toBe(125);
-    expect(heroCapFor({ id: "x", label: "x", tool: "x", route: "/tools", capAccept: "application/pdf" }, false, 30)).toBe(15);
-    expect(heroCapFor({ id: "x", label: "x", tool: "x", route: "/tools", capAccept: "application/pdf" }, true, 150)).toBe(40);
-    expect(heroCapFor({ id: "x", label: "x", tool: "x", route: "/tools" }, false, 30)).toBe(30);
+  it("heroCapFor resolves pro, smartMax, then category caps", () => {
+    const t = (route: string) => ({ id: "x", label: "x", tool: "x", route });
+    // Pro always 2000 regardless of tool.
+    expect(heroCapFor({ ...t("/tools"), capAccept: "application/pdf" }, false, true, "pdf")).toBe(2000);
+    // smartMax intake mirror.
+    expect(heroCapFor({ ...t("/tools"), capAccept: "application/pdf" }, false, false, "pdf")).toBe(125);
+    expect(heroCapFor({ ...t("/tools"), capAccept: "application/pdf" }, true, false, "pdf")).toBe(125);
+    // Category fallback for tools without intake checks.
+    expect(heroCapFor(t("/tools"), false, false, "image")).toBe(50);
+    expect(heroCapFor(t("/tools"), false, false, "document")).toBe(150);
+    expect(heroCapFor(t("/tools"), false, false, "other")).toBe(150);
   });
 
   it("every chip destination consumes the homepage carry (no silent empty tool)", () => {

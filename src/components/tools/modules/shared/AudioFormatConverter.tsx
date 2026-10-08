@@ -225,6 +225,10 @@ export default function AudioFormatConverter({ slug }: AudioFormatConverterProps
   };
 
   const loadFile = useCallback(async (f: File) => {
+    if (f.size > 100 * 1024 * 1024) {
+      toast.error(`"${f.name}" exceeds the 100MB audio limit.`);
+      return;
+    }
     setFile(f);
     setOutputUrl(null);
     if (!isLoaded) await loadFFmpeg();

@@ -117,6 +117,17 @@ export function OnboardingTour({
     };
     (async () => {
       if (flagSet()) return;
+      // First success before first tour: the tour waits for the user's
+      // first completed download (th_last_download, set by the download
+      // gate) instead of stacking on the cookie banner at first paint.
+      // Users who never complete a task never need the tour.
+      const firstSuccess = () => {
+        try {
+          return !!localStorage.getItem("th_last_download");
+        } catch {
+          return false;
+        }
+      };
       if (isSignedIn && syncAccount) {
         try {
           const res = await fetch("/api/account/tour");
@@ -136,6 +147,20 @@ export function OnboardingTour({
         }
       }
       if (cancelled) return;
+      // Site tour only (tool tours keep instant behavior — their user is
+      // already mid-task): wait for the first completed download.
+      if (!deferUntilSiteTour && !firstSuccess()) {
+        // No completed task yet: poll cheaply for the first download, then
+        // show once. Same no-stack discipline as the site-tour deferral.
+        poll = setInterval(() => {
+          if (cancelled) return;
+          if (!firstSuccess()) return;
+          clearInterval(poll!);
+          poll = null;
+          if (!flagSet()) setStep(0);
+        }, 1000);
+        return;
+      }
       if (deferUntilSiteTour && !siteTourDone()) {
         // Poll cheaply until the site tour finishes (flag set or dialog
         // closed) — a second dialog must never stack on the first.

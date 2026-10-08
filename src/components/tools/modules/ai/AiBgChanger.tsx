@@ -103,6 +103,10 @@ export default function AiBgChanger() {
       toast.error('Please choose an image file.');
       return;
     }
+    if (file.size > 50 * 1024 * 1024) {
+      toast.error(`"${file.name}" exceeds the 50MB image limit.`);
+      return;
+    }
     const url = URL.createObjectURL(file);
     setImage(url);
     setResult(null);

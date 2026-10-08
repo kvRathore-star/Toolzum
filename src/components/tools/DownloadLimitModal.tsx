@@ -83,11 +83,13 @@ export function DownloadLimitModal() {
   const isProTool = isCurrentToolPro();
   // Signed-in users never need a "sign in" CTA — show upgrade path only.
   const signedIn = getSignedInStatus();
-  // Anon quota hit on a free tool is the prime signup moment — name the
-  // concrete free-account upside (3→5 downloads, 5 trial credits, 10-file
-  // batch, 150MB) instead of a generic "sign in for more".
-  const isAnonQuota = isQuota && !isProTool && !signedIn;
-  const isAnonPlanLimit = !isQuota && !isUnavailable && !signedIn && (event.type === "plan" && (event.detail.reason === "file_size" || event.detail.reason === "batch_size"));
+  // Local downloads are unlimited (Oct 2026) — quota walls survive only for
+  // Pro-tool taste. All numbers below come from the server event detail
+  // (single source), never hardcoded, so copy tracks enforcement.
+  const planDetail = !isQuota && !isUnavailable && event.type === "plan" ? (event as { detail: PlanLimitDetail }).detail : null;
+  // Prime signup moment: anonymous user hitting any wall on a free tool.
+  // Benefits list the concrete free-account upside under the new tiers.
+  const isAnonWall = !signedIn && !isUnavailable && (!isQuota || !isProTool);
   const copy = isUnavailable
     ? {
         title: "Downloads temporarily unavailable",
@@ -101,22 +103,27 @@ export function DownloadLimitModal() {
         }
       : !signedIn
         ? {
-            title: "You've used your 3 free downloads",
-            body: "Sign in free to keep going today — 5 downloads/day, 5 trial AI credits, 10-file batches up to 150MB. No credit card.",
+            title: "Free download paused",
+            body: "Sign in free for Pro-tool taste and bigger batches — local tools themselves are unlimited. No credit card.",
           }
         : {
-            title: "Daily download limit reached",
-            body: "You've used up today's free downloads. Come back tomorrow, or go Pro for unlimited downloads.",
+            title: "Daily Pro-tool taste used",
+            body: "Come back tomorrow, or go Pro for unlimited downloads.",
           }
-    : !signedIn && event.type === "plan" && event.detail.reason === "file_size"
+    : !signedIn && planDetail?.reason === "file_size"
       ? {
-          title: "File too large for guest use (30MB)",
-          body: "Sign in free for files up to 150MB, or upgrade to Pro for up to 2GB uploads.",
+          title: `File too large (${planDetail.limit}MB limit)`,
+          body: "Sign in free for higher limits, or upgrade to Pro for up to 2GB uploads.",
         }
-      : !signedIn && event.type === "plan" && event.detail.reason === "batch_size"
+      : !signedIn && planDetail?.reason === "batch_size"
         ? {
-            title: "Guests are limited to 1 file at a time",
-            body: "Sign in free for batches up to 10 files, or upgrade to Pro for up to 500 files.",
+            title: `Guests batch up to ${planDetail.limit} files at a time`,
+            body: "Sign in free for bigger batches, or upgrade to Pro for up to 500 files.",
+          }
+        : signedIn && planDetail
+        ? {
+            title: planDetail.reason === "file_size" ? `File over the ${planDetail.limit}MB limit` : `Batch over the ${planDetail.limit}-file limit`,
+            body: "Upgrade to Pro for up to 2GB uploads and 500-file batches.",
           }
         : reasonCopy[(event as { detail: PlanLimitDetail }).detail.reason];
 
@@ -150,11 +157,11 @@ export function DownloadLimitModal() {
         <h3 id="download-limit-title" className="text-lg font-bold text-[var(--text-primary)] mb-1">{copy.title}</h3>
         <p className="text-sm text-[var(--text-secondary)] mb-5">{copy.body}</p>
 
-        {(isAnonQuota || isAnonPlanLimit) && (
+        {isAnonWall && (
           <ul className="mb-5 rounded-[var(--radius-lg)] border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-3.5 text-[13px] text-[var(--text-secondary)] space-y-1.5" aria-label="Free account benefits">
-            <li>✓ 5 downloads/day <span className="text-[var(--text-muted)]">(vs 3 as guest)</span></li>
+            <li>✓ Unlimited local downloads <span className="text-[var(--text-muted)]">(no daily cap)</span></li>
             <li>✓ 5 trial AI credits <span className="text-[var(--text-muted)]">(text 1/use, transcription 1/min, one-time)</span></li>
-            <li>✓ 10-file batches up to 150MB <span className="text-[var(--text-muted)]">(vs 1 file / 30MB)</span></li>
+            <li>✓ 25-file batches <span className="text-[var(--text-muted)]">(vs 5 as guest)</span></li>
             <li>✓ 2 Pro-tool downloads/day</li>
           </ul>
         )}
@@ -175,7 +182,7 @@ export function DownloadLimitModal() {
               className="w-full text-sm"
               asChild
             >
-              <Link href="/sign-in">{isAnonQuota || isAnonPlanLimit ? "Sign in free — unlock 5/day + 5 trial credits" : "Sign in free for more"}</Link>
+              <Link href="/sign-in">{isAnonWall ? "Sign in free — unlimited local + 5 trial credits" : "Sign in free for more"}</Link>
             </Button>
           )}
           <button

@@ -3,7 +3,7 @@
 > Single source of truth for all user-facing limits, credit costs, and rate limits.
 > **If this file and the code disagree, the code wins — but update this file immediately.**
 
-Last verified: 2026-09-12 (re-audited every tier against code; fixed signed-free server caps + badge copy + paywall 2GB)
+Last verified: 2026-10-08 (generous-limits migration — see §11)
 
 ---
 
@@ -38,15 +38,20 @@ Last verified: 2026-09-12 (re-audited every tier against code; fixed signed-free
 
 **Applies to:** 426 tools that save files through the quota gate — `downloadOrShare()` per-save, or one `gateBatchDownload()` call per batch (ZIP/batch downloaders). Single-save tools and batch tools alike; AI-credit tools are separate (§3).
 
-### Free tools (non-Pro)
+### Free tools (non-Pro) — unlimited for everyone (Oct 2026)
 
-| Tier | Daily limit | Reset | Enforcement |
-|------|-------------|-------|-------------|
-| Anonymous | 3/day | Daily (midnight UTC) | Server-side (`download_usage` table) |
-| Signed-in (free) | 5/day | Daily (midnight UTC) | Server-side |
-| Pro | Unlimited | N/A | `getUserLimit()` returns `Infinity` |
+Local compute costs nothing, so local downloads are no longer metered.
+The server still records every download event (funnel analytics) and still
+enforces Pro-tool taste, batch caps, and abuse backstops — but a free-tool
+download is never refused for quota.
 
-### Pro tools
+| Tier | Daily limit | Enforcement |
+|------|-------------|-------------|
+| Anonymous | Unlimited | `downloadLimit()` returns `Infinity` |
+| Signed-in (free) | Unlimited | `downloadLimit()` returns `Infinity` |
+| Pro | Unlimited | `getUserLimit()` returns `Infinity` |
+
+### Pro tools (unchanged)
 
 | Tier | Daily limit | Reset | Enforcement |
 |------|-------------|-------|-------------|
@@ -54,29 +59,21 @@ Last verified: 2026-09-12 (re-audited every tier against code; fixed signed-free
 | Signed-in (free) | 2/day | Daily (midnight UTC) | Server-side (separate `pro:` fingerprint prefix) |
 | Pro | Unlimited | N/A | `getUserLimit()` returns `Infinity` |
 
-**Code:** `functions/api/downloads/check.ts:7-10`, `functions/api/downloads/record.ts:7-10`
-
-```
-getUserLimit(plan, isProTool):
-  pro → Infinity
-  signed-in + Pro tool → 2
-  signed-in + free tool → 5
-  anonymous + Pro tool → 0
-  anonymous + free tool → 3
-```
+**Code:** `src/lib/planTiers.ts → downloadLimit()` (single source; both
+`functions/api/downloads/check.ts` and `record.ts` call it — no per-endpoint
+dialects).
 
 **Pro tool detection:** Client detects Pro tools from URL slug via `proSlugs` set in `tools-constants.ts`. Passes `isPro=1` query param (check) or `isPro: true` body field (record) to server. Server prefixes fingerprint with `pro:` to track Pro tool downloads separately.
 
 **Analytics:** Every attempt logged to `download_event` table with `userType`, `toolSlug`, `outcome` (allowed/blocked_quota/blocked_pro_anon).
 
-**Badge:** Shows on tool page for all 426 slugs via `DOWNLOAD_PRODUCING_SLUGS.has(slug)` in `ToolLayout.tsx`. Badge copy stays short (pill links to `/sign-in`); the full pitch (5/day + 5 trial credits) lives in the limit modal that fires at zero:
+**Badge:** Shows on tool page for all 426 slugs via `DOWNLOAD_PRODUCING_SLUGS.has(slug)` in `ToolLayout.tsx`. With unlimited local downloads the badge hides itself (server returns 999); it survives only for Pro-tool taste. The limit modal fires on size/batch/pro walls with numbers from the server event (single source, never hardcoded).
 - Pro tool + anon: "Sign in to use Pro tools"
 - Pro tool + signed: "N Pro downloads left — Upgrade for unlimited" / "Pro downloads used up today"
-- Free tool + anon: "N remaining — sign in for more" / "0 remaining — sign in free"
-- Free tool + signed: "N free downloads left today" / "Free downloads used up today"
 - Pro user: hidden (unlimited)
+- Free tools: no badge (unlimited) — the modal only fires on size/batch/pro walls.
 
-**Limit modal** (`DownloadLimitModal.tsx`, fires on `toolzum:download-blocked` / `toolzum:plan-limit`): anon quota/file/batch blocks show the concrete free-account upside (5/day, 5 trial credits, 10 files/150MB, 2 Pro downloads/day) with CTA "Sign in free — unlock 5/day + 5 trial credits".
+**Limit modal** (`DownloadLimitModal.tsx`, fires on `toolzum:download-blocked` / `toolzum:plan-limit`): copy derives all numbers from the server event detail. Anon walls show the concrete free-account upside (unlimited local, 5 trial credits, 25-file batches, 2 Pro downloads/day).
 
 > ✅ **Per-batch accounting (Option C, Sep 12 2026):** one batch download =
 > one quota unit, gated by a single `checkAndRecordDownload({ batchSize,
@@ -281,24 +278,29 @@ Rate limited at 10 req/min per IP. Daily quota enforced separately.
 
 ## 5. File Size Limits
 
-**Code:** `functions/api/check-plan.ts:7-11`
+**Code:** `src/lib/planTiers.ts → CATEGORY_CAPS` (single source) served by
+`functions/api/check-plan.ts` (`categoryCaps` in the response); intake guards
+(`smartMax()`, shells, per-tool checks) and the homepage box derive from the
+same numbers. Test-locked in `plan-limits.test.ts`.
 
 | Tier | Max file size | Max batch size | Threads |
 |------|--------------|----------------|---------|
-| Anonymous/free | 30 MB | 1 file | 1 |
-| Signed-in | 150 MB | 10 files | 1 |
+| Anonymous/free | Category ceilings | 5 files | 1 |
+| Signed-in | Category ceilings | 25 files | 1 |
 | Pro | 2 GB | 500 files | 6 |
 
-### Per-Category Smart Limits (`smartMax()`)
+### Per-Category Ceilings (`CATEGORY_CAPS` — same anon and signed)
 
-| Category | Free | Signed-in |
-|----------|------|-----------|
-| Video | 30 MB | 150 MB |
-| PDF | 15 MB | 40 MB |
-| Audio | 20 MB | 50 MB |
-| Default (image, etc.) | 10 MB | 20 MB |
+| Category | Ceiling |
+|----------|---------|
+| Image | 50 MB |
+| PDF | 125 MB |
+| Audio | 100 MB |
+| Video | 300 MB |
+| Other (text, docs, data) | 150 MB |
 
-**Note:** Pro always uses `check-plan.ts` limits (2 GB), not `smartMax()`.
+Ceilings exist for browser memory and abuse only — local compute is free.
+Validate each against engine behavior on a mid-range phone, not a laptop.
 
 > ✅ **FIXED Sep 12 2026 — signed-free server caps:** the DB default is
 > `plan='free'` for every new account, so `check-plan.ts` returned the
@@ -356,7 +358,7 @@ Upgrade secondary. Signed-in free users open Pro tools with download limits
 users; its upgrade-first variant is the fallback for unknown plans only. Its
 feature card advertises "Up to 2GB".
 
-**Batch caps** are enforced client-side at drop time in `BulkToolShell.tsx` (guests 1, signed-in 10, Pro 500 — matches `check-plan.ts`); over-cap drops are truncated with a toast naming the upgrade path. `checkAndRecordDownload()` accepts a `batchSize` option but no caller currently sends it, so the server does not independently enforce batch size — batch is capped at intake, quota at download.
+**Batch caps** are enforced client-side at drop time in `BulkToolShell.tsx` (guests 5, signed-in 25, Pro 500 — matches `check-plan.ts`); over-cap drops are truncated with a toast naming the upgrade path. `checkAndRecordDownload()` accepts a `batchSize` option but no caller currently sends it, so the server does not independently enforce batch size — batch is capped at intake, quota at download.
 
 **Get Pro button:** Hidden for Pro users in header (desktop + mobile drawer).
 
@@ -369,16 +371,16 @@ feature card advertises "Up to 2GB".
 | Feature | Anonymous | Signed-in (free) | Pro ($9.99/mo, ₹299/mo) | Project Pass (7d) |
 |---------|-----------|------------------|-----------------|-------------------|
 | Client-side tools | Unlimited | Unlimited | Unlimited | Unlimited |
-| Download quota (free tools) | 3/day | 5/day | Unlimited | Unlimited |
+| Download quota (free tools) | Unlimited | Unlimited | Unlimited | Unlimited |
 | Download quota (Pro tools) | Blocked | 2/day | Unlimited | Unlimited |
 | AI credits | N/A | 5 trial, one-time | 200/month | 70 one-time |
 | AI rate limit | Blocked | 2 req/min | 5 req/min | 5 req/min |
 | Transcription rate limit | Blocked | 2 req/min | 5 req/min | 5 req/min |
-| Max file size | 30 MB | 150 MB | 2 GB | 2 GB |
-| Max batch size | 1 file | 10 files | 500 files | 500 files |
+| Max file size | Category ceilings | Category ceilings | 2 GB | 2 GB |
+| Max batch size | 5 files | 25 files | 500 files | 500 files |
 | Batch ZIP download | Single-file only | Single-file only (individual downloads) | ✓ Batch ZIP | ✓ Batch ZIP |
 | Pro tools access | Locked at page (sign in for 2/day) | Full access (with limits) | Full access (unlimited) | Full access (7 days) |
-| Gemini watermark single | 3/day | 5/day | Unlimited | Unlimited |
+| Gemini watermark single | Unlimited | Unlimited | Unlimited | Unlimited |
 | Gemini watermark batch | Blocked | Blocked | Unlimited | Unlimited |
 
 ---
@@ -415,12 +417,37 @@ WHERE createdAt > unixepoch('now', '-30 days') GROUP BY task, outcome;
 ```
 
 **Tuning triggers (revisit with real data, not gut calls):**
-- Single-file saves and batch saves share ONE daily counter per user (`download_usage`
-  by fingerprint+date — no separate bulk bucket). The steepest step in the tier
-  ladder is anon→signed on free tools (3 files → 5 batches ≈ 50 files, ~17x).
-  That's the conscious signup incentive; if data shows signed-free users routinely
-  exhausting 5 batches/day without converting, revisit the 50-file ceiling (batch
-  cap or batch quota) — not the Pro side.
-- `download_event` already logs `toolSlug + userType + outcome`: watch
-  `blocked_quota` rate by slug to see whether single-file casual users or batch
-  power users hit the wall first before touching any numbers.
+- The steepest step in the tier ladder is now anon→signed batch (5 → 25
+  files) and free→Pro batch (25 → 500). If data shows signed-free users
+  routinely exhausting 25-file batches without converting, revisit that
+  ceiling — not the Pro side.
+- `download_event` logs `toolSlug + userType + outcome` on every save:
+  watch volume by slug and `blocked_pro_anon` rate to see which Pro tools
+  earn their gate before touching any numbers.
+- Funnel events: pageviews (`analytics_event` path rows), hero drops
+  (`event='drop'`), downloads (`download_event`). Signup and checkout
+  complete server-side (auth, Dodo webhook) — query those tables directly.
+
+---
+
+## 11. Conversion Funnel (Oct 2026)
+
+Never wall the first success. Order of operations:
+
+1. **First visit:** cookie banner only. The site tour waits for the first
+   completed download (`th_last_download`); tool tours keep instant
+   behavior. (`OnboardingTour.tsx`)
+2. **First success:** post-download, anonymous users get one dismissible
+   nudge — history + 5 one-time AI credits. (`SuccessSignupNudge.tsx`)
+3. **Upgrades where need shows up**, price visible, numbers from server events:
+   batch over limit, credit exhaustion, Pro-tool walls. No Pass price is
+   printed anywhere in UI until checkout is verified live.
+4. **Pass-first merchandising** once verified: one-off project users buy
+   $3.99/₹99 impulse, not $9.99 commitment. Pricing page stays Pro-led
+   until the Pass proves itself.
+
+**Blocking step zero — checkout verification (owner action, real money):**
+buy the cheapest item in both currencies → confirm grant (plan/credits) →
+refund → confirm downgrade. No funnel copy may promise a price or grant
+that this checklist hasn't proven. Current state: payments infra + webhook
+grant paths exist in code; live proof pending.

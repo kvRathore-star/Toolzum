@@ -14,6 +14,20 @@ describe('OnboardingTour persistence', () => {
   beforeEach(() => {
     localStorage.clear();
     vi.clearAllMocks();
+    // Post-success state: the site tour waits for the first completed
+    // download (th_last_download). Tests below set it unless asserting
+    // the pre-success wait itself.
+    localStorage.setItem('th_last_download', String(Date.now()));
+  });
+
+  it('waits for the first download instead of stacking on first paint', async () => {
+    localStorage.removeItem('th_last_download');
+    const fetchSpy = vi.fn(async () => new Response('{}', { status: 200 }));
+    vi.stubGlobal('fetch', fetchSpy);
+    render(<OnboardingTour />);
+    await new Promise((r) => setTimeout(r, 1200));
+    expect(screen.queryByText('Skip tour')).toBeNull();
+    vi.unstubAllGlobals();
   });
 
   it('shows on first visit and persists on Skip (never nags again)', async () => {

@@ -131,6 +131,7 @@ interface PlanLimits {
   maxFileSizeMB: number;
   maxBatchSize: number;
   threads: number;
+  categoryCaps?: Record<string, number>;
 }
 
 interface ServerCheckResponse {
@@ -217,9 +218,19 @@ export async function checkAndRecordDownload(options?: { fileSizeMB?: number; ba
     try { window.dispatchEvent(new CustomEvent("toolzum:download-unavailable")); } catch {}
     return false;
   }
-  if (options?.fileSizeMB && options.fileSizeMB > plan.maxFileSizeMB) {
-    try { window.dispatchEvent(new CustomEvent("toolzum:plan-limit", { detail: { reason: "file_size", limit: plan.maxFileSizeMB, actual: options.fileSizeMB } })); } catch {}
-    return false;
+  if (options?.fileSizeMB) {
+    // Generous category ceilings (Oct 2026): the effective cap is per file
+    // type, same for anon and signed-in. Pro keeps the plan ceiling (2GB).
+    // Server ships the table; the local copy is fallback for stale responses.
+    const { category } = getCurrentToolContext();
+    const table = plan.categoryCaps;
+    const catKey = (category || "").toLowerCase();
+    const catCap = table && typeof table[catKey] === "number" ? table[catKey] as number : null;
+    const cap = plan.plan === "pro" ? plan.maxFileSizeMB : catCap ?? plan.maxFileSizeMB;
+    if (options.fileSizeMB > cap) {
+      try { window.dispatchEvent(new CustomEvent("toolzum:plan-limit", { detail: { reason: "file_size", limit: cap, actual: options.fileSizeMB } })); } catch {}
+      return false;
+    }
   }
   if (options?.batchSize && options.batchSize > plan.maxBatchSize) {
     try { window.dispatchEvent(new CustomEvent("toolzum:plan-limit", { detail: { reason: "batch_size", limit: plan.maxBatchSize, actual: options.batchSize } })); } catch {}

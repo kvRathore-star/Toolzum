@@ -16,6 +16,7 @@ import {
   onRequestGet as checkPlan,
   PLAN_LIMITS,
 } from '../../../functions/api/check-plan';
+import { CATEGORY_CAPS } from '@/lib/planTiers';
 
 function mockDb(
   opts: { userRow?: { plan: string } | null; rateCount?: number } = {},
@@ -48,10 +49,10 @@ describe('GET /api/check-plan contract', () => {
     });
     expect(res.status).toBe(200);
     const body = await res.json();
-    expect(body).toEqual({ plan: 'anon', ...PLAN_LIMITS.free });
+    expect(body).toEqual({ plan: 'anon', ...PLAN_LIMITS.free, categoryCaps: CATEGORY_CAPS });
     expect(body).toMatchObject({
       maxFileSizeMB: 30,
-      maxBatchSize: 1,
+      maxBatchSize: 5,
       threads: 1,
     });
   });
@@ -65,10 +66,11 @@ describe('GET /api/check-plan contract', () => {
     expect(body).toEqual({
       plan: 'signedin',
       ...PLAN_LIMITS.signedin,
+      categoryCaps: CATEGORY_CAPS,
     });
     expect(body).toMatchObject({
       maxFileSizeMB: 150,
-      maxBatchSize: 10,
+      maxBatchSize: 25,
       threads: 1,
     });
   });
@@ -81,6 +83,7 @@ describe('GET /api/check-plan contract', () => {
     expect(await res.json()).toEqual({
       plan: 'signedin',
       ...PLAN_LIMITS.signedin,
+      categoryCaps: CATEGORY_CAPS,
     });
   });
 
@@ -90,7 +93,7 @@ describe('GET /api/check-plan contract', () => {
       env: { DB: mockDb({ userRow: { plan: 'pro' } }) } as never,
     });
     const body = await res.json();
-    expect(body).toEqual({ plan: 'pro', ...PLAN_LIMITS.pro });
+    expect(body).toEqual({ plan: 'pro', ...PLAN_LIMITS.pro, categoryCaps: CATEGORY_CAPS });
     expect(body).toMatchObject({
       maxFileSizeMB: 2000,
       maxBatchSize: 500,
@@ -106,6 +109,7 @@ describe('GET /api/check-plan contract', () => {
     expect(await res.json()).toEqual({
       plan: 'signedin',
       ...PLAN_LIMITS.signedin,
+      categoryCaps: CATEGORY_CAPS,
     });
   });
 });

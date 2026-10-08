@@ -46,11 +46,22 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
   const [quality, setQuality] = useState<'low' | 'medium' | 'high'>('high');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Document ceiling is 150MB at intake (matches the download gate, so no
+  // post-work wall). Same house pattern as the video converter's smartMax
+  // guard — signed caps apply at intake for everyone; plan ceilings beyond
+  // that live at the download gate.
+  const DOC_CAP_MB = 150;
   const handleFiles = useCallback((newFiles: FileList | File[]) => {
     const fileArray = Array.from(newFiles);
-    setFiles(prev => [...prev, ...fileArray]);
-    if (fileArray.length > 0 && !defaultFrom) {
-      setSrcFormat(detectFormat(fileArray[0]!.name) as typeof FORMATS[number]);
+    const tooBig = fileArray.filter((f) => f.size > DOC_CAP_MB * 1024 * 1024);
+    if (tooBig.length > 0) {
+      toast.error(`"${tooBig[0]!.name}" exceeds the 150MB document limit.`);
+    }
+    const ok = fileArray.filter((f) => f.size <= DOC_CAP_MB * 1024 * 1024);
+    if (ok.length === 0) return;
+    setFiles(prev => [...prev, ...ok]);
+    if (!defaultFrom) {
+      setSrcFormat(detectFormat(ok[0]!.name) as typeof FORMATS[number]);
     }
     setConvertedFiles([]);
   }, [defaultFrom]);

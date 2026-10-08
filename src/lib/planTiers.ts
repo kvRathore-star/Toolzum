@@ -35,10 +35,34 @@ export interface FileCaps {
 }
 
 const FILE_CAPS: Record<EffectivePlan, FileCaps> = {
-  anon: { maxFileSizeMB: 30, maxBatchSize: 1, threads: 1 },
-  signedin: { maxFileSizeMB: 150, maxBatchSize: 10, threads: 1 },
+  anon: { maxFileSizeMB: 30, maxBatchSize: 5, threads: 1 },
+  signedin: { maxFileSizeMB: 150, maxBatchSize: 25, threads: 1 },
   pro: { maxFileSizeMB: 2000, maxBatchSize: 500, threads: 6 },
 };
+
+/**
+ * Generous per-category intake ceilings (Oct 2026): local compute costs
+ * nothing, so size gates exist only for browser memory and abuse — one
+ * ceiling per category, same for anon and signed-in. Pro keeps 2GB.
+ * Single source: intake guards (smartMax, shells), the homepage box, and
+ * the download gate all derive from here. Test-locked in plan-limits.
+ */
+export const CATEGORY_CAPS = {
+  image: 50,
+  pdf: 125,
+  audio: 100,
+  video: 300,
+  other: 150,
+} as const;
+
+export type CategoryCapKey = keyof typeof CATEGORY_CAPS;
+
+export function categoryCap(category: string | null | undefined): number {
+  if (!category) return CATEGORY_CAPS.other;
+  const key = category.toLowerCase().replace(/\s+/g, "-");
+  if (key === "growth-metrics") return CATEGORY_CAPS.other;
+  return (CATEGORY_CAPS as Record<string, number>)[key] ?? CATEGORY_CAPS.other;
+}
 
 export function resolvePlan(authenticated: boolean, storedPlan: string | null): EffectivePlan {
   if (!authenticated) return "anon";
@@ -59,13 +83,15 @@ export function aiRateLimit(plan: EffectivePlan): number {
 }
 
 /**
- * Daily download budget. Pro is unlimited; Pro tools give authed free users
- * a 2/day taste and block anon entirely. Returns Infinity, never null.
+ * Daily download budget. Local tools are unlimited for everyone — local
+ * compute costs nothing, so the only metered surface is Pro-tool taste
+ * (2/day signed-in, blocked anon) and Pro itself (unlimited).
+ * Returns Infinity, never null.
  */
 export function downloadLimit(plan: EffectivePlan, isProTool: boolean): number {
   if (plan === "pro") return Infinity;
   if (isProTool) return plan === "anon" ? 0 : 2;
-  return plan === "anon" ? 3 : 5;
+  return Infinity;
 }
 
 /** File/batch/thread caps served by /api/check-plan. */

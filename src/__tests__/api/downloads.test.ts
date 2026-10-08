@@ -95,14 +95,15 @@ function recordReq(
 }
 
 describe('GET /api/downloads/check contract', () => {
-  it('anon free tool, fresh quota: allowed with remaining 3', async () => {
-    const { db } = mockDb();
+  it('anon free tool: unlimited (remaining 999), no usage row consulted', async () => {
+    const { db, seen } = mockDb();
     const res = await dlCheck({
       request: checkReq({ fingerprint: 'fp-1' }),
       env: { DB: db } as never,
     });
     expect(res.status).toBe(200);
-    expect(await res.json()).toEqual({ allowed: true, remaining: 3, plan: 'anon' });
+    expect(await res.json()).toEqual({ allowed: true, remaining: 999, plan: 'anon' });
+    expect(seen.some((q) => q.sql.includes('FROM download_usage'))).toBe(false);
   });
 
   it('anon pro tool: blocked (limit 0), no usage row consulted', async () => {
@@ -115,13 +116,13 @@ describe('GET /api/downloads/check contract', () => {
     expect(seen.some((q) => q.sql.includes('FROM download_usage'))).toBe(false);
   });
 
-  it('signed-in free user, free tool: allowed with remaining 5', async () => {
+  it('signed-in free user, free tool: unlimited (remaining 999)', async () => {
     const { db } = mockDb();
     const res = await dlCheck({
       request: checkReq({ user: 'free-user' }),
       env: { DB: db } as never,
     });
-    expect(await res.json()).toEqual({ allowed: true, remaining: 5, plan: 'signedin' });
+    expect(await res.json()).toEqual({ allowed: true, remaining: 999, plan: 'signedin' });
   });
 
   it('signed-in free user, pro tool: limit 2 bucket with pro: fingerprint prefix', async () => {
@@ -163,13 +164,13 @@ describe('GET /api/downloads/check contract', () => {
     }
   });
 
-  it('quota exhausted: anon at 3/3 is blocked with remaining 0', async () => {
-    const { db } = mockDb({ usageCount: 3 });
+  it('retired quota never blocks free tools: anon with prior usage still allowed', async () => {
+    const { db } = mockDb({ usageCount: 30 });
     const res = await dlCheck({
       request: checkReq({ fingerprint: 'fp-1' }),
       env: { DB: db } as never,
     });
-    expect(await res.json()).toEqual({ allowed: false, remaining: 0, plan: 'anon' });
+    expect(await res.json()).toEqual({ allowed: true, remaining: 999, plan: 'anon' });
   });
 
   it('service failure reports plan null (unknown state, never "used up")', async () => {
@@ -186,15 +187,18 @@ describe('GET /api/downloads/check contract', () => {
 });
 
 describe('POST /api/downloads/record contract', () => {
-  it('anon free tool, fresh quota: allowed, remaining 2, counter inserted', async () => {
+  it('anon free tool: allowed, remaining 999, event logged but no quota counter', async () => {
     const { db, seen } = mockDb();
     const res = await dlRecord({
       request: recordReq({ toolSlug: 'pdf-compressor', category: 'PDF' }, { fingerprint: 'fp-1' }),
       env: { DB: db } as never,
     });
-    expect(await res.json()).toEqual({ allowed: true, remaining: 2 });
+    expect(await res.json()).toEqual({ allowed: true, remaining: 999 });
     expect(
       seen.some((q) => q.sql.includes('INSERT INTO download_usage')),
+    ).toBe(false);
+    expect(
+      seen.some((q) => q.sql.includes('INSERT INTO download_event')),
     ).toBe(true);
   });
 
@@ -207,17 +211,17 @@ describe('POST /api/downloads/record contract', () => {
     expect(await res.json()).toEqual({ allowed: false, remaining: 0 });
   });
 
-  it('signed-in free user: limit 5, fresh quota leaves remaining 4', async () => {
+  it('signed-in free user: unlimited on free tools (remaining 999)', async () => {
     const { db } = mockDb();
     const res = await dlRecord({
       request: recordReq({}, { user: 'free-user' }),
       env: { DB: db } as never,
     });
-    expect(await res.json()).toEqual({ allowed: true, remaining: 4 });
+    expect(await res.json()).toEqual({ allowed: true, remaining: 999 });
   });
 
-  it('quota exhausted: anon at 3/3 blocked_quota with remaining 0', async () => {
-    const { db, seen } = mockDb({ usageCount: 3 });
+  it('retired quota: heavy prior usage never blocks a free-tool record', async () => {
+    const { db, seen } = mockDb({ usageCount: 30 });
     const res = await dlRecord({
       request: recordReq(
         { toolSlug: 'pdf-compressor', category: 'PDF' },
@@ -225,27 +229,26 @@ describe('POST /api/downloads/record contract', () => {
       ),
       env: { DB: db } as never,
     });
-    expect(await res.json()).toEqual({ allowed: false, remaining: 0 });
+    expect(await res.json()).toEqual({ allowed: true, remaining: 999 });
     expect(
       seen.some(
         (q) =>
           q.sql.includes('INSERT INTO download_event') &&
           String(q.sql).includes('blocked_quota'),
       ),
-    ).toBe(true);
+    ).toBe(false);
   });
 
-  it('increment path: existing row is UPDATED, not inserted', async () => {
+  it('no counter writes for free tools: usage rows untouched', async () => {
     const { db, seen } = mockDb({ usageCount: 2 });
     const res = await dlRecord({
       request: recordReq({}, { fingerprint: 'fp-1' }),
       env: { DB: db } as never,
     });
-    // limit 3 - count 2 - 1 => allowed with remaining 0.
-    expect(await res.json()).toEqual({ allowed: true, remaining: 0 });
+    expect(await res.json()).toEqual({ allowed: true, remaining: 999 });
     expect(
       seen.some((q) => q.sql.includes('UPDATE download_usage')),
-    ).toBe(true);
+    ).toBe(false);
   });
 
   it('pro user: immediate allow with remaining 999 and no usage tracking', async () => {
@@ -272,13 +275,13 @@ describe('POST /api/downloads/record contract', () => {
     expect(String(evt?.sql)).toContain('allowed');
   });
 
-  it('legacy callers with an empty body still record against the anon quota', async () => {
+  it('legacy callers with an empty body are allowed without quota', async () => {
     const { db } = mockDb();
     const res = await dlRecord({
       request: recordReq(null, { fingerprint: 'fp-1', rawBody: true }),
       env: { DB: db } as never,
     });
-    expect(await res.json()).toEqual({ allowed: true, remaining: 2 });
+    expect(await res.json()).toEqual({ allowed: true, remaining: 999 });
   });
 
   it('rotation farm: anon 429s at the daily IP attempt budget', async () => {

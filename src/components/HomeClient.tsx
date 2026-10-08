@@ -20,13 +20,14 @@ import {
 } from '@/data/homepage';
 import { useIsIndia } from '@/hooks/useIsIndia';
 import { useSession } from '@/lib/auth-client';
-import { getRemainingDownloads } from '@/utils/freeUsageGuard';
 import { resolvePlan, fileCaps } from '@/lib/planTiers';
 import { detectFileType, heroIntentsFor, heroBulkIntentsFor, heroDefaultIntentId, heroBlockReason, heroTypeWarning, heroSizeState, heroCapFor, heroExtOf, type HeroFileType, type HeroIntent } from '@/lib/fileRoute';
 import { stashHeroFiles, sweepHeroFiles } from '@/lib/heroFile';
+import { mayCollectTelemetry } from '@/lib/consent';
 import { useRouter } from 'next/navigation';
 import { useFavorites } from '@/hooks/useFavorites';
 import { FavoriteStarButton } from '@/components/FavoriteStarButton';
+import { useProStatus } from '@/hooks/useProStatus';
 import { getClientToolBySlug } from '@/registry/tools-client-index';
 
 const { localTools, cloudTools, hybridTools, totalImplemented } = SITE_STATS;
@@ -791,15 +792,8 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
     void sweepHeroFiles();
   }, []);
   const planCapMB = fileCaps(resolvePlan(!!session?.user, (session?.user as { plan?: string } | undefined)?.plan ?? null)).maxFileSizeMB;
-  // User state (quota-aware box): cookie + local counters only — no request.
-  // Server remains the source of truth at save time; this is a heads-up.
-  const [quota, setQuota] = useState<{ signedIn: boolean; remaining: number } | null>(null);
-  useEffect(() => {
-    try {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate quota hint from local counters; re-run when the session resolves
-      setQuota({ signedIn: !!session?.user, remaining: getRemainingDownloads() });
-    } catch { /* stays neutral */ }
-  }, [session?.user]);
+  // Local downloads are unlimited (Oct 2026) — no quota state in the box.
+  // Pro-tool taste limits still enforced server-side at save time.
   // Drag-enter/leave counter: crossing child elements fires leave events
   // without the pointer actually exiting (classic highlight flicker).
   const dragDepth = useRef(0);
@@ -833,6 +827,16 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
     const kind = detectFileType({ type: first.type, name: first.name });
     setTypeWarn(heroTypeWarning(first.type, ext));
     setFiles(arr);
+    // Funnel telemetry (consent-gated, no filenames ever — category only).
+    try {
+      if (mayCollectTelemetry()) {
+        fetch('/api/analytics', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: `hero-drop:${kind}`, event: 'drop', clientType: 'hero-box' }),
+        }).catch(() => {});
+      }
+    } catch { /* telemetry never breaks the flow */ }
     // Homepage tabs double as the default intent: picking Convert then
     // dropping a PNG preselects Convert. Set once at drop (event handler,
     // never an effect) so an explicit chip choice always sticks.
@@ -855,12 +859,12 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
   // enforcement the file will actually meet. Never gate while the session
   // resolves (optimistic; destinations enforce strictly anyway).
   const signedIn = !!session?.user;
-  const selectedCap = selected ? heroCapFor(selected, signedIn, planCapMB) : planCapMB;
+  const isProUser = useProStatus();
+  const selectedCap = selected && fileType ? heroCapFor(selected, signedIn, isProUser, fileType) : planCapMB;
   const overCap = !sessionPending && !!first && first.size > selectedCap * 1024 * 1024;
   // Quota is a local best-effort counter for everyone (anon included —
   // getRemainingDownloads tracks both). Server remains source of truth.
-  const quotaOut = quota !== null && quota.remaining <= 0;
-  const gated = overCap || quotaOut;
+  const gated = overCap;
 
   const clearAll = useCallback(() => {
     setFiles([]);
@@ -1052,19 +1056,16 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
             </div>
           </div>
         )}
-        {/* State gate BEFORE effort: over-cap or quota-out disables every chip
-            and says exactly how to proceed. Never a post-work wall. */}
+        {/* State gate BEFORE effort: over-cap disables every chip and says
+            exactly how to proceed. Never a post-work wall. Downloads on
+            local tools are unlimited; Pro taste is gated server-side. */}
         {first && gated && !blocked && (
           <div role="alert" className="mt-2 p-2.5 rounded-xl border border-amber-500/30 bg-amber-500/10 text-[11px] text-[var(--text-secondary)]">
-            {overCap ? (
-              <>{formatSize(first.size)} exceeds {selected ? `${selected.tool}'s` : 'this tool’s'} {selectedCap}MB intake limit — {signedIn
-                ? (selected?.capAccept || selected?.capMB
+            <>{formatSize(first.size)} exceeds {selected ? `${selected.tool}'s` : 'this tool’s'} {selectedCap}MB intake limit — {signedIn
+                ? (selected?.capAccept
                   ? <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">view Pro plans</Link>
                   : <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">go Pro (2GB)</Link>)
                 : <><Link href="/sign-in" className="text-[var(--accent)] underline underline-offset-2">sign in free for more</Link> or <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">view Pro plans</Link></>}.</>
-            ) : (
-              <>Daily limit reached — resets tomorrow · {!signedIn && <>sign in free for more or </>}<Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">view Pro</Link>.</>
-            )}
           </div>
         )}
       </div>
@@ -1114,18 +1115,6 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
         </div>
       </div>
 
-      {/* Quota-aware status line (local counters; server enforces at save). */}
-      {quota && (
-        <p className="mt-2 text-center text-[10px] text-[var(--text-muted)]" role="status">
-          {!quota.signedIn ? (
-            <>3 free downloads/day · <Link href="/sign-in" className="text-[var(--accent)] underline underline-offset-2 hover:no-underline">Sign in for 5/day + AI credits</Link></>
-          ) : quota.remaining > 0 ? (
-            <>{quota.remaining} free {quota.remaining === 1 ? "download" : "downloads"} left today</>
-          ) : (
-            <>Daily limit reached — resets tomorrow · <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2 hover:no-underline">View Pro</Link></>
-          )}
-        </p>
-      )}
     </div>
   );
 }

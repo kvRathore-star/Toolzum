@@ -13,6 +13,7 @@ import { getSignedInStatus, gateBatchDownload, maxBlobMB } from '@/utils/freeUsa
 import { usePickerFocusReturn } from '@/components/buttonKeys';
 import { isLowEndDevice } from '@/lib/device';
 import { useHeroFilePickup } from '@/lib/heroFile';
+import { smartMax } from '@/utils/fileSizeLimits';
 
 export interface ProcessedFile {
   name: string;
@@ -30,8 +31,7 @@ interface BulkToolShellProps {
   title: string;
   description: string;
   accept?: string;
-  maxSizeMB?: number;
-  processFile: (file: File, config: Record<string, unknown>, signal: AbortSignal) => Promise<ProcessedFile | null>;
+  maxSizeMB?: number;  processFile: (file: File, config: Record<string, unknown>, signal: AbortSignal) => Promise<ProcessedFile | null>;
   configFields?: React.ReactNode;
   defaultConfig?: Record<string, unknown>;
   /** Shown once as a heads-up on low-end devices when processing starts
@@ -44,12 +44,18 @@ export function BulkToolShell({
   title,
   description,
   accept = '*/*',
-  maxSizeMB = 500,
+  maxSizeMB,
   processFile,
   configFields,
   defaultConfig = {},
   heavyEngineNotice,
 }: BulkToolShellProps) {
+  // Intake ceiling derives from the accept list (smartMax = category
+  // ceilings) unless the tool overrides explicitly. Pro keeps 2GB.
+  // Matches what the download gate enforces, so nobody processes only
+  // to be blocked at save.
+  const { process, abort, maxConcurrency, isPro } = useParallelProcessor();
+  const effectiveMaxMB = isPro ? (maxSizeMB ?? 2000) : (maxSizeMB ?? smartMax(accept).free);
   const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
   const [config, setConfig] = useState<Record<string, unknown>>(defaultConfig);
@@ -68,7 +74,6 @@ export function BulkToolShell({
     };
   }, []);
 
-  const { process, abort, maxConcurrency, isPro } = useParallelProcessor();
   const { dropRef, armReturn, focusDrop } = usePickerFocusReturn<HTMLDivElement>();
   const { presets, savePreset, loadPreset, deletePreset, isPro: canSavePresets } = useWorkflowPresets(toolSlug);
 
@@ -83,9 +88,9 @@ export function BulkToolShell({
   // one validation path (size, content probe, plan batch caps) for every entry.
   const addFiles = useCallback(async (accepted: File[]) => {
     if (accepted.length === 0) return;
-    const withinSize = accepted.filter(f => f.size <= maxSizeMB * 1024 * 1024);
+    const withinSize = accepted.filter(f => f.size <= effectiveMaxMB * 1024 * 1024);
     if (withinSize.length !== accepted.length) {
-      toast.error(`Some files exceed ${maxSizeMB}MB limit. ${withinSize.length} of ${accepted.length} accepted.`);
+      toast.error(`Some files exceed ${effectiveMaxMB}MB limit. ${withinSize.length} of ${accepted.length} accepted.`);
     }
     // Content probe: canvas can only verify bitmap-decodable images. It must
     // not run for non-image accepts (audio/pdf/fonts… — createImageBitmap
@@ -112,18 +117,17 @@ export function BulkToolShell({
     }));
     const valid = validated.filter((f): f is File => f !== null);
     if (valid.length === 0) return;
-    // Plan batch caps at drop time (matches check-plan.ts: anon 1, signed-in
-    // 10, pro 500) — blocking upfront beats grinding through files only to
-    // hit the ZIP/quota gate at download.
-    const batchCap = isPro ? 500 : getSignedInStatus() ? 10 : 1;
+    // Plan batch caps (5 anon / 25 signed-in / 500 pro — blocking upfront
+    // beats grinding through files only to hit the gate at download.
+    const batchCap = isPro ? 500 : getSignedInStatus() ? 25 : 5;
     const room = batchCap - files.length;
     if (room <= 0) {
       toast.error(
         isPro
           ? `Pro batches up to 500 files — remove some to add more.`
           : getSignedInStatus()
-            ? `Free plan batches up to 10 files — upgrade to Pro for 500.`
-            : `Guests process 1 file at a time — sign in free for 10-file batches.`
+            ? `Free plan batches up to 25 files — upgrade to Pro for 500.`
+            : `Guests batch up to 5 files at a time — sign in free for 25-file batches.`
       );
       if (fileRef.current) fileRef.current.value = '';
       return;
@@ -134,8 +138,8 @@ export function BulkToolShell({
         isPro
           ? `Pro batches up to 500 files — first ${capped.length} kept.`
           : getSignedInStatus()
-            ? `Free plan batches up to 10 files — first ${capped.length} kept, Pro handles 500.`
-            : `Guests process 1 file at a time — first file kept, sign in free for 10-file batches.`
+            ? `Free plan batches up to 25 files — first ${capped.length} kept, Pro handles 500.`
+            : `Guests batch up to 5 files — first ${capped.length} kept, sign in free for 25-file batches.`
       );
     }
     setFiles(prev => [...prev, ...capped]);
@@ -156,7 +160,7 @@ export function BulkToolShell({
     if (fileRef.current) fileRef.current.value = '';
     // Keep keyboard context on the dropzone for the next Tab/Enter/Space.
     focusDrop();
-  }, [maxSizeMB, accept, files.length, isPro, focusDrop]);
+  }, [effectiveMaxMB, accept, files.length, isPro, focusDrop]);
 
   const handleFiles = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     await addFiles(Array.from(e.target.files || []));
@@ -327,7 +331,7 @@ export function BulkToolShell({
           </div>
           <Upload className="w-10 h-10 text-[var(--text-muted)] mb-3" />
           <p className="text-sm text-[var(--text-primary)] font-medium">Drop files here or click to upload</p>
-          <p className="text-xs text-[var(--text-muted)] mt-1">Max {maxSizeMB}MB per file • {accept === '*/*' ? 'All formats' : accept}</p>
+          <p className="text-xs text-[var(--text-muted)] mt-1">Max {effectiveMaxMB}MB per file • {accept === '*/*' ? 'All formats' : accept}</p>
           {!isPro && (
             <p className="text-[10px] text-[var(--text-muted)] mt-1">Guests: 1 file • Free sign-in: 10 files/batch, individual downloads (batch ZIP is Pro)</p>
           )}

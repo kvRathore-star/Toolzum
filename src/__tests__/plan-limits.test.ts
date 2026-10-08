@@ -1,5 +1,6 @@
 import { describe, it, expect, afterEach, vi } from 'vitest';
 import { PLAN_LIMITS } from '../../functions/api/check-plan';
+import { CATEGORY_CAPS } from '@/lib/planTiers';
 import { smartMax } from '@/utils/fileSizeLimits';
 import { checkAndRecordDownload, gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
 import { setSignedIn } from '@/lib/session-state';
@@ -10,7 +11,7 @@ function mockPlanFetch(planLimits: { maxFileSizeMB: number; maxBatchSize: number
   vi.stubGlobal('fetch', vi.fn(async (input: RequestInfo | URL) => {
     const url = String(input);
     if (url.endsWith('/api/check-plan')) {
-      return new Response(JSON.stringify({ plan, ...planLimits }), { status: 200 });
+      return new Response(JSON.stringify({ plan, ...planLimits, categoryCaps: CATEGORY_CAPS }), { status: 200 });
     }
     if (url.endsWith('/api/downloads/check')) {
       return new Response(JSON.stringify({ allowed: true, remaining: 9 }), { status: 200 });
@@ -29,42 +30,44 @@ describe('plan limits alignment (Option A)', () => {
     window.history.pushState({}, '', '/');
   });
 
-  it('server download-gate ceiling is >= every smartMax category ceiling per tier', () => {
+  it('category ceilings cover every smartMax intake ceiling (box mirrors tools)', () => {
+    // Generous-limits model (Oct 2026): one ceiling per category, same for
+    // anon and signed-in. smartMax derives from the same numbers, so intake
+    // guards and download enforcement can never disagree.
     for (const accept of CATEGORIES) {
       const { signed, free } = smartMax(accept);
-      expect(PLAN_LIMITS.free.maxFileSizeMB, `free ceiling >= smartMax free (${free}MB) for ${accept}`).toBeGreaterThanOrEqual(free);
-      expect(PLAN_LIMITS.signedin.maxFileSizeMB, `signedin ceiling >= smartMax signed (${signed}MB) for ${accept}`).toBeGreaterThanOrEqual(signed);
-      expect(PLAN_LIMITS.pro.maxFileSizeMB, `pro ceiling >= smartMax signed (${signed}MB) for ${accept}`).toBeGreaterThanOrEqual(signed);
+      expect(signed, `smartMax signed for ${accept}`).toBe(free);
+      expect([50, 100, 125, 150, 300]).toContain(free);
     }
+    expect(smartMax('video/*')).toEqual({ signed: 300, free: 300 });
+    expect(smartMax('application/pdf')).toEqual({ signed: 125, free: 125 });
+    expect(smartMax('audio/*')).toEqual({ signed: 100, free: 100 });
+    expect(smartMax('image/*')).toEqual({ signed: 50, free: 50 });
+    expect(PLAN_LIMITS.pro.maxFileSizeMB).toBe(2000);
   });
 
-  it('replays broken flow: signed-in 40MB PDF downloads (old 25MB server cap blocked it)', async () => {
-    mockPlanFetch(PLAN_LIMITS.signedin, 'signedin');
-    setSignedIn(true);
-
-    const allowed = await checkAndRecordDownload({ fileSizeMB: 40 });
-    expect(allowed).toBe(true);
-  });
-
-  it('replays broken flow: free 25MB video downloads (old 10MB server cap blocked it)', async () => {
+  it('generous ceilings: 40MB PDF and 25MB video download on free caps', async () => {
     mockPlanFetch(PLAN_LIMITS.free, 'free');
 
-    const allowed = await checkAndRecordDownload({ fileSizeMB: 25 });
-    expect(allowed).toBe(true);
+    window.history.pushState({}, '', '/pdf/pdf-compressor');
+    expect(await checkAndRecordDownload({ fileSizeMB: 40 })).toBe(true);
+    window.history.pushState({}, '', '/video/video-compressor');
+    expect(await checkAndRecordDownload({ fileSizeMB: 25 })).toBe(true);
   });
 
-  it('still blocks when the result genuinely exceeds the aligned ceiling', async () => {
+  it('still blocks past the category ceiling (130MB PDF on /pdf/)', async () => {
     mockPlanFetch(PLAN_LIMITS.free, 'free');
+    window.history.pushState({}, '', '/pdf/pdf-compressor');
 
-    const allowed = await checkAndRecordDownload({ fileSizeMB: 60 });
+    const allowed = await checkAndRecordDownload({ fileSizeMB: 130 });
     expect(allowed).toBe(false);
   });
 
-  it('counts one batch download as one unit (batchSize within cap passes)', async () => {
+  it('counts one batch download as one unit (batchSize within the 25 cap passes)', async () => {
     mockPlanFetch(PLAN_LIMITS.signedin, 'signedin');
     setSignedIn(true);
 
-    const allowed = await checkAndRecordDownload({ batchSize: 10, fileSizeMB: 20 });
+    const allowed = await checkAndRecordDownload({ batchSize: 25, fileSizeMB: 20 });
     expect(allowed).toBe(true);
   });
 
@@ -84,7 +87,7 @@ describe('plan limits alignment (Option A)', () => {
     };
     window.addEventListener('toolzum:plan-limit', onPlan);
     try {
-      const allowed = await checkAndRecordDownload({ batchSize: 11, fileSizeMB: 20 });
+      const allowed = await checkAndRecordDownload({ batchSize: 26, fileSizeMB: 20 });
       expect(allowed).toBe(false);
       expect(reason).toBe('batch_size');
       expect(calls.some((u) => u.endsWith('/api/downloads/record'))).toBe(false);
@@ -98,7 +101,7 @@ describe('plan limits alignment (Option A)', () => {
     expect(maxBlobMB([])).toBeUndefined();
     mockPlanFetch(PLAN_LIMITS.signedin, 'signedin');
     setSignedIn(true);
-    await expect(gateBatchDownload(10, 20)).resolves.toBe(true);
+    await expect(gateBatchDownload(25, 20)).resolves.toBe(true);
   });
 
   // --- Pro-tool gate: server verdict drives it (Sep 2026 regression) ------

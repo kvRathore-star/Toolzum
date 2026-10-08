@@ -14,11 +14,16 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     if (typeof path !== 'string' || path.length > 500) {
       return new Response(JSON.stringify({ ok: false, error: 'Invalid path' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
     }
-    // Votes are a closed vocabulary — anything else is a malformed client.
+    // Closed event vocabulary — anything else is a malformed client.
+    // 'vote' needs a yes/no; 'drop' is a standalone funnel event (hero file
+    // drops carry no filenames, ever — only the file category in path).
     const voteClean = vote === 'yes' || vote === 'no' ? vote : null;
-    const eventClean = event === 'vote' ? 'vote' : null;
-    if (eventClean && !voteClean) {
+    const eventClean = event === 'vote' || event === 'drop' ? event : null;
+    if (eventClean === 'vote' && !voteClean) {
       return new Response(JSON.stringify({ ok: false, error: 'Invalid vote' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+    }
+    if (!eventClean && event !== undefined && event !== null) {
+      return new Response(JSON.stringify({ ok: false, error: 'Invalid event' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
     }
 
     const ip = context.request.headers.get('CF-Connecting-IP') || 'unknown';

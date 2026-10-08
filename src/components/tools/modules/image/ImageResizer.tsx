@@ -28,6 +28,10 @@ export default function ImageResizer() {
   }, [registerConfig, width, height]);
 
   const loadFile = (file: File) => {
+    if (file.size > 50 * 1024 * 1024) {
+      toast.error(`"${file.name}" exceeds the 50MB image limit.`);
+      return;
+    }
     const reader = new FileReader();
     reader.onload = (event) => {
        const img = new Image();

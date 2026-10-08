@@ -1,6 +1,6 @@
 import { checkRateLimit, recordRateLimit } from "./rate-limit";
 import { createAuth } from "../../src/lib/auth";
-import { resolvePlan, fileCaps, effectivePlanForUser, type FileCaps } from "../../src/lib/planTiers";
+import { resolvePlan, fileCaps, effectivePlanForUser, CATEGORY_CAPS, type FileCaps } from "../../src/lib/planTiers";
 
 interface Env {
   DB: D1Database;
@@ -60,7 +60,7 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     const limits = fileCaps(plan);
     recordRateLimit(DB, "check-plan", ip, "/check-plan");
 
-    return new Response(JSON.stringify({ plan, ...limits }), {
+    return new Response(JSON.stringify({ plan, ...limits, categoryCaps: CATEGORY_CAPS }), {
       headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
     });
   } catch {

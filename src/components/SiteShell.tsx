@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import { OnboardingTour } from "@/components/OnboardingTour";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
+import { SuccessSignupNudge } from "@/components/SuccessSignupNudge";
 
 /**
  * Layout-level ambient background (27" verdict). Fixed, static
@@ -47,6 +48,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <OnboardingTour />
       {/* #45: single global instance (was tool-pages-only in ToolLayout) */}
       <OfflineIndicator />
+      <SuccessSignupNudge />
       <AmbientBackground />
       <Header />
       {children}

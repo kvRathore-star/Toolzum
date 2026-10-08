@@ -33,6 +33,10 @@ export default function BulkCsvExcelToJson() {
   const [isProcessing, setIsProcessing] = useState(false);
 
   const processFile = useCallback(async (file: File) => {
+    if (file.size > 150 * 1024 * 1024) {
+      toast.error(`"${file.name}" exceeds the 150MB spreadsheet limit.`);
+      return;
+    }
     setIsProcessing(true);
     setFileName(file.name);
     try {

@@ -305,19 +305,29 @@ export default function ImageFormatConverter({ slug }: ImageFormatConverterProps
   const handleFileSelect = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
     if (!f) return;
+    if (f.size > 50 * 1024 * 1024) {
+      toast.error(`"${f.name}" exceeds the 50MB image limit.`);
+      e.target.value = '';
+      return;
+    }
     setFile(f);
     setPreview(URL.createObjectURL(f));
   }, []);
 
   // Hero-box carry: a file dropped on the homepage arrives via IndexedDB (same
   // browser, never uploaded). Accepted only when its extension matches this
-  // pair's input format — a stale or mismatched carry is ignored silently.
+  // pair's input format and it fits the 50MB image ceiling — a stale,
+  // mismatched, or oversized carry is refused with its reason, never silent.
   const heroClaimed = useRef(false);
   useEffect(() => {
     if (heroClaimed.current) return;
     heroClaimed.current = true;
     consumeHeroFile().then((f) => {
       if (!f || heroExtOf(f.name) !== inputKey) return;
+      if (f.size > 50 * 1024 * 1024) {
+        toast.error(`"${f.name}" exceeds the 50MB image limit.`);
+        return;
+      }
       setFile(f);
       setPreview(URL.createObjectURL(f));
       toast.success('Loaded your dropped file.');

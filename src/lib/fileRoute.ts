@@ -6,6 +6,7 @@
  */
 
 import { smartMax } from '@/utils/fileSizeLimits';
+import { categoryCap } from '@/lib/planTiers';
 
 export type HeroFileType = 'image' | 'video' | 'audio' | 'pdf' | 'document' | 'other';
 
@@ -90,12 +91,6 @@ export interface HeroIntent {
    */
   capAccept?: string;
   /**
-   * Explicit per-plan intake cap (MB) for tools whose limits live outside
-   * smartMax — e.g. the PDF editor's own FileUploader props (125 free,
-   * unlimited Pro). Verified against the component, never guessed.
-   */
-  capMB?: { anon: number; signed: number };
-  /**
    * Set ONLY when requiresCloudApi(live registry deps) is true for this
    * route. Absence means local. A test locks every intent against the live
    * verdict, so a future cloud chip cannot ship unlabeled.
@@ -112,7 +107,7 @@ const IMAGE_INTENTS: HeroIntent[] = [
 
 const PDF_INTENTS: HeroIntent[] = [
   { id: 'compress', label: 'Compress', tool: 'PDF Compressor', route: '/pdf/pdf-compressor', capAccept: 'application/pdf' },
-  { id: 'edit', label: 'Edit', tool: 'PDF Editor', route: '/pdf/pdf-editor', capMB: { anon: 125, signed: 125 } },
+  { id: 'edit', label: 'Edit', tool: 'PDF Editor', route: '/pdf/pdf-editor', capAccept: 'application/pdf' },
   { id: 'merge', label: 'Merge', tool: 'PDF Merger', route: '/pdf/pdf-merger', capAccept: 'application/pdf' },
   { id: 'split', label: 'Split', tool: 'PDF Splitter', route: '/pdf/pdf-splitter', capAccept: 'application/pdf' },
 ];
@@ -286,14 +281,17 @@ export function heroExtOf(fileName: string): string {
   return parts.length > 1 ? (parts.pop()?.toLowerCase() || '') : '';
 }
 
-/** Effective intake cap (MB) for an intent: explicit per-tool cap first,
- *  smartMax-derived second, plan cap last. Pure + test-locked, so the box
- *  can never display a limit the destination won't honor. */
-export function heroCapFor(intent: HeroIntent, signed: boolean, planCapMB: number): number {
-  if (intent.capMB) return signed ? intent.capMB.signed : intent.capMB.anon;
+/** Effective intake cap (MB) for an intent in the box.
+ *  Order: Pro always 2000 (plan promise, honored at the download gate);
+ *  explicit smartMax intake caps next (mirrors destination enforcement);
+ *  generous category ceiling last (CATEGORY_CAPS — same anon and signed).
+ *  Pure + test-locked, so the box can never display a limit the
+ *  destination won't honor. */
+export function heroCapFor(intent: HeroIntent, authenticated: boolean, isPro: boolean, fileType: HeroFileType): number {
+  if (isPro) return 2000;
   if (intent.capAccept) {
     const limits = smartMax(intent.capAccept);
-    return signed ? limits.signed : limits.free;
+    return authenticated ? limits.signed : limits.free;
   }
-  return planCapMB;
+  return categoryCap(fileType === 'document' || fileType === 'other' ? 'other' : fileType);
 }
