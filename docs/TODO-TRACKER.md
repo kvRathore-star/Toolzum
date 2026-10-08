@@ -193,3 +193,19 @@ Tier 2 — sampling, not exhaustive:
 7. Screenshot baselines for ~20 representative tools (one per shell variant) at 375/1280 — cheap visual-regression beachhead.
 8. Oracle tests by archetype — for formula-type calculators (~120), add independent-value oracles like the existing traffic-top tests; converters get round-trip invariants (already exist as *-pairs, extend coverage).
 Tier 3 — accepted as manual (per scorecard.md:150, depth-audit-followups:175): full 1,141-tool human functional audit was deliberately ruled not cost-justified; FAQ custom-content rollout (~1,060 tools) is content work, not testing.
+
+
+Honest diagnosis — it's not one thing, it's five stacked:
+Why it feels chaotic
+1. Scale without a single source of truth. 1,059 tools, 21 categories, quotas, pro lists, redirects, shelves, intros, FAQs — each subsystem is sensible alone, but nobody can hold the whole model in one head. And the "sources of truth" disagree: docs say 1,145 tools (registry: 1,059), 65 vs 66 pro tools, GSC says 1,084 (sitemap: 1,085). Stale numbers everywhere force you to re-verify everything, every time.
+2. History of changes without reasons. 11 sitemap commits, quota flips 10→3→?, Sep 15's "separate cleanup" promise that sat for 3 weeks. Each change was probably right that day; without decision records, the pile reads as chaos. You can't tell which scars are load-bearing.
+3. Too many overlapping docs. TODO-TRACKER, ACTION-PLAN, scorecard, gotchas, postmortems — and I added 4 more files today. Each true at creation; collectively a maze with no entrance. (The master todo was designed as the single entrance — everything else hangs off it.)
+4. Two wars on one front. Product work (billing, email, features) and SEO recovery ship in the same deploys, so every push feels high-stakes for two reasons at once.
+5. Laggy instruments. GSC withholds breakdowns, validations fail opaquely, sitemap reads sit 3 weeks stale. You're flying a storm on delayed gauges — of course it feels chaotic.
+The de-chaos prescription (already started today)
+- Freezes hold: routes frozen, quotas frozen 90 days, no mass anything. Fewer moving parts = less chaos, immediately.
+- One queue: master todo is the only list that matters; if it's not there, it waits.
+- Decision records, not just changes: quota freeze rule, consolidation log, per-change reason+date. Future-you will know why, not just what.
+- Rhythm over sprints: daily 10 clicks, weekly batches, monthly measures. Panic is what happens without cadence.
+- One number: indexed count on Oct 13. Everything else is noise until that moves.
+And my share of the mess: today's 30-file commit is big because it closes five open loops at once (trust, dedup, sitemap, hubs, agent-ready) instead of opening five new ones. After push, the tree goes quiet — small, test-guarded deploys only.
