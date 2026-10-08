@@ -3654,7 +3654,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Live Transcription",
     slug: "live-transcription",
     category: "Transcription",
-    description: 'Dictate live with real-time browser speech recognition and interim results — meetings, lectures, notes. Capture a 30-minute talk as editable text — free to start, transcript saves on free quota.',
+    description: 'Dictate live with real-time browser speech recognition and interim results — meetings, lectures, notes. Capture a 30-minute talk as editable text — free to start, transcript saves unlimited.',
     seoDescription: 'Free live transcription — real-time mic dictation in your browser. Browser speech recognition, unlimited saves, no signup needed.',
     dependencies: "Web Speech API",
     seoTitle: "Free Live Transcription – Dictate Online",

@@ -1338,7 +1338,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Live Transcription",
     "slug": "live-transcription",
     "category": "Transcription",
-    "description": "Dictate live with real-time browser speech recognition and interim results — meetings, lectures, notes. Capture a 30-minute talk as editable text — free to start, transcript saves on free quota.",
+    "description": "Dictate live with real-time browser speech recognition and interim results — meetings, lectures, notes. Capture a 30-minute talk as editable text — free to start, transcript saves unlimited.",
     "isPro": false
   },
   {
