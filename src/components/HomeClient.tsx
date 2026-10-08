@@ -1022,10 +1022,10 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
         )}
       </div>
 
-      {/* Intent chips: WHAT the file is -> WHY the user came. Reserved height
-          so the box doesn't jump when they appear. */}
-      <div className="min-h-[76px] mt-3" aria-live="polite">
-        {first && fileType && !blocked && (
+      {/* Intent chips: WHAT the file is -> WHY the user came. Rendered only
+          with a file present — no reserved void when idle. */}
+      {first && fileType && !blocked && (
+        <div className="mt-3" aria-live="polite">
           <div className="flex flex-col gap-2">
             <p className="text-[11px] text-[var(--text-muted)]">
               {multi
@@ -1055,20 +1055,20 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
               })}
             </div>
           </div>
-        )}
-        {/* State gate BEFORE effort: over-cap disables every chip and says
-            exactly how to proceed. Never a post-work wall. Downloads on
-            local tools are unlimited; Pro taste is gated server-side. */}
-        {first && gated && !blocked && (
-          <div role="alert" className="mt-2 p-2.5 rounded-xl border border-amber-500/30 bg-amber-500/10 text-[11px] text-[var(--text-secondary)]">
+          {/* State gate BEFORE effort: over-cap disables every chip and says
+              exactly how to proceed. Never a post-work wall. Downloads on
+              local tools are unlimited; Pro taste is gated server-side. */}
+          {first && gated && !blocked && (
+            <div role="alert" className="mt-2 p-2.5 rounded-xl border border-amber-500/30 bg-amber-500/10 text-[11px] text-[var(--text-secondary)]">
             <>{formatSize(first.size)} exceeds {selected ? `${selected.tool}'s` : 'this tool’s'} {selectedCap}MB intake limit — {signedIn
                 ? (selected?.capAccept
                   ? <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">view Pro plans</Link>
                   : <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">go Pro (2GB)</Link>)
-                : <><Link href="/sign-in" className="text-[var(--accent)] underline underline-offset-2">sign in free for more</Link> or <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">view Pro plans</Link></>}.</>
-          </div>
-        )}
-      </div>
+              : <><Link href="/sign-in" className="text-[var(--accent)] underline underline-offset-2">sign in free for more</Link> or <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">view Pro plans</Link></>}.</>
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3" aria-label="Accepted formats">
         {formatBadges.map((b) => (
