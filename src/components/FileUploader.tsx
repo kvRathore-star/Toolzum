@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import { cn, formatBytes } from "@/lib/utils";
 import { Upload, X, FileIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { consumeHeroFile } from "@/lib/heroFile";
+import { useHeroFilePickup } from "@/lib/heroFile";
 
 export interface UploadedFile {
   id: string;
@@ -86,17 +86,10 @@ export function FileUploader({
     [files, maxSize, multiple, onFilesAccepted]
   );
 
-  // Hero-box carry: a file dropped on the homepage arrives via IndexedDB (same
-  // browser, never uploaded) and enters through processFiles — same size/type
-  // guards as a manual pick. Consume-once + 5-min TTL live in heroFile.ts.
-  const heroClaimed = useRef(false);
-  useEffect(() => {
-    if (heroClaimed.current) return;
-    heroClaimed.current = true;
-    consumeHeroFile().then((f) => {
-      if (f) processFiles([f]);
-    }).catch(() => {});
-  }, [processFiles]);
+  // Hero-box carry via the shared pickup (guards stay in processFiles).
+  useHeroFilePickup((incoming) => {
+    if (incoming.length > 0) processFiles(incoming);
+  });
 
   // Drag handlers
   const handleDragEnter = useCallback((e: DragEvent) => {

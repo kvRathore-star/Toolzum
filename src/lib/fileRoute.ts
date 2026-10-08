@@ -5,6 +5,8 @@
  * document-converter once pointed at /document/ instead of /converter/).
  */
 
+import { smartMax } from '@/utils/fileSizeLimits';
+
 export type HeroFileType = 'image' | 'video' | 'audio' | 'pdf' | 'document' | 'other';
 
 export function detectFileType(f: { type?: string; name: string }): HeroFileType {
@@ -87,6 +89,18 @@ export interface HeroIntent {
    * box falls back to the plan cap — their enforcement lives at save time.
    */
   capAccept?: string;
+  /**
+   * Explicit per-plan intake cap (MB) for tools whose limits live outside
+   * smartMax — e.g. the PDF editor's own FileUploader props (125 free,
+   * unlimited Pro). Verified against the component, never guessed.
+   */
+  capMB?: { anon: number; signed: number };
+  /**
+   * Set ONLY when requiresCloudApi(live registry deps) is true for this
+   * route. Absence means local. A test locks every intent against the live
+   * verdict, so a future cloud chip cannot ship unlabeled.
+   */
+  cloud?: true;
 }
 
 const IMAGE_INTENTS: HeroIntent[] = [
@@ -98,6 +112,7 @@ const IMAGE_INTENTS: HeroIntent[] = [
 
 const PDF_INTENTS: HeroIntent[] = [
   { id: 'compress', label: 'Compress', tool: 'PDF Compressor', route: '/pdf/pdf-compressor', capAccept: 'application/pdf' },
+  { id: 'edit', label: 'Edit', tool: 'PDF Editor', route: '/pdf/pdf-editor', capMB: { anon: 125, signed: 125 } },
   { id: 'merge', label: 'Merge', tool: 'PDF Merger', route: '/pdf/pdf-merger', capAccept: 'application/pdf' },
   { id: 'split', label: 'Split', tool: 'PDF Splitter', route: '/pdf/pdf-splitter', capAccept: 'application/pdf' },
 ];
@@ -259,7 +274,6 @@ export function heroTypeWarning(mime: string, ext: string): string | null {
 }
 
 export type HeroSizeState = 'ok' | 'over-cap' | 'too-big';
-
 /** 2GB is the hard browser-memory ceiling for every plan (Pro caps at 2GB). */
 export function heroSizeState(bytes: number, capMB: number): HeroSizeState {
   if (bytes > 2048 * 1024 * 1024) return 'too-big';
@@ -270,4 +284,16 @@ export function heroSizeState(bytes: number, capMB: number): HeroSizeState {
 export function heroExtOf(fileName: string): string {
   const parts = fileName.split('.');
   return parts.length > 1 ? (parts.pop()?.toLowerCase() || '') : '';
+}
+
+/** Effective intake cap (MB) for an intent: explicit per-tool cap first,
+ *  smartMax-derived second, plan cap last. Pure + test-locked, so the box
+ *  can never display a limit the destination won't honor. */
+export function heroCapFor(intent: HeroIntent, signed: boolean, planCapMB: number): number {
+  if (intent.capMB) return signed ? intent.capMB.signed : intent.capMB.anon;
+  if (intent.capAccept) {
+    const limits = smartMax(intent.capAccept);
+    return signed ? limits.signed : limits.free;
+  }
+  return planCapMB;
 }

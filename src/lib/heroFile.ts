@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 /**
  * heroFile.ts — carries the homepage drop into the destination tool.
  *
@@ -25,10 +27,12 @@ interface HeroPayload {
   at: number;
 }
 
-// Carry caps: IDB handles blobs well, but a 500-file Pro batch must never
-// ride the homepage — the bulk tools take folders themselves.
-const MAX_CARRY_FILES = 25;
-const MAX_CARRY_BYTES = 2 * 1024 * 1024 * 1024;
+// Carry caps: IndexedDB handles blobs well on desktop, but Safari/iOS and
+// private mode choke on hundreds of megabytes. Desktop Chrome/Firefox take
+// far more — the cap protects the weakest path, not the strongest.
+const MAX_CARRY_FILES = 100;
+const MAX_CARRY_BYTES = 300 * 1024 * 1024;
+const MAX_SINGLE_BYTES = 2 * 1024 * 1024 * 1024;
 
 function openDb(): Promise<IDBDatabase | null> {
   return new Promise((resolve) => {
@@ -47,18 +51,25 @@ function openDb(): Promise<IDBDatabase | null> {
 }
 
 export async function stashHeroFile(file: File): Promise<boolean> {
-  return stashHeroFiles([file]);
+  return (await stashHeroFiles([file])) > 0;
 }
 
-export async function stashHeroFiles(files: File[]): Promise<boolean> {
+export async function stashHeroFiles(files: File[]): Promise<number> {
   try {
-    const items: HeroRecord[] = files
-      .filter((f) => f.size > 0 && f.size <= MAX_CARRY_BYTES)
-      .slice(0, MAX_CARRY_FILES)
-      .map((f) => ({ blob: f, name: f.name, type: f.type, at: Date.now() }));
-    if (items.length === 0) return false;
+    // First-N under a total budget: the rest travel light (bulk tools take
+    // folders themselves). Order preserved so the lead files ride.
+    const items: HeroRecord[] = [];
+    let total = 0;
+    for (const f of files) {
+      if (items.length >= MAX_CARRY_FILES) break;
+      if (f.size <= 0 || f.size > MAX_SINGLE_BYTES) continue;
+      if (total + f.size > MAX_CARRY_BYTES) break;
+      total += f.size;
+      items.push({ blob: f, name: f.name, type: f.type, at: Date.now() });
+    }
+    if (items.length === 0) return 0;
     const db = await openDb();
-    if (!db) return false;
+    if (!db) return 0;
     await new Promise<void>((resolve, reject) => {
       const tx = db.transaction(STORE, 'readwrite');
       tx.oncomplete = () => resolve();
@@ -66,9 +77,9 @@ export async function stashHeroFiles(files: File[]): Promise<boolean> {
       tx.objectStore(STORE).put({ items, at: Date.now() } as HeroPayload, KEY);
     });
     db.close();
-    return true;
+    return items.length;
   } catch {
-    return false;
+    return 0;
   }
 }
 
@@ -77,8 +88,7 @@ export async function consumeHeroFile(): Promise<File | null> {
   return files[0] ?? null;
 }
 
-export async function consumeHeroFiles(): Promise<File[]> {
-  try {
+export async function consumeHeroFiles(): Promise<File[]> {  try {
     const db = await openDb();
     if (!db) return [];
     const payload = await new Promise<HeroPayload | HeroRecord | undefined>((resolve, reject) => {
@@ -106,4 +116,50 @@ export async function consumeHeroFiles(): Promise<File[]> {
   } catch {
     return [];
   }
+}
+
+/**
+ * Active expiry sweep. TTL is otherwise checked lazily on consume — but an
+ * abandoned carry (tab closed, user walked away) would sit in IndexedDB
+ * until something reads the key. Call on page mount (the homepage box does)
+ * so stale files — scans, IDs, contracts — can never linger.
+ */
+export async function sweepHeroFiles(): Promise<void> {
+  try {
+    const db = await openDb();
+    if (!db) return;
+    await new Promise<void>((resolve) => {
+      const tx = db.transaction(STORE, 'readwrite');
+      const store = tx.objectStore(STORE);
+      const get = store.get(KEY);
+      get.onsuccess = () => {
+        const val = get.result as HeroPayload | undefined;
+        if (val && Date.now() - val.at > TTL_MS) store.delete(KEY);
+        resolve();
+      };
+      get.onerror = () => resolve();
+      tx.onerror = () => resolve();
+    });
+    db.close();
+  } catch {
+    // Sweep is hygiene, never load-bearing.
+  }
+}
+
+/**
+ * Shared one-shot pickup for destination uploaders. Replaces a dozen
+ * hand-written consume effects with one shape: mount → consume → deliver
+ * through the tool's own intake. Guards (accept/size) stay in the intake.
+ */
+export function useHeroFilePickup(onFiles: (files: File[]) => void): void {
+  const claimed = useRef(false);
+  const handlerRef = useRef(onFiles);
+  handlerRef.current = onFiles;
+  useEffect(() => {
+    if (claimed.current) return;
+    claimed.current = true;
+    consumeHeroFiles().then((incoming) => {
+      if (incoming.length > 0) handlerRef.current(incoming);
+    }).catch(() => {});
+  }, []);
 }

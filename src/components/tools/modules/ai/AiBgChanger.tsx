@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Upload, Download, RotateCcw, Scissors, Image, Eraser, RefreshCw, ZoomIn, Crown } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
@@ -98,7 +98,7 @@ export default function AiBgChanger() {
     ctx.fillText('Processed with Toolzum', canvas.width - 12, canvas.height - 12);
   };
 
-  const loadFile = (file: File) => {
+  const loadFile = useCallback((file: File) => {
     if (!file.type.startsWith('image/')) {
       toast.error('Please choose an image file.');
       return;
@@ -107,7 +107,7 @@ export default function AiBgChanger() {
     setImage(url);
     setResult(null);
     focusDrop();
-  };
+  }, [focusDrop]);
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -133,7 +133,7 @@ export default function AiBgChanger() {
     consumeHeroFile().then((f) => {
       if (f) loadFile(f);
     }).catch(() => {});
-  }, []);
+  }, [loadFile]);
 
   const removeBackgroundAuto = () => {
     try {

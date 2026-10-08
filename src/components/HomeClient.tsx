@@ -22,9 +22,8 @@ import { useIsIndia } from '@/hooks/useIsIndia';
 import { useSession } from '@/lib/auth-client';
 import { getRemainingDownloads } from '@/utils/freeUsageGuard';
 import { resolvePlan, fileCaps } from '@/lib/planTiers';
-import { smartMax } from '@/utils/fileSizeLimits';
-import { detectFileType, heroIntentsFor, heroBulkIntentsFor, heroDefaultIntentId, heroBlockReason, heroTypeWarning, heroSizeState, heroExtOf, type HeroFileType, type HeroIntent } from '@/lib/fileRoute';
-import { stashHeroFiles } from '@/lib/heroFile';
+import { detectFileType, heroIntentsFor, heroBulkIntentsFor, heroDefaultIntentId, heroBlockReason, heroTypeWarning, heroSizeState, heroCapFor, heroExtOf, type HeroFileType, type HeroIntent } from '@/lib/fileRoute';
+import { stashHeroFiles, sweepHeroFiles } from '@/lib/heroFile';
 import { useRouter } from 'next/navigation';
 import { useFavorites } from '@/hooks/useFavorites';
 import { FavoriteStarButton } from '@/components/FavoriteStarButton';
@@ -786,6 +785,11 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [carrying, setCarrying] = useState(false);
   const { data: session, isPending: sessionPending } = useSession();
+  // Active expiry sweep on every homepage load: abandoned carries (closed
+  // tab, walked away) must not linger in IndexedDB. See heroFile.sweepHeroFiles.
+  useEffect(() => {
+    void sweepHeroFiles();
+  }, []);
   const planCapMB = fileCaps(resolvePlan(!!session?.user, (session?.user as { plan?: string } | undefined)?.plan ?? null)).maxFileSizeMB;
   // User state (quota-aware box): cookie + local counters only — no request.
   // Server remains the source of truth at save time; this is a heads-up.
@@ -851,11 +855,11 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
   // enforcement the file will actually meet. Never gate while the session
   // resolves (optimistic; destinations enforce strictly anyway).
   const signedIn = !!session?.user;
-  const selectedCap = selected?.capAccept
-    ? (signedIn ? smartMax(selected.capAccept).signed : smartMax(selected.capAccept).free)
-    : planCapMB;
+  const selectedCap = selected ? heroCapFor(selected, signedIn, planCapMB) : planCapMB;
   const overCap = !sessionPending && !!first && first.size > selectedCap * 1024 * 1024;
-  const quotaOut = !!quota?.signedIn && quota.remaining <= 0;
+  // Quota is a local best-effort counter for everyone (anon included —
+  // getRemainingDownloads tracks both). Server remains source of truth.
+  const quotaOut = quota !== null && quota.remaining <= 0;
   const gated = overCap || quotaOut;
 
   const clearAll = useCallback(() => {
@@ -947,7 +951,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
     <div className="flex-1 flex flex-col">
       <div className="mb-4">
         <p className="text-sm font-semibold text-[var(--text-primary)]">What are you working with?</p>
-        <p className="text-xs text-[var(--text-muted)] mt-0.5">We detect the format and open the right tool</p>
+        <p className="text-xs text-[var(--text-muted)] mt-0.5">Pick an action above — or just drop a file and we&apos;ll match its format</p>
       </div>
 
       <div
@@ -1041,7 +1045,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
                     } ${(gated || carrying) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
                   >
                     <span className="block text-xs font-semibold">{intent.label}</span>
-                    <span className="block text-[10px] opacity-70">{intent.tool}{intent.note ? ` · ${intent.note}` : ''}</span>
+                    <span className="block text-[10px] opacity-70">{intent.tool}{intent.note ? ` · ${intent.note}` : ''} · {intent.cloud ? <span className="text-amber-600 dark:text-amber-400 font-semibold">Cloud</span> : 'Local'}</span>
                   </button>
                 );
               })}
@@ -1054,20 +1058,20 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
           <div role="alert" className="mt-2 p-2.5 rounded-xl border border-amber-500/30 bg-amber-500/10 text-[11px] text-[var(--text-secondary)]">
             {overCap ? (
               <>{formatSize(first.size)} exceeds {selected ? `${selected.tool}'s` : 'this tool’s'} {selectedCap}MB intake limit — {signedIn
-                ? (selected?.capAccept
+                ? (selected?.capAccept || selected?.capMB
                   ? <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">view Pro plans</Link>
                   : <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">go Pro (2GB)</Link>)
                 : <><Link href="/sign-in" className="text-[var(--accent)] underline underline-offset-2">sign in free for more</Link> or <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">view Pro plans</Link></>}.</>
             ) : (
-              <>Daily limit reached — resets tomorrow · <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">View Pro</Link>.</>
+              <>Daily limit reached — resets tomorrow · {!signedIn && <>sign in free for more or </>}<Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2">view Pro</Link>.</>
             )}
           </div>
         )}
       </div>
 
-      <div className="flex flex-wrap gap-1.5 mt-3">
+      <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3" aria-label="Accepted formats">
         {formatBadges.map((b) => (
-          <span key={b.label} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[10px] font-mono text-[var(--text-muted)]">
+          <span key={b.label} className="inline-flex items-baseline gap-1 text-[10px] font-mono text-[var(--text-muted)]">
             {b.label} <span className="hidden sm:inline text-[9px] opacity-60">{b.exts}</span>
           </span>
         ))}
@@ -1080,12 +1084,12 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
         </summary>
         <div className="mt-1 p-3 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[11px] text-[var(--text-secondary)] leading-relaxed">
           <p><strong className="text-[var(--text-primary)]">Images</strong> (JPG, PNG, WebP…) → compress, convert, resize, remove background · <strong className="text-[var(--text-primary)]">HEIC, SVG, GIF, TIFF, BMP, AVIF, ICO</strong> → the matching converter</p>
-          <p className="mt-1"><strong className="text-[var(--text-primary)]">PDFs</strong> → compress, merge, split</p>
+           <p className="mt-1"><strong className="text-[var(--text-primary)]">PDFs</strong> → compress, edit, merge, split</p>
           <p className="mt-1"><strong className="text-[var(--text-primary)]">Video</strong> (MP4, MOV, MKV, WebM, AVI) → compress, convert, extract MP3 · older formats (WMV, FLV, 3GP) aren&apos;t supported yet</p>
           <p className="mt-1"><strong className="text-[var(--text-primary)]">Audio</strong> (MP3, WAV, FLAC, OGG, M4A, AAC, WMA, Opus, AIFF) → compress, convert</p>
           <p className="mt-1"><strong className="text-[var(--text-primary)]">Documents</strong> (DOCX, ODT, EPUB…) → convert · <strong className="text-[var(--text-primary)]">Spreadsheets</strong> (XLS, XLSX, CSV) → to JSON · <strong className="text-[var(--text-primary)]">Text</strong> (.txt, .md, .json) → count, format</p>
           <p className="mt-1"><strong className="text-[var(--text-primary)]">PPT decks</strong> aren&apos;t supported yet — they land on the tool directory.</p>
-          <p className="mt-2 text-[var(--text-muted)]">Limits: shown per file above (each tool states its own) · files stay in this browser · executables refused · several files open the bulk tools.</p>
+          <p className="mt-2 text-[var(--text-muted)]">Limits: shown per file above (each tool states its own) · files stay in this browser · up to 100 files / 300MB ride along, the rest open the tool directly · executables refused · several files open the bulk tools.</p>
         </div>
       </details>
 

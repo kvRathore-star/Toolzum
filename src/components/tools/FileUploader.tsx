@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useCallback, useState, useEffect, useRef } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { useSession } from '@/lib/auth-client';
 import { smartMax } from '@/utils/fileSizeLimits';
-import { consumeHeroFile } from '@/lib/heroFile';
+import { useHeroFilePickup } from '@/lib/heroFile';
 
 interface FileUploaderProps {
   accept?: string;
@@ -114,17 +114,11 @@ export function FileUploader({
     return () => window.removeEventListener('paste', handlePaste);
   }, [processFile]);
 
-  // Hero-box carry: a file dropped on the homepage arrives via IndexedDB
-  // (same browser, never uploaded) and enters through the same accept/size
-  // guards as a manual pick. Consume-once + 5-min TTL live in heroFile.ts.
-  const heroClaimed = useRef(false);
-  useEffect(() => {
-    if (heroClaimed.current) return;
-    heroClaimed.current = true;
-    consumeHeroFile().then((f) => {
-      if (f) processFile(f);
-    }).catch(() => {});
-  }, [processFile]);
+  // Hero-box carry via the shared pickup (guards stay in processFile).
+  useHeroFilePickup((incoming) => {
+    const f = incoming[0];
+    if (f) processFile(f);
+  });
 
   return (
     <div className="w-full">

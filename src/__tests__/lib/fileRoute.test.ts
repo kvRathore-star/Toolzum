@@ -1,7 +1,13 @@
 import { describe, it, expect } from "vitest";
-import { detectFileType, heroRouteFor, heroToolName, heroIntentsFor, heroBulkIntentsFor, heroDefaultIntentId, heroDocumentIntents, heroBlockReason, heroTypeWarning, heroSizeState, heroExtOf } from "@/lib/fileRoute";
+import { detectFileType, heroRouteFor, heroToolName, heroIntentsFor, heroBulkIntentsFor, heroDefaultIntentId, heroDocumentIntents, heroBlockReason, heroTypeWarning, heroSizeState, heroCapFor, heroExtOf } from "@/lib/fileRoute";
 import { smartMax } from "@/utils/fileSizeLimits";
+import { requiresCloudApi } from "@/lib/cloudPatterns";
 import { clientToolsRegistry } from "@/registry/tools-client-index";
+import { toolsRegistry } from "@/registry/tools";
+import fs from "node:fs";
+import path from "node:path";
+
+const ROOT = process.cwd();
 
 const F = (name: string, type = "") => ({ name, type });
 
@@ -115,8 +121,7 @@ describe("hero upload routing (trustworthy file -> tool)", () => {
     expect(heroIntentsFor("video", "mp4").find((i) => i.id === "to-mp3")!.route).toBe("/video/video-to-mp3");
   });
 
-  it("chip caps mirror destination intake (box gating matches enforcement)", () => {
-    // Contract with smartMax: the box shows these numbers, tools enforce them.
+  it("chip caps mirror destination intake (box gating matches enforcement)", () => {    // Contract with smartMax: the box shows these numbers, tools enforce them.
     expect(smartMax("image/jpeg,image/png,image/webp")).toEqual({ signed: 20, free: 10 });
     expect(smartMax("video/mp4,video/quicktime,video/x-matroska,video/webm")).toEqual({ signed: 150, free: 30 });
     expect(smartMax("audio/*")).toEqual({ signed: 50, free: 20 });
@@ -161,5 +166,77 @@ describe("hero upload routing (trustworthy file -> tool)", () => {
     expect(heroSizeState(3 * 1024 * 1024 * 1024, 2000)).toBe("too-big");
     expect(heroExtOf("photo.HEIC")).toBe("heic");
     expect(heroExtOf("README")).toBe("");
+  });
+
+  it("every chip's cloud label matches the live locality verdict", () => {
+    // A future cloud chip cannot ship unlabeled: the flag must equal
+    // requiresCloudApi over the tool's real dependencies.
+    const bySlug = new Map(toolsRegistry.map((t) => [t.slug, t]));
+    const exts = ["jpg", "png", "heic", "svg", "gif", "tiff", "mp4", "avi", "wmv", "mp3", "pdf", "docx", "xls", "pptx", "json", "csv", "txt", "zip"];
+    const seen = new Set<string>();
+    for (const ext of exts) {
+      const t = ext === "mp4" || ext === "avi" || ext === "wmv" ? "video"
+        : ext === "mp3" ? "audio" : ext === "pdf" ? "pdf"
+        : ["docx", "xls", "pptx"].includes(ext) ? "document"
+        : ["jpg", "png", "heic", "svg", "gif", "tiff"].includes(ext) ? "image" : "other";
+      const intents = [...heroIntentsFor(t as never, ext), ...heroBulkIntentsFor(t as never, ext)];
+      for (const intent of intents) {
+        if (seen.has(intent.route)) continue;
+        seen.add(intent.route);
+        if (intent.route === "/tools") continue;
+        const slug = intent.route.split("/").pop()!;
+        const tool = bySlug.get(slug);
+        expect(tool, `${intent.route} must exist`).toBeDefined();
+        expect(intent.cloud ?? false, `${slug} cloud label`).toBe(
+          requiresCloudApi((tool as unknown as { dependencies?: string }).dependencies || "None"),
+        );
+      }
+    }
+  });
+
+  it("heroCapFor resolves explicit, smartMax, then plan caps", () => {    expect(heroCapFor({ id: "x", label: "x", tool: "x", route: "/tools", capMB: { anon: 125, signed: 125 } }, false, 30)).toBe(125);
+    expect(heroCapFor({ id: "x", label: "x", tool: "x", route: "/tools", capAccept: "application/pdf" }, false, 30)).toBe(15);
+    expect(heroCapFor({ id: "x", label: "x", tool: "x", route: "/tools", capAccept: "application/pdf" }, true, 150)).toBe(40);
+    expect(heroCapFor({ id: "x", label: "x", tool: "x", route: "/tools" }, false, 30)).toBe(30);
+  });
+
+  it("every chip destination consumes the homepage carry (no silent empty tool)", () => {
+    // A chip that lands on a tool which ignores the stash reintroduces the
+    // double-upload. Direct pickup, or a shared shell/uploader that has it.
+    const read = (rel: string) => fs.readFileSync(path.join(ROOT, rel), "utf8");
+    const wrapper = read("src/components/tools/modules/DynamicModuleWrapper.tsx");
+    const carries = (src: string, baseDir: string, depth = 0): boolean => {
+      if (/heroFile|useHeroFilePickup|consumeHero/.test(src)) return true;
+      if (depth >= 2) return false;
+      // Follow local imports (wrappers like PdfEditor -> PdfEditorCore, and
+      // the shared uploaders/shells) looking for the carry everywhere.
+      const imports = [...src.matchAll(/from\s+['"]((?:\.{1,2}\/[^'"]+|@\/[^'"]+))['"]/g)].map((m) => m[1]);
+      return imports.some((imp) => {
+        if (!/(FileUploader|BulkToolShell|editor\/|modules\/pdf\/PdfEditor|Core)/.test(imp)) return false;
+        const fp = imp.startsWith("@/")
+          ? path.join(ROOT, "src", imp.replace(/^@\//, "") + ".tsx")
+          : path.normalize(path.join(baseDir, imp + ".tsx"));
+        if (!fs.existsSync(fp)) return false;
+        return carries(fs.readFileSync(fp, "utf8"), path.dirname(fp), depth + 1);
+      });
+    };
+    const exts = ["jpg", "png", "heic", "svg", "gif", "tiff", "bmp", "avif", "ico", "mp4", "avi", "wmv", "mp3", "pdf", "docx", "xls", "pptx", "json", "csv", "txt", "md"];
+    const routes = new Set<string>();
+    for (const ext of exts) {
+      const t = ["mp4", "avi", "wmv"].includes(ext) ? "video" : ext === "mp3" ? "audio" : ext === "pdf" ? "pdf"
+        : ["docx", "xls", "pptx"].includes(ext) ? "document"
+        : ["jpg", "png", "heic", "svg", "gif", "tiff", "bmp", "avif", "ico"].includes(ext) ? "image" : "other";
+      for (const i of [...heroIntentsFor(t as never, ext), ...heroBulkIntentsFor(t as never, ext)]) routes.add(i.route);
+    }
+    for (const route of routes) {
+      if (route === "/tools") continue;
+      const slug = route.split("/").pop()!;
+      const m = wrapper.match(new RegExp(`'${slug}':\\s*dynamic\\(\\(\\)\\s*=>\\s*import\\('([^']+)'\\)`));
+      expect(m, `${slug} must be wired in DynamicModuleWrapper`).not.toBeNull();
+      const fp = "src/" + m![1].replace(/^@\//, "") + ".tsx";
+      expect(fs.existsSync(path.join(ROOT, fp)), `${slug} component file must exist`).toBe(true);
+      const src = read(fp);
+      expect(carries(src, path.join(ROOT, path.dirname(fp))), `${slug} must consume the hero carry`).toBe(true);
+    }
   });
 });

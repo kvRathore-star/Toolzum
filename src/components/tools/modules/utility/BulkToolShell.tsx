@@ -12,7 +12,7 @@ import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
 import { getSignedInStatus, gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
 import { usePickerFocusReturn } from '@/components/buttonKeys';
 import { isLowEndDevice } from '@/lib/device';
-import { consumeHeroFiles } from '@/lib/heroFile';
+import { useHeroFilePickup } from '@/lib/heroFile';
 
 export interface ProcessedFile {
   name: string;
@@ -162,17 +162,10 @@ export function BulkToolShell({
     await addFiles(Array.from(e.target.files || []));
   }, [addFiles]);
 
-  // Hero-box carry: files dropped on the homepage arrive via IndexedDB (same
-  // browser, never uploaded) and enter through addFiles — same size, content,
-  // and batch-cap guards as a manual pick. Consume-once + 5-min TTL in heroFile.
-  const heroClaimed = useRef(false);
-  useEffect(() => {
-    if (heroClaimed.current) return;
-    heroClaimed.current = true;
-    consumeHeroFiles().then((incoming) => {
-      if (incoming.length > 0) void addFiles(incoming);
-    }).catch(() => {});
-  }, [addFiles]);
+  // Hero-box carry via the shared pickup (guards stay in addFiles).
+  useHeroFilePickup((incoming) => {
+    void addFiles(incoming);
+  });
 
   const removeFile = useCallback((idx: number) => {
     setFiles(prev => prev.filter((_, i) => i !== idx));
