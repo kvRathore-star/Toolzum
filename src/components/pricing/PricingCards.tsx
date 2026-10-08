@@ -101,11 +101,11 @@ export function PricingCards({ proCount, totalTools }: { proCount: number; total
             <ul className="space-y-4 text-sm text-[var(--text-secondary)] mb-8 border-t border-[var(--border-subtle)] pt-6">
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
-                <span>Single-file processing — 10-30MB per file (20-150MB after signing in)</span>
+                <span>Generous per-type ceilings — image 50MB · PDF 125MB · audio 100MB · video 250MB</span>
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
-                <span>3 downloads/day (5/day + 5 trial AI credits after signing in free)</span>
+                <span>Unlimited downloads on local tools (+ 5 trial AI credits after signing in free)</span>
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />

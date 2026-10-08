@@ -56,10 +56,10 @@ export default function PricingPage() {
               </thead>
               <tbody className="divide-y divide-[var(--border-subtle)]">
                 {[
-                  ['Max file size', '10-30MB / 20-150MB', '2GB'],
-                  ['Server downloads (daily)', '3 / 5 per day (Pro tools: 0 / 2)', 'Unlimited'],
+                  ['Max file size', 'Image 50 · PDF 125 · Audio 100 · Video 250 MB', '2GB'],
+                  ['Server downloads (daily)', 'Unlimited', 'Unlimited'],
                   ['Pro tools access', 'Blocked as guest · 2/day after free sign-in', 'Full unlimited access'],
-                  ['Batch processing', '1 / 10 files', '500 files'],
+                  ['Batch processing', '5 / 25 files', '500 files'],
                   ['Processing speed', 'Standard (1 thread)', 'Parallel (6 threads)'],
                   ['ZIP batch download', 'Single-file only', '✓ Batch ZIP'],
                   ['Watermark-free export', '—', '✓'],

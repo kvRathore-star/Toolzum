@@ -286,7 +286,7 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
             <div className="text-2xl font-bold text-[var(--text-primary)] mb-4">$0</div>
             <ul className="space-y-2.5 text-sm">
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Single file processing</span></li>
-              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Basic file size limits (10-30MB)</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Generous size ceilings (image 50 · PDF 125 · audio 100 · video 250MB)</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Unlimited client-side tools</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Local processing</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>5 trial AI credits after free sign-in (one-time)</span></li>

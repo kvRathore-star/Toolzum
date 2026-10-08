@@ -3806,7 +3806,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     showInCategory: true,
     seoTitle: "Free Bulk Image Upscaler – 2x 3x 4x",
     instructions: [
-      { title: "1. Drop images", desc: "Upload AI art or photos — up to 10 files signed-in free (500 on Pro). Cleaner sources upscale better." },
+      { title: "1. Drop images", desc: "Upload AI art or photos — up to 25 files signed-in free (500 on Pro). Cleaner sources upscale better." },
       { title: "2. Pick scale and algorithm", desc: "Choose 2x/3x/4x with Lanczos sharp or Bicubic smooth. Preview one file at 100% first." },
       { title: "3. Download ZIP", desc: "Upscaled files export together. One batch save counts as one Pro download." },
     ],

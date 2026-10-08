@@ -42,7 +42,7 @@ describe('DownloadLimitModal', () => {
     
     fireEvent(window, new CustomEvent('toolzum:download-blocked'));
     
-    expect(screen.getByText("You've used your 3 free downloads")).toBeDefined();
+    expect(screen.getByText('Free download paused')).toBeDefined();
   });
 
   it('shows modal on plan-limit event for file_size', () => {
@@ -52,7 +52,7 @@ describe('DownloadLimitModal', () => {
       detail: { reason: 'file_size', limit: 30, actual: 50 }
     }));
     
-    expect(screen.getByText('File too large for guest use (30MB)')).toBeDefined();
+    expect(screen.getByText('File too large (30MB limit)')).toBeDefined();
   });
 
   it('shows modal on plan-limit event for batch_size', () => {
@@ -62,17 +62,17 @@ describe('DownloadLimitModal', () => {
       detail: { reason: 'batch_size', limit: 5, actual: 10 }
     }));
     
-    expect(screen.getByText('Guests are limited to 1 file at a time')).toBeDefined();
+    expect(screen.getByText('Guests batch up to 5 files at a time')).toBeDefined();
   });
 
   it('closes modal when clicking close button', () => {
     render(<DownloadLimitModal />);
     
     fireEvent(window, new CustomEvent('toolzum:download-blocked'));
-    expect(screen.getByText("You've used your 3 free downloads")).toBeDefined();
+    expect(screen.getByText('Free download paused')).toBeDefined();
     
     fireEvent.click(screen.getByTestId('x-icon'));
-    expect(screen.queryByText("You've used your 3 free downloads")).toBeNull();
+    expect(screen.queryByText('Free download paused')).toBeNull();
   });
 
   it('closes modal when clicking backdrop', () => {
@@ -83,7 +83,7 @@ describe('DownloadLimitModal', () => {
     const backdrop = screen.getByRole('button', { name: 'Close dialog' });
     fireEvent.click(backdrop);
     
-    expect(screen.queryByText("You've used your 3 free downloads")).toBeNull();
+    expect(screen.queryByText('Free download paused')).toBeNull();
   });
 
   it('shows upgrade link', () => {
@@ -101,7 +101,7 @@ describe('DownloadLimitModal', () => {
     
     fireEvent(window, new CustomEvent('toolzum:download-blocked'));
     
-    const signInLink = screen.getByText('Sign in free — unlock 5/day + 5 trial credits');
+    const signInLink = screen.getByText('Sign in free — unlimited local + 5 trial credits');
     expect(signInLink).toBeDefined();
   });
 
@@ -119,7 +119,7 @@ describe('DownloadLimitModal', () => {
 
     fireEvent(window, new CustomEvent('toolzum:download-blocked'));
 
-    expect(screen.getByText('Daily download limit reached')).toBeDefined();
+    expect(screen.getByText('Daily Pro-tool taste used')).toBeDefined();
     expect(screen.queryByText(/Sign in free/)).toBeNull();
     expect(screen.queryByText('Maybe later')).toBeDefined();
   });
@@ -128,12 +128,12 @@ describe('DownloadLimitModal', () => {
     render(<DownloadLimitModal />);
 
     fireEvent(window, new CustomEvent('toolzum:download-blocked'));
-    expect(screen.getByText("You've used your 3 free downloads")).toBeDefined();
+    expect(screen.getByText('Free download paused')).toBeDefined();
 
     setSignedIn(true);
     fireEvent(window, new CustomEvent('toolzum:auth-changed'));
 
-    expect(screen.getByText('Daily download limit reached')).toBeDefined();
+    expect(screen.getByText('Daily Pro-tool taste used')).toBeDefined();
     expect(screen.queryByText(/Sign in free/)).toBeNull();
   });
 });

@@ -576,7 +576,7 @@ export const categoryFaqTemplates: Record<string, ((tool: ToolMetadata) => { que
     { question: `What video formats are supported?`, answer: `Common formats include MP4, MOV, AVI, WebM, MKV, and GIF. The exact list varies by tool.` },
     { question: `How long does video processing take?`, answer: `Depends on file size, your device's CPU, and the operation. Most conversions complete within seconds to a few minutes.` },
     { question: `Is my video data private?`, answer: `Yes. All processing happens locally — your videos never leave your device.` },
-    { question: `What's the maximum file size?`, answer: `Free users can process up to 30MB. Signing in increases the limit to 150MB. Pro subscribers can process files up to 2GB.` },
+    { question: `What's the maximum file size?`, answer: `Generous per-type ceilings, same for guests and signed-in users: images 50MB, PDFs 125MB, audio 100MB, video 250MB. Pro raises everything to 2GB.` },
   ],
   "Audio": (tool) => [
     { question: `What does ${tool.name} do?`, answer: `${tool.description} All audio processing runs locally in your browser.` },

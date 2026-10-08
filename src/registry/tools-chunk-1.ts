@@ -704,7 +704,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { title: "3. Download ZIP", desc: "Save all processed images at once. One batch save counts as one Pro download (signed-in free: 2 a day)." },
     ],
     faqs: [
-      { question: 'How many photos fit in one background batch?', answer: 'Signed-in free users run up to 10 files per batch within 2 Pro batches a day; Pro handles up to 500 files to 2 GB each. A 40-photo supplier set splits into 4 free batches — process the trickiest 10 first to dial in tolerance.' },
+      { question: 'How many photos fit in one background batch?', answer: 'Signed-in free users run up to 25 files per batch within 2 Pro batches a day; Pro handles up to 500 files to 2 GB each. A 40-photo supplier set splits into 2 free batches — process the trickiest 10 first to dial in tolerance.' },
       { question: 'How do I avoid halos around hair and edges?', answer: 'Shoot on contrasting, evenly lit backdrops and set tolerance low first — raise it only until the background drops. Check results at 200% zoom: a 30-second edge inspection beats re-running 40 files. Glass, smoke, and backlit hair always need a manual finish.' },
       { question: 'Are my batch photos uploaded anywhere?', answer: 'No — detection and compositing run locally in your browser on Canvas, so images never leave your device. Only the final ZIP save counts as one Pro download; processing itself is uncapped and private.' },
       { question: 'Transparent or solid replacement — which sells better?', answer: 'Pure white (#FFFFFF) for Amazon, Flipkart, and Meesho listings that require it; transparent PNG for design overlays and logos. Export JPG for smallest listing files, PNG wherever transparency matters.' },
@@ -762,7 +762,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     id: "1104",
     dependencies: 'pdf-lib',
     instructions: [
-      { title: "1. Open a PDF", desc: "Drop in any PDF (30 MB guests, 100 MB signed in, 150–500 pages by plan) or start a blank A4/Letter page. Encrypted files need unlocking first — the editor refuses them honestly rather than failing mid-export." },
+      { title: "1. Open a PDF", desc: "Drop in any PDF up to 125MB free (150–500 pages by plan) or start a blank A4/Letter page. Encrypted files need unlocking first — the editor refuses them honestly rather than failing mid-export." },
       { title: "2. Pick a tool and click the page", desc: "On blank pages Text starts one flowing box that wraps as you type; on existing PDFs each click places a separate box. Retype covers existing text for retyping, Select grabs text for AI actions, Highlight and Cover-up drag over areas, Draw is freehand, Shapes add rectangles/ellipses/lines/arrows, Note drops stickies, Image stamps PNG/JPG/emoji, Sign draws or types a signature to place." },
       { title: "3. Edit and undo freely", desc: "Double-click a text box, note, or flowing text to edit right on the page (Enter commits single-line text, Escape reverts) — or edit the selected box in the left panel. Arrows nudge, Delete removes, Ctrl+C/V copies. With Select, a shape or image grows eight corner/edge handles you can drag to resize — the whole drag is one Undo step. In the Pages sidebar, drag a thumbnail to reorder the document (one Undo step). Undo removes the last annotation; zoom to 200% for fine work, Focus fills the screen." },
       { title: "4. OCR scans, AI actions, download", desc: "Scanned pages: run OCR (8 languages), then click recognized words to insert them as text. Signed-in users can AI-summarize, grammar-fix, or translate for 1 credit each (Pro-only PII sweep included). Download burns everything into a clean PDF." },
@@ -1168,7 +1168,7 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: "Tesseract.js, pdf-lib, SheetJS",
     seoTitle: "Free Bulk Invoice Parser – PDF to CSV",
     instructions: [
-      { title: "1. Drop invoices", desc: "Upload PDF or image invoices — up to 10 files signed-in free (500 on Pro). Flat, well-lit scans parse best." },
+      { title: "1. Drop invoices", desc: "Upload PDF or image invoices — up to 25 files signed-in free (500 on Pro). Flat, well-lit scans parse best." },
       { title: "2. Review extracted rows", desc: "Confirm vendor, date, amount, and tax per file; correct the flagged low-confidence rows." },
       { title: "3. Export CSV", desc: "Download one CSV for Sheets or accounting import. One export counts as one Pro download." },
     ],
@@ -4020,13 +4020,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: "pdf-lib",
     seoTitle: "Free Bulk PDF Suite – 9 Tools in One",
     instructions: [
-      { title: "1. Upload the batch", desc: "Up to 10 files signed-in free (500 on Pro). Scans and digital PDFs can mix." },
+      { title: "1. Upload the batch", desc: "Up to 25 files signed-in free (500 on Pro). Scans and digital PDFs can mix." },
       { title: "2. Pick one of 9 operations", desc: "Rotate, protect, unlock, remove pages, split, watermark, crop, resize, or flatten — with quality 80 default." },
       { title: "3. Download results", desc: "One batch save counts as one Pro download. Re-running another operation costs another save — set it right first." },
     ],
     faqs: [
       { question: 'Which 9 operations does Bulk PDF Suite cover?', answer: 'Rotate (90/180/270), password-protect, unlock (with password), split by page count, text watermark, margin crop, page resize (A4/Letter), and form flatten — each applied uniformly across the whole batch. A 50-file scan cleanup (rotate + compress-ready + flatten) finishes in one session.' },
-      { question: 'How many PDFs fit in one batch?', answer: 'Signed-in free users batch up to 10 files per run within 2 Pro downloads a day; Pro handles up to 500 files to 2 GB each. A 15 MB-per-file cap applies to free uploads (40 MB signed-in) — split oversized scan sets before starting.' },
+      { question: 'How many PDFs fit in one batch?', answer: 'Signed-in free users batch up to 25 files per run within 2 Pro downloads a day; Pro handles up to 500 files to 2 GB each. A 125 MB-per-file ceiling applies — split oversized scan sets before starting.' },
       { question: 'Are my PDF files uploaded anywhere?', answer: 'No — all nine operations run locally in your browser on pdf-lib, so documents never leave your device. Only the final ZIP or file saves count against the Pro download quota; processing itself has no cap.' },
       { question: 'How do I watermark CONFIDENTIAL across 50 files?', answer: 'Drop the batch, choose Watermark, type the text, set diagonal placement at 30% opacity, and run — every page of all 50 files stamps identically. Preview one file first: opacity that looks subtle on screen can vanish in print.' },
       { question: 'Can I unlock password-protected PDFs in bulk?', answer: 'Yes when you know the password — enter it once and the suite unlocks every file in the batch. Files with unknown passwords cannot be processed; that is a hard limitation, not a missing feature.' },

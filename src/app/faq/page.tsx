@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     q: "Do I need to create an account?",
-    a: "No account is needed for any tool. All free tools work immediately. Signing in free raises limits to 5 downloads/day, 5 trial AI credits (one-time, never refills), and batches up to 10 files (150MB each). A Pro account adds unlimited downloads, 500-file batches up to 2GB, batch ZIP downloads, and 200 AI credits/month.",
+    a: "No account is needed for any tool. All free tools work immediately with unlimited local downloads. Signing in free adds 5 trial AI credits (one-time, never refills) and batches up to 25 files. A Pro account adds unlimited downloads, 500-file batches up to 2GB, batch ZIP downloads, and 200 AI credits/month.",
   },
   {
     q: "What file formats are supported?",
@@ -25,11 +25,11 @@ const faqs = [
   },
   {
     q: "Is there a file size limit?",
-    a: "Free anonymous users can process files up to 10-30MB depending on file type (images 10MB, PDFs 15MB, audio 20MB, video 30MB). Signing in increases limits to 20-150MB. Pro subscribers can process files up to 2GB with batch support of up to 500 files.",
+    a: "Generous per-type ceilings, same for guests and signed-in users: images 50MB, PDFs 125MB, audio 100MB, video 250MB. Pro subscribers can process files up to 2GB with batch support of up to 500 files.",
   },
   {
     q: "How many files can I process?",
-    a: "Anonymous users get 3 downloads per day. Signing in free raises the limit to 5 downloads per day with batches up to 10 files. Pro users get unlimited downloads with 6x parallel threads and batches up to 500 files.",
+    a: "Downloads on local tools are unlimited for everyone, no account needed. Signing in free adds 5 trial AI credits and batches up to 25 files. Pro users get unlimited everything with 6x parallel threads and batches up to 500 files.",
   },
   {
     q: "How do AI credits work?",
@@ -49,7 +49,7 @@ const faqs = [
   },
   {
     q: "Do you support bulk/batch processing?",
-    a: "Yes. Free signed-in users can batch up to 10 files at a time (processed one by one, downloaded individually). Pro subscribers batch up to 500 files in parallel with 1-click ZIP download. Select tools like Bulk Image Resizer, Bulk PDF Merger, and Bulk Audio Converter are designed for batch workflows.",
+    a: "Yes. Guests batch up to 5 files at a time and free signed-in users up to 25 files (processed one by one, downloaded individually). Pro subscribers batch up to 500 files in parallel with 1-click ZIP download. Select tools like Bulk Image Resizer, Bulk PDF Merger, and Bulk Audio Converter are designed for batch workflows.",
   },
   {
     q: "Is my data tracked or sold?",

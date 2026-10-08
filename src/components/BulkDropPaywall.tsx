@@ -54,7 +54,7 @@ export function BulkDropPaywall() {
             </div>
             <h3 id="bulk-paywall-title" className="text-lg font-bold text-[var(--text-primary)] mb-1">Bulk Processing Detected</h3>
             <p className="text-sm text-[var(--text-secondary)] mb-2">
-              You dropped <strong>{files.length} files</strong>. Free batches run up to 10 files (guests: 1 file at a time) — sign in free or drop fewer files.
+              You dropped <strong>{files.length} files</strong>. Free batches run up to 25 files (guests: 5 files at a time) — sign in free or drop fewer files.
             </p>
             <p className="text-xs text-[var(--text-muted)] mb-5">
               Pro processes up to <strong>500 files in parallel</strong>.

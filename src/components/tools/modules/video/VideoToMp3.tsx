@@ -112,7 +112,7 @@ export default function VideoToMp3() {
          </div>
          <div className="flex items-center justify-center gap-2">
            <span className="text-[var(--text-secondary)] text-xs">Extract high-quality audio from video files</span>
-            <span className="flex items-center gap-1 px-3 py-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-[var(--accent)] text-[10px] font-bold rounded-full uppercase tracking-wider">{isProUser ? 'Pro unlimited' : '3/day free'}</span>
+            <span className="flex items-center gap-1 px-3 py-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-[var(--accent)] text-[10px] font-bold rounded-full uppercase tracking-wider">{isProUser ? 'Pro unlimited' : 'Free'}</span>
          </div>
 
           {!isProUser && (

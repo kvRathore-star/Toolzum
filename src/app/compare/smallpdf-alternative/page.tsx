@@ -8,9 +8,9 @@ export const metadata = {
 };
 
 const ROWS: [string, string, string][] = [
-  ["Free use", "A couple of tasks per day, then paywall", "3 downloads/day anonymous, 5 signed-in; 2/day on Pro tools"],
+  ["Free use", "A couple of tasks per day, then paywall", "Unlimited local tools and downloads; 2/day on Pro tools"],
   ["Where files go", "Uploaded to Smallpdf servers for processing", "Processed locally in your browser; never uploaded (local tools)"],
-  ["Merge PDFs", "Free tier capped, files leave device", "Unlimited merging locally; save counts on free quota"],
+  ["Merge PDFs", "Free tier capped, files leave device", "Unlimited merging locally, files never leave your device"],
   ["Compress PDFs", "Capped free tasks", "Local compression with quality control"],
   ["Edit PDFs", "Mostly Pro features", "Full editor free: text, sign, OCR, AI actions"],
   ["Price to remove limits", "Pro subscription (~$100+/yr)", "Pro $9.99/mo with 200 AI credits/mo"],

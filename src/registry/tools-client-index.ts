@@ -18,7 +18,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Add Text to Photo",
     "slug": "add-text-to-photo",
     "category": "Image",
-    "description": "Overlays custom text captions onto images with control over font, size, color, alignment, opacity, and rotation angle. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Overlays custom text captions onto images with control over font, size, color, alignment, opacity, and rotation angle. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -26,7 +26,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Batch Image Editor",
     "slug": "batch-image-editor",
     "category": "Image",
-    "description": "Applies resize, crop, rotate, format conversion, and compression settings to dozens of images simultaneously with one click. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Apply resize, crop, rotate, format conversion, and compression to dozens of images in one click. Sellers prep 60 marketplace shots with identical settings — local Canvas work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -34,7 +34,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video to MP3 Converter",
     "slug": "video-to-mp3",
     "category": "Video",
-    "description": "Extracts the audio track from uploaded video files (MP4, MOV, AVI, WebM) and encodes it as a high-quality MP3 file. No signup or account required.",
+    "description": "Extracts the audio track from uploaded video files (MP4, MOV, AVI, WebM) and encodes it as a high-quality MP3 file. Free to start with no signup — fair daily limits apply.",
     "isPro": false
   },
   {
@@ -42,7 +42,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Crop Video",
     "slug": "crop-video",
     "category": "Video",
-    "description": "Crop the visual area of your MP4, MOV, AVI, or WebM video directly in the browser with preset aspect ratios or custom selections. No signup or account required.",
+    "description": "Crop the visual area of your MP4, MOV, AVI, or WebM video directly in the browser with preset aspect ratios or custom selections. Free to start with no signup — fair daily limits apply.",
     "isPro": false
   },
   {
@@ -58,7 +58,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Time Converter",
     "slug": "time-converter",
     "category": "Utility",
-    "description": "Convert between time units including seconds, minutes, hours, days, weeks, months, and years with precise decimal results. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert between time units including seconds, minutes, hours, days, weeks, months, and years with precise decimal results. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -98,7 +98,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Archive Converter",
     "slug": "archive-converter",
     "category": "Converter",
-    "description": "Compress ZIP archives directly in your browser. Upload any file and download a standard ZIP archive — no uploads to servers, no file size limits.",
+    "description": "Convert between ZIP, TAR, GZ, and 7z archives right in your browser. Repackage downloads for any platform — local fflate work, free quota on saves.",
     "isPro": false
   },
   {
@@ -114,7 +114,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Privacy Cleaner",
     "slug": "privacy-cleaner",
     "category": "Privacy",
-    "description": "Scans and clears browser cookies, localStorage, sessionStorage, and cached data for the current site. No signup or account required.",
+    "description": "Scan and clear cookies, localStorage, and cache for the current site — see what\\'s stored first. Audit trackers before wiping — local inspection, free, no signup.",
     "isPro": false
   },
   {
@@ -122,7 +122,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Translator",
     "slug": "ai-translator",
     "category": "AI",
-    "description": "Detects source language automatically and translates text between 100+ languages using advanced neural machine translation.",
+    "description": "Translate text between 100+ languages with automatic source detection on neural machine translation. Bloggers localize a 500-word post in seconds — 1 credit per translation, sign in free for 5.",
     "isPro": true
   },
   {
@@ -130,7 +130,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF to Word",
     "slug": "pdf-to-word",
     "category": "PDF",
-    "description": "Extract PDF content into editable DOCX files. Preserves formatting and layout.",
+    "description": "Extract PDF content into editable DOCX files. Preserves formatting, tables, and layout — review complex layouts after conversion.",
     "isPro": false
   },
   {
@@ -138,7 +138,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Image Generator",
     "slug": "ai-image-generator",
     "category": "AI",
-    "description": "Transforms text prompts into high-resolution images using advanced diffusion models. Designers and marketers use it for rapid visual prototyping.",
+    "description": "Turn text prompts into high-resolution images with three engines: free Pollinations drafts, 1-credit FLUX drafts, and 5-credit Gemini HD for Pro. Designers prototype hero art in seconds — free to start, sign in for credits.",
     "isPro": true
   },
   {
@@ -170,7 +170,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Logo Maker",
     "slug": "logo-maker",
     "category": "Branding",
-    "description": "Logo Maker provides a drag-and-drop canvas with shape libraries, text tools, and icon collections for building brand logos.",
+    "description": "Design simple logos with text, shapes, and icons on canvas — export PNG/SVG. Draft startup marks in an afternoon — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -202,7 +202,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to PDF",
     "slug": "jpg-to-pdf",
     "category": "PDF",
-    "description": "Convert JPG images to PDF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert JPG images to PDF format in your browser. Documents stay on your device — editing and conversion run locally in your browser.",
     "isPro": false
   },
   {
@@ -210,7 +210,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Age Calculator",
     "slug": "age-calculator",
     "category": "Calculator",
-    "description": "Computes exact age in years, months, and days from a given birth date relative to any target date. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Computes exact age in years, months, and days from a given birth date relative to any target date. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -218,7 +218,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to JPG",
     "slug": "heic-to-jpg",
     "category": "Image",
-    "description": "Convert HEIC images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert HEIC images to JPG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -226,7 +226,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF to JPG",
     "slug": "pdf-to-jpg",
     "category": "PDF",
-    "description": "Convert PDF images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert PDF images to JPG format in your browser. Documents stay on your device — editing and conversion run locally in your browser.",
     "isPro": false
   },
   {
@@ -234,7 +234,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF to PPT",
     "slug": "pdf-to-ppt",
     "category": "PDF",
-    "description": "Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure. Documents stay on your device — editing and conversion run locally in your browser.",
     "isPro": false
   },
   {
@@ -250,7 +250,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Background Remover",
     "slug": "background-remover",
     "category": "Image",
-    "description": "Segments the foreground subject from an image using a neural network, producing a transparent PNG with clean edges. Handles hair, fur, and semi-transparent regions better than chroma-key or magic-wand selection. Max 20MB.",
+    "description": "Segments the foreground subject from an image using a neural network, producing a transparent PNG with clean edges. Handles hair, fur, and semi-transparent regions better than chroma-key or magic-wand selection. Max 50MB.",
     "isPro": false
   },
   {
@@ -258,7 +258,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WebP to JPG",
     "slug": "webp-to-jpg",
     "category": "Image",
-    "description": "Convert WEBP images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert WEBP images to JPG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -266,7 +266,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to JPG",
     "slug": "png-to-jpg",
     "category": "Image",
-    "description": "Convert PNG images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert PNG images to JPG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -274,7 +274,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Wheel of Names",
     "slug": "wheel-of-names",
     "category": "Utility",
-    "description": "Displays an animated spinning wheel that randomly selects one entry from a customizable list of names or options. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Spin a colorful prize wheel with your names — giveaways, classrooms, team picks. Draw winners live with drama — free, local, no signup.",
     "isPro": false
   },
   {
@@ -282,7 +282,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image Compressor",
     "slug": "image-compressor",
     "category": "Image",
-    "description": "Reduces JPG, PNG, and WebP file sizes using smart compression with a side-by-side quality preview slider — drag it and watch file size vs visual quality update live. Max 20MB per image. Perfect for web optimization, email attachments, and social media uploads.",
+    "description": "Reduces JPG, PNG, and WebP file sizes using smart compression with a side-by-side quality preview slider — drag it and watch file size vs visual quality update live. Max 50MB per image. Perfect for web optimization, email attachments, and social media uploads.",
     "isPro": false
   },
   {
@@ -290,7 +290,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Object Remover",
     "slug": "object-remover",
     "category": "Image",
-    "description": "Lets you brush over an unwanted object, blemish, or watermark in a photo, then fills the area with contextually plausible pixels. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Brush over unwanted objects and erase them with patch-fill reconstruction — tourists, signs, photobombers. Clean vacation shots in minutes — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -298,7 +298,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PPT to PDF",
     "slug": "ppt-to-pdf",
     "category": "PDF",
-    "description": "Convert PowerPoint presentations to PDF with accurate slide rendering, right in your browser. Nothing uploaded.",
+    "description": "Convert PowerPoint decks to locked PDFs for sharing — fonts embedded, layout frozen. Send a 40-slide pitch that renders identically everywhere — local conversion, free quota on saves.",
     "isPro": false
   },
   {
@@ -322,7 +322,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "QR Code Generator",
     "slug": "qr-code-generator",
     "category": "Utility",
-    "description": "Renders a scannable QR code from any text or URL using a client-side Reed-Solomon encoder. Download as PNG.",
+    "description": "Renders a scannable QR code from any text or URL using a client-side Reed-Solomon encoder. Download as PNG. Customize size and error correction, then download print-ready PNGs — free, local, no signup.",
     "isPro": false
   },
   {
@@ -330,7 +330,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Excel to PDF",
     "slug": "excel-to-pdf",
     "category": "PDF",
-    "description": "Converts Excel spreadsheets into properly paginated PDF files, respecting print areas, page orientation, and cell formatting. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert Excel workbooks to print-ready PDFs with layout preserved — quotes, reports, price lists. Send a client quote that prints identically everywhere — local conversion, free quota on saves.",
     "isPro": false
   },
   {
@@ -338,7 +338,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "EMI Calculator",
     "slug": "emi-calculator",
     "category": "Finance",
-    "description": "Splits a loan principal into equal monthly installments using the standard reducing-balance formula with configurable annual interest and tenure. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Splits a loan principal into equal monthly installments using the standard reducing-balance formula with configurable annual interest and tenure. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -346,7 +346,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Character Counter",
     "slug": "character-counter",
     "category": "Text",
-    "description": "Counts characters with and without spaces and compares your text against platform-specific limits — Twitter/X posts (280), SMS messages (160), SEO meta descriptions (160), Facebook posts (63,206), and LinkedIn summaries (2,600). Real-time counting with space/no-space toggle.",
+    "description": "Count characters, words, sentences, and reading time as you type — with and without spaces. Fit a 280-character post or 1500-word brief exactly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -354,7 +354,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Transcript Formatter",
     "slug": "video-to-text-transcription",
     "category": "Transcription",
-    "description": "Clean up and restructure raw video transcription logs into readable scripts, articles, or outlines using AI. Paste a messy transcript dump and pick a target format.",
+    "description": "Restructure raw video transcript logs into scripts, articles, or outlines with AI — paste the dump, pick a format. YouTubers convert a 20-minute video log into a blog post in one pass — 1 credit per cleanup.",
     "isPro": true
   },
   {
@@ -370,7 +370,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Crop Image",
     "slug": "crop-image",
     "category": "Image",
-    "description": "Lets you drag a selection rectangle to crop an image to any pixel dimension, common social-media ratio (1:1, 16:9, 4:5), or exact preset sizes. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Crop photos with aspect presets and free selection plus rotation correction. Frame 50 portraits to 4:5 for feeds — local Cropper.js work, free quota on saves.",
     "isPro": false
   },
   {
@@ -378,7 +378,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Social Media Post Maker",
     "slug": "social-media-post-maker",
     "category": "Branding",
-    "description": "Social Media Post Maker offers platform-specific canvas templates and a library of stock graphics for creating social visuals. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Design sized social posts with text overlays and brand colors for every network. Ship a week of creatives in one sitting — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -402,7 +402,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Paraphrasing Tool",
     "slug": "ai-paraphrasing-tool",
     "category": "AI",
-    "description": "Rewrite sentences and paragraphs while preserving meaning. Perfect for students, writers, and content creators.",
+    "description": "Rewrite sentences and paragraphs while preserving meaning — students, writers, and marketers rephrase drafts in 7 tones. Runs on AI text generation at 1 credit per rewrite — sign in free for a 5-use trial.",
     "isPro": true
   },
   {
@@ -410,7 +410,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Number Generator",
     "slug": "random-number-generator",
     "category": "Utility",
-    "description": "Generates random integers or decimals within a user-defined min-max range with optional repetition filtering. Uses the browser random number generator — fine for games, raffles, and sampling, not for security secrets. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generates random integers or decimals within a user-defined min-max range with optional repetition filtering. Uses the browser random number generator — fine for games, raffles, and sampling, not for security secrets. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -418,7 +418,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "URL Shortener",
     "slug": "url-shortener",
     "category": "Utility",
-    "description": "Takes any long URL and generates a compact, shareable short link. Uses cloud-based processing.",
+    "description": "Takes any long URL and generates a compact, shareable short link. Uses cloud-based processing. Short links resolve through managed providers with automatic failover — free to start, sign in for full access.",
     "isPro": false
   },
   {
@@ -426,7 +426,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF to Excel",
     "slug": "pdf-to-excel",
     "category": "PDF",
-    "description": "Extract tables from PDF into editable XLSX spreadsheets with accurate column alignment.",
+    "description": "Convert PDF tables into editable Excel spreadsheets with rows and columns preserved. Turn 30 bank statements into one workbook — local parsing, free quota on saves.",
     "isPro": false
   },
   {
@@ -434,7 +434,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Unlock PDF",
     "slug": "unlock-pdf",
     "category": "PDF",
-    "description": "Removes owner-level password restrictions from PDFs so you can edit, print, or copy content from protected documents. No signup or account required.",
+    "description": "Remove known passwords from your own PDFs in bulk — owner restrictions and open passwords. Reclaim 20 archived files you own — local qpdf work, free quota on saves.",
     "isPro": false
   },
   {
@@ -442,7 +442,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image Enhancer",
     "slug": "image-enhancer",
     "category": "Image",
-    "description": "Applies an AI super-resolution model to upscale images by 2x or 4x. Portrait photographers use it to rescue low-resolution files. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Enhance image detail with AI reconstruction — upscale plus texture recovery beyond plain interpolation. Rescue low-res product shots for listings — local Real-ESRGAN work, free quota on saves.",
     "isPro": false
   },
   {
@@ -450,7 +450,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SIP Calculator",
     "slug": "sip-calculator",
     "category": "Finance",
-    "description": "Projects the future value of recurring mutual-fund investments using compounded monthly returns based on historical or assumed growth rates. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Projects the future value of recurring mutual-fund investments using compounded monthly returns based on historical or assumed growth rates. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -458,7 +458,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMI Calculator",
     "slug": "bmi-calculator",
     "category": "Health",
-    "description": "Computes Body Mass Index from metric or imperial height and weight inputs, categorizing the result into underweight, normal, overweight. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Computes Body Mass Index from metric or imperial height and weight inputs, categorizing the result into underweight, normal, overweight. Health data never leaves your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -466,7 +466,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Audio Transcript Formatter",
     "slug": "audio-to-text-transcription",
     "category": "Transcription",
-    "description": "Clean up and format raw audio transcription text into readable articles or scripts using AI. Paste a messy transcript dump and get a polished version.",
+    "description": "Clean up messy audio transcript dumps into readable articles or scripts with AI — paste raw text, pick article or script format. Podcasters turn 5,000 garbled words into publishable copy — 1 credit per cleanup.",
     "isPro": true
   },
   {
@@ -474,7 +474,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Meme Generator",
     "slug": "meme-generator",
     "category": "Image",
-    "description": "Adds top-and-bottom text to any uploaded image with meme-style Impact font, customizable font size, stroke width, and white border. No signup or account required.",
+    "description": "Caption classic meme templates or upload your pictures — top/bottom Impact text, custom fonts, instant download with custom fonts and positioning.",
     "isPro": false
   },
   {
@@ -482,7 +482,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Resume Builder",
     "slug": "resume-builder",
     "category": "Utility",
-    "description": "Provides a structured, form-based interface for entering work history, education, and skills, then renders a professionally formatted PDF resume. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Provides a structured, form-based interface for entering work history, education, and skills, then renders a professionally formatted PDF resume. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -490,7 +490,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Image Upscaler",
     "slug": "ai-image-upscaler",
     "category": "AI",
-    "description": "Increase image resolution by up to 4x using Lanczos-3 interpolation (not AI reconstruction — best for logos, icons, and simple graphics).",
+    "description": "Upscale images up to 4x with Lanczos-3 interpolation — best for logos, icons, and simple graphics where clean edges matter. Runs locally in your browser, no credits — sign in free for 2 Pro downloads a day.",
     "isPro": true
   },
   {
@@ -514,7 +514,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Password Generator",
     "slug": "password-generator",
     "category": "Utility",
-    "description": "Generates cryptographically strong random passwords with fully customizable length, character sets, and pattern rules. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generates cryptographically strong random passwords with fully customizable length, character sets, and pattern rules. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -522,7 +522,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Diff Checker",
     "slug": "diff-checker",
     "category": "Developer",
-    "description": "Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -538,7 +538,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Photo Retoucher",
     "slug": "photo-retoucher",
     "category": "Image",
-    "description": "Applies an AI-powered inpainting model to remove blemishes, scratches, dust spots, and skin imperfections from portrait and product photos. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Retouch portraits with this photo retoucher — blemish healing, skin smoothing, and teeth whitening brushes. Polish headshots naturally in minutes — local OpenCV work, free quota on saves.",
     "isPro": false
   },
   {
@@ -546,7 +546,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Splitter",
     "slug": "pdf-splitter",
     "category": "PDF",
-    "description": "Divides a single PDF into multiple files by page range, bookmark level, or a specified page count per split.",
+    "description": "Split PDFs by page ranges, every-N-pages, or single-page extraction. Break a 200-page manual into chapters — local pdf-lib split, free quota on saves.",
     "isPro": false
   },
   {
@@ -554,7 +554,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Font Generator",
     "slug": "font-generator",
     "category": "Text",
-    "description": "Generates Unicode-styled text variants for bold, italic, monospace, fraktur, script, serif, and sans-serif — optimized for code comments, design mockups, Discord formatting, and technical documentation where visual emphasis matters beyond standard fonts.",
+    "description": "Turn plain text into 50+ Unicode styled font variants — bold, italic, script, monospace, circled. Make bios and headlines stand out anywhere — free, local, copy-paste ready.",
     "isPro": false
   },
   {
@@ -586,7 +586,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Pomodoro Timer",
     "slug": "pomodoro-timer",
     "category": "Productivity",
-    "description": "Pomodoro Timer manages work and break intervals with fully customizable session lengths and auto-start options. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Pomodoro Timer manages work and break intervals with fully customizable session lengths and auto-start options. Tasks never leave your device — everything stores locally in your browser.",
     "isPro": false
   },
   {
@@ -594,7 +594,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "YouTube Transcript Generator",
     "slug": "youtube-transcript-generator",
     "category": "Transcription",
-    "description": "YouTube Transcript Generator fetches captions from public YouTube videos via the video ID or URL. Uses cloud-based processing.",
+    "description": "Fetch captions from any public YouTube video by URL or ID — lectures, podcasts, interviews — with AI analysis of the transcript. Students revise a 40-minute lecture in minutes — 1 credit per video, sign in free.",
     "isPro": true
   },
   {
@@ -610,7 +610,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Protect PDF",
     "slug": "protect-pdf",
     "category": "PDF",
-    "description": "Encrypts a PDF with a user-chosen password using AES-128, restricting opening, printing, and copying as specified by the owner. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Lock PDFs with user and owner passwords — control opening, printing, and copying. Protect 10 client files before sending — local pdf-lib encryption, free quota on saves.",
     "isPro": false
   },
   {
@@ -618,7 +618,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Invoice Generator",
     "slug": "invoice-generator",
     "category": "Finance",
-    "description": "Produces downloadable PDF or HTML invoices with customizable line items, tax rates, discounts, and business logo placement. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Produces downloadable PDF or HTML invoices with customizable line items, tax rates, discounts, and business logo placement. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -626,7 +626,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Business Card Maker",
     "slug": "business-card-maker",
     "category": "Branding",
-    "description": "Business Card Maker provides a WYSIWYG editor with snap-to-grid alignment and preset card dimensions. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Business Card Maker provides a WYSIWYG editor with snap-to-grid alignment and preset card dimensions. Designs never leave your device — everything renders locally in your browser.",
     "isPro": false
   },
   {
@@ -634,7 +634,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Regex Tester",
     "slug": "regex-tester",
     "category": "Developer",
-    "description": "Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -642,7 +642,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Dice Roller",
     "slug": "dice-roller",
     "category": "Utility",
-    "description": "Simulates rolling any number of dice with arbitrary side counts—d4, d6, d8, d10, d12, d20, d100, or custom values. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Roll 3D dice — d4 through d20 plus custom counts — for games and decisions. Roll 4d6 drop-lowest for stats — free, local, no signup.",
     "isPro": false
   },
   {
@@ -650,7 +650,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Profit Margin Calculator",
     "slug": "profit-margin-calculator",
     "category": "Finance",
-    "description": "Computes gross profit, net profit, and margin percentages from revenue and cost inputs. Small-business owners use it to price products, evaluate supplier deals, and ensure healthy margins across their product lines.",
+    "description": "Compute gross and net margins from revenue and costs — know exact profitability. A $30 sale at $20 cost margins 33% — free, local, no signup.",
     "isPro": false
   },
   {
@@ -658,7 +658,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Speech to Text",
     "slug": "speech-to-text",
     "category": "Audio",
-    "description": "Dictate live microphone speech to text in multiple languages using on-device browser recognition.",
+    "description": "Dictate live microphone speech to text in multiple languages through your browser\\'s speech service. Live captions for meetings and notes — free to start, no Toolzum account needed.",
     "isPro": false
   },
   {
@@ -674,7 +674,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Coin Flipper",
     "slug": "coin-flipper",
     "category": "Utility",
-    "description": "Simulates a fair coin flip using a cryptographic random number generator, displaying heads or tails with a realistic animation. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Flip a virtual coin with streak tracking for instant decisions. Settle it fairly in one tap — free, local, no signup. Best-of-three settles disputes fairly with streak tracking — free, local, no signup.",
     "isPro": false
   },
   {
@@ -682,7 +682,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image Colorizer",
     "slug": "image-colorizer",
     "category": "Image",
-    "description": "Uses a deep-learning model trained on millions of historical photos to predict plausible per-pixel color for grayscale and sepia images. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Colorize black-and-white photos with on-device AI — family archives brought to life. Guess-era colors, not ground truth — local DeOldify work, free quota on saves.",
     "isPro": false
   },
   {
@@ -690,7 +690,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "EXIF Data Remover",
     "slug": "exif-data-remover",
     "category": "Privacy",
-    "description": "Strips GPS coordinates, camera metadata, timestamps, and software fingerprints from JPEG and PNG images. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Strips GPS coordinates, camera metadata, timestamps, and software fingerprints from JPEG and PNG images. Sensitive data never leaves your device — encryption runs locally in your browser.",
     "isPro": false
   },
   {
@@ -730,7 +730,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Compressor",
     "slug": "video-compressor",
     "category": "Video",
-    "description": "Reduces MP4, MOV, and WebM video file sizes using configurable CRF (Constant Rate Factor) encoding, resolution scaling, and bitrate control. Includes a quality preview before processing. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Reduces MP4, MOV, and WebM video file sizes using configurable CRF (Constant Rate Factor) encoding, resolution scaling, and bitrate control. Includes a quality preview before processing. Videos never leave your device — compression and conversion run locally in your browser with FFmpeg WASM.",
     "isPro": false
   },
   {
@@ -738,7 +738,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Face Swap",
     "slug": "ai-face-swap",
     "category": "AI",
-    "description": "Combine two photos with manual face compositing — position, scale, and blend a source face onto a target photo on canvas. You control alignment and size for natural results.",
+    "description": "Composite a face from one photo onto another with manual position, scale, and blend controls on canvas. Meme makers and designers align swaps by hand — runs locally, free to start with fair daily limits.",
     "isPro": true
   },
   {
@@ -762,7 +762,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Meeting Minutes Generator",
     "slug": "meeting-minutes-generator",
     "category": "Transcription",
-    "description": "Meeting Minutes Generator structures raw notes into sections like attendees, decisions, action items, and follow-ups. Uses cloud-based processing.",
+    "description": "Turn raw meeting notes into structured minutes — attendees, decisions, action items with owners, and follow-ups. Managers convert 30 lines of chaos into a shareable record in one click — 1 credit per generation.",
     "isPro": true
   },
   {
@@ -770,7 +770,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Cover Letter Generator",
     "slug": "ai-cover-letter-generator",
     "category": "AI",
-    "description": "Analyzes a job description and your résumé to produce a tailored cover letter that highlights relevant experience and matches the employer's. Uses cloud-based processing.",
+    "description": "Turn a job description plus your resume into a tailored cover letter that mirrors the employer\\'s keywords. Applicants generate a first draft in a minute — 1 credit per letter, sign in free for 5.",
     "isPro": true
   },
   {
@@ -786,7 +786,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Watermark PDF",
     "slug": "watermark-pdf",
     "category": "PDF",
-    "description": "Overlays text or image watermarks onto every page of a PDF with customizable position, rotation, opacity, and tiling. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Stamp text watermarks across PDF pages — DRAFT, CONFIDENTIAL, custom text with opacity. Protect 50 filings before sharing — local pdf-lib work, free quota on saves.",
     "isPro": false
   },
   {
@@ -794,7 +794,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Page Delete",
     "slug": "pdf-page-delete",
     "category": "PDF",
-    "description": "Removes selected page ranges from a PDF while renumbering the remaining pages and updating any internal page references. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Removes selected page ranges from a PDF while renumbering the remaining pages and updating any internal page references. Documents stay on your device — editing and conversion run locally in your browser.",
     "isPro": false
   },
   {
@@ -802,7 +802,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to SVG",
     "slug": "png-to-svg",
     "category": "Image",
-    "description": "Convert PNG images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert PNG images to SVG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -810,7 +810,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Email Signature Generator",
     "slug": "email-signature-generator",
     "category": "Branding",
-    "description": "Email Signature Generator builds HTML email signatures through a form-based UI with social link fields and icon toggles. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Build professional HTML email signatures with photo, links, and disclaimers. Sign every mail like a company — local generation, free, copy-paste.",
     "isPro": false
   },
   {
@@ -826,7 +826,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Morse Code Translator",
     "slug": "morse-code-translator",
     "category": "Converter",
-    "description": "Converts alphanumeric text into International Morse code with audible beeps played through the Web Audio API, and decodes incoming Morse signals. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Translate text to Morse code and decode Morse back — with timing-accurate playback. Learn SOS (···---···) properly — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -834,7 +834,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Cursive Text Generator",
     "slug": "cursive-text-generator",
     "category": "Text",
-    "description": "Transforms plain text into elegant cursive and script-style Unicode characters that imitate handwritten calligraphy. Ideal for wedding invitations, greeting cards, elegant Instagram captions, signatures, and any content needing a personal hand-written touch.",
+    "description": "Turn plain text into elegant cursive Unicode script for bios and invitations. Style names beautifully anywhere text renders — free, local, copy-paste ready.",
     "isPro": false
   },
   {
@@ -850,7 +850,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "VAT Calculator",
     "slug": "vat-calculator",
     "category": "Finance",
-    "description": "Computes VAT-inclusive and VAT-exclusive amounts for EU member-state rates (standard and reduced) with country-specific rules for digital services. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Computes VAT-inclusive and VAT-exclusive amounts for EU member-state rates (standard and reduced) with country-specific rules for digital services. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -874,7 +874,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Base64 Encode/Decode",
     "slug": "base64-encode-decode",
     "category": "Developer",
-    "description": "Encodes text or small files into Base64 strings and decodes them back with automatic MIME-type detection for binary safety. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Encodes text or small files into Base64 strings and decodes them back with automatic MIME-type detection for binary safety. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -890,7 +890,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Receipt Generator",
     "slug": "receipt-generator",
     "category": "Finance",
-    "description": "Creates printer-friendly receipt pages with itemized purchases, payment method, date, and merchant details in a compact single-page layout. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Creates printer-friendly receipt pages with itemized purchases, payment method, date, and merchant details in a compact single-page layout. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -898,7 +898,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Thumbnail Maker",
     "slug": "ai-thumbnail-maker",
     "category": "AI",
-    "description": "Designs click-optimized YouTube thumbnails by compositing text, images, and effects on a smart canvas. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Design click-optimized YouTube thumbnails by compositing bold text, cutout images, and effects on a 1280x720 smart canvas. Creators A/B-test two variants per video — runs locally, free to start with fair limits.",
     "isPro": true
   },
   {
@@ -906,7 +906,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Secure Note Sharer",
     "slug": "secure-note-sharer",
     "category": "Privacy",
-    "description": "Encrypts a text note with a passphrase and generates a shareable link with the encrypted note in the URL fragment — the fragment is never sent to any server. Everything runs locally in your browser.",
+    "description": "Share secrets securely via self-decrypting note links — AES in the URL hash servers never see. Send passwords without trusting inboxes — local Web Crypto, free, no signup.",
     "isPro": false
   },
   {
@@ -914,7 +914,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video to GIF",
     "slug": "video-to-gif",
     "category": "Video",
-    "description": "Convert MP4/WebM to GIF animations. Videos up to 30MB as guest, 150MB signed in, 2GB Pro. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert MP4/WebM to GIF animations. Videos up to 250MB. Videos never leave your device — compression and conversion run locally in your browser with FFmpeg WASM.",
     "isPro": false
   },
   {
@@ -922,7 +922,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image to Base64",
     "slug": "image-to-base64",
     "category": "Converter",
-    "description": "Convert images to Base64 encoded data URIs directly in your browser. Supports PNG, JPG, WebP, SVG, and GIF. 100% client-side.",
+    "description": "Encode images to Base64 data URIs for CSS embedding and API payloads. Inline a logo without extra requests — local encoding, free, no signup.",
     "isPro": false
   },
   {
@@ -930,7 +930,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Subtitle Translator",
     "slug": "subtitle-translator",
     "category": "Video",
-    "description": "Accepts SRT or VTT subtitle files and translates their text content into any of 100+ target languages while preserving exact timing codes and frame. Uses cloud-based processing.",
+    "description": "Translate SRT or VTT subtitle files into 100+ languages while preserving every timestamp — creators localize a full episode in one batch. 1 credit per translation; sign in free for trial credits.",
     "isPro": true
   },
   {
@@ -938,7 +938,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "IBAN Validator",
     "slug": "iban-validator",
     "category": "Finance",
-    "description": "Validates the structure, length, and check digits of IBANs from 70+ countries using the official ISO 13616 modulus-97 algorithm. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Validate IBAN structure, length, and mod-97 check digits for 80+ countries. Catch transfer typos before money moves — local ibantools work, free, no signup.",
     "isPro": false
   },
   {
@@ -962,7 +962,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Rotate PDF",
     "slug": "rotate-pdf",
     "category": "PDF",
-    "description": "Rotates individual pages or all pages of a PDF by 90, 180, or 270 degrees without re-encoding the page content. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Rotate sideways or upside-down PDF pages 90/180/270° — fix phone scans in bulk. Straighten 60 landscape pages at once — local pdf-lib rotation, free quota on saves.",
     "isPro": false
   },
   {
@@ -970,7 +970,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Extract Images from PDF",
     "slug": "extract-images-from-pdf",
     "category": "PDF",
-    "description": "Extracts every embedded raster image from a PDF as separate JPEG or PNG files, preserving original resolution and color space. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Pull every embedded image from a PDF at native resolution — photos, charts, logos. Recover 40 figures from a report without screenshots — local PDF.js work, free quota on saves.",
     "isPro": false
   },
   {
@@ -986,7 +986,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "UUID Generator",
     "slug": "uuid-generator",
     "category": "Developer",
-    "description": "Generates UUID v4 random identifiers in standard 36-character string format with an optional compact hex mode (no dashes). Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generates UUID v4 random identifiers in standard 36-character string format with an optional compact hex mode (no dashes). Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -994,7 +994,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEX to RGB Converter",
     "slug": "hex-to-rgb-converter",
     "category": "Design",
-    "description": "Hex to RGB Converter parses hex color codes and outputs the corresponding RGB and RGBA values. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert HEX colors to RGB/RGBA values instantly with alpha support. Translate #4F46E5 for CSS rgba() use — free, local, no signup.",
     "isPro": false
   },
   {
@@ -1002,7 +1002,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMR Calculator",
     "slug": "bmr-calculator",
     "category": "Health",
-    "description": "Calculates Basal Metabolic Rate using the Mifflin-St Jeor equation with age, sex, height, and weight. Nutritionists use it for diet planning. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculates Basal Metabolic Rate using the Mifflin-St Jeor equation with age, sex, height, and weight. Nutritionists use it for diet planning. Health data never leaves your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -1010,7 +1010,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text to Binary",
     "slug": "text-to-binary",
     "category": "Converter",
-    "description": "Encodes any Unicode string into its binary (base-2) representation, byte by byte, with visible byte-boundary separators. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Encode any text into binary (base-2) byte sequences with visible separators. See exactly how computers store letters — local encoding, free, no signup.",
     "isPro": false
   },
   {
@@ -1018,7 +1018,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Binary to Text",
     "slug": "binary-to-text",
     "category": "Converter",
-    "description": "Decodes space- or comma-separated binary strings back into human-readable Unicode text, rejecting malformed groups with an exact-position error. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Decode binary strings back to readable Unicode text with strict validation. Recover messages from bit dumps — local decoding, free, no signup.",
     "isPro": false
   },
   {
@@ -1026,7 +1026,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text ↔ Binary Converter",
     "slug": "text-binary-converter",
     "category": "Converter",
-    "description": "Convert between plain text and binary in both directions — encode text into its base-2 representation or decode binary strings back to readable text, byte by byte. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert between plain text and binary in both directions — encode text into its base-2 representation or decode binary strings back to readable text, byte by byte. Files are converted locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -1042,7 +1042,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Conversion Rate Calculator",
     "slug": "conversion-rate-calculator",
     "category": "Growth & Marketing",
-    "description": "Conversion Rate Calculator divides conversions by total visitors and displays the rate as a percentage with configurable decimal precision. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute conversion rates from visitors and conversions with segment splits. Turn 2% into 3% deliberately — free, local, no signup.",
     "isPro": false
   },
   {
@@ -1050,7 +1050,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CPM Calculator",
     "slug": "cpm-calculator",
     "category": "Growth & Marketing",
-    "description": "Computes cost per mille (CPM) — the cost advertisers pay per 1,000 ad impressions. Includes platform presets for YouTube, Twitch, Facebook, Instagram, TikTok, Twitter, and LinkedIn with average rates, plus RPM (revenue per mille) calculation for creators.",
+    "description": "Compute cost per mille for ad campaigns — compare display, video, and social CPMs. Judge a $12 CPM against returns — free, local, no signup.",
     "isPro": false
   },
   {
@@ -1058,7 +1058,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ROAS Calculator",
     "slug": "roas-calculator",
     "category": "Growth & Marketing",
-    "description": "ROAS Calculator divides ad revenue by ad spend to return a return-on-ad-spend ratio. Performance marketers and ecommerce managers use it to evaluate. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute return on ad spend from revenue and cost — know every dollar\\'s payback. Prove 4:1 ROAS before scaling — free, local, no signup.",
     "isPro": false
   },
   {
@@ -1066,7 +1066,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Podcast Transcription",
     "slug": "podcast-transcription",
     "category": "Transcription",
-    "description": "Convert a podcast episode audio file into a full text transcript using AI speech recognition.",
+    "description": "Turn a full podcast episode into a text transcript with AI speech recognition — upload MP3, WAV, or M4A and get searchable text. Hosts convert a 30-minute show into show notes — 1 credit per minute.",
     "isPro": true
   },
   {
@@ -1074,7 +1074,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSS Minifier",
     "slug": "css-minifier",
     "category": "Developer",
-    "description": "Removes unnecessary whitespace, comments, and trailing semicolons from CSS, while merging identical selector blocks where safe to do so. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Minify CSS by stripping whitespace, comments, and dead semicolons — smaller stylesheets instantly. Shrink a 50 KB file by 30% — local clean-css work, free, no signup.",
     "isPro": false
   },
   {
@@ -1082,7 +1082,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Compare PDF Files",
     "slug": "compare-pdf-files",
     "category": "PDF",
-    "description": "Performs pixel-level and text-level comparison of two PDF files, highlighting every difference with color-coded overlay annotations. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Diff two PDFs side by side — spot changed clauses, figures, and pages before signing. Review a 20-page contract revision in minutes — local PDF.js comparison, free, no signup.",
     "isPro": false
   },
   {
@@ -1090,7 +1090,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Favicon Generator",
     "slug": "favicon-generator",
     "category": "Design",
-    "description": "Favicon Generator converts text initials, uploaded images, or emoji into .ico and PNG favicon files. No signup or account required.",
+    "description": "Generate complete favicon packages — ICO plus PNG and Apple touch icons — from one image. Ship every platform icon in one pass — local generation, free quota on saves.",
     "isPro": false
   },
   {
@@ -1106,7 +1106,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Keyword Density Checker",
     "slug": "keyword-density-checker",
     "category": "SEO",
-    "description": "Parses pasted or uploaded text to count total words, unique terms, and per-keyword frequency as a percentage, sorted by density descending. No signup or account required.",
+    "description": "Measure keyword density per term with safe-range flags for on-page SEO. Keep primary terms at 1–2%, never 5% — local analysis, free, no signup.",
     "isPro": false
   },
   {
@@ -1114,7 +1114,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Base64 to Image",
     "slug": "base64-to-image",
     "category": "Developer",
-    "description": "Decodes a Base64 data string back into its original image format and displays a preview directly in the browser with a download button. No signup or account required.",
+    "description": "Decode Base64 data URIs back into viewable and downloadable images. Recover pictures from API payloads — local decoding, free quota on saves.",
     "isPro": false
   },
   {
@@ -1122,7 +1122,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MD5 & SHA Hash Generator",
     "slug": "md5-hash-generator",
     "category": "Developer",
-    "description": "Compute MD5, SHA-1, SHA-256, and SHA-512 hashes from text or file input using CryptoJS.",
+    "description": "Compute MD5, SHA-1, SHA-256, and SHA-512 hashes from text or file input using CryptoJS. Paste text or drop files; digests compute instantly for checksums and lookups — free, local, no signup.",
     "isPro": false
   },
   {
@@ -1130,7 +1130,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HTML Minifier",
     "slug": "html-minifier",
     "category": "Developer",
-    "description": "Removes unnecessary whitespace, comments, and optional closing tags from HTML code to reduce file size without altering rendered output. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Minify HTML by collapsing whitespace, stripping comments, and pruning optional tags. Slim landing pages for faster loads — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -1138,7 +1138,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Barcode Generator",
     "slug": "barcode-generator",
     "category": "Utility",
-    "description": "Generates scannable barcodes in major symbologies including EAN-13, Code 128, QR Code, and UPC-A from typed input or pasted data. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generates scannable barcodes in major symbologies including EAN-13, Code 128, QR Code, and UPC-A from typed input or pasted data. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -1146,7 +1146,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PGP Key Generator",
     "slug": "pgp-key-generator",
     "category": "Privacy",
-    "description": "Generates RSA (2048/4096) or ECDSA (Curve25519) PGP key pairs with customizable user IDs, expiration dates, and passphrase protection. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate PGP key pairs with OpenPGP.js — public for sharing, private stays local. Encrypt mail like it\\'s 1991 but working — local crypto, free quota on saves.",
     "isPro": false
   },
   {
@@ -1154,7 +1154,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Add Page Numbers to PDF",
     "slug": "add-page-numbers-to-pdf",
     "category": "PDF",
-    "description": "Inserts page number labels at user-chosen positions (bottom-center, top-right, etc.) with configurable font, size, and starting offset. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Inserts page number labels at user-chosen positions (bottom-center, top-right, etc.) with configurable font, size, and starting offset. Documents stay on your device — editing and conversion run locally in your browser.",
     "isPro": false
   },
   {
@@ -1162,7 +1162,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Markdown Tools",
     "slug": "markdown-tools",
     "category": "Converter",
-    "description": "Renders GitHub-Flavored Markdown to HTML, converts text/HTML to Markdown, or strips Markdown to plain text — all in one tool.",
+    "description": "Markdown toolbox — convert, preview, lint, and format Markdown with GFM tables and task lists. Own every .md workflow in one tab — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -1170,7 +1170,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Zalgo Text Generator",
     "slug": "zalgo-text-generator",
     "category": "Text",
-    "description": "Create corrupted Zalgo text by adding combining diacritical marks (accents, umlauts, dots) above, below, and through normal letters. Adjustable intensity for subtle or extreme corruption effects.",
+    "description": "Create glitchy Zalgo text with stacked combining marks for memes and emphasis. Corrupt headings deliciously — free, local, copy-paste ready.",
     "isPro": false
   },
   {
@@ -1178,7 +1178,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Invisible Text Generator",
     "slug": "invisible-text-generator",
     "category": "Text",
-    "description": "Generate blank Unicode text using zero-width spaces, hair spaces, and invisible separators that render as empty content. Copy for social media bios, messaging apps, and formatting hacks.",
+    "description": "Generate invisible Unicode characters and blank text for bios, usernames, and formatting tricks. Post empty messages anywhere — free, local, copy-paste ready.",
     "isPro": false
   },
   {
@@ -1202,7 +1202,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Burn Rate Calculator",
     "slug": "burn-rate-calculator",
     "category": "Growth & Marketing",
-    "description": "Calculates gross burn, net burn, and runway (in months) from monthly revenue, operating expenses, and current cash balance. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute monthly burn and runway from cash balance and net outflow. Know exactly how many months remain — free, local, no signup.",
     "isPro": false
   },
   {
@@ -1210,7 +1210,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Net Promoter Score Calculator",
     "slug": "net-promoter-score-calculator",
     "category": "Growth & Marketing",
-    "description": "Categorizes survey responses into promoters, passives, and detractors. Customer experience teams use it to track loyalty metrics. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute NPS from promoter/passive/detractor counts — loyalty in one number. Score above 50 for world-class loyalty — free, local, no signup.",
     "isPro": false
   },
   {
@@ -1226,7 +1226,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Metadata Editor",
     "slug": "pdf-metadata-editor",
     "category": "PDF",
-    "description": "Displays and allows editing of standard PDF metadata fields: title, author, subject, keywords, and producer. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Edit PDF title, author, keywords, and document info — fix \\'Untitled\\' exports before sharing. Brand 20 client deliverables correctly — local pdf-lib edit, free quota on saves.",
     "isPro": false
   },
   {
@@ -1234,7 +1234,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG Editor",
     "slug": "svg-editor",
     "category": "Design",
-    "description": "SVG Editor provides a visual canvas for manipulating SVG elements with node selection, transform handles, and attribute editing. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Edit SVG code with live preview — paths, fills, transforms — plus SVGO optimization. Tweak icons without Illustrator — local editing, free quota on saves.",
     "isPro": false
   },
   {
@@ -1242,7 +1242,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Robots.txt Generator",
     "slug": "robots-txt-generator",
     "category": "SEO",
-    "description": "Produces a robots.txt file from a point-and-click form where you set allowed and disallowed paths, crawl delays, and sitemap references. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate valid robots.txt with user-agents, allows, disallows, and sitemap lines. Never accidentally deindex with Disallow: / — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -1250,7 +1250,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SaaS Pricing Calculator",
     "slug": "saas-pricing-calculator",
     "category": "Growth & Marketing",
-    "description": "Models subscription revenue across tiers (free, monthly, annual) with inputs for conversion rate, churn, customer count, and average revenue. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Model SaaS pricing with tier math — ARPA, conversion, and expansion effects. Price the Growth tier that converts — free, local, no signup.",
     "isPro": false
   },
   {
@@ -1258,7 +1258,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SaaS Metrics Dashboard",
     "slug": "saas-metrics-dashboard",
     "category": "Growth & Marketing",
-    "description": "All-in-one SaaS metrics dashboard with ARR, MRR, LTV, CAC, NPS, churn, runway, and A/B test analysis — plus scenario modeling and PDF export. Your data stays in your browser — nothing is uploaded.",
+    "description": "Track ARR, MRR, LTV, CAC, NPS, churn, runway, and A/B tests with scenario modeling and PDF export in this SaaS dashboard — all computed locally. Founders model what-if churn shifts live — sign in free to unlock the page; everything runs locally.",
     "isPro": true
   },
   {
@@ -1266,7 +1266,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Workflow Builder",
     "slug": "pdf-workflow-builder",
     "category": "PDF",
-    "description": "Full-featured PDF editor that runs entirely in your browser — merge, split, fill forms, rotate pages, add/remove passwords, and edit metadata. Your files never leave your device — 100% private.",
+    "description": "Chain merge, split, form-fill, rotation, passwords, and metadata edits into repeatable PDF pipelines. Offices rerun payroll-doc prep monthly without reconfiguring — runs locally on pdf-lib, 2 free runs a day.",
     "isPro": true
   },
   {
@@ -1274,7 +1274,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "API Builder & Tester",
     "slug": "api-builder",
     "category": "Developer",
-    "description": "Full-featured API client that runs in your browser — make HTTP requests, edit headers/body/params, save collections, generate code snippets (cURL/Fetch/Axios). Your API keys never touch a server — everything runs locally.",
+    "description": "Send HTTP requests from your browser — custom headers, bodies, params, saved collections, and one-click cURL/Fetch/Axios snippets. Developers debug a REST endpoint without leaving the tab — runs locally, free to start.",
     "isPro": true
   },
   {
@@ -1282,7 +1282,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Employee Turnover Calculator",
     "slug": "employee-turnover-calculator",
     "category": "Growth & Marketing",
-    "description": "Calculate employee turnover rate from headcount, departures, and time period — see monthly and annual rates with industry benchmarks.",
+    "description": "Compute annualized turnover rates and replacement cost impact. Price a 20% churn problem correctly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -1290,7 +1290,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MAC Address Generator",
     "slug": "mac-address-generator",
     "category": "Privacy",
-    "description": "Generates random MAC addresses in six common formats with optional OUI prefix. Supports Unix, Windows, Cisco, and dot-separated styles.",
+    "description": "Generate random MAC addresses with valid OUI structure for labs and testing. Fill virtual networks credibly — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -1298,7 +1298,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "IP Anonymizer",
     "slug": "ip-anonymizer",
     "category": "Privacy",
-    "description": "Anonymize IP addresses in log files by masking octets while preserving network structure for analysis.",
+    "description": "Anonymize IP addresses in logs — mask octets or hash consistently for analytics. Share logs without exposing users — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -1314,7 +1314,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Braille Translator",
     "slug": "braille-translator",
     "category": "Converter",
-    "description": "Bidirectional translator between standard English text and Grade 1 (uncontracted) or Grade 2 (contracted) Braille. Each Braille character is displayed as a visual dot pattern with proper Unicode Braille characters.",
+    "description": "Translate text to Braille Unicode patterns and back for accessibility work. Check ⠓⠑⠇⠇⠕ renders correctly — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -1338,7 +1338,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Live Transcription",
     "slug": "live-transcription",
     "category": "Transcription",
-    "description": "Live Transcription performs real-time speech-to-text using the browser’s native microphone API with continuous streaming output. No signup or account required.",
+    "description": "Dictate live with real-time browser speech recognition and interim results — meetings, lectures, notes. Capture a 30-minute talk as editable text — free to start, transcript saves on free quota.",
     "isPro": false
   },
   {
@@ -1346,7 +1346,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Batch Image Converter",
     "slug": "image-bulk-converter",
     "category": "Image",
-    "description": "Convert dozens of images at once. Drop in your whole folder, pick one output format (JPG, PNG, WebP, AVIF, GIF, or TIFF), and get them all back as a single ZIP — processed locally, nothing leaves your device.",
+    "description": "Drop whole folders and convert dozens of images to JPG, PNG, WebP, AVIF, GIF, or TIFF with one output each. Bloggers modernize 150 post images before a redesign — local processing, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1354,7 +1354,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "eSign PDF",
     "slug": "esign-pdf",
     "category": "PDF",
-    "description": "Places a typed, drawn, or uploaded signature image onto a specific page and coordinate of a PDF document. No signup or account required.",
+    "description": "Sign PDFs electronically — draw, type, or upload signature images onto any page. Execute a 5-page agreement without printing — local pdf-lib + canvas, free quota on saves.",
     "isPro": false
   },
   {
@@ -1362,7 +1362,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF OCR (Scanned Docs)",
     "slug": "pdf-ocr",
     "category": "PDF",
-    "description": "Extracts searchable text from scanned PDF documents and image-only PDFs using optical character recognition with language auto-detection. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "OCR scanned PDFs into searchable, selectable text with Tesseract.js — 100+ languages. Convert a 50-page scan into researchable text — local processing, free quota on saves.",
     "isPro": false
   },
   {
@@ -1370,7 +1370,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Form Filler",
     "slug": "pdf-form-filler",
     "category": "PDF",
-    "description": "Detects interactive form fields in a PDF and provides a clean UI to fill text inputs, checkboxes, and dropdowns before downloading the completed. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Fill any PDF form digitally — text fields, checkboxes, dropdowns, signatures. Complete government forms without print-scan cycles — local pdf-lib, free quota on saves.",
     "isPro": false
   },
   {
@@ -1378,7 +1378,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Document Chat (RAG)",
     "slug": "ai-document-chat",
     "category": "AI",
-    "description": "Indexes uploaded PDFs, Word files, and plain-text documents into a vector store and lets you ask natural-language questions about their contents.",
+    "description": "Chat with PDFs, Word files, and text docs using RAG: files index into a vector store and you ask natural-language questions. Researchers query 50-page reports in seconds — sign in free, 1 credit per answer.",
     "isPro": true
   },
   {
@@ -1386,7 +1386,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OTP Generator",
     "slug": "otp-generator",
     "category": "Utility",
-    "description": "Generates time-based one-time passwords (TOTP) and numeric/alphanumeric OTPs with customizable length and character sets. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate time-based one-time passwords from your TOTP secrets — 2FA codes without a phone app. Get 30-second codes on desktop — local crypto, free, no signup.",
     "isPro": false
   },
   {
@@ -1442,7 +1442,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Watermark Adder",
     "slug": "video-watermark-adder",
     "category": "Video",
-    "description": "Add a logo image or custom text watermark to your videos with position and opacity controls. 100% browser-based.",
+    "description": "Burn logo or text watermarks into videos with position, size, and opacity control. Brand 10 course lessons in one pass — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -1466,7 +1466,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MP3 Compressor",
     "slug": "mp3-compressor",
     "category": "Audio",
-    "description": "Reduce MP3 file size by adjusting bitrate and audio quality settings. Perfect for saving storage or faster uploads.",
+    "description": "Shrink MP3 files by lowering bitrate with quality presets — fit podcasts into feed limits. Cut a 50 MB episode to 15 MB cleanly — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -1482,7 +1482,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Trimmer",
     "slug": "video-trimmer",
     "category": "Video",
-    "description": "Trim and cut video clips locally in your browser. Select start and end times, preview, and download the result.",
+    "description": "Cut start/end segments from any video with frame-accurate trimming in your browser. Remove a 45-second cold open from a 10-minute upload — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -1570,7 +1570,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Generic PDF Processor",
     "slug": "generic-pdf-processor",
     "category": "PDF",
-    "description": "Compress, rotate pages, or strip metadata from PDFs in one unified tool. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Run everyday PDF operations from one toolbox — merge, split, rotate, compress presets without hunting tools. Handle 90% of PDF chores in one tab — local processing, free quota on saves.",
     "isPro": false
   },
   {
@@ -1578,7 +1578,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JFIF to PNG Converter",
     "slug": "jfif-to-png",
     "category": "Image",
-    "description": "Converts JFIF (JPEG File Interchange Format) images to standard PNG format without quality loss. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert JFIF images (JPEG variant from cameras and iPhones) to lossless PNG. Open mislabeled photo files anywhere — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -1586,7 +1586,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image to JPG Converter",
     "slug": "convert-to-jpg",
     "category": "Image",
-    "description": "Converts any image format — PNG, WebP, BMP, GIF, TIFF — to standard JPG with configurable quality settings. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert any mix of PNG, WebP, AVIF, GIF, or BMP images to universal JPG in one batch. Make 100 mixed uploads email-ready — local conversion, free quota on saves.",
     "isPro": false
   },
   {
@@ -1594,7 +1594,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Rotate Image Online",
     "slug": "rotate-image",
     "category": "Image",
-    "description": "Rotates images left or right by 90-degree increments instantly in the browser with no upload required. No signup or account required.",
+    "description": "Rotate images 90/180/270° or flip horizontal/vertical with lossless precision. Fix sideways phone shots in seconds — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -1602,7 +1602,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Blur Face Online",
     "slug": "blur-face",
     "category": "Image",
-    "description": "Detects faces in uploaded images using on-device AI computer vision and applies an adjustable blur effect to each detected face. No signup or account required.",
+    "description": "Detects faces in uploaded images using on-device AI computer vision and applies an adjustable blur effect to each detected face. Free to start with no signup — fair daily limits apply.",
     "isPro": false
   },
   {
@@ -1610,7 +1610,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HTML to Image Converter",
     "slug": "html-to-image",
     "category": "Converter",
-    "description": "Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser. No signup or account required.",
+    "description": "Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser. Free to start with no signup — fair daily limits apply.",
     "isPro": false
   },
   {
@@ -1618,7 +1618,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Apple Music Preview Extractor",
     "slug": "apple-music-preview-extractor",
     "category": "Audio",
-    "description": "Extracts publicly available 30-to-90-second audio preview clips from Apple Music by resolving the store URL. No signup or account required.",
+    "description": "Extracts publicly available 30-to-90-second audio preview clips from Apple Music by resolving the store URL. Free to start with no signup — fair daily limits apply.",
     "isPro": false
   },
   {
@@ -1642,7 +1642,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Resume ATS Score Checker",
     "slug": "resume-ats-score-checker",
     "category": "AI",
-    "description": "Analyzes uploaded resumes against a job description using AI to calculate an ATS compatibility score and provide actionable suggestions. No signup or account required.",
+    "description": "Score your resume against a job description for ATS compatibility — keyword gaps, formatting flags, and fix suggestions. Applicants lift a 52/100 resume past 80 before applying — 1 credit per check, sign in free.",
     "isPro": true
   },
   {
@@ -1650,7 +1650,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WhatsApp Toolkit",
     "slug": "whatsapp-toolkit",
     "category": "Utility",
-    "description": "Generates wa.me click-to-chat links, WhatsApp group invite links, QR codes for quick connections, and includes a chat analyzer and status text. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generates wa.me click-to-chat links, WhatsApp group invite links, QR codes for quick connections, and includes a chat analyzer and status text. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -1666,7 +1666,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Indian Voice Transcriber",
     "slug": "indian-voice-transcriber",
     "category": "indian-utilities",
-    "description": "Transcribes recorded audio to text with support for 12 Indian languages using AI speech recognition. Record or upload a voice note and audio is sent to our server for transcription.",
+    "description": "Transcribe Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Punjabi, Odia, Urdu, or English voice notes to text. Record or upload — students dictate answers in seconds — 1 credit per minute.",
     "isPro": true
   },
   {
@@ -1674,7 +1674,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bank Statement Analyser",
     "slug": "bank-statement-analyser",
     "category": "Utility",
-    "description": "Parses uploaded bank statement PDFs or CSV exports and categorizes transactions into income, expense, and transfer categories with visual spending. No signup or account required.",
+    "description": "Upload bank statement PDFs or CSVs and get income, expense, and transfer categories with visual spending breakdowns. Budgeters spot where Rs.18,000 leaks monthly — sign in free for 2 analyses a day.",
     "isPro": true
   },
   {
@@ -1682,7 +1682,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Social Media Calendar",
     "slug": "social-media-calendar",
     "category": "Branding",
-    "description": "Lets users plan and schedule social media posts across multiple platforms in a visual calendar view with draft, scheduled. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Lets users plan and schedule social media posts across multiple platforms in a visual calendar view with draft, scheduled. Designs never leave your device — everything renders locally in your browser.",
     "isPro": false
   },
   {
@@ -1690,7 +1690,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Background Changer",
     "slug": "bulk-bg-changer",
     "category": "Image",
-    "description": "Removes or replaces backgrounds on multiple images simultaneously with color-key sampling and batch processing. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Strip or swap backgrounds on whole photo batches with color-key sampling and tolerance control. Sellers turn 40 supplier shots into clean white listings in one run — local Canvas work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1698,7 +1698,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Background Changer",
     "slug": "ai-bg-changer",
     "category": "Image",
-    "description": "Removes and replaces image backgrounds using edge-aware detection algorithms that separate foreground subjects without a green screen. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Remove and replace image backgrounds with edge-aware detection — no green screen needed. Sellers shoot product photos on any table, then swap to clean white. Runs locally on canvas — free to start, fair limits.",
     "isPro": true
   },
   {
@@ -1706,7 +1706,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Link in Bio Builder",
     "slug": "link-in-bio-builder",
     "category": "Branding",
-    "description": "Creates customizable link-in-bio landing pages with profile photo, bio, multiple social media links, and custom icon selection. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Build link-in-bio pages with profile, links, and icons — your Instagram exit ramp. Route followers anywhere in one link — local building, free, no signup.",
     "isPro": false
   },
   {
@@ -1714,7 +1714,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Editor",
     "slug": "pdf-editor",
     "category": "PDF",
-    "description": "Add text, highlights, freehand drawings, image stamps, signatures, and cover-up blocks to any PDF, then export. Additive edits on top of the original — free, no signup, no watermark, runs locally in your browser.",
+    "description": "Add text, highlights, drawings, shapes, notes, signatures, and images to any PDF. Rotate, duplicate, and OCR pages (8 languages), or use one-click AI to summarize, fix, or translate. Editing runs 100% locally. AI actions are optional and cost credits, shown on each button before you click. Free, no watermark — no signup needed to start, fair daily limits apply.",
     "isPro": false
   },
   {
@@ -1722,7 +1722,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Page Manager",
     "slug": "pdf-page-manager",
     "category": "PDF",
-    "description": "Manages PDF pages with crop, organize, extract, rotate, and delete operations in a single unified interface with visual page thumbnails. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Reorder, duplicate, delete, and rotate PDF pages with thumbnail drag-and-drop. Assemble a 40-page pack from three sources — local pdf-lib work, free quota on saves.",
     "isPro": false
   },
   {
@@ -1730,7 +1730,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk QR Code Generator",
     "slug": "bulk-qr-code-generator",
     "category": "Utility",
-    "description": "Processes a CSV file containing multiple data entries and generates a corresponding QR code image for each row, delivered as a ZIP archive. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Turn a CSV of URLs, text, or contacts into hundreds of styled QR PNGs in one batch — event badges, inventory labels, menus. Organizers code 500 tables in minutes — local qrcode.js work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1738,7 +1738,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF AI Summariser",
     "slug": "pdf-ai-summariser",
     "category": "AI",
-    "description": "Uploads a PDF document, extracts its full text via native parsing, then sends the content to an LLM for a condensed summary highlighting key points and insights.",
+    "description": "Condense any PDF into bullet, paragraph, or executive summaries with native text extraction plus LLM condensing. Analysts digest a 50-page report over coffee — 1 credit per summary, sign in free.",
     "isPro": true
   },
   {
@@ -1746,7 +1746,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Image Watermark",
     "slug": "bulk-image-watermark",
     "category": "Image",
-    "description": "Apply a text logo, image logo, or timestamp overlay to dozens of images at once with configurable position, opacity, and rotation per batch. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Stamp text, logo, or timestamp watermarks across dozens of photos with position, opacity, and rotation control. Photographers protect 200 wedding proofs before sharing — local Canvas work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1754,7 +1754,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk PDF Data Extractor",
     "slug": "bulk-pdf-data-extractor",
     "category": "PDF",
-    "description": "Extract tables, form fields, and key-value pairs from multiple PDFs simultaneously and export the aggregated data to a single CSV or Excel file. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Pull tables, form fields, and key-value pairs from stacks of PDFs into one clean CSV. Accountants turn 60 invoices into a spreadsheet in an afternoon — local pdf-lib parsing, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1762,7 +1762,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Image to PDF",
     "slug": "bulk-image-to-pdf",
     "category": "PDF",
-    "description": "Merge hundreds of JPG, PNG, or WebP images into a single multi-page PDF with configurable page size, orientation, and compression per batch. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Bind hundreds of JPG, PNG, or WebP images into one multi-page PDF with page size, orientation, and fit control. Agents compile 80 property photos into a brochure — local jsPDF work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1770,7 +1770,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Audio Converter",
     "slug": "bulk-audio-converter",
     "category": "Audio",
-    "description": "Convert an entire folder of audio files between MP3, WAV, OGG, FLAC, and M4A formats in one batch with consistent quality and bitrate settings. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert whole folders of audio between MP3, WAV, OGG, FLAC, M4A, and AAC with uniform bitrate and sample settings. Podcasters standardize 50 episodes for every platform — local FFmpeg WASM, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1778,7 +1778,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk SVG to PNG",
     "slug": "bulk-svg-to-png",
     "category": "Image",
-    "description": "Rasterize hundreds of SVG files to PNG at any resolution, preserving vector sharpness. Ideal for generating icon sprite sheets and asset pipelines. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Rasterize hundreds of SVG vectors to crisp PNGs at any resolution with filename preservation. Developers ship full icon sets at 1x, 2x, and 3x in three runs — local Canvas work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1786,7 +1786,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Image Compressor",
     "slug": "bulk-image-compressor",
     "category": "Image",
-    "description": "Compress JPG, PNG, and WebP images in bulk with uniform quality settings. E-commerce sellers use it to optimize entire product catalogs before upload. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Shrink image batches (JPG, PNG, WebP) by 40–80% with one quality slider and live size preview. Store owners compress 300 product shots before upload — local processing, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1794,7 +1794,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk PDF Size Reducer",
     "slug": "bulk-pdf-size-reducer",
     "category": "PDF",
-    "description": "Reduce file size of multiple PDFs at once by compressing embedded images, removing metadata, and optimizing object streams across the batch. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Shrink stacks of PDFs 40–90% with Maximum, Balanced, or High-Quality tiers that recompress images and strip metadata. Firms email 25 filings instead of courier — local pdf-lib work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1802,7 +1802,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Image Resizer",
     "slug": "bulk-image-resizer",
     "category": "Image",
-    "description": "Resize hundreds of images to exact pixel dimensions or percentage scale in one pass. Photographers use it to standardize client galleries before delivery. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Resize hundreds of photos to exact pixels, percentage scale, or social presets in one pass with aspect control. Photographers deliver 400 wedding shots at uniform 2048px — local Canvas work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1810,7 +1810,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Video Compressor",
     "slug": "bulk-video-compressor",
     "category": "Video",
-    "description": "Compress multiple video files simultaneously with consistent CRF, resolution, and codec settings. YouTube studios use it to batch-optimize daily uploads. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compress multiple videos with consistent CRF, resolution, and codec presets for web, email, and archive. Studios batch 20 daily uploads at CRF 28 — local FFmpeg WASM, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1818,7 +1818,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk PDF Merger",
     "slug": "bulk-pdf-merger",
     "category": "PDF",
-    "description": "Join dozens of PDF files into one document in a single operation. Legal teams use it to consolidate contract bundles and discovery exhibits instantly. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Join up to 100 PDFs into one document per Pro run with order control and preserved links. Legal teams bind 40 exhibits into one filing — local pdf-lib merge, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1826,7 +1826,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Face Anonymizer",
     "slug": "bulk-face-anonymizer",
     "category": "Image",
-    "description": "Detect and blur faces across multiple images automatically using on-device face detection. GDPR compliance teams use it to anonymize datasets before publication. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Detect and blur, pixelate, or cover faces across whole photo batches with on-device TensorFlow.js. Newsrooms anonymize 100 protest photos before publishing — local processing, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1834,7 +1834,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk PDF Form Extractor",
     "slug": "bulk-pdf-form-extractor",
     "category": "PDF",
-    "description": "Extract filled form fields from hundreds of identical PDF forms and aggregate responses into a single CSV. Large-scale survey and application processing teams depend on it. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Aggregate filled fields from hundreds of identical PDF forms into one CSV — survey responses, applications, feedback. HR compiles 300 applications into a shortlist sheet — local pdf-lib work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1842,7 +1842,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Video Size Reducer",
     "slug": "bulk-video-size-reducer",
     "category": "Video",
-    "description": "Batch-reduce video file sizes to fit email attachment limits (25MB), messaging platform caps, or any user-defined target. Every office worker with video attachments needs this. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Hit exact file-size targets (10/25/50 MB) across video batches for email and messaging caps. Teams fit 15 clips under Gmail\\'s 25 MB wall — local FFmpeg WASM, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1850,7 +1850,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Audio Normalizer",
     "slug": "bulk-audio-normalizer",
     "category": "Audio",
-    "description": "Normalize loudness across multiple audio files to broadcast-standard LUFS levels (–16 LUFS for podcasts, –14 LUFS for streaming). Podcast networks use this to unify episode volume. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Level whole audio batches to broadcast LUFS targets (-14 podcast, -16 music) without crushing dynamics. Networks even out 30 episodes so listeners stop riding volume — local Web Audio work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1858,7 +1858,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Video Subtitle Burner",
     "slug": "bulk-video-subtitle-burner",
     "category": "Video",
-    "description": "Burn SRT or VTT subtitles directly into multiple video files in one batch. Content republishers use it to prepare videos for platforms that do not support soft subtitles. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Burn SRT/VTT subtitles permanently into batches of videos with font, size, color, and position control. Course creators hard-sub 20 lessons for platforms that ignore caption files — FFmpeg WASM, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1866,7 +1866,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Invoice & Receipt Parser",
     "slug": "bulk-invoice-receipt-parser",
     "category": "Finance",
-    "description": "Drop 100 invoice PDFs or images, auto-detect date, vendor, amount, and tax, then export a clean CSV ready for tax filing. Replaces expensive accounting OCR per-document fees. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Drop 100 invoice or receipt PDFs and images; get vendor, date, amount, tax, and line items in one CSV. Bookkeepers close month-end without retyping — local Tesseract + pdf-lib, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1874,7 +1874,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk CSV/Excel to JSON",
     "slug": "bulk-csv-excel-to-json",
     "category": "Converter",
-    "description": "Convert messy CSV or Excel sheets from clients into clean JSON in one batch. Handles missing values, nested rows, and generates strict JSON schemas for 50+ files at once. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Turn messy client CSV and Excel sheets into clean JSON arrays or keyed objects with column mapping. Developers convert 50 exports without hand-editing — local SheetJS work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1882,7 +1882,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk URL Status Checker",
     "slug": "bulk-url-status-checker",
     "category": "SEO",
-    "description": "Check up to 5,000 URLs for HTTP status codes (200, 301, 404, 500), redirect targets, and response times, then flag broken links and slow pages. Checks run server-side, so results are accurate. SEO agencies use it instead of $50/mo crawling tools.",
+    "description": "Scan hundreds of URLs for status codes, redirect chains, and dead pages with CSV export for audits. SEOs check 500 links before a migration — local fetch with auto-paced backend, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1890,7 +1890,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Image Format Converter",
     "slug": "bulk-image-converter",
     "category": "Image",
-    "description": "Find the exact bulk conversion you need: PNG→WebP, JPG→AVIF, HEIC→JPG, and 100+ more — each format pair is its own dedicated, optimized tool with quality control and folder-preserving ZIP output.",
+    "description": "Convert whole folders between 100+ format pairs — PNG to WebP, JPG to AVIF, HEIC to JPG — with quality control and folder-preserving ZIP output. Web teams modernize 300 images before deploy — local, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1898,7 +1898,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk EXIF Stripper & Injector",
     "slug": "bulk-exif-stripper-injector",
     "category": "Image",
-    "description": "Strip GPS location, camera serial, and timestamps from thousands of photos client-side. Or bulk-inject copyright metadata using a template across an entire image library. No signup or account required.",
+    "description": "Strip GPS, camera serials, and timestamps from thousands of photos — or inject copyright and author credits. Agents clean 500 listing shots before upload — local exifr work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1906,7 +1906,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk App Icon Generator",
     "slug": "bulk-app-icon-generator",
     "category": "Image",
-    "description": "Upload one high-res SVG/PNG and export 30+ correctly sized icons for iOS, Android, PWA, Shopify, and social media OG images in a structured ZIP. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Export 30+ correctly sized icons for iOS, Android, PWA, and social from one high-res source. Indie devs ship full icon sets an hour before release — local Canvas work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1914,7 +1914,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Markdown to PDF/HTML",
     "slug": "bulk-markdown-to-pdf-html",
     "category": "Converter",
-    "description": "Convert 100+ Markdown files into beautifully styled PDFs or static HTML with custom CSS, auto-generated table of contents, and corporate templates. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert 100+ Markdown files to styled PDFs or web-ready HTML with custom CSS and auto tables of contents. Docs teams publish whole wikis in one run — local Marked + jsPDF, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1922,7 +1922,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Font Subsetter",
     "slug": "bulk-font-subsetter",
     "category": "Developer",
-    "description": "Convert TTF/OTF fonts to WOFF2 and subset to only used characters (Latin, Cyrillic, etc.). Generates @font-face CSS blocks. Cuts font files from MBs to KBs. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert TTF/OTF to WOFF2 subset to only your used characters and cut 50–200 KB fonts to 2–15 KB. Performance engineers fix the render-blocking font in one batch — local opentype.js, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1930,7 +1930,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Subtitle Time-Shifter",
     "slug": "bulk-subtitle-time-shifter",
     "category": "Video",
-    "description": "Apply global time offset (+/- seconds) to a whole season of SRT/VTT files at once. Localization agencies use it to realign and translate subtitle batches. No signup or account required.",
+    "description": "Shift subtitle timing across a whole season of SRT/VTT files by ±seconds with millisecond precision. Localizers fix a 2.5s broadcast delay on 24 episodes at once — local parsing, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1938,7 +1938,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Regex Extractor & Replacer",
     "slug": "bulk-regex-extractor-replacer",
     "category": "Developer",
-    "description": "Scan thousands of log files or codebase files for regex patterns (IPs, API keys, URLs) and extract or replace them. Visual builder for non-coders with live preview. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Hunt IPs, API keys, emails, and URLs across thousands of logs or code files — extract matches or replace in place. SREs scrub 5,000 logs before sharing — local JS RegExp, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1946,7 +1946,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Image to Text (OCR)",
     "slug": "bulk-image-to-text-ocr",
     "category": "Image",
-    "description": "Extract text from batches of scanned JPGs, PNGs, or PDF pages and export as a single formatted Word doc. Students and digitizers use it instead of typing 40 pages manually. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "OCR batches of scans, photos, and PDF pages into one text document in 100+ languages. Archivists digitize 200-page records weekly — local Tesseract.js, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1954,7 +1954,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk E-Book Converter",
     "slug": "bulk-ebook-converter",
     "category": "Converter",
-    "description": "Convert your entire digital library between EPUB, MOBI, and PDF in one batch. Note: This is a basic client-side conversion — complex EPUB/MOBI layouts may not render perfectly. For professional results, use a dedicated e-book tool like Calibre.",
+    "description": "Convert whole libraries between EPUB, MOBI, and PDF with metadata and covers preserved. Readers move 100 books to a new device in an afternoon — local processing, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1962,7 +1962,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk HEIC to JPG",
     "slug": "bulk-heic-to-jpg",
     "category": "Image",
-    "description": "Convert hundreds of iPhone HEIC photos to universal JPGs in one batch — fully client-side so your personal vacation photos never leave your machine. Windows users finally view their iPhone library. No signup or account required.",
+    "description": "Convert hundreds of iPhone HEIC photos to universal JPGs in one batch with quality control. Families share 300 vacation shots with Windows relatives — local libheif WASM, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1994,7 +1994,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Complaint Letter Generator",
     "slug": "complaint-letter-generator",
     "category": "indian-utilities",
-    "description": "Generates legally correct formal complaint letters citing Indian consumer law — Consumer Protection Act 2019, RERA, TRAI, or RBI regulations. AI-powered with your API key.",
+    "description": "Draft formal Indian consumer complaints citing Consumer Protection Act 2019, RERA, TRAI, or RBI rules — telecom, banking, real estate, e-commerce. Each letter costs 1 credit; sign in free for a 5-letter trial.",
     "isPro": true
   },
   {
@@ -2002,7 +2002,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Brand Color Palette Generator",
     "slug": "brand-color-palette-generator",
     "category": "Branding",
-    "description": "Describe your brand and get a complete 6-color palette with usage suggestions for designers. Uses AI to generate harmonious color schemes.",
+    "description": "Describe your brand in one line and get a complete 6-color palette with hex codes and designer usage notes. Founders go from \\'trustworthy fintech\\' to a working palette in a minute — 1 credit per palette.",
     "isPro": true
   },
   {
@@ -2010,7 +2010,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Brand Kit",
     "slug": "brand-kit",
     "category": "Branding",
-    "description": "A local-first brand asset manager for colors and fonts. No signup or account required.",
+    "description": "Collect brand colors by hex with names plus font picks in one persistent kit — export JSON for developers. Lock a startup identity in an afternoon — free, local, no signup.",
     "isPro": false
   },
   {
@@ -2018,7 +2018,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "To-Do List",
     "slug": "to-do-list",
     "category": "Productivity",
-    "description": "A persistent task manager with priorities and filters. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Simple task lists with priorities that persist in your browser — plan days without accounts. Manage today in one tab — local storage, free, no signup.",
     "isPro": false
   },
   {
@@ -2034,7 +2034,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Pronunciation Tool",
     "slug": "pronunciation-tool",
     "category": "Text",
-    "description": "Hear the correct pronunciation of any word or phrase in multiple English accents using browser-based speech synthesis. Adjustable playback speed with clear audio output.",
+    "description": "Hear any text pronounced with browser speech in multiple voices and speeds. Check English pronunciation before presentations — free, local, no signup.",
     "isPro": false
   },
   {
@@ -2066,7 +2066,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Data Format Converter",
     "slug": "data-format-converter",
     "category": "Converter",
-    "description": "Convert between JSON, CSV, XML, YAML, and TSV data formats. Pick any input and output format — your files never leave your device.",
+    "description": "Convert data formats between JSON, YAML, XML, TOML, and CSV with structure preserved. Migrate configs across stacks without rewriting — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -2082,7 +2082,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF to Markdown",
     "slug": "pdf-to-markdown",
     "category": "PDF",
-    "description": "Extracts all text content from PDF files and converts it to clean Markdown format with proper headings, lists, and structure. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Extracts all text content from PDF files and converts it to clean Markdown format with proper headings, lists, and structure. Documents stay on your device — editing and conversion run locally in your browser.",
     "isPro": false
   },
   {
@@ -2098,7 +2098,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Scan to PDF",
     "slug": "scan-to-pdf",
     "category": "PDF",
-    "description": "Turn photos and scanned images into a professional PDF document. Upload multiple images, reorder, and combine into a single PDF. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Turn photos and scanned images into a professional PDF document. Upload multiple images, reorder, and combine into a single PDF. Documents stay on your device — editing and conversion run locally in your browser.",
     "isPro": false
   },
   {
@@ -2106,7 +2106,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Repair PDF",
     "slug": "repair-pdf",
     "category": "PDF",
-    "description": "Attempts to repair corrupted or damaged PDF files by rebuilding the internal structure. Recovers readable content from broken PDFs and re-saves them as valid PDF documents.",
+    "description": "Fix corrupted PDFs that refuse to open — rebuild cross-references and salvage readable pages. Recover a deadline file from a bad download — local pdf-lib repair, free quota on saves.",
     "isPro": false
   },
   {
@@ -2114,7 +2114,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF to PDF/A",
     "slug": "pdf-to-pdfa",
     "category": "PDF",
-    "description": "Converts standard PDF files to PDF/A archival format with proper metadata, embedded fonts, and color profiles. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Converts standard PDF files to PDF/A archival format with proper metadata, embedded fonts, and color profiles. Documents stay on your device — editing and conversion run locally in your browser.",
     "isPro": false
   },
   {
@@ -2122,7 +2122,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Crop PDF",
     "slug": "crop-pdf",
     "category": "PDF",
-    "description": "Crop PDF pages to custom dimensions or preset sizes. Remove unwanted margins, white space, or sections from your PDF documents. Supports all standard and custom crop areas.",
+    "description": "Trim margins off every page of a PDF at once — remove scanner shadows and overscan. Clean a 50-page scan set for reading — local pdf-lib work, free quota on saves.",
     "isPro": false
   },
   {
@@ -2130,7 +2130,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Redact PDF",
     "slug": "redact-pdf",
     "category": "PDF",
-    "description": "Permanently remove sensitive information from PDF files. Black out text, images, or areas with permanent redaction. Perfect for legal documents, contracts, and personal data protection.",
+    "description": "Redact sensitive text permanently — PII, prices, names — with true content removal from PDFs. Share contracts safely, not just covered visually — local processing, free quota on saves.",
     "isPro": false
   },
   {
@@ -2146,7 +2146,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Flatten PDF",
     "slug": "flatten-pdf",
     "category": "PDF",
-    "description": "Flattens PDF files by merging all layers, removing form fields, and converting interactive elements into static content. Perfect for sharing finalized documents and reducing file complexity.",
+    "description": "Bake fillable form fields and annotations permanently into page content — lock applications before sending. Freeze a signed offer letter exactly as seen — local pdf-lib, free quota on saves.",
     "isPro": false
   },
   {
@@ -2154,7 +2154,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Grayscale PDF",
     "slug": "grayscale-pdf",
     "category": "PDF",
-    "description": "Convert any PDF to grayscale/black and white. Perfect for printing, reducing ink usage, creating archive copies, or giving documents a professional monochrome look.",
+    "description": "Convert color PDFs to grayscale for cheap B&W printing and smaller files. Cut a 50-page deck\\'s print cost in half — local processing, free quota on saves.",
     "isPro": false
   },
   {
@@ -2170,7 +2170,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Resize PDF Pages",
     "slug": "resize-pdf-pages",
     "category": "PDF",
-    "description": "Change the page size of your PDF documents. Choose from standard sizes (A4, Letter, Legal, A3) or set custom dimensions. Automatically adds white margins when enlarging.",
+    "description": "Scale all PDF pages to standard sizes — A4, Letter, or custom — for print shops and archives. Normalize mixed-size scans to uniform A4 — local work, free quota on saves.",
     "isPro": false
   },
   {
@@ -2178,7 +2178,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Add Text to PDF",
     "slug": "add-text-to-pdf",
     "category": "PDF",
-    "description": "Add custom text labels, annotations, and captions directly onto PDF pages. Choose font size, color, and position. Perfect for signing, marking up, or adding notes to documents.",
+    "description": "Type directly onto any PDF page — fill forms, add notes, stamp corrections without printing. Complete a 3-page application in minutes — local pdf-lib editing, free quota on saves.",
     "isPro": false
   },
   {
@@ -2194,7 +2194,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Header and Footer",
     "slug": "header-footer-pdf",
     "category": "PDF",
-    "description": "Add professional headers and footers to every page of your PDF. Supports text, page numbers ({{page}}/{{total}}), dates, and custom alignment. Perfect for reports and official documents.",
+    "description": "Stamp headers and footers on every PDF page — page numbers, dates, confidentiality lines. Number a 100-page report in one pass — local pdf-lib work, free quota on saves.",
     "isPro": false
   },
   {
@@ -2202,7 +2202,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "N-up PDF",
     "slug": "nup-pdf",
     "category": "PDF",
-    "description": "Combine multiple PDF pages onto a single sheet with N-up layout. Choose 2-up, 4-up, 6-up, 9-up, or booklet mode. Perfect for printing multiple slides or pages on one sheet.",
+    "description": "Print multiple PDF pages per sheet — 2-up handouts, 4-up booklets, 6-up slides. Fit a 60-slide deck on 10 sheets — local processing, free quota on saves.",
     "isPro": false
   },
   {
@@ -2218,7 +2218,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Deskew PDF",
     "slug": "deskew-pdf",
     "category": "PDF",
-    "description": "Automatically detect and straighten crooked scanned PDF pages. Uses advanced image analysis to find the correct rotation angle. Perfect for fixing skewed scanned documents.",
+    "description": "Deskew skewed scan pages automatically — fix feeder tilt across whole PDF documents. Rescue a 30-page crooked scan in one pass — local processing, free quota on saves.",
     "isPro": false
   },
   {
@@ -2234,7 +2234,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Markdown to PDF",
     "slug": "markdown-to-pdf",
     "category": "PDF",
-    "description": "Convert Markdown to beautifully formatted PDF. Supports headings, bold, italic, code blocks, and lists. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert Markdown to beautifully formatted PDF. Supports headings, bold, italic, code blocks, and lists. Documents stay on your device — editing and conversion run locally in your browser.",
     "isPro": false
   },
   {
@@ -2258,7 +2258,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "RAW Image Converter",
     "slug": "raw-image-converter",
     "category": "Image",
-    "description": "Convert RAW camera images (CR2, NEF, ARW, DNG) to universal formats. Works with most modern camera RAW formats directly in your browser. Perfect for photographers on the go.",
+    "description": "Convert camera RAW files to viewable JPG or PNG for sharing and editing. Open CR2, NEF, and ARW shots anywhere — local processing, free quota on saves.",
     "isPro": false
   },
   {
@@ -2266,7 +2266,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PSD to JPG/PNG",
     "slug": "psd-to-jpg-png",
     "category": "Image",
-    "description": "Convert PSD images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert PSD images to JPG or PNG in your browser — flatten layered Photoshop files for sharing where PSD isn\\'t supported. Photos never leave your device.",
     "isPro": false
   },
   {
@@ -2282,7 +2282,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Chart Maker",
     "slug": "chart-maker",
     "category": "Image",
-    "description": "Create stunning charts and graphs online for free. Supports bar, line, pie, doughnut, area charts with custom colors, labels, and titles. Perfect for presentations and reports.",
+    "description": "Build bar, line, and pie charts from your data in your browser — paste values, style, and export images for reports and posts.",
     "isPro": false
   },
   {
@@ -2298,7 +2298,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Unblur / Sharpen",
     "slug": "unblur-sharpen",
     "category": "Image",
-    "description": "Fix blurry photos with smart sharpening or add artistic blur effects. Supports sharpen, Gaussian blur, and motion blur with adjustable intensity. ",
+    "description": "Sharpen slightly soft photos with deconvolution-style enhancement — rescue mild blur, not motion smear. Save a good shot gone soft — local processing, free quota on saves.",
     "isPro": false
   },
   {
@@ -2306,7 +2306,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF Editor",
     "slug": "gif-editor",
     "category": "Image",
-    "description": "Edit animated GIFs — resize, change speed, reverse, optimize colors, and extract frames. Perfect for social media memes, product demos, and animated banners.",
+    "description": "Edit animated GIFs frame by frame in your browser — crop, add text, trim clips, and resize without re-uploading without re-uploading anything.",
     "isPro": false
   },
   {
@@ -2314,7 +2314,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Speed Changer",
     "slug": "video-speed-changer",
     "category": "Video",
-    "description": "Speed up or slow down any video. Adjust playback speed from 0.1x to 10x with audio pitch preservation. Perfect for creating time-lapses, slow-motion replays, and quick reviews.",
+    "description": "Speed up or slow down video from 0.25x to 4x with pitch-safe audio. Make a 20-minute lecture watchable at 2x — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -2322,7 +2322,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Reverse Video",
     "slug": "reverse-video",
     "category": "Video",
-    "description": "Play any video backwards. Reverse video, audio, or both independently. Create fun effects, hidden messages, and creative video edits with a single click.",
+    "description": "Play any video backwards — video, audio, or both independently. Create rewind effects for social clips — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -2330,7 +2330,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Mute Video",
     "slug": "mute-video",
     "category": "Video",
-    "description": "Remove audio from a video completely, replace it with a new audio track, or adjust the volume. Perfect for creating silent videos, adding background music, or fixing audio levels.",
+    "description": "Strip the audio track from any video in one click — clean B-roll, GIF sources, confidential calls. Keep full visual quality with zero re-encode waste — local FFmpeg, free quota on saves.",
     "isPro": false
   },
   {
@@ -2354,7 +2354,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Voice Recorder",
     "slug": "voice-recorder",
     "category": "Audio",
-    "description": "Record audio directly in your browser using your microphone. Features real-time waveform visualization, pause/resume, and multiple export formats. No software installation needed.",
+    "description": "Record voice memos straight from your microphone with live levels — interviews, notes, ideas. Capture clean audio without installing apps — local recording, free quota on saves.",
     "isPro": false
   },
   {
@@ -2362,7 +2362,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Noise Reducer",
     "slug": "noise-reducer",
     "category": "Audio",
-    "description": "Reduce background noise from audio recordings. Choose from mild to extreme reduction or sample a noise profile for precision cleaning. Perfect for podcasts, calls, and field recordings.",
+    "description": "Remove hiss, hum, and background noise from recordings with profile-based reduction. Rescue fan-noisy interviews in one pass — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -2370,7 +2370,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Audio Equalizer",
     "slug": "audio-equalizer",
     "category": "Audio",
-    "description": "Fine-tune your audio with a 10-band graphic equalizer. Boost bass, enhance vocals, or apply professional presets. Includes real-time frequency response visualization.",
+    "description": "Shape audio with multi-band EQ — boost bass, cut mud, add air to dull recordings. Fix a boomy room recording fast — local processing, free quota on saves.",
     "isPro": false
   },
   {
@@ -2378,7 +2378,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Audio Compressor",
     "slug": "audio-compressor",
     "category": "Audio",
-    "description": "Balance audio dynamics with professional compression controls. Perfect for podcasts, voice overs, and music production. Features threshold, ratio, attack, release, and makeup gain.",
+    "description": "Even out loud and quiet parts of any audio with dynamics compression — podcasts at one steady volume. Stop riding the volume knob — local processing, free quota on saves.",
     "isPro": false
   },
   {
@@ -2386,7 +2386,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Waveform Generator",
     "slug": "waveform-generator",
     "category": "Audio",
-    "description": "Generate beautiful audio waveform visualizations from any audio file. Choose from bar, line, filled, or circular styles. Perfect for podcast artwork, music videos, and social media.",
+    "description": "Render audio waveforms as shareable PNG images — audiograms, episode art, visual proof. Turn a soundbite into social content — local rendering, free quota on saves.",
     "isPro": false
   },
   {
@@ -2402,7 +2402,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Stabilizer",
     "slug": "video-stabilizer",
     "category": "Video",
-    "description": "Fix shaky handheld footage with advanced video stabilization. Two-pass analysis delivers smooth, professional results. Perfect for vloggers, action cameras, and mobile videos.",
+    "description": "Smooth shaky handheld footage with motion-compensated stabilization. Salvage walking tour videos without gimbals — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -2418,7 +2418,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Filters",
     "slug": "video-filters",
     "category": "Video",
-    "description": "Apply stunning visual effects to your videos. Choose from color filters, artistic effects, blurs, and lighting adjustments. Combine multiple filters for unique looks.",
+    "description": "Grade videos with brightness, contrast, saturation, and grayscale filters plus live preview. Rescue flat 7am footage before posting — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -2434,7 +2434,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Chat PDF",
     "slug": "ai-chat-pdf",
     "category": "AI",
-    "description": "Chat with your PDF documents. Ask questions, get answers, and extract insights from any document. Extract text and use intelligent search to find relevant information instantly.",
+    "description": "Chat with any PDF: ask questions, get answers, and extract insights with intelligent in-browser search. Students quiz a textbook chapter in minutes — free to start, fair daily limits apply.",
     "isPro": true
   },
   {
@@ -2442,7 +2442,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Grammar Checker",
     "slug": "grammar-checker",
     "category": "AI",
-    "description": "Check and correct grammar, spelling, and punctuation in your text. Detects common errors including homophones, misspellings, punctuation issues, and run-on sentences.",
+    "description": "Catch grammar, spelling, and punctuation errors with in-browser pattern matching — homophones, run-ons, misplaced commas. Writers proofread a 1,000-word draft in seconds — runs locally, free to start with fair limits.",
     "isPro": true
   },
   {
@@ -2450,7 +2450,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Humanizer",
     "slug": "ai-humanizer",
     "category": "AI",
-    "description": "Make AI-generated text sound more natural and human-like. Choose from casual, professional, friendly, natural, or storytelling tones. Reduces robotic patterns and improves readability.",
+    "description": "Rewrite stiff AI-sounding text into natural human-like prose in 5 tones — casual, professional, friendly, natural, storytelling. Bloggers convert robotic drafts into readable posts — runs locally, free to start with fair limits.",
     "isPro": true
   },
   {
@@ -2458,7 +2458,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Detector",
     "slug": "ai-detector",
     "category": "AI",
-    "description": "Detect if text was written by AI. Analyzes burstiness, repetition patterns, sentence variance, and AI trigger phrases. Get a percentage score with detailed breakdown per section.",
+    "description": "Score text for AI authorship with burstiness, repetition, and trigger-phrase analysis — percentage plus per-section breakdown. Teachers screen a 2,000-word essay in seconds — runs locally, free to start with fair limits.",
     "isPro": true
   },
   {
@@ -2466,7 +2466,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Article Writer",
     "slug": "article-writer",
     "category": "AI",
-    "description": "Generate well-structured articles on any topic. Choose tone, audience, and length. Includes introduction, body, conclusion, FAQ, and key takeaways sections. Export as text, markdown, or HTML.",
+    "description": "Draft structured articles from outlines — intro, body, conclusion with FAQ and takeaways. Beat blank-page block in minutes — local templates, free quota on saves.",
     "isPro": false
   },
   {
@@ -2474,7 +2474,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Social Caption Generator",
     "slug": "social-caption-generator",
     "category": "AI",
-    "description": "Generate engaging social media captions for Instagram, Twitter, LinkedIn, Facebook, TikTok, and Pinterest. Multiple moods, hashtag suggestions, and emoji support.",
+    "description": "Generate platform-tuned social captions with mood, tone, hashtags, and CTA in one click. Fill a week of posts in minutes — local template engine, free quota on saves.",
     "isPro": false
   },
   {
@@ -2498,7 +2498,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to PNG",
     "slug": "svg-to-png",
     "category": "Image",
-    "description": "Convert SVG images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert SVG vectors to PNG raster in your browser — export logos and icons at any exact pixel size. Photos never leave your device.",
     "isPro": false
   },
   {
@@ -2506,7 +2506,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to JPG",
     "slug": "svg-to-jpg",
     "category": "Image",
-    "description": "Convert SVG images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert SVG images to JPG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2514,7 +2514,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to GIF",
     "slug": "png-to-gif",
     "category": "Image",
-    "description": "Convert PNG images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert PNG images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2522,7 +2522,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to GIF",
     "slug": "jpg-to-gif",
     "category": "Image",
-    "description": "Convert JPG images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert JPG images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2530,7 +2530,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WebP to GIF",
     "slug": "webp-to-gif",
     "category": "Image",
-    "description": "Convert WEBP images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert WEBP images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2538,7 +2538,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to JPG",
     "slug": "bmp-to-jpg",
     "category": "Image",
-    "description": "Convert BMP images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert BMP images to JPG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2546,7 +2546,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to PNG",
     "slug": "bmp-to-png",
     "category": "Image",
-    "description": "Convert BMP images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert BMP images to PNG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2554,7 +2554,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to JPG",
     "slug": "tiff-to-jpg",
     "category": "Image",
-    "description": "Convert TIFF images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert TIFF images to JPG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2562,7 +2562,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to PNG",
     "slug": "tiff-to-png",
     "category": "Image",
-    "description": "Convert TIFF images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert TIFF scans and archives to universal PNG for viewing and editing anywhere. Open press files on any device — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -2570,7 +2570,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to JPG",
     "slug": "gif-to-jpg",
     "category": "Image",
-    "description": "Convert GIF images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert GIF images to JPG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2578,7 +2578,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to PNG",
     "slug": "gif-to-png",
     "category": "Image",
-    "description": "Convert GIF images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert GIF images to PNG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2586,7 +2586,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to PNG",
     "slug": "ico-to-png",
     "category": "Image",
-    "description": "Convert ICO images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert ICO favicons to editable PNG in your browser — extract icon artwork at full embedded size for reuse in any editor.",
     "isPro": false
   },
   {
@@ -2594,7 +2594,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to PNG",
     "slug": "jxl-to-png",
     "category": "Image",
-    "description": "Convert JXL images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert next-gen JPEG XL photos to universal PNG in your browser — open JXL anywhere with zero quality loss, including shots from phones and cameras.",
     "isPro": false
   },
   {
@@ -2602,7 +2602,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to JPG",
     "slug": "jxl-to-jpg",
     "category": "Image",
-    "description": "Convert JXL images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert JPEG XL photos to compact JPG in your browser — small shareable files from next-gen originals, recompressed at your chosen quality.",
     "isPro": false
   },
   {
@@ -2610,7 +2610,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WMA to MP3",
     "slug": "wma-to-mp3",
     "category": "Audio",
-    "description": "Convert WMA audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert WMA audio files to MP3 format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -2618,7 +2618,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Opus to MP3",
     "slug": "opus-to-mp3",
     "category": "Audio",
-    "description": "Convert OPUS audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert OPUS audio files to MP3 format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. from VoIP and streaming sources.",
     "isPro": false
   },
   {
@@ -2626,7 +2626,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AIFF to MP3",
     "slug": "aiff-to-mp3",
     "category": "Audio",
-    "description": "Convert AIFF audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert AIFF audio files to MP3 format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. from studio masters to portable size.",
     "isPro": false
   },
   {
@@ -2642,7 +2642,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to WebP/WebM",
     "slug": "gif-to-webp-webm",
     "category": "Converter",
-    "description": "Convert animated GIFs to modern WebP or WebM formats with transparency support — ~10x smaller files.",
+    "description": "Convert animated GIFs to modern WebP or WebM formats with transparency support — ~10x smaller files. Shrink GIFs dramatically for modern web use — local conversion, free quota on saves.",
     "isPro": false
   },
   {
@@ -2650,7 +2650,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to JPG",
     "slug": "avif-to-jpg",
     "category": "Image",
-    "description": "Convert AVIF images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert modern AVIF images to universal JPG in your browser — maximum compatibility where AVIF support lags where AVIF support still lags.",
     "isPro": false
   },
   {
@@ -2658,7 +2658,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to PNG",
     "slug": "avif-to-png",
     "category": "Image",
-    "description": "Convert AVIF images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert AVIF images to lossless PNG in your browser — transparency and quality preserved for editing for editing and compositing work.",
     "isPro": false
   },
   {
@@ -2666,7 +2666,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to AVIF",
     "slug": "bmp-to-avif",
     "category": "Image",
-    "description": "Convert BMP images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert BMP bitmaps to modern AVIF in your browser — shrink uncompressed legacy files to a fraction with royalty-free encoding.",
     "isPro": false
   },
   {
@@ -2674,7 +2674,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to GIF",
     "slug": "bmp-to-gif",
     "category": "Image",
-    "description": "Convert BMP images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert BMP images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2682,7 +2682,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to WebP",
     "slug": "bmp-to-webp",
     "category": "Image",
-    "description": "Convert BMP images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert BMP images to WEBP format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2690,7 +2690,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to AVIF",
     "slug": "gif-to-avif",
     "category": "Image",
-    "description": "Convert GIF images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert GIF images to modern AVIF in your browser — still frames compress dramatically smaller than legacy GIF, ideal for poster frames and thumbnails.",
     "isPro": false
   },
   {
@@ -2706,7 +2706,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to AVIF",
     "slug": "heic-to-avif",
     "category": "Image",
-    "description": "Convert HEIC images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert HEIC images to AVIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2714,7 +2714,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to GIF",
     "slug": "heic-to-gif",
     "category": "Image",
-    "description": "Convert HEIC images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert HEIC images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2722,7 +2722,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to WebP",
     "slug": "heic-to-webp",
     "category": "Image",
-    "description": "Convert HEIC images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert HEIC images to WEBP format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2730,7 +2730,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to JPG",
     "slug": "ico-to-jpg",
     "category": "Image",
-    "description": "Convert ICO images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Extract Windows icon images to shareable JPGs for docs and presentations. Show favicon designs in slide decks — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -2738,7 +2738,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to WebP",
     "slug": "ico-to-webp",
     "category": "Image",
-    "description": "Convert ICO images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert ICO favicons to modern WebP in your browser — small fast-loading icons for today\\'s web for faster modern web delivery.",
     "isPro": false
   },
   {
@@ -2746,7 +2746,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to JXL",
     "slug": "jpg-to-jxl",
     "category": "Image",
-    "description": "Convert JPG images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert JPG images to JXL format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2754,7 +2754,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to GIF",
     "slug": "jxl-to-gif",
     "category": "Image",
-    "description": "Convert JXL images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert JXL images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2762,7 +2762,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to WebP",
     "slug": "jxl-to-webp",
     "category": "Image",
-    "description": "Convert JXL images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert JPEG XL images to WebP for today\\'s browsers while keeping files small. Bridge next-gen masters to current web — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -2770,7 +2770,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to JXL",
     "slug": "png-to-jxl",
     "category": "Image",
-    "description": "Convert PNG images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert PNG graphics to JPEG XL for next-gen lossless storage at smaller sizes. Archive design assets in the future-proof format — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -2778,7 +2778,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to AVIF",
     "slug": "svg-to-avif",
     "category": "Image",
-    "description": "Convert SVG images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert SVG images to AVIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2786,7 +2786,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to GIF",
     "slug": "svg-to-gif",
     "category": "Image",
-    "description": "Convert SVG images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Rasterize SVG vectors to GIFs for legacy animation and universal compatibility. Animate icons where only GIF plays — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -2794,7 +2794,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to WebP",
     "slug": "svg-to-webp",
     "category": "Image",
-    "description": "Convert SVG images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Rasterize SVG vectors to WebP for fast modern websites. Ship icons at a tenth of PNG bytes — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -2802,7 +2802,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to AVIF",
     "slug": "tiff-to-avif",
     "category": "Image",
-    "description": "Convert TIFF images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert TIFF images to AVIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2810,7 +2810,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to GIF",
     "slug": "tiff-to-gif",
     "category": "Image",
-    "description": "Convert TIFF images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert TIFF scans and photos to compact GIF in your browser — small previews where full TIFFs are overkill where full TIFFs are overkill.",
     "isPro": false
   },
   {
@@ -2818,7 +2818,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to WebP",
     "slug": "tiff-to-webp",
     "category": "Image",
-    "description": "Convert TIFF images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert TIFF images to WEBP format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -2866,7 +2866,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk PDF Suite",
     "slug": "bulk-pdf-suite",
     "category": "PDF",
-    "description": "Rotate, protect, unlock, split, watermark, crop, resize, or flatten multiple PDF files in one batch. All processing happens locally in your browser — nothing is uploaded.",
+    "description": "Rotate, protect, unlock, split, watermark, crop, resize, or flatten dozens of PDFs in one batch. Law firms prep 50 filings for email in an afternoon — runs locally on pdf-lib, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -2874,7 +2874,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WebP to AVIF",
     "slug": "webp-to-avif",
     "category": "Image",
-    "description": "Convert WEBP images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert WebP images to next-gen AVIF in your browser — squeeze modern files smaller still with transparency intact throughout.",
     "isPro": false
   },
   {
@@ -2882,7 +2882,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AAC to FLAC",
     "slug": "aac-to-flac",
     "category": "Audio",
-    "description": "Convert AAC audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert AAC audio files to FLAC format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -2890,7 +2890,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AAC to M4A",
     "slug": "aac-to-m4a",
     "category": "Audio",
-    "description": "Convert AAC audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert AAC audio files to M4A format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -2898,7 +2898,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AAC to OGG",
     "slug": "aac-to-ogg",
     "category": "Audio",
-    "description": "Convert AAC audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert AAC audio files to OGG format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -2906,7 +2906,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AAC to WAV",
     "slug": "aac-to-wav",
     "category": "Audio",
-    "description": "Convert AAC audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert AAC audio files to WAV format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -2914,7 +2914,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "FLAC to AAC",
     "slug": "flac-to-aac",
     "category": "Audio",
-    "description": "Convert FLAC audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert FLAC audio files to AAC format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -2922,7 +2922,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "FLAC to M4A",
     "slug": "flac-to-m4a",
     "category": "Audio",
-    "description": "Convert FLAC audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert FLAC audio files to M4A format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for Apple music libraries.",
     "isPro": false
   },
   {
@@ -2930,7 +2930,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "FLAC to OGG",
     "slug": "flac-to-ogg",
     "category": "Audio",
-    "description": "Convert FLAC audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert FLAC audio files to OGG format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -2938,7 +2938,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "FLAC to WAV",
     "slug": "flac-to-wav",
     "category": "Audio",
-    "description": "Convert FLAC audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert FLAC audio files to WAV format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for DAW editing workflows.",
     "isPro": false
   },
   {
@@ -2946,7 +2946,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "M4A to AAC",
     "slug": "m4a-to-aac",
     "category": "Audio",
-    "description": "Convert M4A audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert M4A audio files to AAC format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -2954,7 +2954,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "M4A to FLAC",
     "slug": "m4a-to-flac",
     "category": "Audio",
-    "description": "Convert M4A audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert M4A audio files to FLAC format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for universal lossless archival.",
     "isPro": false
   },
   {
@@ -2962,7 +2962,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "M4A to OGG",
     "slug": "m4a-to-ogg",
     "category": "Audio",
-    "description": "Convert M4A audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert M4A audio files to OGG format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -2970,7 +2970,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "M4A to WAV",
     "slug": "m4a-to-wav",
     "category": "Audio",
-    "description": "Convert M4A audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert M4A audio to uncompressed WAV for DAWs and archival — bit-perfect from ALAC sources. Prep Apple recordings for Pro Tools — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -2978,7 +2978,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MP3 to AAC",
     "slug": "mp3-to-aac",
     "category": "Audio",
-    "description": "Convert MP3 audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert MP3 to AAC for better quality per bit on Apple devices and streaming. Modernize libraries for smaller sizes — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -2986,7 +2986,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MP3 to AIFF",
     "slug": "mp3-to-aiff",
     "category": "Audio",
-    "description": "Convert MP3 audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert MP3 audio files to AIFF format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -2994,7 +2994,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MP3 to FLAC",
     "slug": "mp3-to-flac",
     "category": "Audio",
-    "description": "Convert MP3 audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert MP3 audio files to FLAC format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for library uniformity.",
     "isPro": false
   },
   {
@@ -3002,7 +3002,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MP3 to M4A",
     "slug": "mp3-to-m4a",
     "category": "Audio",
-    "description": "Convert MP3 audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert MP3 audio files to M4A format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3010,7 +3010,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MP3 to OGG",
     "slug": "mp3-to-ogg",
     "category": "Audio",
-    "description": "Convert MP3 audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert MP3 audio files to OGG format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3018,7 +3018,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MP3 to Opus",
     "slug": "mp3-to-opus",
     "category": "Audio",
-    "description": "Convert MP3 audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert MP3 audio files to OPUS format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for voice streaming and bots.",
     "isPro": false
   },
   {
@@ -3026,7 +3026,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MP3 to WMA",
     "slug": "mp3-to-wma",
     "category": "Audio",
-    "description": "Convert MP3 audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert MP3 audio files to WMA format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3034,7 +3034,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OGG to AAC",
     "slug": "ogg-to-aac",
     "category": "Audio",
-    "description": "Convert OGG audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert OGG Vorbis to AAC for Apple and streaming compatibility. Move open audio into mainstream players — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3042,7 +3042,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OGG to FLAC",
     "slug": "ogg-to-flac",
     "category": "Audio",
-    "description": "Convert OGG audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert OGG Vorbis to FLAC for lossless archival uniformity. Standardize libraries on FLAC without quality illusions — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3050,7 +3050,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OGG to M4A",
     "slug": "ogg-to-m4a",
     "category": "Audio",
-    "description": "Convert OGG audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert OGG audio files to M4A format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3058,7 +3058,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OGG to WAV",
     "slug": "ogg-to-wav",
     "category": "Audio",
-    "description": "Convert OGG audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert OGG audio files to WAV format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3066,7 +3066,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WAV to AAC",
     "slug": "wav-to-aac",
     "category": "Audio",
-    "description": "Convert WAV audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert WAV audio files to AAC format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3074,7 +3074,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WAV to AIFF",
     "slug": "wav-to-aiff",
     "category": "Audio",
-    "description": "Convert WAV audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert WAV audio files to AIFF format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for Logic Pro and GarageBand.",
     "isPro": false
   },
   {
@@ -3082,7 +3082,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WAV to FLAC",
     "slug": "wav-to-flac",
     "category": "Audio",
-    "description": "Convert WAV audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Compress WAV masters to FLAC at ~60% size with zero loss — the archival standard. Archive studio recordings properly — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3090,7 +3090,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WAV to M4A",
     "slug": "wav-to-m4a",
     "category": "Audio",
-    "description": "Convert WAV audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert WAV audio files to M4A format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3098,7 +3098,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WAV to OGG",
     "slug": "wav-to-ogg",
     "category": "Audio",
-    "description": "Convert WAV audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert WAV audio files to OGG format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3106,7 +3106,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WAV to Opus",
     "slug": "wav-to-opus",
     "category": "Audio",
-    "description": "Convert WAV audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert WAV audio files to OPUS format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for podcasts and voice calls.",
     "isPro": false
   },
   {
@@ -3114,7 +3114,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WAV to WMA",
     "slug": "wav-to-wma",
     "category": "Audio",
-    "description": "Convert WAV audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert WAV audio files to WMA format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for legacy Windows libraries.",
     "isPro": false
   },
   {
@@ -3138,7 +3138,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to APNG",
     "slug": "gif-to-apng",
     "category": "Image",
-    "description": "Convert GIF images to APNG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Upgrade GIF animations to APNG for full color and smoother motion at smaller sizes. Modernize sticker packs for today\\'s apps — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3146,7 +3146,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "APNG to GIF",
     "slug": "apng-to-gif",
     "category": "Image",
-    "description": "Convert APNG images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert APNG images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -3154,7 +3154,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image to ICO",
     "slug": "image-to-ico",
     "category": "Image",
-    "description": "Convert IMAGE images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Turn any image into ICO favicon files in your browser — 16/32/48 px multi-size icons ready to link for browser tabs and shortcuts.",
     "isPro": false
   },
   {
@@ -3162,7 +3162,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Color Converter",
     "slug": "color-converter",
     "category": "Design",
-    "description": "Convert colors between Hex, RGB, HSL, HSV, and CMYK formats. Real-time preview, color picker, and copy-to-clipboard.",
+    "description": "Convert colors between HEX, RGB, HSL, and HSV with live swatches. Translate brand specs across formats — free, local, no signup.",
     "isPro": false
   },
   {
@@ -3170,7 +3170,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "QR Code Reader",
     "slug": "qr-code-reader",
     "category": "Developer",
-    "description": "Decode QR codes from uploaded images. Scan any QR code image and extract the embedded text or URL.",
+    "description": "Decode QR codes from uploaded images. Scan any QR code image and extract the embedded text or URL. Point it at screenshots, photos, or documents — decoded URLs and text copy out instantly. Runs locally, free, no signup.",
     "isPro": false
   },
   {
@@ -3194,7 +3194,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SSL Checker",
     "slug": "ssl-checker",
     "category": "Developer",
-    "description": "Check SSL/TLS certificate details for any domain. View issuer, validity period, days remaining, and SANs.",
+    "description": "Check SSL/TLS certificate details for any domain. View issuer, validity period, days remaining, and SANs. Expiry alerts plus chain validation catch outages before users do — local checks, free, no signup.",
     "isPro": false
   },
   {
@@ -3202,7 +3202,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF to TIFF",
     "slug": "pdf-to-tiff",
     "category": "PDF",
-    "description": "Convert PDF images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert PDF pages to lossless TIFF images for print, fax, and archival workflows. Produce 300 DPI press-ready files — local rendering, free quota on saves.",
     "isPro": false
   },
   {
@@ -3210,7 +3210,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to PDF",
     "slug": "tiff-to-pdf",
     "category": "PDF",
-    "description": "Convert TIFF images to PDF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert TIFF images to PDF format in your browser. Documents stay on your device — editing and conversion run locally in your browser.",
     "isPro": false
   },
   {
@@ -3218,7 +3218,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Font Converter",
     "slug": "font-converter",
     "category": "Design",
-    "description": "Convert fonts between TTF, OTF, WOFF, and WOFF2 formats. Preview fonts with custom text before downloading. Perfect for web developers and designers.",
+    "description": "Convert fonts between TTF, OTF, WOFF, and WOFF2 with custom-text preview before downloading. Ship web-ready WOFF2 in one pass — local opentype.js work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3226,7 +3226,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Font Subsetter",
     "slug": "font-subsetter",
     "category": "Design",
-    "description": "Reduce font file size by removing unused glyphs. Keep only the characters you need. Perfect for web fonts and performance optimization.",
+    "description": "Subset fonts to used characters plus WOFF2 conversion — cut webfont weight by 90%. Ship 12 KB instead of 150 KB — local opentype.js work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3234,7 +3234,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CBZ to PDF",
     "slug": "cbz-to-pdf",
     "category": "Converter",
-    "description": "Convert comic book archives to PDF. Page ranges, double-page spreads, multiple sizes. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert comic book archives to PDF. Page ranges, double-page spreads, multiple sizes. Files are converted locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -3250,7 +3250,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "XLSX ↔ CSV Converter",
     "slug": "xlsx-csv-converter",
     "category": "Converter",
-    "description": "Bidirectional converter between Excel spreadsheets (XLSX) and CSV files. Select sheets, choose delimiters, and preview data before converting.",
+    "description": "Convert between XLSX workbooks and CSV files preserving sheets and encoding. Move data across Excel and pipelines — local SheetJS work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3258,7 +3258,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "VCF ↔ CSV Converter",
     "slug": "vcf-csv-converter",
     "category": "Converter",
-    "description": "Bidirectional converter between vCard (VCF) and CSV formats. Perfect for importing/exporting address books between any platform or service.",
+    "description": "Convert vCard contacts to CSV spreadsheets and back — migrate address books anywhere. Move 500 iPhone contacts to Google — local parsing, free quota on saves.",
     "isPro": false
   },
   {
@@ -3266,7 +3266,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICS ↔ CSV Converter",
     "slug": "ics-csv-converter",
     "category": "Converter",
-    "description": "Bidirectional converter between iCalendar (ICS) and CSV formats. Migrate events between Google Calendar, Outlook, Apple Calendar, and spreadsheets.",
+    "description": "Convert calendar ICS files to CSV rows — audit events in spreadsheets. Turn a year of meetings into data — local parsing, free quota on saves.",
     "isPro": false
   },
   {
@@ -3274,7 +3274,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WAV to MP3",
     "slug": "wav-to-mp3",
     "category": "Audio",
-    "description": "Convert WAV audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert WAV audio files to MP3 format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3282,7 +3282,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "FLAC to MP3",
     "slug": "flac-to-mp3",
     "category": "Audio",
-    "description": "Convert FLAC audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert FLAC audio files to MP3 format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3290,7 +3290,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "FLAC to WMA",
     "slug": "flac-to-wma",
     "category": "Audio",
-    "description": "Convert FLAC audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert FLAC audio files to WMA format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for Windows-only workflows.",
     "isPro": false
   },
   {
@@ -3298,7 +3298,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "FLAC to Opus",
     "slug": "flac-to-opus",
     "category": "Audio",
-    "description": "Convert FLAC audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert FLAC audio files to OPUS format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3306,7 +3306,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "FLAC to AIFF",
     "slug": "flac-to-aiff",
     "category": "Audio",
-    "description": "Convert FLAC audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert FLAC audio files to AIFF format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for native Logic ingest.",
     "isPro": false
   },
   {
@@ -3314,7 +3314,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OGG to MP3",
     "slug": "ogg-to-mp3",
     "category": "Audio",
-    "description": "Convert OGG audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert OGG audio files to MP3 format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for universal device playback.",
     "isPro": false
   },
   {
@@ -3322,7 +3322,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OGG to WMA",
     "slug": "ogg-to-wma",
     "category": "Audio",
-    "description": "Convert OGG audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert OGG audio files to WMA format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3330,7 +3330,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OGG to Opus",
     "slug": "ogg-to-opus",
     "category": "Audio",
-    "description": "Convert OGG audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert OGG audio files to OPUS format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for a newer codec generation.",
     "isPro": false
   },
   {
@@ -3338,7 +3338,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OGG to AIFF",
     "slug": "ogg-to-aiff",
     "category": "Audio",
-    "description": "Convert OGG audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert OGG audio files to AIFF format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3346,7 +3346,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "M4A to MP3",
     "slug": "m4a-to-mp3",
     "category": "Audio",
-    "description": "Convert M4A audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert M4A audio files to MP3 format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. when leaving the Apple ecosystem.",
     "isPro": false
   },
   {
@@ -3354,7 +3354,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "M4A to WMA",
     "slug": "m4a-to-wma",
     "category": "Audio",
-    "description": "Convert M4A audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert M4A audio files to WMA format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3362,7 +3362,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "M4A to Opus",
     "slug": "m4a-to-opus",
     "category": "Audio",
-    "description": "Convert M4A audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert M4A audio files to OPUS format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for efficient voice streaming.",
     "isPro": false
   },
   {
@@ -3370,7 +3370,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "M4A to AIFF",
     "slug": "m4a-to-aiff",
     "category": "Audio",
-    "description": "Convert M4A audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert M4A to AIFF for Logic Pro and GarageBand native ingest. Move Apple audio into pro workflows — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3378,7 +3378,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AAC to MP3",
     "slug": "aac-to-mp3",
     "category": "Audio",
-    "description": "Convert AAC audio files to MP3 format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert AAC to universally compatible MP3 for legacy players and sharing. Reach every device ever made — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3386,7 +3386,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AAC to WMA",
     "slug": "aac-to-wma",
     "category": "Audio",
-    "description": "Convert AAC audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert AAC audio files to WMA format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for corporate Windows systems.",
     "isPro": false
   },
   {
@@ -3394,7 +3394,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AAC to Opus",
     "slug": "aac-to-opus",
     "category": "Audio",
-    "description": "Convert AAC audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert AAC to ultra-efficient Opus for voice streaming, bots, and VoIP. Shrink spoken audio to tiny bitrates — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3402,7 +3402,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AAC to AIFF",
     "slug": "aac-to-aiff",
     "category": "Audio",
-    "description": "Convert AAC audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert AAC audio files to AIFF format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for professional Apple workflows.",
     "isPro": false
   },
   {
@@ -3410,7 +3410,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WMA to WAV",
     "slug": "wma-to-wav",
     "category": "Audio",
-    "description": "Convert WMA audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert WMA audio files to WAV format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for editable uncompressed audio.",
     "isPro": false
   },
   {
@@ -3418,7 +3418,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WMA to FLAC",
     "slug": "wma-to-flac",
     "category": "Audio",
-    "description": "Convert WMA audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert WMA to FLAC for lossless Windows-library archival. Escape legacy codecs without further loss — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3426,7 +3426,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WMA to OGG",
     "slug": "wma-to-ogg",
     "category": "Audio",
-    "description": "Convert WMA audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert WMA audio files to OGG format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for open-source playback.",
     "isPro": false
   },
   {
@@ -3434,7 +3434,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WMA to M4A",
     "slug": "wma-to-m4a",
     "category": "Audio",
-    "description": "Convert WMA audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert WMA audio files to M4A format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for Apple devices and apps.",
     "isPro": false
   },
   {
@@ -3442,7 +3442,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WMA to AAC",
     "slug": "wma-to-aac",
     "category": "Audio",
-    "description": "Convert WMA audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert legacy WMA to efficient AAC for modern players and phones. Rescue Windows Media libraries for today — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3450,7 +3450,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WMA to Opus",
     "slug": "wma-to-opus",
     "category": "Audio",
-    "description": "Convert WMA audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert WMA audio files to OPUS format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3458,7 +3458,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WMA to AIFF",
     "slug": "wma-to-aiff",
     "category": "Audio",
-    "description": "Convert WMA audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert WMA to uncompressed AIFF for Apple pro audio workflows. Bring legacy libraries into Logic — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3466,7 +3466,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Opus to WAV",
     "slug": "opus-to-wav",
     "category": "Audio",
-    "description": "Convert OPUS audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert OPUS audio files to WAV format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3474,7 +3474,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Opus to FLAC",
     "slug": "opus-to-flac",
     "category": "Audio",
-    "description": "Convert OPUS audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert OPUS audio files to FLAC format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for archive uniformity.",
     "isPro": false
   },
   {
@@ -3482,7 +3482,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Opus to OGG",
     "slug": "opus-to-ogg",
     "category": "Audio",
-    "description": "Convert OPUS audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert OPUS audio files to OGG format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3490,7 +3490,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Opus to M4A",
     "slug": "opus-to-m4a",
     "category": "Audio",
-    "description": "Convert OPUS audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert Opus voice files to M4A for Apple Podcasts and iTunes compatibility. Publish voice content where Opus won\\'t play — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3498,7 +3498,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Opus to AAC",
     "slug": "opus-to-aac",
     "category": "Audio",
-    "description": "Convert OPUS audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert OPUS audio files to AAC format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3506,7 +3506,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Opus to WMA",
     "slug": "opus-to-wma",
     "category": "Audio",
-    "description": "Convert OPUS audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert OPUS audio files to WMA format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for legacy Windows targets.",
     "isPro": false
   },
   {
@@ -3514,7 +3514,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Opus to AIFF",
     "slug": "opus-to-aiff",
     "category": "Audio",
-    "description": "Convert OPUS audio files to AIFF format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert OPUS audio files to AIFF format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3522,7 +3522,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AIFF to WAV",
     "slug": "aiff-to-wav",
     "category": "Audio",
-    "description": "Convert AIFF audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert AIFF audio files to WAV format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free. for Windows and DAW compatibility.",
     "isPro": false
   },
   {
@@ -3530,7 +3530,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AIFF to FLAC",
     "slug": "aiff-to-flac",
     "category": "Audio",
-    "description": "Convert AIFF audio files to FLAC format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Compress AIFF masters to FLAC at half size with zero loss — universal archival. Move Logic bounces into long-term storage — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3538,7 +3538,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AIFF to OGG",
     "slug": "aiff-to-ogg",
     "category": "Audio",
-    "description": "Convert AIFF audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert AIFF audio files to OGG format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3546,7 +3546,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AIFF to M4A",
     "slug": "aiff-to-m4a",
     "category": "Audio",
-    "description": "Convert AIFF audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert AIFF audio files to M4A format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3554,7 +3554,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AIFF to AAC",
     "slug": "aiff-to-aac",
     "category": "Audio",
-    "description": "Convert AIFF audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert AIFF masters to efficient AAC for sharing and streaming previews. Send listenable links without huge uploads — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3562,7 +3562,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AIFF to WMA",
     "slug": "aiff-to-wma",
     "category": "Audio",
-    "description": "Convert AIFF audio files to WMA format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert AIFF to WMA for legacy Windows systems that accept nothing else. Serve corporate libraries stuck on old codecs — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3570,7 +3570,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AIFF to Opus",
     "slug": "aiff-to-opus",
     "category": "Audio",
-    "description": "Convert AIFF audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.",
+    "description": "Convert AIFF audio files to OPUS format directly in your browser. Audio never leaves your device — conversion and editing run locally in your browser with FFmpeg WASM. Private and free.",
     "isPro": false
   },
   {
@@ -3578,7 +3578,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Hex ↔ ASCII Converter",
     "slug": "hex-ascii-converter",
     "category": "Developer",
-    "description": "Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -3586,7 +3586,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "URL Encoder / Decoder",
     "slug": "url-encoder-decoder",
     "category": "Developer",
-    "description": "Encode or decode URLs with percent-encoding. Swaps input/output for quick bidirectional conversion. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Encode or decode URLs with percent-encoding. Swaps input/output for quick bidirectional conversion. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -3594,7 +3594,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HTML Entity Encoder / Decoder",
     "slug": "html-entity-encoder",
     "category": "Developer",
-    "description": "Encode special HTML characters into entities (&amp; &lt; &gt;) or decode them back to readable text.",
+    "description": "Encode special HTML characters into entities (&amp; &lt; &gt;) or decode them back to readable text — display code safely and neutralize injection vectors.",
     "isPro": false
   },
   {
@@ -3602,7 +3602,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Backslash Escape / Unescape",
     "slug": "backslash-escape",
     "category": "Developer",
-    "description": "Escape or unescape special characters with backslashes. Handles newlines, tabs, quotes, and more. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Escape or unescape special characters with backslashes. Handles newlines, tabs, quotes, and more. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -3610,7 +3610,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random String Generator",
     "slug": "random-string-generator",
     "category": "Utility",
-    "description": "Generate cryptographically secure random strings with customizable length, count, and character sets (uppercase, lowercase, digits, symbols).",
+    "description": "Generate random alphanumeric strings for tokens, IDs, and test fixtures. Mint 32-char references in bulk — free, local, no signup.",
     "isPro": false
   },
   {
@@ -3618,7 +3618,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Number Base Converter",
     "slug": "number-base-converter",
     "category": "Converter",
-    "description": "Convert numbers between binary (2), octal (8), decimal (10), and hexadecimal (16) bases with instant swap.",
+    "description": "Convert numbers between binary, octal, decimal, and hex with bitwise views. Read 0xFF as 255 instantly — local math, free, no signup.",
     "isPro": false
   },
   {
@@ -3626,7 +3626,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Line Sorter & Deduplicator",
     "slug": "line-sorter",
     "category": "Utility",
-    "description": "Sort lines alphabetically (A→Z, Z→A), reverse order, shuffle randomly, or remove duplicate lines.",
+    "description": "Sort lines alphabetically (A→Z, Z→A), reverse order, shuffle randomly, or remove duplicate lines. A–Z, Z–A, length, shuffle, and dedupe modes cover every ordering chore — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -3634,7 +3634,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "URL Parser",
     "slug": "url-parser",
     "category": "Developer",
-    "description": "Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more with copy-to-clipboard.",
+    "description": "Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more with copy-to-clipboard. Host, path, query, and fragment split with decoding — debug redirect chains precisely. Runs locally, free, no signup.",
     "isPro": false
   },
   {
@@ -3650,7 +3650,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Unix Time Converter",
     "slug": "unix-time-converter",
     "category": "Utility",
-    "description": "Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time formats.",
+    "description": "Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time formats. Milliseconds, seconds, and ISO 8601 convert both directions with timezone clarity — local math, free, no signup.",
     "isPro": false
   },
   {
@@ -3658,7 +3658,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Code Beautifier & Minifier",
     "slug": "code-beautifier",
     "category": "Developer",
-    "description": "Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS with a single click.",
+    "description": "Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS with a single click. HTML, CSS, JS, XML, and more normalize in one pass — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -3682,7 +3682,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to CSS Converter",
     "slug": "svg-to-css",
     "category": "Developer",
-    "description": "Convert SVG images to CSS format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert SVG images to CSS format in your browser. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -3690,7 +3690,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JSON to Code Generator",
     "slug": "json-to-code",
     "category": "Converter",
-    "description": "Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. Files are converted locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -3698,7 +3698,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JWT Debugger",
     "slug": "jwt-debugger",
     "category": "Developer",
-    "description": "Decode and inspect JWT tokens — view header, payload, expiration, issuer, subject, and other standard claims.",
+    "description": "Decode and inspect JWT tokens — view header, payload, expiration, issuer, subject, and other standard claims. Header, payload, and expiry decode with signature guidance — local inspection, free, no signup.",
     "isPro": false
   },
   {
@@ -3706,7 +3706,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HTML Preview",
     "slug": "html-preview",
     "category": "Developer",
-    "description": "Write HTML and see a live preview rendered in a sandboxed iframe. Perfect for prototyping and testing. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Write HTML and see a live preview rendered in a sandboxed iframe. Perfect for prototyping and testing. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -3714,7 +3714,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Cron Expression Parser",
     "slug": "cron-parser",
     "category": "Developer",
-    "description": "Parse cron expressions into human-readable descriptions. Includes common presets for quick reference.",
+    "description": "Parse cron expressions into human-readable descriptions. Includes common presets for quick reference. Presets plus plain-English schedules prevent 3am surprises — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -3722,7 +3722,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TOML Converter",
     "slug": "toml-converter",
     "category": "Converter",
-    "description": "Convert between JSON, YAML, and TOML formats. Four-direction conversion: JSON↔TOML and YAML↔TOML.",
+    "description": "Convert TOML configs to and from JSON/YAML — Cargo, pyproject, and app settings. Migrate Rust configs cleanly — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -3738,7 +3738,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text Converter & Obfuscator",
     "slug": "text-converter",
     "category": "Developer",
-    "description": "NATO phonetic alphabet converter, ASCII binary converter, Unicode code point viewer, Roman numeral converter, and string obfuscator with leet speak, ROT13, Base64, and shuffle.",
+    "description": "Convert text between NATO phonetic, ASCII codes, binary, and Unicode representations. Spell callsigns and debug encodings — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -3746,7 +3746,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ETA Calculator",
     "slug": "eta-calculator",
     "category": "Calculator",
-    "description": "Estimate travel time from distance and speed — with optional arrival time.",
+    "description": "Estimate travel time from distance and speed — with optional arrival time and traffic buffer. Add traffic buffers and arrival targets for realistic plans — free, local, no signup.",
     "isPro": false
   },
   {
@@ -3762,7 +3762,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WiFi QR Generator",
     "slug": "wifi-qr-generator",
     "category": "Utility",
-    "description": "Generate QR codes for WiFi network credentials — scan to connect.",
+    "description": "Generate WiFi QR codes guests scan to join — no password dictation. Put one on the fridge for visitors — free, local, no signup.",
     "isPro": false
   },
   {
@@ -3770,7 +3770,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Phone Number Parser",
     "slug": "phone-parser",
     "category": "Developer",
-    "description": "Parse and validate international phone numbers with country detection.",
+    "description": "Parse and validate international phone numbers with automatic country detection from the dial code. All validation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -3778,7 +3778,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Slugify",
     "slug": "slugify-tool",
     "category": "Utility",
-    "description": "Convert text to URL-friendly slugs with configurable separators. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert text to URL-friendly slugs with configurable separators. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -3786,7 +3786,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ULID Generator",
     "slug": "ulid-generator",
     "category": "Utility",
-    "description": "Generate time-ordered ULID identifiers with Crockford base32 encoding. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate time-ordered ULID identifiers with Crockford base32 encoding. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -3794,7 +3794,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Numeronym Generator",
     "slug": "numeronym-generator",
     "category": "Utility",
-    "description": "Convert words to numeronyms (a11y-style) and acronyms. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert words to numeronyms (a11y-style) and acronyms. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -3802,7 +3802,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MAC Vendor Lookup",
     "slug": "mac-vendor-lookup",
     "category": "Developer",
-    "description": "Look up device manufacturer from MAC address OUI prefix.",
+    "description": "Look up device manufacturer from a MAC address OUI prefix, covering thousands of registered vendors from Apple and Samsung to Intel and Cisco.",
     "isPro": false
   },
   {
@@ -3810,7 +3810,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "List Converter",
     "slug": "list-converter",
     "category": "Utility",
-    "description": "Convert lists between delimiters: comma, newline, pipe, tab, semicolon, and space. Auto-detects input format and supports trim, sort, and deduplicate.",
+    "description": "Convert lists between comma, newline, JSON array, and quoted formats. Move data across tools without reformatting — free, local, no signup.",
     "isPro": false
   },
   {
@@ -3826,7 +3826,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Emoji Picker",
     "slug": "emoji-picker",
     "category": "Utility",
-    "description": "Browse 400+ emojis organized by category with search and copy.",
+    "description": "Pick emoji by keyword with skin-tone and variant options — copy anywhere. Find the exact reaction fast — free, local, no signup.",
     "isPro": false
   },
   {
@@ -3834,7 +3834,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ASCII Art Generator",
     "slug": "ascii-art-generator",
     "category": "Utility",
-    "description": "Convert text to ASCII art with multiple font styles.",
+    "description": "Convert text to ASCII art with multiple font styles — download or copy the result for READMEs, code comments, and banners.",
     "isPro": false
   },
   {
@@ -3842,7 +3842,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ASCII Font Generator",
     "slug": "ascii-font-generator",
     "category": "Utility",
-    "description": "Generate large ASCII text banners with multiple font styles — perfect for terminal headers and text art.",
+    "description": "Generate ASCII-art text banners and figlet fonts for READMEs and terminals. Make headers that pop in plain text — free, local, no signup.",
     "isPro": false
   },
   {
@@ -3850,7 +3850,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Benchmark Builder",
     "slug": "benchmark-builder",
     "category": "Utility",
-    "description": "Measure browser CPU performance with synthetic benchmarks: integer math, floating point, array sorting, string ops, and mixed workloads.",
+    "description": "Build JavaScript micro-benchmarks with warmup, iterations, and ops/sec stats. Prove which snippet is faster — local measurement, free, no signup.",
     "isPro": false
   },
   {
@@ -3858,7 +3858,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF to PNG",
     "slug": "pdf-to-png",
     "category": "PDF",
-    "description": "Convert PDF images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert PDF images to PNG format in your browser. Documents stay on your device — editing and conversion run locally in your browser.",
     "isPro": false
   },
   {
@@ -3874,7 +3874,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Info & Analysis",
     "slug": "pdf-info",
     "category": "PDF",
-    "description": "View document metadata, page dimensions, extract all text content, and export structured data as JSON from any PDF. Essential for document auditing and compliance.",
+    "description": "Read any PDF\\'s metadata instantly — page count, size, author, creation date, encryption status. Verify a download before opening fully — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -3882,7 +3882,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Cleanup",
     "slug": "pdf-cleanup",
     "category": "PDF",
-    "description": "Remove annotations, strip hidden metadata, delete blank pages, reverse page order, or sanitize your PDF documents. Combine multiple cleanup operations in one pass.",
+    "description": "Remove blank pages, embedded junk, and bloat from PDFs in one pass — compress, clean, and standardize. Shrink a bloated 80 MB archive for sharing — local work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3890,7 +3890,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Background Color",
     "slug": "pdf-background-color",
     "category": "PDF",
-    "description": "Add a subtle color tint to all pages in a PDF document. Upload your PDF and pick a background color.",
+    "description": "Add a subtle color tint to all pages in a PDF document. Upload your PDF and pick a background color. Tint every page uniformly for branding or readability themes — local pdf-lib work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3898,7 +3898,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Add Blank Page",
     "slug": "pdf-add-blank-page",
     "category": "PDF",
-    "description": "Insert blank pages at any position in a PDF document. Choose page size, count, and position.",
+    "description": "Insert blank pages at any position in a PDF document. Choose page size, count, and position. Choose page size and count to match the document — local pdf-lib work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3906,7 +3906,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Bates Numbering",
     "slug": "pdf-bates-numbering",
     "category": "PDF",
-    "description": "Add sequential Bates numbers to every page of your PDF. Customize prefix, starting number, and position.",
+    "description": "Add sequential Bates numbers to every page of your PDF. Customize prefix, starting number, and position. Prefixes, start numbers, and positioning per filing rules — local pdf-lib work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3914,7 +3914,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Stamp",
     "slug": "pdf-stamp",
     "category": "PDF",
-    "description": "Add a diagonal watermark stamp (DRAFT, CONFIDENTIAL, etc.) to every page of your PDF.",
+    "description": "Add a diagonal watermark stamp (DRAFT, CONFIDENTIAL, etc.) to every page of your PDF — mark review copies and control document status visibly. Runs locally in your browser.",
     "isPro": false
   },
   {
@@ -3922,7 +3922,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Timestamp",
     "slug": "pdf-timestamp",
     "category": "PDF",
-    "description": "Add a generation timestamp to the bottom-right corner of every page in your PDF.",
+    "description": "Add a generation timestamp to the bottom-right corner of every page in your PDF — proof of when each copy was produced. Works on scans and forms; runs locally in your browser.",
     "isPro": false
   },
   {
@@ -3930,7 +3930,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Table of Contents",
     "slug": "pdf-table-of-contents",
     "category": "PDF",
-    "description": "Insert a table of contents page at the beginning of your PDF document.",
+    "description": "Generate clickable tables of contents for PDFs from headings — navigate 300-page ebooks instantly. Add what the author forgot — local pdf-lib work, free quota on saves.",
     "isPro": false
   },
   {
@@ -3954,7 +3954,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Study Time Calculator",
     "slug": "study-time-calculator",
     "category": "Calculator",
-    "description": "Calculate total study hours over a period and see monthly projections.",
+    "description": "Plan study hours from syllabus weight and days left — pass with scheduled effort. Turn 5 chapters in 10 days into daily targets — free, local, no signup.",
     "isPro": false
   },
   {
@@ -3962,7 +3962,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Test Score Calculator",
     "slug": "test-score-calculator",
     "category": "Calculator",
-    "description": "Convert correct/total answers to percentage and letter grade.",
+    "description": "Compute test percentages and grades from correct/total with curve options. Turn 42/50 into 84% (B) instantly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -3970,7 +3970,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Words Per Page Calculator",
     "slug": "words-per-page-calculator",
     "category": "Calculator",
-    "description": "Estimate how many pages your word count will take at different font sizes.",
+    "description": "Estimate how many pages your word count fills at different font sizes — compare 11pt vs 12pt, single vs double spacing, for essays and manuscripts.",
     "isPro": false
   },
   {
@@ -3978,7 +3978,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Profit & Loss Calculator",
     "slug": "profit-loss-calculator",
     "category": "Finance",
-    "description": "Calculate gross profit, net income, and margin from revenue, COGS, and operating expenses.",
+    "description": "Compute profit and loss from revenue, costs, and expenses with margin percentages. Close the month knowing exact numbers — free, local, no signup.",
     "isPro": false
   },
   {
@@ -3986,7 +3986,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Ring Size Converter",
     "slug": "ring-size-converter",
     "category": "Utility",
-    "description": "Convert inner diameter in millimeters to US ring sizes.",
+    "description": "Convert ring sizes across US, UK, EU, and Japanese standards with millimeter diameters. Buy a size 7 as EU 54 correctly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -3994,7 +3994,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Screen Size Calculator",
     "slug": "screen-size-converter",
     "category": "Calculator",
-    "description": "Calculate width, height, and area from diagonal screen size and aspect ratio.",
+    "description": "Convert screen sizes between inches, cm, resolution, and aspect — compare displays honestly. Check a 27-inch 4K pixel density — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4002,7 +4002,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Shoe Size Converter",
     "slug": "shoe-size-converter",
     "category": "Utility",
-    "description": "Convert between US, UK, European, and Asian shoe size systems instantly. Includes men\\'s, women\\'s, and children\\'s size charts.",
+    "description": "Convert shoe sizes across US, UK, EU, and CM Mondopoint with foot-length mapping. Translate EU 42 to US 9 accurately — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4010,7 +4010,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ZIP File Extractor",
     "slug": "zip-file-extractor",
     "category": "Utility",
-    "description": "View the contents and file sizes inside a ZIP archive without extracting.",
+    "description": "Peek inside any ZIP — list contents with sizes before extracting anything. Verify a 500 MB download\\'s contents first — local fflate parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -4026,7 +4026,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PKCE Verifier",
     "slug": "pkce-verifier",
     "category": "Developer",
-    "description": "Generate PKCE code_verifier and code_challenge (S256) pairs, or verify that a verifier matches a challenge.",
+    "description": "Generate PKCE code_verifier and code_challenge (S256) pairs, or verify that a verifier matches a challenge. Test mobile and SPA auth flows safely — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4034,7 +4034,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OAuth Scope Builder",
     "slug": "oauth-scope-builder",
     "category": "Developer",
-    "description": "Build OAuth scope strings from comma-separated values with URL encoding and breakdown.",
+    "description": "Build OAuth scope strings from comma-separated values with URL encoding and breakdown. Space-delimited scopes with encoding handled — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4042,7 +4042,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OAuth State Validator",
     "slug": "oauth-state-validator",
     "category": "Developer",
-    "description": "Validate OAuth state parameters for format, length, and age.",
+    "description": "Validate OAuth state parameters for format, length, and age — catch CSRF holes before they ship. Nothing leaves your browser.",
     "isPro": false
   },
   {
@@ -4050,7 +4050,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PBKDF2 Hash Generator",
     "slug": "pbkdf2-hash-generator",
     "category": "Developer",
-    "description": "Generate PBKDF2 hashes with 10,000 iterations of SHA-256 for password storage simulation.",
+    "description": "Generate PBKDF2 hashes with 10,000 iterations of SHA-256 for password storage simulation. Tune iterations to hardware — slower hashes resist brute force — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4058,7 +4058,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Cookie Parser & Analyzer",
     "slug": "cookie-parser",
     "category": "Developer",
-    "description": "Parse Set-Cookie headers into structured JSON, or analyze cookie security flags (Secure, HttpOnly, SameSite, expiry).",
+    "description": "Parse Set-Cookie headers into structured JSON, or analyze cookie security flags (Secure, HttpOnly, SameSite, expiry). Flag missing Secure, HttpOnly, and SameSite attributes — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4066,7 +4066,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HTML Linter",
     "slug": "html-linter",
     "category": "Developer",
-    "description": "Lint HTML for missing DOCTYPE, unclosed tags, and unexpected closing tags. Paste your HTML and get instant feedback.",
+    "description": "Lint HTML for missing DOCTYPE, unclosed tags, and unexpected closing tags. Paste your HTML and get instant feedback. Catch errors before browsers guess wrong — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4074,7 +4074,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "XML Minifier / Validator",
     "slug": "xml-minifier-validator",
     "category": "Developer",
-    "description": "Minify XML by removing whitespace, or validate XML syntax. Paste your XML and choose an operation.",
+    "description": "Minify XML by removing whitespace, or validate XML syntax. Paste your XML and choose an operation. Minify for transit or validate for correctness — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4082,7 +4082,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Border CSS Generator",
     "slug": "border-css-generator",
     "category": "Design",
-    "description": "Visual border CSS generator with width, style, color, and radius controls with live preview.",
+    "description": "Design CSS borders visually — width, style, color, and radius with live preview and copy-ready code. Prototype a card border in 30 seconds — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4090,7 +4090,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Typography Preview",
     "slug": "typography-preview",
     "category": "Design",
-    "description": "Typography CSS generator with font-size, line-height, letter-spacing, and font-weight controls with live preview.",
+    "description": "Preview font size, line-height, letter-spacing, and weight combos live before committing CSS. Test a 32px/1.5 bold hero in seconds — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4098,7 +4098,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Base32 Encoder / Decoder",
     "slug": "base32-encoder",
     "category": "Developer",
-    "description": "Encode text to Base32 or decode Base32 strings back to text.",
+    "description": "Encode text to Base32 or decode Base32 strings back — the alphabet TOTP apps and authenticator URIs use. Both directions, fully local.",
     "isPro": false
   },
   {
@@ -4106,7 +4106,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Base64 to JSON Decoder",
     "slug": "base64-json-decoder",
     "category": "Developer",
-    "description": "Decode Base64 strings and pretty-print JSON data — paste encoded text to see the decoded result instantly.",
+    "description": "Decode Base64 strings and pretty-print JSON data — paste encoded text to see the decoded result instantly. Inspect API payloads and tokens readably — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4114,7 +4114,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Hex to Text Converter",
     "slug": "hex-text-converter",
     "category": "Developer",
-    "description": "Convert between hex strings and text. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert between hex strings and text. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -4122,7 +4122,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to Base64 Converter",
     "slug": "svg-base64-converter",
     "category": "Converter",
-    "description": "Convert SVG images to BASE64 format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Encode SVGs to Base64 data URIs for CSS embedding — icons without requests. Inline a logo in one line — local encoding, free, no signup.",
     "isPro": false
   },
   {
@@ -4130,7 +4130,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Character Encoding Converter",
     "slug": "character-encoding-converter",
     "category": "Developer",
-    "description": "Analyze each character to see its Unicode code point and ASCII/non-ASCII status.",
+    "description": "Analyze each character to see its Unicode code point and ASCII/non-ASCII status. Debug mojibake with byte-level views — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4138,7 +4138,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Unicode Converter",
     "slug": "unicode-converter",
     "category": "Developer",
-    "description": "Convert text to Unicode code points with JavaScript escape sequences and HTML entities.",
+    "description": "Convert text to Unicode code points with JavaScript escape sequences and HTML entities. JavaScript escapes plus HTML entities covered — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4146,7 +4146,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Markdown to Slack Converter",
     "slug": "markdown-slack-converter",
     "category": "Converter",
-    "description": "Convert Markdown formatting to Slack mrkdwn syntax — bold, italic, links, code blocks, and lists translated automatically.",
+    "description": "Convert Markdown to Slack mrkdwn — bold, italics, links, and code that actually render. Post formatted updates that work — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -4154,7 +4154,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PX to REM Converter",
     "slug": "px-rem-converter",
     "category": "Developer",
-    "description": "Convert between PX and REM with custom base size. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert between PX and REM with custom base size. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -4162,7 +4162,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG Optimizer",
     "slug": "svg-optimizer",
     "category": "Developer",
-    "description": "Minify SVG by removing whitespace, comments, and redundant attributes.",
+    "description": "Minify SVG by removing whitespace, comments, and redundant attributes — typically cutting files 20–50% with zero visual change.",
     "isPro": false
   },
   {
@@ -4170,7 +4170,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Power Converter",
     "slug": "power-converter",
     "category": "Utility",
-    "description": "Convert between kW, hp, bhp, W, MW, and BTU/hr.",
+    "description": "Convert between kW, hp, bhp, W, MW, and BTU/hr — engine specs, solar sizing, and HVAC math in one place. Size solar arrays and compare engine outputs correctly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4178,7 +4178,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Pressure Converter",
     "slug": "pressure-converter",
     "category": "Utility",
-    "description": "Convert between kPa, psi, bar, atm, Torr, and mbar. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert between kPa, psi, bar, atm, Torr, and mbar. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4186,7 +4186,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Color Shades & Tints",
     "slug": "color-shades-tints",
     "category": "Design",
-    "description": "Generate color shades and tints from a base color by varying lightness in HSL space.",
+    "description": "Generate shade and tint scales from any base color — 10-step ramps for design systems. Build hover states systematically — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4194,7 +4194,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Contrast Ratio Checker",
     "slug": "contrast-ratio-checker",
     "category": "Design",
-    "description": "Check foreground/background color contrast against WCAG AA and AAA accessibility standards.",
+    "description": "Check any color pair\\'s WCAG contrast ratio with AA/AAA verdicts for normal and large text. Prove 4.5:1 before shipping — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4202,7 +4202,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Media Query Generator",
     "slug": "media-query-generator",
     "category": "Developer",
-    "description": "Generate CSS media queries with min/max width and optional device type conditions.",
+    "description": "Generate CSS media queries with min/max width and optional device type conditions. Mobile-first breakpoints with device conditions — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4210,7 +4210,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Markdown Table Generator",
     "slug": "markdown-table-generator",
     "category": "Developer",
-    "description": "Generate Markdown table templates with configurable rows and columns.",
+    "description": "Generate Markdown tables without hand-aligning pipes — define columns and rows, preview live, and copy GitHub-ready markup.",
     "isPro": false
   },
   {
@@ -4218,7 +4218,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Gemini Watermark Remover",
     "slug": "gemini-watermark-remover",
     "category": "Image",
-    "description": "Remove the visible sparkle watermark from Gemini AI-generated images using reverse alpha blending. Supports single image and batch processing with ZIP download. 100% client-side — nothing is uploaded.",
+    "description": "Remove Google\\'s sparkle watermark from Gemini-generated images — auto-detects 48/96px marks and reverses alpha blending locally. Single images free; batch mode Pro-only.",
     "isPro": false
   },
   {
@@ -4226,7 +4226,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk HEIC Converter",
     "slug": "bulk-heic-converter",
     "category": "Image",
-    "description": "Convert iPhone HEIC/HEIF photos to JPG, PNG, or WebP in batch with quality control. Fully client-side — your photos never leave your device.",
+    "description": "Convert iPhone HEIC/HEIF photos to JPG, PNG, or WebP in batch with quality control. Designers pull iPhone shots into any workflow — local heic2any work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -4234,7 +4234,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Image Upscaler",
     "slug": "bulk-image-upscaler",
     "category": "Image",
-    "description": "Batch upscale AI-generated and regular images by 2x, 3x, or 4x with Lanczos, Bicubic, or Bilinear algorithms. Side-by-side comparison preview. 100% client-side.",
+    "description": "Upscale batches of AI art and regular images 2x, 3x, or 4x with Lanczos sharp or Bicubic smooth resampling. Creators print 50 Midjourney pieces at poster size — local Canvas work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -4242,7 +4242,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk AVIF Optimizer",
     "slug": "bulk-avif-optimizer",
     "category": "Image",
-    "description": "Convert and compress images to AVIF format in bulk with quality presets and max-width controls. AVIF provides 50% smaller files than JPEG with better quality. 100% client-side.",
+    "description": "Convert and compress images to next-gen AVIF with quality presets and max-width caps. Performance teams cut hero images 50% smaller than WebP — local Canvas work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -4250,7 +4250,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Nginx Config Generator",
     "slug": "nginx-config-generator",
     "category": "Developer",
-    "description": "Generate Nginx server block configurations from directive lists.",
+    "description": "Generate Nginx server blocks — reverse proxy, SSL, gzip, caching headers — without syntax hunting. Ship a correct vhost first try — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -4258,7 +4258,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "IP Allowlist Generator",
     "slug": "ip-allowlist-generator",
     "category": "Developer",
-    "description": "Generate Nginx allow/deny rules from a list of CIDR ranges.",
+    "description": "Build IP allowlist rules for firewalls, security groups, and app configs from CIDR lists. Generate AWS, Nginx, and htaccess formats — local, free, no signup.",
     "isPro": false
   },
   {
@@ -4266,7 +4266,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "INI to JSON Converter",
     "slug": "ini-json-converter",
     "category": "Converter",
-    "description": "Convert INI configs to JSON. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert INI files to JSON objects and back — legacy configs to modern tooling. Migrate .ini without hand-editing — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -4274,7 +4274,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MessagePack Inspector",
     "slug": "msgpack-inspector",
     "category": "Developer",
-    "description": "Encode JSON as real MessagePack binary and inspect the resulting bytes. Supports both encode and decode modes.",
+    "description": "Decode MessagePack binary into readable JSON structures. Debug compact payloads without hex dumps — local decoding, free, no signup.",
     "isPro": false
   },
   {
@@ -4282,7 +4282,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CBOR Inspector",
     "slug": "cbor-inspector",
     "category": "Developer",
-    "description": "Encode JSON as real CBOR binary and inspect the resulting bytes with major type analysis. Supports both encode and decode modes.",
+    "description": "Decode CBOR binary (RFC 7049) into readable structures — inspect IoT and WebAuthn payloads. Read COSE keys without a parser library — local decoding, free, no signup.",
     "isPro": false
   },
   {
@@ -4290,7 +4290,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Data Anonymizer",
     "slug": "data-anonymizer",
     "category": "Developer",
-    "description": "Anonymize emails, phone numbers, and IP addresses in text by replacing them with placeholders.",
+    "description": "Mask PII in datasets — names, emails, phones, IDs — with consistent fake replacements. Share analytics safely under privacy rules — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -4298,7 +4298,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Code to cURL Converter",
     "slug": "code-to-curl-converter",
     "category": "Developer",
-    "description": "Convert fetch() or axios JavaScript code to equivalent cURL commands with headers, methods, and request body intact.",
+    "description": "Convert fetch, XHR, and HTTP client snippets to equivalent curl commands — headers and auth preserved for terminal debugging sessions.",
     "isPro": false
   },
   {
@@ -4306,7 +4306,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "cURL to Code Converter",
     "slug": "curl-to-code-converter",
     "category": "Developer",
-    "description": "Convert cURL commands to fetch() JavaScript code — paste a cURL string to get a ready-to-use fetch call.",
+    "description": "Convert curl commands to Fetch, Axios, Python, and Go snippets instantly. Move terminal wins into codebases — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -4314,7 +4314,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JSON-RPC Builder",
     "slug": "jsonrpc-builder",
     "category": "Developer",
-    "description": "Build JSON-RPC 2.0 request objects with method, params, and auto-generated ID.",
+    "description": "Build JSON-RPC 2.0 request envelopes with method, params, and IDs. Talk to Ethereum nodes and RPC APIs correctly — local building, free, no signup.",
     "isPro": false
   },
   {
@@ -4322,7 +4322,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HAR File Analyzer",
     "slug": "har-analyzer",
     "category": "Developer",
-    "description": "Analyze HAR files to see entry count, total size, total time, and URLs.",
+    "description": "Analyze HAR network captures — waterfall timing, payload sizes, failed requests. Find the 3-second render blocker in minutes — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -4330,7 +4330,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Log File Analyzer",
     "slug": "log-analyzer",
     "category": "Developer",
-    "description": "Count log lines by level (ERROR, INFO, WARN, DEBUG, etc.).",
+    "description": "Analyze log files — error grouping, level counts, time clustering. Find the 3am spike cause in minutes — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -4338,7 +4338,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "package.json Validator",
     "slug": "package-json-validator",
     "category": "Developer",
-    "description": "Validate package.json for required fields, semver format, and dependency presence.",
+    "description": "Validate package.json for required fields, semver format, and dependency presence. Catch missing fields and bad semver before installs fail — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4346,7 +4346,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MIME Type Finder",
     "slug": "mime-finder",
     "category": "Developer",
-    "description": "Look up MIME types for common file extensions.",
+    "description": "Find MIME types for any file extension — and extensions for MIME types. Set correct Content-Type headers fast — local reference, free, no signup.",
     "isPro": false
   },
   {
@@ -4354,7 +4354,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CIDR Calculator",
     "slug": "cidr-calculator",
     "category": "Developer",
-    "description": "Calculate CIDR subnet ranges — network address, broadcast, first/last host, total hosts, and netmask.",
+    "description": "Convert CIDR prefixes to masks, ranges, and host counts — /8 through /32 decoded. Answer \\'how many IPs in a /22\\' instantly — local math, free, no signup.",
     "isPro": false
   },
   {
@@ -4362,7 +4362,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AWS IAM Policy Analyzer",
     "slug": "aws-iam-policy-analyzer",
     "category": "Developer",
-    "description": "Paste an AWS IAM policy JSON to check for wildcard resources, overly broad actions, and full admin access.",
+    "description": "Paste an AWS IAM policy JSON to check for wildcard resources, overly broad actions, and full admin access. Deny-by-default review with least-privilege guidance — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4370,7 +4370,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SCSS to CSS Converter",
     "slug": "scss-to-css-converter",
     "category": "Converter",
-    "description": "Convert SCSS variables and nesting to plain CSS. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert SCSS variables and nesting to plain CSS. Files are converted locally in your browser — nothing is uploaded. Variables and nesting compile cleanly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4378,7 +4378,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Stylus to CSS Converter",
     "slug": "stylus-to-css-converter",
     "category": "Converter",
-    "description": "Convert Stylus syntax to plain CSS. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert Stylus syntax to plain CSS. Files are converted locally in your browser — nothing is uploaded. Indentation-based syntax compiles cleanly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4386,7 +4386,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Tailwind to CSS Converter",
     "slug": "tailwind-to-css-converter",
     "category": "Converter",
-    "description": "Convert Tailwind utility classes to plain CSS. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert Tailwind utility classes to plain CSS. Files are converted locally in your browser — nothing is uploaded. Utility classes expand to vanilla CSS for non-Tailwind projects — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4394,7 +4394,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Proto Schema Converter",
     "slug": "proto-schema-converter",
     "category": "Developer",
-    "description": "Convert Protobuf message definitions to TypeScript interfaces and JSON samples.",
+    "description": "Convert Protocol Buffer .proto definitions to JSON Schema and back — bridge gRPC APIs and JSON tooling for docs, validators, and gRPC tests.",
     "isPro": false
   },
   {
@@ -4410,7 +4410,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "tsconfig Analyzer",
     "slug": "tsconfig-analyzer",
     "category": "Developer",
-    "description": "Parse and describe each option in a tsconfig.json file.",
+    "description": "Audit tsconfig.json for strictness gaps, misconfigured paths, and target mismatches. Catch lax strictNullChecks before production does — local analysis, free, no signup.",
     "isPro": false
   },
   {
@@ -4418,7 +4418,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TypeScript Formatter",
     "slug": "typescript-formatter",
     "category": "Developer",
-    "description": "Auto-format TypeScript code with consistent indentation and line breaks.",
+    "description": "Format TypeScript with correct indentation, type-annotation spacing, and interface alignment. Clean up 500-line components before review — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -4426,7 +4426,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "String Template Tester",
     "slug": "string-template-tester",
     "category": "Developer",
-    "description": "Test string templates with {{variable}} placeholders against JSON variables.",
+    "description": "Test JavaScript template literals live — ${} interpolation, nesting, and escaping, evaluated instantly with instant error highlighting.",
     "isPro": false
   },
   {
@@ -4434,7 +4434,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Test Data Generator",
     "slug": "test-data-generator",
     "category": "Developer",
-    "description": "Generate test data objects from a schema defining field names and types.",
+    "description": "Generate realistic fake data — names, emails, numbers, addresses — in common formats for testing and demos for demos, seeding, and UI tests.",
     "isPro": false
   },
   {
@@ -4442,7 +4442,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Mortgage Calculator",
     "slug": "mortgage-calculator",
     "category": "Finance",
-    "description": "Calculate monthly mortgage payments with amortization schedule. Enter loan amount, interest rate, and term to see total interest paid. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate monthly mortgage payments with amortization schedule. Enter loan amount, interest rate, and term to see total interest paid. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4450,7 +4450,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ARR Calculator",
     "slug": "arr-calculator",
     "category": "Growth & Marketing",
-    "description": "Calculate Annual Recurring Revenue from subscription revenue, expansion revenue, and churn. Essential for SaaS businesses tracking growth. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate Annual Recurring Revenue from subscription revenue, expansion revenue, and churn. Essential for SaaS businesses tracking growth. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4458,7 +4458,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Compound Interest Calculator",
     "slug": "compound-interest-calculator",
     "category": "Finance",
-    "description": "Calculate compound interest with regular contributions. See how your money grows over time with different compounding frequencies. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate compound interest with regular contributions. See how your money grows over time with different compounding frequencies. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4466,7 +4466,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Car Loan Calculator",
     "slug": "car-loan-calculator",
     "category": "Finance",
-    "description": "Calculate monthly car loan payments, total interest, and total cost. Enter loan amount, rate, and term for a complete auto financing picture. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate monthly car loan payments, total interest, and total cost. Enter loan amount, rate, and term for a complete auto financing picture. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4474,7 +4474,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Car Lease Calculator",
     "slug": "car-lease-calculator",
     "category": "Finance",
-    "description": "Calculate monthly lease payments using capitalized cost, residual value, term, and money factor. Compare lease vs buy for your next vehicle. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Estimate monthly car lease payments from price, residual, and money factor. Know a $30k car\\'s true monthly cost — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4482,7 +4482,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Churn Rate Calculator",
     "slug": "churn-rate-calculator",
     "category": "Growth & Marketing",
-    "description": "Calculate customer churn rate by dividing customers lost by total customers. Monitor retention health for your subscription business. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate customer churn rate by dividing customers lost by total customers. Monitor retention health for your subscription business. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4490,7 +4490,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Debt Payoff Calculator",
     "slug": "debt-payoff-calculator",
     "category": "Finance",
-    "description": "Calculate how long it will take to pay off debt with monthly payments. See total interest paid and create a payoff plan. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Plan debt payoff with avalanche vs snowball strategies and extra payments. See a 5-year slog become 3 with $200 extra — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4498,7 +4498,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Discount Calculator",
     "slug": "discount-calculator",
     "category": "Finance",
-    "description": "Calculate savings and final price after a percentage discount. Perfect for shopping, sales, and budget planning. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate savings and final price after a percentage discount. Perfect for shopping, sales, and budget planning. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4506,7 +4506,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Hourly to Salary Calculator",
     "slug": "hourly-to-salary-calculator",
     "category": "Finance",
-    "description": "Convert hourly wage to annual salary. Enter hourly rate and hours per week to see your projected yearly income. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert hourly wage to annual salary. Enter hourly rate and hours per week to see your projected yearly income. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4514,7 +4514,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Inflation Calculator",
     "slug": "inflation-calculator",
     "category": "Finance",
-    "description": "Calculate the future value of money adjusted for inflation. See how purchasing power changes over time with different inflation rates. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Project future prices and eroded buying power at any inflation rate — Rs.100 today at 6% for 10 years costs Rs.179. Plan savings targets honestly — free, runs locally.",
     "isPro": false
   },
   {
@@ -4522,7 +4522,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Customer LTV Calculator",
     "slug": "customer-ltv-calculator",
     "category": "Growth & Marketing",
-    "description": "Calculate Customer Lifetime Value using ARPU and churn rate. Understand how much revenue each customer generates over their relationship. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute customer lifetime value from ARPA, margin, and churn — know what buyers are worth. Justify $500 CAC with $2,000 LTV — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4530,7 +4530,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MRR Calculator",
     "slug": "mrr-calculator",
     "category": "Growth & Marketing",
-    "description": "Calculate Monthly Recurring Revenue from customer count and average revenue per account (ARPA), with new, expansion, churned, and contraction MRR broken out so net growth is visible. Example: 120 customers at $49 ARPA = $5,880 MRR. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate Monthly Recurring Revenue from customer count and average revenue per account (ARPA), with new, expansion, churned, and contraction MRR broken out so net growth is visible. Example: 120 customers at $49 ARPA = $5,880 MRR. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4538,7 +4538,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Net Worth Calculator",
     "slug": "net-worth-calculator",
     "category": "Finance",
-    "description": "Calculate your net worth by subtracting total liabilities from total assets. Get a snapshot of your financial health. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute net worth from assets minus liabilities with category breakdowns. Track the number that actually matters yearly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4546,7 +4546,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Rent vs Buy Calculator",
     "slug": "rent-vs-buy-calculator",
     "category": "Finance",
-    "description": "Compare the total cost of renting versus buying a home over time. Factor in mortgage payments, rent, and equity growth. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compare the total cost of renting versus buying a home over time. Factor in mortgage payments, rent, and equity growth. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4554,7 +4554,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Retirement Calculator",
     "slug": "retirement-calculator",
     "category": "Finance",
-    "description": "Project your retirement savings based on current age, savings, monthly contributions, and expected returns. Plan for a comfortable retirement. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Project your retirement savings based on current age, savings, monthly contributions, and expected returns. Plan for a comfortable retirement. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4562,7 +4562,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Revenue Growth Calculator",
     "slug": "revenue-growth-calculator",
     "category": "Growth & Marketing",
-    "description": "Calculate revenue growth rate by comparing current period revenue to previous period. Track your business growth over time. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate revenue growth rate by comparing current period revenue to previous period. Track your business growth over time. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4570,7 +4570,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Runway Calculator",
     "slug": "runway-calculator",
     "category": "Growth & Marketing",
-    "description": "Calculate how many months your cash balance will last given your monthly burn rate. Essential for startup financial planning. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute startup runway from cash, burn, and revenue growth — months until decisions. Act at 12 months, not 3 — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4578,7 +4578,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "A/B Test Calculator",
     "slug": "ab-test-calculator",
     "category": "Growth & Marketing",
-    "description": "Calculate A/B test significance between two variants. Compare conversion rates with visitor and conversion data for each variant. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Check A/B test significance — conversion lifts that are real vs noise. Stop shipping coin flips — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4586,7 +4586,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Business Days Calculator",
     "slug": "business-days-calculator",
     "category": "Calculator",
-    "description": "Count the number of business days between two dates, excluding weekends. Plan projects and track working days accurately. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Count working days between two dates excluding weekends — HR teams prorate leave and payroll accurately. A 20-day leave request spans 28 calendar days — free, no signup, runs locally.",
     "isPro": false
   },
   {
@@ -4594,7 +4594,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Day of Week Calculator",
     "slug": "day-of-week-calculator",
     "category": "Calculator",
-    "description": "Find out what day of the week any date falls on. Look up birthdays, holidays, historical events, and future dates. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Find the weekday for any Gregorian date — plan anniversaries, verify old records, settle bets. Check what day you were born in seconds — free, no signup, runs locally.",
     "isPro": false
   },
   {
@@ -4602,7 +4602,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Day of Year Calculator",
     "slug": "day-of-year-calculator",
     "category": "Calculator",
-    "description": "Calculate the day number of the year for any date. Find out which day of 365 (or 366) a specific date represents. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert any date to its day-of-year number (1–365/366) with days remaining. Developers compute ordinal dates for logs and filenames — free, no signup, runs locally.",
     "isPro": false
   },
   {
@@ -4610,7 +4610,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Exponent Calculator",
     "slug": "exponent-calculator",
     "category": "Calculator",
-    "description": "Calculate base raised to an exponent power. Compute large exponential values quickly with this simple math tool. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Raise any base to any power — squares, cubes, negative and fractional exponents with full precision. Students check 2^10 = 1024 homework in seconds — free, no signup, runs locally.",
     "isPro": false
   },
   {
@@ -4618,7 +4618,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Final Grade Calculator",
     "slug": "final-grade-calculator",
     "category": "Calculator",
-    "description": "Calculate your final grade using weighted assignment scores. Enter grades and their weights to compute your overall percentage. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate your final grade using weighted assignment scores. Enter grades and their weights to compute your overall percentage. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4626,7 +4626,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GPA Calculator",
     "slug": "gpa-calculator",
     "category": "Calculator",
-    "description": "Calculate your Grade Point Average from letter grades and credit hours. Supports standard 4.0 grading scale. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute semester GPA from course grades on the standard 4.0 scale — quick academic snapshot. See what straight B\\'s earn — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4634,7 +4634,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Grade Calculator",
     "slug": "grade-calculator",
     "category": "Calculator",
-    "description": "Convert percentage scores to letter grades. Enter your percentage to see the corresponding letter grade on standard scale. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute course grades from weighted categories — what the final exam must deliver. Learn you need 92, not hope — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4642,7 +4642,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "College GPA Calculator",
     "slug": "college-gpa-calculator",
     "category": "Calculator",
-    "description": "Calculate semester and cumulative GPA. Enter current grades, credits, and previous GPA to track your academic performance. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute semester GPA from course grades and credit hours with weighted math. Students check what an A in a 4-credit lab does before finals — free, no signup, runs locally.",
     "isPro": false
   },
   {
@@ -4650,7 +4650,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Leap Year Calculator",
     "slug": "leap-year-calculator",
     "category": "Calculator",
-    "description": "Check if any year is a leap year. Enter a year to find out if it has 366 days with February 29. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Test any year for leap status with the full Gregorian rule — divisible by 4, except centuries unless divisible by 400. Settle the 1900 vs 2000 debate instantly — free, runs locally.",
     "isPro": false
   },
   {
@@ -4658,7 +4658,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Probability Calculator",
     "slug": "probability-calculator",
     "category": "Calculator",
-    "description": "Calculate probability of an event occurring. Enter favorable outcomes and total outcomes to get probability percentage and odds. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute probability for events — single, independent, conditional — with working shown. Price lottery dreams at true odds — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4666,7 +4666,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Proportion Calculator",
     "slug": "proportion-calculator",
     "category": "Calculator",
-    "description": "Solve proportions with three known values. Find the missing value in a:b = c:d ratio equations. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Solve proportions a/b = c/d for any missing term — recipes, maps, dosages scale correctly. Double a 4-serving recipe to 10 without breaking ratios — free, runs locally.",
     "isPro": false
   },
   {
@@ -4674,7 +4674,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Ratio Calculator",
     "slug": "ratio-calculator",
     "category": "Calculator",
-    "description": "Simplify ratios to their lowest terms. Enter two numbers to find the simplest whole-number ratio between them. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Simplify ratios to lowest terms and split quantities by ratio — paint mixes, profit shares, teams. Divide Rs.90,000 2:3:4 fairly in one pass — free, runs locally.",
     "isPro": false
   },
   {
@@ -4682,7 +4682,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Aspect Ratio Calculator",
     "slug": "aspect-ratio-calculator",
     "category": "Calculator",
-    "description": "Calculate the aspect ratio from width and height dimensions. Find the simplified W:H ratio for images, videos, and screens. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Get any image or screen\\'s aspect ratio and compute fitting dimensions — 16:9, 4:3, 1:1 and custom. Fit a 4000px photo to 1920 wide without distortion — free, runs locally.",
     "isPro": false
   },
   {
@@ -4690,7 +4690,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Circle Calculator",
     "slug": "circle-calculator",
     "category": "Calculator",
-    "description": "Calculate circle area and circumference from radius. Quick geometry calculations for circles of any size. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute circle area, circumference, diameter, and radius from any one known — geometry homework solved. Get all circle measures at once — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4698,7 +4698,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "DPI Calculator",
     "slug": "dpi-calculator",
     "category": "Calculator",
-    "description": "Calculate dots per inch from pixel dimensions and physical size. Determine display and print resolution quality. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute print DPI from pixel dimensions and print size — verify a photo prints sharp at 8×10. A 3000px file at 10 inches gives 300 DPI — free, runs locally.",
     "isPro": false
   },
   {
@@ -4706,7 +4706,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Fraction Calculator",
     "slug": "fraction-calculator",
     "category": "Calculator",
-    "description": "Add, subtract, multiply, and divide fractions. Get simplified results for all common fraction arithmetic operations. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Add, subtract, multiply, and divide fractions with simplification and decimal equivalents. Split 3/4 of a bill three ways without decimal drift — free, runs locally.",
     "isPro": false
   },
   {
@@ -4714,7 +4714,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Mean Median Mode Calculator",
     "slug": "mean-median-mode-calculator",
     "category": "Calculator",
-    "description": "Calculate mean, median, and mode from a list of numbers. Statistical analysis for any dataset with instant results. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute mean, median, and mode for any dataset with distribution insight. See why averages mislead skewed data — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4722,7 +4722,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PPI Calculator",
     "slug": "ppi-calculator",
     "category": "Calculator",
-    "description": "Calculate pixels per inch from diagonal resolution and screen size. Determine screen sharpness and pixel density. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute screen pixel density from resolution and diagonal size — compare phone sharpness honestly. A 1080p 6-inch display gives ~367 PPI — free, runs locally.",
     "isPro": false
   },
   {
@@ -4730,7 +4730,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Pythagorean Theorem Calculator",
     "slug": "pythagorean-theorem-calculator",
     "category": "Calculator",
-    "description": "Calculate the hypotenuse of a right triangle using the Pythagorean theorem. Enter sides a and b to find side c. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "The Pythagorean theorem solves a²+b²=c² for any missing side — ladders, ramps, screen diagonals. A 3-4-5 triangle checks square corners on site — free, runs locally.",
     "isPro": false
   },
   {
@@ -4738,7 +4738,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Quadratic Equation Solver",
     "slug": "quadratic-equation-solver",
     "category": "Calculator",
-    "description": "Solve quadratic equations of the form ax² + bx + c = 0. Get real and complex roots with step-by-step solutions. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "This quadratic equation solver handles ax²+bx+c=0 with roots and discriminant shown — real, repeated, or complex. Check x²−5x+6=0 gives 2 and 3 before submission — free, runs locally.",
     "isPro": false
   },
   {
@@ -4746,7 +4746,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Rectangle Area Calculator",
     "slug": "rectangle-area-calculator",
     "category": "Calculator",
-    "description": "Calculate the area and perimeter of a rectangle from length and width. Simple geometry for construction, design, and planning. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute rectangle area and perimeter from length and width — flooring, paint, fencing estimates. A 12×15 ft room needs 180 sq ft of flooring — free, runs locally.",
     "isPro": false
   },
   {
@@ -4754,7 +4754,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Square Root Calculator",
     "slug": "square-root-calculator",
     "category": "Calculator",
-    "description": "Calculate the square root of any number. Get precise square root values for mathematical and scientific calculations. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute square roots with full precision plus perfect-square detection. Verify √144 = 12 and spot irrational results instantly — free, runs locally.",
     "isPro": false
   },
   {
@@ -4770,7 +4770,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Fluid Typography Calculator",
     "slug": "fluid-typography-calculator",
     "category": "Developer",
-    "description": "Generate CSS clamp() values for fluid responsive typography. Calculate viewport-based font sizes that scale smoothly. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute fluid clamp() type scales that flex between viewport sizes — no breakpoints needed. Set 16→20px body that just works — local math, free, no signup.",
     "isPro": false
   },
   {
@@ -4778,7 +4778,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMI Calculator for Kids",
     "slug": "bmi-calculator-for-kids",
     "category": "Health",
-    "description": "Calculate BMI for children with age and gender considerations. Track childhood growth and weight status. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute children\\'s BMI with age-and-gender percentile context for growth tracking. See where a 10-year-old sits on the chart — free, local, informational only.",
     "isPro": false
   },
   {
@@ -4786,7 +4786,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Body Fat Percentage Calculator",
     "slug": "body-fat-percentage-calculator",
     "category": "Health",
-    "description": "Calculate body fat percentage using the US Navy circumference method. Enter waist, neck, height, and hip measurements. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate body fat percentage using the US Navy circumference method. Enter waist, neck, height, and hip measurements. Health data never leaves your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4794,7 +4794,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Body Surface Area Calculator",
     "slug": "body-surface-area-calculator",
     "category": "Health",
-    "description": "Calculate Body Surface Area using the Mosteller formula. Enter height and weight for medical and fitness BSA measurements. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute body surface area (Du Bois) for medication dosing and physiology. Get m² from height and weight — free, local, informational only.",
     "isPro": false
   },
   {
@@ -4802,7 +4802,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Baby Formula Calculator",
     "slug": "baby-formula-calculator",
     "category": "Health",
-    "description": "Calculate daily baby formula amount based on weight and age. Get recommended ounces and milliliters per feeding. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate infant formula amounts by age and weight with feeding schedules. Get daily ounces and bottle splits right — free, local, informational only.",
     "isPro": false
   },
   {
@@ -4810,7 +4810,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Baby Growth Percentile Calculator",
     "slug": "baby-growth-percentile-calculator",
     "category": "Health",
-    "description": "Estimate baby growth percentiles from weight, height, and age. Monitor your childs growth compared to population averages. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Estimate baby growth percentiles from weight, height, and age. Monitor your childs growth compared to population averages. Health data never leaves your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4818,7 +4818,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Baby Sleep Schedule Calculator",
     "slug": "baby-sleep-schedule-calculator",
     "category": "Health",
-    "description": "Get recommended sleep schedules for babies by age. Learn total sleep hours, nap count, and nighttime sleep duration. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Build age-appropriate baby sleep schedules — naps, bedtimes, wake windows. End the 5am party phase with structure — free, local, informational only.",
     "isPro": false
   },
   {
@@ -4826,7 +4826,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Breastfeeding Calorie Calculator",
     "slug": "breastfeeding-calorie-calculator",
     "category": "Health",
-    "description": "Calculate calories burned through breastfeeding. Enter babys age and feedings per day to estimate daily energy expenditure. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Estimate extra calories needed while breastfeeding by baby age and feeding frequency. Fuel milk production without guessing — free, local, informational only.",
     "isPro": false
   },
   {
@@ -4834,7 +4834,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Child Height Predictor",
     "slug": "child-height-predictor",
     "category": "Health",
-    "description": "Predict a childs adult height based on parents heights using the mid-parental method. Estimate future height for boys and girls. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Estimate a child\\'s adult height from parents\\' heights with the mid-parental method. Get a ±10 cm range in seconds — free, local, estimate only.",
     "isPro": false
   },
   {
@@ -4842,7 +4842,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Cycling Calorie Calculator",
     "slug": "cycling-calorie-calculator",
     "category": "Health",
-    "description": "Calculate calories burned during cycling based on weight, duration, and speed. Track your cycling workout calorie expenditure. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Estimate cycling burn from weight, speed, distance, and terrain. Price a 40 km weekend ride in calories — free, local, estimate only.",
     "isPro": false
   },
   {
@@ -4858,7 +4858,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Heart Rate Zone Calculator",
     "slug": "heart-rate-zone-calculator",
     "category": "Health",
-    "description": "Calculate heart rate training zones by age. Find your target heart rate ranges for different exercise intensity levels. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate heart rate training zones by age. Find your target heart rate ranges for different exercise intensity levels. Health data never leaves your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4866,7 +4866,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Keto Calculator",
     "slug": "keto-calculator",
     "category": "Health",
-    "description": "Calculate keto diet macros including protein, fat, and carbs. Get your personalized macronutrient targets for the ketogenic diet. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute keto macros — 70% fat targets in grams for your calories and protein needs. Hit ketosis without math errors — free, local, informational only.",
     "isPro": false
   },
   {
@@ -4874,7 +4874,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Lean Body Mass Calculator",
     "slug": "lean-body-mass-calculator",
     "category": "Health",
-    "description": "Calculate lean body mass from total weight and body fat percentage. Understand your muscle mass versus fat mass. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Estimate lean body mass from weight and body-fat percent — the number training actually moves. Track muscle, not just scale weight — free, local, informational only.",
     "isPro": false
   },
   {
@@ -4882,7 +4882,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Macro Calculator",
     "slug": "macro-calculator",
     "category": "Health",
-    "description": "Calculate daily macronutrient targets based on your goals. Get personalized protein, fat, and carb recommendations for weight loss or muscle gain. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute daily protein, carb, and fat macro targets from calories, weight, and goals. Turn any diet into gram numbers — free, local, informational only.",
     "isPro": false
   },
   {
@@ -4890,7 +4890,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Pregnancy Due Date Calculator",
     "slug": "pregnancy-due-date-calculator",
     "category": "Health",
-    "description": "Calculate your estimated due date from the first day of your last period. Get trimester dates and important pregnancy milestones. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Estimate due date from last period with trimester milestones. Get the 40-week roadmap instantly — free, local, informational only.",
     "isPro": false
   },
   {
@@ -4898,7 +4898,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Protein Calculator",
     "slug": "protein-calculator",
     "category": "Health",
-    "description": "Calculate daily protein requirements based on weight and activity level. Get tailored protein recommendations for your fitness goals. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute daily protein needs from weight, goal, and activity — lifters to dieters covered. Hit 120g without guessing portions — free, local, informational only.",
     "isPro": false
   },
   {
@@ -4906,7 +4906,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Running Pace Calculator",
     "slug": "running-pace-calculator",
     "category": "Health",
-    "description": "Calculate running pace from distance and time. Enter your run details to find pace per kilometer and speed in km/h. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute running pace, race times, and splits from any two knowns. Predict a 10K from your 5K — free, local, no signup. Even pacing plus predictions from any two knowns — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4914,7 +4914,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Sleep Calculator",
     "slug": "sleep-calculator",
     "category": "Health",
-    "description": "Calculate optimal bedtime based on wake time and sleep cycles. Find the best time to go to bed for refreshed mornings. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute ideal bedtimes and wake times in 90-minute sleep cycles. Wake refreshed at cycle ends, not mid-dream — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4922,7 +4922,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Steps to Calories Calculator",
     "slug": "steps-to-calories-calculator",
     "category": "Health",
-    "description": "Convert steps to calories burned. Enter your step count and weight to estimate calories and distance walked. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert step counts to calorie burn with weight-adjusted math. Learn what 12,000 steps really cost — free, local, estimate only.",
     "isPro": false
   },
   {
@@ -4930,7 +4930,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Water Intake Calculator",
     "slug": "water-intake-calculator",
     "category": "Health",
-    "description": "Calculate daily water intake recommendations based on weight and exercise. Stay hydrated with personalized water goals. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute daily water needs from weight, activity, and climate. Drink the right amount, not 8 glasses blindly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4938,7 +4938,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Simple Interest Calculator",
     "slug": "simple-interest-calculator",
     "category": "Finance",
-    "description": "Calculate simple interest using principal, rate, and time. Find total interest earned and final amount for basic interest calculations. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate simple interest using principal, rate, and time. Find total interest earned and final amount for basic interest calculations. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4946,7 +4946,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Savings Calculator",
     "slug": "savings-calculator",
     "category": "Finance",
-    "description": "Calculate the future value of monthly savings with compound interest. Plan your savings goals and see your money grow over time. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate the future value of monthly savings with compound interest. Plan your savings goals and see your money grow over time. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4954,7 +4954,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Seat License Calculator",
     "slug": "seat-license-calculator",
     "category": "Growth & Marketing",
-    "description": "Calculate total cost of software licenses by seats, price per seat, and duration. Budget and plan your SaaS subscription costs. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate total cost of software licenses by seats, price per seat, and duration. Budget and plan your SaaS subscription costs. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4962,7 +4962,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Semver Calculator",
     "slug": "semver-calculator",
     "category": "Developer",
-    "description": "Compare semantic version numbers. Check if one version is greater than, less than, or equal to another using semver rules. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute next semantic versions from change types — breaking bumps major automatically. Tag v2.4.1 correctly after that breaking fix — local logic, free, no signup.",
     "isPro": false
   },
   {
@@ -4970,7 +4970,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Standard Deviation Calculator",
     "slug": "standard-deviation-calculator",
     "category": "Calculator",
-    "description": "Calculate standard deviation, variance, and mean from a list of numbers. Statistical analysis for data science and mathematics. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute standard deviation with variance and mean for any dataset — exam scores, lab readings, quality checks. A class scoring 70±8 reads spread at a glance — free, runs locally.",
     "isPro": false
   },
   {
@@ -4978,7 +4978,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Tax Calculator",
     "slug": "tax-calculator",
     "category": "Finance",
-    "description": "Estimate your income tax with progressive tax brackets. Enter income and deductions to calculate estimated tax liability and effective rate. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Estimate income tax across progressive brackets with regime comparison. See what you keep before filing season — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4986,7 +4986,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TDS Calculator India",
     "slug": "tds-calculator-india",
     "category": "Finance",
-    "description": "Calculate TDS for Indian salaried employees under the new tax regime. Estimate monthly TDS deduction and net take-home salary. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute TDS on salary, rent, and professional fees under current Indian slabs. Know monthly deductions upfront — free, local, verify rules yearly.",
     "isPro": false
   },
   {
@@ -4994,7 +4994,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Trial Conversion Calculator",
     "slug": "trial-conversion-calculator",
     "category": "Growth & Marketing",
-    "description": "Calculate trial-to-paid conversion rate. Enter total trials and paid conversions to understand your freemium or trial funnel performance. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute trial-to-paid conversion with activation splits — find funnel leaks. Lift 15% trials to 25% deliberately — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5002,7 +5002,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "API Request Builder",
     "slug": "api-request-builder",
     "category": "Developer",
-    "description": "Build HTTP requests with custom method, URL, headers, and body. Generate equivalent curl commands. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Build HTTP requests with method, URL, headers, and body — then generate matching curl commands. Prototype endpoints without leaving the tab — local, free, no signup.",
     "isPro": false
   },
   {
@@ -5018,7 +5018,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "API Response Formatter",
     "slug": "api-response-formatter",
     "category": "Developer",
-    "description": "Prettifies JSON and API response data with configurable indentation, sorting, and syntax validation — fixes malformed JSON and makes nested structures readable.",
+    "description": "Prettify raw JSON and XML API responses with indentation, key sorting, and syntax validation. Read nested payloads at a glance — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -5026,7 +5026,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "API Error Decoder",
     "slug": "api-error-decoder",
     "category": "Developer",
-    "description": "Decode HTTP status codes with full category, description, and common causes for each code from 1xx to 5xx.",
+    "description": "Decode cryptic API error codes into plain explanations — 4xx client errors, 5xx server faults, and retry guidance. Runs locally in your browser.",
     "isPro": false
   },
   {
@@ -5034,7 +5034,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "API Payload Analyzer",
     "slug": "api-payload-analyzer",
     "category": "Developer",
-    "description": "Analyze JSON payload size, structure, nesting depth, and key count for optimizing API request and response bodies.",
+    "description": "Inspect JSON API payloads for structure, size breakdown, and key depth — spot sensitive fields before sharing logs before production incidents.",
     "isPro": false
   },
   {
@@ -5042,7 +5042,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "API Mock Data Generator",
     "slug": "api-mock-data-generator",
     "category": "Developer",
-    "description": "Generate realistic mock JSON data from a schema description. Ideal for rapid API prototyping and frontend development without a backend.",
+    "description": "Generate realistic mock JSON from field specs — names, emails, dates, nested objects. Fill frontends before backends exist — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -5058,7 +5058,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Mock API Response Generator",
     "slug": "mock-api-response-generator",
     "category": "Developer",
-    "description": "Generate sample API responses from a schema definition. Create realistic mock data for frontend testing and development.",
+    "description": "Craft canned API responses with status codes, headers, and bodies for testing error paths. Simulate 404s and 500s without a server — local, free, no signup.",
     "isPro": false
   },
   {
@@ -5074,7 +5074,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "API Pagination Calculator",
     "slug": "api-pagination-calculator",
     "category": "Developer",
-    "description": "Calculate pagination parameters including page count, offset values, and next/previous page navigation for any API.",
+    "description": "Calculate API pagination math — page counts, edge items, and rate-budget tradeoffs for cursor vs offset designs before you write code.",
     "isPro": false
   },
   {
@@ -5098,7 +5098,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "API Key Validator",
     "slug": "api-key-validator",
     "category": "Developer",
-    "description": "Validate API key format including length checks, character set validation, prefix verification, and entropy analysis.",
+    "description": "Validate API key format and structure — charset, length, and provider prefix patterns checked instantly without exposing secrets anywhere.",
     "isPro": false
   },
   {
@@ -5106,7 +5106,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "API Cost Estimator",
     "slug": "api-cost-estimator",
     "category": "Developer",
-    "description": "Estimate API costs based on monthly requests, price per million calls, and number of users. Plan your API budget with confidence.",
+    "description": "Estimate API bills from call volumes and per-call pricing — OpenAI, maps, SMS tiers. Forecast a 1M-call month before committing — local math, free, no signup.",
     "isPro": false
   },
   {
@@ -5138,7 +5138,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "API Documentation Generator",
     "slug": "api-documentation-generator",
     "category": "Developer",
-    "description": "Generate clean API documentation from endpoint descriptions. Includes parameters, response examples, and curl command samples.",
+    "description": "Turn endpoint descriptions into clean API docs with parameters, responses, and curl samples. Document as you build, not after — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -5162,7 +5162,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GraphQL Query Formatter",
     "slug": "graphql-query-formatter",
     "category": "Developer",
-    "description": "Format and prettify GraphQL queries with proper indentation. Makes complex nested queries readable and maintainable.",
+    "description": "Format GraphQL queries with consistent indentation — fragments, variables, and nested selections normalized for readable, reviewable APIs.",
     "isPro": false
   },
   {
@@ -5170,7 +5170,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GraphQL Schema to JSON Schema",
     "slug": "graphql-schema-to-json-schema",
     "category": "Developer",
-    "description": "Convert GraphQL schema definitions to JSON Schema format. Bridge the gap between GraphQL and REST tooling ecosystems.",
+    "description": "Convert GraphQL schema definitions to JSON Schema format. Bridge the gap between GraphQL and REST tooling ecosystems. Types map with validation preserved — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5202,7 +5202,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GraphQL Variables Formatter",
     "slug": "graphql-variables-formatter",
     "category": "Developer",
-    "description": "Format and beautify GraphQL variables JSON with proper indentation. Ensure your variables are correctly structured before sending queries.",
+    "description": "Format GraphQL variables JSON with validation against query structure. Stop malformed-variables errors before sending — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -5210,7 +5210,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "gRPC Status Code Lookup",
     "slug": "grpc-status-code-lookup",
     "category": "Developer",
-    "description": "Lookup gRPC status codes from 0 (OK) to 16 (Unauthenticated) with descriptions and common causes for each error.",
+    "description": "Look up all 17 gRPC status codes (0–16) with meanings — from OK and CANCELLED through resource and network errors for backend debugging.",
     "isPro": false
   },
   {
@@ -5226,7 +5226,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OpenAPI Mock Generator",
     "slug": "openapi-mock-generator",
     "category": "Developer",
-    "description": "Generate mock API responses from OpenAPI spec fragments. Create realistic sample data for API development and testing.",
+    "description": "Generate mock endpoints from OpenAPI specs — example responses shaped for immediate frontend work, no backend wait while real backends are still being built.",
     "isPro": false
   },
   {
@@ -5234,7 +5234,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OpenAPI to Postman",
     "slug": "openapi-to-postman",
     "category": "Developer",
-    "description": "Convert OpenAPI specs to Postman collection JSON format. Import directly into Postman. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert OpenAPI specs into Postman collections with requests, auth, and examples. Import 50 endpoints in one click — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -5258,7 +5258,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Postman to OpenAPI Converter",
     "slug": "postman-to-openapi-converter",
     "category": "Developer",
-    "description": "Convert Postman collections to OpenAPI 3.0 specs. Migrate your API documentation. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert Postman collections to OpenAPI 3.0 specs. Migrate your API documentation. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -5282,7 +5282,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Webhook Retry Config",
     "slug": "webhook-retry-config",
     "category": "Developer",
-    "description": "Configure and compare webhook retry strategies — Fixed, Linear, Exponential, and Exponential + Jitter. Calculate total delays and visualize retry patterns.",
+    "description": "Design webhook retry policies — attempts, backoff curves, dead-letter thresholds. Stop losing events to blips — local planning, free, no signup.",
     "isPro": false
   },
   {
@@ -5290,7 +5290,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Webhook Signature Verifier",
     "slug": "webhook-signature-verifier",
     "category": "Developer",
-    "description": "Verify webhook HMAC-SHA256 signatures. Validate that incoming webhooks are genuinely from your provider and haven\\'t been tampered with.",
+    "description": "Verify webhook HMAC signatures to prove payloads came from the provider untampered. Reject forged events before processing — local crypto, free, no signup.",
     "isPro": false
   },
   {
@@ -5322,7 +5322,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OpenAPI Documentation Generator",
     "slug": "api-docs-generator",
     "category": "Developer",
-    "description": "Generate Markdown API documentation from OpenAPI specs. Create clean, readable docs with endpoints, parameters, and response examples.",
+    "description": "Generate Markdown API documentation from OpenAPI specs with endpoints and examples. Publish clean reference docs fast — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -5330,7 +5330,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Conventional Commit Generator",
     "slug": "conventional-commit-generator",
     "category": "Developer",
-    "description": "Generate conventional commit messages with type, scope, description, breaking changes, and body. Follow the Conventional Commits specification.",
+    "description": "Generate Conventional Commits messages — type, scope, breaking flags — that changelogs can parse. Write feat(api): add retry in seconds — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -5338,7 +5338,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Code Formatter",
     "slug": "code-formatter",
     "category": "Developer",
-    "description": "Auto-formats source code across 15+ languages — JavaScript, Python, HTML, CSS, SQL, YAML — with language-aware indentation and syntax rules.",
+    "description": "Auto-detect language and format mixed code snippets — JS, CSS, HTML, JSON in one paste. Clean Stack Overflow answers before using — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -5362,7 +5362,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JavaScript Formatter",
     "slug": "javascript-formatter",
     "category": "Developer",
-    "description": "Formats JavaScript code with proper indentation, consistent spacing, and syntax structure — supports modern ES6+ features and async patterns.",
+    "description": "Format JavaScript with consistent indentation, semicolons, quotes, and brace style. Standardize legacy scripts before refactor — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -5370,7 +5370,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JSX Formatter",
     "slug": "jsx-formatter",
     "category": "Developer",
-    "description": "Formats JSX/React component code with proper indentation, prop alignment, and JSX expression structure for readable component definitions.",
+    "description": "Format JSX with component indentation, prop alignment, and expression-container spacing. Read nested component trees at a glance — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -5378,7 +5378,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TSX Formatter",
     "slug": "tsx-formatter",
     "category": "Developer",
-    "description": "Formats TSX/React TypeScript components with type-aware indentation, prop type alignment, and clean JSX structure.",
+    "description": "Format TSX React components with type-aware indentation — TypeScript types plus JSX markup, both handled correctly without breaking either side.",
     "isPro": false
   },
   {
@@ -5386,7 +5386,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SCSS Formatter",
     "slug": "scss-formatter",
     "category": "Developer",
-    "description": "Organizes SCSS/Sass stylesheets with proper nesting indentation, variable alignment, and mixin formatting for maintainable styles.",
+    "description": "Format SCSS with nested-rule indentation, variable alignment, and mixin spacing. Tidy sprawling stylesheets before merging — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -5418,7 +5418,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Markdown Formatter",
     "slug": "markdown-formatter",
     "category": "Developer",
-    "description": "Normalizes Markdown formatting with consistent heading spacing, list indentation, and code block structure for readable documentation.",
+    "description": "Format Markdown with consistent headings, lists, code fences, and table alignment. Make READMEs render perfectly on GitHub — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -5426,7 +5426,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSS Generator",
     "slug": "css-generator",
     "category": "Developer",
-    "description": "Generate CSS code interactively for box shadows, gradients, border radius, transforms, filters, and more. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate CSS code interactively for box shadows, gradients, border radius, transforms, filters, and more. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -5434,7 +5434,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Box Shadow Generator",
     "slug": "box-shadow-generator",
     "category": "Developer",
-    "description": "Generate CSS box-shadow values with an interactive preview. Configure offset, blur, spread, color, and inset. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Design CSS box-shadows visually — offsets, blur, spread, color, and inset. Craft depth that looks designed — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -5442,7 +5442,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Border Radius Generator",
     "slug": "border-radius-generator",
     "category": "Developer",
-    "description": "Generate CSS border-radius values visually. Control each corner independently with live preview. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate CSS border-radius values visually. Control each corner independently with live preview. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -5450,7 +5450,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Flexbox CSS Generator",
     "slug": "flexbox-css-generator",
     "category": "Developer",
-    "description": "Generate Flexbox CSS code interactively. Configure direction, wrap, justify, align, and gap with live preview. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate Flexbox CSS code interactively. Configure direction, wrap, justify, align, and gap with live preview. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -5458,7 +5458,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSS Grid Generator",
     "slug": "css-grid-generator",
     "category": "Developer",
-    "description": "Generate CSS Grid layout code interactively. Configure columns, rows, and gap with live preview. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate CSS Grid layout code interactively. Configure columns, rows, and gap with live preview. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -5466,7 +5466,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text Shadow Generator",
     "slug": "text-shadow-generator",
     "category": "Developer",
-    "description": "Generate CSS text-shadow values with interactive preview. Configure offset, blur, color, and opacity. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate CSS text-shadow values with interactive preview. Configure offset, blur, color, and opacity. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -5474,7 +5474,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSS Transform Generator",
     "slug": "css-transform-generator",
     "category": "Developer",
-    "description": "Generate CSS transform values interactively. Configure rotate, scale, skew, and translate with live preview. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate CSS transforms — rotate, scale, skew, translate — with live preview. Build hover effects without guessing syntax — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -5482,7 +5482,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSS Animation Generator",
     "slug": "css-animation-generator",
     "category": "Developer",
-    "description": "Generate CSS keyframe animations interactively. Choose from fade-in, slide-in, and pulse animations. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate CSS keyframe animations interactively. Choose from fade-in, slide-in, and pulse animations. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -5490,7 +5490,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSS Filter Generator",
     "slug": "css-filter-generator",
     "category": "Developer",
-    "description": "Generate CSS filter values interactively. Configure blur, brightness, contrast, saturation, hue, sepia, and grayscale. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate CSS filter chains — blur, brightness, contrast, grayscale, hue-rotate. Grade images without editors — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -5498,7 +5498,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image Converter",
     "slug": "image-converter",
     "category": "Image",
-    "description": "Convert images between PNG, JPG, WebP, GIF, BMP, SVG, ICO, AVIF, and TIFF formats with format auto-detection.",
+    "description": "Convert images between PNG, JPG, WebP, GIF, BMP, SVG, ICO, AVIF, and TIFF formats with format auto-detection. Redirects to the live bulk converter.",
     "isPro": false
   },
   {
@@ -5514,7 +5514,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Analyzer",
     "slug": "csv-analyzer",
     "category": "Utility",
-    "description": "Analyze CSV structure — column types, counts, unique values, and empty cells.",
+    "description": "Analyze CSV structure — column types, counts, unique values, and empty cells. Spot malformed rows and mixed types before import.",
     "isPro": false
   },
   {
@@ -5522,7 +5522,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JSON Path Query Builder",
     "slug": "json-path-query-builder",
     "category": "Developer",
-    "description": "Query JSON data using dot-notation path expressions with wildcard support. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Query JSON data using dot-notation path expressions with wildcard support. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -5530,7 +5530,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JSON Tree Viewer",
     "slug": "json-tree-viewer",
     "category": "Developer",
-    "description": "Visualize JSON structure as an indented tree — see nested objects and arrays at a glance.",
+    "description": "Visualize JSON structure as an indented tree — see nested objects and arrays at a glance. Collapse deep branches to navigate large payloads — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5538,7 +5538,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JSON Diff Checker",
     "slug": "json-diff-checker",
     "category": "Developer",
-    "description": "Compare two JSON objects side-by-side with color-coded key-level differences. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Diff two JSON documents with path-level change listing — spot breaking API changes instantly. Review a 500-line response diff in minutes — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -5546,7 +5546,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Color Generator",
     "slug": "random-color-generator",
     "category": "Utility",
-    "description": "Generate random colors in Hex, RGB, or HSL format with visual preview swatches. Perfect for design palettes and testing. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate random hex colors with lockable favorites for palettes and placeholders. Find happy accidents fast — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5554,7 +5554,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Team Generator",
     "slug": "random-team-generator",
     "category": "Utility",
-    "description": "Split a list of names into random teams with configurable number of teams. Perfect for classroom activities, sports, and group projects. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Split names into fair random teams with sizes and captains options. Divide 20 players in seconds — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5562,7 +5562,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Picker Generator",
     "slug": "random-picker-generator",
     "category": "Utility",
-    "description": "Randomly pick one or more items from a list with optional repeat control. Perfect for giveaways, raffles, and random selection. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Pick random items from lists with weighted options — winners, samples, draws. Draw fairly with visible odds — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5570,7 +5570,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Decision Maker",
     "slug": "random-decision-maker",
     "category": "Utility",
-    "description": "Make decisions with a fun animated spinner that cycles through Yes, No, Maybe, and other responses. Perfect for quick decisions. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Make random calls between options with best-of logic for quick settles. End debates with a fair draw — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5578,7 +5578,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Username Generator",
     "slug": "random-username-generator",
     "category": "Utility",
-    "description": "Generate creative usernames from configurable patterns including adjective+noun, noun+number, and word-word combinations. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate available-style usernames with adjectives, nouns, and numbers. Find handles that stick — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5586,7 +5586,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Token Generator",
     "slug": "random-token-generator",
     "category": "Developer",
-    "description": "Generate cryptographically secure random tokens in hex, base64, or alphanumeric format. Perfect for API keys, session tokens, and secrets. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate cryptographically secure random tokens — hex, base64, URL-safe — for secrets and sessions. Mint a 256-bit API secret in one click — local crypto, free, no signup.",
     "isPro": false
   },
   {
@@ -5594,7 +5594,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Dummy Text Generator",
     "slug": "dummy-text-generator",
     "category": "Developer",
-    "description": "Generate dummy placeholder text at a specified character length for design mockups, UI prototypes, and content layout testing. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate dummy placeholder text at a specified character length for design mockups, UI prototypes, and content layout testing. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -5602,7 +5602,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Fake Data Generator",
     "slug": "fake-data-generator",
     "category": "Developer",
-    "description": "Generate fake personal data including names, emails, phone numbers, and addresses. Perfect for testing forms, databases, and application development. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate realistic fake datasets — users, orders, addresses — for demos and load tests. Fill staging with 10k believable rows — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -5610,7 +5610,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Fake Identity Generator",
     "slug": "fake-identity-generator",
     "category": "Developer",
-    "description": "Generate complete fake identities with name, email, phone, address, date of birth, and occupation. Includes a photo placeholder. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate complete fake identities with name, email, phone, address, date of birth, and occupation. Includes a photo placeholder. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -5618,7 +5618,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Fake Credit Card Generator",
     "slug": "fake-credit-card-generator",
     "category": "Developer",
-    "description": "Generate fake credit card numbers with valid formats including Visa, Mastercard, Amex, and Discover. All numbers pass Luhn algorithm validation. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate fake credit card numbers with valid formats including Visa, Mastercard, Amex, and Discover. All numbers pass Luhn algorithm validation. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -5626,7 +5626,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Sequence Generator",
     "slug": "sequence-generator",
     "category": "Utility",
-    "description": "Generate number sequences in arithmetic, geometric, or custom progression. Configure start value, difference/ratio, and count. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate number and letter sequences — arithmetic, geometric, Fibonacci, custom steps. Fill spreadsheets and test series — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5634,7 +5634,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Coupon Code Generator",
     "slug": "coupon-code-generator",
     "category": "Developer",
-    "description": "Generate random coupon/discount codes with customizable pattern using X as placeholder for random characters. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate memorable coupon codes in bulk with prefixes and exclusions — WELCOME10-style campaigns. Create 500 trackable codes in one batch — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -5642,7 +5642,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Serial Number Generator",
     "slug": "serial-number-generator",
     "category": "Developer",
-    "description": "Generate serial numbers with configurable format patterns using X (hex), 9 (digit), and A (alphanumeric) placeholders. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate formatted serial numbers with prefixes, segments, and checksums for products and licenses. Create 1000 trackable SKUs in one batch — local, free, no signup.",
     "isPro": false
   },
   {
@@ -5650,7 +5650,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Nickname Generator",
     "slug": "nickname-generator",
     "category": "Utility",
-    "description": "Generate random nicknames by combining adjectives and creative name parts. Perfect for gaming, social media, and creative projects. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate fun nicknames from names with style options — gamer tags, pet names, team aliases. Find a tag that sticks — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5658,7 +5658,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Avatar Generator",
     "slug": "avatar-generator",
     "category": "Design",
-    "description": "Generate avatar initials SVG from any name with customizable background color, text color, and size. Perfect for profile placeholders. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate initial-based avatars with custom colors, fonts, and sizes — profile placeholders in seconds. Ship default user pics that look designed — local Canvas work, free, no signup.",
     "isPro": false
   },
   {
@@ -5666,7 +5666,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Timer",
     "slug": "timer",
     "category": "Utility",
-    "description": "Configurable countdown timer with hours, minutes, and seconds input. Features start, pause, and reset controls with visual progress bar. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Configurable countdown timer with hours, minutes, and seconds input. Features start, pause, and reset controls with visual progress bar. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -5674,7 +5674,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Stopwatch",
     "slug": "stopwatch",
     "category": "Utility",
-    "description": "Precision stopwatch with start, stop, lap recording, and reset functionality. Lap times are displayed in a table for easy comparison. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Precision stopwatch with start, stop, lap recording, and reset functionality. Lap times are displayed in a table for easy comparison. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -5682,7 +5682,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Countdown Timer",
     "slug": "countdown-tool",
     "category": "Utility",
-    "description": "Countdown to a specific date and time with live days, hours, minutes, and seconds display. Perfect for event countdowns and deadlines. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Countdown to a specific date and time with live days, hours, minutes, and seconds display. Perfect for event countdowns and deadlines. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -5690,7 +5690,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Interval Timer",
     "slug": "interval-timer",
     "category": "Utility",
-    "description": "Repeating interval timer for workouts and training. Configure sets, work period, and rest period with automatic cycling. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Repeating interval timer for workouts and training. Configure sets, work period, and rest period with automatic cycling. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -5698,7 +5698,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Tabata Timer",
     "slug": "tabata-timer",
     "category": "Utility",
-    "description": "Tabata interval timer with 20 seconds work and 10 seconds rest per round. Features a 3-second preparation countdown and configurable rounds. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Tabata interval timer with 20 seconds work and 10 seconds rest per round. Features a 3-second preparation countdown and configurable rounds. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -5706,7 +5706,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "World Clock",
     "slug": "world-clock",
     "category": "Utility",
-    "description": "Display multiple timezone clocks simultaneously. Add and remove cities from a curated list of major world timezones. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "See live times across world time zones with DST handling — schedule global meetings right. Know Tokyo time before calling — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5714,7 +5714,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Time Duration Calculator",
     "slug": "time-duration-calculator",
     "category": "Calculator",
-    "description": "Calculate the exact duration between two times. Handles overnight time spans and displays results in hours, minutes, and seconds. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate the exact duration between two times. Handles overnight time spans and displays results in hours, minutes, and seconds. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -5722,7 +5722,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Time Addition Calculator",
     "slug": "time-addition-calculator",
     "category": "Calculator",
-    "description": "Add or subtract hours and minutes from a starting time. Perfect for scheduling, project planning, and time tracking. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Add hours and minutes to any time — shift schedules, compute end times, total durations. Add 8h30m to 9:00 for shift end — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5730,7 +5730,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Time Until Calculator",
     "slug": "time-until-calculator",
     "category": "Calculator",
-    "description": "Calculate the exact days, hours, and minutes remaining until a specified future date and time. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Count down the time until any future moment in days, hours, minutes, and seconds — launches, deadlines, events. See 45 days to launch live — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5738,7 +5738,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Meeting Time Planner",
     "slug": "meeting-time-planner",
     "category": "Calculator",
-    "description": "Plan meeting times across multiple timezones. Select date and time, then see the equivalent time in all selected cities simultaneously. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Find meeting slots across attendee time zones with working-hours overlap. Schedule standups spanning continents fairly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5746,7 +5746,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Word Frequency Counter",
     "slug": "word-frequency-counter",
     "category": "SEO",
-    "description": "Analyze word frequency in any text. Shows top N words with count and percentage. Essential for keyword analysis and content optimization. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Count word occurrences with percentages and top-N ranking — keyword density, essay analysis, content audits. Spot a 5% stuffing problem instantly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5754,7 +5754,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Keyword Planner Tool",
     "slug": "keyword-planner-tool",
     "category": "SEO",
-    "description": "Extract potential SEO keywords from text with stop word filtering and frequency analysis. Shows word count, percentage, and density. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Extract SEO keyword candidates from your text with stop-word filtering and frequency stats. Build a 20-keyword brief from one article — local analysis, free, no signup.",
     "isPro": false
   },
   {
@@ -5762,7 +5762,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SEO Meta Tag Generator",
     "slug": "seo-meta-tag-generator",
     "category": "SEO",
-    "description": "Generate complete HTML meta tags including title, description, keywords, Open Graph, Twitter Cards, and canonical URL from a simple form. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate complete meta tag blocks — title, description, Open Graph, Twitter Cards, canonical — from one form. Ship correct head markup per page — free, local, copy-paste.",
     "isPro": false
   },
   {
@@ -5770,7 +5770,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SEO Preview Generator",
     "slug": "seo-preview-generator",
     "category": "SEO",
-    "description": "Preview how your page will appear in Google search results. Enter title, URL, and description to see the live search snippet preview. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Preview how your page will appear in Google search results. Enter title, URL, and description to see the live search snippet preview. Analysis runs locally in your browser — nothing you enter is uploaded.",
     "isPro": false
   },
   {
@@ -5778,7 +5778,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SEO Headline Analyzer",
     "slug": "seo-headline-analyzer",
     "category": "SEO",
-    "description": "Analyze headlines for word count, character count, sentiment, power words, and overall SEO score. Optimize your titles for better engagement. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Analyze headlines for word count, character count, sentiment, power words, and overall SEO score. Optimize your titles for better engagement. Analysis runs locally in your browser — nothing you enter is uploaded.",
     "isPro": false
   },
   {
@@ -5786,7 +5786,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SEO Schema Generator",
     "slug": "seo-schema-generator",
     "category": "SEO",
-    "description": "Generate JSON-LD structured data markup for Article, Product, FAQ, LocalBusiness, Recipe, and Event schema types. No signup or account required.",
+    "description": "Generate valid JSON-LD schema for Article, Product, FAQ, LocalBusiness, Recipe, and Event types. Add rich-result eligibility in minutes — free, local, copy-paste.",
     "isPro": false
   },
   {
@@ -5794,7 +5794,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SEO Slug Generator",
     "slug": "seo-slug-generator",
     "category": "SEO",
-    "description": "Generate SEO-friendly URL slugs from any text. Automatically removes special characters and converts spaces to hyphens. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate SEO-friendly URL slugs from any text. Automatically removes special characters and converts spaces to hyphens. Analysis runs locally in your browser — nothing you enter is uploaded.",
     "isPro": false
   },
   {
@@ -5802,7 +5802,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text Replacer",
     "slug": "text-replacer",
     "category": "Text",
-    "description": "Find and replace text in any string instantly. Supports case-sensitive and case-insensitive matching, whole-word replacement, and regex patterns for advanced text manipulation.",
+    "description": "Find-and-replace text across full documents with case control — rebrand 200 mentions in one pass. Rename a product through a 50-page spec instantly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5810,7 +5810,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text Sorter",
     "slug": "text-sorter",
     "category": "Text",
-    "description": "Sort text lines alphabetically (A-Z, Z-A), by length (shortest-first or longest-first), randomize order, or remove duplicates. Essential for organizing lists, cleaning data, and preparing content.",
+    "description": "Sort text lines A–Z, Z–A, by length, or shuffle randomly with duplicate control. Organize 500-line lists instantly — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -5818,7 +5818,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text Deduplicator",
     "slug": "text-deduplicator",
     "category": "Text",
-    "description": "Remove duplicate lines from text instantly while preserving the order of first occurrences. Perfect for cleaning up lists, CSV data, log files, and removing redundant entries from any line-based data.",
+    "description": "Remove duplicate text lines with the deduplicator, preserving first-seen order — clean email lists and logs. Dedupe 10,000 rows without Excel gymnastics — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -5826,7 +5826,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text to HTML Converter",
     "slug": "text-to-html-converter",
     "category": "Converter",
-    "description": "Convert plain text to HTML paragraphs with proper paragraph and line break tags. Handles double line breaks as paragraph separators. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert plain text to clean HTML with paragraphs, breaks, lists, and escaping. Turn meeting notes into publishable markup — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -5834,7 +5834,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HTML to Text Converter",
     "slug": "html-to-text-converter",
     "category": "Converter",
-    "description": "Strip all HTML tags from content and decode HTML entities. Convert any HTML document back to clean plain text. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Strip HTML to clean plain text for emails, docs, and analysis. Extract article text without tags — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -5842,7 +5842,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Markdown Previewer",
     "slug": "markdown-previewer",
     "category": "Text",
-    "description": "Preview Markdown text as rendered HTML in real time. Supports headings, bold, italic, blockquotes, code blocks, inline code, links, images, lists, tables, and strikethrough. All processing is local.",
+    "description": "Preview Markdown as rendered HTML in real time with GFM tables and task lists. Write docs seeing final output — local rendering, free, no signup.",
     "isPro": false
   },
   {
@@ -5850,7 +5850,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Color Picker",
     "slug": "color-picker",
     "category": "Design",
-    "description": "Pick colors from a visual spectrum or enter hex values. Copy to clipboard — perfect for design palettes, CSS variables, and UI mockups. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Pick colors from a visual spectrum or enter hex values. Copy to clipboard — perfect for design palettes, CSS variables, and UI mockups. Work never leaves your device — everything renders locally in your browser.",
     "isPro": false
   },
   {
@@ -5858,7 +5858,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Color Palette Generator",
     "slug": "color-palette-generator",
     "category": "Design",
-    "description": "Generate harmonious color palettes from a base color. Includes complementary, analogous, and triadic color schemes for designers. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate harmonious color palettes from a base color. Includes complementary, analogous, and triadic color schemes for designers. Work never leaves your device — everything renders locally in your browser.",
     "isPro": false
   },
   {
@@ -5866,7 +5866,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Gradient Generator",
     "slug": "gradient-generator",
     "category": "Design",
-    "description": "Create beautiful CSS gradients with a visual preview. Choose between linear and radial gradients for your web designs. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Design CSS gradients — linear, radial, conic — with multi-stop color control and live preview. Ship mesh-grade backgrounds from code — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -5874,7 +5874,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Contrast Checker",
     "slug": "contrast-checker",
     "category": "Utility",
-    "description": "Check the contrast ratio between two colors against WCAG AA and AAA standards. Essential for accessible web design. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Check the contrast ratio between two colors against WCAG AA and AAA standards. Essential for accessible web design. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -5882,7 +5882,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Counter Tool",
     "slug": "counter-tool",
     "category": "Utility",
-    "description": "Simple increment/decrement counter with a reset option. Track anything from reps to inventory counts. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Simple tap counter with increment, decrement, and reset — reps, inventory, headcounts. Count 200 items without losing place — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5890,7 +5890,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "List Randomizer",
     "slug": "list-randomizer",
     "category": "Utility",
-    "description": "Randomly shuffle any list of items. Enter each item on a new line and see them randomized instantly. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Shuffle lists randomly — giveaway winners, team orders, presentation sequences. Pick fairly in one click — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5898,7 +5898,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "List Sorter",
     "slug": "list-sorter",
     "category": "Utility",
-    "description": "Sort lists alphabetically (A-Z or Z-A) or by length. Great for organizing data and cleaning up unordered lists. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Sort any list A–Z, Z–A, or by length with one click — ballots, rosters, data cleanup. Order 300 names for roll call instantly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5906,7 +5906,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Decision Maker",
     "slug": "decision-maker",
     "category": "Utility",
-    "description": "Can't decide? Enter your options and let the tool randomly pick one for you. Perfect for everyday choices. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Let the wheel decide — pros/cons scoring plus random pick for stuck choices. End analysis paralysis in 60 seconds — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5914,7 +5914,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Yes / No Picker",
     "slug": "yes-no-picker",
     "category": "Utility",
-    "description": "Quick yes/no picker for binary decisions. Randomly picks yes or no with animated reveal. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Get instant yes/no answers with streak tracking for micro-decisions. Settle it with one tap — free, local, no signup. Best-of-three settles playground disputes fairly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5922,7 +5922,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Number Guessing Game",
     "slug": "number-guessing-game",
     "category": "Utility",
-    "description": "Guess the random number between 1 and 100. Get hints if your guess is too high or too low. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Guess the number 1–100 with hotter/colder hints and attempt tracking. Five tries is sharp play — free, local, no signup, learn binary search by feel.",
     "isPro": false
   },
   {
@@ -5930,7 +5930,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Rock Paper Scissors",
     "slug": "rock-paper-scissors",
     "category": "Utility",
-    "description": "Play rock paper scissors against the computer. Keep track of wins, losses, and ties. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Play rock-paper-scissors against the computer with win/loss/tie scoreboard. Settle any debate in three throws — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5938,7 +5938,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Hangman Game",
     "slug": "hangman-game",
     "category": "Utility",
-    "description": "Classic hangman word guessing game. Choose letters to reveal the hidden word before the hangman is complete. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Play hangman with categories and difficulty levels — guess letters before parts run out. Six wrong guesses and it\\'s over — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5946,7 +5946,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Roman Numeral Converter",
     "slug": "roman-numeral-converter",
     "category": "Converter",
-    "description": "Convert between Roman numerals and decimal numbers. Supports standard numeral rules up to 3999. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert between Roman numerals and numbers both ways — chapters, clocks, movie credits. Decode MCMXCIV as 1994 instantly — local math, free, no signup.",
     "isPro": false
   },
   {
@@ -5954,7 +5954,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Number to Words Converter",
     "slug": "number-to-words-converter",
     "category": "Utility",
-    "description": "Convert any number to its English word representation. Supports large numbers up to billions. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Write any number out in English words up to billions — checks, legal documents, invoices. Render 1,250,000 for a contract line — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5962,7 +5962,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Percentage Difference Calculator",
     "slug": "percentage-difference-calculator",
     "category": "Calculator",
-    "description": "Calculate the percentage difference between any two numbers. Useful for comparing data sets, prices, and measurements. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate the percentage difference between any two numbers. Useful for comparing data sets, prices, and measurements. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -5970,7 +5970,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Tip Calculator",
     "slug": "tip-calculator",
     "category": "Finance",
-    "description": "Calculate the tip amount and total bill per person. Customize tip percentage and split among any number of people. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate the tip amount and total bill per person. Customize tip percentage and split among any number of people. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -5978,7 +5978,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Sales Tax Calculator",
     "slug": "sales-tax-calculator",
     "category": "Finance",
-    "description": "Calculate total price including sales tax. Enter the pre-tax amount and tax rate to see the exact tax amount and final total. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Add sales tax to prices instantly by rate — checkout totals, quotes, and receipts. Price a $49 item at 8% correctly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5986,7 +5986,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Markup Calculator",
     "slug": "markup-calculator",
     "category": "Finance",
-    "description": "Calculate markup percentage, selling price, and gross profit from cost. Essential for retail pricing and margin analysis. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Price products from cost with markup percent — margin, selling price, and profit united. Cost $20 at 50% markup sells $30 — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5994,7 +5994,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CAGR Calculator",
     "slug": "cagr-calculator",
     "category": "Finance",
-    "description": "Calculate the Compound Annual Growth Rate (CAGR) for investments. Shows year-by-year growth breakdown. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate the Compound Annual Growth Rate (CAGR) for investments. Shows year-by-year growth breakdown. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6002,7 +6002,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Fraction to Decimal Calculator",
     "slug": "fraction-to-decimal-calculator",
     "category": "Calculator",
-    "description": "Convert fractions to decimal numbers. Shows the step-by-step division process. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert fractions to decimal numbers. Shows the step-by-step division process. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6010,7 +6010,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Decimal to Fraction Calculator",
     "slug": "decimal-to-fraction-calculator",
     "category": "Calculator",
-    "description": "Convert decimal numbers to fractions. Handles terminating and repeating decimals with precision. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert decimals to exact fractions — 0.75 to 3/4 with repeating-decimal support. Get exact answers for homework — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6018,7 +6018,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Combination Calculator",
     "slug": "combination-calculator",
     "category": "Calculator",
-    "description": "Calculate the number of ways to choose k items from n items (nCr). Includes the formula and step-by-step result. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute nCr combinations and nPr permutations with factorial steps shown. Count 5-card poker hands (2,598,960) correctly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6026,7 +6026,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Permutation Calculator",
     "slug": "permutation-calculator",
     "category": "Calculator",
-    "description": "Calculate the number of ways to arrange k items from n items (nPr). Shows the step-by-step permutation calculation. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate the number of ways to arrange k items from n items (nPr). Shows the step-by-step permutation calculation. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6034,7 +6034,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Factorial Calculator",
     "slug": "factorial-calculator",
     "category": "Calculator",
-    "description": "Calculate the factorial of any number (n!). Handles large numbers and shows the full multiplication sequence. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate the factorial of any number (n!). Handles large numbers and shows the full multiplication sequence. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6042,7 +6042,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Prime Number Checker",
     "slug": "prime-number-checker",
     "category": "Calculator",
-    "description": "Check if any number is prime. Also shows all factors and whether the number is odd or even. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Check if any number is prime. Also shows all factors and whether the number is odd or even. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6050,7 +6050,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Prime Factorization Calculator",
     "slug": "prime-factorization-calculator",
     "category": "Calculator",
-    "description": "Find the prime factors of any number. Shows the complete factorization tree and exponential form. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Break any integer into prime factors with factor trees — 60 = 2²×3×5 shown stepwise. Ace number theory homework — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6058,7 +6058,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Greatest Common Factor Calculator",
     "slug": "greatest-common-factor-calculator",
     "category": "Calculator",
-    "description": "Calculate the GCF/GCD of two or more numbers. Shows the prime factorization method step by step. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Find the greatest common factor (GCF/GCD) of number sets via Euclidean algorithm with steps. Reduce 48:180 to 4:15 correctly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6066,7 +6066,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Least Common Multiple Calculator",
     "slug": "least-common-multiple-calculator",
     "category": "Calculator",
-    "description": "Calculate the LCM of two or more numbers. Shows the prime factorization approach for clarity. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Find LCM of number sets for scheduling cycles and fraction denominators. Sync 4-day and 6-day rotas every 12 days — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6074,7 +6074,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Modulo Calculator",
     "slug": "modulo-calculator",
     "category": "Calculator",
-    "description": "Calculate the remainder of division (a mod b). Shows quotient, remainder, full division expression, and negative dividend semantics. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate the remainder of division (a mod b). Shows quotient, remainder, full division expression, and negative dividend semantics. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6082,7 +6082,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Logarithm Calculator",
     "slug": "logarithm-calculator",
     "category": "Calculator",
-    "description": "Calculate logarithms with any base. Supports log base 10, natural log (ln), and custom bases. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute logarithms (logs) in any base with change-of-base steps and natural/common presets. Solve log₂(32) = 5 instantly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6090,7 +6090,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Trigonometry Calculator",
     "slug": "trigonometry-calculator",
     "category": "Calculator",
-    "description": "Calculate sine, cosine, tangent, and their inverses. Enter an angle in degrees or radians and see all six trig functions. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute trigonometry: sin, cos, tan in degrees or radians with triangle solving. Find the opposite side from 30° hypotenuse 10 (= 5) — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6098,7 +6098,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Degree / Radian Converter",
     "slug": "degree-radian-converter",
     "category": "Calculator",
-    "description": "Convert between degrees and radians. Shows the formula and step-by-step conversion process. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert degrees and radians both ways with π-exact forms — 180° = π rad. Stop mixing modes in calculus — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6106,7 +6106,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Scientific Notation Converter",
     "slug": "scientific-notation-converter",
     "category": "Calculator",
-    "description": "Convert numbers between standard form and scientific notation (E-notation). Handles very large and very small numbers. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert between standard and scientific notation — 6,020,000,000 ↔ 6.02×10⁹. Handle Avogadro-scale numbers cleanly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6114,7 +6114,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Significant Figures Calculator",
     "slug": "significant-figures-calculator",
     "category": "Calculator",
-    "description": "Round numbers to a specified number of significant figures. Essential for scientific and engineering calculations. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Round results to correct significant figures with rule explanations — 0.00450 has 3. Stop overstating lab precision — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6122,7 +6122,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Rounding Calculator",
     "slug": "rounding-calculator",
     "category": "Calculator",
-    "description": "Round numbers using 5 modes: round half up, banker\\'s rounding, floor, ceil, and truncate. Shows step-by-step explanation with the digit being rounded. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Round numbers using 5 modes: round half up, banker\\'s rounding, floor, ceil, and truncate. Shows step-by-step explanation with the digit being rounded. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6130,7 +6130,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Math Equation Solver",
     "slug": "math-equation-solver",
     "category": "Calculator",
-    "description": "Solve linear and quadratic equations. Enter an equation with one variable (x) and see the step-by-step solution. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Solve linear equations step by step — isolate x with operations shown. Check 3x + 7 = 22 → x = 5 before class — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6138,7 +6138,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Algebra Calculator",
     "slug": "algebra-calculator",
     "category": "Calculator",
-    "description": "Solve algebraic expressions, evaluate formulas, and simplify expressions. Perfect for homework and quick calculations. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Solve algebraic expressions and linear equations with steps — variables isolated cleanly. Check homework before class — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6146,7 +6146,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Geometry Calculator",
     "slug": "geometry-calculator",
     "category": "Calculator",
-    "description": "Calculate area, perimeter, and volume for shapes including circle, square, triangle, rectangle, sphere, cylinder, cone, and cube. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Solve geometry essentials — areas, perimeters, volumes, angles — with diagrams described. Cover homework shapes in one tab — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6154,7 +6154,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Coordinate Calculator",
     "slug": "coordinate-calculator",
     "category": "Calculator",
-    "description": "Calculate the distance and midpoint between two points on a 2D coordinate plane. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute distance, midpoint, and slope between coordinate points — geometry essentials. Get all three from two points — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6162,7 +6162,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Slope Calculator",
     "slug": "slope-calculator",
     "category": "Calculator",
-    "description": "Calculate the slope, equation, and intercept of a line from two points. Shows the full line equation in y = mx + b form. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute line slope from two points with intercept form — rise over run done right. Get m and b for graphing — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6170,7 +6170,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Speed Converter",
     "slug": "speed-converter",
     "category": "Utility",
-    "description": "Convert speed between km/h, mph, knots, m/s, and ft/s. Instant conversion for travel and scientific use. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert speeds between km/h, mph, m/s, and knots instantly. Translate a 100 mph speed for any audience — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6178,7 +6178,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Length Converter",
     "slug": "length-converter",
     "category": "Utility",
-    "description": "Convert length and distance between km, miles, meters, yards, feet, and inches. Simple and intuitive. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert length and distance between km, miles, meters, yards, feet, and inches. Simple and intuitive. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6186,7 +6186,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Weight Converter",
     "slug": "weight-converter",
     "category": "Utility",
-    "description": "Convert weight between kg, g, lb, oz, and stone. Supports both metric and imperial systems. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert weight between kg, g, lb, oz, and stone. Supports both metric and imperial systems. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6194,7 +6194,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Volume Converter",
     "slug": "volume-converter",
     "category": "Utility",
-    "description": "Convert volume between liters, mL, gallons, quarts, fl oz, and cups. Handy for cooking, science, and travel. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert volume between liters, mL, gallons, quarts, fl oz, and cups. Handy for cooking, science, and travel. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6202,7 +6202,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Area Converter",
     "slug": "area-converter",
     "category": "Utility",
-    "description": "Convert area between square meters, square feet, acres, hectares, and square kilometers. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert area between square meters, square feet, acres, hectares, and square kilometers. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6210,7 +6210,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Data Size Converter",
     "slug": "data-size-converter",
     "category": "Utility",
-    "description": "Convert data sizes between bytes, KB, MB, GB, TB, and PB. Understand disk space and file sizes in different units. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert data sizes between bytes, KB, MB, GB, TB, and PB. Understand disk space and file sizes in different units. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6218,7 +6218,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Body Fat Estimator",
     "slug": "body-fat-calculator",
     "category": "Health",
-    "description": "Estimate body fat percentage using BMI-based formula adjusted for age and gender. Shows fitness range and category. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Estimate body fat percentage using BMI-based formula adjusted for age and gender. Shows fitness range and category. Health data never leaves your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6226,7 +6226,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Daily Calorie Needs",
     "slug": "calorie-intake-calculator",
     "category": "Health",
-    "description": "Calculate your daily calorie needs using BMR and activity level. Shows maintenance, cutting, and bulking calorie targets for fitness planning. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate your daily calorie needs using BMR and activity level. Shows maintenance, cutting, and bulking calorie targets for fitness planning. Health data never leaves your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6234,7 +6234,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "30/40/30 Macro Split",
     "slug": "macro-split-calculator",
     "category": "Health",
-    "description": "Calculate recommended daily protein, carbs, and fat grams based on calorie intake. Follows standard 30/40/30 macro split. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Split calories into protein, carb, and fat grams for any diet target. Turn 2000 kcal into exact macros — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6242,7 +6242,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Sleep Requirements",
     "slug": "sleep-requirement-calculator",
     "category": "Health",
-    "description": "Get recommended sleep hours based on your age. Follows CDC and National Sleep Foundation guidelines from newborn to senior. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Get recommended sleep hours based on your age. Follows CDC and National Sleep Foundation guidelines from newborn to senior. Health data never leaves your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6250,7 +6250,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Ideal Body Weight",
     "slug": "ideal-weight-calc",
     "category": "Health",
-    "description": "Calculate your ideal body weight using Devine and Robinson formulas. Provides a healthy weight range for your height and gender. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute healthy weight range with Devine and Robinson formulas from height. See a 170 cm target band instantly — free, local, informational only.",
     "isPro": false
   },
   {
@@ -6258,7 +6258,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Steps to Distance",
     "slug": "steps-calculator",
     "category": "Health",
-    "description": "Convert steps walked to distance in km and miles. Also estimates calories burned based on height and step count. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert step counts to kilometers and miles plus calorie estimates from height and stride. Turn 10,000 steps into 7.5 km instantly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6266,7 +6266,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Calories Burned Calculator",
     "slug": "calories-burned-calculator",
     "category": "Health",
-    "description": "Estimate calories burned during exercise. Supports running, walking, cycling, swimming, yoga, lifting, and jump rope activities. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Estimate workout burn across running, cycling, swimming, yoga, and lifting from weight and duration. Price a 45-minute run in calories — free, local, estimate only.",
     "isPro": false
   },
   {
@@ -6274,7 +6274,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Blood Alcohol Estimator",
     "slug": "blood-alcohol-calculator",
     "category": "Health",
-    "description": "Estimate your blood alcohol concentration (BAC) based on drinks consumed, weight, gender, and time elapsed. For educational purposes only. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Estimate your blood alcohol concentration (BAC) based on drinks consumed, weight, gender, and time elapsed. For educational purposes only. Health data never leaves your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6282,7 +6282,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Ovulation Tracker",
     "slug": "ovulation-tracker",
     "category": "Health",
-    "description": "Track your fertile window and estimated ovulation date based on your last menstrual period. Helps with family planning. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Track your fertile window and estimated ovulation date based on your last menstrual period. Helps with family planning. Health data never leaves your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6290,7 +6290,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Date Difference Calculator",
     "slug": "date-difference-calculator",
     "category": "Calculator",
-    "description": "Calculate the exact difference between two dates in days, hours, minutes, and seconds. Perfect for project timelines and countdowns. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Measure the exact gap between two dates in days, weeks, and months — tenures, ages, project spans. A 3-year job stint reads 1,096 days instantly — free, no signup, runs locally.",
     "isPro": false
   },
   {
@@ -6298,7 +6298,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Date Addition Calculator",
     "slug": "date-addition-calculator",
     "category": "Calculator",
-    "description": "Add or subtract days from any date. Get the resulting date instantly — useful for deadlines, scheduling, and planning. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Add or subtract days, weeks, months, and years from any date — calendar-accurate. Find 100 days from hire date exactly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6306,7 +6306,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Week Number Calculator",
     "slug": "week-number-calculator",
     "category": "Calculator",
-    "description": "Find the ISO week number for any date. Also shows the day of the week and the current week of the year. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Get ISO week numbers for any date — plan sprints and fiscal weeks correctly. Know Week 32 means late July instantly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6314,7 +6314,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Time Since Calculator",
     "slug": "time-since-calculator",
     "category": "Calculator",
-    "description": "Calculate the time elapsed between any date and now. Shows results in years, months, weeks, days, hours, minutes, and seconds. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Measure exact elapsed time since any moment — days, hours, minutes live. Track 100 days sober to the second — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6322,7 +6322,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Time Zone Converter",
     "slug": "time-zone-converter",
     "category": "Utility",
-    "description": "Convert time between different time zones. Enter a time and your source/target time zones and see the converted result. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert times across world zones with DST handled — schedule global meetings right. See 9am New York everywhere instantly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6330,7 +6330,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "DST Checker (US)",
     "slug": "daylight-saving-time-checker",
     "category": "Calculator",
-    "description": "Check when daylight saving time starts and ends in the US for any year. Shows the exact dates and DST period length. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Check DST observance and transition dates for any timezone — spring forward dates decoded. Never miss a global meeting again — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6338,7 +6338,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Work Hours Calculator",
     "slug": "work-hours-calculator",
     "category": "Calculator",
-    "description": "Calculate total work hours between start and end times with a configurable break. Essential for timesheets and payroll. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate total work hours between start and end times with a configurable break. Essential for timesheets and payroll. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6346,7 +6346,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Hours & Minutes Calculator",
     "slug": "hours-minutes-calculator",
     "category": "Calculator",
-    "description": "Add, subtract, and calculate duration between hours and minutes. Perfect for time tracking and scheduling. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Add and subtract hours:minutes durations — timesheets, shifts, project totals. Sum 7:30 + 8:15 correctly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6354,7 +6354,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Password Entropy Calculator",
     "slug": "password-entropy-calculator",
     "category": "Developer",
-    "description": "Calculate password entropy in bits to measure password strength against brute-force attacks. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate password entropy in bits to measure password strength against brute-force attacks. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6362,7 +6362,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Two-Factor Auth Generator",
     "slug": "two-factor-auth-generator",
     "category": "Developer",
-    "description": "Generate TOTP URIs for two-factor authentication setup with authenticator apps. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate TOTP URIs for two-factor authentication setup with authenticator apps. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6370,7 +6370,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Brute Force Time Estimator",
     "slug": "brute-force-time-estimator",
     "category": "Developer",
-    "description": "Estimate the time required to brute-force a password given its length, character set, and hash rate. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Estimate password crack times from length, charset, and attacker speed — entropy made visceral. Show why 8-char passwords fall in hours — local math, free, no signup.",
     "isPro": false
   },
   {
@@ -6378,7 +6378,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Hash Verifier",
     "slug": "hash-verifier",
     "category": "Developer",
-    "description": "Verify that a hash matches a given input to check data integrity. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Verify that a hash matches a given input to check data integrity. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6386,7 +6386,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Hash Password Generator",
     "slug": "hash-password-generator",
     "category": "Developer",
-    "description": "Generate password hashes using PBKDF2-SHA256 with 600,000 iterations for secure password storage. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate password hashes using PBKDF2-SHA256 with 600,000 iterations for secure password storage. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6394,7 +6394,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Content Hash Generator",
     "slug": "hash-file-generator",
     "category": "Developer",
-    "description": "Compute SHA-1, SHA-256, SHA-384, or SHA-512 hashes of text content using the Web Crypto API. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute SHA-1, SHA-256, SHA-384, or SHA-512 hashes of text content using the Web Crypto API. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6402,7 +6402,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HMAC Generator",
     "slug": "hmac-generator",
     "category": "Developer",
-    "description": "Generate HMAC signatures using a secret key and hash algorithm for API authentication. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate HMAC signatures using a secret key and hash algorithm for API authentication. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6410,7 +6410,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SSL/TLS Checker",
     "slug": "ssl-tls-checker",
     "category": "Developer",
-    "description": "Check HTTPS reachability with browser-validated certificates, plus issuer and expiry history from public certificate records.",
+    "description": "Inspect TLS cipher suites and protocol versions a server offers — flag deprecated RC4, DES, and TLS 1.0 relics before attackers inventory them.",
     "isPro": false
   },
   {
@@ -6418,7 +6418,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HTTP Security Checker",
     "slug": "http-security-checker",
     "category": "Developer",
-    "description": "Probe a live URL for reachability, redirect chain, and visible response details, plus a reference checklist for HSTS, X-Frame-Options, and CSP to verify server-side.",
+    "description": "Run an HTTP security probe on a live URL — reachability, redirect chain, and visible response details, plus a reference checklist for HSTS, X-Frame-Options, and CSP.",
     "isPro": false
   },
   {
@@ -6426,7 +6426,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JWT Inspector",
     "slug": "jwt-inspector",
     "category": "Developer",
-    "description": "Deep-inspect JWT tokens with expiry validation, algorithm analysis, and claim details. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Decode JWT headers and payloads instantly — inspect claims, expiry, and algorithm before trusting a token. Debug auth failures in seconds — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -6434,7 +6434,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Content Security Policy Generator",
     "slug": "content-security-policy-generator",
     "category": "Developer",
-    "description": "Build a Content Security Policy header by selecting directives and allowed sources. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Build a Content Security Policy header by selecting directives and allowed sources. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6442,7 +6442,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Subnet Calculator",
     "slug": "subnet-calculator",
     "category": "Developer",
-    "description": "Calculate subnet masks, network addresses, broadcast addresses, and usable host ranges. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compute subnet masks, network/broadcast addresses, and usable host ranges from any CIDR. Plan a /24 office network correctly — local math, free, no signup.",
     "isPro": false
   },
   {
@@ -6450,7 +6450,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Subnet Visualizer",
     "slug": "subnet-visualizer",
     "category": "Developer",
-    "description": "Visualize IP subnet divisions with a hierarchical tree view for network planning. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "See subnet splits as visual maps — carve networks into sub-subnets graphically. Divide a /16 into department /24s visually — local rendering, free, no signup.",
     "isPro": false
   },
   {
@@ -6458,7 +6458,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "IPv4 Address Converter",
     "slug": "ip-address-converter",
     "category": "Developer",
-    "description": "Convert IPv4 addresses between dotted decimal, decimal, binary, and hexadecimal formats. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert IPv4 addresses between dotted-decimal, hex, integer, and binary forms. Decode 2130706433 to 127.0.0.1 instantly — local math, free, no signup.",
     "isPro": false
   },
   {
@@ -6466,7 +6466,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "IP Range Expander",
     "slug": "ip-range-expander",
     "category": "Developer",
-    "description": "Expand an IP address range into a list of individual addresses. Useful for network planning and firewall rules. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Expand an IP address range into a list of individual addresses. Useful for network planning and firewall rules. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6474,7 +6474,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "IPv6 ULA Generator",
     "slug": "ipv6-ula-generator",
     "category": "Developer",
-    "description": "Generate random IPv6 Unique Local Addresses (ULA) for internal network use. No signup or account required.",
+    "description": "Generate Unique Local Addresses for private IPv6 networks — random 40-bit global IDs in fc00::/7 space, no coordination needed.",
     "isPro": false
   },
   {
@@ -6482,7 +6482,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "DNS Lookup Generator",
     "slug": "dns-lookup-generator",
     "category": "Developer",
-    "description": "Look up live A, AAAA, CNAME, MX, TXT, and NS records via DNS-over-HTTPS, answered in your browser.",
+    "description": "Look up live A, AAAA, CNAME, MX, TXT, and NS records via DNS-over-HTTPS. Queries go to Google DNS — results display here.",
     "isPro": false
   },
   {
@@ -6490,7 +6490,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CORS Inspector",
     "slug": "cors-inspector",
     "category": "Developer",
-    "description": "Run a real cross-origin preflight from your browser to test whether an endpoint allows it, with the exact server headers to confirm.",
+    "description": "Run a real CORS preflight from your browser — a cross-origin request that shows whether an endpoint allows it, with the exact server headers to confirm.",
     "isPro": false
   },
   {
@@ -6498,7 +6498,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CORS Header Generator",
     "slug": "cors-header-generator",
     "category": "Developer",
-    "description": "Generate CORS headers for your API by configuring allowed origins, methods, and headers.",
+    "description": "Generate correct CORS headers — Access-Control-Allow-Origin, methods, headers, credentials. Fix preflight failures with exact syntax — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -6506,7 +6506,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Env File Generator",
     "slug": "env-file-generator",
     "category": "Developer",
-    "description": "Generate .env file templates with configurable variable names and default values. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate .env file templates with configurable variable names and default values. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6514,7 +6514,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Env File Parser",
     "slug": "env-file-parser",
     "category": "Developer",
-    "description": "Parse and validate .env files to detect missing variables, syntax errors, and duplicates. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Parse and validate .env files — quoted values, exports, comments, and multiline entries. Catch the missing quote breaking deploys — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -6522,7 +6522,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CVE Lookup",
     "slug": "cve-lookup",
     "category": "Developer",
-    "description": "Look up vulnerabilities by CVE ID with severity, summary, and references from the OSV database, plus direct NVD/MITRE links.",
+    "description": "Look up CVE vulnerabilities by ID with severity, descriptions, and affected products. Check CVE-2024-3094 before patching decisions — live OSV data, free, no signup.",
     "isPro": false
   },
   {
@@ -6530,7 +6530,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SQL Injection Detector",
     "slug": "sql-injection-detector",
     "category": "Developer",
-    "description": "Analyze SQL queries for common injection patterns and parameterization issues. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Scan inputs and queries for SQL injection patterns — tautologies, unions, stacked queries. Catch \\' OR \\'1\\'=\\'1 before attackers do — local pattern matching, free, no signup.",
     "isPro": false
   },
   {
@@ -6538,7 +6538,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "XSS Protection Checker",
     "slug": "xss-protection-checker",
     "category": "Developer",
-    "description": "Scan HTML/JavaScript code for reflected, stored, and DOM-based XSS vulnerabilities.",
+    "description": "Probe inputs against classic XSS cross-site scripting vectors — script tags, event handlers, and encoding tricks before shipping to production.",
     "isPro": false
   },
   {
@@ -6546,7 +6546,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSRF Token Generator",
     "slug": "csrf-token-generator",
     "category": "Developer",
-    "description": "Generate cryptographically secure CSRF tokens with configurable length and encoding. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate cryptographically secure CSRF tokens with configurable length and encoding. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6554,7 +6554,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OAuth2 Debugger",
     "slug": "oauth2-debugger",
     "category": "Developer",
-    "description": "Debug and decode OAuth2 tokens, authorization codes, and refresh token flows. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Debug OAuth2 flows step by step — authorize URLs, code exchange, token inspection. Fix redirect_uri_mismatch in minutes — local tooling, free, no signup.",
     "isPro": false
   },
   {
@@ -6562,7 +6562,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SAML Decoder",
     "slug": "saml-decoder",
     "category": "Developer",
-    "description": "Decode and inspect SAML assertions and responses for SSO troubleshooting. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Decode and inspect SAML assertions and responses for SSO troubleshooting. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6570,7 +6570,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSP Policy Validator",
     "slug": "csp-policy-validator",
     "category": "Developer",
-    "description": "Validate Content Security Policy headers against W3C spec and common pitfalls. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Validate Content Security Policy headers against W3C spec and common pitfalls. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6578,7 +6578,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TLS Cipher Checker",
     "slug": "tls-cipher-checker",
     "category": "Developer",
-    "description": "Check which TLS ciphers and protocol versions are supported by a server.",
+    "description": "Inspect which TLS cipher suites a server offers — flag weak RC4, DES, and TLS 1.0 relics before attackers do before attackers inventory them.",
     "isPro": false
   },
   {
@@ -6586,7 +6586,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "IP Reputation Checker",
     "slug": "ip-reputation-checker",
     "category": "Developer",
-    "description": "Look up IP geolocation, ASN, and hostname instantly, with direct links to AbuseIPDB and VirusTotal for blacklist verdicts.",
+    "description": "Check IP reputation against blocklists and geolocation data — spot VPNs, bots, and abuse sources. Screen a suspicious login IP instantly — live lookup data, free, no signup.",
     "isPro": false
   },
   {
@@ -6594,7 +6594,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "URL Sanitizer",
     "slug": "url-sanitizer",
     "category": "Developer",
-    "description": "Sanitize URLs by removing tracking parameters and normalizing the URL structure. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Strip tracking parameters, normalize, and defang suspicious URLs safely. Clean 50 affiliate links before sharing — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -6602,7 +6602,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SSL Certificate Decoder",
     "slug": "ssl-certificate-decoder",
     "category": "Developer",
-    "description": "Decode and view SSL certificate details including subject, issuer, and validity period. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Decode and view SSL certificate details including subject, issuer, and validity period. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6618,7 +6618,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Email Validator",
     "slug": "email-format-validator",
     "category": "Developer",
-    "description": "Validate email addresses for correct format, disposable domains, and MX record existence. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Validate email addresses for correct format, disposable domains, and MX record existence. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6626,7 +6626,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Validator",
     "slug": "syntax-validator",
     "category": "Developer",
-    "description": "Validate code syntax across multiple languages including JSON, XML, and JavaScript. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Validate code syntax across multiple languages including JSON, XML, and JavaScript. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6634,7 +6634,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Annual Contract Value Calculator",
     "slug": "acv-calculator",
     "category": "Growth & Marketing",
-    "description": "Calculate Annual Contract Value (ACV) by dividing total contract value by the contract term in years.",
+    "description": "Compute Average Contract Value from bookings and customer counts — know deal size trends. Track enterprise motion quarterly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6642,7 +6642,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ASCII Table Generator",
     "slug": "ascii-table-generator",
     "category": "Text",
-    "description": "Generate clean ASCII art tables from CSV, TSV, or pipe-delimited data. Configurable header alignment, border styles, column padding, and export options for documentation, code comments, and terminal output.",
+    "description": "Browse and search the full ASCII table — decimals, hex, symbols, and HTML entities. Find that the copyright sign is &#169; in seconds — free, local, developer reference.",
     "isPro": false
   },
   {
@@ -6650,7 +6650,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Git Commit Linter",
     "slug": "git-commit-linter",
     "category": "Developer",
-    "description": "Validate git commit messages against the Conventional Commits specification. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Validate git commit messages against the Conventional Commits specification. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6666,7 +6666,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SaaS Payback Period",
     "slug": "saas-payback-period",
     "category": "Growth & Marketing",
-    "description": "Calculate SaaS customer payback period by dividing CAC by monthly revenue per customer.",
+    "description": "Compute CAC payback months — how fast customers repay acquisition cost. Prove 12-month payback to investors — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6674,7 +6674,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SaaS Quick Ratio",
     "slug": "saas-quick-ratio",
     "category": "Growth & Marketing",
-    "description": "Calculate SaaS Quick Ratio from new, expansion, reactivation, churned, and contraction MRR.",
+    "description": "Compute SaaS Quick Ratio — growth efficiency balancing new revenue vs churn. Score above 4 for elite growth — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6682,7 +6682,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SaaS Rule of 40",
     "slug": "saas-rule-of-40",
     "category": "Growth & Marketing",
-    "description": "Calculate the Rule of 40 score by combining revenue growth rate and profit margin. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Score Rule of 40 — growth rate plus profit margin — for SaaS health at a glance. Prove 40+ to investors — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6690,7 +6690,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Swift Formatter",
     "slug": "swift-formatter",
     "category": "Developer",
-    "description": "Formats Swift source code with proper indentation, spacing, and bracing style for readable iOS and macOS development.",
+    "description": "Format Swift with proper indentation, optional chaining spacing, and closure layout. Clean iOS sources before commit — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -6698,7 +6698,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Temperature Converter",
     "slug": "temperature-converter",
     "category": "Utility",
-    "description": "Convert temperatures between Celsius, Fahrenheit, and Kelvin scales instantly. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert Celsius, Fahrenheit, and Kelvin temperature units instantly with formula shown. Translate 350°F for any recipe — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6706,7 +6706,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF to TXT",
     "slug": "pdf-to-txt",
     "category": "PDF",
-    "description": "Extract plain text from PDF files with estimated output size. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Extract plain text from any PDF — articles, transcripts, documentation. Strip a 100-page manual to editable text — local extraction, free, no signup.",
     "isPro": false
   },
   {
@@ -6714,7 +6714,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV to SQLite Web Terminal",
     "slug": "csv-to-sqlite",
     "category": "Converter",
-    "description": "Import CSV data directly into a SQLite database. Run SQL queries, filter rows, and export results.",
+    "description": "Convert CSV files into queryable SQLite databases in your browser. Turn 100k-row exports into SELECT-able tables — local sql.js work, free quota on saves.",
     "isPro": false
   },
   {
@@ -6722,7 +6722,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Vector Pen Canvas",
     "slug": "vector-pen-canvas",
     "category": "Design",
-    "description": "A freeform vector drawing tool with freehand pen, shapes (rectangle, ellipse, line), multi-page canvas, color picker, and SVG/PNG export. Draw diagrams and illustrations entirely in your browser.",
+    "description": "Draw bezier vector paths with a pen tool on canvas — anchor handles included. Sketch icons and illustrations freehand — local Fabric work, free quota on saves.",
     "isPro": false
   },
   {
@@ -6730,7 +6730,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AES Encrypt",
     "slug": "aes-encrypt",
     "category": "Developer",
-    "description": "Encrypt text using AES symmetric encryption with a passphrase. Generate ciphertext that can be safely transmitted or stored. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Encrypt text using AES symmetric encryption with a passphrase. Generate ciphertext that can be safely transmitted or stored. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6738,7 +6738,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AES Decrypt",
     "slug": "aes-decrypt",
     "category": "Developer",
-    "description": "Decrypt AES-encrypted ciphertext back to plain text using the original passphrase. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Decrypt AES-encrypted ciphertext with the original key — CBC/ECB modes, Base64 I/O. Recover data locked with known keys — local CryptoJS work, free, no signup.",
     "isPro": false
   },
   {
@@ -6746,7 +6746,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HTTP Header Analyzer",
     "slug": "http-header-analyzer",
     "category": "Developer",
-    "description": "Analyze HTTP request and response headers — detect security headers, review formatting, and inspect value structure. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Analyze HTTP request and response headers — detect security headers, review formatting, and inspect value structure. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6754,7 +6754,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HTTP Headers Generator",
     "slug": "http-headers-generator",
     "category": "Developer",
-    "description": "Generate common HTTP headers for JSON, REST, and GraphQL APIs with correct Content-Type and authorization patterns. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate common HTTP headers for JSON, REST, and GraphQL APIs with correct Content-Type and authorization patterns. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6762,7 +6762,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HTTP Cache Header Generator",
     "slug": "http-cache-header-generator",
     "category": "Developer",
-    "description": "Generate Cache-Control directives with configurable max-age, scope, must-revalidate, and no-transform options. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate Cache-Control directives with configurable max-age, scope, must-revalidate, and no-transform options. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6778,7 +6778,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ESLint Config Generator",
     "slug": "eslint-config-generator",
     "category": "Developer",
-    "description": "Generate ESLint configuration presets for React, Node.js, TypeScript, and Next.js projects with recommended rules. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate ESLint flat configs with curated rule sets for React, Node, and TypeScript. Standardize linting across repos — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -6786,7 +6786,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HTTP Retry Policy Builder",
     "slug": "http-retry-policy-builder",
     "category": "Developer",
-    "description": "Build HTTP retry policies with exponential backoff, fixed delay, or circuit breaker strategies for resilient API clients. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Build HTTP retry policies with exponential backoff, fixed delay, or circuit breaker strategies for resilient API clients. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6794,7 +6794,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Triangle Area Calculator",
     "slug": "triangle-area-calculator",
     "category": "Calculator",
-    "description": "Calculate the area of a triangle given base and height using the formula 0.5 × base × height. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate the area of a triangle given base and height using the formula 0.5 × base × height. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6802,7 +6802,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Gas Mileage Calculator",
     "slug": "gas-mileage-calculator",
     "category": "Calculator",
-    "description": "Calculate fuel economy in MPG (miles per gallon) from distance driven and fuel consumed. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate fuel economy in MPG (miles per gallon) from distance driven and fuel consumed. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6810,7 +6810,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Calorie Tracker",
     "slug": "calorie-tracker",
     "category": "Health",
-    "description": "Log your daily food intake with a built-in common foods database. Track total calories consumed throughout the day. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Log daily calories against targets with running totals — simple deficit tracking that works. See 400 kcal remaining at dinner — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6818,7 +6818,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Waist-to-Hip Ratio Calculator",
     "slug": "waist-to-hip-ratio-calculator",
     "category": "Health",
-    "description": "Calculate your waist-to-hip ratio and assess health risk based on your measurements and gender. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate your waist-to-hip ratio and assess health risk based on your measurements and gender. Health data never leaves your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6826,7 +6826,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TSV ↔ CSV Converter",
     "slug": "tsv-csv-converter",
     "category": "Converter",
-    "description": "Bidirectional converter between tab-separated values (TSV) and comma-separated values (CSV) with proper quoting. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert between tab-separated and comma-separated values with proper quoting. Move data between Unix tools and Excel cleanly — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -6834,7 +6834,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JSON → Toon Converter",
     "slug": "json-toon-converter",
     "category": "Converter",
-    "description": "Convert JSON objects into a human-readable Toon format using → arrows instead of colons. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert JSON objects into a human-readable Toon format using → arrows instead of colons. Files are converted locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -6842,7 +6842,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Data Cleaner",
     "slug": "csv-data-cleaner",
     "category": "Converter",
-    "description": "Clean CSV data by trimming whitespace, removing empty rows, deduplicating, and applying column-aware transforms (email lowercasing, phone digit-stripping, note normalizing). Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Clean messy CSVs — trim whitespace, fix encodings, deduplicate rows, standardize blanks. Make client exports analysis-ready — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -6850,7 +6850,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Statistics",
     "slug": "csv-statistics",
     "category": "Converter",
-    "description": "Compute per-column statistics for CSV data including count, sum, average, min, max for numeric columns. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Profile CSV datasets — row counts, column types, null rates, value distributions. Scope data quality before analysis — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -6858,7 +6858,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV ↔ HTML Table Converter",
     "slug": "csv-html-table-converter",
     "category": "Converter",
-    "description": "Bidirectional converter between CSV data and HTML table markup with live preview. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Bidirectional converter between CSV data and HTML table markup with live preview. Files are converted locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -6866,7 +6866,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "YAML Validator",
     "slug": "yaml-validator",
     "category": "Developer",
-    "description": "Validate YAML formatting, detect indentation issues, convert YAML to JSON, and minify YAML comments. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Validate YAML formatting, detect indentation issues, convert YAML to JSON, and minify YAML comments. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -6882,7 +6882,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text Cleaner",
     "slug": "text-cleaner",
     "category": "Text",
-    "description": "Normalize whitespace, trim trailing spaces, remove excess newlines, strip empty lines, and clean up messy text with one click. Handles mixed line endings and irregular spacing.",
+    "description": "Strip extra spaces, blank lines, and invisible characters from pasted text. Fix copy-paste mess from PDFs and web — local cleaning, free, no signup.",
     "isPro": false
   },
   {
@@ -6898,7 +6898,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Trailing Space Remover",
     "slug": "trailing-space-remover",
     "category": "Developer",
-    "description": "Remove trailing whitespace from every line in your text. Essential for code cleanup and formatting.",
+    "description": "Strip trailing whitespace and normalize final newlines across pasted code or text. Ship zero-whitespace diffs every commit — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -6906,7 +6906,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Canonical URL Checker",
     "slug": "canonical-url-checker",
     "category": "SEO",
-    "description": "Validate canonical URLs — check protocol, domain, path, query parameters, fragments, trailing slash, and www prefix for SEO best practices.",
+    "description": "Validate canonical tags — protocol, www, trailing slash, and page consistency. Catch the canonical pointing at staging — local checks, free, no signup.",
     "isPro": false
   },
   {
@@ -6914,7 +6914,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Breadcrumb Schema Generator",
     "slug": "breadcrumb-schema-generator",
     "category": "SEO",
-    "description": "Generate JSON-LD BreadcrumbList structured data from a list of page names and URLs. Add breadcrumb schema to your website for better SEO.",
+    "description": "Generate BreadcrumbList JSON-LD for rich SERP trails — Home > Category > Product. Earn navigational breadcrumbs in results — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -6922,7 +6922,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "UTM Builder",
     "slug": "utm-builder",
     "category": "SEO",
-    "description": "Build campaign tracking URLs with utm_source, utm_medium, utm_campaign, utm_term, and utm_content parameters. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Build tagged campaign URLs with utm_source, medium, campaign, term, and content — no broken query strings. Tag 50 launch links without typos — free, local, copy-paste.",
     "isPro": false
   },
   {
@@ -6930,7 +6930,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Port Number Lookup",
     "slug": "port-number-lookup",
     "category": "Developer",
-    "description": "Look up service names for TCP/UDP port numbers — well-known (0-1023), registered (1024-49151), and dynamic/private (49152-65535) ranges. Includes 25+ common services.",
+    "description": "Look up TCP/UDP port assignments — 443 HTTPS, 5432 Postgres — with service context. Identify mystery listeners instantly — local reference, free, no signup.",
     "isPro": false
   },
   {
@@ -6938,7 +6938,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "User-Agent Parser",
     "slug": "user-agent-parser",
     "category": "Developer",
-    "description": "Parse browser, operating system, and version from any User-Agent string. Detects Chrome, Firefox, Safari, Edge, and the client OS from request headers.",
+    "description": "Parse User-Agent strings into browser, OS, device, and bot verdicts. Identify crawlers vs customers in logs — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -6954,7 +6954,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SSE Event Formatter",
     "slug": "sse-event-formatter",
     "category": "Developer",
-    "description": "Parse and visualize Server-Sent Events (SSE) streams into structured data. Formats event fields including data, event, id, and retry directives.",
+    "description": "Format Server-Sent Events streams — data, event, id, retry fields validated. Debug EventSource feeds line by line — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -6962,7 +6962,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Rate Limit Header Parser",
     "slug": "rate-limit-header-parser",
     "category": "Developer",
-    "description": "Parse X-RateLimit headers and compute usage percentage, reset times, and retry intervals. Supports standard X-RateLimit-Limit, X-RateLimit-Remaining, and X-RateLimit-Reset formats.",
+    "description": "Parse RateLimit/Limit headers — limits, remaining, reset times — from any API response. Read 429s correctly before retrying — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -6970,7 +6970,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Pricing Tier Builder",
     "slug": "pricing-tier-builder",
     "category": "Developer",
-    "description": "Build pricing tier descriptions from JSON input. Supports free/pro tiers with configurable pricing (monthly/annual), user limits, and feature lists.",
+    "description": "Design SaaS pricing tiers with feature matrices and monthly/annual math. Model Starter/Growth/Scale before committing — local planning, free, no signup.",
     "isPro": false
   },
   {
@@ -6978,7 +6978,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SSH Key Generator",
     "slug": "ssh-key-generator",
     "category": "Developer",
-    "description": "Generate RSA, ECDSA, and Ed25519 SSH key pairs with proper OpenSSH format output. RSA uses RSASSA-PKCS1-v1_5 (2048-bit). ECDSA supports P-256 and P-384. Ed25519 uses a pure-JS implementation (no server). Public keys paste directly into ~/.ssh/authorized_keys.",
+    "description": "Generate SSH key pairs (ed25519/RSA) with copy-ready public and private parts. Set up server access in a minute — local Web Crypto, free, no signup.",
     "isPro": false
   },
   {
@@ -6994,7 +6994,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "security.txt Generator",
     "slug": "security-txt-generator",
     "category": "Developer",
-    "description": "Generate a security.txt file for your website following RFC 9116 standard. Specify contact email, security policy URL, encryption key, and expiry date for vulnerability disclosure.",
+    "description": "Generate RFC 9116 security.txt files with contact, policy, and expiry fields. Give researchers a reporting path — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -7002,7 +7002,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "robots.txt Validator",
     "slug": "robots-txt-validator",
     "category": "Developer",
-    "description": "Validate robots.txt syntax — checks User-agent, Allow, Disallow, Sitemap, Crawl-delay directives. Identifies unknown directives, missing colons, and missing User-agent declarations.",
+    "description": "Validate robots.txt syntax — user-agents, allow/disallow, sitemaps, wildcards. Catch the Disallow: / that deindexed everything — local validation, free, no signup.",
     "isPro": false
   },
   {
@@ -7010,7 +7010,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "DNS Record Validator",
     "slug": "dns-record-validator",
     "category": "Developer",
-    "description": "Validate DNS record syntax for A, AAAA, CNAME, MX, TXT, NS, SOA, SRV, CAA, and PTR records. Checks IP format for A/AAAA records and domain validity for MX records.",
+    "description": "Validate DNS records — A, MX, TXT, SPF, DKIM, DMARC syntax and coherence. Catch the missing SPF that tanks deliverability — local checks, free, no signup.",
     "isPro": false
   },
   {
@@ -7018,7 +7018,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Docker Compose Validator",
     "slug": "docker-compose-validator",
     "category": "Developer",
-    "description": "Validate docker-compose.yml files — checks YAML syntax, correct indentation, tab usage, and the presence of the services section. Identifies mixed indentation and formatting issues.",
+    "description": "Validate docker-compose.yml — YAML syntax, indentation, tabs, and services presence. Catch the tab indent breaking deploys — local validation, free, no signup.",
     "isPro": false
   },
   {
@@ -7042,7 +7042,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Kubernetes YAML Validator",
     "slug": "kubernetes-yaml-validator",
     "category": "Developer",
-    "description": "Validate Kubernetes YAML manifests — checks for required fields (apiVersion, kind, metadata), correct YAML structure, indentation, and tab usage.",
+    "description": "Validate Kubernetes manifests — apiVersion/kind, required metadata, probe and resource sanity. Catch CrashLoop configs before apply — local validation, free, no signup.",
     "isPro": false
   },
   {
@@ -7066,7 +7066,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "RSS Feed Validator",
     "slug": "rss-feed-validator",
     "category": "Developer",
-    "description": "Validate RSS 2.0 and Atom feed XML — checks root element, channel/feed, title, link, description, items/entries, and XML declaration.",
+    "description": "Validate RSS/Atom feeds for spec compliance — required fields, date formats, enclosures. Fix podcast feeds Apple rejects — local validation, free, no signup.",
     "isPro": false
   },
   {
@@ -7082,7 +7082,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "XPath Validator",
     "slug": "xpath-validator",
     "category": "Developer",
-    "description": "Test XPath expressions against XML or HTML documents. Evaluates queries and displays matching results in real time. Checks XML parsing errors before evaluation.",
+    "description": "Test XPath expressions against XML documents with match highlighting. Debug //book[price>30] before committing scrapers — local evaluation, free, no signup.",
     "isPro": false
   },
   {
@@ -7090,7 +7090,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Cron Expression Validator",
     "slug": "cron-expression-validator",
     "category": "Developer",
-    "description": "Validate cron expressions with field-level range checking. Supports 5-field format with step values, ranges, lists, and wildcards. Detects out-of-bounds values and provides readable descriptions.",
+    "description": "Validate cron schedules and preview next run times — catch the Sunday-vs-7 bug before production. Verify 0 2 * * * runs 2am daily — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -7098,7 +7098,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Date Generator",
     "slug": "random-date-generator",
     "category": "Utility",
-    "description": "Generate random dates within a configurable range with optional format selection including ISO, US, EU, and full-date styles. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate random dates within a configurable range with optional format selection including ISO, US, EU, and full-date styles. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -7106,7 +7106,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Time Generator",
     "slug": "random-time-generator",
     "category": "Utility",
-    "description": "Generate random times in 12-hour or 24-hour format with optional seconds and configurable time range. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate random times in 12/24-hour format with seconds and range control. Schedule surprise drills and test fixtures — free, local, no signup.",
     "isPro": false
   },
   {
@@ -7114,7 +7114,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random IP Generator",
     "slug": "random-ip-generator",
     "category": "Developer",
-    "description": "Generate random IPv4 and IPv6 addresses for network testing, development, and security research. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate random IPv4 and IPv6 addresses for network testing, development, and security research. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -7122,7 +7122,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random User-Agent Generator",
     "slug": "random-user-agent-generator",
     "category": "Developer",
-    "description": "Generate random browser user-agent strings from a curated list covering Chrome, Firefox, Safari, Edge, and mobile browsers. No signup or account required.",
+    "description": "Generate random browser user-agent strings from a curated list covering Chrome, Firefox, Safari, Edge, and mobile browsers. Free to start with no signup — fair daily limits apply.",
     "isPro": false
   },
   {
@@ -7130,7 +7130,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Sentence Generator",
     "slug": "random-sentence-generator",
     "category": "Utility",
-    "description": "Generate random sentences from a curated word list, useful for placeholder text and content generation. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate random sentences for writing prompts, test data, and brainstorming. Break writer\\'s block in one click — free, local, no signup.",
     "isPro": false
   },
   {
@@ -7138,7 +7138,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Word Generator",
     "slug": "random-word-generator",
     "category": "Utility",
-    "description": "Generate random words from a curated vocabulary list for brainstorming, naming, and word games. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate random words by part of speech and length for games, passwords, and naming. Find startup names that aren\\'t taken — free, local, no signup.",
     "isPro": false
   },
   {
@@ -7146,7 +7146,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PIN Generator",
     "slug": "pin-generator",
     "category": "Developer",
-    "description": "Generate numeric PINs of configurable length from 4 to 10 digits for security codes, verification codes, and access tokens. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate numeric PINs of configurable length from 4 to 10 digits for security codes, verification codes, and access tokens. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -7154,7 +7154,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "License Key Generator",
     "slug": "license-key-generator",
     "category": "Developer",
-    "description": "Generate license keys in custom formats with configurable character sets, segment separators, and prefix/suffix options. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate formatted software license keys with segments and validation patterns. Issue XXXX-XXXX keys for releases — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -7162,7 +7162,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image Placeholder Generator",
     "slug": "image-placeholder-generator",
     "category": "Design",
-    "description": "Generate SVG image placeholders as base64 data URIs with configurable dimensions and random background colors for prototyping. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate placeholder images by URL with custom size, text, and colors — wireframes that look intentional. Fill layouts before assets arrive — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -7170,7 +7170,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Logo Placeholder Generator",
     "slug": "logo-placeholder-generator",
     "category": "Design",
-    "description": "Generate brand logo placeholders as SVG with random brand names, initials, colors, and configurable size for design mockups. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate text-based logo placeholders with fonts and styling for mockups. Brand wireframes convincingly — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -7178,7 +7178,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Open Graph Generator",
     "slug": "open-graph-generator",
     "category": "Developer",
-    "description": "Generate Open Graph (og:) and Twitter Card meta tags for social sharing, with fields for title, description, URL, and image. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate Open Graph and Twitter Card meta tags with image specs for perfect link previews. Fix blank Discord embeds in minutes — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -7186,7 +7186,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OAuth PKCE Generator",
     "slug": "oauth-pkce-generator",
     "category": "Developer",
-    "description": "Generate RFC 7636 OAuth PKCE code_verifier + code_challenge (S256 method) pairs. Verifier uses 48 bytes → 64-char base64url, challenge uses SHA-256. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate RFC 7636 OAuth PKCE code_verifier + code_challenge (S256 method) pairs. Verifier uses 48 bytes → 64-char base64url, challenge uses SHA-256. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -7194,7 +7194,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Cooking Measurement Converter",
     "slug": "cooking-measurement-converter",
     "category": "Utility",
-    "description": "Convert cooking measurements between teaspoons, tablespoons, fluid ounces, cups, pints, quarts, gallons, milliliters, and liters. Includes tsp and tbsp not found in the volume converter.",
+    "description": "Convert cooking measurements: cups, grams, ounces, and milliliters for any ingredient — bake American recipes anywhere. Translate 1 cup flour to 120g exactly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -7202,7 +7202,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Fuel Consumption Converter",
     "slug": "fuel-consumption-converter",
     "category": "Utility",
-    "description": "Convert fuel economy between L/100km, MPG (US), MPG (UK), and km/L. Essential for comparing vehicle efficiency across metric and imperial systems.",
+    "description": "Convert MPG, L/100km, and km/L to compare fuel consumption across systems. Translate 30 MPG for European buyers — free, local, no signup.",
     "isPro": false
   },
   {
@@ -7210,7 +7210,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Paper Size Converter",
     "slug": "paper-size-converter",
     "category": "Utility",
-    "description": "Compare and convert between A0, A1, A4, Letter, and Legal paper sizes. Understand how many sheets of one size fit into another.",
+    "description": "Convert paper sizes — A4, Letter, Legal — with millimeter and inch dimensions. Fit US Letter content onto A4 correctly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -7218,7 +7218,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Clothing Size Converter",
     "slug": "clothing-size-converter",
     "category": "Utility",
-    "description": "Convert clothing sizes between US/Canada, UK, EU, Japan, and France sizing systems. Supports women\\'s apparel size conversions with international standards.",
+    "description": "Convert clothing sizes across US, UK, EU, and Asian systems for tops, shoes, and rings. Order a EU 42 as US 9 confidently — free, local, no signup.",
     "isPro": false
   },
   {
@@ -7226,7 +7226,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Large Text File Viewer",
     "slug": "large-text-viewer",
     "category": "Developer",
-    "description": "View and search large text files (logs, CSVs, JSON) up to 100K characters in the browser with text search and match counting. No file upload needed — all client-side.",
+    "description": "Open multi-megabyte text files that crash editors — chunked rendering keeps scrolling smooth. Read 50 MB logs without freezing — local FileReader streaming, free, no signup.",
     "isPro": false
   },
   {
@@ -7242,7 +7242,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Avro to JSON Sample Generator",
     "slug": "avro-to-json-sample",
     "category": "Developer",
-    "description": "Generate sample JSON data from an Avro schema. Auto-generates values based on field types. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate sample JSON data from an Avro schema. Auto-generates values based on field types. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -7250,7 +7250,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "iCal Event Generator",
     "slug": "ical-event-generator",
     "category": "Utility",
-    "description": "Generate .ics calendar files for any event. Set summary, dates, times, description, and location — download or copy ready-to-import iCal (RFC 5545) format.",
+    "description": "Build .ics calendar event files with summary, dates, location, and description — import anywhere. Send invites that land in every calendar app — free, local download.",
     "isPro": false
   },
   {
@@ -7258,7 +7258,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Column Extractor",
     "slug": "column-extractor",
     "category": "Utility",
-    "description": "Extract specific columns from CSV data by header name. Select the columns you need and get a clean CSV with only your chosen fields.",
+    "description": "Extract single CSV columns by name or index into clean lists. Pull all emails from row 3 in seconds — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -7266,7 +7266,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Column Renamer",
     "slug": "column-renamer",
     "category": "Utility",
-    "description": "Rename CSV column headers in bulk using old:new mapping. Quickly relabel columns for data standardization and reporting.",
+    "description": "Rename CSV headers in bulk with old:new mapping — standardize client exports fast. Fix 40 messy columns before import — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -7274,7 +7274,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Data Type Converter",
     "slug": "data-type-converter",
     "category": "Converter",
-    "description": "Convert CSV column data types between number, string, integer, and float. Ensure consistent typing across your dataset.",
+    "description": "Convert values between string, number, boolean, array, and object types with validation. Fix API type mismatches fast — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -7282,7 +7282,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Deduplicator",
     "slug": "deduplicator",
     "category": "Utility",
-    "description": "Remove duplicate rows from CSV data based on a specific column. Keep only unique values for cleaner datasets.",
+    "description": "Remove duplicate rows from CSV data based on a specific column. Keep only unique values for cleaner datasets. Sort plus dedupe passes clean mailing lists and datasets fast — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -7290,7 +7290,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Format Validator",
     "slug": "format-validator",
     "category": "Utility",
-    "description": "Validate CSV formatting — detect inconsistent column counts, quoting errors, and malformed rows. Get detailed issue reports.",
+    "description": "Validate data formats — emails, phones, dates, UUIDs — with pattern diagnostics. Catch bad rows before import — local validation, free, no signup.",
     "isPro": false
   },
   {
@@ -7298,7 +7298,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Merger",
     "slug": "csv-merger",
     "category": "Utility",
-    "description": "Merge two CSV files on a common column. Join datasets horizontally by matching key values, like a SQL JOIN for your spreadsheets.",
+    "description": "Merge multiple CSV files into one with header alignment — combine monthly exports instantly. Join 12 reports into one sheet — local merging, free, no signup.",
     "isPro": false
   },
   {
@@ -7306,7 +7306,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Null Value Handler",
     "slug": "null-value-handler",
     "category": "Utility",
-    "description": "Replace empty, null, or NA values in CSV data with a custom fill value. Clean your datasets for analysis and migration.",
+    "description": "Replace empty, null, or NA values in CSV data with a custom fill value. Clean your datasets for analysis and migration. Standardize empties to null or custom fills so GROUP BY counts stay correct — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -7314,7 +7314,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Pivot Generator",
     "slug": "pivot-generator",
     "category": "Utility",
-    "description": "Generate pivot tables from CSV data by specifying group and value columns. Transform long-format data into summary tables. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Pivot CSV rows into summary tables — group, count, and sum without spreadsheets. Summarize 10k sales rows by region instantly — local pivoting, free, no signup.",
     "isPro": false
   },
   {
@@ -7330,7 +7330,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Row Sorter",
     "slug": "csv-row-sorter",
     "category": "Utility",
-    "description": "Sort CSV rows by any column in ascending or descending order. Quickly organize your data for analysis and reporting.",
+    "description": "Sort CSV rows by any column ascending or descending — dates, numbers, names handled right. Order 10,000 sales rows in seconds — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -7338,7 +7338,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Splitter",
     "slug": "csv-splitter",
     "category": "Utility",
-    "description": "Split a large CSV file into multiple smaller files by page count. Divide datasets into manageable chunks for processing.",
+    "description": "Split large CSVs by row count or column value — chunks that tools accept. Break 1M rows into importable parts — local splitting, free, no signup.",
     "isPro": false
   },
   {
@@ -7346,7 +7346,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Transpose",
     "slug": "csv-transpose",
     "category": "Utility",
-    "description": "Transpose CSV data — swap rows and columns. Convert horizontal data to vertical and vice versa for reformatting.",
+    "description": "Flip CSV rows and columns — wide tables to long form for analysis. Pivot stubborn exports without Excel gymnastics — local transposing, free, no signup.",
     "isPro": false
   },
   {
@@ -7354,7 +7354,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV to Markdown Table",
     "slug": "csv-to-markdown",
     "category": "Converter",
-    "description": "Convert CSV data into GitHub-flavored Markdown tables for docs and README files. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert CSV data into GitHub-flavored Markdown tables for docs and README files. Files are converted locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -7362,7 +7362,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV to NDJSON",
     "slug": "csv-to-ndjson",
     "category": "Converter",
-    "description": "Convert CSV to Newline Delimited JSON. Each row becomes a separate JSON object. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert CSV rows to newline-delimited JSON for streaming pipelines and log systems. Feed Kafka without reformatting — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -7370,7 +7370,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV to SQL INSERT",
     "slug": "csv-to-sql",
     "category": "Converter",
-    "description": "Converts CSV files to SQL format — spreadsheets, database exports, and data imports to relational database operations, data analysis, and reporting. All conversion happens locally in your browser with no file size limits.",
+    "description": "Convert CSV data into SQL INSERT statements with inferred column types. Seed test databases in minutes — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -7378,7 +7378,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JSON Escape/Unescape",
     "slug": "json-escape-unescape",
     "category": "Developer",
-    "description": "Escape or unescape JSON strings — convert special characters to their JSON-safe escaped equivalents and back.",
+    "description": "Escape JSON strings for embedding or unescape back to readable text in one click. Fix double-escaped API fixtures fast — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -7386,7 +7386,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JSON Flattener",
     "slug": "json-flattener",
     "category": "Developer",
-    "description": "Flatten nested JSON objects into dot-notation key-value pairs. Unwrap complex hierarchies for tabular processing.",
+    "description": "Flatten nested JSON objects into dot-notation key-value pairs. Unwrap complex hierarchies for tabular processing. Dot-notation paths preserve nesting info for spreadsheets and logs — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -7410,7 +7410,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JSON Schema Generator",
     "slug": "json-schema-generator",
     "category": "Developer",
-    "description": "Generate a JSON Schema (draft-07) from sample JSON data. Auto-detect types, required fields, and nested structures.",
+    "description": "Generate JSON Schema from sample JSON — types, required fields, and nested structure inferred automatically in seconds flat.",
     "isPro": false
   },
   {
@@ -7418,7 +7418,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JSON Size Analyzer",
     "slug": "json-size-analyzer",
     "category": "Developer",
-    "description": "Analyze JSON payload size, character count, key count, and nesting depth. Understand the size profile of your data.",
+    "description": "Profile JSON payload weight — byte size, key counts, nesting depth, and heavy branches. Find the 2 MB field bloating responses — local analysis, free, no signup.",
     "isPro": false
   },
   {
@@ -7426,7 +7426,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JSON to Zod Schema",
     "slug": "json-to-zod",
     "category": "Developer",
-    "description": "Generate Zod validation schemas from sample JSON data. TypeScript runtime validation. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate Zod validation schemas from sample JSON data. TypeScript runtime validation. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -7434,7 +7434,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JWK Generator",
     "slug": "jwk-generator",
     "category": "Developer",
-    "description": "Generate JSON Web Keys (JWK) with RSA key sizes of 2048 or 4096 bits. Export public and private keys in JWK format.",
+    "description": "Generate JSON Web Keys (JWK: RSA, EC, oct) with kid and alg parameters — browser-crypto randomness, ready to use for auth systems that need them.",
     "isPro": false
   },
   {
@@ -7442,7 +7442,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JSONL Formatter",
     "slug": "jsonl-formatter",
     "category": "Developer",
-    "description": "Format JSON Lines (JSONL) data — pretty-print each line as formatted JSON for readability and debugging.",
+    "description": "Format JSON Lines files with per-line pretty-printing and validation. Read streaming logs like structured data — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -7450,7 +7450,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "NDJSON to JSON Array",
     "slug": "ndjson-to-json",
     "category": "Developer",
-    "description": "Convert Newline Delimited JSON into a standard JSON array format. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert newline-delimited JSON streams to JSON arrays for analysis. Turn 10,000 log lines into queryable data — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -7458,7 +7458,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JSON to URL Parameters",
     "slug": "json-to-url-params",
     "category": "Developer",
-    "description": "Convert JSON objects into URL query string parameters for API calls and web requests. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Flatten JSON objects into URL query strings — nest with bracket notation. Build ?filter[x]=1 links from API objects — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -7466,7 +7466,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Row / JSON Generator",
     "slug": "csv-json-row-generator",
     "category": "Utility",
-    "description": "Generate realistic dummy data as CSV rows or JSON objects. Configure count (1-50) for test data, demos, and prototyping.",
+    "description": "Generate CSV rows from JSON objects for fixtures and imports — nested keys flattened. Seed databases from API shapes — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -7474,7 +7474,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Glassmorphism CSS Generator",
     "slug": "glassmorphism-generator",
     "category": "Developer",
-    "description": "Generate glassmorphism CSS with adjustable blur, opacity, and border radius. Copy ready-to-use CSS for frosted-glass UI effects. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generate glassmorphism CSS — backdrop blur, translucency, borders, and shadows. Build frosted cards that look premium — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -7482,7 +7482,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Neumorphism CSS Generator",
     "slug": "neumorphism-generator",
     "category": "Developer",
-    "description": "Generate neumorphism CSS with configurable size, blur, and color. Create soft UI shadow effects with live preview.",
+    "description": "Generate soft-UI neumorphic CSS — extruded surfaces with paired shadows from any base color, ready to paste into any stylesheet.",
     "isPro": false
   },
   {
@@ -7490,7 +7490,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSS Specificity Calculator",
     "slug": "css-specificity-calculator",
     "category": "Developer",
-    "description": "Calculate CSS selector specificity as (IDs, classes, tags) and total weight. Understand which selector wins in a specificity conflict.",
+    "description": "Compute CSS selector specificity (a,b,c scores) and settle override battles with math. Prove #id beats .class chains — local calculation, free, no signup.",
     "isPro": false
   },
   {
@@ -7498,7 +7498,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSS to SCSS Converter",
     "slug": "css-to-scss-converter",
     "category": "Converter",
-    "description": "Convert plain CSS to SCSS syntax with nesting and parent selector references. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert plain CSS to SCSS syntax with nesting and parent selector references. Files are converted locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -7506,7 +7506,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Less to CSS Converter",
     "slug": "less-to-css-converter",
     "category": "Converter",
-    "description": "Convert Less variables and syntax to plain CSS. Comment out Less variables and output standard CSS. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Compile LESS stylesheets to plain CSS with variables and mixins resolved. Migrate legacy styles forward — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -7514,7 +7514,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSS Validator",
     "slug": "css-validator",
     "category": "Developer",
-    "description": "Validate CSS for missing semicolons, unclosed braces, and syntax issues. Get line-by-line error reports.",
+    "description": "Validate CSS syntax — unclosed braces, bad properties, bad values — with line numbers. Catch the missing } breaking layouts — local validation, free, no signup.",
     "isPro": false
   },
   {
@@ -7522,7 +7522,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Code Obfuscator",
     "slug": "code-obfuscator",
     "category": "Developer",
-    "description": "Obfuscate or deobfuscate code using Base64 encoding with reversed output. Quick one-way code protection for sharing.",
+    "description": "Obfuscate JavaScript with Base64 layering and reversal for casual code-sharing protection. Deter copy-paste without real crypto claims — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -7530,7 +7530,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Code to cURL Parser",
     "slug": "code-to-curl-parser",
     "category": "Developer",
-    "description": "Parse cURL commands to extract method, URL, headers, and body. Debug HTTP requests from cURL strings. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Parse curl commands into method, URL, headers, and body parts for debugging. Dissect a failing Stripe call field by field — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -7538,7 +7538,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JavaScript Syntax Checker",
     "slug": "js-syntax-checker",
     "category": "Developer",
-    "description": "Check JavaScript code for syntax errors using the Function constructor. Validate code before execution. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Check JavaScript code for syntax errors using the Function constructor. Validate code before execution. Code never leaves your device — formatting and validation run locally in your browser.",
     "isPro": false
   },
   {
@@ -7546,7 +7546,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Pug to HTML Converter",
     "slug": "pug-to-html-converter",
     "category": "Developer",
-    "description": "Convert Pug/Jade template syntax to HTML. Parse indentation-based Pug into standard HTML tags. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert Pug/Jade templates to plain HTML for migration and debugging. Move legacy views to modern stacks — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -7562,7 +7562,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JSON Output Tools",
     "slug": "json-formatter-tool",
     "category": "Developer",
-    "description": "Format, validate, and convert JSON to Zod schemas, URL query parameters, flat key-value pairs, JSON-LD, or analyze size and structure.",
+    "description": "All-in-one JSON output hub — format, validate, convert to Zod, URL params, flat pairs, JSON-LD, and size analysis. One tab for every JSON chore — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -7570,7 +7570,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Output Tools",
     "slug": "csv-formatter",
     "category": "Converter",
-    "description": "Convert CSV data to Markdown tables, NDJSON, SQL INSERT statements, HTML tables, or analyze statistics and find data quality issues.",
+    "description": "Format and validate CSV files — consistent delimiters, quoting, and line endings. Fix files Excel mangles on export — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -7578,7 +7578,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Import to CSV",
     "slug": "import-to-csv",
     "category": "Converter",
-    "description": "Convert TSV, Excel XLSX, vCard VCF, iCalendar ICS, and Parquet files to CSV. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert pasted tables, lists, and structured text into clean CSV rows. Turn copied web tables into spreadsheet data — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -7586,7 +7586,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Color Blindness Simulator",
     "slug": "color-blindness-simulator",
     "category": "Design",
-    "description": "Simulate how your designs and images appear to users with protanopia, deuteranopia, tritanopia, and achromatopsia color vision deficiencies.",
+    "description": "Simulate color blindness: preview designs through protanopia, deuteranopia, and tritanopia filters — catch invisible-to-some UI. Fix red-green errors before users suffer — local Canvas work, free, no signup.",
     "isPro": false
   },
   {
@@ -7594,7 +7594,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "C++ Formatter",
     "slug": "cpp-formatter",
     "category": "Developer",
-    "description": "Format and beautify C++ source code with configurable indentation, brace style, and spacing. Supports modern C++11 through C++23 syntax.",
+    "description": "Format C++ with brace style, pointer alignment, and include ordering. Tame legacy codebases before review — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -7602,7 +7602,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Go Formatter",
     "slug": "go-formatter",
     "category": "Developer",
-    "description": "Format and beautify Go source code with proper indentation, alignment, and standard gofmt-style conventions. Clean up any Go file instantly.",
+    "description": "Format Go with gofmt-compatible indentation, import grouping, and alignment. Keep goroutines readable across the repo — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -7610,7 +7610,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Kotlin Formatter",
     "slug": "kotlin-formatter",
     "category": "Developer",
-    "description": "Format and beautify Kotlin source code with correct indentation, spacing, and brace placement. Supports Kotlin DSL, coroutines, and modern syntax.",
+    "description": "Format Kotlin with indentation, null-safety spacing, and data-class layout. Clean Android sources consistently — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -7618,7 +7618,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PHP Beautifier",
     "slug": "php-beautifier",
     "category": "Developer",
-    "description": "Beautify and format PHP source code with proper indentation, brace style, and spacing. Handles PHP, HTML embedded PHP, and mixed syntax files.",
+    "description": "Beautify PHP with PSR-12 indentation, spacing, and brace placement. Modernize legacy templates safely — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -7626,7 +7626,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Ruby Formatter",
     "slug": "ruby-formatter",
     "category": "Developer",
-    "description": "Format and beautify Ruby source code with proper indentation, spacing, and block alignment. Supports modern Ruby syntax and Rails conventions.",
+    "description": "Format Ruby with end alignment, block style, and hash syntax consistency. Unify Rails codebases effortlessly — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -7634,7 +7634,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Rust Formatter",
     "slug": "rust-formatter",
     "category": "Developer",
-    "description": "Format and beautify Rust source code with proper indentation, spacing, and brace placement. Handles Rust macros, traits, generics, and module structure.",
+    "description": "Format Rust with rustfmt-style indentation, match-arm layout, and trait organization. Keep ownership code readable — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -7642,7 +7642,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JWT Encoder & Signer",
     "slug": "jwt-encoder-signer",
     "category": "Developer",
-    "description": "Create and sign JSON Web Tokens with custom header and payload. Supports HS256, HS384, HS512 signing algorithms for API authentication testing.",
+    "description": "Build and sign JWTs with HS256/RS256 — headers, claims, expiry, and signature verification. Mint test tokens without backend roundtrips — local crypto, free, no signup.",
     "isPro": false
   },
   {
@@ -7650,7 +7650,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Memorable Password Generator",
     "slug": "memorable-password-generator",
     "category": "Developer",
-    "description": "Generate easy-to-remember passphrases using random word combinations with separators, numbers, and capitalization. More secure than dictionary words, easier to remember than random strings.",
+    "description": "Generate strong yet memorable passwords — word-based passphrases with real entropy. Get correct-horse grade security you can type — local crypto, free, no signup.",
     "isPro": false
   },
   {
@@ -7658,7 +7658,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "YAML → Toon Converter",
     "slug": "yaml-to-toon",
     "category": "Converter",
-    "description": "Convert YAML data into a human-readable Toon format using → arrows. Perfect for quick visualization of hierarchical YAML structures.",
+    "description": "Convert YAML configs to TOON token-efficient format for LLM prompts. Shrink context payloads measurably — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -7666,7 +7666,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Toon → JSON Converter",
     "slug": "toon-to-json",
     "category": "Converter",
-    "description": "Convert Toon format (→ arrows) back into JSON. Reverse of the JSON → Toon converter for round-trip data transformation.",
+    "description": "Convert TOON back to standard JSON for tooling compatibility. Return from token-efficient form losslessly — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -7674,7 +7674,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Toon → YAML Converter",
     "slug": "toon-to-yaml",
     "category": "Converter",
-    "description": "Convert Toon format (→ arrows) back into YAML. Complete the round-trip from any source format.",
+    "description": "Convert TOON back to standard YAML for configs and pipelines. Return from token-efficient form losslessly — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -7690,7 +7690,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MKV to AVI",
     "slug": "mkv-to-avi",
     "category": "Video",
-    "description": "Convert MKV video files to AVI format directly in your browser. 100% free, private — your files never leave your device.",
+    "description": "Convert MKV to legacy AVI for old players and embedded systems. Reach hardware that accepts nothing newer — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -7698,7 +7698,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MP4 to WEBM",
     "slug": "mp4-to-webm",
     "category": "Video",
-    "description": "Convert MP4 video files to WEBM format directly in your browser. 100% free, private — your files never leave your device.",
+    "description": "Convert MP4 to WebM for fast web embedding with smaller files. Make homepage videos load instantly — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -7714,7 +7714,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MOV to WEBM",
     "slug": "mov-to-webm",
     "category": "Video",
-    "description": "Convert MOV video files to WEBM format directly in your browser. 100% free, private — your files never leave your device.",
+    "description": "Convert Apple MOV files to web-ready WebM for fast HTML5 playback. Shrink a 200 MB screen recording for embedding — local FFmpeg conversion, free quota on saves.",
     "isPro": false
   },
   {
@@ -7738,7 +7738,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WEBM to MOV",
     "slug": "webm-to-mov",
     "category": "Video",
-    "description": "Convert WEBM video files to MOV format directly in your browser. 100% free, private — your files never leave your device.",
+    "description": "Convert WebM videos to Apple-friendly MOV for Final Cut and QuickTime workflows. Bring web clips into Mac editing — local FFmpeg work, free quota on saves.",
     "isPro": false
   },
   {
@@ -7778,7 +7778,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to PNG",
     "slug": "jpg-to-png",
     "category": "Image",
-    "description": "Convert JPG images to PNG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert JPG photos to lossless PNG for transparency-ready editing and graphics work. Prep images for design tools without recompression loss — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -7786,7 +7786,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to WEBP",
     "slug": "png-to-webp",
     "category": "Image",
-    "description": "Convert PNG images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert PNG images to WEBP format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -7794,7 +7794,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to WEBP",
     "slug": "jpg-to-webp",
     "category": "Image",
-    "description": "Convert JPG images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert JPG photos to modern WebP at ~30% smaller sizes for faster websites. Optimize entire image libraries before deploy — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -7818,7 +7818,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to AVIF",
     "slug": "png-to-avif",
     "category": "Image",
-    "description": "Convert PNG images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert PNG images to modern AVIF in your browser — transparency kept at a fraction of the size for faster web delivery.",
     "isPro": false
   },
   {
@@ -7826,7 +7826,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to AVIF",
     "slug": "jpg-to-avif",
     "category": "Image",
-    "description": "Convert JPG images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert JPG images to AVIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -7834,7 +7834,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to HEIC",
     "slug": "png-to-heic",
     "category": "Image",
-    "description": "Convert PNG images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert PNG graphics to HEIC for Apple-optimized storage at half the bytes. Shrink screenshot libraries for iCloud — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -7842,7 +7842,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to BMP",
     "slug": "png-to-bmp",
     "category": "Image",
-    "description": "Convert PNG images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert PNG images to uncompressed BMP in your browser — for legacy software and embedded systems that accept nothing else.",
     "isPro": false
   },
   {
@@ -7850,7 +7850,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to TIFF",
     "slug": "png-to-tiff",
     "category": "Image",
-    "description": "Convert PNG images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert PNG images to TIFF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -7858,7 +7858,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to ICO",
     "slug": "png-to-ico",
     "category": "Image",
-    "description": "Convert PNG images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Generate multi-size Windows ICO favicons from PNG graphics in batch. Ship crisp taskbar icons from transparent art — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -7866,7 +7866,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to HEIC",
     "slug": "jpg-to-heic",
     "category": "Image",
-    "description": "Convert JPG images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert JPG images to HEIC format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -7874,7 +7874,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to SVG",
     "slug": "jpg-to-svg",
     "category": "Image",
-    "description": "Convert JPG images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Trace JPG photos and logos into SVG vectors — rescue raster logos as scalable art. Rebuild brand marks from compressed copies — local tracing, free quota on saves.",
     "isPro": false
   },
   {
@@ -7882,7 +7882,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to BMP",
     "slug": "jpg-to-bmp",
     "category": "Image",
-    "description": "Convert JPG images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert JPG images to BMP format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -7890,7 +7890,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to TIFF",
     "slug": "jpg-to-tiff",
     "category": "Image",
-    "description": "Convert JPG images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert JPG images to TIFF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -7898,7 +7898,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to ICO",
     "slug": "jpg-to-ico",
     "category": "Image",
-    "description": "Convert JPG images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert JPG photos to ICO favicons in your browser — 16/32/48 px multi-size icons ready to link with a single rel=icon tag.",
     "isPro": false
   },
   {
@@ -7906,7 +7906,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WEBP to HEIC",
     "slug": "webp-to-heic",
     "category": "Image",
-    "description": "Convert WEBP images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert WEBP images to HEIC format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -7914,7 +7914,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WEBP to SVG",
     "slug": "webp-to-svg",
     "category": "Image",
-    "description": "Convert WEBP images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert WEBP images to SVG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -7922,7 +7922,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WEBP to BMP",
     "slug": "webp-to-bmp",
     "category": "Image",
-    "description": "Convert WEBP images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert WEBP images to BMP format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -7930,7 +7930,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WEBP to TIFF",
     "slug": "webp-to-tiff",
     "category": "Image",
-    "description": "Convert WEBP images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert WebP images to lossless TIFF for print and archival handoff. Take web art into press workflows — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -7938,7 +7938,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WEBP to ICO",
     "slug": "webp-to-ico",
     "category": "Image",
-    "description": "Convert WEBP images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert WEBP images to ICO format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -7946,7 +7946,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WEBP to JXL",
     "slug": "webp-to-jxl",
     "category": "Image",
-    "description": "Convert WEBP images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert WEBP images to JXL format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -7954,7 +7954,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to SVG",
     "slug": "heic-to-svg",
     "category": "Image",
-    "description": "Convert HEIC images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Trace iPhone HEIC photos into SVG vectors for logos salvaged from snapshots. Rebuild brand art from a phone pic — local tracing, free quota on saves.",
     "isPro": false
   },
   {
@@ -7962,7 +7962,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to BMP",
     "slug": "heic-to-bmp",
     "category": "Image",
-    "description": "Convert HEIC images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert HEIC images to BMP format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -7970,7 +7970,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to TIFF",
     "slug": "heic-to-tiff",
     "category": "Image",
-    "description": "Convert HEIC images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert iPhone HEIC shots to lossless TIFF for print and professional handoff. Take phone photos into press workflows — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -7978,7 +7978,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to ICO",
     "slug": "heic-to-ico",
     "category": "Image",
-    "description": "Convert HEIC images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert HEIC images to ICO format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -7986,7 +7986,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to JXL",
     "slug": "heic-to-jxl",
     "category": "Image",
-    "description": "Convert HEIC images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Migrate iPhone HEIC photos to JPEG XL for the most advanced archival available. Move Apple libraries to future-proof storage — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -7994,7 +7994,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to WEBP",
     "slug": "avif-to-webp",
     "category": "Image",
-    "description": "Convert AVIF images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert AVIF images to WebP for broader browser compatibility without ballooning size. Serve next-gen art to the 5% on older browsers — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -8002,7 +8002,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to HEIC",
     "slug": "avif-to-heic",
     "category": "Image",
-    "description": "Convert AVIF images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert AVIF images to HEIC format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -8010,7 +8010,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to SVG",
     "slug": "avif-to-svg",
     "category": "Image",
-    "description": "Convert AVIF images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Trace AVIF rasters into scalable SVG vectors for logos resurrected from compressed copies. Rebuild a lost logo as infinite-resolution art — local tracing, free quota on saves.",
     "isPro": false
   },
   {
@@ -8018,7 +8018,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to BMP",
     "slug": "avif-to-bmp",
     "category": "Image",
-    "description": "Convert AVIF images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert AVIF images to uncompressed BMP for legacy pipelines and pixel-level analysis. Feed modern photos into older lab software — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -8026,7 +8026,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to TIFF",
     "slug": "avif-to-tiff",
     "category": "Image",
-    "description": "Convert AVIF images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert AVIF photos to lossless TIFF for print publishing and professional archives. Prepare press-ready files from next-gen originals — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -8034,7 +8034,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to GIF",
     "slug": "avif-to-gif",
     "category": "Image",
-    "description": "Convert AVIF images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Turn AVIF images into universally compatible GIFs for legacy platforms and simple animations. Post next-gen art where only GIF uploads work — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -8042,7 +8042,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to ICO",
     "slug": "avif-to-ico",
     "category": "Image",
-    "description": "Convert AVIF images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert AVIF images to ICO format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -8050,7 +8050,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to JXL",
     "slug": "avif-to-jxl",
     "category": "Image",
-    "description": "Convert AVIF images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert AVIF images to JXL format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -8058,7 +8058,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to HEIC",
     "slug": "svg-to-heic",
     "category": "Image",
-    "description": "Convert SVG images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Rasterize SVG vectors to HEIC for Apple-optimized asset delivery. Ship tiny icons into iOS apps — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -8066,7 +8066,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to BMP",
     "slug": "svg-to-bmp",
     "category": "Image",
-    "description": "Convert SVG images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert SVG vectors to BMP raster in your browser — only when legacy compatibility demands it, since PNG beats BMP everywhere else.",
     "isPro": false
   },
   {
@@ -8074,7 +8074,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to TIFF",
     "slug": "svg-to-tiff",
     "category": "Image",
-    "description": "Convert SVG images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert SVG vectors to print-grade TIFF in your browser — resolution-independent artwork rasterized at any size from web size to poster size.",
     "isPro": false
   },
   {
@@ -8082,7 +8082,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to ICO",
     "slug": "svg-to-ico",
     "category": "Image",
-    "description": "Convert SVG images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Generate Windows ICO favicons directly from SVG masters at any resolution. Build razor-sharp icon sets from vectors — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -8090,7 +8090,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to JXL",
     "slug": "svg-to-jxl",
     "category": "Image",
-    "description": "Convert SVG images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Rasterize SVG vectors to next-gen JPEG XL for archival icon libraries. Store infinite-resolution art in future-proof pixels — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -8098,7 +8098,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to HEIC",
     "slug": "bmp-to-heic",
     "category": "Image",
-    "description": "Convert BMP images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert BMP images to HEIC format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -8106,7 +8106,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to SVG",
     "slug": "bmp-to-svg",
     "category": "Image",
-    "description": "Convert BMP images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Vectorize BMP bitmaps into scalable SVGs — rescue legacy clip-art for modern use. Turn pixelated 90s graphics into clean vectors — local tracing, free quota on saves.",
     "isPro": false
   },
   {
@@ -8114,7 +8114,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to TIFF",
     "slug": "bmp-to-tiff",
     "category": "Image",
-    "description": "Convert BMP images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert BMP bitmaps to lossless TIFF for print archives and professional handoff. Move legacy scans into press workflows — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -8122,7 +8122,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to ICO",
     "slug": "bmp-to-ico",
     "category": "Image",
-    "description": "Convert BMP images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert BMP images to ICO format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -8130,7 +8130,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to JXL",
     "slug": "bmp-to-jxl",
     "category": "Image",
-    "description": "Convert BMP images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert BMP bitmaps to next-gen JPEG XL in your browser — rescue uncompressed legacy files into efficient modern archival.",
     "isPro": false
   },
   {
@@ -8138,7 +8138,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to HEIC",
     "slug": "tiff-to-heic",
     "category": "Image",
-    "description": "Convert TIFF images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert lossless TIFF archives to efficient HEIC for Apple storage and sharing. Halve archival bytes for the Apple ecosystem — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -8146,7 +8146,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to SVG",
     "slug": "tiff-to-svg",
     "category": "Image",
-    "description": "Convert TIFF images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Trace TIFF scans into SVG vectors — rescue high-contrast art from print archives. Rebuild logos from press files — local tracing, free quota on saves.",
     "isPro": false
   },
   {
@@ -8154,7 +8154,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to BMP",
     "slug": "tiff-to-bmp",
     "category": "Image",
-    "description": "Convert TIFF images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert TIFF images to BMP format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -8162,7 +8162,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to ICO",
     "slug": "tiff-to-ico",
     "category": "Image",
-    "description": "Convert TIFF images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Generate Windows ICO favicons from high-res TIFF masters. Build icons from press-quality sources — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -8170,7 +8170,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to JXL",
     "slug": "tiff-to-jxl",
     "category": "Image",
-    "description": "Convert TIFF images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert TIFF images to JXL format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -8178,7 +8178,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to HEIC",
     "slug": "gif-to-heic",
     "category": "Image",
-    "description": "Convert GIF images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert GIF animations and stills to space-efficient HEIC for Apple workflows. Halve sticker libraries for iOS apps — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -8186,7 +8186,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to SVG",
     "slug": "gif-to-svg",
     "category": "Image",
-    "description": "Convert GIF images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert GIF images to SVG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -8194,7 +8194,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to BMP",
     "slug": "gif-to-bmp",
     "category": "Image",
-    "description": "Convert GIF images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert GIF images to BMP format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -8202,7 +8202,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to TIFF",
     "slug": "gif-to-tiff",
     "category": "Image",
-    "description": "Convert GIF images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert GIF images to print-grade TIFF in your browser — frames and stills rasterized for publishing for print and publishing workflows.",
     "isPro": false
   },
   {
@@ -8210,7 +8210,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to ICO",
     "slug": "gif-to-ico",
     "category": "Image",
-    "description": "Convert GIF images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert GIF images to ICO format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -8218,7 +8218,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to JXL",
     "slug": "gif-to-jxl",
     "category": "Image",
-    "description": "Convert GIF images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert GIFs to next-gen JPEG XL for archival-grade stills at tiny sizes. Future-proof meme libraries with full-color frames — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -8226,7 +8226,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to HEIC",
     "slug": "ico-to-heic",
     "category": "Image",
-    "description": "Convert ICO images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert ICO icons to HEIC for Apple ecosystem asset catalogs. Feed Windows artwork into Xcode projects — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -8234,7 +8234,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to AVIF",
     "slug": "ico-to-avif",
     "category": "Image",
-    "description": "Convert ICO images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert Windows ICO icons to ultra-efficient AVIF for modern web use. Shrink favicon libraries for the fast web — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -8242,7 +8242,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to SVG",
     "slug": "ico-to-svg",
     "category": "Image",
-    "description": "Convert ICO images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Trace Windows ICO icons into scalable SVG vectors for modern icon systems. Rebuild favicon sets as infinite-resolution art — local tracing, free quota on saves.",
     "isPro": false
   },
   {
@@ -8250,7 +8250,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to BMP",
     "slug": "ico-to-bmp",
     "category": "Image",
-    "description": "Convert ICO images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert ICO favicons to BMP bitmaps in your browser — full-size icon artwork for legacy Windows software for editing in legacy Windows apps.",
     "isPro": false
   },
   {
@@ -8258,7 +8258,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to TIFF",
     "slug": "ico-to-tiff",
     "category": "Image",
-    "description": "Convert ICO images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert ICO images to TIFF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -8266,7 +8266,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to GIF",
     "slug": "ico-to-gif",
     "category": "Image",
-    "description": "Convert ICO images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert ICO images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -8274,7 +8274,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to JXL",
     "slug": "ico-to-jxl",
     "category": "Image",
-    "description": "Convert ICO images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert ICO images to JXL format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -8282,7 +8282,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to HEIC",
     "slug": "jxl-to-heic",
     "category": "Image",
-    "description": "Convert JXL images to HEIC format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert JPEG XL photos to Apple HEIC in your browser — native iPhone and Mac format from next-gen originals across the whole Apple ecosystem.",
     "isPro": false
   },
   {
@@ -8290,7 +8290,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to AVIF",
     "slug": "jxl-to-avif",
     "category": "Image",
-    "description": "Convert JXL images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert JXL images to AVIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -8298,7 +8298,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to SVG",
     "slug": "jxl-to-svg",
     "category": "Image",
-    "description": "Convert JXL images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert JXL images to SVG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
     "isPro": false
   },
   {
@@ -8306,7 +8306,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to BMP",
     "slug": "jxl-to-bmp",
     "category": "Image",
-    "description": "Convert JXL images to BMP format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert JPEG XL images to raw BMP bitmaps for legacy analysis pipelines. Feed next-gen captures into older lab tools — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -8314,7 +8314,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to TIFF",
     "slug": "jxl-to-tiff",
     "category": "Image",
-    "description": "Convert JXL images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Convert JPEG XL photos to archival TIFF in your browser — lossless masters for print and publishing for print and long-term archival.",
     "isPro": false
   },
   {
@@ -8322,7 +8322,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to ICO",
     "slug": "jxl-to-ico",
     "category": "Image",
-    "description": "Convert JXL images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "description": "Generate Windows ICO favicons from JPEG XL sources in batch. Build icon sets from next-gen art — local Canvas work, free quota on saves.",
     "isPro": false
   },
   {
@@ -8346,7 +8346,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JSON to INI Converter",
     "slug": "json-to-ini-converter",
     "category": "Converter",
-    "description": "Convert JSON objects to INI config file format with section headers and key-value pairs. Perfect for configuration file generation.",
+    "description": "Convert JSON objects to INI sections and keys for legacy configs and Windows apps. Feed old parsers from modern data — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -8362,7 +8362,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSS to Less Converter",
     "slug": "css-to-less-converter",
     "category": "Converter",
-    "description": "Convert CSS to Less syntax by transforming CSS variables to Less variables (@). Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert CSS to Less syntax by transforming CSS variables to Less variables (@). Files are converted locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -8370,7 +8370,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSS to Stylus Converter",
     "slug": "css-to-stylus-converter",
     "category": "Converter",
-    "description": "Convert CSS braces and semicolons to Stylus indentation-based syntax. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert CSS braces and semicolons to Stylus indentation-based syntax. Files are converted locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -8378,7 +8378,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk URL Shortener",
     "slug": "bulk-url-shortener",
     "category": "Utility",
-    "description": "Shorten hundreds of URLs in one batch. Paste a list or upload a CSV — get shortened links with copy-all and CSV export. Uses cloud-based processing.",
+    "description": "Shorten hundreds of URLs in one batch with automatic provider failover — paste a list, get clean links for campaigns and bios. Marketers prep 200 UTM links before launch — managed shortening (~10/min pace), sign in free.",
     "isPro": true
   },
   {
@@ -8386,7 +8386,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text Repeater",
     "slug": "text-repeater",
     "category": "Text",
-    "description": "Repeat any text a specified number of times with customizable separators (newline, space, comma, custom) and optional line numbering. Perfect for templates, practice drills, and repetitive patterns.",
+    "description": "Repeat text blocks N times with custom separators and numbering — test data, chants, drills. Generate 100 lines in one click — free, local, no signup.",
     "isPro": false
   },
   {
@@ -8394,7 +8394,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Small Text Generator",
     "slug": "small-text-generator",
     "category": "Text",
-    "description": "Convert text to superscript, subscript, tiny text, or small caps Unicode variants. Perfect for footnotes, chemical formulas, mathematical expressions, and decorative text in social media.",
+    "description": "Shrink text to tiny superscript and subscript Unicode for captions and footnotes. Fit more in bios elegantly — free, local, copy-paste ready.",
     "isPro": false
   },
   {
@@ -8402,7 +8402,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Big Text Generator",
     "slug": "big-text-generator",
     "category": "Text",
-    "description": "Convert regular text into large ASCII block art, circled bubble letters, or mathematical bold Unicode. Make your text stand out with big, bold styles for social media headers, signs, and emphasis.",
+    "description": "Blow text up to huge display sizes with styles for banners and headers. Make announcements unmissable — free, local, copy-paste ready.",
     "isPro": false
   },
   {
@@ -8410,7 +8410,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Writing Tools",
     "slug": "writing-tools",
     "category": "Text",
-    "description": "Comprehensive writing analysis dashboard — real-time word count, character count, sentences, paragraphs, syllables, reading time, speaking time, Flesch-Kincaid readability score, and vocabulary richness metrics.",
+    "description": "Writing toolkit — readability scores, passive-voice flags, adverb alerts, sentence variety. Lift drafts from decent to publishable — local analysis, free, no signup.",
     "isPro": false
   },
   {
@@ -8418,7 +8418,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Citation Generator",
     "slug": "citation-generator",
     "category": "Text",
-    "description": "Generate citations in APA, MLA, Chicago, Harvard, IEEE, AMA, and Vancouver formats. Supports books, websites, journal articles, videos, and more with all fields auto-formatted.",
+    "description": "Generate APA, MLA, and Chicago citations from URLs, DOIs, and ISBNs. Cite sources correctly in seconds — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -8426,7 +8426,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text Reverser",
     "slug": "text-reverser",
     "category": "Text",
-    "description": "Reverse text by characters, words, or lines; flip upside down using Unicode rot180; mirror horizontally; or rotate 180 degrees. Six transformation modes for creating puzzles, secret messages, and unique social media content.",
+    "description": "Reverse text character-by-character or word-by-word for puzzles and effects. Flip sentences backwards instantly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -8434,7 +8434,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Upside Down Text Generator",
     "slug": "upside-down-text",
     "category": "Text",
-    "description": "Flip text upside down using Unicode rot180 (rotated 180 degrees) characters. Two modes: full flip reverses order and flips characters, mirror flips characters in place. Great for social media and fun.",
+    "description": "Flip text upside-down with Unicode rotation for playful posts and puzzles. Write uʍop ǝpᴉsdn — free, local, copy-paste ready.",
     "isPro": false
   },
   {
@@ -8442,7 +8442,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Glitch Text Generator",
     "slug": "glitch-text",
     "category": "Text",
-    "description": "Create corrupted glitch text effects with Zalgo diacritics, random character corruption, or scramble transformations. Adjustable intensity, position, and seed for reproducible results.",
+    "description": "Corrupt text with Zalgo-style combining marks and glitch effects for edgy posts. Break headings beautifully — free, local, copy-paste ready.",
     "isPro": false
   },
   {
@@ -8450,7 +8450,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Invisible Character Generator",
     "slug": "invisible-character",
     "category": "Text",
-    "description": "Generate and inspect invisible Unicode characters — zero-width space (ZWSP), zero-width non-joiner (ZWNJ), zero-width joiner (ZWJ), left-to-right/right-to-left marks, and word joiner. Copy raw bytes or visualizable forms.",
+    "description": "Copy invisible Unicode characters — zero-width spaces and joiners — for spacing tricks and testing. Insert the unseeable on purpose — free, local, no signup.",
     "isPro": false
   },
   {
@@ -8466,7 +8466,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Unicode Code Point Viewer",
     "slug": "unicode-viewer",
     "category": "Utility",
-    "description": "View Unicode code points, HTML entities, and percent-encoding for any text. Character-by-character breakdown with U+XXXX codes and HTML entity references.",
+    "description": "Inspect any character\\'s Unicode code points, names, blocks, and UTF-8 bytes. Debug invisible text issues precisely — local inspection, free, no signup.",
     "isPro": false
   },
   {
@@ -8474,7 +8474,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Markdown to HTML",
     "slug": "markdown-to-html",
     "category": "Converter",
-    "description": "Convert Markdown to HTML with live preview. Perfect for writing blog posts, documentation, and README files.",
+    "description": "Convert Markdown to clean HTML for CMS paste and publishing — headings, tables, code blocks. Turn README sources into pages — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -8482,7 +8482,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HTML to Markdown",
     "slug": "html-to-markdown",
     "category": "Converter",
-    "description": "Convert HTML to Markdown format. Perfect for migrating content from rich text editors to Markdown-based workflows.",
+    "description": "Convert HTML pages to clean Markdown for docs, notes, and migration. Strip a blog post to portable text — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -8490,7 +8490,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text to Markdown",
     "slug": "text-to-markdown",
     "category": "Converter",
-    "description": "Convert plain text to Markdown format. Wraps paragraphs and preserves line breaks in clean Markdown syntax.",
+    "description": "Structure plain text into Markdown with headings, lists, and emphasis detection. Turn meeting notes into formatted docs — local conversion, free, no signup.",
     "isPro": false
   },
   {
@@ -8498,7 +8498,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Markdown to Text",
     "slug": "markdown-to-text",
     "category": "Converter",
-    "description": "Strip Markdown formatting and convert to plain text. Removes headers, bold, italic, links, and lists cleanly.",
+    "description": "Strip Markdown to clean plain text for emails, captions, and analysis. Remove every # and * correctly — local conversion, free, no signup.",
     "isPro": false
   }
 ];

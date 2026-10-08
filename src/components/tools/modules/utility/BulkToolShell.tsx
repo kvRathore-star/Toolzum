@@ -333,7 +333,7 @@ export function BulkToolShell({
           <p className="text-sm text-[var(--text-primary)] font-medium">Drop files here or click to upload</p>
           <p className="text-xs text-[var(--text-muted)] mt-1">Max {effectiveMaxMB}MB per file • {accept === '*/*' ? 'All formats' : accept}</p>
           {!isPro && (
-            <p className="text-[10px] text-[var(--text-muted)] mt-1">Guests: 1 file • Free sign-in: 10 files/batch, individual downloads (batch ZIP is Pro)</p>
+            <p className="text-[10px] text-[var(--text-muted)] mt-1">Guests: 5 files • Free sign-in: 25 files/batch, individual downloads (batch ZIP is Pro)</p>
           )}
           <p className="text-[10px] text-emerald-600 dark:text-emerald-400 mt-2 flex items-center gap-1">
             <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
