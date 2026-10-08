@@ -55,7 +55,7 @@ describe('tool content standard', () => {
     const bySlug = new Map((toolsRegistry as any[]).map((t: any) => [t.slug, t]));
     const gated = defaultFaqsFor(bySlug.get('qr-code-generator'));
     const limits = gated.find((f) => /limits|free/i.test(f.question));
-    expect(limits ? limits.answer : '').toMatch(/fair daily limits/i);
+    expect(limits ? limits.answer : '').toMatch(/2 free downloads a day/i);
     const free = defaultFaqsFor(bySlug.get('password-generator'));
     const usage = free.find((f) => /limits|free/i.test(f.question));
     expect(usage ? usage.answer : '').toMatch(/no signup|completely free/i);
