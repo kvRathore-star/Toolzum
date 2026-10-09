@@ -180,7 +180,7 @@ export default function VideoCompressor() {
                   type="range" min="20" max="40" step="1" value={crf}
                   onChange={(e) => setCrf(parseInt(e.target.value))}
                   disabled={isProcessing}
-                  className="w-full accent-blue-600"
+                  className="w-full accent-[var(--accent)]"
                 />
                 <div className="flex justify-between text-xs text-[var(--text-secondary)] px-1">
                   <span>Better Quality</span>
@@ -217,7 +217,7 @@ export default function VideoCompressor() {
                   <span>{mode === 'video' ? 'Compressing Video...' : 'Optimizing GIF...'}</span>
                   <span>{progress}%</span>
                 </div>
-                <div className="w-full bg-blue-100 dark:bg-[var(--accent)]/10 rounded-full h-3 overflow-hidden">
+                <div className="w-full bg-[var(--accent)]/10 rounded-full h-3 overflow-hidden">
                   <div className="bg-[var(--accent-ink)] h-3 rounded-full transition-all duration-300" style={{ width: `${progress}%` }}></div>
                 </div>
               </div>

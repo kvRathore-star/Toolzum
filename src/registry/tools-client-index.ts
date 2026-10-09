@@ -42,7 +42,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Crop Video",
     "slug": "crop-video",
     "category": "Video",
-    "description": "Crop the visual area of your MP4, MOV, AVI, or WebM video directly in the browser with preset aspect ratios or custom selections. Free to start with no signup.",
+    "description": "Crop the visual area of your MP4 or WebM video directly in the browser with 9:16, 1:1, 16:9 presets or custom dimensions with X/Y offsets. Free to start with no signup.",
     "isPro": false
   },
   {
@@ -394,7 +394,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text to Speech (TTS)",
     "slug": "text-to-speech-tts",
     "category": "Audio",
-    "description": "Generate natural-sounding speech from text using your browser's built-in voices, including Hindi, Tamil, Telugu, Bengali, and more Indian languages. Adjust speed, pitch, and volume — download your text as .txt.",
+    "description": "Generate natural-sounding speech from text using your browser's built-in voices. Adjust speed and pitch — download your text as .txt.",
     "isPro": false
   },
   {
@@ -458,7 +458,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMI Calculator",
     "slug": "bmi-calculator",
     "category": "Health",
-    "description": "Computes Body Mass Index from metric or imperial height and weight inputs, categorizing the result into underweight, normal, overweight. Health data never leaves your device — every calculation runs locally in your browser.",
+    "description": "Computes Body Mass Index from metric or imperial height and weight inputs, categorizing the result into underweight, normal, overweight, and obese, with a healthy weight range for your height. Health data never leaves your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -570,7 +570,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Audio Cutter",
     "slug": "audio-cutter",
     "category": "Audio",
-    "description": "Trim and cut audio files online — MP3, WAV, M4A, FLAC, and OGG. Select start and end points visually on the waveform, then download the trimmed clip.",
+    "description": "Trim and cut audio files online — MP3, WAV, M4A, FLAC, and OGG. Set start and end times with sliders, then download the trimmed MP3 clip.",
     "isPro": false
   },
   {
@@ -730,7 +730,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Compressor",
     "slug": "video-compressor",
     "category": "Video",
-    "description": "Reduces MP4, MOV, and WebM video file sizes using configurable CRF (Constant Rate Factor) encoding, resolution scaling, and bitrate control. Includes a quality preview before processing. Videos never leave your device — compression and conversion run locally in your browser with FFmpeg WASM.",
+    "description": "Reduces MP4, MOV, and WebM video file sizes with a configurable CRF 20–40 slider (default 28, libx264 fast preset), plus a GIF mode with color-palette control. Videos never leave your device — compression runs locally in your browser with FFmpeg WASM.",
     "isPro": false
   },
   {
@@ -930,7 +930,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Subtitle Translator",
     "slug": "subtitle-translator",
     "category": "Video",
-    "description": "Translate SRT or VTT subtitle files into 100+ languages while preserving every timestamp — creators localize a full episode in one batch. 1 credit per translation; sign in free for trial credits.",
+    "description": "Translate pasted SRT or VTT subtitle text into 9 languages (Spanish, French, German, Japanese, Chinese, Hindi, Portuguese, Russian, Arabic) while preserving every timestamp — AI-powered with your own API key, text never stored.",
     "isPro": true
   },
   {
@@ -1442,7 +1442,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Watermark Adder",
     "slug": "video-watermark-adder",
     "category": "Video",
-    "description": "Burn logo or text watermarks into videos with position, size, and opacity control. Brand 10 course lessons in one pass — local FFmpeg work, unlimited saves.",
+    "description": "Burn text watermarks into a video with 5 position presets (bottom-right default, fixed 24px white on semi-transparent black box). Brand one clip at a time — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -1482,7 +1482,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Trimmer",
     "slug": "video-trimmer",
     "category": "Video",
-    "description": "Cut start/end segments from any video with frame-accurate trimming in your browser. Remove a 45-second cold open from a 10-minute upload — local FFmpeg work, unlimited saves.",
+    "description": "Cut start/end segments from any video with fast stream-copy trimming in your browser (keyframe-aligned, no re-encode). Remove a 45-second cold open from a 10-minute upload — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -1618,7 +1618,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Apple Music Preview Extractor",
     "slug": "apple-music-preview-extractor",
     "category": "Audio",
-    "description": "Extracts publicly available 30-to-90-second audio preview clips from Apple Music by resolving the store URL. Free to start with no signup.",
+    "description": "Extracts publicly available 30-second audio preview clips from Apple Music by resolving the store URL. Free to start with no signup.",
     "isPro": false
   },
   {
@@ -1770,7 +1770,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Audio Converter",
     "slug": "bulk-audio-converter",
     "category": "Audio",
-    "description": "Convert whole folders of audio between MP3, WAV, OGG, FLAC, M4A, and AAC with uniform bitrate and sample settings. Podcasters standardize 50 episodes for every platform — local FFmpeg WASM, 2 free batches a day.",
+    "description": "Convert whole batches of audio between WAV, MP3, and OGG with one output format and sample rate for the whole batch. Podcasters standardize 50 episodes for every platform — local processing, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1810,7 +1810,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Video Compressor",
     "slug": "bulk-video-compressor",
     "category": "Video",
-    "description": "Compress multiple videos with consistent CRF, resolution, and codec presets for web, email, and archive. Studios batch 20 daily uploads at CRF 28 — local FFmpeg WASM, 2 free batches a day.",
+    "description": "Compress multiple videos with one shared CRF setting (18 high quality, 23 default, 28 smaller, 35 maximum) encoded libx264 medium preset with 128k AAC audio. Studios batch 20 daily uploads at CRF 28 — local FFmpeg WASM, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1842,7 +1842,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Video Size Reducer",
     "slug": "bulk-video-size-reducer",
     "category": "Video",
-    "description": "Hit exact file-size targets (10/25/50 MB) across video batches for email and messaging caps. Teams fit 15 clips under Gmail\\'s 25 MB wall — local FFmpeg WASM, 2 free batches a day.",
+    "description": "Hit exact file-size targets (10/25/50/100 MB, default 50) across video batches for email and messaging caps. Teams fit 15 clips under Gmail\\'s 25 MB wall — local FFmpeg WASM, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1850,7 +1850,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Audio Normalizer",
     "slug": "bulk-audio-normalizer",
     "category": "Audio",
-    "description": "Level whole audio batches to broadcast LUFS targets (-14 podcast, -16 music) without crushing dynamics. Networks even out 30 episodes so listeners stop riding volume — local Web Audio work, 2 free batches a day.",
+    "description": "Level whole audio batches with peak normalization to a target dBFS level (default -3) without crushing dynamics. Networks even out 30 episodes so listeners stop riding volume — local Web Audio work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1858,7 +1858,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Video Subtitle Burner",
     "slug": "bulk-video-subtitle-burner",
     "category": "Video",
-    "description": "Burn SRT/VTT subtitles permanently into batches of videos with font, size, color, and position control. Course creators hard-sub 20 lessons for platforms that ignore caption files — FFmpeg WASM, 2 free batches a day.",
+    "description": "Burn one shared SRT subtitle file permanently into a whole batch of videos with font-size and bottom/top/middle position control. Course creators hard-sub 20 lessons for platforms that ignore caption files — FFmpeg WASM, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1930,7 +1930,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Subtitle Time-Shifter",
     "slug": "bulk-subtitle-time-shifter",
     "category": "Video",
-    "description": "Shift subtitle timing across a whole season of SRT/VTT files by ±seconds with millisecond precision. Localizers fix a 2.5s broadcast delay on 24 episodes at once — local parsing, 2 free batches a day.",
+    "description": "Shift subtitle timing by ±milliseconds with pasted SRT/VTT text and instant before/after comparison. Localizers fix a 2.5s broadcast delay — paste, shift, copy or download, all local.",
     "isPro": true
   },
   {
@@ -2314,7 +2314,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Speed Changer",
     "slug": "video-speed-changer",
     "category": "Video",
-    "description": "Speed up or slow down video from 0.25x to 4x with pitch-safe audio. Make a 20-minute lecture watchable at 2x — local FFmpeg work, unlimited saves.",
+    "description": "Speed up or slow down video from 0.1x to 10x (presets 0.25x–4x) with pitch-corrected audio via chained atempo filters. Make a 20-minute lecture watchable at 2x — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -2330,7 +2330,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Mute Video",
     "slug": "mute-video",
     "category": "Video",
-    "description": "Strip the audio track from any video in one click — clean B-roll, GIF sources, confidential calls. Keep full visual quality with zero re-encode waste — local FFmpeg, unlimited saves.",
+    "description": "Strip, replace, or adjust volume (0–200%) of any video\\u2019s audio in your browser — clean B-roll, GIF sources, confidential calls. Mute copies video untouched with zero re-encode waste — local FFmpeg, unlimited saves.",
     "isPro": false
   },
   {
@@ -2418,7 +2418,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Filters",
     "slug": "video-filters",
     "category": "Video",
-    "description": "Grade videos with brightness, contrast, saturation, and grayscale filters plus live preview. Rescue flat 7am footage before posting — local FFmpeg work, unlimited saves.",
+    "description": "Grade videos with 18 filters across Color, Artistic, Blur, and Lighting (grayscale, sepia, pixelate, gaussian blur, vignette, brightness/contrast/saturation) plus a live still-frame preview. Export MP4, WebM, or GIF — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -4778,7 +4778,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMI Calculator for Kids",
     "slug": "bmi-calculator-for-kids",
     "category": "Health",
-    "description": "Compute children\\'s BMI with age-and-gender percentile context for growth tracking. See where a 10-year-old sits on the chart — free, local, informational only.",
+    "description": "Compute children\\'s BMI from height and weight with metric/imperial inputs and a healthy-range readout for growth tracking. See where a 10-year-old sits — free, local, informational only.",
     "isPro": false
   },
   {
@@ -4794,7 +4794,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Body Surface Area Calculator",
     "slug": "body-surface-area-calculator",
     "category": "Health",
-    "description": "Compute body surface area (Du Bois) for medication dosing and physiology. Get m² from height and weight — free, local, informational only.",
+    "description": "Compute body surface area with four formulas (Mosteller, Du Bois, Haycock, Gehan & George) for medication dosing and physiology. Get m² from height and weight — free, local, informational only.",
     "isPro": false
   },
   {
@@ -4810,7 +4810,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Baby Growth Percentile Calculator",
     "slug": "baby-growth-percentile-calculator",
     "category": "Health",
-    "description": "Estimate baby growth percentiles from weight, height, and age. Monitor your childs growth compared to population averages. Health data never leaves your device — every calculation runs locally in your browser.",
+    "description": "Compare baby weight and height against WHO median references by age and sex, shown as % above or below the median — a reference comparison, not clinical percentiles. Monitor your childs growth compared to population medians. Health data never leaves your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4826,7 +4826,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Breastfeeding Calorie Calculator",
     "slug": "breastfeeding-calorie-calculator",
     "category": "Health",
-    "description": "Estimate extra calories needed while breastfeeding by baby age and feeding frequency. Fuel milk production without guessing — free, local, informational only.",
+    "description": "Estimate calories burned making breast milk by baby age and feeding frequency, at ~0.67 kcal per mL. Fuel milk production without guessing — free, local, informational only.",
     "isPro": false
   },
   {
@@ -4834,7 +4834,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Child Height Predictor",
     "slug": "child-height-predictor",
     "category": "Health",
-    "description": "Estimate a child\\'s adult height from parents\\' heights with the mid-parental method. Get a ±10 cm range in seconds — free, local, estimate only.",
+    "description": "Estimate a child\\'s adult height from parents\\' heights with the mid-parental method. Get a ±8 cm range in seconds — free, local, estimate only.",
     "isPro": false
   },
   {
@@ -4842,7 +4842,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Cycling Calorie Calculator",
     "slug": "cycling-calorie-calculator",
     "category": "Health",
-    "description": "Estimate cycling burn from weight, speed, distance, and terrain. Price a 40 km weekend ride in calories — free, local, estimate only.",
+    "description": "Estimate cycling burn from weight, speed, and distance with speed-based MET bands. Price a 40 km weekend ride in calories — free, local, estimate only.",
     "isPro": false
   },
   {
@@ -4866,7 +4866,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Keto Calculator",
     "slug": "keto-calculator",
     "category": "Health",
-    "description": "Compute keto macros — 70% fat targets in grams for your calories and protein needs. Hit ketosis without math errors — free, local, informational only.",
+    "description": "Compute keto daily calories (TDEE minus 500) with protein at 1.8g/kg and fixed 20g net carbs, fat filling the rest. Hit ketosis without math errors — free, local, informational only.",
     "isPro": false
   },
   {
@@ -4874,7 +4874,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Lean Body Mass Calculator",
     "slug": "lean-body-mass-calculator",
     "category": "Health",
-    "description": "Estimate lean body mass from weight and body-fat percent — the number training actually moves. Track muscle, not just scale weight — free, local, informational only.",
+    "description": "Estimate lean body mass from weight and height with Boer and James formulas averaged — the number training actually moves. Track muscle, not just scale weight — free, local, informational only.",
     "isPro": false
   },
   {
@@ -4882,7 +4882,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Macro Calculator",
     "slug": "macro-calculator",
     "category": "Health",
-    "description": "Compute daily protein, carb, and fat macro targets from calories, weight, and goals. Turn any diet into gram numbers — free, local, informational only.",
+    "description": "Compute daily protein, carb, and fat macro targets from calories and your own percentage split. Turn any diet into gram numbers — free, local, informational only.",
     "isPro": false
   },
   {
@@ -4906,7 +4906,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Running Pace Calculator",
     "slug": "running-pace-calculator",
     "category": "Health",
-    "description": "Compute running pace, race times, and splits from any two knowns. Predict a 10K from your 5K — free, local, no signup. Even pacing plus predictions from any two knowns — free, local, no signup.",
+    "description": "Compute running pace and speed from distance and time in km or miles. Check splits for a 5K tune-up — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6218,7 +6218,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Body Fat Estimator",
     "slug": "body-fat-calculator",
     "category": "Health",
-    "description": "Estimate body fat percentage using BMI-based formula adjusted for age and gender. Shows fitness range and category. Health data never leaves your device — every calculation runs locally in your browser.",
+    "description": "Estimate body fat percentage from BMI with an age and gender adjustment. Enter BMI, age, and gender for a quick estimate. Health data never leaves your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6226,7 +6226,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Daily Calorie Needs",
     "slug": "calorie-intake-calculator",
     "category": "Health",
-    "description": "Calculate your daily calorie needs using BMR and activity level. Shows maintenance, cutting, and bulking calorie targets for fitness planning. Health data never leaves your device — every calculation runs locally in your browser.",
+    "description": "Calculate your daily calorie needs from BMR (Mifflin-St Jeor) times activity level. Shows basal burn plus maintenance calories for fitness planning. Health data never leaves your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6258,7 +6258,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Steps to Distance",
     "slug": "steps-calculator",
     "category": "Health",
-    "description": "Convert step counts to kilometers and miles plus calorie estimates from height and stride. Turn 10,000 steps into 7.5 km instantly — free, local, no signup.",
+    "description": "Convert step counts to kilometers and miles plus calorie estimates from height-based stride. Log daily steps with distance context — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6810,7 +6810,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Calorie Tracker",
     "slug": "calorie-tracker",
     "category": "Health",
-    "description": "Log daily calories against targets with running totals — simple deficit tracking that works. See 400 kcal remaining at dinner — free, local, no signup.",
+    "description": "Log daily calories with one-tap common foods and a running total — simple intake tracking that works. See the day add up as you eat — free, local, no signup.",
     "isPro": false
   },
   {

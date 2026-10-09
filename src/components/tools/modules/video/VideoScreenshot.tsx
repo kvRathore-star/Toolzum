@@ -240,7 +240,7 @@ export default function VideoScreenshot() {
                 <span className="text-[var(--text-primary)] font-mono text-xs bg-[var(--bg-surface)] px-2 py-0.5 rounded">{quality}%</span>
               </div>
               <input aria-label="Quality" type="range" min={1} max={100} value={quality} onChange={(e) => setQuality(Number(e.target.value))}
-                className="w-full accent-blue-600"
+                className="w-full accent-[var(--accent)]"
               />
               <div className="flex justify-between text-xs text-[var(--text-muted)] mt-1"><span>Low</span><span>High</span></div>
             </div>

@@ -44,7 +44,7 @@ export default function MacroCalculator() {
       </div>
       <div className="flex gap-3 mt-3">
         <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setCalories('2000'); setProteinPct('30'); setCarbsPct('40'); setFatPct('30'); }}>Balanced</button>
-        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setCalories('2000'); setProteinPct('40'); setCarbsPct('20'); setFatPct('40'); }}>Keto</button>
+            <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setCalories('2000'); setProteinPct('25'); setCarbsPct('5'); setFatPct('70'); }}>Keto</button>
         <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setCalories('2500'); setProteinPct('35'); setCarbsPct('45'); setFatPct('20'); }}>Muscle gain</button>
       </div>
     </CalculatorShell>

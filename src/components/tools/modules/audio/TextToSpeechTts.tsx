@@ -174,7 +174,7 @@ export default function TextToSpeechTts() {
             )}
             <button
                 onClick={handleDownloadText}
-                className="flex-1 sm:flex-none bg-[var(--bg-elevated)] hover:bg-zinc-500 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center gap-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="flex-1 sm:flex-none bg-[var(--bg-elevated)] hover:bg-[var(--bg-surface)] text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center gap-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 aria-label="Download text as .txt file"
               >
                 Download .txt
@@ -223,7 +223,7 @@ export default function TextToSpeechTts() {
                step="0.1"
                value={rate}
                onChange={(e) => setRate(Number(e.target.value))}
-               className="w-full accent-blue-600"
+                className="w-full accent-[var(--accent)]"
              />
              <div className="flex justify-between text-xs text-[var(--text-muted)] px-1">
                <span>Slow</span>

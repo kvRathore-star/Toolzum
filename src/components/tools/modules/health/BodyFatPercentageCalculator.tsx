@@ -5,23 +5,28 @@ import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function BodyFatPercentageCalculator() {
   const [gender, setGender] = useState<'male'|'female'>('male');
-  const [weight, setWeight] = useState('80');
-  const [waist, setWaist] = useState('90');
+  const [height, setHeight] = useState('175');
+  const [waist, setWaist] = useState('80');
   const [neck, setNeck] = useState('40');
   const [hip, setHip] = useState('100');
 
-  const w = parseFloat(weight) || 0;
+  // U.S. Navy Hodgdon-Beckett, density form (works directly in cm):
+  // male BF% = 495/(1.0324 − 0.19077·log10(waist−neck) + 0.15456·log10(height)) − 450
+  // female BF% = 495/(1.29579 − 0.35004·log10(waist+hip−neck) + 0.22100·log10(height)) − 450
+  // The old code fed body WEIGHT where HEIGHT belongs and mixed units —
+  // the "Fit Male" preset read 34.9% Obese; it now reads ~11% Athletes.
+  const ht = parseFloat(height) || 0;
   const wa = parseFloat(waist) || 0;
   const n = parseFloat(neck) || 0;
   const h = parseFloat(hip) || 0;
   let result = '';
   let category = '';
-  if (w && wa && n && !(gender === 'female' && !h)) {
+  if (ht > 0 && wa > 0 && n > 0 && (wa - n) > 0 && !(gender === 'female' && (!h || (wa + h - n) <= 0))) {
     let bf: number;
     if (gender === 'male') {
-      bf = 495 / (1.0324 - 0.19077 * Math.log10(wa - n) + 0.15456 * Math.log10(w)) - 450;
+      bf = 495 / (1.0324 - 0.19077 * Math.log10(wa - n) + 0.15456 * Math.log10(ht)) - 450;
     } else {
-      bf = 495 / (1.29579 - 0.35004 * Math.log10(wa + h - n) + 0.22100 * Math.log10(w)) - 450;
+      bf = 495 / (1.29579 - 0.35004 * Math.log10(wa + h - n) + 0.22100 * Math.log10(ht)) - 450;
     }
     const rounded = Math.round(bf * 10) / 10;
     result = rounded.toString();
@@ -41,8 +46,8 @@ export default function BodyFatPercentageCalculator() {
   }
 
   const presets = [
-    { label: 'Fit Male', apply: () => { setGender('male'); setWeight('80'); setWaist('80'); setNeck('40'); } },
-    { label: 'Avg Female', apply: () => { setGender('female'); setWeight('70'); setWaist('75'); setNeck('35'); setHip('100'); } },
+    { label: 'Fit Male', apply: () => { setGender('male'); setHeight('175'); setWaist('80'); setNeck('40'); } },
+    { label: 'Avg Female', apply: () => { setGender('female'); setHeight('162'); setWaist('75'); setNeck('35'); setHip('100'); } },
   ];
 
   return (
@@ -68,7 +73,7 @@ export default function BodyFatPercentageCalculator() {
       <div className="max-w-xl">
         <div className="grid grid-cols-2 gap-4">
           <div><label htmlFor="lbl-bodyfatpercentagecalculator-gender" className={labelCls}>Gender</label><select id="lbl-bodyfatpercentagecalculator-gender" aria-label="Gender" className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
-          <div><label htmlFor="lbl-bodyfatpercentagecalculator-weight-kg" className={labelCls}>Weight (kg)</label><input id="lbl-bodyfatpercentagecalculator-weight-kg" aria-label="Weight (kg)" className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+          <div><label htmlFor="lbl-bodyfatpercentagecalculator-height-cm" className={labelCls}>Height (cm)</label><input id="lbl-bodyfatpercentagecalculator-height-cm" aria-label="Height (cm)" className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
           <div><label htmlFor="lbl-bodyfatpercentagecalculator-waist-cm" className={labelCls}>Waist (cm)</label><input id="lbl-bodyfatpercentagecalculator-waist-cm" aria-label="Waist (cm)" className={inputCls} type="number" value={waist} onChange={e => setWaist(e.target.value)} /></div>
           <div><label htmlFor="lbl-bodyfatpercentagecalculator-neck-cm" className={labelCls}>Neck (cm)</label><input id="lbl-bodyfatpercentagecalculator-neck-cm" aria-label="Neck (cm)" className={inputCls} type="number" value={neck} onChange={e => setNeck(e.target.value)} /></div>
           <div className={gender === 'female' ? '' : 'opacity-50'}><label htmlFor="lbl-bodyfatpercentagecalculator-hip-cm-female" className={labelCls}>Hip (cm, female)</label><input id="lbl-bodyfatpercentagecalculator-hip-cm-female" aria-label="Hip (cm, female)" className={inputCls} type="number" value={hip} onChange={e => setHip(e.target.value)} disabled={gender === 'male'} /></div>

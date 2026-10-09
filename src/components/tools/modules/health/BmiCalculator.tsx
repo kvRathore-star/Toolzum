@@ -22,7 +22,7 @@ export default function BmiCalculator() {
   if (bmi < 18.5) {
     category = 'Underweight';
     color = 'text-amber-500';
-  } else if (bmi >= 25 && bmi < 29.9) {
+  } else if (bmi >= 25 && bmi < 30) {
     category = 'Overweight';
     color = 'text-orange-500';
   } else if (bmi >= 30) {

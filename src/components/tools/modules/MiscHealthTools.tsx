@@ -342,7 +342,10 @@ export function StepsCalculator() {
   const [steps, setSteps] = useState('10000');
   const [height, setHeight] = useState('170');
   const s = Number(steps), h = Number(height);
-  const stride = h * 0.415;
+  // Stride ≈ 0.415 × height; height is entered in cm so convert to meters —
+  // the old code multiplied steps by centimeter-stride as if meters and
+  // showed 705 km for a 10k-step day.
+  const stride = h * 0.415 / 100;
   const distM = s * stride;
   const distKm = distM / 1000;
   const distMi = distKm / 1.609;

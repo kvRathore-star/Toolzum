@@ -155,7 +155,7 @@ export default function VideoTrimmer() {
                     setStartTime(v);
                     if (v >= endTime) setEndTime(Math.min(videoDuration, v + 1));
                   }}
-                  className="w-full accent-blue-500"
+                  className="w-full accent-[var(--accent)]"
                 />
               </div>
 
@@ -175,7 +175,7 @@ export default function VideoTrimmer() {
                     setEndTime(v);
                     if (v <= startTime) setStartTime(Math.max(0, v - 1));
                   }}
-                  className="w-full accent-blue-500"
+                  className="w-full accent-[var(--accent)]"
                 />
               </div>
 

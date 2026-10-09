@@ -356,7 +356,7 @@ export default function AudioMerger() {
               value={crossfade}
               onChange={(e) => setCrossfade(Number(e.target.value))}
               disabled={isProcessing}
-              className="w-full accent-blue-500"
+              className="w-full accent-[var(--accent)]"
             />
             <p className="text-[10px] text-[var(--text-muted)] mt-1">Smooth transition between tracks</p>
           </div>

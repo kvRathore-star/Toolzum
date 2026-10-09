@@ -184,7 +184,7 @@ export default function VideoSpeedChanger() {
                 step="0.1"
                 value={speed}
                 onChange={(e) => setSpeed(parseFloat(e.target.value))}
-                className="w-full accent-blue-500"
+                className="w-full accent-[var(--accent)]"
               />
               <div className="flex justify-between text-xs text-[var(--text-secondary)] mt-1">
                 <span>0.1x</span>
