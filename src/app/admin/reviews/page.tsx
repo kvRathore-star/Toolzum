@@ -31,7 +31,7 @@ export default function AdminReviewsPage() {
     try {
       const res = await fetch("/api/admin/testimonials");
       if (res.status === 401) {
-        router.push("/sign-in");
+        router.push("/login");
         return;
       }
       const data = (await res.json()) as { ok?: boolean; testimonials?: Row[]; error?: string };
@@ -73,7 +73,7 @@ export default function AdminReviewsPage() {
 
   if (isPending) return null;
   if (!session?.user) {
-    router.push("/sign-in");
+    router.push("/login");
     return null;
   }
 
