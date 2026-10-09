@@ -71,6 +71,7 @@ describe('Hub upgrades (rival-teardown spec)', () => {
   });
 
   it('related categories all resolve to live category pages', async () => {
+    // Registry import is heavy; generous timeout (not a perf assertion).
     const { RELATED_CATEGORIES } = await import('@/data/categorySections');
     const { toolsRegistry } = await import('@/registry/tools');
     const catToSlug = (cat: string) =>
@@ -82,7 +83,7 @@ describe('Hub upgrades (rival-teardown spec)', () => {
         expect(live.has(l.slug), `${cat} links dead category /${l.slug}/`).toBe(true);
       }
     }
-  });
+  }, 30000);
 
   it('trust strip + guides render on PDF hub', () => {
     const { container } = render(

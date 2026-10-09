@@ -46,9 +46,9 @@ Same 5 as PDF, plus:
 
 ## Rollout to all 21 hubs (after PDF + Image prove out)
 
-- [ ] New-badge data + render (all hubs, monthly review of the set)
-- [ ] RelatedCategories wheel (3–4 links each, no orphan hubs)
-- [ ] Trust strip (category-specific proof bullets, all honest)
-- [ ] Platform row (PWA + Pro)
-- [ ] Guides row (wires up as guides ship)
+- [x] New-badge data + render (all hubs, monthly review of the set — `NEW_TOOL_SLUGS`, Oct 9)
+- [x] RelatedCategories wheel (3–4 links each, no orphan hubs — `RELATED_CATEGORIES`, all resolve, Oct 9)
+- [x] Trust strip (category-specific proof bullets, all honest — `TRUST_LINES`, Oct 9)
+- [x] Platform row (PWA + Pro — offline-after-load + pricing link, Oct 9)
+- [x] Guides row (wires up as guides ship — `CATEGORY_GUIDES` for 6 hubs with live guides, Oct 9)
 - [ ] Verticals phase 2: Business/Education-style pages + India verticals

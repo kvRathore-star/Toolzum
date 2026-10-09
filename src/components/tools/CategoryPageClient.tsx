@@ -260,7 +260,7 @@ function NewBadge() {
   );
 }
 
-function HubExtras({ category, tools }: { category: string; tools: ToolMetadata[] }) {
+function HubExtras({ category, tools, quiet }: { category: string; tools: ToolMetadata[]; quiet: boolean }) {
   const related = RELATED_CATEGORIES[category] || [];
   const guideSlugs = CATEGORY_GUIDES[category] || [];
   const guides = guideSlugs
@@ -268,6 +268,7 @@ function HubExtras({ category, tools }: { category: string; tools: ToolMetadata[
     .filter((p): p is (typeof blogPosts)[number] => !!p);
   const trustLine = TRUST_LINES[category];
   const proCount = tools.filter((t) => t.isPro).length;
+  if (quiet) return null;
   if (related.length === 0 && guides.length === 0 && !trustLine) return null;
   return (
     <div className="mt-12 space-y-8 max-w-3xl">
@@ -861,8 +862,9 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
           </div>
         )}
 
-        {/* Hub upgrades (rival-teardown spec): wheel, guides, trust, platform */}
-        <HubExtras category={category} tools={tools} />
+        {/* Hub upgrades (rival-teardown spec): wheel, guides, trust, platform.
+            Hidden while searching/filtering, same as the FAQ block. */}
+        <HubExtras category={category} tools={tools} quiet={!!searchQuery || !!activeSubcategory || proFilter !== 'all'} />
 
         {/* Category FAQ — indexable editorial layer, hidden while searching */}
         {!searchQuery && faqs.length > 0 && (
