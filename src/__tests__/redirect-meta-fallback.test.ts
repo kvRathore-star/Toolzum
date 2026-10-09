@@ -93,8 +93,7 @@ describe('redirect noindex fallback (#10): unlisted paths degrade gracefully, ne
     expect(rules.filter(r => dynamic.test(r)).length).toBeLessThanOrEqual(100);
   });
 
-  it('merged video-converter redirects preserve format intent (?from=)', () => {
-    // 11b merge: retired /converter/<fmt>-to-mp4 URLs must land on
+  it('merged video-converter redirects preserve format intent (?from=)', () => {    // 11b merge: retired /converter/<fmt>-to-mp4 URLs must land on
     // /converter/video-converter/ with the source format preselected.
     const file = readFileSync(join(process.cwd(), 'public/_redirects'), 'utf8');
     const targets = new Map<string, string>();
@@ -106,5 +105,17 @@ describe('redirect noindex fallback (#10): unlisted paths degrade gracefully, ne
       expect(targets.get(`/converter/${fmt}-to-mp4`),
         `${fmt}-to-mp4 must redirect with ?from=${fmt}`).toBe(`/converter/video-converter/?from=${fmt}`);
     }
+  });
+
+  it('_redirects stays under the 2,000-static ceiling (silent-drop postmortem)', () => {
+    // Cloudflare silently drops rules past ~2,000 statics — the exact
+    // failure mode of the redirects-dynamic-budget postmortem. Fail loud
+    // at 1,800 so growth never sneaks into the drop zone unnoticed.
+    const file = readFileSync(join(process.cwd(), 'public/_redirects'), 'utf8');
+    const rules = file
+      .split('\n')
+      .map(l => l.trim())
+      .filter(l => l && !l.startsWith('#') && l.split(/\s+/).length >= 3);
+    expect(rules.length, `redirect rules (${rules.length}) approaching the 2,000 silent-drop ceiling`).toBeLessThanOrEqual(1800);
   });
 });

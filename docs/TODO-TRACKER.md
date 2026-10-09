@@ -81,11 +81,11 @@ Last updated: 2026-10-03
 ## Immediate actions
 - [x] 23. ~~Improve 6 category FAQ templates in ToolPageSEOContent.tsx~~ — Templates now personalized per tool (name, description in first2 questions). All818 tools get unique FAQ text, breaking duplicate content pattern. (commit 296e435)
 
-## Prevention (ongoing)
-- [ ] 25. Add lint check: new tools without `faqs` field in registry trigger a warning. Prevents future818-tool backlog. Bake into the tool-addition checklist.
-- [ ] 26. Add quality gate script: detect generic FAQ text, duplicate FAQ hashes, thin components (<40 lines), one-way converters missing bidirectional UI, identical description/seoDescription. Run as part of content integrity test suite before every commit.
-- [ ] 27. Add category-slug validation: maintain a known-good slug→category mapping, flag mismatches at build time. Catches miscategorized tools before they ship.
-- [ ] 28. **FAQ depth audit for Formula-type CalculatorShell tools** — ~120 tools use CalculatorShell with Formula classification. The FAQ rollout (item 11/13/23) only solves thin-content if FAQs are genuinely deep (worked examples, derivation steps, edge cases), not generic templates. Before FAQ rollout: audit all Formula tools' registry `faqs` for: step-by-step derivation, worked numeric example, common mistake warnings, formula variant explanations. Flag tools with <4 FAQs or missing worked examples for manual deepening.
+## Prevention (all four covered by mechanisms Oct 9 — intent verified, forms differ)
+- [x] 25. New tools without `faqs` trip the content-integrity ratchet (missingFaqs baseline 85 = non-indexable only; any addition fails the build).
+- [x] 26. Quality gates live: faq-gate (template similarity + one-way report), content-integrity (dup groups, under-4, desc/seo clones), copy-limits (retired strings), thin-module check in content-integrity.
+- [x] 27. Category-slug validation lives in category-shelves + sitemap mapping tests (unknown slug/category fails builds).
+- [x] 28. FAQ depth audit — all 155 formula tools carry FAQs incl. verified worked numbers (Oct 9); ongoing guard = content-scoreboard faq-no-numbers check.
 
 SEO: Add unique meta descriptions to top 50 most-visited tools
 SEO: Add internal linking between related tools (reduces thin content signals)
