@@ -120,6 +120,56 @@ export default function WhoisLookup() {
     // 15s ceiling per provider — neither endpoint may hang the UI forever.
     const withTimeout = () => AbortSignal.timeout(15000);
     let rdapNotFound = false;
+    // 0. First-party RDAP (per-TLD authoritative server via IANA
+    // bootstrap) — correct for ccTLDs where rdap.org has no data.
+    try {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 15000);
+      let first: Response;
+      try {
+        first = await fetch('/api/rdap-lookup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ domain: target }),
+          signal: ctrl.signal,
+        });
+      } finally {
+        clearTimeout(timer);
+      }
+      if (first.ok) {
+        const data = (await first.json()) as {
+          outcome?: string;
+          verdict?: { domain: string; registrar: string; expiration: string; nameservers: string[]; dnssec: string };
+        };
+        if (data.outcome === 'registered' && data.verdict) {
+          const v = data.verdict;
+          setResult({
+            domain: v.domain,
+            registrar: v.registrar,
+            creationDate: 'N/A',
+            expirationDate: v.expiration,
+            nameServers: v.nameservers,
+            status: [],
+            dnssec: v.dnssec,
+            rawData: JSON.stringify({ source: 'first-party RDAP (IANA bootstrap)', verdict: v }, null, 2),
+          });
+          setHistory(prev => [target, ...prev.filter(h => h !== target)].slice(0, 5));
+          toast.success('WHOIS data retrieved!');
+          return;
+        }
+        if (data.outcome === 'unregistered') {
+          rdapNotFound = true;
+          throw new Error('RDAP 404');
+        }
+        // unsupported → fall through to the public providers below
+      }
+    } catch (e) {
+      if (e instanceof Error && e.message === 'RDAP 404') {
+        // Authoritative "not registered" — still try the public fallback
+        // for extra detail, but remember the verdict for the error path.
+      }
+      /* any other first-party failure → public providers below */
+    }
     try {
       const res = await fetch(`https://rdap.org/domain/${target}`, { signal: withTimeout() });
       if (res.status === 404) {

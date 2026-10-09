@@ -1590,8 +1590,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Domain Availability Checker",
     slug: "domain-availability-checker",
     category: "Developer",
-    description: "Check a domain name across major TLDs with a DNS heuristic — likely-registered or likely-available per extension. A DNS miss is not proof of availability: always confirm with a registrar before purchasing.",
-    seoDescription: "Free domain availability checker — DNS-heuristic check across major TLDs. Instant lookup, free, no signup; confirm winners at a registrar.",
+    description: "Check a domain name across major TLDs against authoritative RDAP servers — a missing record means likely available. TLDs without RDAP fall back to a DNS heuristic. Always confirm with a registrar before purchasing.",
+    seoDescription: "Free domain availability checker — RDAP-backed checks across major TLDs with DNS fallback. Free, no signup; confirm winners at a registrar.",
     dependencies: "DNS API (Google DoH)",
     instructions: [
       { title: "1. Type the name", desc: "Without extension first — TLD coverage is checked across majors." },
@@ -1599,7 +1599,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { title: "3. Register the winner", desc: "Claim available names at any registrar before someone else does." },    ],
     faqs: [
       { question: "Which TLDs does it check?", answer: "Major TLDs including .com, .net, .org, .io, .dev, .co, .app, and more. The checker queries DNS records to determine if a domain is registered or available." },
-      { question: "How accurate are the results?", answer: "Results are based on DNS queries and WHOIS data. A domain showing as 'available' may still be registered but not actively hosted — always verify with a registrar before purchasing." },
+      { question: "How accurate are the results?", answer: "RDAP answers are authoritative: a record means registered, a missing record means likely available (premium/reserved names can still surprise you). Where a TLD has no RDAP, the tool falls back to DNS queries — weaker signal. Always verify with a registrar before purchasing." },
       { question: "Can I check multiple domains at once?", answer: "Yes. Enter a base name and the tool checks it across all supported TLDs simultaneously, showing availability status for each extension in a single table." },
       { question: "Does it suggest alternative names?", answer: "No. The tool checks the exact name you type across supported TLDs — it does not generate alternative names or spelling variations." },
       { question: "Is the lookup data stored?", answer: "We store no search history. But the checks themselves are DNS-over-HTTPS queries to Google's public DNS resolver, so queried names are visible to that third party — same as any DNS lookup." },

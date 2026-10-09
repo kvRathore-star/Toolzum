@@ -2026,7 +2026,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Domain Availability Checker",
     "slug": "domain-availability-checker",
     "category": "Developer",
-    "description": "Check a domain name across major TLDs with a DNS heuristic — likely-registered or likely-available per extension. A DNS miss is not proof of availability: always confirm with a registrar before purchasing.",
+    "description": "Check a domain name across major TLDs against authoritative RDAP servers — a missing record means likely available. TLDs without RDAP fall back to a DNS heuristic. Always confirm with a registrar before purchasing.",
     "isPro": false
   },
   {

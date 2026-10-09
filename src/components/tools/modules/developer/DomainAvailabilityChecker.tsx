@@ -39,8 +39,32 @@ export default function DomainAvailabilityChecker() {
     const checks: DomainStatus[] = [];
     for (const tld of COMMON_TLDS) {
       const fullDomain = `${name}${tld}`;
+      // RDAP first: a 404 from the authoritative server means "not
+      // registered" — far stronger than DNS absence. Anything ambiguous
+      // falls back to the DNS A/MX heuristic below, labeled as such.
       try {
-        // Check A (web) AND MX (mail) records: a domain with mail but no
+        const r = await fetch('/api/rdap-lookup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ domain: fullDomain }),
+          signal: AbortSignal.timeout(10000),
+        });
+        if (r.ok) {
+          const data = (await r.json()) as { outcome?: string };
+          if (data.outcome === 'registered') {
+            checks.push({ domain: fullDomain, available: false, note: 'Registered (RDAP record found)' });
+            continue;
+          }
+          if (data.outcome === 'unregistered') {
+            checks.push({ domain: fullDomain, available: true, note: 'Available — no RDAP record; confirm at a registrar' });
+            continue;
+          }
+        }
+      } catch {
+        /* RDAP unreachable for this TLD — heuristic below */
+      }
+      try {
+        // DNS heuristic (weak signal): a domain with mail but no
         // website is still registered. The old check looked at A records
         // only and reported such domains as "available".
         // 10s per lookup: one stalled resolver must not hang the whole
@@ -85,7 +109,7 @@ export default function DomainAvailabilityChecker() {
           <Globe className="w-5 h-5 text-emerald-500" />
           Domain Name Availability Checker
         </h2>
-        <p className="text-xs text-[var(--text-secondary)] mt-1">Checks live DNS (web + mail records) across 10 popular TLDs. DNS-based — a final registrar check confirms before purchase.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Checks each name against its authoritative RDAP server first (a missing record means likely available), falling back to DNS web+mail records where RDAP is unsupported. A final registrar check confirms before purchase.</p>
       </div>
 
       <div className="bg-[var(--bg-elevated)]/30 border border-[var(--border-subtle)] rounded-2xl p-6">
