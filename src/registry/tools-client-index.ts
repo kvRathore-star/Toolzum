@@ -18,7 +18,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Add Text to Photo",
     "slug": "add-text-to-photo",
     "category": "Image",
-    "description": "Overlays custom text captions onto images with control over font, size, color, alignment, opacity, and rotation angle. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "Add one custom text caption onto a photo with color, size (10–300px slider), and X/Y position controls, composed on fixed social-size canvases — Instagram Post 1080×1080, Reel 1080×1920, YouTube Banner 2560×1440, Twitter Header 1500×500, or Custom. Exports PNG locally in your browser on Canvas; 3 free downloads a day.",
     "isPro": false
   },
   {
@@ -26,7 +26,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Batch Image Editor",
     "slug": "batch-image-editor",
     "category": "Image",
-    "description": "Apply resize, crop, rotate, format conversion, and compression to dozens of images in one click. Sellers prep 60 marketplace shots with identical settings — local Canvas work, 2 free batches a day.",
+    "description": "Downscale a batch of images to one max width (default 1920px) with an optional bottom-right watermark, then download everything as a ZIP. Same max-width and watermark apply to every image — local Canvas work, 3 free images a day.",
     "isPro": true
   },
   {
@@ -98,7 +98,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Archive Converter",
     "slug": "archive-converter",
     "category": "Converter",
-    "description": "Convert between ZIP, TAR, GZ, and 7z archives right in your browser. Repackage downloads for any platform — local fflate work, unlimited saves.",
+    "description": "Create ZIP archives from your files right in your browser. Bundle loose files into one archive.zip with DEFLATE compression — local JSZip work, unlimited saves.",
     "isPro": false
   },
   {
@@ -154,7 +154,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Compress Image to 50KB",
     "slug": "compress-image-to-50kb",
     "category": "Image",
-    "description": "Reduces image file size to a specific target — 50 KB, 100 KB, or 200 KB — by automatically adjusting JPEG quality, reducing pixel dimensions, or stripping EXIF metadata. Ideal for government forms, job applications, and upload portals with strict file size limits.",
+    "description": "Shrinks one photo to under 50 KB (51,200 bytes) for portals with strict limits — NSDL, UIDAI, UPSC, SSC, and banking uploads. Runs up to 5 auto passes locally with the browser-image-compression library; standard metadata is preserved.",
     "isPro": false
   },
   {
@@ -162,7 +162,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Currency Converter",
     "slug": "currency-converter",
     "category": "Finance",
-    "description": "Converts between 160+ world currencies using real-time exchange rates sourced from central banks and financial data providers. Uses cloud-based processing.",
+    "description": "Converts between 12 major world currencies using built-in offline reference rates, with quick amounts and recent history kept in your browser.",
     "isPro": false
   },
   {
@@ -194,7 +194,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Percentage Calculator",
     "slug": "percentage-calculator",
     "category": "Calculator",
-    "description": "Computes percentage values, percentage increases and decreases, and what-percent-of-what relationships with precise decimal arithmetic. Essential for everyday math — tips, discounts, tax rates, grade scores, and statistical comparisons where quick percentage answers are needed.",
+    "description": "Computes X% of Y and what-percent-of-what (X is what % of Y) in two side-by-side panels with precise decimal arithmetic. Essential for everyday math — tips, discounts, tax rates, grade scores, and statistical comparisons where quick percentage answers are needed.",
     "isPro": false
   },
   {
@@ -282,7 +282,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image Compressor",
     "slug": "image-compressor",
     "category": "Image",
-    "description": "Reduces JPG, PNG, and WebP file sizes using smart compression with a side-by-side quality preview slider — drag it and watch file size vs visual quality update live. Max 50MB per image. Perfect for web optimization, email attachments, and social media uploads.",
+    "description": "Shrink JPG, PNG, and WebP photos with an Image Quality slider (10–100%, default 80%) plus a Resolution Scale slider, shown in Before/After panels with exact KB and -% savings. Single-image uploads up to 50MB — local library work, unlimited saves.",
     "isPro": false
   },
   {
@@ -290,7 +290,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Object Remover",
     "slug": "object-remover",
     "category": "Image",
-    "description": "Brush over unwanted objects and erase them with patch-fill reconstruction — tourists, signs, photobombers. Clean vacation shots in minutes — local Canvas work, unlimited saves.",
+    "description": "Brush over unwanted objects and erase them with 8-pass patch-fill reconstruction that averages the 4-neighbourhood around each masked pixel — tourists, signs, photobombers. Exports JPEG at quality 0.95 as erased-<name> — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -370,7 +370,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Crop Image",
     "slug": "crop-image",
     "category": "Image",
-    "description": "Crop photos with aspect presets and free selection plus rotation correction. Frame 50 portraits to 4:5 for feeds — local Cropper.js work, unlimited saves.",
+    "description": "Crop photos with 6 aspect presets — Free Size, Square 1:1, Video 16:9, Photo 4:3, Classic 3:2, Portrait 2:3 — plus ±90° rotation and horizontal/vertical flip. Exports PNG as cropped-<name> — local Cropper.js work, unlimited saves.",
     "isPro": false
   },
   {
@@ -410,7 +410,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Number Generator",
     "slug": "random-number-generator",
     "category": "Utility",
-    "description": "Generates random integers or decimals within a user-defined min-max range with optional repetition filtering. Uses the browser random number generator — fine for games, raffles, and sampling, not for security secrets. Input never leaves your device — everything runs locally in your browser.",
+    "description": "Generates random integers within a user-defined min-max range with optional unique and sorted output. Uses the browser random number generator — fine for games, raffles, and sampling, not for security secrets. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -442,7 +442,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image Enhancer",
     "slug": "image-enhancer",
     "category": "Image",
-    "description": "Enhance image detail with AI reconstruction — upscale plus texture recovery beyond plain interpolation. Rescue low-res product shots for listings — local Real-ESRGAN work, unlimited saves.",
+    "description": "Grade photos with 6 one-click filter presets — Vintage, Noir, Vibrant, Cool Tone, Warm Glow — plus 6 manual sliders (brightness, contrast, saturation, blur, sepia, grayscale) rendered live through canvas filters at full source resolution. Exports JPEG at quality 0.95 as enhanced-<name>; nothing uploads.",
     "isPro": false
   },
   {
@@ -474,7 +474,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Meme Generator",
     "slug": "meme-generator",
     "category": "Image",
-    "description": "Caption classic meme templates or upload your pictures — top/bottom Impact text, custom fonts, instant download with custom fonts and positioning.",
+    "description": "Caption 4 built-in meme templates (Drake Hotline Bling, Distracted Boyfriend, Two Buttons, Change My Mind) or upload your own picture — top/bottom Impact 900 text with auto black stroke, size slider 20–70px, and forced-uppercase toggle. Exports a fixed 600×600 JPEG (meme.jpg) from local canvas.",
     "isPro": false
   },
   {
@@ -482,7 +482,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Resume Builder",
     "slug": "resume-builder",
     "category": "Utility",
-    "description": "Provides a structured, form-based interface for entering work history, education, and skills, then renders a professionally formatted PDF resume. Input never leaves your device — everything runs locally in your browser.",
+    "description": "Provides a structured, form-based interface for entering work history and education, then prints a cleanly formatted resume via the print dialog (save as PDF) with plain-text export. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -506,7 +506,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image Resizer",
     "slug": "image-resizer",
     "category": "Image",
-    "description": "Scales images to exact pixel dimensions or percentage-based sizes with intelligent resampling algorithms that preserve sharpness.",
+    "description": "Scale one image to exact pixel dimensions — width/height fields prefill from the source — with optional aspect-ratio lock, PNG/JPEG/WebP output picker, and quality control for JPEG/WebP. Files over 50MB are rejected; resizing runs on plain canvas drawImage locally.",
     "isPro": false
   },
   {
@@ -514,7 +514,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Password Generator",
     "slug": "password-generator",
     "category": "Utility",
-    "description": "Generates cryptographically strong random passwords with fully customizable length, character sets, and pattern rules. Input never leaves your device — everything runs locally in your browser.",
+    "description": "Generates cryptographically strong random passwords with fully customizable length and character sets, plus memorable passphrases. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -538,7 +538,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Photo Retoucher",
     "slug": "photo-retoucher",
     "category": "Image",
-    "description": "Retouch portraits with this photo retoucher — blemish healing, skin smoothing, and teeth whitening brushes. Polish headshots naturally in minutes — local OpenCV work, unlimited saves.",
+    "description": "Retouch portrait photos with two paint-on brushes: Skin Smoothing (3×3 box blur inside a circular brush) and Red-Eye Remover (red-dominant pixels neutralized to grey). Brush runs 5–100px; the snapshot saves as JPEG 0.95 (retouched-<name>) when you lift the mouse — local Canvas pixel work, unlimited saves.",
     "isPro": false
   },
   {
@@ -554,7 +554,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Font Generator",
     "slug": "font-generator",
     "category": "Text",
-    "description": "Turn plain text into 50+ Unicode styled font variants — bold, italic, script, monospace, circled. Make bios and headlines stand out anywhere — free, local, copy-paste ready.",
+    "description": "Preview your text in 6 Google fonts — Inter, Playfair Display, Fira Code, Pacifico, Outfit, and Montserrat — and copy the ready-to-use CSS import plus font-family rule. Free, local, no signup.",
     "isPro": false
   },
   {
@@ -618,7 +618,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Invoice Generator",
     "slug": "invoice-generator",
     "category": "Finance",
-    "description": "Produces downloadable PDF or HTML invoices with customizable line items, tax rates, discounts, and business logo placement. Figures never leave your device — every calculation runs locally in your browser.",
+    "description": "Produces printable invoices with editable line items, a single tax rate, notes, and sender/client blocks. Print to PDF or download a plain-text copy. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -642,7 +642,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Dice Roller",
     "slug": "dice-roller",
     "category": "Utility",
-    "description": "Roll 3D dice — d4 through d20 plus custom counts — for games and decisions. Roll 4d6 drop-lowest for stats — free, local, no signup.",
+    "description": "Roll dice — d4 through d20 with up to 5 dice — for games and decisions. Totals summed live — free, local, no signup.",
     "isPro": false
   },
   {
@@ -650,7 +650,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Profit Margin Calculator",
     "slug": "profit-margin-calculator",
     "category": "Finance",
-    "description": "Compute gross and net margins from revenue and costs — know exact profitability. A $30 sale at $20 cost margins 33% — free, local, no signup.",
+    "description": "Compute gross margin from revenue and costs — know exact profitability. A $30 sale at $20 cost margins 33% — free, local, no signup.",
     "isPro": false
   },
   {
@@ -674,7 +674,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Coin Flipper",
     "slug": "coin-flipper",
     "category": "Utility",
-    "description": "Flip a virtual coin with streak tracking for instant decisions. Settle it fairly in one tap — free, local, no signup. Best-of-three settles disputes fairly with streak tracking — free, local, no signup.",
+    "description": "Flip a virtual coin with heads/tails totals for instant decisions. Settle it fairly in one tap — free, local, no signup.",
     "isPro": false
   },
   {
@@ -682,7 +682,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image Colorizer",
     "slug": "image-colorizer",
     "category": "Image",
-    "description": "Colorize black-and-white photos with on-device AI — family archives brought to life. Guess-era colors, not ground truth — local DeOldify work, unlimited saves.",
+    "description": "Tint any photo with an HSL color wash — hue 0–360° (default 200° blue), saturation 0–100% (default 60), brightness −40–40% (default 10) — painted in hue-blend mode over the full-resolution image. Exports JPEG at quality 0.9 as colorized_photo.jpg; nothing uploads.",
     "isPro": false
   },
   {
@@ -802,7 +802,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to SVG",
     "slug": "png-to-svg",
     "category": "Image",
-    "description": "Convert PNG images to SVG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "Turn a PNG (or JPG/WebP) into SVG two ways: Embedded Vector Wrapper (full-size base64 image in an SVG shell — scales without re-saving, not true vectors) or Silhouette Path Trace (black-only 1px-rect tracing of dark pixels on a capped 250px thumbnail). Downloads as traced_vector.svg — local Canvas work, no uploads.",
     "isPro": false
   },
   {
@@ -818,7 +818,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Margin Calculator",
     "slug": "margin-calculator",
     "category": "Finance",
-    "description": "Calculates gross margin percentage, markup percentage, cost, and selling price from any two known variables — perfect for retail pricing, wholesale negotiations, and e-commerce product listing optimization where you need to work backwards from a target margin.",
+    "description": "Prices from cost and a target margin percentage — the tool solves for selling price, profit, and markup. Perfect for retail pricing, wholesale negotiations, and e-commerce listings where you work backwards from a target margin.",
     "isPro": false
   },
   {
@@ -850,7 +850,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "VAT Calculator",
     "slug": "vat-calculator",
     "category": "Finance",
-    "description": "Computes VAT-inclusive and VAT-exclusive amounts for EU member-state rates (standard and reduced) with country-specific rules for digital services. Figures never leave your device — every calculation runs locally in your browser.",
+    "description": "Computes VAT-inclusive and VAT-exclusive amounts from a single rate you enter, with presets for common UK, EU, India, UAE, and Swiss rates. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -882,7 +882,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text to Handwriting",
     "slug": "text-to-handwriting",
     "category": "Text",
-    "description": "Render typed text as realistic handwritten output with configurable fonts, ink colors, paper styles, and simulated pressure variations. Create handwritten-looking notes, letters, and assignments.",
+    "description": "Render typed text in a slanted serif handwriting style on a ruled sheet with blue, black, or red ink. Create handwritten-looking notes, cards, and mockups.",
     "isPro": false
   },
   {
@@ -1034,7 +1034,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Break-Even Calculator",
     "slug": "break-even-calculator",
     "category": "Finance",
-    "description": "Determines the exact unit volume or revenue required to cover fixed and variable costs, with a built-in sensitivity slider for price changes. Essential for startup pricing strategy, product launch planning, and manufacturing cost analysis where knowing your break-even point is critical before committing to production.",
+    "description": "Determines the exact unit volume or revenue required to cover fixed and variable costs, with presets for common business types. Essential for startup pricing strategy, product launch planning, and manufacturing cost analysis where knowing your break-even point is critical before committing to production.",
     "isPro": false
   },
   {
@@ -1138,7 +1138,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Barcode Generator",
     "slug": "barcode-generator",
     "category": "Utility",
-    "description": "Generates scannable barcodes in major symbologies including EAN-13, Code 128, QR Code, and UPC-A from typed input or pasted data. Input never leaves your device — everything runs locally in your browser.",
+    "description": "Generates scannable barcodes in UPC-A, EAN-13, Code 128, and Code 39 from typed input. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -1162,7 +1162,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Markdown Tools",
     "slug": "markdown-tools",
     "category": "Converter",
-    "description": "Markdown toolbox — convert, preview, lint, and format Markdown with GFM tables and task lists. Own every .md workflow in one tab — local processing, free, no signup.",
+    "description": "Markdown toolbox with four converting tabs — Markdown to HTML source, plain text to Markdown, HTML to Markdown, and Markdown to plain text. Own every .md workflow in one tab — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -1306,7 +1306,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "XML to JSON",
     "slug": "xml-to-json",
     "category": "Converter",
-    "description": "Transforms well-formed XML documents into equivalent JSON structures, mapping attributes to prefixed keys and text content.",
+    "description": "Transforms well-formed XML documents into equivalent JSON structures, merging attributes into their elements with text content preserved.",
     "isPro": false
   },
   {
@@ -1346,7 +1346,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Batch Image Converter",
     "slug": "image-bulk-converter",
     "category": "Image",
-    "description": "Drop whole folders and convert dozens of images to JPG, PNG, WebP, AVIF, GIF, or TIFF with one output each. Bloggers modernize 150 post images before a redesign — local processing, 2 free batches a day.",
+    "description": "Convert a batch of images to one output — JPG, PNG, or WebP — at quality 10–100% (default 80%), capped at 4096px longest side, then download everything as a ZIP. Files that fail conversion fall back to their originals inside the same archive — local library work.",
     "isPro": true
   },
   {
@@ -1386,7 +1386,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OTP Generator",
     "slug": "otp-generator",
     "category": "Utility",
-    "description": "Generate time-based one-time passwords from your TOTP secrets — 2FA codes without a phone app. Get 30-second codes on desktop — local crypto, free, no signup.",
+    "description": "Generate OTP codes — numeric, alphabetic, or hex — in batches of your chosen length. Make verification codes fast — free, local, no signup.",
     "isPro": false
   },
   {
@@ -1578,7 +1578,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JFIF to PNG Converter",
     "slug": "jfif-to-png",
     "category": "Image",
-    "description": "Convert JFIF images (JPEG variant from cameras and iPhones) to lossless PNG. Open mislabeled photo files anywhere — local Canvas work, unlimited saves.",
+    "description": "Convert one JFIF file (JPEG variant from cameras and iPhones) to standard PNG at full natural size. Fixed output name converted.png — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -1586,7 +1586,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image to JPG Converter",
     "slug": "convert-to-jpg",
     "category": "Image",
-    "description": "Convert any mix of PNG, WebP, AVIF, GIF, or BMP images to universal JPG in one batch. Make 100 mixed uploads email-ready — local conversion, unlimited saves.",
+    "description": "Convert one image (PNG, WebP, BMP, GIF, or any browser-decodable picture) to universal JPG at fixed quality 0.9, flattening transparency onto white. Always saves as converted.jpg — local conversion, unlimited saves.",
     "isPro": false
   },
   {
@@ -1594,7 +1594,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Rotate Image Online",
     "slug": "rotate-image",
     "category": "Image",
-    "description": "Rotate images 90/180/270° or flip horizontal/vertical with lossless precision. Fix sideways phone shots in seconds — local Canvas work, unlimited saves.",
+    "description": "Rotate one image with quick ±90°/180° buttons or a free 0–359° slider (plus numeric input), flip horizontal/vertical with toggles, and export PNG as rotated.png. Fix sideways phone shots in seconds — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -1602,7 +1602,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Blur Face Online",
     "slug": "blur-face",
     "category": "Image",
-    "description": "Detects faces in uploaded images using on-device AI computer vision and applies an adjustable blur effect to each detected face. Free to start with no signup.",
+    "description": "Detects faces in one uploaded photo with the on-device BlazeFace model (TensorFlow.js, downloaded lazily on first run) and blurs every detected box at a fixed 15px. Exports PNG as blurred_faces.png with a face-count toast — free to start with no signup.",
     "isPro": false
   },
   {
@@ -1610,7 +1610,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HTML to Image Converter",
     "slug": "html-to-image",
     "category": "Converter",
-    "description": "Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser. Free to start with no signup.",
+    "description": "Renders pasted HTML and CSS markup (no file upload, no URL screenshots) into downloadable PNG, JPEG (fixed quality 0.95), or SVG via the html-to-image library. Preview is DOMPurify-sanitized — free to start with no signup.",
     "isPro": false
   },
   {
@@ -1730,7 +1730,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk QR Code Generator",
     "slug": "bulk-qr-code-generator",
     "category": "Utility",
-    "description": "Turn a CSV of URLs, text, or contacts into hundreds of styled QR PNGs in one batch — event badges, inventory labels, menus. Organizers code 500 tables in minutes — local qrcode.js work, 2 free batches a day.",
+    "description": "Turn a CSV of URLs or text into styled QR PNGs in one batch — event badges, inventory labels, menus. Free tier generates 5 QR a day; Pro runs up to 100 per batch — local qrcode work.",
     "isPro": true
   },
   {
@@ -1746,7 +1746,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Image Watermark",
     "slug": "bulk-image-watermark",
     "category": "Image",
-    "description": "Stamp text, logo, or timestamp watermarks across dozens of photos with position, opacity, and rotation control. Photographers protect 200 wedding proofs before sharing — local Canvas work, 2 free batches a day.",
+    "description": "Stamp text or logo watermarks across dozens of photos with 5 positions and 10–100% opacity control. Photographers protect 200 wedding proofs before sharing — always exports PNG (<name>-watermarked.png) — local Canvas work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1778,7 +1778,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk SVG to PNG",
     "slug": "bulk-svg-to-png",
     "category": "Image",
-    "description": "Rasterize hundreds of SVG vectors to crisp PNGs at any resolution with filename preservation. Developers ship full icon sets at 1x, 2x, and 3x in three runs — local Canvas work, 2 free batches a day.",
+    "description": "Rasterize SVG vectors to crisp PNGs at 1x, 2x (default), 3x, or 4x scale — base size read from the SVG width/height attributes (100px fallback) — with filename preservation (.svg becomes .png). Developers ship full icon sets in four runs — local Canvas work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1786,7 +1786,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Image Compressor",
     "slug": "bulk-image-compressor",
     "category": "Image",
-    "description": "Shrink image batches (JPG, PNG, WebP) by 40–80% with one quality slider and live size preview. Store owners compress 300 product shots before upload — local processing, 2 free batches a day.",
+    "description": "Shrink image batches to JPEG or PNG (no WebP output) at full source dimensions with one quality slider (10–100, default 80). Store owners compress 300 product shots before upload — local processing, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1802,7 +1802,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Image Resizer",
     "slug": "bulk-image-resizer",
     "category": "Image",
-    "description": "Resize hundreds of photos to exact pixels, percentage scale, or social presets in one pass with aspect control. Photographers deliver 400 wedding shots at uniform 2048px — local Canvas work, 2 free batches a day.",
+    "description": "Resize hundreds of photos to one exact W×H canvas (default 800×800, inputs 1–10000px) with Contain, Cover, or Stretch fit — no percentage or preset modes. Transparency flattens onto white; output is always PNG. Photographers deliver 400 wedding shots at uniform size — local Canvas work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1826,7 +1826,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Face Anonymizer",
     "slug": "bulk-face-anonymizer",
     "category": "Image",
-    "description": "Detect and blur, pixelate, or cover faces across whole photo batches with on-device TensorFlow.js. Newsrooms anonymize 100 protest photos before publishing — local processing, 2 free batches a day.",
+    "description": "Detect and blur or pixelate faces across whole photo batches with on-device BlazeFace (one shared model download for the batch). Faces need confidence above 0.5 and size above 8px; faceless files are skipped with an error. Outputs PNG as <name>-anonymized.png — local processing, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1866,7 +1866,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Invoice & Receipt Parser",
     "slug": "bulk-invoice-receipt-parser",
     "category": "Finance",
-    "description": "Drop 100 invoice or receipt PDFs and images; get vendor, date, amount, tax, and line items in one CSV. Bookkeepers close month-end without retyping — local Tesseract + pdf-lib, 2 free batches a day.",
+    "description": "Drop invoice or receipt PDFs and images; get vendor, date, invoice number, total, and a confidence flag per file as CSV rows. Bookkeepers close month-end without retyping — local Tesseract OCR, batches of 5 as guest, 25 signed-in, 500 on Pro.",
     "isPro": true
   },
   {
@@ -1890,7 +1890,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Image Format Converter",
     "slug": "bulk-image-converter",
     "category": "Image",
-    "description": "Convert whole folders between 100+ format pairs — PNG to WebP, JPG to AVIF, HEIC to JPG — with quality control and folder-preserving ZIP output. Web teams modernize 300 images before deploy — local, 2 free batches a day.",
+    "description": "Convert image batches between JPG, PNG, WebP, and AVIF outputs (JPEG/PNG/WebP/AVIF/HEIC/HEIF/GIF/BMP/ICO/SVG inputs; HEIC via heic2any, SVG rasterized at intrinsic size or 1024px fallback) with a quality slider (10–100, default 80). Pair pages (?from/?to) preset the output. Flat ZIP renamed per file — local, 5-file guest batches, 25 signed-in, 500 Pro.",
     "isPro": true
   },
   {
@@ -1898,7 +1898,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk EXIF Stripper & Injector",
     "slug": "bulk-exif-stripper-injector",
     "category": "Image",
-    "description": "Strip GPS, camera serials, and timestamps from thousands of photos — or inject copyright and author credits. Agents clean 500 listing shots before upload — local exifr work, 2 free batches a day.",
+    "description": "Strip all EXIF metadata from JPEG, PNG, and WebP photos by re-encoding each to JPEG at quality 0.95 (files renamed *-noexif.jpg). Strip-only — no inject mode exists. Agents clean 500 listing shots before upload — local canvas work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -1906,7 +1906,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk App Icon Generator",
     "slug": "bulk-app-icon-generator",
     "category": "Image",
-    "description": "Export 30+ correctly sized icons for iOS, Android, PWA, and social from one high-res source. Indie devs ship full icon sets an hour before release — local Canvas work, 2 free batches a day.",
+    "description": "Export 14 fixed PNG sizes (1024, 512, 192, 180, 167, 152, 120, 87, 76, 60, 58, 40, 32, 16) from pasted SVG code or one uploaded image (PNG/SVG/JPEG), downscaled with high-quality smoothing into a flat app-icons.zip. 5 free generations per session; Pro unlimited — local Canvas work.",
     "isPro": true
   },
   {
@@ -1914,7 +1914,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Markdown to PDF/HTML",
     "slug": "bulk-markdown-to-pdf-html",
     "category": "Converter",
-    "description": "Convert 100+ Markdown files to styled PDFs or web-ready HTML with custom CSS and auto tables of contents. Docs teams publish whole wikis in one run — local Marked + jsPDF, 2 free batches a day.",
+    "description": "Convert a single Markdown document to styled HTML or plain-text PDF with three built-in themes. One document at a time — local Marked + jsPDF, free, no signup.",
     "isPro": true
   },
   {
@@ -1954,7 +1954,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk E-Book Converter",
     "slug": "bulk-ebook-converter",
     "category": "Converter",
-    "description": "Convert whole libraries between EPUB, MOBI, and PDF with metadata and covers preserved. Readers move 100 books to a new device in an afternoon — local processing, 2 free batches a day.",
+    "description": "Convert EPUB ebooks to paginated PDF, or PDF ebooks back to EPUB — real local text extraction. MOBI/Kindle files are rejected (repack them to EPUB in Calibre first); images-only books need OCR.",
     "isPro": true
   },
   {
@@ -1962,7 +1962,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk HEIC to JPG",
     "slug": "bulk-heic-to-jpg",
     "category": "Image",
-    "description": "Convert hundreds of iPhone HEIC photos to universal JPGs in one batch with quality control. Families share 300 vacation shots with Windows relatives — local libheif WASM, 2 free batches a day.",
+    "description": "Convert iPhone HEIC/HEIF photos to universal JPGs at fixed quality 0.92 via heic2any (loaded on demand per batch). Filenames carry over with .jpg extensions — local conversion, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -2034,7 +2034,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Pronunciation Tool",
     "slug": "pronunciation-tool",
     "category": "Text",
-    "description": "Hear any text pronounced with browser speech in multiple voices and speeds. Check English pronunciation before presentations — free, local, no signup.",
+    "description": "Hear any text pronounced with browser speech in English accents, speeds, and voices — plus word lookups with definitions, phonetics, and favorites. Check English pronunciation before presentations — free, local, no signup.",
     "isPro": false
   },
   {
@@ -2066,7 +2066,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Data Format Converter",
     "slug": "data-format-converter",
     "category": "Converter",
-    "description": "Convert data formats between JSON, YAML, XML, TOML, and CSV with structure preserved. Migrate configs across stacks without rewriting — local parsing, free, no signup.",
+    "description": "Convert data between JSON, CSV, XML, YAML, and TSV with structure preserved. Migrate configs across stacks without rewriting — local PapaParse/xml2js/yaml parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -2074,7 +2074,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Document Converter",
     "slug": "document-converter",
     "category": "Converter",
-    "description": "Convert between PDF, Word, Excel, PowerPoint, JPG, EPUB, and HEIC document formats. Pick any input and output format — your files never leave your device.",
+    "description": "Organize documents across PDF, DOCX, TXT, HTML, Markdown, RTF, ODT, and EPUB filename targets. Files queue locally with a 150MB per-file intake cap — your files never leave your device.",
     "isPro": false
   },
   {
@@ -2258,7 +2258,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "RAW Image Converter",
     "slug": "raw-image-converter",
     "category": "Image",
-    "description": "Convert camera RAW files to viewable JPG or PNG for sharing and editing. Open CR2, NEF, and ARW shots anywhere — local processing, unlimited saves.",
+    "description": "Queue RAW files (CR2, NEF, ARW, DNG, RAF, ORF, RW2, PEF, SRW) — each gets a live browser decode test with a green/red dot; supported ones convert to JPG, PNG, or WebP at quality 10–100% (default 92, hidden for PNG), one by one or all at once. Canvas re-encoding drops metadata — local processing, unlimited saves.",
     "isPro": false
   },
   {
@@ -2266,7 +2266,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PSD to JPG/PNG",
     "slug": "psd-to-jpg-png",
     "category": "Image",
-    "description": "Convert PSD images to JPG or PNG in your browser — flatten layered Photoshop files for sharing where PSD isn\\'t supported. Photos never leave your device.",
+    "description": "Convert one PSD to JPG, PNG, or WebP in your browser via ag-psd — flattened composite (or first visible layer fallback) with a dimensions, color-mode, and layer-count readout. JPG flattens transparency onto white; quality 10–100 (default 90) for JPG/WebP. Photos never leave your device.",
     "isPro": false
   },
   {
@@ -2274,7 +2274,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Collage Maker",
     "slug": "collage-maker",
     "category": "Image",
-    "description": "Combine multiple photos into beautiful collages. Choose from grid, strip, or featured layouts. Perfect for creating photo montages, mood boards, and social media posts.",
+    "description": "Combine 2–9 photos into a fixed 1200×1200 collage across 5 fixed-count layouts — Grid 2×2 (exactly 4), Grid 3×3 (exactly 9), Horizontal/Vertical strips (2–9), Featured (exactly 3). Cells center-crop; spacing 0–20px, border 0–10px, radius 0–50px, PNG/JPG/WebP output (quality 0.92 default).",
     "isPro": false
   },
   {
@@ -2282,7 +2282,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Chart Maker",
     "slug": "chart-maker",
     "category": "Image",
-    "description": "Build bar, line, and pie charts from your data in your browser — paste values, style, and export images for reports and posts.",
+    "description": "Build bar, line, pie, doughnut, area, and horizontal-bar charts from a label/value table (minimum 2 rows) with 10 ten-color palettes, title/axis labels, background, and labels/legend toggles. Canvas renders at device-pixel-ratio sharpness, width 400–2000px, height 300–1200px — exports PNG named after your title.",
     "isPro": false
   },
   {
@@ -2298,7 +2298,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Unblur / Sharpen",
     "slug": "unblur-sharpen",
     "category": "Image",
-    "description": "Sharpen slightly soft photos with deconvolution-style enhancement — rescue mild blur, not motion smear. Save a good shot gone soft — local processing, unlimited saves.",
+    "description": "Sharpen soft photos with a 3×3 convolution kernel (center 1+4f, arms −f, f = max(0.5, intensity)) — or add Gaussian/motion blur artistically. Intensity 1–10 (default 5); motion kernel caps at 15px with 0–360° angle; live 400px preview debounced 150ms; JPG/PNG/WebP output (quality default 0.92) — local processing, unlimited saves.",
     "isPro": false
   },
   {
@@ -2306,7 +2306,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF Editor",
     "slug": "gif-editor",
     "category": "Image",
-    "description": "Edit animated GIFs frame by frame in your browser — crop, add text, trim clips, and resize without re-uploading without re-uploading anything.",
+    "description": "Edit animated GIFs in your browser with FFmpeg WASM — resize (Lanczos, aspect lock), speed (setpts), reverse, palette optimize (max_colors with bayer dither), and PNG frame extraction to <name>_frames.zip. No crop, text, or trim tools. Header shows WxH, frame count, KB, and seconds.",
     "isPro": false
   },
   {
@@ -3122,7 +3122,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF Compressor",
     "slug": "gif-compressor",
     "category": "Image",
-    "description": "Compress animated GIFs by reducing colors from 256 to as few as 16, removing duplicate frames, and applying lossy optimization. Reduce file size by up to 80% while keeping animation intact. Essential for web performance, email signatures, and social media where large GIFs cause slow loading.",
+    "description": "Compress one animated GIF with FFmpeg: colors slider 2–256 (default 128), Floyd or no dithering, loss tolerance 0–100 (above 50 flips lossless to lossy), and optional duplicate-frame removal (mpdecimate, off by default). Output fps locks to 10; result shows KB and -% and saves as <name>-compressed.gif.",
     "isPro": false
   },
   {
@@ -3130,7 +3130,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF Resizer",
     "slug": "gif-resizer",
     "category": "Image",
-    "description": "Resize animated GIFs to exact dimensions while preserving animation. Choose from presets or custom width with aspect ratio lock.",
+    "description": "Resize one animated GIF to exact dimensions via FFmpeg Lanczos (default), Bilinear, or Nearest — width presets 100/150/200/320/480/640px or custom, height auto-follows with aspect lock ON (unlock to stretch). W/H prefill from the source; saves as <name>-resized.gif with animation intact.",
     "isPro": false
   },
   {
@@ -3138,7 +3138,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to APNG",
     "slug": "gif-to-apng",
     "category": "Image",
-    "description": "Upgrade GIF animations to APNG for full color and smoother motion at smaller sizes. Modernize sticker packs for today\\'s apps — local FFmpeg work, unlimited saves.",
+    "description": "Upgrade one GIF to APNG via FFmpeg apng codec at locked 10fps and source dimensions (Lanczos) — 24-bit color plus 8-bit alpha, no size/quality settings. Result panel shows GIF vs APNG KB with ±% change; saves as <name>.png. Modernize sticker packs — local FFmpeg work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3146,7 +3146,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "APNG to GIF",
     "slug": "apng-to-gif",
     "category": "Image",
-    "description": "Convert APNG images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "Convert one APNG to GIF in your browser with FFmpeg WASM — frame rate picker 10/15/24/30fps (default 10), output width 320/480/640/800px (default 320, height auto), palettegen/paletteuse optimize, loop-forever output. Photos never leave your device.",
     "isPro": false
   },
   {
@@ -3154,7 +3154,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image to ICO",
     "slug": "image-to-ico",
     "category": "Image",
-    "description": "Turn any image into ICO favicon files in your browser — 16/32/48 px multi-size icons ready to link for browser tabs and shortcuts.",
+    "description": "Turn one image (PNG, JPG, WebP, or GIF) into a hand-built 32-bit Windows ICO — 6 sizes (16, 32, 48, 64, 128, 256) packed by default, or a single size (default 32). Center square-crop on, or fit with transparent/color background; alpha under 128 becomes transparent. Saves as <name>.ico.",
     "isPro": false
   },
   {
@@ -3194,7 +3194,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SSL Checker",
     "slug": "ssl-checker",
     "category": "Developer",
-    "description": "Check SSL/TLS certificate details for any domain. View issuer, validity period, days remaining, and SANs. Expiry alerts plus chain validation catch outages before users do — local checks, free, no signup.",
+    "description": "Check SSL/TLS certificate details for any domain via public certificate APIs. View issuer, validity period, days remaining, and SANs. Expiry alerts catch outages before users do — free, no signup.",
     "isPro": false
   },
   {
@@ -3610,7 +3610,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random String Generator",
     "slug": "random-string-generator",
     "category": "Utility",
-    "description": "Generate random alphanumeric strings for tokens, IDs, and test fixtures. Mint 32-char references in bulk — free, local, no signup.",
+    "description": "Generate random strings in alphanumeric, alphabetic, numeric, hex, or UUID formats. Mint references and IDs fast — free, local, no signup.",
     "isPro": false
   },
   {
@@ -3626,7 +3626,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Line Sorter & Deduplicator",
     "slug": "line-sorter",
     "category": "Utility",
-    "description": "Sort lines alphabetically (A→Z, Z→A), reverse order, shuffle randomly, or remove duplicate lines. A–Z, Z–A, length, shuffle, and dedupe modes cover every ordering chore — local processing, free, no signup.",
+    "description": "Sort lines alphabetically (A→Z, Z→A), reverse order, shuffle randomly, or remove duplicate lines. A–Z, Z–A, reverse, shuffle, and dedupe modes cover every ordering chore — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -3690,7 +3690,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JSON to Code Generator",
     "slug": "json-to-code",
     "category": "Converter",
-    "description": "Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. Files are converted locally in your browser — nothing is uploaded.",
+    "description": "Generate type definitions from pasted JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin (plus a TS interface flavor). Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -3778,7 +3778,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Slugify",
     "slug": "slugify-tool",
     "category": "Utility",
-    "description": "Convert text to URL-friendly slugs with configurable separators. Input never leaves your device — everything runs locally in your browser.",
+    "description": "Slugify text to URL-friendly slugs with lowercase and trim options. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -3810,7 +3810,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "List Converter",
     "slug": "list-converter",
     "category": "Utility",
-    "description": "Convert lists between comma, newline, JSON array, and quoted formats. Move data across tools without reformatting — free, local, no signup.",
+    "description": "Convert lists between comma, newline, pipe, tab, semicolon, and space delimiters. Move data across tools without reformatting — free, local, no signup.",
     "isPro": false
   },
   {
@@ -3826,7 +3826,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Emoji Picker",
     "slug": "emoji-picker",
     "category": "Utility",
-    "description": "Pick emoji by keyword with skin-tone and variant options — copy anywhere. Find the exact reaction fast — free, local, no signup.",
+    "description": "Pick emoji by keyword across 9 categories — copy anywhere. Find the exact reaction fast — free, local, no signup.",
     "isPro": false
   },
   {
@@ -3850,7 +3850,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Benchmark Builder",
     "slug": "benchmark-builder",
     "category": "Utility",
-    "description": "Build JavaScript micro-benchmarks with warmup, iterations, and ops/sec stats. Prove which snippet is faster — local measurement, free, no signup.",
+    "description": "Run JavaScript speed benchmarks across five workloads with ops/sec scores. Prove which device runs faster — local measurement, free, no signup.",
     "isPro": false
   },
   {
@@ -4234,7 +4234,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk Image Upscaler",
     "slug": "bulk-image-upscaler",
     "category": "Image",
-    "description": "Upscale batches of AI art and regular images 2x, 3x, or 4x with Lanczos sharp or Bicubic smooth resampling. Creators print 50 Midjourney pieces at poster size — local Canvas work, 2 free batches a day.",
+    "description": "Upscale batches of AI art and regular images 2x, 3x, or 4x with Lanczos-sharp, Bicubic-smooth, or Bilinear-fast smoothing — 3x/4x run multi-step (halving per pass) into always-PNG output. Click any queued file for an original-vs-upscaled preview. Single files save as upscaled.png; batches as *-upscaled.png ZIPs — local Canvas work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -4242,7 +4242,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk AVIF Optimizer",
     "slug": "bulk-avif-optimizer",
     "category": "Image",
-    "description": "Convert and compress images to next-gen AVIF with quality presets and max-width caps. Performance teams cut hero images 50% smaller than WebP — local Canvas work, 2 free batches a day.",
+    "description": "Convert and compress images to AVIF via canvas encoding with 4 presets — Web 1920px/q60, Balanced 2048px/q75 (default), High Quality 3000px/q85, Maximum original-size/q95 — plus free quality (10–100) and max-width (0–4000, 0 = Original) sliders that decouple the preset. Only wider images downscale; single saves as optimized.avif, batches as *.avif in avif-images.zip — local work, 2 free batches a day.",
     "isPro": true
   },
   {
@@ -4458,7 +4458,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Compound Interest Calculator",
     "slug": "compound-interest-calculator",
     "category": "Finance",
-    "description": "Calculate compound interest with regular contributions. See how your money grows over time with different compounding frequencies. Figures never leave your device — every calculation runs locally in your browser.",
+    "description": "Calculate compound interest on a single principal. See how your money grows over time with different compounding frequencies. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4490,7 +4490,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Debt Payoff Calculator",
     "slug": "debt-payoff-calculator",
     "category": "Finance",
-    "description": "Plan debt payoff with avalanche vs snowball strategies and extra payments. See a 5-year slog become 3 with $200 extra — free, local, no signup.",
+    "description": "Plan a single-debt payoff from balance, rate, and monthly payment. See months to debt-free with a payoff timeline — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4514,7 +4514,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Inflation Calculator",
     "slug": "inflation-calculator",
     "category": "Finance",
-    "description": "Project future prices and eroded buying power at any inflation rate — Rs.100 today at 6% for 10 years costs Rs.179. Plan savings targets honestly — free, runs locally.",
+    "description": "Project future prices at any inflation rate — $1,000 today at 3% for 10 years costs $1,344. Plan savings targets honestly — free, runs locally.",
     "isPro": false
   },
   {
@@ -4538,7 +4538,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Net Worth Calculator",
     "slug": "net-worth-calculator",
     "category": "Finance",
-    "description": "Compute net worth from assets minus liabilities with category breakdowns. Track the number that actually matters yearly — free, local, no signup.",
+    "description": "Compute net worth from total assets minus total liabilities. Track the number that actually matters yearly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4546,7 +4546,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Rent vs Buy Calculator",
     "slug": "rent-vs-buy-calculator",
     "category": "Finance",
-    "description": "Compare the total cost of renting versus buying a home over time. Factor in mortgage payments, rent, and equity growth. Figures never leave your device — every calculation runs locally in your browser.",
+    "description": "Compare buy net cost against rent total over a timeframe you set, from home price, down payment, mortgage rate, and monthly rent. Figures never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4618,7 +4618,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Final Grade Calculator",
     "slug": "final-grade-calculator",
     "category": "Calculator",
-    "description": "Calculate your final grade using weighted assignment scores. Enter grades and their weights to compute your overall percentage. Numbers never leave your device — every calculation runs locally in your browser.",
+    "description": "Compute your overall course percentage from comma-separated assignment grades and their matching weights — Exam Heavy presets included. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4626,7 +4626,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GPA Calculator",
     "slug": "gpa-calculator",
     "category": "Calculator",
-    "description": "Compute semester GPA from course grades on the standard 4.0 scale — quick academic snapshot. See what straight B\\'s earn — free, local, no signup.",
+    "description": "Compute semester GPA from course grades and credit hours with credit-weighted math on the standard 4.0 scale — quick academic snapshot. See what straight B\\'s earn — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4634,7 +4634,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Grade Calculator",
     "slug": "grade-calculator",
     "category": "Calculator",
-    "description": "Compute course grades from weighted categories — what the final exam must deliver. Learn you need 92, not hope — free, local, no signup.",
+    "description": "Convert a single course percentage into its letter grade on the built-in plus/minus scale — see that an 85 earns a B instantly. Free, local, no signup.",
     "isPro": false
   },
   {
@@ -4658,7 +4658,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Probability Calculator",
     "slug": "probability-calculator",
     "category": "Calculator",
-    "description": "Compute probability for events — single, independent, conditional — with working shown. Price lottery dreams at true odds — free, local, no signup.",
+    "description": "Compute simple probability as favorable outcomes divided by total outcomes — coin flips, dice rolls, card draws. See 3 in 10 read as 30.0% instantly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4666,7 +4666,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Proportion Calculator",
     "slug": "proportion-calculator",
     "category": "Calculator",
-    "description": "Solve proportions a/b = c/d for any missing term — recipes, maps, dosages scale correctly. Double a 4-serving recipe to 10 without breaking ratios — free, runs locally.",
+    "description": "Solve proportions a/b = c/d for the fourth term — recipes, maps, dosages scale correctly. Double a 4-serving recipe to 10 without breaking ratios — free, runs locally.",
     "isPro": false
   },
   {
@@ -4674,7 +4674,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Ratio Calculator",
     "slug": "ratio-calculator",
     "category": "Calculator",
-    "description": "Simplify ratios to lowest terms and split quantities by ratio — paint mixes, profit shares, teams. Divide Rs.90,000 2:3:4 fairly in one pass — free, runs locally.",
+    "description": "Simplify any two-number ratio to lowest terms via GCD — paint mixes, screen sizes, shares. Reduce 150:225 to 2:3 in one pass — free, runs locally.",
     "isPro": false
   },
   {
@@ -4682,7 +4682,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Aspect Ratio Calculator",
     "slug": "aspect-ratio-calculator",
     "category": "Calculator",
-    "description": "Get any image or screen\\'s aspect ratio and compute fitting dimensions — 16:9, 4:3, 1:1 and custom. Fit a 4000px photo to 1920 wide without distortion — free, runs locally.",
+    "description": "Get any image or screen\\'s aspect ratio in reduced form with common-ratio matching — 16:9, 4:3, 1:1 and custom. Check a 1920×1080 screen reads 16:9 — free, runs locally.",
     "isPro": false
   },
   {
@@ -4690,7 +4690,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Circle Calculator",
     "slug": "circle-calculator",
     "category": "Calculator",
-    "description": "Compute circle area, circumference, diameter, and radius from any one known — geometry homework solved. Get all circle measures at once — free, local, no signup.",
+    "description": "Compute circle area and circumference from the radius — geometry homework solved. Enter r=5 and read both measures at once — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4698,7 +4698,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "DPI Calculator",
     "slug": "dpi-calculator",
     "category": "Calculator",
-    "description": "Compute print DPI from pixel dimensions and print size — verify a photo prints sharp at 8×10. A 3000px file at 10 inches gives 300 DPI — free, runs locally.",
+    "description": "Compute display DPI from pixel width, pixel height, and diagonal inches — diagonal pixels over diagonal size. Compare phone and laptop sharpness honestly — free, runs locally.",
     "isPro": false
   },
   {
@@ -4730,7 +4730,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Pythagorean Theorem Calculator",
     "slug": "pythagorean-theorem-calculator",
     "category": "Calculator",
-    "description": "The Pythagorean theorem solves a²+b²=c² for any missing side — ladders, ramps, screen diagonals. A 3-4-5 triangle checks square corners on site — free, runs locally.",
+    "description": "The Pythagorean theorem solves c = √(a²+b²) for the hypotenuse from two legs — ladders, ramps, screen diagonals. A 3-4-5 triangle reads c = 5.00 on site — free, runs locally.",
     "isPro": false
   },
   {
@@ -4754,7 +4754,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Square Root Calculator",
     "slug": "square-root-calculator",
     "category": "Calculator",
-    "description": "Compute square roots with full precision plus perfect-square detection. Verify √144 = 12 and spot irrational results instantly — free, runs locally.",
+    "description": "Compute square roots to four decimals — verify √144 = 12.0000 and spot irrational results instantly. Free, runs locally.",
     "isPro": false
   },
   {
@@ -4970,7 +4970,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Standard Deviation Calculator",
     "slug": "standard-deviation-calculator",
     "category": "Calculator",
-    "description": "Compute standard deviation with variance and mean for any dataset — exam scores, lab readings, quality checks. A class scoring 70±8 reads spread at a glance — free, runs locally.",
+    "description": "Compute population and sample standard deviation with variance, mean, median, and range for any dataset — exam scores, lab readings, quality checks. A class scoring 70±8 reads spread at a glance — free, runs locally.",
     "isPro": false
   },
   {
@@ -4978,7 +4978,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Tax Calculator",
     "slug": "tax-calculator",
     "category": "Finance",
-    "description": "Estimate income tax across progressive brackets with regime comparison. See what you keep before filing season — free, local, no signup.",
+    "description": "Estimate US federal income tax across progressive brackets with filing-status comparison, plus state tax and FICA. See what you keep before filing season — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4986,7 +4986,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TDS Calculator India",
     "slug": "tds-calculator-india",
     "category": "Finance",
-    "description": "Compute TDS on salary, rent, and professional fees under current Indian slabs. Know monthly deductions upfront — free, local, verify rules yearly.",
+    "description": "Estimate annual income tax in India by slab from income, age, and old/new regime. See yearly tax, effective rate, and in-hand pay — free, local, verify rules yearly.",
     "isPro": false
   },
   {
@@ -5546,7 +5546,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Color Generator",
     "slug": "random-color-generator",
     "category": "Utility",
-    "description": "Generate random hex colors with lockable favorites for palettes and placeholders. Find happy accidents fast — free, local, no signup.",
+    "description": "Generate random hex, RGB, and HSL colors for palettes and placeholders. Find happy accidents fast — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5554,7 +5554,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Team Generator",
     "slug": "random-team-generator",
     "category": "Utility",
-    "description": "Split names into fair random teams with sizes and captains options. Divide 20 players in seconds — free, local, no signup.",
+    "description": "Split names into fair random teams in seconds. Divide 20 players evenly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5562,7 +5562,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Picker Generator",
     "slug": "random-picker-generator",
     "category": "Utility",
-    "description": "Pick random items from lists with weighted options — winners, samples, draws. Draw fairly with visible odds — free, local, no signup.",
+    "description": "Use the Picker to draw random winners from lists, with optional no-repeat draws. Settle raffles in one click — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5570,7 +5570,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Decision Maker",
     "slug": "random-decision-maker",
     "category": "Utility",
-    "description": "Make random calls between options with best-of logic for quick settles. End debates with a fair draw — free, local, no signup.",
+    "description": "Make random calls between options with animated draws and history. End debates with a fair draw — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5626,7 +5626,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Sequence Generator",
     "slug": "sequence-generator",
     "category": "Utility",
-    "description": "Generate number and letter sequences — arithmetic, geometric, Fibonacci, custom steps. Fill spreadsheets and test series — free, local, no signup.",
+    "description": "Generate arithmetic, geometric, and custom number sequences with sums. Fill spreadsheets and test series — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5650,7 +5650,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Nickname Generator",
     "slug": "nickname-generator",
     "category": "Utility",
-    "description": "Generate fun nicknames from names with style options — gamer tags, pet names, team aliases. Find a tag that sticks — free, local, no signup.",
+    "description": "Generate fun nicknames from five patterns — gamer tags, fantasy, sci-fi, cute, and professional. Find a tag that sticks — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6410,7 +6410,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SSL/TLS Checker",
     "slug": "ssl-tls-checker",
     "category": "Developer",
-    "description": "Test what a live server offers over HTTPS — cipher suites, protocol versions, certificate validity, issuer and expiry. Flag RC4, DES, and TLS 1.0 relics before attackers inventory them.",
+    "description": "Check a host over HTTPS from your browser — SSL/TLS reachability (which proves the browser validated the certificate chain) plus public issuance history (issuer, expiry, cert count) via crt.sh. No cipher-suite or protocol-version scan: browsers do not expose handshakes.",
     "isPro": false
   },
   {
@@ -6450,7 +6450,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Subnet Visualizer",
     "slug": "subnet-visualizer",
     "category": "Developer",
-    "description": "See subnet splits as visual maps — carve networks into sub-subnets graphically. Divide a /16 into department /24s visually — local rendering, free, no signup.",
+    "description": "See any CIDR as binary maps — IP, mask, and network bits plus a 32-block network/host bar. Single-network rendering only, no sub-subnetting — local rendering, free, no signup.",
     "isPro": false
   },
   {
@@ -6514,7 +6514,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Env File Parser",
     "slug": "env-file-parser",
     "category": "Developer",
-    "description": "Parse and validate .env files — quoted values, exports, comments, and multiline entries. Catch the missing quote breaking deploys — local parsing, free, no signup.",
+    "description": "Parse .env files — quoted values and comments handled, one variable per line. Local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -6538,7 +6538,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "XSS Protection Checker",
     "slug": "xss-protection-checker",
     "category": "Developer",
-    "description": "Probe inputs against classic XSS cross-site scripting vectors — script tags, event handlers, and encoding tricks before shipping to production.",
+    "description": "Check pasted response headers for XSS-relevant protections — Content-Security-Policy, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, and X-XSS-Protection presence, locally in your browser.",
     "isPro": false
   },
   {
@@ -6546,7 +6546,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSRF Token Generator",
     "slug": "csrf-token-generator",
     "category": "Developer",
-    "description": "Generate cryptographically secure CSRF tokens with configurable length and encoding. Code never leaves your device — formatting and validation run locally in your browser.",
+    "description": "Generate cryptographically secure CSRF tokens as hex with configurable byte length (16–128). Code never leaves your device — generation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6586,7 +6586,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "IP Reputation Checker",
     "slug": "ip-reputation-checker",
     "category": "Developer",
-    "description": "Check IP reputation against blocklists and geolocation data — spot VPNs, bots, and abuse sources. Screen a suspicious login IP instantly — live lookup data, free, no signup.",
+    "description": "Look up IP geolocation context — city, region, country, hostname, and ASN/org via ipinfo.io. No blocklist verdicts: abuse and blacklist checks are honest link-outs to AbuseIPDB and VirusTotal. Queried IPs leave the browser by design — live lookup, free, no signup.",
     "isPro": false
   },
   {
@@ -6594,7 +6594,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "URL Sanitizer",
     "slug": "url-sanitizer",
     "category": "Developer",
-    "description": "Strip tracking parameters, normalize, and defang suspicious URLs safely. Clean 50 affiliate links before sharing — local processing, free, no signup.",
+    "description": "Strip tracking parameters (UTM, fbclid, gclid, and 15+ more) from URLs. Local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -6618,7 +6618,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Email Validator",
     "slug": "email-format-validator",
     "category": "Developer",
-    "description": "Validate email addresses for correct format, disposable domains, and MX record existence. Code never leaves your device — formatting and validation run locally in your browser.",
+    "description": "Validate email address format locally — regex shape, @ presence, domain TLD, and length/dot rules with named issues. No disposable-domain or MX checks. Code never leaves your device.",
     "isPro": false
   },
   {
@@ -6626,7 +6626,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Validator",
     "slug": "syntax-validator",
     "category": "Developer",
-    "description": "Validate code syntax across multiple languages including JSON, XML, and JavaScript. Code never leaves your device — formatting and validation run locally in your browser.",
+    "description": "Basic syntax sanity check for JSON (full parse), XML (root-element check), and YAML (accepted as-is) — JavaScript not included. Code never leaves your device.",
     "isPro": false
   },
   {
@@ -6794,7 +6794,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Triangle Area Calculator",
     "slug": "triangle-area-calculator",
     "category": "Calculator",
-    "description": "Calculate the area of a triangle given base and height using the formula 0.5 × base × height. Numbers never leave your device — every calculation runs locally in your browser.",
+    "description": "Calculate triangle area three ways — base and height, three sides (Heron), or two sides plus included angle. Pick the method matching your knowns. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6802,7 +6802,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Gas Mileage Calculator",
     "slug": "gas-mileage-calculator",
     "category": "Calculator",
-    "description": "Calculate fuel economy in MPG (miles per gallon) from distance driven and fuel consumed. Numbers never leave your device — every calculation runs locally in your browser.",
+    "description": "Calculate gas mileage as MPG (miles per gallon) from distance driven and fuel consumed, with a metric L/100km view and trip-cost math. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -7098,7 +7098,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Date Generator",
     "slug": "random-date-generator",
     "category": "Utility",
-    "description": "Generate random dates within a configurable range with optional format selection including ISO, US, EU, and full-date styles. Input never leaves your device — everything runs locally in your browser.",
+    "description": "Generate random dates from the past five years with ISO and long-form outputs. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -7106,7 +7106,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Time Generator",
     "slug": "random-time-generator",
     "category": "Utility",
-    "description": "Generate random times in 12/24-hour format with seconds and range control. Schedule surprise drills and test fixtures — free, local, no signup.",
+    "description": "Generate random times with 24-hour and 12-hour outputs. Schedule surprise drills and test fixtures — free, local, no signup.",
     "isPro": false
   },
   {
@@ -7138,7 +7138,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Word Generator",
     "slug": "random-word-generator",
     "category": "Utility",
-    "description": "Generate random words by part of speech and length for games, passwords, and naming. Find startup names that aren\\'t taken — free, local, no signup.",
+    "description": "Generate random placeholder words with optional capitalization for games and naming. Find startup names that aren\\'t taken — free, local, no signup.",
     "isPro": false
   },
   {
@@ -7258,7 +7258,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Column Extractor",
     "slug": "column-extractor",
     "category": "Utility",
-    "description": "Extract single CSV columns by name or index into clean lists. Pull all emails from row 3 in seconds — local parsing, free, no signup.",
+    "description": "Extract CSV columns by name into clean lists. Pull email and name columns from pasted CSV in seconds — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -7282,7 +7282,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Deduplicator",
     "slug": "deduplicator",
     "category": "Utility",
-    "description": "Remove duplicate rows from CSV data based on a specific column. Keep only unique values for cleaner datasets. Sort plus dedupe passes clean mailing lists and datasets fast — local processing, free, no signup.",
+    "description": "Remove duplicate rows from CSV data based on a specific column. Keep only unique values for cleaner datasets — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -7290,7 +7290,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Format Validator",
     "slug": "format-validator",
     "category": "Utility",
-    "description": "Validate data formats — emails, phones, dates, UUIDs — with pattern diagnostics. Catch bad rows before import — local validation, free, no signup.",
+    "description": "Validate CSV structure — flag rows with wrong column counts and empty cells before import. Catch bad rows locally — free, no signup.",
     "isPro": false
   },
   {
@@ -7298,7 +7298,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Merger",
     "slug": "csv-merger",
     "category": "Utility",
-    "description": "Merge multiple CSV files into one with header alignment — combine monthly exports instantly. Join 12 reports into one sheet — local merging, free, no signup.",
+    "description": "Merge two CSV files on a shared key column — join related exports into one sheet. Combine two tables without spreadsheets — local merging, free, no signup.",
     "isPro": false
   },
   {
@@ -7306,7 +7306,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Null Value Handler",
     "slug": "null-value-handler",
     "category": "Utility",
-    "description": "Replace empty, null, or NA values in CSV data with a custom fill value. Clean your datasets for analysis and migration. Standardize empties to null or custom fills so GROUP BY counts stay correct — local processing, free, no signup.",
+    "description": "Fill null (empty) cells in CSV data with a custom fill value. Clean datasets for analysis and migration — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -7322,7 +7322,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Row Filter",
     "slug": "row-filter",
     "category": "Utility",
-    "description": "Filter CSV rows by column value matching. Includes exact match, contains, and not-equal operators for flexible data selection.",
+    "description": "Filter CSV rows by column value with case-insensitive contains matching. Keep only the rows you need — local, free, no signup.",
     "isPro": false
   },
   {
@@ -7330,7 +7330,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Row Sorter",
     "slug": "csv-row-sorter",
     "category": "Utility",
-    "description": "Sort CSV rows by any column ascending or descending — dates, numbers, names handled right. Order 10,000 sales rows in seconds — local parsing, free, no signup.",
+    "description": "Sort CSV rows by any column ascending or descending — numbers by value, text alphabetically. Order sales rows in seconds — local parsing, free, no signup.",
     "isPro": false
   },
   {
@@ -7338,7 +7338,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Splitter",
     "slug": "csv-splitter",
     "category": "Utility",
-    "description": "Split large CSVs by row count or column value — chunks that tools accept. Break 1M rows into importable parts — local splitting, free, no signup.",
+    "description": "Split CSV data into equal parts with headers in every chunk. Break large pastes into smaller pieces — local splitting, free, no signup.",
     "isPro": false
   },
   {
@@ -7466,7 +7466,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CSV Row / JSON Generator",
     "slug": "csv-json-row-generator",
     "category": "Utility",
-    "description": "Generate CSV rows from JSON objects for fixtures and imports — nested keys flattened. Seed databases from API shapes — local conversion, free, no signup.",
+    "description": "Generate random CSV rows or JSON lines for fixtures and tests — pick a format and row count. Seed mock data fast — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -8386,7 +8386,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text Repeater",
     "slug": "text-repeater",
     "category": "Text",
-    "description": "Repeat text blocks N times with custom separators and numbering — test data, chants, drills. Generate 100 lines in one click — free, local, no signup.",
+    "description": "Repeat text blocks N times with preset separators and numbering — test data, chants, drills. Generate 100 lines in one click — free, local, no signup.",
     "isPro": false
   },
   {
@@ -8410,7 +8410,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Writing Tools",
     "slug": "writing-tools",
     "category": "Text",
-    "description": "Writing toolkit — readability scores, passive-voice flags, adverb alerts, sentence variety. Lift drafts from decent to publishable — local analysis, free, no signup.",
+    "description": "Writing toolkit — readability scores, word and sentence counts, reading time, and vocabulary stats. Lift drafts from decent to publishable — local analysis, free, no signup.",
     "isPro": false
   },
   {
@@ -8418,7 +8418,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Citation Generator",
     "slug": "citation-generator",
     "category": "Text",
-    "description": "Generate APA, MLA, and Chicago citations from URLs, DOIs, and ISBNs. Cite sources correctly in seconds — local generation, free, no signup.",
+    "description": "Generate APA, MLA, Chicago, Harvard, IEEE, AMA, and Vancouver citations from fields you type — title, authors, publisher, year, URL, and DOI. Cite sources correctly in seconds — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -8466,7 +8466,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Unicode Code Point Viewer",
     "slug": "unicode-viewer",
     "category": "Utility",
-    "description": "Inspect any character\\'s Unicode code points, names, blocks, and UTF-8 bytes. Debug invisible text issues precisely — local inspection, free, no signup.",
+    "description": "Inspect any character\\'s Unicode code points, HTML entities, and percent-encoded bytes. Debug invisible text issues precisely — local inspection, free, no signup.",
     "isPro": false
   },
   {
@@ -8490,7 +8490,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text to Markdown",
     "slug": "text-to-markdown",
     "category": "Converter",
-    "description": "Structure plain text into Markdown with headings, lists, and emphasis detection. Turn meeting notes into formatted docs — local conversion, free, no signup.",
+    "description": "Turn plain-text lines into spaced Markdown paragraphs. Non-empty lines are trimmed and joined with blank lines — local conversion, free, no signup.",
     "isPro": false
   },
   {

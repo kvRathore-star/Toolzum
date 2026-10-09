@@ -71,7 +71,7 @@ export default function IbanValidator() {
             )
           ) : (
             <div className="text-center text-[var(--text-muted)]">
-              <ShieldCheck className="w-10 h-10 mx-auto mb-2 text-zinc-300 dark:text-[var(--text-primary)] animate-pulse" />
+              <ShieldCheck className="w-10 h-10 mx-auto mb-2 text-[var(--text-muted)] dark:text-[var(--text-primary)] animate-pulse" />
               <p className="text-sm">Status display is idle.</p>
               <p className="text-xs text-[var(--text-secondary)]">Enter bank account details and validate.</p>
             </div>

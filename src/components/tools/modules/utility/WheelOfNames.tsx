@@ -176,7 +176,7 @@ export default function WheelOfNames() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[600px]">
           {/* Wheel Area */}
-          <div className="lg:col-span-8 p-8 flex flex-col items-center justify-center relative bg-[var(--bg-overlay)] dark:bg-zinc-950/50">
+          <div className="lg:col-span-8 p-8 flex flex-col items-center justify-center relative bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)]">
             {winner && (
               <div className="absolute top-8 left-1/2 -translate-x-1/2 z-10 animate-in slide-in-from-top-4 fade-in duration-500">
                 <div className="bg-[var(--bg-elevated)] border-2 border-pink-500 rounded-2xl px-8 py-4 shadow-xl flex items-center gap-4">

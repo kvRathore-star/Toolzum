@@ -663,7 +663,7 @@ export function ULIDGenerator() {
                     <code className="text-sm font-mono text-[var(--text-primary)] break-all">{item.ulid}</code>
                     <div className="text-[10px] text-[var(--text-muted)] mt-0.5">{new Date(item.timestamp).toISOString()}</div>
                   </div>
-                  <button onClick={() => { clipboardWrite(item.ulid).then(ok => { if (ok) toast.success('ULID copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="text-[10px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] dark:hover:text-zinc-300 bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors shrink-0">Copy</button>
+                  <button onClick={() => { clipboardWrite(item.ulid).then(ok => { if (ok) toast.success('ULID copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="text-[10px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] dark:hover:text-[var(--text-primary)] bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors shrink-0">Copy</button>
                 </div>
               ))}
             </div>
@@ -729,7 +729,7 @@ export function NumeronymGenerator() {
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Numeronym</span>
                 <div className="flex items-center gap-2">
-                  <button onClick={() => { clipboardWrite(numeronym).then(ok => { if (ok) toast.success('Numeronym copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="text-[10px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] dark:hover:text-zinc-300 bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
+                  <button onClick={() => { clipboardWrite(numeronym).then(ok => { if (ok) toast.success('Numeronym copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="text-[10px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] dark:hover:text-[var(--text-primary)] bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
                   <button onClick={() => { const text = `Numeronym: ${numeronym}\nAcronym: ${acronym}\nInput: ${input}`; const blob = new Blob([text], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='numeronym.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-lg transition-colors">
                     Download
                   </button>
@@ -741,7 +741,7 @@ export function NumeronymGenerator() {
             <div className="bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Acronym</span>
-                <button onClick={() => { clipboardWrite(acronym).then(ok => { if (ok) toast.success('Acronym copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="text-[10px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] dark:hover:text-zinc-300 bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
+                <button onClick={() => { clipboardWrite(acronym).then(ok => { if (ok) toast.success('Acronym copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="text-[10px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] dark:hover:text-[var(--text-primary)] bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
               </div>
               <code className="text-lg font-mono font-bold text-[var(--accent)] break-all">{acronym}</code>
             </div>
@@ -813,7 +813,7 @@ export function MACVendorLookup() {
                 <div className="flex items-center gap-2">
                   <code className="text-sm font-mono font-bold text-[var(--text-primary)]">{oui}</code>
                   <button onClick={() => { clipboardWrite(oui).then(ok => { if (ok) toast.success('OUI copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }}
-                    className="text-[10px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
+                    className="text-[10px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] dark:hover:text-[var(--text-primary)] bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
                 </div>
               </div>
               <div className="bg-[var(--bg-overlay)]/30 rounded-xl p-3">

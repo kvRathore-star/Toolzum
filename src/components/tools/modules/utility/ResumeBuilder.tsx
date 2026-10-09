@@ -63,7 +63,7 @@ export default function ResumeBuilder() {
           <div className="space-y-4">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-bold text-[var(--text-primary)]">Experience</h3>
-              <button onClick={addExperience} className="text-sm text-[var(--accent)] hover:text-blue-300 px-3 py-1 bg-[var(--accent)]/10 rounded-lg">+ Add</button>
+              <button onClick={addExperience} className="text-sm text-[var(--accent)] hover:text-[var(--accent-ink)] px-3 py-1 bg-[var(--accent)]/10 rounded-lg">+ Add</button>
             </div>
             {experience.map((exp, i) => (
               <div key={i} className="space-y-2 p-4 border border-[var(--border-subtle)] rounded-xl bg-[var(--bg-overlay)]/50 dark:bg-black/50">
@@ -80,7 +80,7 @@ export default function ResumeBuilder() {
           <div className="space-y-4">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-bold text-[var(--text-primary)]">Education</h3>
-              <button onClick={addEducation} className="text-sm text-[var(--accent)] hover:text-blue-300 px-3 py-1 bg-[var(--accent)]/10 rounded-lg">+ Add</button>
+              <button onClick={addEducation} className="text-sm text-[var(--accent)] hover:text-[var(--accent-ink)] px-3 py-1 bg-[var(--accent)]/10 rounded-lg">+ Add</button>
             </div>
             {education.map((edu, i) => (
               <div key={i} className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 border border-[var(--border-subtle)] rounded-xl bg-[var(--bg-overlay)]/50 dark:bg-black/50">

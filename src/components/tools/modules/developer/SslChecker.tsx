@@ -222,7 +222,7 @@ export default function SslChecker() {
       case 'valid': return 'text-emerald-500 bg-emerald-700/10 border-emerald-500/20';
       case 'expiring': return 'text-amber-500 bg-amber-500/10 border-amber-500/20';
       case 'expired': return 'text-red-500 bg-red-500/10 border-red-500/20';
-      default: return 'text-[var(--text-secondary)] bg-[var(--bg-overlay)]0/10 border-zinc-500/20';
+      default: return 'text-[var(--text-secondary)] bg-[var(--bg-overlay)] border-[var(--border-subtle)]';
     }
   };
 

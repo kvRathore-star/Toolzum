@@ -35,7 +35,7 @@ export function ProDownloadButton({ fileCount, onDownloadAll, onDownloadEach, is
         <button
           onClick={onDownloadEach}
           disabled={isProcessing}
-          className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[var(--bg-elevated)] text-zinc-200 font-medium rounded-[var(--radius-lg)] hover:bg-[var(--bg-elevated)] disabled:opacity-50 transition-all text-sm"
+          className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[var(--bg-elevated)] text-[var(--text-primary)] font-medium rounded-[var(--radius-lg)] hover:bg-[var(--bg-elevated)] disabled:opacity-50 transition-all text-sm"
         >
           <Download className="w-4 h-4" />
           Download files individually

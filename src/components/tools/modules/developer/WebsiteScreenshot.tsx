@@ -337,7 +337,7 @@ export default function WebsiteScreenshot() {
                   max={100}
                   value={Math.round(quality * 100)} aria-label="Quality"
                   onChange={e => setQuality(parseInt(e.target.value) / 100)}
-                  className="w-full accent-blue-600"
+                  className="w-full accent-[var(--accent)]"
                 />
               </div>
             )}
@@ -402,7 +402,7 @@ export default function WebsiteScreenshot() {
                 max={10}
                 value={captureDelay}
                 onChange={e => setCaptureDelay(parseInt(e.target.value))}
-                className="w-24 accent-blue-600"
+                className="w-24 accent-[var(--accent)]"
               />
               <span className="text-[var(--text-secondary)] w-6">{captureDelay}s</span>
             </div>

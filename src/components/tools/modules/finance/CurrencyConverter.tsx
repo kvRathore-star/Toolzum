@@ -149,10 +149,10 @@ export default function CurrencyConverter() {
             <Sparkles className="w-5 h-5 text-amber-500" />
             Live Currency Converter
           </h2>
-          <p className="text-xs text-[var(--text-secondary)] mt-1">Convert between 160+ currencies with real-time accuracy</p>
+          <p className="text-xs text-[var(--text-secondary)] mt-1">Convert between 12 major currencies — live rates refresh hourly; offline fallback is labeled as such</p>
         </div>
         <div className="flex items-center gap-3 text-xs text-[var(--text-muted)] self-end sm:self-auto">
-          <span>Rates updated: <strong className="text-[var(--text-secondary)] dark:text-zinc-300">{lastUpdated || 'Loading...'}</strong></span>
+          <span>Rates updated: <strong className="text-[var(--text-secondary)] dark:text-[var(--text-secondary)]">{lastUpdated || 'Loading...'}</strong></span>
           <button
             onClick={fetchRates}
             disabled={loading}
@@ -188,7 +188,7 @@ export default function CurrencyConverter() {
               <button 
                 type="button" 
                 onClick={handleSwap} 
-                className="p-3 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-all text-[var(--text-secondary)] dark:text-zinc-300 shadow-md active:scale-95"
+                className="p-3 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-all text-[var(--text-secondary)] dark:text-[var(--text-secondary)] shadow-md active:scale-95"
                 aria-label="Swap currencies"
               >
                 <ArrowUpDown className="w-5 h-5" />
@@ -223,7 +223,7 @@ export default function CurrencyConverter() {
               <button 
                 type="button" 
                 onClick={handleSwap} 
-                className="p-3 bg-[var(--bg-surface)] rounded-full hover:bg-[var(--bg-surface)] transition-all text-[var(--text-secondary)] dark:text-zinc-300 shadow-sm hover:shadow-md cursor-pointer active:scale-95"
+                className="p-3 bg-[var(--bg-surface)] rounded-full hover:bg-[var(--bg-surface)] transition-all text-[var(--text-secondary)] dark:text-[var(--text-secondary)] shadow-sm hover:shadow-md cursor-pointer active:scale-95"
                 title="Swap Currencies" aria-label="Swap currencies"
               >
                 <ArrowUpDown className="w-4 h-4 rotate-90" />
@@ -264,7 +264,7 @@ export default function CurrencyConverter() {
 
           {/* Results Box */}
           {finalResult > 0 && (
-            <div role="status" className="bg-[var(--bg-overlay)]/35 border border-[var(--border-subtle)]/50 dark:border-zinc-800/80 rounded-2xl p-6 space-y-4 animate-in fade-in duration-300">
+            <div role="status" className="bg-[var(--bg-overlay)]/35 border border-[var(--border-subtle)]/50 dark:border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 animate-in fade-in duration-300">
               <div className="space-y-1">
                 <span className="text-sm font-semibold text-[var(--text-muted)]">
                   {parseFloat(amount).toLocaleString()} {fromCurrency} =
@@ -291,11 +291,11 @@ export default function CurrencyConverter() {
               Quick Conversions
             </h3>
             
-            <div className="divide-y divide-zinc-100 dark:divide-zinc-800/60 max-h-[220px] overflow-y-auto pr-1">
+            <div className="divide-y divide-[var(--border-subtle)] dark:divide-[var(--border-subtle)] max-h-[220px] overflow-y-auto pr-1">
               {multipliers.map(mult => (
                 <div key={mult} className="flex justify-between py-2 text-xs">
                   <span className="text-[var(--text-secondary)] font-medium">{mult.toLocaleString()} {fromCurrency}</span>
-                  <span className="text-[var(--text-primary)] dark:text-zinc-200 font-bold">
+                  <span className="text-[var(--text-primary)] dark:text-[var(--text-primary)] font-bold">
                     {(mult * conversionRate).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} {toCurrency}
                   </span>
                 </div>
@@ -328,7 +328,7 @@ export default function CurrencyConverter() {
                       </div>
                       <div className="text-[10px] text-[var(--text-muted)]">Rate: { (entry.result / entry.amount).toFixed(4) }</div>
                     </div>
-                    <span className="text-[10px] text-[var(--text-muted)] bg-zinc-200/50 dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded-full font-medium">{entry.date}</span>
+                    <span className="text-[10px] text-[var(--text-muted)] bg-[var(--bg-surface)] dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded-full font-medium">{entry.date}</span>
                   </div>
                 ))}
               </div>

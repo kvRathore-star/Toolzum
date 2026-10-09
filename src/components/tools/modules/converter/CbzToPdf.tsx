@@ -291,10 +291,10 @@ export default function CbzToPdf() {
           <strong>CBZ to PDF:</strong> Convert comic book archives (CBZ) to PDF for easy reading on any device.
         </div>
         <FileUploader
-          accept=".cbz,.cbr,.zip"
+          accept=".cbz,.zip"
           onFileSelect={handleFileSelect}
           title="Upload CBZ File"
-          subtitle="Comic book archive (CBZ/CBR/ZIP) containing images"
+          subtitle="ZIP-based comic archive (CBZ/ZIP) containing images — RAR-based .cbr is not supported"
         />
       </div>
     );

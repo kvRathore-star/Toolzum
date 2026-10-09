@@ -81,7 +81,7 @@ export default function BenchmarkBuilder() {
       <div className="space-y-4">
         <div className="flex flex-wrap gap-2">
           {(Object.keys(BENCH_LABELS) as BenchType[]).map(t => (
-            <button key={t} onClick={() => setBenchType(t)} disabled={running} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${benchType === t ? 'bg-[var(--bg-elevated)] text-[var(--accent)] shadow-sm border border-blue-200 dark:border-blue-800' : 'text-[var(--text-secondary)] border border-transparent'}`}>
+            <button key={t} onClick={() => setBenchType(t)} disabled={running} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${benchType === t ? 'bg-[var(--bg-elevated)] text-[var(--accent)] shadow-sm border border-[var(--accent)]/30 dark:border-[var(--accent)]/30' : 'text-[var(--text-secondary)] border border-transparent'}`}>
               {BENCH_LABELS[t]}
             </button>
           ))}

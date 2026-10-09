@@ -184,7 +184,7 @@ export default function PronunciationTool() {
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[var(--accent)]/10 to-blue-50 dark:from-[var(--accent)]/10 dark:to-blue-950/20 p-5 border border-[var(--accent)]/20 rounded-2xl">
+      <div className="bg-gradient-to-r from-[var(--accent)]/10 to-[var(--bg-surface)] dark:from-[var(--accent)]/10 dark:to-[var(--bg-elevated)] p-5 border border-[var(--accent)]/20 rounded-2xl">
         <div className="flex items-start justify-between">
           <div>
             <h2 className="text-xl font-bold text-[var(--text-primary)] flex items-center gap-2">

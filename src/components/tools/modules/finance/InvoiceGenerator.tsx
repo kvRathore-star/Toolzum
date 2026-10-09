@@ -218,7 +218,7 @@ export default function InvoiceGenerator() {
                 <th className="py-3 px-2 w-10 print-hide"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800/50">
+            <tbody className="divide-y divide-[var(--border-subtle)] dark:divide-[var(--border-subtle)]">
               {items.map((item, idx) => (
                 <tr key={item.id} className="group">
                   <td className="py-3 px-2">
@@ -226,7 +226,7 @@ export default function InvoiceGenerator() {
                       type="text"
                       value={item.description}
                       onChange={(e) => handleItemChange(item.id, 'description', e.target.value)}
-                      className="w-full bg-transparent border-b border-transparent hover:border-[var(--border-subtle)] dark:hover:border-[var(--border-subtle)] focus:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)] dark:text-zinc-300"
+                      className="w-full bg-transparent border-b border-transparent hover:border-[var(--border-subtle)] dark:hover:border-[var(--border-subtle)] focus:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)] dark:text-[var(--text-primary)]"
                       placeholder="Item description"
                     />
                   </td>
@@ -236,7 +236,7 @@ export default function InvoiceGenerator() {
                       min="1"
                       value={item.quantity} aria-label={`Item ${idx + 1} quantity`}
                       onChange={(e) => handleItemChange(item.id, 'quantity', parseFloat(e.target.value) || 0)}
-                      className="w-full text-right bg-transparent border-b border-transparent hover:border-[var(--border-subtle)] dark:hover:border-[var(--border-subtle)] focus:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)] dark:text-zinc-300"
+                      className="w-full text-right bg-transparent border-b border-transparent hover:border-[var(--border-subtle)] dark:hover:border-[var(--border-subtle)] focus:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)] dark:text-[var(--text-primary)]"
                     />
                   </td>
                   <td className="py-3 px-2 text-right">
@@ -246,7 +246,7 @@ export default function InvoiceGenerator() {
                       step="0.01"
                       value={item.rate} aria-label={`Item ${idx + 1} rate`}
                       onChange={(e) => handleItemChange(item.id, 'rate', parseFloat(e.target.value) || 0)}
-                      className="w-full text-right bg-transparent border-b border-transparent hover:border-[var(--border-subtle)] dark:hover:border-[var(--border-subtle)] focus:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)] dark:text-zinc-300"
+                      className="w-full text-right bg-transparent border-b border-transparent hover:border-[var(--border-subtle)] dark:hover:border-[var(--border-subtle)] focus:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)] dark:text-[var(--text-primary)]"
                     />
                   </td>
                   <td className="py-3 px-2 text-right font-medium text-[var(--text-primary)]">
@@ -311,7 +311,7 @@ export default function InvoiceGenerator() {
               <span className="font-medium">${tax.toFixed(2)}</span>
             </div>
             
-            <div className="flex justify-between items-center py-3 border-t-2 border-zinc-900 dark:border-white">
+            <div className="flex justify-between items-center py-3 border-t-2 border-[var(--text-primary)] dark:border-[var(--text-primary)]">
               <span className="font-bold">Total</span>
               <span className="font-bold text-xl">${total.toFixed(2)}</span>
             </div>

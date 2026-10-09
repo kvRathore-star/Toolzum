@@ -93,7 +93,7 @@ export default function ComingSoonTool({ toolName }: { toolName: string }) {
             required
             className="bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] flex-1 h-12 rounded-xl focus-visible:ring-[var(--accent)]"
           />
-          <Button type="submit" disabled={sending} className="h-12 px-6 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-xl shadow-lg shadow-blue-500/20 transition-all">
+          <Button type="submit" disabled={sending} className="h-12 px-6 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-xl shadow-lg shadow-[var(--accent)]/20 transition-all">
             {sending ? 'Joining…' : 'Notify Me'}
           </Button>
           </div>

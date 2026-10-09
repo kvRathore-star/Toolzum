@@ -55,7 +55,7 @@ export default function LoremIpsumGenerator() {
           </div>
           <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
         </div>
-        {type === 'paragraphs' && <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={startLorem} onChange={e => setStartLorem(e.target.checked)} className="accent-blue-500" />Start with "Lorem ipsum..."</label>}
+        {type === 'paragraphs' && <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={startLorem} onChange={e => setStartLorem(e.target.checked)} className="accent-[var(--accent)]" />Start with "Lorem ipsum..."</label>}
       </div>
     </CalculatorShell>
   );

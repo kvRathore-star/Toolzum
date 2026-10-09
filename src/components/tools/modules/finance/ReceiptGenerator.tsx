@@ -151,12 +151,12 @@ export default function ReceiptGenerator() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 text-xs text-[var(--text-muted)]">
         {/* Workspace */}
         <div className="lg:col-span-5 space-y-4">
-          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-zinc-800 pb-2">Details</h3>
+          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-[var(--border-subtle)] pb-2">Details</h3>
           
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
               <label htmlFor="lbl-receiptgenerator-business-name" className="text-[10px] text-[var(--text-muted)] font-bold">Business Name</label>
-              <input id="lbl-receiptgenerator-business-name" aria-label="Business Name" type="text" value={businessName} onChange={e => setBusinessName(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-zinc-200" />
+              <input id="lbl-receiptgenerator-business-name" aria-label="Business Name" type="text" value={businessName} onChange={e => setBusinessName(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)]" />
             </div>
             <div className="space-y-1">
               <label htmlFor="lbl-receiptgenerator-receipt-id" className="text-[10px] text-[var(--text-muted)] font-bold">Receipt ID</label>
@@ -167,7 +167,7 @@ export default function ReceiptGenerator() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
               <label htmlFor="lbl-receiptgenerator-date" className="text-[10px] text-[var(--text-muted)] font-bold">Date</label>
-              <input id="lbl-receiptgenerator-date" aria-label="Date" type="date" value={date} onChange={e => setDate(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-zinc-200" />
+              <input id="lbl-receiptgenerator-date" aria-label="Date" type="date" value={date} onChange={e => setDate(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)]" />
             </div>
             <div className="space-y-1">
               <label htmlFor="lbl-receiptgenerator-payment-method" className="text-[10px] text-[var(--text-muted)] font-bold">Payment Method</label>
@@ -202,7 +202,7 @@ export default function ReceiptGenerator() {
         {/* Live Bill preview */}
         <div className="lg:col-span-7 flex flex-col justify-between min-h-[450px]">
           <div className="space-y-4 flex-1">
-            <div className="flex justify-between items-start border-b border-zinc-800 pb-3">
+            <div className="flex justify-between items-start border-b border-[var(--border-subtle)] pb-3">
               <div>
                 <h4 className="text-base font-black text-[var(--text-primary)]">{businessName}</h4>
                 <p className="text-[10px] text-[var(--text-secondary)] mt-1">Receipt: {receiptNumber} | {date}</p>
@@ -211,7 +211,7 @@ export default function ReceiptGenerator() {
             </div>
 
             <div className="space-y-3">
-              <div className="grid grid-cols-12 text-[var(--text-muted)] font-bold border-b border-zinc-800 pb-1.5">
+              <div className="grid grid-cols-12 text-[var(--text-muted)] font-bold border-b border-[var(--border-subtle)] pb-1.5">
                 <span className="col-span-6">Description</span>
                 <span className="col-span-2 text-center">Qty</span>
                 <span className="col-span-2 text-right">Rate</span>
@@ -219,7 +219,7 @@ export default function ReceiptGenerator() {
               </div>
 
               {items.map(item => (
-                <div key={item.id} className="grid grid-cols-12 items-center text-zinc-300 py-1 border-b border-[var(--border-subtle)]/50">
+                <div key={item.id} className="grid grid-cols-12 items-center text-[var(--text-secondary)] py-1 border-b border-[var(--border-subtle)]/50">
                   <span className="col-span-6 truncate font-medium">{item.name}</span>
                   <span className="col-span-2 text-center">{item.qty}</span>
                   <span className="col-span-2 text-right">${item.rate.toFixed(2)}</span>
@@ -237,7 +237,7 @@ export default function ReceiptGenerator() {
                 <span>Tax ({taxPercent}%):</span>
                 <span>${getTax().toFixed(2)}</span>
               </div>
-              <div className="flex justify-between w-48 text-[var(--text-primary)] font-bold border-t border-zinc-800 pt-2 text-sm">
+              <div className="flex justify-between w-48 text-[var(--text-primary)] font-bold border-t border-[var(--border-subtle)] pt-2 text-sm">
                 <span>Total:</span>
                 <span className="text-emerald-500">${getTotal().toFixed(2)}</span>
               </div>

@@ -454,7 +454,7 @@ export function EmojiPicker() {
             const isOpen = expandedCategories.has(cat);
             return (
               <div key={cat} className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
-                <button onClick={() => toggleCategory(cat)} className="w-full flex justify-between items-center px-5 py-3 text-xs font-bold text-[var(--text-secondary)] uppercase hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800/50 transition-colors cursor-pointer">
+                <button onClick={() => toggleCategory(cat)} className="w-full flex justify-between items-center px-5 py-3 text-xs font-bold text-[var(--text-secondary)] uppercase hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer">
                   <span>{cat} ({items.length})</span>
                   <span className={`transition-transform ${isOpen ? 'rotate-180' : ''}`}>▼</span>
                 </button>

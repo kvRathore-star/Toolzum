@@ -270,7 +270,7 @@ export default function GifToWebpWebm() {
                   className="w-5 h-5 rounded border-[var(--border-subtle)] text-emerald-500 focus:ring-emerald-500"
                 />
                 <span className="text-sm text-[var(--text-secondary)]">
-                  Preserve transparency <span className="text-[var(--text-muted)]">(WebP only — WebM ignores this)</span>
+                  Preserve transparency <span className="text-[var(--text-muted)]">(WebM only — WebP ignores this)</span>
                 </span>
               </label>
             )}

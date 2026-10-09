@@ -55,12 +55,12 @@ export function JwtInspector() {
   const copyH = () => { if (header) { clipboardWrite(JSON.stringify(header, null, 2)).then(ok => { if (ok) { setCopiedH(true); setTimeout(() => setCopiedH(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   const copyP = () => { if (payload) { clipboardWrite(JSON.stringify(payload, null, 2)).then(ok => { if (ok) { setCopiedP(true); setTimeout(() => setCopiedP(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
 
-  const resultText = isValid ? `✓ Valid JWT (${header?.alg || 'unknown'}, ${payload?.sub ? `sub: ${payload.sub}` : 'no subject'})` : (issues[0] || 'Enter JWT to inspect');
+  const resultText = isValid ? `✓ Well-formed JWT (${header?.alg || 'unknown'}, ${payload?.sub ? `sub: ${payload.sub}` : 'no subject'}) — structure only, signature not verified` : (issues[0] || 'Enter JWT to inspect');
 
   const customResult = isValid !== null ? (
     <div className="space-y-3">
       <div className={`p-4 rounded-xl border-l-4 ${isValid ? 'bg-violet-50 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 border-violet-400' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-red-400'}`}>
-        <div className="flex items-center gap-2 font-semibold">{isValid ? '✓ Valid JWT' : '✗ Invalid JWT'}</div>
+        <div className="flex items-center gap-2 font-semibold">{isValid ? '✓ Well-formed JWT (signature not verified)' : '✗ Invalid JWT'}</div>
         {issues.length > 0 && (
           <div className="mt-2 space-y-1">
             {issues.map((iss, i) => (
