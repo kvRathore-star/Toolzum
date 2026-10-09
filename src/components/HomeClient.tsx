@@ -13,6 +13,7 @@ import type { PopularTool, CategoryCount } from '@/registry/tools';
 import { toast } from 'react-hot-toast';
 import { SITE_STATS } from '@/registry/site-data.generated';
 import { Button } from '@/components/ui/button';
+import { Testimonials } from '@/components/Testimonials';
 import { getCategoryTheme } from '@/lib/categoryTheme';
 import {
   CATEGORIES, STEPS, FEATURES, USE_CASES, INDIA_TOOLS,
@@ -655,6 +656,8 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
           ))}
         </div>
       </section>
+
+      <Testimonials />
 
       {/* ===== 9. INDIA SECTION ===== */}
       {showIndia && (
