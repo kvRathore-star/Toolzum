@@ -1670,3 +1670,161 @@ export const CATEGORY_FAQS: Record<string, CategoryFaq[]> = {
   ],
 };
 
+
+/**
+ * Hub upgrades (rival-teardown spec, Oct 2026). All data below is curated,
+ * not generated — every slug verified live, every claim honest.
+ */
+
+/** Tools shipped recently enough to earn a "New" pill. Reviewed monthly:
+ *  add launches, drop anything older than ~60 days. Test-locked: badge
+ *  renders ONLY on these slugs (see CategoryPageClient.test). */
+export const NEW_TOOL_SLUGS: ReadonlySet<string> = new Set([
+  "pdf-editor",
+  "gemini-watermark-remover",
+  "bulk-avif-optimizer",
+  "bulk-heic-converter",
+  "bulk-image-upscaler",
+]);
+
+/** Cross-category wheel: 3–4 links per hub with the honest reason to cross.
+ *  Slugs are URL slugs; every target must resolve (test-locked). */
+export const RELATED_CATEGORIES: Record<string, { slug: string; blurb: string }[]> = {
+  PDF: [
+    { slug: "image", blurb: "JPG flows into PDF and back out" },
+    { slug: "developer", blurb: "Validators and format tools" },
+    { slug: "ai", blurb: "Summarize and chat with PDFs" },
+  ],
+  Image: [
+    { slug: "pdf", blurb: "Photos merge into PDF documents" },
+    { slug: "video", blurb: "GIFs and frames go both ways" },
+    { slug: "ai", blurb: "Upscale and backgrounds" },
+  ],
+  Video: [
+    { slug: "audio", blurb: "Extract MP3 from any clip" },
+    { slug: "image", blurb: "GIFs plus frame grabs" },
+    { slug: "converter", blurb: "Format pairs for video" },
+  ],
+  Audio: [
+    { slug: "video", blurb: "MP3s come from video" },
+    { slug: "transcription", blurb: "Speech to text" },
+    { slug: "converter", blurb: "Format pairs for audio" },
+  ],
+  AI: [
+    { slug: "transcription", blurb: "Speech and meeting AI" },
+    { slug: "image", blurb: "Generate and enhance" },
+    { slug: "text", blurb: "Paraphrase and translate" },
+  ],
+  Converter: [
+    { slug: "video", blurb: "Video format pairs" },
+    { slug: "audio", blurb: "Audio format pairs" },
+    { slug: "pdf", blurb: "Document conversions" },
+  ],
+  Developer: [
+    { slug: "converter", blurb: "Data format pairs" },
+    { slug: "seo", blurb: "Audit and meta tools" },
+    { slug: "text", blurb: "Diff, format, encode" },
+  ],
+  Text: [
+    { slug: "ai", blurb: "Paraphrase and translate" },
+    { slug: "transcription", blurb: "Captions from text" },
+    { slug: "seo", blurb: "Density and readability" },
+  ],
+  Finance: [
+    { slug: "calculator", blurb: "The math underneath" },
+    { slug: "utility", blurb: "Everyday converters" },
+  ],
+  Privacy: [
+    { slug: "pdf", blurb: "Redact documents" },
+    { slug: "image", blurb: "Strip EXIF, blur faces" },
+    { slug: "developer", blurb: "Hashes and crypto" },
+  ],
+  SEO: [
+    { slug: "developer", blurb: "Validators and linters" },
+    { slug: "text", blurb: "Content analysis" },
+    { slug: "utility", blurb: "Link checkers" },
+  ],
+  Utility: [
+    { slug: "converter", blurb: "Unit conversions" },
+    { slug: "calculator", blurb: "Quick math" },
+    { slug: "text", blurb: "Text helpers" },
+  ],
+  "indian-utilities": [
+    { slug: "finance", blurb: "GST and tax math" },
+    { slug: "pdf", blurb: "Aadhaar and forms" },
+    { slug: "utility", blurb: "Everyday helpers" },
+  ],
+  Transcription: [
+    { slug: "audio", blurb: "Source audio tools" },
+    { slug: "video", blurb: "Video captions" },
+    { slug: "ai", blurb: "Meeting AI" },
+  ],
+  Branding: [
+    { slug: "design", blurb: "Colors and type" },
+    { slug: "image", blurb: "Assets to design with" },
+    { slug: "growth-metrics", blurb: "Measure campaigns" },
+  ],
+  Productivity: [
+    { slug: "utility", blurb: "Timers and helpers" },
+    { slug: "text", blurb: "Notes and lists" },
+  ],
+  Design: [
+    { slug: "image", blurb: "Assets to design with" },
+    { slug: "branding", blurb: "Logos and posts" },
+    { slug: "developer", blurb: "CSS generators" },
+  ],
+  Health: [
+    { slug: "calculator", blurb: "The math underneath" },
+    { slug: "utility", blurb: "Converters" },
+  ],
+  Extension: [
+    { slug: "utility", blurb: "Everyday helpers" },
+    { slug: "productivity", blurb: "Timers and lists" },
+  ],
+  Calculator: [
+    { slug: "finance", blurb: "Money math" },
+    { slug: "converter", blurb: "Unit conversions" },
+    { slug: "health", blurb: "Body math" },
+  ],
+  "Growth & Marketing": [
+    { slug: "finance", blurb: "Money math" },
+    { slug: "branding", blurb: "Logos and posts" },
+    { slug: "seo", blurb: "Audit and rank" },
+  ],
+};
+
+/** One category-specific proof line per hub. Universal truths (no signup,
+ *  AI marked + costed) render beside these — never instead of them. */
+export const TRUST_LINES: Record<string, string> = {
+  AI: "AI features cost credits and say so before you click — 5 free trial credits, no card.",
+  Audio: "FFmpeg runs in your browser — MP3, WAV, FLAC and OGG never upload.",
+  Branding: "Logos and posts compose on local Canvas — nothing uploaded.",
+  Calculator: "66 calculators, every formula computed locally with steps shown.",
+  Converter: "Format pairs convert locally — files never leave the tab.",
+  Design: "Colors, fonts and icons generated on-device, free.",
+  Developer: "242 dev tools — formatters, validators and encoders run locally; secrets never uploaded.",
+  Extension: "Enhancements run locally in your browser — no data collection.",
+  Finance: "EMI, tax and ledger math computed locally — figures never uploaded.",
+  "Growth & Marketing": "SaaS metrics computed locally from numbers you enter.",
+  Health: "Wellness math runs locally; estimates are informational, not medical advice.",
+  Image: "Canvas and WebAssembly processing — photos never uploaded.",
+  PDF: "pdf-lib runs in your browser — files to 125MB, no signup.",
+  Privacy: "Crypto runs locally — secrets never leave your device.",
+  Productivity: "Timers and lists run fully offline after load.",
+  SEO: "Audits run on pasted content locally — nothing crawled from our servers.",
+  Text: "Text tools run on pasted content locally — nothing uploaded.",
+  Transcription: "Speech runs on-device or via API with per-minute costs shown first.",
+  Utility: "Everyday tools, local-first, free.",
+  Video: "FFmpeg WASM in your browser — footage to 250MB never uploads.",
+  "indian-utilities": "PAN, Aadhaar and GST formats validated locally — numbers never uploaded.",
+};
+
+/** Blog guides wired per hub (slugs in src/lib/blog-posts.ts, /blog/posts/). */
+export const CATEGORY_GUIDES: Record<string, string[]> = {
+  PDF: ["compress-pdf-without-losing-quality", "merge-pdf-online-free-guide"],
+  Image: ["free-online-photo-editor-no-signup", "remove-background-from-image-free", "image-formats-webp-avif-jpg-guide"],
+  Video: ["convert-video-to-mp3-audio-free"],
+  Privacy: ["privacy-first-browser-tools-guide", "zero-telemetry-privacy"],
+  Developer: ["wasm-converters", "webgl-image-tensors"],
+  "indian-utilities": ["gst-invoice-guide-india"],
+};

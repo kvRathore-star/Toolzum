@@ -43,3 +43,73 @@ describe('CategoryPageClient filter dead-ends (#issue)', () => {
     expect(screen.getByText('Age Calculator')).toBeDefined();
   });
 });
+
+describe('Hub upgrades (rival-teardown spec)', () => {
+  const pdfTools = [
+    {
+      id: '10', slug: 'pdf-editor', name: 'PDF Editor',
+      description: 'Edit PDFs.', category: 'PDF', isPro: false,
+    },
+    {
+      id: '11', slug: 'pdf-compressor', name: 'PDF Compressor',
+      description: 'Shrink PDFs.', category: 'PDF', isPro: false,
+    },
+  ];
+
+  it('New badge renders only on listed slugs', () => {
+    const { container } = render(
+      <CategoryPageClient category="PDF" tools={pdfTools} />
+    );
+    const badges = container.querySelectorAll('span');
+    const newBadges = Array.from(badges).filter((s) => s.textContent === 'New');
+    expect(newBadges.length).toBeGreaterThan(0);
+    // pdf-compressor card must not carry one: its heading has no New badge.
+    const compressorHeading = Array.from(container.querySelectorAll('h3')).find((h) =>
+      h.textContent?.includes('PDF Compressor')
+    );
+    expect(compressorHeading?.textContent).not.toContain('New');
+  });
+
+  it('related categories all resolve to live category pages', async () => {
+    const { RELATED_CATEGORIES } = await import('@/data/categorySections');
+    const { toolsRegistry } = await import('@/registry/tools');
+    const catToSlug = (cat: string) =>
+      cat === 'Growth & Marketing' ? 'growth-metrics' : cat.toLowerCase().replace(/\s+/g, '-');
+    const live = new Set(toolsRegistry.map((t: { category: string }) => catToSlug(t.category)));
+    for (const [cat, links] of Object.entries(RELATED_CATEGORIES)) {
+      expect(links.length, `${cat} needs links`).toBeGreaterThan(0);
+      for (const l of links as { slug: string }[]) {
+        expect(live.has(l.slug), `${cat} links dead category /${l.slug}/`).toBe(true);
+      }
+    }
+  });
+
+  it('trust strip + guides render on PDF hub', () => {
+    const { container } = render(
+      <CategoryPageClient category="PDF" tools={pdfTools} />
+    );
+    expect(container.textContent).toContain('pdf-lib');
+    expect(container.textContent).toContain('More from Toolzum');
+    expect(container.textContent).toContain('Guides');
+  });
+
+  it('every NEW_TOOL_SLUGS entry is a live tool', async () => {
+    const { NEW_TOOL_SLUGS } = await import('@/data/categorySections');
+    const { toolsRegistry } = await import('@/registry/tools');
+    const slugs = new Set(toolsRegistry.map((t: { slug: string }) => t.slug));
+    for (const slug of NEW_TOOL_SLUGS) {
+      expect(slugs.has(slug), `${slug} badge points nowhere`).toBe(true);
+    }
+  });
+
+  it('every CATEGORY_GUIDES slug is a live blog post', async () => {
+    const { CATEGORY_GUIDES } = await import('@/data/categorySections');
+    const { blogPosts } = await import('@/lib/blog-posts');
+    const live = new Set(blogPosts.map((p: { slug: string }) => p.slug));
+    for (const [cat, slugs] of Object.entries(CATEGORY_GUIDES)) {
+      for (const slug of slugs as string[]) {
+        expect(live.has(slug), `${cat} guides dead post ${slug}`).toBe(true);
+      }
+    }
+  });
+});

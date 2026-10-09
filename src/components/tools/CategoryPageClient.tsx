@@ -7,6 +7,8 @@ import { Search, ChevronRight, Grid3X3, List, ChevronDown, Image, FileText, Code
 import { getCategoryTheme, getCategoryGroup } from "@/lib/categoryTheme";
 import { FavoriteStarButton } from "@/components/FavoriteStarButton";
 import type { CategorySection, CategoryFaq } from "@/data/categorySections";
+import { NEW_TOOL_SLUGS, RELATED_CATEGORIES, TRUST_LINES, CATEGORY_GUIDES } from "@/data/categorySections";
+import { blogPosts } from "@/lib/blog-posts";
 import { PoweredBy } from "@/components/tools/PoweredBy";
 
 interface CategoryPageClientProps {
@@ -241,12 +243,87 @@ function SectionToolRow({ tool }: { tool: ToolMetadata }) {
         <Icon className={`w-5 h-5 ${color}`} />
       </div>
       <div className="flex-1 min-w-0">
-        <h3 className="text-sm font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors truncate">{tool.name}</h3>
+        <h3 className="text-sm font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors truncate">{tool.name}{NEW_TOOL_SLUGS.has(tool.slug) && <NewBadge />}</h3>
         <p className="text-xs text-[var(--text-secondary)] truncate break-words">{tool.description}</p>
         <PoweredBy deps={tool.dependencies || ""} />
       </div>
       <ChevronRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--accent)] group-hover:translate-x-0.5 transition-all shrink-0" />
     </Link>
+  );
+}
+
+function NewBadge() {
+  return (
+    <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/30 text-[10px] font-semibold text-[var(--accent)] align-middle">
+      New
+    </span>
+  );
+}
+
+function HubExtras({ category, tools }: { category: string; tools: ToolMetadata[] }) {
+  const related = RELATED_CATEGORIES[category] || [];
+  const guideSlugs = CATEGORY_GUIDES[category] || [];
+  const guides = guideSlugs
+    .map((slug) => blogPosts.find((p) => p.slug === slug))
+    .filter((p): p is (typeof blogPosts)[number] => !!p);
+  const trustLine = TRUST_LINES[category];
+  const proCount = tools.filter((t) => t.isPro).length;
+  if (related.length === 0 && guides.length === 0 && !trustLine) return null;
+  return (
+    <div className="mt-12 space-y-8 max-w-3xl">
+      {related.length > 0 && (
+        <section aria-label="Related categories">
+          <h2 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-widest mb-3">
+            More from Toolzum
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {related.map((r) => (
+              <Link
+                key={r.slug}
+                href={`/${r.slug}/`}
+                title={r.blurb}
+                className="px-3 py-2 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)]/40 transition-all"
+              >
+                {r.slug.replace(/-/g, ' ')} <span className="opacity-60">— {r.blurb}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+      {guides.length > 0 && (
+        <section aria-label="Guides">
+          <h2 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-widest mb-3">
+            Guides
+          </h2>
+          <ul className="space-y-2">
+            {guides.map((g) => (
+              <li key={g.slug}>
+                <Link href={`/blog/posts/${g.slug}/`} className="text-sm text-[var(--accent)] hover:underline underline-offset-2">
+                  {g.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+      {trustLine && (
+        <section aria-label="Why trust these tools" className="p-5 rounded-[var(--radius-xl)] bg-[var(--accent-ink)]/5 border border-[var(--accent)]/20">
+          <ul className="space-y-1.5 text-sm text-[var(--text-secondary)]">
+            <li>✓ {trustLine}</li>
+            <li>✓ No signup to start{proCount > 0 ? ` — ${proCount} Pro tool${proCount === 1 ? '' : 's'} clearly marked` : ''}.</li>
+            <li>✓ Cloud AI features marked with their cost before you click.</li>
+          </ul>
+        </section>
+      )}
+      <section aria-label="Platforms" className="text-sm text-[var(--text-secondary)]">
+        <p>
+          Works offline after first load ·{' '}
+          <Link href="/pricing" className="text-[var(--accent)] hover:underline underline-offset-2">
+            Pro unlocks 500-file batches and 2GB files
+          </Link>
+        </p>
+      </section>
+    </div>
   );
 }
 
@@ -620,6 +697,7 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
                       </div>
                       <h3 className="text-base font-medium text-[var(--text-primary)] mb-2 group-hover:text-[var(--accent)] transition-colors flex items-center gap-2">
                         {tool.name}
+                        {NEW_TOOL_SLUGS.has(tool.slug) && <NewBadge />}
                         <ChevronRight className="w-3.5 h-3.5 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all text-[var(--accent)]" />
                       </h3>
                       <p className="text-sm text-[var(--text-secondary)] line-clamp-2 leading-relaxed">
@@ -698,6 +776,7 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
                                 </div>
                                 <h3 className="text-base font-medium text-[var(--text-primary)] mb-2 group-hover:text-[var(--accent)] transition-colors flex items-center gap-2">
                                   {tool.name}
+                                  {NEW_TOOL_SLUGS.has(tool.slug) && <NewBadge />}
                                   <ChevronRight className="w-3.5 h-3.5 opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all text-[var(--accent)]" />
                                 </h3>
                                 <p className="text-sm text-[var(--text-secondary)] line-clamp-2 leading-relaxed">
@@ -781,6 +860,9 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
             )}
           </div>
         )}
+
+        {/* Hub upgrades (rival-teardown spec): wheel, guides, trust, platform */}
+        <HubExtras category={category} tools={tools} />
 
         {/* Category FAQ — indexable editorial layer, hidden while searching */}
         {!searchQuery && faqs.length > 0 && (
