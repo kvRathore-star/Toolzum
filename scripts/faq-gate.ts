@@ -28,6 +28,15 @@ const ONE_WAY_ACCEPTED = new Set([
   'mp4-to-mp3', // audio extraction; mp3-to-mp4 is meaningless
   'mov-to-mp3',
   'webm-to-mp3',
+  // Reverses that live under different slugs (verified Oct 9):
+  'gif-to-mp4', // reverse is video-to-gif (accepts mp4/mov/webm)
+  'pdf-to-png', // reverse is bulk-image-to-pdf / jpg-to-pdf
+  // No meaningful reverse exists:
+  'eml-to-pdf', // cannot reconstruct an email from a PDF
+  'html-to-jsx', // JSX-to-HTML needs execution, not conversion
+  'svg-to-css', // CSS cannot regenerate vector source
+  // Reverse would be a new tool (sql-to-csv noted as candidate):
+  'csv-to-sql',
 ]);
 
 const words = (s: string) =>
