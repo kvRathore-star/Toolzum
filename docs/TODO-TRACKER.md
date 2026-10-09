@@ -58,11 +58,11 @@ Last updated: 2026-10-03
 - [ ] 10. Annual plan / credit pack — what price/credit size?
 
 ## Save for Focus Time
-- [ ] 11. FAQ rollout (~1,060 tools) — multi-day
+- [x] 11. FAQ rollout — DONE Oct 9: 1,058/1,143 custom FAQs (~93%); rest is non-indexable redirects
 - [x] 12. Registry-import perf rewrite — eliminated 736KB full registry from client bundles; Homepage -567KB (30%), Tool page -734KB (35%) (commit 52dccf2)
 
 ## Mechanical (proven playbook, no decision needed)
-- [ ] 13. FAQ rollout — Tier 1 done (category templates personalized, commit 296e435). Still pending: custom FAQs for GSC "crawled, not indexed" flagged tools, then general volume rollout. Weekend task.
+- [x] 13. FAQ rollout — Tier 1 done (commit 296e435) + full custom rollout DONE Oct 9 (1,058/1,143)
 - [x] 14. ~~Developer dedup~~ — api-response-formatter → json-formatter, api-error-decoder → http-status-code-checker (commit 0b3b4c0)
 - [x] 15. ~~Calculator consolidation~~ — 6 tools redirected to geometry/scientific/date calculators (commit 0b3b4c0)
 - [x] 16. ~~Transcription reclassification~~ — Renamed to "Audio Transcript Formatter" / "Video Transcript Formatter", fixed descriptions (commit 0b3b4c0)
@@ -158,28 +158,28 @@ Temp mail → verification loop. The old flow destroyed your live address first,
 
 
 Still open:
-- #19 IndexNow — scripts/submit-indexnow.ts exists but is not in package.json/CI and has never been wired; GSC re-validate not done
-- #11/#13 FAQ rollout — only 371 / 1,061 tools have faqs: (~35%)
-- #28 FAQ depth audit for ~120 Formula tools — no script or test
-- SEO — meta descriptions for top-50 tools (no script)
-- Gap tools — Auto-Redact PII, Fingerprint, Chat with PDF absent from registry
+- #19 IndexNow — WIRED since Oct 5 (`submit:indexnow` in package.json, 1,086 URLs submitted); GSC re-validate not done
+- #11/#13 FAQ rollout — DONE Oct 9: 1,058/1,143 tools with custom FAQs (~93%); remainder is 82 SEO redirects + 3 stubs (not indexable by design)
+- #28 FAQ depth audit — SUBSTANTIALLY DONE Oct 9: all 155 formula tools carry FAQs; the 15 without worked numbers got verified numeric examples; ongoing guard = `scripts/content-scoreboard.ts` faq-no-numbers check
+- SEO — meta descriptions for top-50 tools: DONE Oct 9 (all indexable metas deepened, 0 thin, 0 dups — see scoreboard)
+- Gap tools — Auto-Redact PII, Fingerprint, Chat with PDF absent from registry (verified Oct 9)
 - #18 Productivity category decision
 - Manual QA — 5-page VoiceOver pass, temp-mail receipt test, test purchase (Dodo secrets present, so unblocked), PageSpeed, PR-preview secrets, ZAP, video WASM check, device-audit checklist
-- GSC 2-week / 4-week checks (time-gated)
+- GSC 2-week / 4-week checks (time-gated, Oct 13 due)
 - Action plan — #15 build/perf, #42 load testing, #43 brand (unblocked now that email ships)
-- Untracked — .axe-ctl/d bg/full/scan.mjs (4 scripts) need commit or gitignore
+- Untracked — .axe-ctl/ does not exist (verified Oct 9) — moot, nothing to commit
 ?
 
 
 
-Where you can NOT currently know
-1. FAQs — the ratchet baseline (content-integrity-baseline.json) allows 783 tools missing FAQs + 77 duplicate FAQ groups forever, green forever. Only ~31% have custom FAQs. No quality check (length, worked examples, ≥4 FAQs — TODO #28 open).
-2. How-to-use — only 12/1,141 (~1%) have custom instructions; the other 99% are derived templates, never asserted as correct or non-generic.
-3. SEO per tool — generator logic is unit-tested with synthetic tools, but no per-tool title/description length or duplicate check; zero tests of the FAQPage/SoftwareApplication JSON-LD actually emitted.
-4. OG images — generator tested, but existence per tool isn't; 8 known missing.
-5. Built output — nothing crawls out/'s 2,565 pages for 200s, <title>, canonical, internal links.
-6. Visual/UX — no screenshot regression anywhere; a11y automation covers 3 of 1,141 URLs (0.3%); axe scripts are manual/hardcoded.
-7. Full function — ~92% of tools only prove "doesn't throw on render" (effect-phase crashes not caught); quality-audit.js never fails (exit 0 always); gen:parallel failures don't fail builds (bare wait returns 0).
+Where you can NOT currently know (re-verified Oct 9 — most of this section is now stale, kept with corrections)
+1. FAQs — 1,058/1,143 custom (~93%), 0 trios, pairs-only dups on siblings; depth: all formula tools have worked numbers as of Oct 9. Remaining: qualitative depth review (no script judges persuasion).
+2. How-to-use — 1,058/1,143 with custom instructions (~93%, was 12); 0 generic templates (verified Oct 9); correctness spot-checked on pro tools, not exhaustively.
+3. SEO per tool — titles: 0 dups, 0 over-60, all query-first with Free; metas: 0 thin, 0 dups; JSON-LD shape still unit-tested only (no emitted-output validator — ladder item 3 still open).
+4. OG images — all indexable tools have PNG+webp (verified Oct 9, incl. the 8 once-missing); per-tool existence is now asserted by `scripts/content-scoreboard.ts` no-og check.
+5. Built output — nothing crawls out/'s pages for 200s, <title>, canonical, internal links (ladder item 1 still open).
+6. Visual/UX — no screenshot regression anywhere; hero-gap e2e (`e2e/hero-gap.spec.ts`) covers the homepage box; axe scripts are manual/hardcoded.
+7. Full function — most tools only prove render-safety; quality-audit.js never fails (exit 0 always); gen:parallel failures don't fail builds (bare wait returns 0).
 
 How to actually "know" — recommended ladder
 Tier 1 — cheap, high-leverage gates (add to CI):

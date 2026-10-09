@@ -21,13 +21,17 @@
 How-to coverage on done set: 0 bare `other` (verified Oct 6 — specific
 pattern or custom instructions on every one of the 562).
 
-## Remaining (499 tools, no custom FAQs)
+## Remaining (SUPERSEDED Oct 9 — registry now 1,058/1,143 with FAQs, ~93%)
+
+The counts below are the Oct 6 snapshot, kept for history. All parked-pool
+and unknown-pool batches shipped after Oct 6; remaining no-FAQ pages are
+the 82 SEO-permutation redirects + 3 redirect stubs (not indexable by design).
 
 - Parked + no FAQs: **62** (priority — Google actively judging)
 - Unknown + no FAQs: **415** (phase 2)
 - Other states: 22
 
-## Next-30 queued (parked order)
+## Next-30 queued (DONE — parked pool cleared Oct 6-7, see above; the 30 slugs below all ship customs now)
 
 business-days-calculator, day-of-week-calculator, day-of-year-calculator,
 exponent-calculator, college-gpa-calculator, leap-year-calculator,

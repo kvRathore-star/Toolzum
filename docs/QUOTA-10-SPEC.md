@@ -1,8 +1,10 @@
-# Quota 10/day Merge — SPEC (awaiting owner pricing approval, Oct 5)
+# Quota 10/day Merge — SPEC (SUPERSEDED Oct 8 2026 — do not implement)
 
-> Status: SPEC ONLY — no code changed. Deploying this alters the business model;
-> needs explicit owner "ship it". When approved: implement → gates → same deploy
-> as §7b honesty fixes (copy depends on final numbers).
+> Status history: SPEC ONLY Oct 5, awaiting owner pricing approval. Then the
+> generous-limits migration (Oct 8, see LIMITS-AND-PRICING.md §11) removed
+> local download quotas entirely — a bigger change in the same direction.
+> Implementing this spec's diff today would RE-IMPOSE a quota. Kept for
+> history; the batch/credit/pro-taste numbers below remain informative.
 
 ## Decision
 

@@ -1,7 +1,8 @@
 # Restore Drill (#38 exit criterion)
 
 Proves the backups work before anyone needs them. Owner-executed
-(requires Cloudflare credentials) — staged, awaiting a run.
+(requires Cloudflare credentials) — first run PASSED 2026-09-16
+(see DATA-MIGRATIONS.md); next quarterly re-run due ~Dec 2026.
 
 ## Run it (one command)
 

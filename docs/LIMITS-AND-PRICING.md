@@ -11,7 +11,7 @@ Last verified: 2026-10-08 (generous-limits migration — see §11)
 
 | Metric | Count | Canonical source |
 |--------|-------|------------------|
-| Total tools | 1,145 (1,063 registry + 82 SEO landing pages) | `src/registry/tools-client-index.ts` + `SEO_PERMUTATIONS` |
+| Total tools | 1,143 registry entries (82 SEO landing pages) | `src/registry/tools.ts` + `SEO_PERMUTATIONS` |
 | Pro tools | 65 (all gated via `proSlugs`, all browsable) | `src/registry/tools-constants.ts` → `proSlugs` |
 | Download-producing tools | 426 (auto-generated) | `src/lib/downloadProducingSlugs.ts` (regen: `npx tsx scripts/generate-download-slugs.ts`) |
 | BulkToolShell wrappers | 20 tools | wrappers import from `src/components/tools/modules/utility/BulkToolShell.tsx` |
@@ -75,17 +75,16 @@ dialects).
 
 **Limit modal** (`DownloadLimitModal.tsx`, fires on `toolzum:download-blocked` / `toolzum:plan-limit`): copy derives all numbers from the server event detail. Anon walls show the concrete free-account upside (unlimited local, 5 trial credits, 25-file batches, 2 Pro downloads/day).
 
-> ✅ **Per-batch accounting (Option C, Sep 12 2026):** one batch download =
-> one quota unit, gated by a single `checkAndRecordDownload({ batchSize,
+> ✅ **Per-batch accounting (Option C, Sep 12 2026; quotas retired Oct 8 2026 — mechanics kept):** one batch download =
+> one gate call, by a single `checkAndRecordDownload({ batchSize,
 > fileSizeMB })` call (`gateBatchDownload()` in `freeUsageGuard.ts`) BEFORE
-> any file saves. So signed free gets 5 batches/day on free tools (~50 files)
-> and 2 batches/day on Pro tools (~20 files) — the `pro:` bucket is unchanged.
+> any file saves. Batch COUNT caps (5 / 25 / 500) still gate; size caps are
+> category ceilings. The `pro:` taste bucket is unchanged.
 > Applies to `BulkToolShell` (covers 20 wrapper tools), `DocumentConverter`,
 > `BatchImageEditor`, `BulkImageWatermark`, the three FFmpeg bulk video tools,
 > `BulkPdfMerger`, and `ArchiveConverter`. Single-save tools were already gated
-> via `downloadOrShare()`. User-facing copy keeps saying "downloads/day" (a batch
-> save reads as one download action; the badge decrements per batch, so it's
-> self-consistent) — "batch" lives in code comments and this doc only.
+> via `downloadOrShare()`. User-facing copy says "unlimited" for local tools —
+> the batch-count caps live in toasts/modals at the moment of need.
 >
 > **Gate coverage by surface (verified Sep 12 2026):**
 >
@@ -270,7 +269,7 @@ revenue — sustainable in every mix.
 Rate limited at 10 req/min per IP. Daily quota enforced separately.
 
 **Notes:**
-- Transcription uploads are capped at 50MB by the endpoint itself (`MAX_UPLOAD_BYTES` in `transcribe.ts`) regardless of plan — a signed-in user's 150MB file allowance does not apply to `/api/ai/transcribe`.
+- Transcription uploads are capped at 25MB by the endpoint itself (`MAX_UPLOAD_BYTES` in `transcribe.ts`) regardless of plan — a signed-in user's video ceiling does not apply to `/api/ai/transcribe`.
 - Daily download buckets use `YYYY-M-D` server dates (workerd runs UTC → effectively midnight-UTC reset). The legacy client mirror (`freeUsageGuard`) resets on browser-local midnight — server is authoritative on conflict.
 - Plan labels differ slightly per endpoint (`check-plan` returns `signedin` for authenticated free users; download/credit endpoints use `free`) but resolve to identical free-tier outcomes everywhere.
 
@@ -325,8 +324,8 @@ Pure client-side alpha-blending (no API calls, zero cost). No credit charge, no 
 
 | Tier | Downloads/day |
 |------|---------------|
-| Anonymous | 3 |
-| Signed-in (free) | 5 |
+| Anonymous | Unlimited |
+| Signed-in (free) | Unlimited |
 | Pro | Unlimited |
 
 ### Batch Mode (Pro-only)
@@ -345,7 +344,7 @@ Pure client-side alpha-blending (no API calls, zero cost). No credit charge, no 
 
 ## 7. Pro Tools
 
-**List:** `src/registry/tools-constants.ts` → `proSlugs` array (66 slugs: 55 produce file downloads, 11 are text-only/dashboards)
+**List:** `src/registry/tools-constants.ts` → `proSlugs` array (65 slugs)
 
 **Categories covered:** AI, Image (bulk), PDF (bulk), Audio (bulk), Video (bulk), Transcription, Developer, E-commerce, Privacy, Indian Utilities
 
@@ -358,7 +357,7 @@ Upgrade secondary. Signed-in free users open Pro tools with download limits
 users; its upgrade-first variant is the fallback for unknown plans only. Its
 feature card advertises "Up to 2GB".
 
-**Batch caps** are enforced client-side at drop time in `BulkToolShell.tsx` (guests 5, signed-in 25, Pro 500 — matches `check-plan.ts`); over-cap drops are truncated with a toast naming the upgrade path. `checkAndRecordDownload()` accepts a `batchSize` option but no caller currently sends it, so the server does not independently enforce batch size — batch is capped at intake, quota at download.
+**Batch caps** are enforced client-side at drop time in `BulkToolShell.tsx` (guests 5, signed-in 25, Pro 500 — matches `check-plan.ts`); over-cap drops are truncated with a toast naming the upgrade path. `gateBatchDownload()` passes `batchSize` through, so the server independently enforces batch caps at save time too.
 
 **Get Pro button:** Hidden for Pro users in header (desktop + mobile drawer).
 

@@ -11,14 +11,14 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 1044 |
-| Redirect-only sources (not in MODULE_REGISTRY) | 86 (21 ComingSoon registry tools + 0 registry tools redirecting to a hub + 65 legacy URLs) |
+| MODULE_REGISTRY (direct dynamic import) | 1042 |
+| Redirect-only sources (not in MODULE_REGISTRY) | 90 (21 ComingSoon registry tools + 0 registry tools redirecting to a hub + 69 legacy URLs) |
 | Category-move redirects (same slug, old->new category) | 144 (144 MODULE_REGISTRY) |
 | SEO permutation landing slugs (redirected in page.tsx) | 82 |
 
 - All routing now flows through MODULE_REGISTRY; CONVERTER_CONFIG / ConverterRouter were retired in Phase 4.
 - Redirect-only slugs never reach `ComingSoonTool` because `[category]/[tool]/page.tsx` redirects them first.
-- **Render baseline:** `registry-render-smoke.test.ts` renders every MODULE_REGISTRY slug (1044) through the real resolution path with no throw. Two real bugs were found and fixed:
+- **Render baseline:** `registry-render-smoke.test.ts` renders every MODULE_REGISTRY slug (1042) through the real resolution path with no throw. Two real bugs were found and fixed:
   - `json-tree-viewer` (DataUtilitiesWidgets.tsx) called `setError` during render -> infinite re-render loop.
   - `ssh-key-generator` (SshKeyGenerator.tsx) computed `x ** (p-2)` with a ~2^255 BigInt exponent at module load -> import crash. Fixed `modinv` to use modular exponentiation.
 
@@ -137,7 +137,6 @@
 | avatar-generator | AvatarGenerator |
 | avi-to-mkv | VideoFormatConverter [slug=avi-to-mkv] |
 | avi-to-mov | VideoFormatConverter [slug=avi-to-mov] |
-| avi-to-mp4 | VideoFormatConverter [slug=avi-to-mp4] |
 | avi-to-webm | VideoFormatConverter [slug=avi-to-webm] |
 | avif-to-bmp | ImageCatchAllConverter [slug=avif-to-bmp] |
 | avif-to-gif | ImageCatchAllConverter [slug=avif-to-gif] |
@@ -194,7 +193,6 @@
 | breadcrumb-schema-generator | BreadcrumbSchemaGenerator |
 | break-even-calculator | BreakEvenCalculator |
 | breastfeeding-calorie-calculator | BreastfeedingCalorieCalculator |
-| browser-extension | BrowserExtension |
 | brute-force-time-estimator | PasswordTools -> BruteForceTimeEstimator |
 | bulk-app-icon-generator | BulkAppIconGenerator |
 | bulk-audio-converter | BulkAudioConverter |
@@ -650,7 +648,6 @@
 | mov-to-avi | VideoFormatConverter [slug=mov-to-avi] |
 | mov-to-mkv | VideoFormatConverter [slug=mov-to-mkv] |
 | mov-to-mp3 | VideoToAudioConverter [slug=mov-to-mp3] |
-| mov-to-mp4 | VideoFormatConverter [slug=mov-to-mp4] |
 | mov-to-webm | VideoFormatConverter [slug=mov-to-webm] |
 | mp3-compressor | Mp3Compressor |
 | mp3-to-aac | AudioFormatConverter [slug=mp3-to-aac] |
@@ -730,6 +727,7 @@
 | pdf-bates-numbering | PdfBatesNumbering |
 | pdf-cleanup | PdfCleanup |
 | pdf-compressor | PdfCompressor |
+| pdf-editor | PdfEditor |
 | pdf-form-filler | PdfFormFiller |
 | pdf-info | PdfInfo |
 | pdf-merger | PdfMerger |
@@ -942,6 +940,7 @@
 | tax-calculator | TaxCalculator |
 | tax-saving-calculator | TaxSavingCalculator |
 | tds-calculator-india | TdsCalculatorIndia |
+| temp-email-generator | TempEmailInbox |
 | temperature-converter | UnitConverter [slug=temperature-converter] |
 | test-data-generator | StyleCodeKitWidgets -> TestDataGenerator |
 | test-score-calculator | CalcFileKitWidgets -> TestScoreCalculator |
@@ -1053,7 +1052,6 @@
 | webm-to-mkv | VideoFormatConverter [slug=webm-to-mkv] |
 | webm-to-mov | VideoFormatConverter [slug=webm-to-mov] |
 | webm-to-mp3 | VideoToAudioConverter [slug=webm-to-mp3] |
-| webm-to-mp4 | VideoFormatConverter [slug=webm-to-mp4] |
 | webp-to-avif | ImageCatchAllConverter [slug=webp-to-avif] |
 | webp-to-bmp | ImageCatchAllConverter [slug=webp-to-bmp] |
 | webp-to-gif | ImageCatchAllConverter [slug=webp-to-gif] |
@@ -1105,7 +1103,7 @@
 
 ## Redirect-only slugs (never reach ComingSoonTool)
 
-These 86 slugs are in `TOOL_REDIRECTS` and not in MODULE_REGISTRY, so `page.tsx` redirects them before the wrapper renders.
+These 90 slugs are in `TOOL_REDIRECTS` and not in MODULE_REGISTRY, so `page.tsx` redirects them before the wrapper renders.
 
 ### Registry tools (22) — the wrapper's only "ComingSoon" fallthrough candidates
 
@@ -1139,9 +1137,11 @@ These 86 slugs are in `TOOL_REDIRECTS` and not in MODULE_REGISTRY, so `page.tsx`
 |---|---|
 | apa-citation-generator | citation-generator |
 | ascii-big-text | big-text-generator |
+| avi-to-mp4 | video-converter |
 | base64-encoder-decoder | base64-encode-decode |
 | binary-converter | number-base-converter |
 | body-fat-estimator | body-fat-calculator |
+| browser-extension | screen-recorder-extension |
 | bubble-text-generator | big-text-generator |
 | bulk-link-shortener | bulk-url-shortener |
 | bulk-short-link-generator | bulk-url-shortener |
@@ -1173,6 +1173,7 @@ These 86 slugs are in `TOOL_REDIRECTS` and not in MODULE_REGISTRY, so `page.tsx`
 | minutes-to-hours-converter | time-converter |
 | mla-citation-generator | citation-generator |
 | morse-code-converter | morse-code-translator |
+| mov-to-mp4 | video-converter |
 | mp4-to-gif | video-to-gif |
 | nps-survey-calculator | net-promoter-score-calculator |
 | ovulation-calculator | ovulation-tracker |
@@ -1199,6 +1200,7 @@ These 86 slugs are in `TOOL_REDIRECTS` and not in MODULE_REGISTRY, so `page.tsx`
 | video-converter-tool | video-converter |
 | water-requirement-calculator | water-intake-calculator |
 | webm-to-gif | video-to-gif |
+| webm-to-mp4 | video-converter |
 | word-count-tool | writing-tools |
 | working-capital-calculator | profit-loss-calculator |
 | yaml-syntax-validator | yaml-validator |

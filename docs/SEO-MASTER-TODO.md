@@ -53,16 +53,17 @@
 
 ## E. Queued builds (agent, in priority order)
 
-- [ ] Pro-tool Batch 1 (30 credit-urgent, §10.7 28-pt + premium bar) — Oct 6–7
-- [ ] Pro-tool Batch 2 (35 bulk/moat, same bar) — Oct 6–7 / next slot
+- [x] Pro-tool Batch 1 (30 credit-urgent) + Batch 2 (35 bulk/moat) — DONE Oct 6 (see SEO-BATCH-STATUS).
+- [x] Cannibalization mapping — DONE (`docs/CANNIBALIZATION-MAP-2026-10-06.md`).
+- [x] CWV + AI-citation baselines doc — DONE (`docs/CWV-AI-BASELINE-2026-10-06.md`; lab/field runs still owner-side).
+- [x] Comparison page — DONE (`/compare/smallpdf-alternative/`).
 - [ ] Next-30 tools batch (§10.7 checklist applies from §F: same machinery)
 - [ ] Titles batch 2 (defend-3 + India/format pairs)
 - [ ] Hub upgrades per teardown spec (badges, category wheel, trust strip)
 - [ ] Blog↔tool interlinking · `/tools` editorial · comparison page
 - [ ] Visuals (screenshots/GIFs — §10.1 DoD item, zero shipped)
 - [ ] E-E-A-T (authors, reviews/testimonials)
-- [ ] CWV measurement + AI-citation baseline run
-- [ ] Cannibalization mapping (query→pages, consolidation list)
+- [ ] CWV lab + field runs · AI-citation monthly runs (owner/CI)
 - [ ] Consolidation pilot (§10.5) · markdown/WebMCP (P2 agent-readiness)
 - [ ] 6 pre-existing one-way-converter gaps (faq-gate backlog, unrelated)
 

@@ -2,11 +2,9 @@
 
 ## Version source of truth
 
-`package.json` `version` tracks the **product** version (currently 2.4.0,
-aligned with the newest `/changelog` entry — it used to sit at 0.1.0 while
-the product shipped 2.x). It is displayed on `/status`, so "which version
-is live" is always answerable. No git tags exist yet (Sep 2026) — the
-first tagged release starts the tag discipline below.
+`package.json` `version` tracks the **product** version (currently 2.5.0,
+aligned with the newest `/changelog` entry). It is displayed on `/status`, so "which version
+is live" is always answerable. Git tag `v2.5.0` exists — tag discipline active.
 
 ## Semver policy
 

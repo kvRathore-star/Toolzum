@@ -28,11 +28,22 @@ function wordsOf(tool: ToolMetadata): string[] {
 }
 
 export function findRelatedTools(tool: ToolMetadata, registry: ToolMetadata[], maxResults = 6): ToolMetadata[] {
-  const toolWords = new Set(wordsOf(tool));
+  // Tokenize once per tool (module-scope cache was lost in the STOP_WORDS
+  // rewrite and ranking re-tokenized per comparison at static-gen).
+  const wordCache = new Map<string, Set<string>>();
+  const wordsFor = (t: ToolMetadata): Set<string> => {
+    let s = wordCache.get(t.slug);
+    if (!s) {
+      s = new Set(wordsOf(t));
+      wordCache.set(t.slug, s);
+    }
+    return s;
+  };
+  const toolWords = wordsFor(tool);
   const candidates = registry.filter((t) => t.slug !== tool.slug);
 
   function score(t: ToolMetadata): number {
-    const candidateWords = wordsOf(t);
+    const candidateWords = wordsFor(t);
     let intersection = 0;
     for (const w of candidateWords) {
       if (toolWords.has(w)) intersection++;

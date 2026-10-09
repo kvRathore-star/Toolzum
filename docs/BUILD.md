@@ -1,7 +1,9 @@
 # Build Performance (#15)
 
 Measured Sep 16 2026 (4-core Mac; CI ubuntu is faster — treat these as
-upper bounds, not targets).
+upper bounds, not targets). Page counts below are that day's snapshot
+(registry is 1,143 tools / ~1,141 routed pages as of Oct 9) — timings,
+not inventory, are the durable content here.
 
 ## Phase timings (full `npm run build`, 2,563 pages)
 

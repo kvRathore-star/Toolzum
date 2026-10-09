@@ -3,6 +3,11 @@
 > Logged during the Depth/functionality audit (2026-07-31). These are explicitly tracked as
 > follow-up candidates, **not closed**. None required action on the audit day; each is listed
 > with the evidence gathered so the decision is recorded rather than silently waived.
+>
+> **Oct 9 2026 status sweep:** #1 CLOSED (copy fixed, verified in registry);
+> #2 CLOSED (all four tools verified description !== seoDescription);
+> #4 CLOSED (all 8 OG images exist on disk + in builds). #4b, #6b, #6c and the
+> rest below keep their original status unless noted.
 
 ## Context: `scan.test.ts` is diagnostic-only
 

@@ -54,7 +54,7 @@ AI engines cite passages, not pages. Rules:
 - [ ] Freshness: updated dates real, statistics current.
 - [ ] Brand mentions across the web (Reddit is Perplexity's #1 source at ~47% —
       genuine participation, never spam).
-- [ ] Keep AI crawlers allowed in robots.txt (verified Oct 5).
+- [x] Keep AI crawlers allowed in robots.txt (verified Oct 5, re-verified Oct 9 — GPTBot/ClaudeBot/PerplexityBot/CCBot allowed).
 
 ## 3. AEO — Answer Engine Optimization (direct-answer boxes, voice, featured snippets)
 
@@ -100,7 +100,7 @@ AI engines cite passages, not pages. Rules:
   > caps free use at [X/day / uploads files] — we're the unlimited private
   > alternative. Worth a test for your [section]? [exact tool link]
 
-- [ ] `/press` page (logo kit, stats, contact) — every outreach needs a credible target.
+- [x] `/press` page (logo kit, stats, contact) — shipped (`src/app/press/page.tsx`).
 - [ ] HARO/Connectively as founder (2–3 quotes/week) — drafts on request.
 - [ ] Directories: SaaSHub, AlternativeTo, Capterra, Product Hunt, BetaList.
 - [ ] **NEVER:** buy links · link exchanges · footer/template badge links with
@@ -267,6 +267,7 @@ Long-tail pattern: `"[format] to [format]"`, `"[task] online free no signup"`.
 
 1. **Blog engine + 1 guide per big category** (how-tos, comparisons, "best X"
    with honest competitor tables — these earn the listicle links in §5).
+   DONE Oct 9: 12 guides live (`src/lib/blog-posts.ts`) + `/compare/smallpdf-alternative/` shipped.
 2. **Data studies from our own stats** ("we compressed X images…") — digital-PR bait.
 3. **Photo Editor (unified)** — PDF-Editor-class flagship; launches index-ready
    per §6 checklist.
@@ -279,7 +280,7 @@ Honest framing: **none of this moves Google indexing today.** It positions for
 agent-driven traffic (ChatGPT/Claude browsing, Comet/Atlas browsers). Score
 20→~60 with static files + headers; the rest needs real infra.
 
-- P0 — `/llms.txt` (the actual GEO artifact: site summary + key URLs for LLMs).
+- P0 — `/llms.txt` (the actual GEO artifact: site summary + key URLs for LLMs) — SHIPPED (`public/llms.txt`).
 - P1 — `/.well-known/api-catalog` (RFC 9727, point at /tools + search),
   `/.well-known/agent-skills/index.json` (tool categories as skills),
   `/.well-known/ai-catalog.json` (ARD manifest), Link headers in next.config
