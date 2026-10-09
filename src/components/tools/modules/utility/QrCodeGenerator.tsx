@@ -69,6 +69,11 @@ export default function QrCodeGenerator() {
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  // Wi-Fi payload delimiters (; : , " \) inside SSID/password must be
+  // backslash-escaped, or a password containing ";" silently truncates the
+  // network config and the code joins nothing.
+  const escWifi = (s: string) => s.replace(/([\\;,:"])/g, '\\$1');
+
   const getQRText = () => {
     switch (qrType) {
       case 'url': return urlContent;
@@ -92,7 +97,7 @@ export default function QrCodeGenerator() {
         if (waText) s += `?text=${encodeURIComponent(waText)}`;
         return s;
       }
-      case 'wifi': return `WIFI:T:${wifiSec};S:${wifiSsid};P:${wifiPass};;`;
+      case 'wifi': return `WIFI:T:${wifiSec};S:${escWifi(wifiSsid)};P:${escWifi(wifiPass)};;`;
       case 'contact': {
         return [
           'BEGIN:VCARD',
@@ -107,7 +112,12 @@ export default function QrCodeGenerator() {
         ].filter(Boolean).join('\n');
       }
       case 'event': {
+        // Bare VEVENT is rejected by most calendar apps — it must ride
+        // inside a VCALENDAR envelope.
         return [
+          'BEGIN:VCALENDAR',
+          'VERSION:2.0',
+          'PRODID:-//Toolzum//QR Event//EN',
           'BEGIN:VEVENT',
           `SUMMARY:${eventTitle}`,
           eventLoc ? `LOCATION:${eventLoc}` : '',
@@ -115,6 +125,7 @@ export default function QrCodeGenerator() {
           `DTEND:${eventEnd}`,
           eventDesc ? `DESCRIPTION:${eventDesc}` : '',
           'END:VEVENT',
+          'END:VCALENDAR',
         ].filter(Boolean).join('\n');
       }
       case 'location': return `geo:${geoLat},${geoLon}?q=${encodeURIComponent(geoLabel || `${geoLat},${geoLon}`)}`;
@@ -140,7 +151,10 @@ export default function QrCodeGenerator() {
         if (!ctx) return;
         const logoImg = new Image();
         logoImg.src = logoImage;
-        await new Promise(r => { logoImg.onload = r; });
+        // Resolve on error too — a corrupt logo used to hang generation
+        // forever on this await with no feedback.
+        await new Promise(r => { logoImg.onload = r; logoImg.onerror = r; });
+        if (!logoImg.naturalWidth) { toast.error('Logo image could not be decoded — QR rendered without it.'); return; }
         const logoSize = size * 0.2;
         const x = (size - logoSize) / 2;
         const y = (size - logoSize) / 2;

@@ -5,9 +5,26 @@ interface Env {
 import { checkRateLimit, recordRateLimit } from './rate-limit';
 
 export async function onRequestGet(context: { request: Request; env: Env }): Promise<Response> {
-  const { DB } = context.env;
   const url = new URL(context.request.url);
   const target = url.searchParams.get('url');
+  return shortenTarget(context, target);
+}
+
+// POST { url } — preferred: very long destinations overflow GET query
+// limits (414) on some paths; a JSON body has no such ceiling.
+export async function onRequestPost(context: { request: Request; env: Env }): Promise<Response> {
+  let target: string | null = null;
+  try {
+    const body = (await context.request.json()) as { url?: unknown };
+    target = typeof body.url === 'string' ? body.url : null;
+  } catch {
+    return new Response('Invalid JSON body', { status: 400 });
+  }
+  return shortenTarget(context, target);
+}
+
+async function shortenTarget(context: { request: Request; env: Env }, target: string | null): Promise<Response> {
+  const { DB } = context.env;
   if (!target) return new Response('Missing url parameter', { status: 400 });
 
   try {

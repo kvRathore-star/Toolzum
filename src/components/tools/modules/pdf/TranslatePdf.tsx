@@ -94,12 +94,15 @@ export default function TranslatePdf() {
 
     setIsTranslating(true);
     try {
+      // MyMemory caps a request at 5000 chars — say so when cutting, or
+      // the user believes all 20 pages were translated.
+      const wasTruncated = extractedText.length > 5000;
       const text = extractedText.slice(0, 5000);
-      const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${targetLang}`);
+      const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${targetLang}`, { signal: AbortSignal.timeout(25000) });
       const data: { responseStatus: number; responseData: { translatedText: string }; responseDetails?: string } = await res.json();
       if (data.responseStatus === 200) {
         setTranslatedText(data.responseData.translatedText);
-        toast.success("Translation complete!");
+        toast.success(wasTruncated ? `Translation complete — first 5000 of ${extractedText.length} characters (API limit).` : "Translation complete!");
       } else {
         throw new Error(data.responseDetails || "Translation failed");
       }

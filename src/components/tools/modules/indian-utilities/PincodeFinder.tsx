@@ -51,7 +51,7 @@ export default function PincodeFinder() {
       if (!/^\d{6}$/.test(cleanPincode)) { setError('Pincode must be exactly 6 digits (e.g. 110001).'); return; }
       setLoading(true);
       try {
-        const response = await fetch(`https://api.postalpincode.in/pincode/${cleanPincode}`);
+        const response = await fetch(`https://api.postalpincode.in/pincode/${cleanPincode}`, { signal: AbortSignal.timeout(15000) });
         if (!response.ok) throw new Error('API server returned an error.');
         const json = (await response.json()) as Array<{ Status?: string; Message?: string; PostOffice?: Array<Record<string, string>> }>;
         const postOffices = json[0]?.PostOffice;
@@ -64,7 +64,7 @@ export default function PincodeFinder() {
       if (!cleanName || cleanName.length < 3) { toast.error('Please enter at least 3 characters of the Post Office name'); return; }
       setLoading(true);
       try {
-        const response = await fetch(`https://api.postalpincode.in/postoffice/${encodeURIComponent(cleanName)}`);
+        const response = await fetch(`https://api.postalpincode.in/postoffice/${encodeURIComponent(cleanName)}`, { signal: AbortSignal.timeout(15000) });
         if (!response.ok) throw new Error('API server returned an error.');
         const json = (await response.json()) as Array<{ Status?: string; Message?: string; PostOffice?: Array<Record<string, string>> }>;
         const postOffices = json[0]?.PostOffice;

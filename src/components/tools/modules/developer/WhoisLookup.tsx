@@ -21,6 +21,7 @@ interface RDAPResponse {
   entities?: RDAPEntity[];
   nameservers?: { ldhName: string }[];
   status?: string[];
+  secureDNS?: { delegationSigned?: boolean };
   rdapConformance?: string[];
   notices?: { title: string; description: string[] }[];
 }
@@ -32,6 +33,7 @@ interface WhoisResult {
   expirationDate: string;
   nameServers: string[];
   status: string[];
+  dnssec: string;
   rawData: string;
 }
 
@@ -61,6 +63,7 @@ function parseRDAP(data: RDAPResponse, domain: string): WhoisResult {
     expirationDate: expiration || 'N/A',
     nameServers: nameservers,
     status: data.status || [],
+    dnssec: data.secureDNS?.delegationSigned === true ? 'Signed' : data.secureDNS?.delegationSigned === false ? 'Unsigned' : 'N/A',
     rawData: JSON.stringify(data, null, 2),
   };
 }
@@ -80,12 +83,13 @@ function parseWhoisFreeAes(data: Record<string, unknown>, domain: string): Whois
     expirationDate: Array.isArray(expiration) ? (expiration[0] ?? '') : expiration || 'N/A',
     nameServers: Array.isArray(nameservers) ? nameservers.slice(0, 10) : [],
     status: Array.isArray(status) ? status : typeof status === 'string' ? [status] : [],
+    dnssec: 'N/A',
     rawData: raw,
   };
 }
 
 function validateDomain(d: string): string | null {
-  const clean = d.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/\/.*$/, '');
+  const clean = d.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/\/.*$/, '').replace(/\.$/, '');
   if (!clean) return null;
   if (!/^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/.test(clean)) return null;
   return clean;
@@ -113,8 +117,16 @@ export default function WhoisLookup() {
     setError('');
     setResult(null);
 
+    // 15s ceiling per provider — neither endpoint may hang the UI forever.
+    const withTimeout = () => AbortSignal.timeout(15000);
+    let rdapNotFound = false;
     try {
-      const res = await fetch(`https://rdap.org/domain/${target}`);
+      const res = await fetch(`https://rdap.org/domain/${target}`, { signal: withTimeout() });
+      if (res.status === 404) {
+        // 404 is data, not a network error: unregistered or TLD unsupported.
+        rdapNotFound = true;
+        throw new Error('RDAP 404');
+      }
       if (!res.ok) throw new Error('RDAP failed');
       const data: RDAPResponse = await res.json();
       setResult(parseRDAP(data, target));
@@ -122,7 +134,7 @@ export default function WhoisLookup() {
       toast.success('WHOIS data retrieved!');
     } catch {
       try {
-        const fallbackRes = await fetch(`https://whois.freeaes.com/api/whois?domain=${target}`);
+        const fallbackRes = await fetch(`https://whois.freeaes.com/api/whois?domain=${target}`, { signal: withTimeout() });
         if (!fallbackRes.ok) throw new Error('Fallback failed');
         const data: Record<string, unknown> = await fallbackRes.json();
         if (data.error || !data.raw) throw new Error((data.error as string) || 'No data');
@@ -130,7 +142,9 @@ export default function WhoisLookup() {
         setHistory(prev => [target, ...prev.filter(h => h !== target)].slice(0, 5));
         toast.success('WHOIS data retrieved (via fallback)');
       } catch {
-        setError('Unable to retrieve WHOIS information. Try again later.');
+        setError(rdapNotFound
+          ? `No RDAP record for ${target} — the domain may be unregistered (possibly available) or the TLD may be unsupported. Verify at a registrar before acting.`
+          : 'Unable to retrieve WHOIS information. Try again later.');
         toast.error('Lookup failed');
       }
     } finally {
@@ -151,6 +165,7 @@ export default function WhoisLookup() {
         `Registrar: ${result.registrar}`,
         `Created: ${result.creationDate}`,
         `Expires: ${result.expirationDate}`,
+        `DNSSEC: ${result.dnssec}`,
         `Name Servers: ${result.nameServers.join(', ')}`,
         `Status: ${result.status.join(', ')}`,
         '',
@@ -208,6 +223,10 @@ export default function WhoisLookup() {
               <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4">
                 <p className="text-[10px] text-[var(--text-secondary)] uppercase tracking-wider">Expires</p>
                 <p className="text-sm text-[var(--text-primary)] mt-1 font-mono">{result.expirationDate}</p>
+              </div>
+              <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4">
+                <p className="text-[10px] text-[var(--text-secondary)] uppercase tracking-wider">DNSSEC</p>
+                <p className="text-sm text-[var(--text-primary)] mt-1 font-mono">{result.dnssec}</p>
               </div>
             </div>
 

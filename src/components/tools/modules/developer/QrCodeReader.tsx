@@ -34,8 +34,8 @@ export default function QrCodeReader() {
   }, []);
 
   const processFile = async (f: File) => {
-    if (!['image/png', 'image/jpeg', 'image/webp'].includes(f.type) && !f.name.match(/\.(png|jpe?g|webp)$/i)) {
-      toast.error('Unsupported format. Use PNG, JPG, or WebP.');
+    if (!['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/bmp'].includes(f.type) && !f.name.match(/\.(png|jpe?g|webp|gif|bmp)$/i)) {
+      toast.error('Unsupported format. Use PNG, JPG, GIF, BMP, or WebP.');
       return;
     }
     setFile(f);
@@ -62,7 +62,7 @@ export default function QrCodeReader() {
       if (!ctx) { toast.error('Canvas not supported'); return; }
       ctx.drawImage(bitmap, 0, 0);
       const imageData = ctx.getImageData(0, 0, bitmap.width, bitmap.height);
-      const code = jsQR(imageData.data, imageData.width, imageData.height, { inversionAttempts: 'dontInvert' });
+      const code = jsQR(imageData.data, imageData.width, imageData.height, { inversionAttempts: 'attemptBoth' });
       bitmap.close();
 
       if (code) {
@@ -128,9 +128,10 @@ export default function QrCodeReader() {
     try {
       const content = decodedData.map(d => d.data).join('\n---\n');
       const blob = new Blob([content], { type: 'text/plain' });
-      if (blobUrlRef.current) URL.revokeObjectURL(blobUrlRef.current);
+      // Fresh URL for the download only — the preview URL in blobUrlRef is
+      // left alone (downloadOrShare revokes what it is given). Reusing
+      // blobUrlRef here used to break the preview image after Download.
       const url = URL.createObjectURL(blob);
-      blobUrlRef.current = url;
       await downloadOrShare(url, 'qr-codes-decoded.txt');
     } catch {
       toast.error('Download failed');
@@ -209,6 +210,10 @@ export default function QrCodeReader() {
     const img = imageRef.current;
     ov.width = img.naturalWidth;
     ov.height = img.naturalHeight;
+    // Backing store is natural pixels but the preview is CSS-scaled
+    // (max-h-80) — match the displayed size so the box lands on the code.
+    ov.style.width = `${img.clientWidth}px`;
+    ov.style.height = `${img.clientHeight}px`;
     ctx.clearRect(0, 0, ov.width, ov.height);
     ctx.strokeStyle = '#22c55e';
     ctx.lineWidth = 4;
@@ -238,7 +243,7 @@ export default function QrCodeReader() {
           className={`border-2 border-dashed rounded-xl p-8 text-center transition-all cursor-pointer ${dragOver ? 'border-[var(--accent)] bg-[var(--accent)]/5 scale-[1.02]' : 'border-[var(--border-subtle)] hover:border-[var(--accent)]'}`}
         >
           <label className="cursor-pointer">
-            <input type="file" accept="image/png,image/jpeg,image/webp" onChange={handleFileSelect} className="sr-only" aria-label="Upload QR Code Image" />
+            <input type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" onChange={handleFileSelect} className="sr-only" aria-label="Upload QR Code Image" />
             <div className="text-[var(--text-muted)] text-sm">
               <p className="font-medium text-[var(--text-secondary)] mb-1">Upload QR Code Image</p>
               <p className="text-xs">Drag & drop or click to select (PNG, JPG, WebP)</p>

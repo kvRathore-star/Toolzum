@@ -48,7 +48,9 @@ export default function YoutubeTranscriptGenerator() {
         throw new Error(capData.error || 'No public captions found for this video.');
       }
       const transcript = capData.lines.join(' ');
-      setTranscriptInfo(`${capData.lines.length} caption lines (${capData.lang || 'unknown language'}) — analysis below is grounded in this transcript.`);
+      // Analysis runs on the first ~12K chars only — long videos are
+      // partial, and the info line must say so.
+      setTranscriptInfo(`${capData.lines.length} caption lines (${capData.lang || 'unknown language'}) — analysis below is grounded in this transcript${transcript.length > 12000 ? ' (first ~12K characters; long video, tail not covered)' : ''}.`);
       const excerpt = transcript.length > 12000 ? `${transcript.slice(0, 12000)}…` : transcript;
       const prompt = `You are an expert YouTube content analyst assistant.\n\nAnalyze THIS ACTUAL TRANSCRIPT (do not invent content beyond it). Detail level: ${detailLevel}. Create a summary, structured outline, and actionable takeaways.\n\nTranscript:\n${excerpt}`;
       const response = await generateCompletion([{ role: 'user', content: prompt }], 0.5);

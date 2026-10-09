@@ -24,7 +24,7 @@ export default function OpenapiValidator() {
     if (methods.length > 0 && responses.length === 0) issues.push('Methods found but no `responses:` blocks — every operation needs at least one response');
     const descriptions = spec.match(/^\s*description:\s*.+/gim) || [];
     if (responses.length > 0 && descriptions.length === 0) issues.push('Responses exist but none carry a description');
-    setResult({ valid: issues.length === 0, issues: issues.length ? issues : ['Schema appears valid'] });
+    setResult({ valid: issues.length === 0, issues: issues.length ? issues : ['Basic structure looks OK — heuristic screen only, not a full spec validation'] });
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
@@ -37,7 +37,7 @@ export default function OpenapiValidator() {
         <button onClick={calc} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Validate</button>
         {result && (
           <div className={`p-3 rounded-xl text-sm font-bold ${result.valid ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300'}`}>
-            <p>{result.valid ? '✓ Valid Spec' : '✗ Issues Found'}</p>
+            <p>{result.valid ? '✓ Basic Structure OK' : '✗ Issues Found'}</p>
             {result.issues.map((issue, i) => <p key={i} className="text-xs font-normal mt-1">{issue}</p>)}
           </div>
         )}

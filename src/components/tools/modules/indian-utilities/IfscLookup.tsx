@@ -53,7 +53,7 @@ export default function IfscLookup() {
     setData(null);
 
     try {
-      const response = await fetch(`https://ifsc.razorpay.com/${cleanIfsc}`);
+      const response = await fetch(`https://ifsc.razorpay.com/${cleanIfsc}`, { signal: AbortSignal.timeout(15000) });
       if (!response.ok) {
         if (response.status === 404) throw new Error('IFSC code not found in the database. Please verify the code.');
         throw new Error('Failed to fetch IFSC details. Please try again.');

@@ -154,7 +154,7 @@ export default function AiGrammarChecker() {
       const found = findErrors(input);
       setErrors(found);
       setHasChecked(true);
-      toast.success(found.length === 0 ? 'No errors found' : `Found ${found.length} potential error${found.length > 1 ? 's' : ''}`);
+      toast.success(found.length === 0 ? 'No common errors found' : `Found ${found.length} potential error${found.length > 1 ? 's' : ''}`);
     } catch (e: unknown) {
       toast.error(e instanceof Error ? e.message : 'Failed to check grammar');
     } finally {
@@ -393,8 +393,8 @@ export default function AiGrammarChecker() {
                 <svg className="w-12 h-12 mx-auto mb-3 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <p className="text-sm font-medium">No errors found!</p>
-                <p className="text-xs mt-1">Your text looks clean. Try pasting more text to check.</p>
+                <p className="text-sm font-medium">No common errors found</p>
+                <p className="text-xs mt-1">This check covers common patterns only — give high-stakes text one human read.</p>
               </div>
             )}
           </div>

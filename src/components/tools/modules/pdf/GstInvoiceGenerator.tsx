@@ -147,8 +147,14 @@ export default function GstInvoiceGenerator() {
           if (logoImage) {
             const logoDims = logoImage.scaleToFit(120, 50);
             page.drawImage(logoImage, { x: 40, y: height - 60 - logoDims.height, width: logoDims.width, height: logoDims.height });
+          } else {
+            // A chosen logo that never lands on the page must be named —
+            // otherwise the invoice reads "generated!" while missing art.
+            toast.error("Logo could not be embedded (unsupported image) — invoice generated without it.");
           }
-        } catch {}
+        } catch {
+          toast.error("Logo could not be embedded — invoice generated without it.");
+        }
       }
 
       page.drawText("TAX INVOICE", { x: 40, y: height - 60, size: 20, font: fontBold, color: rgb(0.1, 0.1, 0.1) });

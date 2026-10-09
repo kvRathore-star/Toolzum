@@ -29,7 +29,11 @@ export default function BulkUrlShortener() {
       return { original: url, shortened: '', status: 'error', error: 'Invalid URL' };
     }
     try {
-      const res = await fetch(`/api/url-shorten?url=${encodeURIComponent(url.startsWith('http') ? url : 'https://' + url)}`);
+      const res = await fetch('/api/url-shorten', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: url.startsWith('http') ? url : 'https://' + url }),
+      });
       // Backend allows ~10/min: back off on 429 instead of failing the URL.
       if (res.status === 429 && attempt < 3 && !abortRef.current) {
         const waitSec = Math.min(Number(res.headers.get('Retry-After')) || 20, 65);

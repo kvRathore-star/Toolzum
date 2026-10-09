@@ -322,7 +322,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "QR Code Generator",
     "slug": "qr-code-generator",
     "category": "Utility",
-    "description": "Renders a scannable QR code from any text or URL using a client-side Reed-Solomon encoder. Download as PNG. Customize size and error correction, then download print-ready PNGs — free, local, no signup.",
+    "description": "Renders a scannable QR code from any text or URL with a client-side Reed-Solomon encoder at fixed high error correction. Customize size, colors, and center logo, then download the PNG — free, local, no signup.",
     "isPro": false
   },
   {
@@ -418,7 +418,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "URL Shortener",
     "slug": "url-shortener",
     "category": "Utility",
-    "description": "Takes any long URL and generates a compact, shareable short link. Uses cloud-based processing. Short links resolve through managed providers with automatic failover — free to start, sign in for full access.",
+    "description": "Takes any long URL and generates a compact, shareable short link. Uses cloud-based processing. Short links resolve through managed providers with automatic failover — free, paced ~10 links/min per address.",
     "isPro": false
   },
   {
@@ -706,7 +706,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MP4 to MOV Converter",
     "slug": "mp4-to-mov",
     "category": "Converter",
-    "description": "Convert MP4 video files to MKV format directly in your browser. 100% free, private — your files never leave your device.",
+    "description": "Convert MP4 video files to MOV format directly in your browser. 100% free, private — your files never leave your device.",
     "isPro": false
   },
   {
@@ -722,7 +722,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MOV to MKV Converter",
     "slug": "mov-to-mkv",
     "category": "Converter",
-    "description": "Convert MKV video files to MOV format directly in your browser. 100% free, private — your files never leave your device.",
+    "description": "Convert MOV video files to MKV format directly in your browser. 100% free, private — your files never leave your device.",
     "isPro": false
   },
   {
@@ -754,7 +754,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "XML Sitemap Generator",
     "slug": "xml-sitemap-generator",
     "category": "SEO",
-    "description": "Crawls any website and generates a standards-compliant XML sitemap. Supports JavaScript sites (React, Next.js, Vue), detects broken links, and provides SEO health insights.",
+    "description": "Crawls any website and generates a standards-compliant XML sitemap. Static-link crawl plus sitemap.xml seeding — JavaScript-rendered links (React, Next.js, Vue) may be missed. Detects broken links and provides SEO health insights.",
     "isPro": false
   },
   {
@@ -1674,7 +1674,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bank Statement Analyser",
     "slug": "bank-statement-analyser",
     "category": "Utility",
-    "description": "Upload bank statement PDFs or CSVs and get income, expense, and transfer categories with visual spending breakdowns. Budgeters spot where Rs.18,000 leaks monthly — sign in free for 2 analyses a day.",
+    "description": "Upload bank statement PDFs or CSVs and get income, expense, and transfer categories with visual spending breakdowns. Budgeters spot where Rs.18,000 leaks monthly — analysis is free and unlimited, exports count as Pro downloads.",
     "isPro": true
   },
   {
@@ -1882,7 +1882,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Bulk URL Status Checker",
     "slug": "bulk-url-status-checker",
     "category": "SEO",
-    "description": "Scan hundreds of URLs for status codes, redirect chains, and dead pages with CSV export for audits. SEOs check 500 links before a migration — local fetch with auto-paced backend, 2 free batches a day.",
+    "description": "Scan hundreds of URLs for status codes, redirect chains, and dead pages with CSV export for audits. SEOs check 500 links before a migration — server-side checks with auto-paced backend (~15/min per address).",
     "isPro": true
   },
   {
@@ -2026,7 +2026,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Domain Availability Checker",
     "slug": "domain-availability-checker",
     "category": "Developer",
-    "description": "Check if a domain name is available across major TLDs. Instantly verify domain availability, lookup registration status, and get suggestions for alternative names.",
+    "description": "Check a domain name across major TLDs with a DNS heuristic — likely-registered or likely-available per extension. A DNS miss is not proof of availability: always confirm with a registrar before purchasing.",
     "isPro": false
   },
   {
@@ -2634,7 +2634,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Website Screenshot",
     "slug": "website-screenshot",
     "category": "Developer",
-    "description": "Capture screenshots of any website directly in your browser. Choose output format, viewport size, and capture delay. No server-side processing.",
+    "description": "Take a screenshot snapshot as a static-HTML approximation of any public page, rendered in your browser. Choose output format, viewport size, and settle delay. Page HTML is fetched via a first-party proxy, then rendered locally.",
     "isPro": false
   },
   {
@@ -5242,7 +5242,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "OpenAPI Validator",
     "slug": "openapi-validator",
     "category": "Developer",
-    "description": "Validate OpenAPI/Swagger spec syntax. Check for required fields, missing paths, and structural issues in your API specification.",
+    "description": "Basic structural check for OpenAPI/Swagger specs — required top-level fields, non-empty paths, and $ref presence. A heuristic screen, not a full spec validation: passing here does not guarantee a valid spec.",
     "isPro": false
   },
   {
@@ -5786,7 +5786,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SEO Schema Generator",
     "slug": "seo-schema-generator",
     "category": "SEO",
-    "description": "Generate valid JSON-LD schema for Article, Product, FAQ, LocalBusiness, Recipe, and Event types. Add rich-result eligibility in minutes — free, local, copy-paste.",
+    "description": "Generate JSON-LD schema for Article, Product, FAQ, LocalBusiness, Recipe, and Event types. Add rich-result eligibility in minutes — free, local, copy-paste.",
     "isPro": false
   },
   {

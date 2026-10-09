@@ -19,9 +19,17 @@ export default function DomainAvailabilityChecker() {
   const [isLoading, setIsLoading] = useState(false);
 
   const checkDomain = async () => {
-    const name = domain.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/\/.*$/, '').split('.')[0];
-    if (!name || name.length < 2) {
-      toast.error('Enter a domain name (at least 2 characters)');
+    const cleaned = domain.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/\/.*$/, '');
+    // Strip a known TLD suffix if present ("myshop.com" → "myshop") so a
+    // pasted FQDN checks the right base. The old split('.')[0] turned
+    // "my.cool" into "my" and checked the wrong domain entirely.
+    const tldsSorted = [...COMMON_TLDS].sort((a, b) => b.length - a.length);
+    let name = cleaned;
+    for (const t of tldsSorted) {
+      if (cleaned.endsWith(t)) { name = cleaned.slice(0, -t.length); break; }
+    }
+    if (!name || name.includes('.') || name.length < 2) {
+      toast.error('Enter a single name without extension (e.g. myshop — not my.shop)');
       return;
     }
 
@@ -35,9 +43,11 @@ export default function DomainAvailabilityChecker() {
         // Check A (web) AND MX (mail) records: a domain with mail but no
         // website is still registered. The old check looked at A records
         // only and reported such domains as "available".
+        // 10s per lookup: one stalled resolver must not hang the whole
+        // sequential TLD loop. Timeouts land in catch per-TLD below.
         const [aRes, mxRes] = await Promise.all([
-          fetch(`https://dns.google/resolve?name=${fullDomain}&type=A`),
-          fetch(`https://dns.google/resolve?name=${fullDomain}&type=MX`),
+          fetch(`https://dns.google/resolve?name=${fullDomain}&type=A`, { signal: AbortSignal.timeout(10000) }),
+          fetch(`https://dns.google/resolve?name=${fullDomain}&type=MX`, { signal: AbortSignal.timeout(10000) }),
         ]);
         const aData: { Answer?: { data: string }[] } = await aRes.json();
         const mxData: { Answer?: { data: string }[] } = await mxRes.json();

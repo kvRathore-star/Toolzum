@@ -8,10 +8,7 @@ export default function CanonicalUrlChecker() {
     let u: URL;
     try { u = new URL(url); } catch { setResult('Invalid URL'); return; }
     const structural = [`Protocol: ${u.protocol}`, `Domain: ${u.hostname}`, `Path: ${u.pathname}`, u.hash ? '⚠️ Has fragment (#) — search engines may ignore' : '✓ No fragment', u.search ? '⚠️ Has query params — ensure these are the canonical version' : '✓ No query params', u.pathname.endsWith('/') ? '✓ Ends with /' : 'ℹ️ No trailing slash', u.hostname.startsWith('www.') ? 'ℹ️ With www' : 'ℹ️ Without www'];
-    setChecking(true);
-    try {
-      const res = await fetch(url, { redirect: 'follow' });
-      const html = await res.text();
+    const readTag = (html: string, finalUrl: string, via: string) => {
       const doc = new DOMParser().parseFromString(html, 'text/html');
       const link = doc.querySelector('link[rel="canonical"]');
       const canonical = link?.getAttribute('href')?.trim() || '';
@@ -19,12 +16,40 @@ export default function CanonicalUrlChecker() {
         let resolved = canonical;
         try { resolved = new URL(canonical, url).toString(); } catch { /* keep raw */ }
         const selfRef = resolved.replace(/\/$/, '') === u.toString().replace(/\/$/, '');
-        setResult([`✓ Valid URL format`, ...structural, '', `Canonical tag found: ${resolved}`, selfRef ? '✓ Self-referencing canonical (good)' : '⚠️ Canonical points to a different URL — that URL is the one search engines will index', `Final URL after redirects: ${res.url}`].join('\n'));
+        setResult([`✓ Valid URL format`, ...structural, '', `Canonical tag found (${via}): ${resolved}`, selfRef ? '✓ Self-referencing canonical (good)' : '⚠️ Canonical points to a different URL — that URL is the one search engines will index', `Final URL after redirects: ${finalUrl}`].join('\n'));
       } else {
-        setResult([`✓ Valid URL format`, ...structural, '', 'ℹ️ No <link rel="canonical"> tag found in the fetched HTML — search engines will treat the page URL itself as canonical.'].join('\n'));
+        setResult([`✓ Valid URL format`, ...structural, '', `ℹ️ No <link rel="canonical"> tag found in the fetched HTML (${via}) — search engines will treat the page URL itself as canonical.`].join('\n'));
       }
-    } catch {
-      setResult([`✓ Valid URL format`, ...structural, '', '⚠️ Could not fetch this URL from your browser (most sites block cross-origin reads via CORS). Showing structural analysis only — open the page and check for a <link rel="canonical"> tag in its <head> manually.'].join('\n'));
+    };
+    const structuralOnly = (why: string) => {
+      setResult([`✓ Valid URL format`, ...structural, '', `⚠️ ${why} Showing structural analysis only — open the page and check for a <link rel="canonical"> tag in its <head> manually.`].join('\n'));
+    };
+    setChecking(true);
+    try {
+      // 1. Direct browser fetch (works for CORS-open sites).
+      try {
+        const res = await fetch(url, { redirect: 'follow', signal: AbortSignal.timeout(15000) });
+        readTag(await res.text(), res.url, 'direct fetch');
+        return;
+      } catch { /* fall through to first-party fetch */ }
+      // 2. First-party fetch (SSRF-guarded server fetch, 20/min) — covers
+      // the sites that block cross-origin browser reads.
+      try {
+        const r = await fetch('/api/fetch-page', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ url }), signal: AbortSignal.timeout(20000) });
+        const data = (await r.json()) as { html?: string; finalUrl?: string; error?: string };
+        if (!r.ok || !data.html) {
+          const why = data.error === 'invalid_url' ? 'That address was rejected (private/local URLs cannot be fetched).'
+            : data.error === 'not_html' ? 'That URL did not return an HTML page.'
+            : data.error === 'too_large' ? 'That page exceeds the 1.5MB fetch cap.'
+            : r.status === 429 ? 'Fetch budget exhausted (~20/min) — wait a minute and retry.'
+            : 'The server could not fetch that page (it may block bots).';
+          structuralOnly(why);
+          return;
+        }
+        readTag(data.html, data.finalUrl || url, 'server fetch');
+      } catch {
+        structuralOnly('Could not fetch this URL from your browser or our server.');
+      }
     } finally {
       setChecking(false);
     }

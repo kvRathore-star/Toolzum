@@ -105,7 +105,7 @@ function GroupLinkTab() {
       )}
       <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/30 rounded-xl p-3">
         <p className="text-[10px] text-amber-600 dark:text-amber-400">
-          <strong>Note:</strong> Group invite links expire after 7+ days of inactivity. Pro: permanent invite links with QR codes.
+          <strong>Note:</strong> Group invite links are managed by WhatsApp — admins can reset them at any time, which invalidates old links. This tool only formats the link; it cannot extend or lock expiry.
         </p>
       </div>
     </div>
@@ -212,7 +212,7 @@ function BulkLinkTab() {
   };
 
   const handleCopy = (index: number) => {
-    clipboardWrite(generateLink(csvData[index]!)).then(ok => { if (ok) { setCopiedIndex(index); setTimeout(() => setCopiedIndex(null), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
+    clipboardWrite(generateLink(filteredData[index]!)).then(ok => { if (ok) { setCopiedIndex(index); setTimeout(() => setCopiedIndex(null), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const filteredData = useMemo(() => {
@@ -617,7 +617,7 @@ function ChatAnalyzerTab() {
       '--- Top Senders ---',
       ...stats.topSenders.map(([name, count]) => `${name}: ${count} messages (${(count / stats.totalMessages * 100).toFixed(1)}%)`),
       '',
-      'Pro version includes: full timeline, word cloud, sentiment analysis, export as PDF.',
+      'Counts above cover per-sender, per-day, and per-hour activity plus media and link tallies.',
     ].join('\n');
     const blob = new Blob([report], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
@@ -832,7 +832,7 @@ function StatusDesignerTab() {
 
           <button onClick={handleDownload}
             className="w-full py-3.5 bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors">
-            <Download className="w-4 h-4" /> Download Status Image (1080×1920)
+            <Download className="w-4 h-4" /> Download Status Image (540×960)
           </button>
         </div>
 

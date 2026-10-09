@@ -196,7 +196,7 @@ export function GraphqlSchemaValidator() {
         issues.push(`Reference to unknown type: ${ref}`);
       }
     }
-    setResult({ valid: issues.length === 0, issues: issues.length ? issues : ['Schema appears valid'] });
+    setResult({ valid: issues.length === 0, issues: issues.length ? issues : ['Basic structure looks OK — heuristic screen only, not spec validation'] });
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
@@ -217,7 +217,7 @@ export function GraphqlSchemaValidator() {
           <div className="space-y-2">
             <div className={`flex items-center gap-2 p-3 rounded-xl text-sm font-bold ${result.valid ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300'}`}>
               <span className="text-lg">{result.valid ? '✓' : '✗'}</span>
-              {result.valid ? 'Valid Schema' : 'Issues Found'}
+              {result.valid ? 'Basic Structure OK' : 'Issues Found'}
             </div>
             <div className="text-xs text-[var(--text-secondary)] space-y-1">
               {result.issues.map((issue, i) => (

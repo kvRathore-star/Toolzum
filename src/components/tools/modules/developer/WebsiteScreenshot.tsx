@@ -418,7 +418,7 @@ export default function WebsiteScreenshot() {
 
         <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] p-4 rounded-xl text-xs text-[var(--text-secondary)] space-y-1">
           <p>⚠️ <strong>Limitations:</strong> Pages are fetched server-side and rendered locally in your browser, so external CSS, images, and JavaScript may not load — results work best on simple or text-based pages. Sites that block all bots may refuse the fetch entirely. For full-featured screenshots, consider a browser extension or a server-side tool like Puppeteer.</p>
-          <p className="pt-1">💡 <strong>Tip:</strong> Increase the delay for JavaScript-heavy sites to allow more content to render before capture.</p>
+          <p className="pt-1">💡 <strong>Tip:</strong> The delay only settles the local static render — page JavaScript never runs, so longer waits cannot load JS-driven content.</p>
         </div>
 
         <div ref={contentRef} className="fixed left-[-9999px] top-0" aria-hidden="true" />

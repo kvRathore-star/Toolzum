@@ -130,6 +130,9 @@ export default function BankStatementAnalyser() {
     const reader = new FileReader();
     reader.onload = (ev) => {
       const text = ev.target?.result as string;
+      // Preview cap only — parseStatement below runs on the full text, so
+      // analysis covers everything; the textarea just doesn't render 500K+.
+      if (text.length > 500000) toast('Large file — preview shows the first 500K characters; analysis covers the full file.');
       setRawText(text.slice(0, 500000)); // cap at 500K chars
       const result = parseStatement(text);
       if (result.error) {

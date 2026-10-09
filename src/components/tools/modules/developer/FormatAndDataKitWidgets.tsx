@@ -482,7 +482,7 @@ export function HarAnalyzer() {
         timings?: { wait?: number; receive?: number };
       }
       const entries: HarEntry[] = har?.log?.entries || [];
-      if (entries.length === 0) { setOutput('No entries found.'); return; }
+      if (entries.length === 0) { setOutput('No HAR entries found — paste a HAR object with log.entries (DevTools → Network → Export HAR).'); return; }
 
       const totalSize = entries.reduce((s: number, e: HarEntry) => s + (e.response?.content?.size || 0), 0);
       const totalTime = entries.reduce((s: number, e: HarEntry) => s + (e.timings?.wait || 0) + (e.timings?.receive || 0), 0);
@@ -490,14 +490,22 @@ export function HarAnalyzer() {
       const domains: Record<string, number> = {};
       const statuses: Record<number, number> = {};
       const lines: string[] = [];
+      let badUrls = 0;
+      let unknownStatus = 0;
+      let unknownSize = 0;
 
       entries.forEach((e: HarEntry, i: number) => {
         try {
           const u = new URL(e.request?.url || '');
           domains[u.hostname] = (domains[u.hostname] || 0) + 1;
-        } catch {}
-        const status = e.response?.status || 0;
-        statuses[status] = (statuses[status] || 0) + 1;
+        } catch { badUrls += 1; }
+        const status = e.response?.status;
+        if (typeof status === 'number') statuses[status] = (statuses[status] || 0) + 1;
+        else unknownStatus += 1;
+        // size -1/undefined means "unknown" in HAR — counted as 0 bytes
+        // below, and reported here instead of silently absorbed.
+        const sz = e.response?.content?.size;
+        if (typeof sz !== 'number' || sz < 0) unknownSize += 1;
       });
 
       setDomainBreakdown(domains);
@@ -521,6 +529,15 @@ export function HarAnalyzer() {
         const pct = ((entry[1] / entries.length) * 100).toFixed(1);
         lines.push('  ' + entry[0] + ': ' + entry[1] + ' (' + pct + '%)');
       });
+      // Partial input must read as partial — never present a clean report
+      // over skipped entries.
+      if (unknownStatus > 0) lines.push('  unknown status: ' + unknownStatus);
+      if (badUrls > 0 || unknownSize > 0) {
+        lines.push('');
+        lines.push('Skipped/approximated:');
+        if (badUrls > 0) lines.push('  ' + badUrls + ' entr' + (badUrls === 1 ? 'y' : 'ies') + ' with missing/malformed URLs (excluded from domain breakdown)');
+        if (unknownSize > 0) lines.push('  ' + unknownSize + ' entr' + (unknownSize === 1 ? 'y' : 'ies') + ' with unknown body size (counted as 0 bytes)');
+      }
 
       let wf = 'Waterfall (text):\n';
       entries.forEach((e: HarEntry, i: number) => {

@@ -17,9 +17,30 @@ export default function ApiRequestBuilder() {
     { label: 'GraphQL', url: 'https://api.example.com/graphql', method: 'POST', headers: 'Content-Type: application/json', body: '{"query":"{ users { id name } }"}' },
   ];
   const calc = () => {
-    const h = headers.split('\n').filter(Boolean).map(h => `  -H "${h.trim()}"`).join(' \\\n');
-    const b = method !== 'GET' && body ? `  -d '${body}'` : '';
-    const curl = `curl -X ${method} \\\n${h} \\\n  "${url}"${b ? ` \\\n${b}` : ''}`;
+    let protocol = '';
+    try {
+      protocol = new URL(url.trim()).protocol;
+    } catch {
+      toast.error('Invalid URL — include the http(s) scheme.');
+      return;
+    }
+    if (protocol !== 'http:' && protocol !== 'https:') {
+      toast.error('Only http(s) URLs allowed.');
+      return;
+    }
+    const headerLines = headers.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+    const bad = headerLines.filter(l => l.indexOf(':') <= 0);
+    if (bad.length > 0) {
+      toast.error(`Bad header line${bad.length === 1 ? '' : 's'} (need "Name: value"): ${bad.join(' | ')}`);
+      return;
+    }
+    // Quote for POSIX shells: backslash/double-quote inside -H "...",
+    // single-quote inside -d '...' — otherwise the copied command breaks.
+    const escDq = (s: string) => s.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+    const h = headerLines.map(l => `-H "${escDq(l)}"`).join(' \\\n  ');
+    const b = method !== 'GET' && body ? `  -d '${body.replace(/'/g, `'\''`)}'` : '';
+    const curl = `curl -X ${method}${h ? ` \\\n  ${h}` : ''} \\\n  "${url.trim()}"${b ? ` \\\n${b}` : ''}`
+      + (method === 'GET' && body.trim() ? `\n# Body omitted: GET requests carry no body (kept text was not included)` : '');
     setResult(curl);
   };
   return (

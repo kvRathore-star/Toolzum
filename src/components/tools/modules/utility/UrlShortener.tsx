@@ -31,7 +31,11 @@ export default function UrlShortener() {
     setCopied(false);
 
     try {
-      const response = await fetch(`/api/url-shorten?url=${encodeURIComponent(requestUrl)}`);
+      const response = await fetch('/api/url-shorten', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: requestUrl }),
+      });
       
       if (!response.ok) {
         throw new Error('Failed to shorten URL');

@@ -17,10 +17,11 @@ export default function SpeedTest() {
     setLatencyMs(null);
     setProgress(10);
 
-    // Step 1: Simulate / Measure real connection latency
+    // Step 1: Simulate / Measure real connection latency (10s ceiling —
+    // a stalled probe must fall back to estimated, not hang "Testing…").
     const startLatency = Date.now();
     try {
-      await fetch('https://httpbin.org/delay/0', { mode: 'cors' });
+      await fetch('https://httpbin.org/delay/0', { mode: 'cors', signal: AbortSignal.timeout(10000) });
       setLatencyMs(Date.now() - startLatency);
       setLatencyEstimated(false);
     } catch (e) {
@@ -33,7 +34,9 @@ export default function SpeedTest() {
     const startTime = Date.now();
     
     try {
-      const response = await fetch(testUrl, { cache: 'no-store', mode: 'cors' });
+      // 30s overall: aborting cancels the reader stream too, so a stall
+      // mid-download fails honestly instead of freezing at partial %.
+      const response = await fetch(testUrl, { cache: 'no-store', mode: 'cors', signal: AbortSignal.timeout(30000) });
       const reader = response.body?.getReader();
       if (!reader) throw new Error();
 

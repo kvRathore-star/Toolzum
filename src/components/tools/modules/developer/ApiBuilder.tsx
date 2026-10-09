@@ -47,33 +47,36 @@ function generateCode(method: HttpMethod, url: string, headers: KeyValue[], body
   const activeHeaders = headers.filter(h => h.enabled && h.key);
   const headerLines = activeHeaders.map(h => `  "${h.key}": "${h.value}"`).join(',\n');
   const hasBody = bodyType !== 'none' && body.trim();
+  // POSIX single-quote escaping for pasted commands — an apostrophe in a
+  // value used to silently produce a broken curl/fetch/axios snippet.
+  const escSq = (s: string) => s.replace(/\\/g, '\\\\').replace(/'/g, `'\''`);
 
   if (lang === 'curl') {
-    let cmd = `curl -X ${method} '${url}'`;
-    for (const h of activeHeaders) cmd += ` \\\n  -H '${h.key}: ${h.value}'`;
+    let cmd = `curl -X ${method} '${escSq(url)}'`;
+    for (const h of activeHeaders) cmd += ` \\\n  -H '${escSq(`${h.key}: ${h.value}`)}'`;
     if (hasBody) {
-      if (bodyType === 'json') cmd += ` \\\n  -H 'Content-Type: application/json' \\\n  -d '${body}'`;
-      else cmd += ` \\\n  -d '${body}'`;
+      if (bodyType === 'json') cmd += ` \\\n  -H 'Content-Type: application/json' \\\n  -d '${escSq(body)}'`;
+      else cmd += ` \\\n  -d '${escSq(body)}'`;
     }
     return cmd;
   }
 
   if (lang === 'fetch') {
-    let code = `fetch('${url}', {\n  method: '${method}',`;
+    let code = `fetch('${escSq(url)}', {\n  method: '${method}',`;
     if (activeHeaders.length) code += `\n  headers: {\n${headerLines}\n  }`;
     if (hasBody) {
       if (bodyType === 'json') code += `,\n  body: JSON.stringify(${body})`;
-      else code += `,\n  body: '${body}'`;
+      else code += `,\n  body: '${escSq(body)}'`;
     }
     code += '\n})';
     return code;
   }
 
-  let code = `axios({\n  method: '${method.toLowerCase()}',\n  url: '${url}',`;
+  let code = `axios({\n  method: '${method.toLowerCase()}',\n  url: '${escSq(url)}',`;
   if (activeHeaders.length) code += `\n  headers: {\n${headerLines}\n  }`;
   if (hasBody) {
     if (bodyType === 'json') code += `,\n  data: ${body}`;
-    else code += `,\n  data: '${body}'`;
+    else code += `,\n  data: '${escSq(body)}'`;
   }
   code += '\n})';
   return code;
@@ -138,6 +141,17 @@ export function ApiBuilder() {
 
   const sendRequest = useCallback(async () => {
     if (!url.trim()) { setError('Enter a URL'); return; }
+    let protocol = '';
+    try {
+      protocol = new URL(buildUrl()).protocol;
+    } catch {
+      setError('Invalid URL — include the http(s) scheme.');
+      return;
+    }
+    if (protocol !== 'http:' && protocol !== 'https:') {
+      setError('Only http(s) URLs can be fetched from a browser.');
+      return;
+    }
     setLoading(true);
     setError('');
     setResponse(null);
@@ -147,7 +161,18 @@ export function ApiBuilder() {
       const activeHeaders = headers.filter(h => h.enabled && h.key);
       const reqHeaders: Record<string, string> = {};
       for (const h of activeHeaders) reqHeaders[h.key] = h.value;
-      const opts: RequestInit = { method, headers: reqHeaders };
+      // Declared-JSON bodies must actually parse — otherwise the request
+      // goes out with a broken payload and the 400 looks like a server bug.
+      if (bodyType === 'json' && body.trim()) {
+        try {
+          JSON.parse(body);
+        } catch {
+          setError('Body is marked JSON but does not parse — fix it or switch body type.');
+          setLoading(false);
+          return;
+        }
+      }
+      const opts: RequestInit = { method, headers: reqHeaders, signal: AbortSignal.timeout(20000) };
       if (bodyType !== 'none' && body.trim()) {
         if (bodyType === 'json') {
           opts.body = body;

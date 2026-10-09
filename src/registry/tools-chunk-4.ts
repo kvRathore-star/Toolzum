@@ -399,8 +399,8 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "SEO Schema Generator",
     slug: "seo-schema-generator",
     category: "SEO",
-    description: 'Generate valid JSON-LD schema for Article, Product, FAQ, LocalBusiness, Recipe, and Event types. Add rich-result eligibility in minutes — free, local, copy-paste.',
-    seoDescription: 'Free JSON-LD schema generator — 6 types with valid markup that passes validators. Local generation, free, copy-paste, nothing uploads.',
+    description: 'Generate JSON-LD schema for Article, Product, FAQ, LocalBusiness, Recipe, and Event types. Add rich-result eligibility in minutes — free, local, copy-paste.',
+    seoDescription: 'Free JSON-LD schema generator — 6 types of schema.org markup shaped for validators. Local generation, free, copy-paste, nothing uploads.',
     dependencies: "None",
     seoTitle: "Free Schema Generator – JSON-LD Online",
     instructions: [
@@ -2570,7 +2570,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     slug: "ip-reputation-checker",
     category: "Developer",
     description: 'Check IP reputation against blocklists and geolocation data — spot VPNs, bots, and abuse sources. Screen a suspicious login IP instantly — live lookup data, free, no signup.',
-    seoDescription: 'Free IP reputation checker — blocklists plus geo context. Live ipinfo data, free, no signup, nothing uploads.',
+    seoDescription: 'Free IP reputation checker — blocklists plus geo context. Live ipinfo data, free, no signup; queried IPs leave the browser by design.',
     dependencies: "ipinfo.io API, Fetch API",
     seoTitle: "Free IP Reputation Checker Online",
     instructions: [

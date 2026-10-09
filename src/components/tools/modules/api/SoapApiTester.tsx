@@ -37,13 +37,26 @@ export default function SoapApiTester() {
     setSending(true);
     setResponse('');
     try {
+      let protocol = '';
+      try {
+        protocol = new URL(endpoint.trim()).protocol;
+      } catch {
+        setResponse('Invalid endpoint URL — include the http(s) scheme.');
+        return;
+      }
+      if (protocol !== 'http:' && protocol !== 'https:') {
+        setResponse('Only http(s) endpoints can be fetched from a browser.');
+        return;
+      }
       const res = await fetch(endpoint.trim(), {
         method: 'POST',
         headers: { 'Content-Type': 'text/xml; charset=utf-8', SOAPAction: method },
         body: envelope,
+        signal: AbortSignal.timeout(25000),
       });
       const text = await res.text();
-      setResponse(`# Status: ${res.status} ${res.ok ? 'OK' : 'ERROR'}\n\n${text.slice(0, 8000)}`);
+      const LIMIT = 8000;
+      setResponse(`# Status: ${res.status} ${res.ok ? 'OK' : 'ERROR'}\n\n${text.length > LIMIT ? `${text.slice(0, LIMIT)}\n…[truncated — showing first ${LIMIT} of ${text.length} chars]` : text}`);
     } catch (e) {
       setResponse(`Request failed: ${e instanceof Error ? e.message : 'network error'} (the service may block browser CORS — test CORS-enabled endpoints).`);
     } finally {

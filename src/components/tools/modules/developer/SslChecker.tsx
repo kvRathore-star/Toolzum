@@ -28,6 +28,8 @@ interface SslResult {
   cert: CertInfo;
   chain: ChainCert[];
   status: 'valid' | 'expiring' | 'expired';
+  /** live = direct chain check; ctlog = newest Certificate-Transparency log entry (not the live chain). */
+  source: 'live' | 'ctlog';
 }
 
 function parseSSLCheckerResponse(data: Record<string, unknown>, domain: string): SslResult | null {
@@ -73,6 +75,7 @@ function parseSSLCheckerResponse(data: Record<string, unknown>, domain: string):
     },
     chain,
     status,
+    source: 'live',
   };
 }
 
@@ -102,6 +105,7 @@ function parseCrtShResponse(data: Record<string, unknown>[], domain: string): Ss
     },
     chain: [],
     status,
+    source: 'ctlog',
   };
 }
 
@@ -134,6 +138,10 @@ export default function SslChecker() {
     abortRef.current?.abort();
     const controller = new AbortController();
     abortRef.current = controller;
+    // 15s ceiling: a stalled provider must not hang the UI. Supersede
+    // (a newer lookup) and timeout share the abort channel — told apart
+    // by whether this run is still current.
+    const timer = setTimeout(() => controller.abort(), 15000);
 
     setIsProcessing(true);
     setError('');
@@ -151,21 +159,31 @@ export default function SslChecker() {
       if (parsed.status === 'valid') toast.success(message);
       else toast(message, { icon: parsed.status === 'expiring' ? '⚠️' : '🚫' });
     } catch (err: unknown) {
-      if (err instanceof Error && err.name === 'AbortError') return;
+      // A newer lookup superseded this one — stay silent, it owns the UI.
+      if (err instanceof Error && err.name === 'AbortError' && abortRef.current !== controller) return;
       try {
-        const crtRes = await fetch(`https://crt.sh/?q=${target}&output=json`, { signal: controller.signal });
-        if (!crtRes.ok) throw new Error('crt.sh failed');
-        const crtData: Record<string, unknown>[] = await crtRes.json();
+        // Fresh controller: the primary one may be timed-out/aborted.
+        const fb = new AbortController();
+        const fbTimer = setTimeout(() => fb.abort(), 15000);
+        let crtData: Record<string, unknown>[];
+        try {
+          const crtRes = await fetch(`https://crt.sh/?q=${target}&output=json`, { signal: fb.signal });
+          if (!crtRes.ok) throw new Error('crt.sh failed');
+          crtData = await crtRes.json();
+        } finally {
+          clearTimeout(fbTimer);
+        }
         const parsed = parseCrtShResponse(crtData, target);
         if (!parsed) throw new Error('No certificate data found');
         setResult(parsed);
         setHistory(prev => [target, ...prev.filter(h => h !== target)].slice(0, 5));
-        toast.success('Certificate info retrieved (via crt.sh)');
+        toast.success('Newest logged certificate retrieved (via crt.sh — log entry, not live chain status)');
       } catch {
         setError('Unable to check SSL certificate. Try again later.');
         toast.error('SSL check failed');
       }
     } finally {
+      clearTimeout(timer);
       setIsProcessing(false);
     }
   };
@@ -238,6 +256,9 @@ export default function SslChecker() {
               {result.status === 'expiring' && `Expiring in ${result.cert.daysRemaining} days`}
               {result.status === 'expired' && `Expired (${Math.abs(result.cert.daysRemaining)} days ago)`}
             </div>
+            {result.source === 'ctlog' && (
+              <p className="text-xs text-[var(--text-muted)]">Newest Certificate-Transparency log entry — not a live chain check; confirm expiry against the live server before acting.</p>
+            )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4">

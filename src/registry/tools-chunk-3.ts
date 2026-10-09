@@ -2303,7 +2303,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { title: "2. Read structure verdict", desc: "Which format rules pass, which fail, and the detected provider shape." },
       { title: "3. Rotate weak keys", desc: "Short or malformed keys get regenerated at the provider dashboard." },    ],
     faqs: [
-      { question: "Format or live check?", answer: "Both — structure validation instantly, live verification where the provider allows." },
+      { question: "Format or live check?", answer: "Format only — structure, entropy, and provider-prefix patterns checked instantly. No offline check can confirm a key works with its issuer; only a real API call to the provider can verify that." },
       { question: "What makes a key valid?", answer: "Charset, length, and prefix patterns per provider convention." },
       { question: "Is pasting keys safe?", answer: "Validation runs locally in your browser — keys never leave the tab." },
       { question: "Are my keys uploaded anywhere?", answer: "No — validation runs locally in your browser, free with no signup." },
@@ -2523,7 +2523,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { title: "2. Read reference errors", desc: "Missing root types and unknown type references listed." },
       { title: "3. Fix types first", desc: "Define or import the flagged types, then revalidate." },    ],
     faqs: [
-      { question: "Spec compliance?", answer: "Validated against the GraphQL spec — types, fields, and nullability rules." },
+      { question: "Spec compliance?", answer: "Partially — the check covers root-type presence and unknown type references only. It never parses the schema, so directives, interfaces, field-type mismatches, and full spec rules are not verified. For full validation, use a dedicated GraphQL validator." },
       { question: "Error messages useful?", answer: "Each violation cites the exact type and field path for direct fixing." },
       { question: "Schema vs query validation?", answer: "Schemas define the contract; queries get checked against it separately." },
       { question: "Is my schema uploaded anywhere?", answer: "No — validation runs locally in your browser, free with no signup." },
@@ -2692,14 +2692,14 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "OpenAPI Validator",
     slug: "openapi-validator",
     category: "Developer",
-    description: 'Validate OpenAPI/Swagger spec syntax. Check for required fields, missing paths, and structural issues in your API specification.',
-    seoTitle: "OpenAPI Validator – Check Specs Free",
+    description: 'Basic structural check for OpenAPI/Swagger specs — required top-level fields, non-empty paths, and $ref presence. A heuristic screen, not a full spec validation: passing here does not guarantee a valid spec.',
+    seoTitle: "OpenAPI Validator – Basic Structure Check Free",
     instructions: [
       { title: "1. Paste the spec", desc: "OpenAPI/Swagger YAML or JSON with paths and components." },
-      { title: "2. Read structural errors", desc: "Missing required fields, empty paths, broken references listed." },
+      { title: "2. Read structural errors", desc: "Missing version/title fields, empty paths, methods without responses listed." },
       { title: "3. Fix and regenerate", desc: "Repair flagged sections, revalidate, then regenerate clients." },    ],
     faqs: [
-      { question: "Which OpenAPI versions?", answer: "2.0 and 3.x structures, including nested $ref chains and Schema Objects." },
+      { question: "Which OpenAPI versions?", answer: "The check looks for 2.0/3.x markers and top-level structure only — it never parses YAML or resolves $refs, so nested chains and Schema Objects are not actually verified. For full validation, use a dedicated spec validator." },
       { question: "What breaks most?", answer: "Missing required fields, wrong types, and unresolvable $refs." },
       { question: "Errors listed how?", answer: "Each violation with its JSON path for direct fixing in your editor." },
       { question: "Is my OpenAPI spec uploaded anywhere?", answer: "No — validation runs locally in your browser, free with no signup." },

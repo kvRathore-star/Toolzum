@@ -29,6 +29,7 @@ export default function BulkUrlStatusChecker() {
   const [isChecking, setIsChecking] = useState(false);
   const [progress, setProgress] = useState({ checked: 0, total: 0, batch: 0 });
   const [copied, setCopied] = useState(false);
+  const [paste, setPaste] = useState('');
   const fileRef = useRef<HTMLInputElement>(null);
   const cancelRef = useRef(false);
 
@@ -149,6 +150,7 @@ export default function BulkUrlStatusChecker() {
 
       <div className="space-y-6">
         {urls.length === 0 ? (
+          <>
           <div
             role="button"
             tabIndex={0}
@@ -165,6 +167,31 @@ export default function BulkUrlStatusChecker() {
               e.target.value = '';
             }} />
           </div>
+          <div className="space-y-2">
+            <label htmlFor="bulk-url-paste" className="text-xs font-semibold text-[var(--text-secondary)]">Or paste URLs (one per line)</label>
+            <textarea
+              id="bulk-url-paste"
+              value={paste}
+              onChange={e => setPaste(e.target.value)}
+              rows={4}
+              placeholder={'https://example.com/page-1\nhttps://example.com/page-2'}
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] px-4 py-3 text-xs font-mono text-[var(--text-primary)] placeholder:text-[var(--text-muted)]"
+            />
+            <button
+              onClick={() => {
+                const parsed = parseUrlList(paste);
+                if (parsed.length === 0) { toast.error('No valid URLs found in pasted text'); return; }
+                setUrls(parsed);
+                setResults([]);
+                setFileName('Pasted list');
+              }}
+              disabled={!paste.trim()}
+              className="px-4 py-2 bg-[var(--accent-ink)] hover:opacity-90 disabled:opacity-50 text-white text-xs font-bold rounded-xl transition-colors"
+            >
+              Use pasted list
+            </button>
+          </div>
+          </>
         ) : (
           <div className="space-y-4">
             <div className="flex items-center justify-between">

@@ -145,7 +145,7 @@ export function ApiKeyValidator() {
           <div className="space-y-2">
             <div className={`flex items-center gap-2 p-3 rounded-xl text-sm font-bold ${result.valid ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300'}`}>
               <span className="text-lg">{result.valid ? '✓' : '✗'}</span>
-              {result.valid ? 'Valid API Key' : 'Invalid API Key'}
+              {result.valid ? 'Passes Hygiene Checks' : 'Hygiene Issues Found'}
             </div>
             <div className="space-y-1.5">
               {result.checks.map((c, i) => (

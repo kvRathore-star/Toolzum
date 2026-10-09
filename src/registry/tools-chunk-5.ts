@@ -1221,7 +1221,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "What is JSON-LD?", answer: "JSON-LD (Linked Data) is a method of encoding structured data using JSON. It wraps your data with @context (schema.org) and @type (Article, Product, FAQPage, etc.) for search engine rich results." },
       { question: "What schema types are supported?", answer: "All schema.org types: Article, Product, FAQPage, HowTo, LocalBusiness, Event, Recipe, VideoObject, BreadcrumbList, and more." },
       { question: "How do I use the output?", answer: "Paste the generated JSON-LD into a <script type='application/ld+json'> tag in your HTML <head>. Google and other search engines parse it for rich snippets and knowledge panels." },
-      { question: "Does it validate the output?", answer: "Yes. The generator produces valid JSON-LD syntax and optionally validates against Google's structured data requirements." },
+      { question: "Does it validate the output?", answer: "Syntax only — the generator emits well-formed JSON-LD, but Google-eligibility (required/recommended properties per type) is not checked here. Paste the output into Google's Rich Results Test before shipping." },
       { question: "When using JSON-LD Generator, is my data stored?", answer: "No. All generation happens locally in your browser. No structured data is transmitted." },
     ],
     seoTitle: "Free Online JSON-LD Generator",
@@ -3991,7 +3991,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     faqs: [
       { question: 'How fast does a 200-link batch shorten?', answer: 'Our backend shortens each URL through managed shortening providers with automatic failover — if one provider errors, the request retries on a second — at ~10 links per minute with automatic retry on 429s. 200 UTM links finish in about 20 minutes. Paste, start, keep the tab open; invalid URLs report as errors instead of blocking the batch.' },
       { question: 'Are my original URLs stored or tracked?', answer: 'URLs pass through our backend to a third-party shortening service (unavoidable — short links live on the provider\'s domain under its terms). We keep no batch list beyond standard rate-limit rows — copy results before leaving. For sensitive pre-launch campaigns, shorten after the embargo lifts rather than weeks early.' },
-      { question: 'How do Pro limits work here?', answer: 'Anonymous visitors meet the Pro page lock and sign in to continue; signed-in free users run 2 Pro batches a day; Pro is unlimited. Copy results to clipboard free anytime; the CSV results download counts as one Pro download.' },
+      { question: 'How do Pro limits work here?', answer: 'Anonymous visitors meet the Pro page lock and sign in to continue; signed-in shortening runs paced at ~10 links per minute per address with automatic retry on 429s. Copy results to clipboard free anytime; the CSV results download counts as one Pro download.' },
       { question: 'Do shortened links expire?', answer: 'Created links typically persist on the provider\'s domain — check the link domain\'s terms for expiry and unsuitable-use rules. For evergreen content (bios, packaging), prefer your own domain shortener; use bulk shortening for campaigns and temporary pushes.' },
     ],
     seoTitle: "Free Bulk URL Shortener – Shorten Links",

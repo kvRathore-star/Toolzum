@@ -24,6 +24,25 @@ function fmtCountdown(ms: number): string {
   return `${String(m).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
 }
 
+// Plain-text bodies carry confirmation links as raw text — split on URLs
+// so each one renders as a real clickable anchor (safe: http/https only,
+// rel noopener; HTML is never injected, text stays text).
+const URL_RE = /(https?:\/\/[^\s<>"')\]]+)/g;
+
+function renderLinkedBody(body: string): React.ReactNode {
+  if (!body) return '(empty message)';
+  const parts = body.split(URL_RE);
+  return parts.map((part, i) =>
+    i % 2 === 1 ? (
+      <a key={i} href={part} target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] underline underline-offset-2 break-all">
+        {part}
+      </a>
+    ) : (
+      <React.Fragment key={i}>{part}</React.Fragment>
+    ),
+  );
+}
+
 export default function TempEmailInbox() {
   const [address, setAddress] = useState('');
   const [expiresAt, setExpiresAt] = useState(0);
@@ -264,7 +283,7 @@ export default function TempEmailInbox() {
                           </button>
                         </div>
                         <div className="text-sm text-[var(--text-secondary)] whitespace-pre-wrap break-words max-h-96 overflow-y-auto">
-                          {m.body || '(empty message)'}
+                          {renderLinkedBody(m.body)}
                         </div>
                       </div>
                     )}

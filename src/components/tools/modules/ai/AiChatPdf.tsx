@@ -187,7 +187,7 @@ export default function AiChatPdf() {
 
   const handleDownloadTranscript = async () => {
     const text = chatHistory.map((h, i) =>
-      `Q${i + 1}: ${h.question}\nA: ${h.answer}\nConfidence: ${h.confidence}%\n---`
+      `Q${i + 1}: ${h.question}\nA: ${h.answer}\nKeyword match: ${h.confidence}%\n---`
     ).join('\n\n');
     const blob = new Blob([text], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);

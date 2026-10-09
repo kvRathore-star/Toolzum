@@ -10,10 +10,22 @@ export default function WebhookTester() {
   const calc = async () => {
     setLoading(true); setResult(''); setStatus(null);
     try {
-      const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload });
+      let protocol = '';
+      try {
+        protocol = new URL(url.trim()).protocol;
+      } catch {
+        setResult('Invalid URL — include the http(s) scheme.');
+        return;
+      }
+      if (protocol !== 'http:' && protocol !== 'https:') {
+        setResult('Only http(s) URLs can be fetched from a browser.');
+        return;
+      }
+      const res = await fetch(url.trim(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, signal: AbortSignal.timeout(20000) });
       const text = await res.text();
       setStatus(res.status);
-      setResult(text.slice(0, 500));
+      const LIMIT = 500;
+      setResult(text.length > LIMIT ? `${text.slice(0, LIMIT)}\n…[truncated — showing first ${LIMIT} of ${text.length} chars]` : text);
     } catch (e) {
       setResult(`Fetch error: ${e}\n\n(Note: This may fail due to CORS. Use a test endpoint that supports CORS.)`);
     } finally { setLoading(false); }
