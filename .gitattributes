@@ -1,0 +1,9 @@
+# Generated assets: don't inflate language stats or diffs.
+public/og/** linguist-generated=true
+out/** linguist-generated=true
+
+# Large binaries reviewers should pull on demand, not diff.
+*.png binary
+*.webp binary
+*.woff2 binary
+*.wasm binary

@@ -9,7 +9,8 @@ import {
   MessageSquare,
   HelpCircle,
   Bug,
-  Lightbulb
+  Lightbulb,
+  Share2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-hot-toast";
@@ -187,8 +188,20 @@ export default function ContactPage() {
                 <Bug className="w-4.5 h-4.5 text-red-700 dark:text-red-400" /> Bug Reporting
               </h3>
               <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-                Notice an issue executing our client-side tools? Open an issue on our GitHub repository or submit details directly to our developers.
+                Notice an issue executing our client-side tools? <a href="https://github.com/kvRathore-star/Toolzum/issues" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] underline underline-offset-2">Open an issue on GitHub</a> or submit details directly to our developers.
               </p>
+            </div>
+
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6">
+              <h3 className="font-semibold text-base mb-4 flex items-center gap-2">
+                <Share2 className="w-4.5 h-4.5 text-emerald-700 dark:text-emerald-400" /> Follow Toolzum
+              </h3>
+              <div className="flex flex-wrap gap-2 text-xs">
+                <a href="https://github.com/kvRathore-star/Toolzum" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)]/40 transition-all">GitHub</a>
+                <a href="https://instagram.com/toolzum" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)]/40 transition-all">Instagram</a>
+                <a href="https://x.com/toolzum" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)]/40 transition-all">X</a>
+                <a href="https://linkedin.com/company/toolzum" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)]/40 transition-all">LinkedIn</a>
+              </div>
             </div>
 
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6">

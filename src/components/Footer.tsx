@@ -48,6 +48,13 @@ export function Footer() {
               Privacy-first tools — PDF, images, video, converters, AI & more. All in one place.
             </p>
             <div className="flex flex-col gap-4">
+              <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Follow Toolzum</p>
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <a href="https://github.com/kvRathore-star/Toolzum" target="_blank" rel="noopener noreferrer" className="px-2.5 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] inline-flex items-center text-[11px] font-semibold text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent)]/40 transition-all" title="Toolzum on GitHub">GitHub</a>
+                <a href="https://instagram.com/toolzum" target="_blank" rel="noopener noreferrer" className="px-2.5 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] inline-flex items-center text-[11px] font-semibold text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent)]/40 transition-all" title="Toolzum on Instagram">Instagram</a>
+                <a href="https://x.com/toolzum" target="_blank" rel="noopener noreferrer" className="px-2.5 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] inline-flex items-center text-[11px] font-semibold text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent)]/40 transition-all" title="Toolzum on X">X</a>
+                <a href="https://linkedin.com/company/toolzum" target="_blank" rel="noopener noreferrer" className="px-2.5 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] inline-flex items-center text-[11px] font-semibold text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent)]/40 transition-all" title="Toolzum on LinkedIn">LinkedIn</a>
+              </div>
               <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Share Toolzum</p>
               <div className="flex items-center gap-1.5 flex-wrap">
                 <a href="https://twitter.com/intent/tweet?text=Check+out+Toolzum+—+privacy-first+browser+tools,+all+free.&url=https://toolzum.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[11px] font-bold font-mono text-[var(--text-muted)] hover:text-white hover:border-white/30 hover:bg-zinc-800 transition-all" title="Share on X/Twitter">𝕏</a>

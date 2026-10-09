@@ -87,6 +87,12 @@ export default function AboutPage() {
           <p className="text-sm text-[var(--text-muted)] mt-2 inline-flex items-center gap-1.5">
             <Mail className="w-3.5 h-3.5" /> Privacy-first by design · <a href="mailto:contact@toolzum.com" className="underline underline-offset-2 hover:text-[var(--text-secondary)]">contact@toolzum.com</a>
           </p>
+          <div className="mt-4 flex items-center justify-center gap-2 text-xs">
+            <a href="https://github.com/kvRathore-star/Toolzum" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)]/40 transition-all">GitHub</a>
+            <a href="https://instagram.com/toolzum" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)]/40 transition-all">Instagram</a>
+            <a href="https://x.com/toolzum" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)]/40 transition-all">X</a>
+            <a href="https://linkedin.com/company/toolzum" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)]/40 transition-all">LinkedIn</a>
+          </div>
         </div>
 
         {/* What Sets Us Apart */}

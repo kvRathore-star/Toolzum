@@ -1,13 +1,24 @@
 # Toolzum
 
-Privacy-first toolbox with **1,147 tools** (1,065 interactive + 82 SEO landing pages) across **21 categories** — image, PDF, video, AI, developer, calculators, and more. All processing is client-side (nothing uploaded).
+Privacy-first toolbox with **1,143 tools** (1,061 interactive + 82 SEO landing pages) across **21 categories** — image, PDF, video, AI, developer, calculators, and more. All processing is client-side (nothing uploaded).
+
+🌐 **Live:** [toolzum.com](https://toolzum.com) · 💻 **Source:** [github.com/kvRathore-star/Toolzum](https://github.com/kvRathore-star/Toolzum) · 📸 [Instagram](https://instagram.com/toolzum) · 𝕏 [X](https://x.com/toolzum) · 💼 [LinkedIn](https://linkedin.com/company/toolzum) · ✉️ contact@toolzum.com
+
+> **Source-available, not open-source.** The code is public for transparency
+> and audit. The [LICENSE](./LICENSE) reserves all rights — you may read and
+> learn, but not copy, redistribute, or host it.
 
 - **Stack**: Next.js 16 (static export), React 19, TypeScript (strict), Tailwind CSS
-- **Deploy**: Cloudflare Pages auto-deploys from `main` (static export, ~2,565 pages)
+- **Deploy**: Cloudflare Pages auto-deploys from `main` (static export, ~1,141 pages)
 - **Auth**: Better Auth with D1 database
 - **Payments**: Razorpay + Dodo (Pro tier with credits)
 - **Mobile**: PWA manifest + Capacitor (Android built, iOS not yet initialized)
-- **Testing**: Vitest + Testing Library (212 test files) + Playwright E2E (`e2e/`)
+- **Testing**: Vitest + Testing Library (222 test files) + Playwright E2E (`e2e/`)
+
+## Security
+
+No secrets are committed — see [SECURITY.md](./SECURITY.md) for reporting
+vulnerabilities and the secret-hygiene rules every contributor follows.
 
 ## Getting Started
 
@@ -58,3 +69,17 @@ Copy `.env.example` to `.env.local` and fill in the required variables. See `.en
 ## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md).
+
+## Repository settings (one-time, owner, after going public)
+
+GitHub → Settings:
+
+1. **General** — description, website (`https://toolzum.com`), topics
+   (`privacy`, `webassembly`, `nextjs`, `pwa`, `free-tools`); keep
+   Projects/Wiki/Discussions off unless used; enable secret scanning +
+   push protection.
+2. **Branches → Rulesets** — require pull request before merging to `main`
+   + require status checks (`lint`, `typecheck`, `test`, `build`); include
+   administrators. (Free for public repos — impossible on private free tier.)
+3. **Secrets** — `RESEND_API_KEY`, Cloudflare tokens, Dodo/Razorpay keys
+   live in Cloudflare Pages env, never in git.
