@@ -1,4 +1,5 @@
 import React from "react";
+import { legalDate, formatLegalDate } from "@/lib/legal-dates.generated";
 import { AlertTriangle, HelpCircle } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -93,7 +94,7 @@ export default function DisclaimerPage() {
             Important information about the Toolzum platform and your use of it.
           </p>
           <p className="text-sm font-mono text-[var(--text-muted)] mt-4">
-            Last Updated: September 4, 2026
+            Last Updated: {formatLegalDate(legalDate("/disclaimer/"))}
           </p>
         </div>
 

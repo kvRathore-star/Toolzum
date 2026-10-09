@@ -1,4 +1,5 @@
 import React from "react";
+import { legalDate, formatLegalDate } from "@/lib/legal-dates.generated";
 import { 
   Scale, 
   HelpCircle, 
@@ -203,7 +204,7 @@ export default function TermsOfServicePage() {
             Please read these guidelines carefully before using the Toolzum client compilers.
           </p>
           <p className="text-sm font-mono text-[var(--text-muted)] mt-4">
-            Last Updated: September 16, 2026
+            Last Updated: {formatLegalDate(legalDate("/terms/"))}
           </p>
         </div>
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { legalDate, formatLegalDate } from "@/lib/legal-dates.generated";
 import {
   Cookie,
   ShieldCheck,
@@ -38,7 +39,7 @@ export default function CookiePolicyPage() {
             Cookie Policy
           </h1>
           <p className="text-sm font-mono text-[var(--text-muted)]">
-            Last Updated: May 25, 2026
+            Last Updated: {formatLegalDate(legalDate("/cookies/"))}
           </p>
         </div>
 

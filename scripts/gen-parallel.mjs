@@ -16,6 +16,7 @@ export const GENERATORS = [
   "npm run gen:redirects",
   "npm run gen:og",
   "npm run gen:site-data",
+  "npm run gen:legal-dates",
   "npm run gen:download-slugs",
 ];
 

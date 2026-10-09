@@ -281,6 +281,9 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
             {description}
           </p>
           {tool && <PoweredBy deps={tool.dependencies || ""} linked className="mb-6 -mt-4" />}
+          <p className="text-[11px] text-[var(--text-muted)] mb-8 -mt-2">
+            Content reviewed October 2026 · <Link href="/about" className="underline underline-offset-2 hover:text-[var(--text-secondary)]">About Toolzum</Link>
+          </p>
 
           {/* Badges row */}
           <div className="flex items-center gap-3 sm:gap-4 mb-12 text-[11px] font-medium text-[var(--text-muted)] tracking-wide bg-[var(--bg-overlay)] border border-[var(--border-subtle)] px-3 sm:px-4 py-2 rounded-full shadow-sm hover:border-[var(--border-default)] transition-colors flex-wrap justify-center">

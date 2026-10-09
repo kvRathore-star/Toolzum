@@ -1,4 +1,5 @@
 import React from "react";
+import { legalDate, formatLegalDate } from "@/lib/legal-dates.generated";
 import Link from "next/link";
 import { 
   ShieldAlert, 
@@ -40,7 +41,7 @@ export default function PrivacyPolicyPage() {
             Privacy Policy
           </h1>
           <p className="text-sm font-mono text-[var(--text-muted)]">
-            Last Updated: May 25, 2026
+            Last Updated: {formatLegalDate(legalDate("/privacy-policy/"))}
           </p>
         </div>
 

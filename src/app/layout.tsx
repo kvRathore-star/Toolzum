@@ -85,6 +85,7 @@ export default function RootLayout({
                 "logo": "https://toolzum.com/og/branding/index.webp",
                 "description": `${toolCount}+ free, privacy-first web tools that run entirely in your browser.`,
                 "email": "contact@toolzum.com",
+                "founder": { "@type": "Person", "name": "Kirtiwardhan Rathore" },
                 "sameAs": [],
               },
               {

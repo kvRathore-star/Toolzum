@@ -36,11 +36,12 @@ describe('gen-parallel (build generator runner)', () => {
     expect(results).toEqual([{ cmd: 'missing-cmd', code: 1 }]);
   });
 
-  it('runs exactly the four build generators', () => {
+  it('runs exactly the five build generators', () => {
     expect(GENERATORS).toEqual([
       'npm run gen:redirects',
       'npm run gen:og',
       'npm run gen:site-data',
+      'npm run gen:legal-dates',
       'npm run gen:download-slugs',
     ]);
   });

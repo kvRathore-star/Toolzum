@@ -8,6 +8,7 @@
     "gen:download-slugs": "npx tsx scripts/generate-download-slugs.ts",
     "gen:redirects": "node scripts/generate-redirects.js",
     "gen:site-data": "npx tsx scripts/generate-site-data.ts",
+    "gen:legal-dates": "npx tsx scripts/generate-legal-dates.ts",
     "build": "npm run gen:parallel && next build && node scripts/gen-sw.js",
     "gen:parallel": "node scripts/gen-parallel.mjs",
     "verify:out": "npx tsx scripts/verify-out.ts",
