@@ -16,9 +16,13 @@ import { checkRateLimit, recordRateLimit } from './rate-limit';
 
 // Free-plan Workers allow 50 subrequests/invocation. Budget leaves headroom
 // for redirect hops and the concurrent in-flight fetches (CONCURRENCY).
+// Worst case per URL is 1 + MAX_REDIRECTS + 1 (HEAD-fallback); typical URLs
+// cost 1. Exhaustion is absorbed by the budgetOk guard + skipped/hasMore
+// re-queue below, so a higher hop cap only spends more on genuinely
+// long chains (post-migration http→https→www→new-domain runs 3-4 hops).
 const SUBREQUEST_BUDGET = 45;
 const CONCURRENCY = 4;
-const MAX_REDIRECTS = 2;
+const MAX_REDIRECTS = 5;
 const TIMEOUT_MS = 8000;
 const MAX_URLS_PER_REQUEST = 45;
 const MAX_URL_LENGTH = 2048;
