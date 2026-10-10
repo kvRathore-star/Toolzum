@@ -5,6 +5,7 @@ import { getErrorMessage } from '@/utils/error';
 import { Section, Input } from './_shared';
 import { clipboardWrite } from "@/lib/clipboard";
 import { toast } from 'react-hot-toast';
+import * as YAML from 'js-yaml';
 
 
 export function Validator() {
@@ -27,7 +28,10 @@ export function Validator() {
         setResult('✓ Valid XML (basic syntax check passed)'); setIsValid(true);
       }
       else if (fmt === 'yaml') {
-        setResult('✓ Valid YAML (basic syntax check passed)'); setIsValid(true);
+        // Real parse via js-yaml — malformed indentation, tabs, and bad
+        // mappings throw instead of passing silently.
+        YAML.load(input || '');
+        setResult('✓ Valid YAML'); setIsValid(true);
       }
     } catch (e: unknown) { setResult(`✗ ${fmt.toUpperCase()} syntax error: ${getErrorMessage(e)}`); setIsValid(false); }
   };

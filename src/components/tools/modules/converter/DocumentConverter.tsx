@@ -275,11 +275,3 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
   );
 }
 
-export function PdfToDocx() { return <DocumentConverter defaultFrom="PDF" defaultTo="DOCX" downloadFilename="converted.docx" />; }
-export function DocxToPdf() { return <DocumentConverter defaultFrom="DOCX" defaultTo="PDF" downloadFilename="converted.pdf" />; }
-export function PdfToTxt() { return <DocumentConverter defaultFrom="PDF" defaultTo="TXT" downloadFilename="converted.txt" />; }
-export function TxtToPdf() { return <DocumentConverter defaultFrom="TXT" defaultTo="PDF" downloadFilename="converted.pdf" />; }
-export function MdToHtml() { return <DocumentConverter defaultFrom="Markdown" defaultTo="HTML" downloadFilename="converted.html" />; }
-export function HtmlToPdf() { return <DocumentConverter defaultFrom="HTML" defaultTo="PDF" downloadFilename="converted.pdf" />; }
-export function DocxToTxt() { return <DocumentConverter defaultFrom="DOCX" defaultTo="TXT" downloadFilename="converted.txt" />; }
-export function RtfToPdf() { return <DocumentConverter defaultFrom="RTF" defaultTo="PDF" downloadFilename="converted.pdf" />; }
