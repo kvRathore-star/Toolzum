@@ -162,7 +162,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Currency Converter",
     "slug": "currency-converter",
     "category": "Finance",
-    "description": "Converts between 12 major world currencies using built-in offline reference rates, with quick amounts and recent history kept in your browser.",
+    "description": "Converts between 12 major world currencies — live rates refresh hourly from the server on demand, with a clearly labeled offline fallback for the same 12 majors.",
     "isPro": false
   },
   {
@@ -6626,7 +6626,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Validator",
     "slug": "syntax-validator",
     "category": "Developer",
-    "description": "Basic syntax sanity check for JSON (full parse), XML (root-element check), and YAML (accepted as-is) — JavaScript not included. Code never leaves your device.",
+    "description": "Basic syntax sanity check for JSON (full parse), XML (root-element check), and YAML (real js-yaml parse) — JavaScript not included. Code never leaves your device.",
     "isPro": false
   },
   {
