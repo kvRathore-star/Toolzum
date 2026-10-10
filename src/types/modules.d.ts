@@ -37,3 +37,29 @@ declare module "vcard-parser" {
 // imported (registerFontkitOnce in PdfEditorCore — @pdf-lib/fontkit's Babel
 // generated StateMachine.match calls the global regeneratorRuntime).
 declare module "regenerator-runtime/runtime";
+
+// gif.js.optimized ships no types. Default export is the GIF constructor
+// (UMD); the worker script is served same-origin at /gif.worker.js.
+declare module "gif.js.optimized" {
+  interface GifOptions {
+    workers?: number;
+    quality?: number;
+    workerScript?: string;
+    width?: number;
+    height?: number;
+    [key: string]: unknown;
+  }
+  interface GifFrameOptions {
+    copy?: boolean;
+    delay?: number;
+    [key: string]: unknown;
+  }
+  class GIF {
+    constructor(opts?: GifOptions);
+    addFrame(el: HTMLCanvasElement, opts?: GifFrameOptions): void;
+    on(ev: "finished", cb: (blob: Blob) => void): void;
+    on(ev: string, cb: (...args: never[]) => void): void;
+    render(): void;
+  }
+  export default GIF;
+}

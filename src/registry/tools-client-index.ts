@@ -586,7 +586,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Pomodoro Timer",
     "slug": "pomodoro-timer",
     "category": "Productivity",
-    "description": "Pomodoro Timer manages work and break intervals with fully customizable session lengths and auto-start options. Tasks never leave your device — everything stores locally in your browser.",
+    "description": "Pomodoro Timer manages work and break intervals with fully customizable session lengths. Timing runs locally in your browser — nothing is stored or uploaded.",
     "isPro": false
   },
   {
@@ -994,7 +994,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEX to RGB Converter",
     "slug": "hex-to-rgb-converter",
     "category": "Design",
-    "description": "Convert HEX colors to RGB/RGBA values instantly with alpha support. Translate #4F46E5 for CSS rgba() use — free, local, no signup.",
+    "description": "Convert 3- or 6-digit HEX colors to RGB values instantly. Translate #4F46E5 for CSS rgb() use — free, local, no signup.",
     "isPro": false
   },
   {
@@ -2514,7 +2514,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to GIF",
     "slug": "png-to-gif",
     "category": "Image",
-    "description": "PNG to GIF output is not produced here — browsers have no GIF encoder, so Canvas conversion fails locally instead of downloading. Convert PNG to JPG/WebP instead — local, unlimited saves.",
+    "description": "Convert PNG images to GIF in your browser — each PNG still encodes to a single-frame GIF locally via the bundled gif.js worker. Stills-only output flattens transparency to white, and downloads are unlimited since nothing is uploaded.",
     "isPro": false
   },
   {
@@ -2522,7 +2522,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to GIF",
     "slug": "jpg-to-gif",
     "category": "Image",
-    "description": "JPG to GIF output is not produced here — browsers have no GIF encoder, so Canvas conversion fails locally instead of downloading. Convert JPG to PNG/WebP instead — local, unlimited saves.",
+    "description": "Convert JPG photos to GIF in your browser — each JPG still encodes to a single-frame GIF locally via the bundled gif.js worker. Stills-only output flattens transparency to white, and downloads are unlimited since nothing is uploaded.",
     "isPro": false
   },
   {
@@ -2530,7 +2530,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WebP to GIF",
     "slug": "webp-to-gif",
     "category": "Image",
-    "description": "WebP to GIF output is not produced here — browsers have no GIF encoder, so Canvas conversion fails locally instead of downloading. Convert WebP to PNG/JPG/WebP instead — local, unlimited saves.",
+    "description": "Convert WebP images to GIF in your browser — each WebP still encodes to a single-frame GIF locally via the bundled gif.js worker. Stills-only output flattens transparency to white, and downloads are unlimited since nothing is uploaded.",
     "isPro": false
   },
   {
@@ -2674,7 +2674,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to GIF",
     "slug": "bmp-to-gif",
     "category": "Image",
-    "description": "BMP to GIF output is not produced here — browsers have no GIF encoder, so Canvas conversion fails locally instead of downloading. Convert BMP to PNG/JPG/WebP instead — local, unlimited saves.",
+    "description": "Convert BMP bitmaps to GIF in your browser — each BMP still encodes to a single-frame GIF locally via the bundled gif.js worker. Stills-only output flattens transparency to white, and downloads are unlimited since nothing is uploaded.",
     "isPro": false
   },
   {
@@ -2714,7 +2714,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to GIF",
     "slug": "heic-to-gif",
     "category": "Image",
-    "description": "HEIC to GIF output is not produced here — browsers have no GIF encoder, so Canvas conversion fails locally instead of downloading. Convert HEIC to JPG/PNG/WebP instead — local, unlimited saves.",
+    "description": "Convert HEIC photos to GIF in your browser — each HEIC still encodes to a single-frame GIF locally via the bundled gif.js worker. Stills-only output flattens transparency to white, and downloads are unlimited since nothing is uploaded.",
     "isPro": false
   },
   {
@@ -2754,7 +2754,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to GIF",
     "slug": "jxl-to-gif",
     "category": "Image",
-    "description": "JXL to GIF output is not produced here — browsers have no GIF encoder, so Canvas conversion fails locally instead of downloading, and JXL input itself may not decode in browsers. Convert JXL to PNG/JPG/WebP instead — local, unlimited saves.",
+    "description": "Convert JXL images to GIF in your browser — each JXL still encodes to a single-frame GIF locally via the bundled gif.js worker. Stills-only output flattens transparency to white, and downloads are unlimited since nothing is uploaded.",
     "isPro": false
   },
   {
@@ -2786,7 +2786,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to GIF",
     "slug": "svg-to-gif",
     "category": "Image",
-    "description": "SVG to GIF output is not produced here — browsers have no GIF encoder, so Canvas conversion fails locally instead of downloading. Convert SVG to PNG/WebP instead — local, unlimited saves.",
+    "description": "Convert SVG vectors to GIF in your browser — each SVG still rasterizes then encodes to a single-frame GIF locally via the bundled gif.js worker. Stills-only output flattens transparency to white, and downloads are unlimited since nothing is uploaded.",
     "isPro": false
   },
   {
@@ -2810,7 +2810,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to GIF",
     "slug": "tiff-to-gif",
     "category": "Image",
-    "description": "TIFF to GIF output is not produced here — browsers have no GIF encoder, so Canvas conversion fails locally instead of downloading, and TIFF input itself may not decode in browsers. Convert TIFF to PNG/JPG/WebP instead — local, unlimited saves.",
+    "description": "Convert TIFF scans to GIF in your browser — each TIFF still encodes to a single-frame GIF locally via the bundled gif.js worker. Stills-only output flattens transparency to white, and downloads are unlimited since nothing is uploaded.",
     "isPro": false
   },
   {
@@ -3162,7 +3162,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Color Converter",
     "slug": "color-converter",
     "category": "Design",
-    "description": "Convert colors between HEX, RGB, HSL, and HSV with live swatches. Translate brand specs across formats — free, local, no signup.",
+    "description": "Convert colors between HEX, RGB, and HSL with a type-and-convert text UI. Translate brand specs across formats — free, local, no signup.",
     "isPro": false
   },
   {
@@ -3218,7 +3218,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Font Converter",
     "slug": "font-converter",
     "category": "Design",
-    "description": "Convert fonts between TTF, OTF, WOFF, and WOFF2 with custom-text preview before downloading. Ship web-ready WOFF2 in one pass — local opentype.js work, unlimited saves.",
+    "description": "Convert fonts between TTF, OTF, and WOFF (WOFF2 accepted as input) with custom-text preview before downloading. Ship web-ready WOFF in one pass — local opentype.js work, unlimited saves.",
     "isPro": false
   },
   {
@@ -3226,7 +3226,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Font Subsetter",
     "slug": "font-subsetter",
     "category": "Design",
-    "description": "Subset fonts to used characters plus WOFF2 conversion — cut webfont weight by 90%. Ship 12 KB instead of 150 KB — local opentype.js work, unlimited saves.",
+    "description": "Subset TTF/OTF fonts to used characters and export TTF or WOFF — cut webfont weight by 90%. Ship 12 KB instead of 150 KB — local opentype.js work, unlimited saves.",
     "isPro": false
   },
   {
@@ -5106,7 +5106,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "API Cost Estimator",
     "slug": "api-cost-estimator",
     "category": "Developer",
-    "description": "Estimate API bills from call volumes and per-call pricing — OpenAI, maps, SMS tiers. Forecast a 1M-call month before committing — local math, free, no signup.",
+    "description": "Estimate API bills from request volumes and price-per-million — OpenAI and Stripe presets included. Forecast a 1M-request month before committing — local math, free, no signup.",
     "isPro": false
   },
   {
@@ -6722,7 +6722,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Vector Pen Canvas",
     "slug": "vector-pen-canvas",
     "category": "Design",
-    "description": "Draw bezier vector paths with a pen tool on canvas — anchor handles included. Sketch icons and illustrations freehand — local Fabric work, unlimited saves.",
+    "description": "Draw freehand vectors plus rectangle, ellipse, and line shapes on canvas — color and stroke control included. Sketch icons and diagrams with SVG/PNG export — local Fabric work, unlimited saves.",
     "isPro": false
   },
   {
@@ -8034,7 +8034,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to GIF",
     "slug": "avif-to-gif",
     "category": "Image",
-    "description": "AVIF to GIF output is not produced here — AVIF input decodes, but Canvas cannot encode GIF, so conversion fails locally. Convert AVIF to PNG/JPG/WebP instead — local, unlimited saves.",
+    "description": "Convert AVIF images to GIF in your browser — each AVIF still encodes to a single-frame GIF locally via the bundled gif.js worker. Stills-only output flattens transparency to white, and downloads are unlimited since nothing is uploaded.",
     "isPro": false
   },
   {
@@ -8266,7 +8266,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to GIF",
     "slug": "ico-to-gif",
     "category": "Image",
-    "description": "ICO to GIF output is not produced here — ICO input loads, but Canvas cannot encode GIF, so conversion fails locally. Convert ICO to PNG/JPG/WebP instead — local, unlimited saves.",
+    "description": "Turn ICO icons into GIFs in your browser — each icon still encodes to a single-frame GIF locally via the bundled gif.js worker. Stills-only output flattens transparency to white, and downloads are unlimited since nothing is uploaded.",
     "isPro": false
   },
   {

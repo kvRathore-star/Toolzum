@@ -1,11 +1,20 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 
 export default function CronParser() {
   const [expression, setExpression] = useState('*/5 * * * *');
   const [result, setResult] = useState<{ label: string; value: string }[]>([]);
+  // Next-run search brute-forces up to 525600 minute-steps (a full year for
+  // impossible dates like Feb 30). Debounced off the keystroke so typing
+  // never freezes; a single run of a few hundred ms is fine.
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const queueParse = (v: string) => {
+    setExpression(v);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => parse(v), 250);
+  };
 
   const FIELD_BOUNDS: [number, number][] = [[0, 59], [0, 23], [1, 31], [1, 12], [0, 7]];
   const numOk = (n: number, i: number): boolean => Number.isInteger(n) && n >= FIELD_BOUNDS[i]![0] && n <= FIELD_BOUNDS[i]![1];
@@ -78,7 +87,7 @@ export default function CronParser() {
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex items-center gap-3">
-        <input value={expression} onChange={e => { setExpression(e.target.value); parse(e.target.value); }} aria-label="Cron expression" placeholder="cron expression (e.g. */5 * * * *)" className="flex-1 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono focus:border-[var(--accent)] transition-colors" />
+                    <input value={expression} onChange={e => queueParse(e.target.value)} aria-label="Cron expression" placeholder="cron expression (e.g. */5 * * * *)" className="flex-1 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono focus:border-[var(--accent)] transition-colors" />
       </div>
       {result.length > 0 && (
         <div className="bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl overflow-hidden">

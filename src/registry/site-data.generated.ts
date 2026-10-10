@@ -22,8 +22,8 @@ export const TOOL_COUNT = 1143;
 export const SITE_STATS = {
   totalImplemented: 1060,
   freeTierTotal: 995,
-  localTools: 1024,
-  cloudTools: 31,
+  localTools: 1020,
+  cloudTools: 29,
   hybridTools: 4,
 } as const;
 
@@ -193,11 +193,11 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
         "href": "/ai/ai-translator"
       },
       {
-        "name": "AI Image Upscaler",
+        "name": "Image Upscaler",
         "href": "/ai/ai-image-upscaler"
       },
       {
-        "name": "AI Face Swap",
+        "name": "Face Swap Compositor",
         "href": "/ai/ai-face-swap"
       },
       {

@@ -29,7 +29,7 @@
     "format:check": "prettier --check 'src/**/*.{ts,tsx,js,jsx,json,css,md}' '*.{ts,mjs,json}'",
     "analyze": "ANALYZE=true next build",
     "prepare": "husky || true",
-    "postinstall": "node scripts/copy-pdf-worker.js || true"
+    "postinstall": "node scripts/copy-pdf-worker.js || true; node scripts/copy-gif-worker.js || true"
   },
   "dependencies": {
     "@capacitor/android": "^6.2.1",

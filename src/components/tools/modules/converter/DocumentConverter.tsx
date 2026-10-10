@@ -126,7 +126,7 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
 
     setConvertedFiles(results);
     setIsProcessing(false);
-    toast.success(`Converted ${results.length} file${results.length > 1 ? 's' : ''}`);
+    toast.success(`Renamed ${results.length} file${results.length > 1 ? 's' : ''} (bytes unchanged — verify each opens before sharing)`);
   };
 
   const handleDownload = async (item?: { blob: Blob; name: string }) => {

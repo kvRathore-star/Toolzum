@@ -404,7 +404,7 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string; so
  * ToolPaywall.test.tsx mapping test.
  */
 export const FREE_SINGLE_ALTERNATIVE: Record<string, string> = {
-  "bulk-bg-changer": "bg-changer",
+  "bulk-bg-changer": "ai-bg-changer",
   "bulk-qr-code-generator": "qr-code-generator",
   "bulk-audio-converter": "audio-converter",
   "bulk-svg-to-png": "svg-to-png",
@@ -412,7 +412,7 @@ export const FREE_SINGLE_ALTERNATIVE: Record<string, string> = {
   "bulk-image-resizer": "image-resizer",
   "bulk-video-compressor": "video-compressor",
   "bulk-pdf-merger": "pdf-merger",
-  "bulk-image-converter": "image-converter",
+  "bulk-image-converter": "image-compressor",
   "bulk-font-subsetter": "font-subsetter",
   "bulk-regex-extractor-replacer": "regex-tester",
   "bulk-ebook-converter": "epub-to-pdf",

@@ -38,6 +38,32 @@ type FormatPair = {
   label: string;
 };
 
+/**
+ * Single-frame GIF encode via the bundled gif.js worker (served
+ * same-origin at /gif.worker.js by scripts/copy-gif-worker.js).
+ * canvas.toBlob cannot encode GIF in any browser, so without this every
+ * *-to-gif page would be a dead end.
+ */
+async function encodeGif(canvas: HTMLCanvasElement): Promise<Blob> {
+  const { default: GIF } = await import('gif.js.optimized');
+  return new Promise<Blob>((resolve, reject) => {
+    try {
+      const gif = new GIF({
+        workers: 2,
+        quality: 10,
+        workerScript: '/gif.worker.js',
+        width: canvas.width,
+        height: canvas.height,
+      });
+      gif.on('finished', (b: Blob) => resolve(b));
+      gif.addFrame(canvas, { copy: true });
+      gif.render();
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
+
 export const FORMAT_PAIRS: FormatPair[] = [
   { slug: 'png-to-jpg', input: 'png', output: 'jpg', label: 'PNG \u2192 JPG' },
   { slug: 'jpg-to-png', input: 'jpg', output: 'png', label: 'JPG \u2192 PNG' },
@@ -357,12 +383,12 @@ export default function ImageFormatConverter({ slug }: ImageFormatConverterProps
     if (!file) return;
     setIsProcessing(true);
     try {
-      // Browsers can only ENCODE png/jpg/webp (avif in Chromium) — every
-      // other output select (HEIC/SVG/TIFF/BMP/GIF/ICO/JXL) leads here.
-      // Refuse upfront with the reason instead of a dead Convert that
-      // fails blaming the input.
-      if (!['png', 'jpg', 'webp', 'avif'].includes(outputKey)) {
-        toast.error(`${outputFmt.label} output isn't encodable in browsers — convert to PNG, JPG, WebP, or AVIF instead.`);
+      // Browsers encode png/jpg/webp natively (avif in Chromium); GIF goes
+      // through the bundled gif.js worker. Everything else (HEIC/SVG/TIFF/
+      // BMP/ICO/JXL) has no encoder — refuse upfront with the reason
+      // instead of a dead Convert that fails blaming the input.
+      if (!['png', 'jpg', 'webp', 'avif', 'gif'].includes(outputKey)) {
+        toast.error(`${outputFmt.label} output isn't encodable in browsers — convert to PNG, JPG, WebP, GIF, or AVIF instead.`);
         return;
       }
       let blob: Blob | null = null;
@@ -388,7 +414,15 @@ export default function ImageFormatConverter({ slug }: ImageFormatConverterProps
           img.width = img.naturalWidth;
           img.height = img.naturalHeight;
         }
-        if (inputKey === 'tiff' || inputKey === 'jxl') {
+        if (outputKey === 'gif') {
+          const gifCanvas = document.createElement('canvas');
+          gifCanvas.width = img.naturalWidth;
+          gifCanvas.height = img.naturalHeight;
+          const gtx = gifCanvas.getContext('2d');
+          if (!gtx) throw new Error('Canvas not supported');
+          gtx.drawImage(img, 0, 0);
+          blob = await encodeGif(gifCanvas);
+        } else if (inputKey === 'tiff' || inputKey === 'jxl') {
           try {
             blob = await convertCanvas(img);
           } catch (e) {
