@@ -65,6 +65,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'How do I install the key?', answer: 'Copy the public part into ~/.ssh/authorized_keys (GitHub: Settings → SSH keys). Private part stays in ~/.ssh with 600 permissions — never shared.' },
       { question: 'Passphrase or not?', answer: 'Passphrase-protect keys on shared machines; ssh-agent caches it per session. Unencrypted keys suit automation with restricted accounts.' },
       { question: 'Do generated keys leave the browser?', answer: 'No — generation runs locally in your browser via Web Crypto. Keys never leave your device — back up the private part yourself.' },
+      { question: 'Which exact algorithms and sizes can I pick?', answer: '4 buttons: RSA 2048, ECDSA P-256 (256-bit), ECDSA P-384 (384-bit) and Ed25519 (256-bit, pure-JS since Web Crypto lacks it). RSA emits SPKI/PKCS8 PEM plus an ssh-rsa wire line for ~/.ssh/authorized_keys; Ed25519 emits OPENSSH PRIVATE KEY. The Verify panel suggests chmod 600 plus ssh-keygen -y and -l checks.' },
     ],
   },
   {
@@ -176,6 +177,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'Tabs vs spaces?', answer: 'Spaces only, consistently 2 per level — one tab anywhere fails the whole file. Mixed indentation flags immediately.' },
       { question: 'Validate before deploy?', answer: 'Always — plus docker compose config dry-run locally. Caught errors here save failed-deploy cycles in CI.' },
       { question: 'Is my compose file uploaded?', answer: 'No — validation runs locally in your browser. Configs never leave your device.' },
+      { question: 'What exactly does it check?', answer: 'Each line is scanned for jumps over 2 spaces (Over-indented), any tab, and 2+ colons; then the file must contain services: and match 8 known keywords (apiVersion, kind, metadata, spec, services, image, ports, volumes). Verdicts read Valid Docker Compose or Invalid, the report downloads as docker-compose-validation.txt, and 3 presets ship (Web Service, Multi-service, Clear).' },
     ],
   },
   {
@@ -396,6 +398,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Can I generate multiple dates at once?", answer: "Yes. Generate 1 to 20 random dates in a single batch with the count slider." },
       { question: "Does it handle leap years correctly?", answer: "Yes. The generator respects calendar rules including leap years, varying month lengths, and valid day ranges for each month." },
       { question: "Is generation done locally in Random Date Generator?", answer: "Yes. All date generation runs in your browser. No data is sent to any server." },
+      { question: "Can the same date appear twice in one batch?", answer: "Yes — each line is an independent draw up to 1,825 days (365x5) back, so repeats are possible. Every line shows ISO plus long form, e.g. 2024-03-01 (Fri Mar 01 2024); the slider batches 1-20." },
     ],
     seoTitle: "Free Online Random Date Generator",
   },
@@ -419,6 +422,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: '12-hour or 24-hour output?', answer: 'Both, always: 24-hour with seconds plus the 12-hour equivalent in parentheses.' },
       { question: 'Is it truly random?', answer: 'Cryptographically decent browser randomness — fine for drills, fixtures, and games. Not for security tokens or lottery draws.' },
       { question: 'Do generated times leave the browser?', answer: 'No — generation runs locally in your browser. Nothing leaves your device.' },
+      { question: "How is the 12-hour time in parentheses derived?", answer: "Hours 0-23 with minutes/seconds 0-59 render as HH:MM:SS plus (h:MM AM/PM) — e.g. 14:05:09 (2:05 PM). Midnight 00:xx shows as 12:xx AM; batches run up to 20." },
     ],
   },
   {
@@ -487,6 +491,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'Test data use?', answer: 'Fill UIs and databases with readable placeholder prose instead of lorem — stakeholders review real-looking content seriously.' },
       { question: 'How many at once?', answer: 'Up to 50 sentences per batch with 3–20 words each. Generate several, keep the sparkers.' },
       { question: 'Do prompt words upload?', answer: 'No — generation runs locally in your browser. Nothing leaves your device.' },
+      { question: "Why do my 8-word sentences come out 6-10 words?", answer: "Each sentence varies plus/minus 2 around your setting (minimum 3), so 8 averages to 6-10. Words draw from a 64-word pool, the first word capitalizes, and batches run up to 50 sentences." },
     ],
   },
   {
@@ -509,6 +514,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'Password words?', answer: 'Single words suit prompts and seeds — not passphrases. Use the Password Generator for memorable multi-word passphrases.' },
       { question: 'Game use?', answer: 'Pictionary prompts, password-game rounds, improv seeds — capitalize option included.' },
       { question: 'Do naming words upload?', answer: 'No — generation runs locally in your browser. Nothing leaves your device.' },
+      { question: "How big is the word pool — can words repeat?", answer: "64 lorem words with independent draws per line, so repeats are possible even in small batches and likely past 64. The slider runs to 100 words; Capitalize uppercases each first letter." },
     ],
   },
   {
@@ -819,6 +825,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'What fields should I fill?', answer: 'Summary, start/end with timezone, location, and description with the meeting link. Timezone-correct entries prevent the classic 3am-invite bug.' },
       { question: 'Recurring events supported?', answer: 'Single events export cleanly; complex recurrence rules vary by importer — send one file per occurrence for critical meetings.' },
       { question: 'Is event data uploaded?', answer: 'No — file building runs locally in your browser. Only the .ics download touches disk.' },
+      { question: 'What does 10:00 on 2026-07-20 become in the file?', answer: 'DTSTART:20260720T100000 — floating local time with no zone suffix. Only DTSTAMP is UTC (...Z, stamped at generation); VERSION:2.0 and PRODID:-//ToolHub//EN are fixed, and empty description/location lines are omitted.' },
     ],
   },
   {
@@ -841,6 +848,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'Duplicates kept?', answer: 'Yes — extracted rows keep original order and duplicates. There is no built-in dedupe pass.' },
       { question: 'Do extracted columns upload?', answer: 'No — extraction runs locally in your browser. Very large pastes may slow the tab, so split huge files first.' },
       { question: 'Is CSV data uploaded?', answer: 'No — parsing runs locally in your browser. Data never leaves your device.' },
+      { question: 'Does output order follow my CSV or my typed list?', answer: 'Your typed list wins: typing email,name returns the email column first even if name leads the CSV. Unknown names are skipped silently; zero matches raises a No matching columns error.' },
     ],
   },
   {
@@ -863,6 +871,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'What about duplicate new names?', answer: 'Duplicates are not flagged — mapping two columns to the same new name produces two identical headers. Rename or drop one side first.' },
       { question: 'Does data change too?', answer: 'No — only header row rewrites; all rows pass through byte-identical. Verify with a diff on the first run.' },
       { question: 'Is my CSV uploaded?', answer: 'No — parsing runs locally in your browser. Data never leaves your device.' },
+      { question: 'Can the new name contain a colon?', answer: 'No — mappings split on colons and keep only the first two parts, so a mapping like time:12:30 renames the header to 12, dropping the rest. Unmatched headers pass through unchanged, so partial maps are safe.' },
     ],
   },
   {
@@ -907,6 +916,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Does it preserve the original row order?", answer: "Yes. The first occurrence of each duplicate is kept. Subsequent duplicates are removed. The output maintains the original order of first appearances." },
       { question: "How are duplicates detected?", answer: "Exact string matching by default. Whitespace differences may cause false non-matches. Trim spaces before deduplicating for best results." },
       { question: "When using CSV Deduplicator, is my CSV data stored?", answer: "No. All processing happens locally in your browser. No CSV data is sent to any server." },
+      { question: 'What does the Default preset remove exactly?', answer: 'Its 5 rows deduped on the name column collapse to 3 (John, Jane, Bob) — the two repeat rows drop, first occurrences kept in order. Matching is exact and case-sensitive: John and john count as different.' },
     ],
     seoTitle: "CSV Deduplicator – Free Online",
   },
@@ -930,6 +940,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'Batch validation?', answer: 'Paste the whole file to validate row by row with failure positions. Import pipelines gate on zero failures.' },
       { question: 'False failures?', answer: 'Trailing commas and ragged rows change column counts — clean the source export rather than editing flagged rows by hand.' },
       { question: 'Do checked formats upload?', answer: 'No — validation runs locally in your browser. Data never leaves your device.' },
+      { question: 'How do I read a Row 3: 2 cols (expected 3) message?', answer: 'Row numbers count the header as row 1, so Row 3 is the 2nd data row with 2 cells where 3 were expected. The Bad Cols preset demos exactly this; empty cells are flagged per column name.' },
     ],
   },
   {
@@ -952,6 +963,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'How many files?', answer: 'Two tables per run — a left and a right CSV joined on the key. Repeat runs to join more.' },
       { question: 'Dedupe after merging?', answer: 'No dedupe step is included — overlapping keys keep the first right-table match. Review the joined output before analysis.' },
       { question: 'Does merging upload data?', answer: 'No — merging runs locally in your browser. Data never leaves your device.' },
+      { question: 'Is the merge an inner or left join?', answer: 'Left join: every left row survives, right-only keys never appear, and unmatched left rows get blank right cells. Headers become left columns plus right non-key columns — the default name-key demo yields name,email,department.' },
     ],
   },
   {
@@ -974,6 +986,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Can I fill only specific columns?", answer: "No. Every empty cell in every column gets the same fill value. Split out columns you want to preserve first." },
       { question: "Does it handle different CSV delimiters?", answer: "No — comma-separated values only. Semicolon, tab, or pipe files need converting to commas first." },
       { question: "When using Null Value Handler, is my CSV data stored?", answer: "No. All processing happens locally in your browser. No CSV data is sent to any server." },
+      { question: 'How many nulls does the Default preset contain?', answer: '3: a missing phone, a missing email, and another missing phone across the demo rows — each replaced by the chosen token (N/A by default). Only whitespace-empty cells count; literal null text is left alone.' },
     ],
     seoTitle: "Free Null Value Handler Online",
   },
@@ -997,6 +1010,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'Multiple groupings?', answer: 'One group column per run — output is group, count, sum, avg. For two levels, pivot once, then pivot the result again.' },
       { question: 'Nulls in groups?', answer: 'Missing keys bucket as (blank) — decide: exclude, impute, or investigate. Silent nulls skew summaries.' },
       { question: 'Do pivot tables upload?', answer: 'No — pivoting runs locally in your browser. Data never leaves your device.' },
+      { question: 'What numbers does the Default preset produce?', answer: 'Grouped by role: Admin gives count 2, sum 157000.00, avg 78500.00 (75000+82000); Editor gives 1, 62000.00, 62000.00. Output headers are always group,count,sum,avg with 2-decimal sums; non-numeric values count as 0.' },
     ],
   },
   {
@@ -1019,6 +1033,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: "Is the filtered output a new CSV?", answer: "Yes. The filtered rows are output as a new CSV with the same headers as the original, with copy and download buttons. The source input is not modified." },
       { question: "Does it handle large CSV files?", answer: "Filtering runs in browser memory. Very large pastes may slow the tab — for huge datasets, filter in smaller chunks." },
       { question: "Is my CSV data stored or transmitted?", answer: "No. All filtering happens locally in your browser. No data is sent to any server." },
+      { question: 'What happens if I clear the filter value?', answer: 'Every row matches — an empty string is contained in all values, so the full table returns with the match count equal to all rows. Filtering is always case-insensitive substring on one column per run.' },
     ],
     seoTitle: "Free Online CSV Row Filter",
   },
@@ -1042,6 +1057,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'How large a file sorts?', answer: 'Tens of thousands of rows sort instantly locally. Past ~100k rows, split by month first for smoother handling.' },
       { question: 'Can I sort by multiple columns?', answer: 'Single-column per pass: sort the secondary key first, then the primary — stable sorting preserves the earlier order within ties.' },
       { question: 'Does my spreadsheet leave the browser?', answer: 'No — sorting runs locally in your browser. Data never leaves your device.' },
+      { question: 'How are mixed numbers and text sorted?', answer: 'Per pair: both-parse-as-numbers compares numerically, otherwise localeCompare text. A stray N/A in an age column sorts textually against numbers; the default age demo orders Jane 28, Alice 31, John 35, Bob 42.' },
     ],
   },
   {
@@ -1064,6 +1080,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'How small per chunk?', answer: 'Rows divide evenly across the parts you pick (2, 3, 4). Check the per-part row counts in the output before importing.' },
       { question: 'Encoding preserved?', answer: 'Yes — BOM and UTF-8 carry into every chunk. Mixed-encoding sources normalize first.' },
       { question: 'Does splitting upload data?', answer: 'No — splitting runs locally in your browser. Data never leaves your device.' },
+      { question: 'What if rows do not divide evenly — 4 rows into 3 parts?', answer: 'Chunk size rounds up (ceil 4/3 = 2), giving parts of 2, 2, and 0 rows — the last part ships headers only. Check the per-part row counts in the Part N banners before importing.' },
     ],
   },
   {
@@ -1087,6 +1104,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'Headers handling?', answer: 'First row becomes first column; corner cell labels the series. Verify after — ragged rows transpose messily.' },
       { question: 'Large tables?', answer: 'Thousand-cell tables transpose instantly; million-cell sheets need script tools. Browsers handle moderate sizes best.' },
       { question: 'Does transposing upload data?', answer: 'No — transposing runs locally in your browser. Data never leaves your device.' },
+      { question: 'What happens to ragged short rows?', answer: 'They pad with blanks to the longest row before flipping, so no data shifts columns. The Metrics demo (metric,Q1-Q4 across 3 rows) becomes a 5-row by 4-column table headed metric,Revenue,Cost,Profit.' },
     ],
   },
   {
@@ -1423,6 +1441,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'Arrays of objects?', answer: 'JSON mode emits one object per line (JSON Lines). Wrap lines in brackets with commas to form an array by hand.' },
       { question: 'Back to JSON?', answer: 'CSV mode outputs plain comma rows with no header line. Add headers yourself if the importer needs them.' },
       { question: 'Do generated rows upload?', answer: 'No — conversion runs locally in your browser. Data never leaves your device.' },
+      { question: 'What exactly is inside each generated row?', answer: 'CSV rows carry first,last,age 20-69,status (Active/Inactive/Pending); JSON lines carry an 8-char id, name, age, lowercase email, and an active flag true about 70% of the time. The slider runs 1-50 rows; CSV mode has no header line.' },
     ],
   },
   {
@@ -4006,6 +4025,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'Where does tiny text work?', answer: 'Bios, captions, comments — anywhere Unicode renders. Tiny body paragraphs strain readers; reserve for accents.' },
       { question: 'Screen reader behavior?', answer: 'Superscripts often announce oddly (\'x squared\' works, custom glyphs don\'t). Keep critical info in normal size.' },
       { question: 'Is input sent anywhere?', answer: 'No — styling maps locally in your browser. Input never leaves your device.' },
+      { question: "Which modes exist and what does ‘hi’ become?", answer: "Four: Superscript (default), Subscript, Tiny, Small Caps. ‘hi’ in Superscript becomes ʰⁱ, mapped per character with unmapped characters passing through. Tiny renders capitals as fullwidth (Ａ–Ｚ); Small Caps leaves s and x unchanged." },
     ],
   },
   {
@@ -4027,6 +4047,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'Bold big text too?', answer: 'Yes where Unicode defines heavy variants. Combine size with bold for maximum poster impact.' },
       { question: 'Readability limits?', answer: 'All-caps giant text reads slowest — reserve for 3–5 word bursts. Longer messages stay mixed case.' },
       { question: 'Does input upload?', answer: 'No — generation runs locally in your browser. Nothing leaves your device.' },
+      { question: "How tall is the ASCII Block style?", answer: "Seven rows per letter from a fixed A–Z/0–9/space table — input is uppercased first and unknown characters render as blanks. The other two styles are Bubble (circled-letter style, space-joined) and Math Bold (mathematical bold style)." },
     ],
   },
   {
@@ -4048,6 +4069,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'Passive voice flagged?', answer: 'No — the tool shows counts and readability only, with no per-sentence flags. Convert key sentences to active yourself (\'the team shipped\' vs \'was shipped by\').' },
       { question: 'Adverb alerts?', answer: 'No — there are no adverb or style highlights. Read the averages (words, sentences, long words, vocabulary richness) and tighten manually.' },
       { question: 'Is my draft uploaded?', answer: 'No — analysis runs locally in your browser. Drafts never leave your device.' },
+      { question: "Which exact rates and bands does it use?", answer: "Reading time divides by 238 wpm and speaking by 183 wpm, rounded up — a 1,190-word draft reads ‘5 min’. Long words means 7+ characters; Flesch bands run 90+ ‘Very Easy (5th grade)’ down to below 30 ‘Very Difficult (Graduate)’; vocabulary richness is unique ÷ total words × 100." },
     ],
   },
   {
@@ -4069,6 +4091,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'What sources work?', answer: 'Books, websites, journals, articles, and videos — every field typed by hand. There is no ISBN lookup and no metadata auto-fill; verify author and date yourself.' },
       { question: 'In-text plus bibliography?', answer: 'Reference-list entries only — no separate in-text parentheticals generate. Copy the entry into your bibliography and write matching in-text markers yourself.' },
       { question: 'Is source data uploaded?', answer: 'No — generation runs locally in your browser. Nothing leaves your device.' },
+      { question: "What happens with missing fields or many authors?", answer: "A blank year prints (n.d.) and a blank title prints [Untitled]; 3 or more authors collapse to ‘First, et al.’ in APA, MLA, Harvard, and Chicago. Seven formats (APA 7th through Vancouver) across five source types — reference-list entries only, no in-text parentheticals." },
     ],
   },
   {
@@ -4132,6 +4155,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'Where does glitch break?', answer: 'Strict databases, screen readers, and normalized forms strip marks. Usernames and decorations, not data.' },
       { question: 'Different from Zalgo tool?', answer: 'Sibling aesthetics with different presets — this one targets heading-style corruption with tuned intensity curves.' },
       { question: 'Do corrupted strings upload?', answer: 'No — generation runs locally in your browser. Nothing leaves your device.' },
+      { question: "What are the defaults, and are spaces safe?", answer: "Zalgo mode at intensity 3 across all positions. Spaces, newlines, and tabs pass through untouched in every mode (Zalgo, Glitch, Scramble). Zalgo splits each intensity point 40/40/20 up/down/middle; the seed box makes output reproducible — same seed plus same settings gives the same string." },
     ],
   },
   {
@@ -4198,6 +4222,7 @@ export const entries_chunk_5: ToolMetadata[] = [
       { question: 'Emoji composition?', answer: 'ZWJ sequences (family emoji = person+ZWJ+person...) decompose visibly here. Length in code points exceeds visible glyphs.' },
       { question: 'UTF-8 bytes?', answer: 'Each character\'s 1–4 byte encoding displays alongside. Mojibake debugging starts with byte comparison.' },
       { question: 'Do inspected glyphs upload?', answer: 'No — inspection runs locally in your browser. Text never leaves your device.' },
+      { question: 'What does é look like in all three panels?', answer: 'U+00E9, &#233;, and %C3%A9 — two UTF-8 bytes (C3 A9) for one code point. Input iterates by code point, so emoji count as one entry; the table breaks every pasted character down the same way.' },
     ],
   },
 {

@@ -821,6 +821,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: 'How many QR codes per batch?', answer: 'Free tier generates 5 QR a day; Pro runs up to 100 rows per batch. Larger CSVs generate the first rows for free — upgrade to Pro for the full batch.' },
       { question: 'What size and error correction?', answer: 'Fixed 500px PNG at error-correction level M — scans from phones at 2–3 meters, ideal for table tents and posters. Test-scan one code with two different phones before printing hundreds.' },
       { question: 'Is my CSV data uploaded anywhere?', answer: 'No — generation runs locally in your browser with qrcode.js, so guest lists and links never leave your device. Only the final ZIP counts as one Pro download; the data itself is never transmitted.' },
+      { question: 'Does one bulk batch burn 5 days of quota?', answer: 'No — a batch counts once against the 5-a-day free limit, but free batches only render the first 5 CSV rows into the ZIP. Filenames sanitize to A-Z/0-9/underscore; the preview lists the first 10 rows.' },
     ],
   },
   {
@@ -1374,6 +1375,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: 'What pattern finds leaked secrets?', answer: 'Start with (?i)(api[_-]?key|secret|token)\\s*[:=]\\s*[\'"]?\\S+ for keys and \\b[\\w.-]+@[\\w.-]+\\.\\w+ for emails. Run extract-only first, eyeball 20 hits for false positives, then tighten before any replace pass.' },
       { question: 'Which file types process safely?', answer: 'Any text: .txt, .md, .csv, .log, .json, .yaml, .js, .py, .sql, .html. Binaries and archives skip automatically — never run replace across a folder containing .git internals or production .env files you haven\'t backed up.' },
       { question: 'Are my logs and code uploaded?', answer: 'No — matching runs locally in your browser with the JS RegExp engine; sensitive logs never leave your device. Only result saves count as Pro downloads — scrub before sharing, not after.' },
+      { question: 'What are the defaults and output filenames?', answer: 'Mode defaults to extract and flags default to g: extract joins every matchAll hit with newlines into <name>-extracted.txt, replace runs text.replace into <name>-replaced.txt. The picker accepts 10 extensions: .txt, .csv, .md, .json, .html, .xml, .log, .js, .ts and .css.' },
     ],
     seoTitle: "Free Bulk Regex Extractor & Replacer",
   },
@@ -3358,6 +3360,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "Does it capture the full page or just the viewport?", answer: "By default it captures the visible viewport. For full-page screenshots, the tool can scroll and stitch the entire page into one image." },
       { question: "Is the website data stored?", answer: "No. The page HTML is fetched through a first-party proxy and rendered locally with html2canvas — fetched content is not retained after your session. External CSS, images, and scripts often fail to load, so results are a static approximation, best on simple or text-based pages." },
       { question: "What are the fetch limits behind a capture?", answer: "The first-party fetch aborts after 25 seconds and each fallback proxy after 20 seconds; pages over ~1.5 MB of HTML are refused. Snapshots render at scale 2, and non-full-page captures clamp height to 1,080px." },
+      { question: "What do the Delay and Quality sliders do?", answer: "Delay runs 0-10 s and only settles the local static render: the tool waits 2000 + delay x 1000 ms (so 5 s means a 7 s wait) before snapshotting, but page JavaScript never executes regardless. Quality spans 10-100% and applies to JPG output only." },
     ],
     showInCategory: true,
     seoTitle: "Website Screenshot – Free Online",

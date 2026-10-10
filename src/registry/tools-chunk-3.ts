@@ -308,6 +308,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: 'Mask for /27?', answer: '255.255.255.224 — 32 usable hosts, the classic small-office or VLAN size. The tool shows mask, wildcard, and binary together.' },
       { question: 'Supernetting?', answer: 'Adjacent same-size blocks merge: two /24s become one /23 when aligned. Alignment matters — 10.0.1.0/24 + 10.0.2.0/24 merge; .1 + .3 do not.' },
       { question: 'Do prefix calculations upload?', answer: 'No — math runs locally in your browser. Nothing leaves your device.' },
+      { question: 'How are /31 and /32 handled?', answer: 'No host subtraction: at prefix 31 and above the total is 2 to the power (32 - prefix), with first = network and last = broadcast (a /31 gives 2 addresses, a /32 gives 1). Below 31 it is 2 to the power (32 - prefix) minus 2, so the default 192.168.1.0/24 reports 254. Prefix must be 0-32 and every octet 0-255.' },
     ],
   },
   {
@@ -684,6 +685,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: 'How much do extra payments help?', answer: 'Enormously early. There is no separate extra-payment field — raise the monthly payment figure instead and compare the months-to-payoff before and after.' },
       { question: 'Which debts first?', answer: 'One debt per run here: enter balance, rate, and payment for each debt separately. Never skip minimums chasing optimizations.' },
       { question: 'Is debt data uploaded?', answer: 'No — planning runs locally in your browser. Sensitive figures never leave your device.' },
+      { question: "How fast does the Credit Card preset clear?", answer: "$10,000 at 18% paying $500/month clears in 24 months (shown as 2 yr 0 mo). The tool simulates month-by-month up to a 600-month cap — and if your payment doesn’t cover the first month’s interest ($150 here), the result stays blank, which means raise the payment." },
     ],
   },
   {
@@ -857,6 +859,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can I model different scenarios?", answer: "Yes. Adjust contribution amounts, return rates, and retirement age to compare scenarios. See how small changes in monthly savings impact your final nest egg." },
       { question: "Does it show monthly income in retirement?", answer: "Yes — the result includes a 4% monthly withdrawal figure alongside the nest egg, contributions, and growth." },
       { question: "When using Retirement Calculator, is my financial data stored?", answer: "No. All calculations run locally in your browser. No retirement data is transmitted." },
+      { question: "What does the default projection give?", answer: "Age 30 to 65 (35 years) with $50,000 saved plus $1,000/month at 7% compounds to about $2,376,362 on $470,000 contributed — roughly $1,906,362 of growth, with a 4% monthly withdrawal near $7,921. Growth compounds monthly, so raising the return even 1% moves the needle enormously." },
     ],
     seoTitle: "Free Retirement Calculator Online",
   },
@@ -1027,6 +1030,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Weighted vs points-based grading?", answer: "This tool is weighted: each grade pairs with its own % weight and the total is normalized by the weight sum. For points systems, convert each assignment to a percentage first, giving weights proportional to course points." },
       { question: "Can extra credit save me?", answer: "Math, not hope: add it as one more grade-and-weight pair and watch the average move. A small weight means a small effect — exactly what the normalization shows." },
       { question: "Is my grade data stored?", answer: "No. All calculations run locally in your browser. No grades leave your device." },
+      { question: "What grade do the default lists give?", answer: "Grades 85, 90, 78 weighted 20/30/50 give 17 + 27 + 39 = 83.0%. Weights are normalized by their sum, so they don’t need to total 100 — and the headline turns red below 70%." },
     ],
     seoTitle: "Free Final Grade Calculator Online",
   },
@@ -1874,6 +1878,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "What time units are supported?", answer: "Years only — the time field is a plain year count. Convert months or days to fractional years yourself before entering." },
       { question: "When is simple interest used?", answer: "Short-term loans, car loans, some personal loans, and educational examples. Most mortgages and long-term investments use compound interest." },
       { question: "When using Simple Interest Calculator, is my data stored?", answer: "No. All calculations run locally in your browser. No financial data is transmitted." },
+      { question: "Can you work the default example?", answer: "$10,000 at 5% for 3 years gives Simple Interest $1,500.00, Total $11,500.00, and Annual interest $500.00 (principal × rate ÷ 100 × years). Try the $50k/8%/5yr preset: $20,000 interest on a $70,000 total." },
     ],
     seoTitle: "Free Online Simple Interest Calculator",
   },
@@ -1896,6 +1901,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can I set a savings goal and see how long it takes?", answer: "No — there is no goal mode. Set the years field to your horizon and read the balance; adjust the horizon until the balance covers your target." },
       { question: "What interest rates should I use?", answer: "Savings accounts: 2-5%. Fixed deposits: 5-7%. Index funds: 8-12% (historical average, not guaranteed). Use conservative estimates for realistic planning." },
       { question: "Is my savings data stored?", answer: "No. All calculations run locally in your browser. No financial data is transmitted." },
+      { question: "What does the default scenario reach in 10 years?", answer: "$10,000 initial plus $500/month at 5% compounded monthly reaches $94,111 — $70,000 contributed plus $24,111 interest, shown year-by-year. The Compounds/Year select (Annual through Daily) re-runs the same per-period loop, so compare Monthly vs Daily to see frequency’s small edge." },
     ],
     seoTitle: "Free Savings Calculator Online",
   },
@@ -1961,6 +1967,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: 'What else comes with the result?', answer: 'Population and sample SD together with variance, mean, median, range, and count — one paste serves the whole lab report.' },
       { question: 'How many values can I enter?', answer: 'Dozens to hundreds paste cleanly as comma or space separated lists. Strip labels and units first — stray text breaks parsing.' },
       { question: 'Is my dataset uploaded?', answer: 'No — statistics compute locally in your browser. Data never leaves your device.' },
+      { question: "What does the default dataset produce?", answer: "10, 12, 23, 23, 16, 23, 21, 16 gives count 8, mean 18.0000, median 21 (upper-middle of the sorted list), range 10–23, population SD 4.8990, sample SD 5.2372, variance 24.0000. You need at least 2 numeric values, comma/space/tab separated — stray text blanks the result." },
     ],
   },
   {
@@ -1982,6 +1989,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: 'Which regime/deductions?', answer: 'US filing statuses (single, married filing jointly, head of household) with one standard-deduction figure, a state rate, and flat FICA — no itemized path and no 80C-style regimes. Rules change yearly — verify current law.' },
       { question: 'Estimate vs filing?', answer: 'Estimates guide planning and advance tax; filings follow official forms and current rules. Never submit estimates as returns.' },
       { question: 'Is income data uploaded?', answer: 'No — math runs locally in your browser. Income never leaves your device.' },
+      { question: "Can you work the $80,000 default?", answer: "Single filer, $14,600 deduction, 5% state: taxable $65,400 gives Federal $9,441 across the 10/12/22% slices, State $3,270, FICA $6,120 (7.65% of gross) — $18,831 total, 23.5% effective, $61,169 take-home. The brackets are built-in 2025 tables, so verify current law before relying on it." },
     ],
   },
   {
@@ -2003,6 +2011,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: 'Rent TDS threshold?', answer: 'Not covered — there is no rent or fee input here. This tool estimates annual slab tax on total income only; look up current TDS thresholds separately.' },
       { question: 'New vs old regime?', answer: 'Compare both with actual deductions — new regime\'s lower rates often win without paperwork, old wins with heavy 80C/HRA. Rules change yearly; verify before filing.' },
       { question: 'Is salary data uploaded?', answer: 'No — math runs locally in your browser. Salary never leaves your device.' },
+      { question: "What tax does ₹12 lakh draw under the new regime?", answer: "₹35,000 — that’s ₹15,000 plus 10% of the ₹2,00,000 above ₹10,00,000, a 2.9% effective rate leaving ₹11,65,000 in-hand. Income up to ₹7,00,000 draws zero under the new regime (try the 5L preset); flip to Old to compare with senior-citizen exemptions." },
     ],
   },
   {
@@ -3481,6 +3490,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Filters?", answer: "Expressions like [?(@.price < 10)] select matching elements." },
       { question: "JSONPath vs jq?", answer: "JSONPath queries inside documents; jq transforms whole pipelines." },
       { question: "Is my input uploaded anywhere when using JSON Path Query Builder?", answer: "No — building runs locally in your browser, free with no signup." },
+      { question: "What does the built-in example return?", answer: "The default document {\"users\":[{\"name\":\"Alice\",\"age\":30},{\"name\":\"Bob\",\"age\":25}]} with path $.users[*].name: the $. prefix is stripped, segments split on dots and brackets, * fans out over arrays and bare digits index them, returning [\"Alice\",\"Bob\"] stringified with 2-space indent. Results download as json-path-result.txt." },
     ],
     seoDescription: 'Free online JSON Path Query Builder — Query JSON data using dot-notation path expressions with wildcard support. ',
     dependencies: "None",
@@ -3506,6 +3516,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: "Can I copy values from the tree?", answer: "Yes. Click on any leaf value to copy it to clipboard. The tree preserves the full path for context." },
       { question: "Does it validate the JSON?", answer: "Yes. If the JSON is malformed, the viewer shows an error with the line number and position of the syntax issue." },
       { question: "When using JSON Tree Viewer, is my JSON data stored?", answer: "No. All visualization happens locally in your browser. No JSON data is sent to any server." },
+      { question: "How are arrays and empty values drawn?", answer: "Indent is 2 spaces per depth; array items print as [0]: ... lines, empty arrays as [], empty objects as {}, null as null and strings quoted. The default document nests address {city, zip} and hobbies [reading, coding] to show both." },
     ],
     seoTitle: "JSON Tree Viewer – Free Online",
   },
@@ -3529,6 +3540,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: 'Key order differences?', answer: 'Ignored by default — JSON objects are unordered, so reordered keys aren\'t changes. Enable strict order mode only for canonical-form checks.' },
       { question: 'Large payloads?', answer: 'Thousand-line payloads diff fine locally; collapse unchanged regions to focus. Save both versions for the PR record.' },
       { question: 'Is payload data uploaded?', answer: 'No — diffing runs locally in your browser. Payloads never leave your device.' },
+      { question: 'What does a one-value change print as?', answer: 'With the defaults ({"a":1,"b":2} vs {"a":1,"b":3}) the output is exactly 2 lines: `- b: 2` then `+ b: 3`. Nested objects recurse with dot-joined paths, array elements get [i] suffixes, unparseable input toasts Invalid JSON in one or both inputs, and identical docs print (no differences).' },
     ],
   },
   {
@@ -3551,6 +3563,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: 'Accessible combos?', answer: 'Check contrast ratios between picks (4.5:1 body text). Random beauty means nothing if text fails readability.' },
       { question: 'Copy formats?', answer: 'Hex, RGB, and HSL copy per swatch. Paste straight into CSS variables or Figma.' },
       { question: 'Do swatches upload anywhere?', answer: 'No — generation runs locally in your browser. Nothing leaves your device.' },
+      { question: 'Is HSL mode full-spectrum or curated?', answer: 'Curated: hue spans the full 0-360 wheel but saturation locks to 50-100% and lightness to 40-60%, so no grays, blacks, or washed-out pastels. The Pastel preset generates 8 HSL swatches at once.' },
     ],
   },
   {
@@ -3573,6 +3586,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: 'Skill-balanced?', answer: 'Pure random here; seed ranked players manually across teams first for balanced competition. Randomness is fair, not equal.' },
       { question: 'Classroom use?', answer: 'Project groups, lab partners, presentation order — visible randomness keeps selections trusted by students.' },
       { question: 'Are names uploaded?', answer: 'No — splitting runs locally in your browser. Names never leave your device.' },
+      { question: 'How are 7 names split into 3 teams?', answer: 'Names shuffle, then deal round-robin (3/2/2) — remainders spread, never stacked. Each team card shows its member count; the default demo is 6 names into 2 teams.' },
     ],
   },
   {
@@ -3595,6 +3609,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: 'How many winners?', answer: 'Pick 1 to N items per draw; no-repeat mode caps picks at the list size.' },
       { question: 'Prove fairness?', answer: 'Entries draw with uniform randomness; screenshot the list plus result for audit trails.' },
       { question: 'Do drawn entries upload?', answer: 'No — picking runs locally in your browser. Lists never leave your device.' },
+      { question: 'I set Pick Count 5 with 4 items and repeats off — what happens?', answer: 'You get all 4 items shuffled (picks cap at list size). Tick Allow repeats for 5 draws with possible duplicates; presets cover Pick 1, 3, and 5.' },
     ],
   },
   {
@@ -3617,6 +3632,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: 'Question label?', answer: 'Add an optional question for context (e.g. dinner venue) — it tags the history entry and saves with the JSON download.' },
       { question: 'Group decisions?', answer: 'Project options visibly, draw live, honor the outcome. Ritual fairness beats arguing.' },
       { question: 'Do debated options upload?', answer: 'No — drawing runs locally in your browser. Nothing leaves your device.' },
+      { question: 'How long does the Decide animation run?', answer: 'Ticks flash every 80ms for options x5 cycles — 3 options take about 1.3s — then a final uniform pick lands and history keeps the last 10 decisions with optional question labels.' },
     ],
   },
   {
@@ -3639,6 +3655,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: 'Availability?', answer: 'Check each platform immediately — good names go fast. Variants with underscores and years extend options.' },
       { question: 'Which pattern per use?', answer: 'Lowercase word-word for handles; number-suffixed patterns for gaming tags. Match tone to context.' },
       { question: 'Do handle ideas upload?', answer: 'No — generation runs locally in your browser. Nothing leaves your device.' },
+      { question: 'What number gets appended with number options?', answer: 'A random 10-999 (always 2-3 digits, 990 possibilities). The noun-num and adj-noun-num patterns include one by design; the Append toggle adds another to any pattern.' },
     ],
   },
   {
@@ -3771,6 +3788,7 @@ export const entries_chunk_3: ToolMetadata[] = [
       { question: 'How long?', answer: 'Hundreds of terms per run locally. Million-term series belong in scripts with streaming output.' },
       { question: 'Custom steps?', answer: 'Yes — start, step, and count define any linear series. Geometric needs ratio instead of step.' },
       { question: 'Do series numbers upload?', answer: 'No — generation runs locally in your browser. Nothing leaves your device.' },
+      { question: 'What does the Even Numbers preset output?', answer: 'Start 2, step 2, count 10 gives 2, 4, through 20 with the panel reporting sum 110 and count 10. Geometric mode multiplies by the ratio instead; Custom uses n + n x r.' },
     ],
   },
   {
