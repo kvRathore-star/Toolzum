@@ -76,6 +76,9 @@ const eslintConfig = defineConfig([
     // Vendored minified pdf.js worker — third-party artifact in public/,
     // never hand-edited; linting minified vendor code is pure noise.
     "public/pdf.worker.min.mjs",
+    // Same rationale: vendored gif.js worker, copied by
+    // scripts/copy-gif-worker.js, never hand-edited.
+    "public/gif.worker.js",
   ]),
 ]);
 
