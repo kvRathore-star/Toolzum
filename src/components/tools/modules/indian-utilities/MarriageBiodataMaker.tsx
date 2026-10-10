@@ -251,7 +251,7 @@ export default function MarriageBiodataMaker() {
                 {photoUrl ? (
                   <div className="relative">
                     <img src={photoUrl} alt="Preview" className="w-20 h-20 rounded-full object-cover border-2 border-rose-300" />
-                    <button onClick={() => setPhotoUrl(null)} className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full text-[10px] font-bold flex items-center justify-center shadow">×</button>
+                    <button onClick={() => setPhotoUrl(null)} aria-label="Remove photo" className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full text-[10px] font-bold flex items-center justify-center shadow">×</button>
                   </div>
                 ) : (
                   <button onClick={() => photoInputRef.current?.click()} className="w-20 h-20 rounded-full border-2 border-dashed border-rose-300 flex flex-col items-center justify-center text-rose-700 dark:text-rose-400 hover:border-rose-500 transition-colors">

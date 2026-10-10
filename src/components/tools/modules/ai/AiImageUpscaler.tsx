@@ -259,16 +259,18 @@ export default function AiImageUpscaler() {
   className="absolute inset-0 w-full h-full object-cover pointer-events-none"
 />
 
-                {/* Left / Original */}
+                {/* Left / Original — clip-path (not width) so the inner
+                image stays container-sized and aligned at every viewport;
+                the old fixed 450px drifted off on small screens. */}
                 <div
-                  className="absolute inset-y-0 left-0 overflow-hidden pointer-events-none"
-                  style={{ width: `${sliderPos}%` }}
+                  className="absolute inset-0 overflow-hidden pointer-events-none"
+                  style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
                 >
 <img
   src={originalUrl || ''}
   alt="Uploaded image preview"
   
-  className="absolute inset-0 w-[450px] h-[450px] max-w-none object-cover pointer-events-none"
+  className="absolute inset-0 w-full h-full object-cover pointer-events-none"
 />
                 </div>
 

@@ -57,7 +57,10 @@ export default function BulkBgChanger() {
   const processImage = useCallback((item: ImageItem): Promise<string> => {
     return new Promise((resolve) => {
       const img = new Image();
-      img.onload = () => {
+      // Async bands: a 12 MP photo is ~12M pixel iterations — running them
+      // in one synchronous pass freezes the tab. Banded rows yield to the
+      // event loop regularly; pixel math and order are unchanged.
+      img.onload = async () => {
         const canvas = document.createElement('canvas');
         canvas.width = img.width;
         canvas.height = img.height;
@@ -67,13 +70,21 @@ export default function BulkBgChanger() {
         ctx.drawImage(img, 0, 0);
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         const data = imageData.data;
+        const W = canvas.width;
+        const H = canvas.height;
+        const BAND_ROWS = 256;
+        const yieldPaint = () => new Promise<void>((r) => setTimeout(r, 0));
 
         if (sampleColor) {
           const sr = parseInt(sampleColor.slice(1, 3), 16);
           const sg = parseInt(sampleColor.slice(3, 5), 16);
           const sb = parseInt(sampleColor.slice(5, 7), 16);
 
-          for (let i = 0; i < data.length; i += 4) {
+          for (let y0 = 0; y0 < H; y0 += BAND_ROWS) {
+            const y1 = Math.min(H, y0 + BAND_ROWS);
+            for (let y = y0; y < y1; y++) {
+              for (let x = 0; x < W; x++) {
+                const i = (y * W + x) * 4;
             const dr = Math.abs((data[i] ?? 0) - sr);
             const dg = Math.abs((data[i + 1] ?? 0) - sg);
             const db = Math.abs((data[i + 2] ?? 0) - sb);
@@ -94,10 +105,17 @@ export default function BulkBgChanger() {
                 data[i + 2] = (data[i + 2] ?? 0) * blend + bb * (1 - blend);
               }
             }
+              }
+            }
+            await yieldPaint();
           }
         } else {
           // Auto-detect: remove white or near-white backgrounds
-          for (let i = 0; i < data.length; i += 4) {
+          for (let y0 = 0; y0 < H; y0 += BAND_ROWS) {
+            const y1 = Math.min(H, y0 + BAND_ROWS);
+            for (let y = y0; y < y1; y++) {
+              for (let x = 0; x < W; x++) {
+                const i = (y * W + x) * 4;
             const avg = ((data[i] ?? 0) + (data[i + 1] ?? 0) + (data[i + 2] ?? 0)) / 3;
             const threshold = 255 - tolerance * 1.5;
             if (avg > threshold) {
@@ -112,6 +130,9 @@ export default function BulkBgChanger() {
                 data[i + 2] = bb;
               }
             }
+              }
+            }
+            await yieldPaint();
           }
         }
 

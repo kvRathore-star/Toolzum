@@ -402,7 +402,7 @@ export function PugToHtml() {
                 </>}
           output={<>
             {preview && (
-              <div className="bg-white rounded-lg border border-[var(--border-subtle)] p-4 max-h-40 overflow-y-auto">
+              <div className="bg-white dark:bg-zinc-900 rounded-lg border border-[var(--border-subtle)] p-4 max-h-40 overflow-y-auto">
                 <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(output) }} className="text-[11px] text-gray-800" />
               </div>
             )}

@@ -113,20 +113,28 @@ export default function CsvToSqlite() {
 
       const insertStmt = database.prepare(`INSERT INTO data (${safeHeaders.map(h => `"${h}"`).join(', ')}) VALUES (${safeHeaders.map(() => '?').join(', ')})`);
 
+      // Yield regularly so large files don't freeze the tab mid-import.
+      // Malformed rows are skipped and counted, never silently dropped.
+      let skipped = 0;
       for (let i = 1; i < lines.length; i++) {
         const values = lines[i]!.split(delimiter).map(v => v.trim().replace(/^["']|["']$/g, ''));
         if (values.length > 0) {
           try {
             insertStmt.run(values);
-          } catch { }
+          } catch {
+            skipped++;
+          }
+        } else {
+          skipped++;
         }
+        if (i % 2000 === 0) await new Promise<void>((r) => setTimeout(r, 0));
       }
       insertStmt.free();
 
       setDb(database);
       refreshSchema(database);
       setExpandedTables(new Set(['data']));
-      toast.success(`Loaded ${lines.length - 1} rows from ${file.name}`);
+      toast.success(`Loaded ${lines.length - 1 - skipped} rows from ${file.name}${skipped > 0 ? ` (${skipped} malformed skipped)` : ''}`);
 
       setQuery('SELECT * FROM data LIMIT 50;');
       executeQuery(database, 'SELECT * FROM data LIMIT 50;');

@@ -212,7 +212,8 @@ export default function CollageMaker() {
                 <img src={img.dataUrl} alt="" className="w-full h-full object-cover" />
                 <button
                   onClick={() => removeImage(i)}
-                  className="absolute top-0.5 right-0.5 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px] opacity-0 group-hover:opacity-100 transition-opacity"
+                  aria-label={`Remove image ${i + 1}`}
+                  className="absolute top-0.5 right-0.5 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px] opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity"
                 >×</button>
               </div>
             ))}
@@ -363,7 +364,8 @@ export default function CollageMaker() {
                   <div key={i} className="relative group w-20 h-20 rounded-lg overflow-hidden border border-[var(--border-subtle)] flex-shrink-0">
                     <img src={img.dataUrl} alt="" className="w-full h-full object-cover" />
                     <button onClick={() => removeImage(i)}
-                      className="absolute top-0.5 right-0.5 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">×</button>
+                      aria-label={`Remove image ${i + 1}`}
+                      className="absolute top-0.5 right-0.5 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px] opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity">×</button>
                     <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-[10px] text-center py-0.5">{i + 1}</div>
                   </div>
                 ))}

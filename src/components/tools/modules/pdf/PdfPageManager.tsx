@@ -220,7 +220,7 @@ export default function PdfPageManager() {
                         else if (e.key === 'ArrowRight') { e.preventDefault(); movePage(i, 1); }
                       }}
                       className={`flex flex-col items-center justify-center w-20 h-24 bg-white dark:bg-[var(--bg-surface)] border-2 ${draggedIdx === i ? 'border-dashed border-[var(--accent)] opacity-50' : 'border-[var(--border-subtle)]'} rounded-lg shadow-sm cursor-move hover:border-[var(--accent)] transition-colors group relative`}>
-                      <button onClick={() => handleRemove(i)} className="absolute -top-1.5 -right-1.5 bg-rose-500 text-white rounded-full w-5 h-5 text-[8px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">×</button>
+                      <button onClick={() => handleRemove(i)} aria-label={`Remove page ${pn + 1}`} className="absolute -top-1.5 -right-1.5 bg-rose-500 text-white rounded-full w-5 h-5 text-[8px] flex items-center justify-center opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity">×</button>
                       <FileText className="w-6 h-6 text-[var(--text-muted)] mb-1" /><span className="font-bold text-[10px]">Page {pn + 1}</span>
                     </div>
                   ))}
