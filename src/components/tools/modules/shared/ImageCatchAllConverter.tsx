@@ -357,6 +357,14 @@ export default function ImageFormatConverter({ slug }: ImageFormatConverterProps
     if (!file) return;
     setIsProcessing(true);
     try {
+      // Browsers can only ENCODE png/jpg/webp (avif in Chromium) — every
+      // other output select (HEIC/SVG/TIFF/BMP/GIF/ICO/JXL) leads here.
+      // Refuse upfront with the reason instead of a dead Convert that
+      // fails blaming the input.
+      if (!['png', 'jpg', 'webp', 'avif'].includes(outputKey)) {
+        toast.error(`${outputFmt.label} output isn't encodable in browsers — convert to PNG, JPG, WebP, or AVIF instead.`);
+        return;
+      }
       let blob: Blob | null = null;
 
       if (inputKey === 'heic') {
@@ -393,7 +401,7 @@ export default function ImageFormatConverter({ slug }: ImageFormatConverterProps
         URL.revokeObjectURL(dataUrl);
       }
 
-      if (!blob) throw new Error('Conversion failed');
+      if (!blob) throw new Error(outputKey === 'avif' ? 'AVIF encoding needs a Chromium browser — try Chrome or Edge, or pick WebP.' : 'Conversion failed');
       const url = URL.createObjectURL(blob);
       downloadOrShare(url, `converted.${outputFmt.ext}`);
       setTimeout(() => URL.revokeObjectURL(url), 100);

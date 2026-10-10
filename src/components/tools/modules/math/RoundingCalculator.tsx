@@ -25,7 +25,9 @@ export default function RoundingCalculator() {
         if (diffFloor < diffCeil) return floor;
         if (diffCeil < diffFloor) return ceil;
         const floorScaled = Math.floor(n * factor);
-        return (floorScaled % 2 === 0 ? floorScaled : floorScaled) / factor;
+        // Exact tie: round to even (2.5→2, 3.5→4). The old code returned
+        // floorScaled on both branches — always flooring ties.
+        return (floorScaled % 2 === 0 ? floorScaled : floorScaled + 1) / factor;
       }
       case 'floor': return Math.floor(n * factor) / factor;
       case 'ceil': return Math.ceil(n * factor) / factor;

@@ -309,7 +309,9 @@ export function WorkHoursCalculator() {
   const [breakMin, setBreakMin] = useState('30');
   const [sH, sM] = start.split(':').map(Number);
   const [eH, eM] = end.split(':').map(Number);
-  const total = (eH! * 60 + eM!) - (sH! * 60 + sM!) - Number(breakMin);
+  // Overnight shifts cross midnight — wrap into a 0–24h day instead of
+  // printing a negative total (22:00→06:00 is 8h, not −16h).
+  const total = (((eH! * 60 + eM!) - (sH! * 60 + sM!) - Number(breakMin)) % 1440 + 1440) % 1440;
   const hrs = Math.floor(total / 60), mins = total % 60;
 
   const presets = [

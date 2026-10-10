@@ -122,7 +122,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Translator",
     "slug": "ai-translator",
     "category": "AI",
-    "description": "Translate text between 100+ languages with automatic source detection on neural machine translation. Bloggers localize a 500-word post in seconds — 1 credit per translation, sign in free for 5.",
+    "description": "Translate text between 16 languages with automatic source detection via the AI API. Bloggers localize a 500-word post in seconds — 1 credit per translation, sign in free for 5.",
     "isPro": true
   },
   {
@@ -178,7 +178,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Compressor",
     "slug": "pdf-compressor",
     "category": "PDF",
-    "description": "Reduces PDF file size by compressing embedded images, removing redundant metadata, and optimizing object streams. Three compression tiers let you choose between maximum size reduction and high-quality preservation. Handles PDFs up to 125MB.",
+    "description": "Trims PDF file size by stripping redundant metadata and optimizing object streams — best on text-heavy documents. Cannot recompress embedded images (the main size driver); for scan-heavy PDFs use Bulk PDF Size Reducer. Handles PDFs up to 125MB.",
     "isPro": false
   },
   {
@@ -186,7 +186,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Word to PDF",
     "slug": "word-to-pdf",
     "category": "PDF",
-    "description": "Converts .docx and .doc files to PDF while preserving fonts, tables, images, headers, and embedded formatting. Uses cloud-based processing.",
+    "description": "Converts .docx files to PDF entirely in your browser — text runs extracted into clean plain-Helvetica pages. No server, no LibreOffice fidelity: complex formatting, tables, and images do not carry over.",
     "isPro": false
   },
   {
@@ -314,7 +314,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF Merger",
     "slug": "pdf-merger",
     "category": "PDF",
-    "description": "Combines two or more PDF files into one contiguous document with a drag-and-drop reorder interface for the input list. Legal assistants compiling.",
+    "description": "Combines two or more PDF files into one contiguous document with up/down buttons to order the input list. Legal assistants compiling.",
     "isPro": false
   },
   {
@@ -330,7 +330,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Excel to PDF",
     "slug": "excel-to-pdf",
     "category": "PDF",
-    "description": "Convert Excel workbooks to print-ready PDFs with layout preserved — quotes, reports, price lists. Send a client quote that prints identically everywhere — local conversion, unlimited saves.",
+    "description": "Convert the first sheet of Excel workbooks to a plain-grid PDF — quotes, reports, price lists. Send a client quote that reads identically everywhere — local conversion, unlimited saves.",
     "isPro": false
   },
   {
@@ -402,7 +402,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Paraphrasing Tool",
     "slug": "ai-paraphrasing-tool",
     "category": "AI",
-    "description": "Rewrite sentences and paragraphs while preserving meaning — students, writers, and marketers rephrase drafts in 7 tones. Runs on AI text generation at 1 credit per rewrite — sign in free for a 5-use trial.",
+    "description": "Rewrite sentences and paragraphs while preserving meaning — students, writers, and marketers rephrase drafts in 4 tones (Standard, Fluent, Formal, Creative). Runs on AI text generation at 1 credit per rewrite — sign in free for a 5-use trial.",
     "isPro": true
   },
   {
@@ -434,7 +434,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Unlock PDF",
     "slug": "unlock-pdf",
     "category": "PDF",
-    "description": "Remove known passwords from your own PDFs in bulk — owner restrictions and open passwords. Reclaim 20 archived files you own — local qpdf work, unlimited saves.",
+    "description": "Remove the known password from your own single PDF — owner restrictions and open passwords. Reclaim an archived file you own — local pdf.js and jsPDF work, unlimited saves.",
     "isPro": false
   },
   {
@@ -487,10 +487,10 @@ export const clientToolsRegistry: ClientToolEntry[] = [
   },
   {
     "id": "69",
-    "name": "AI Image Upscaler",
+    "name": "Image Upscaler",
     "slug": "ai-image-upscaler",
     "category": "AI",
-    "description": "Upscale images up to 4x with Lanczos-3 interpolation — best for logos, icons, and simple graphics where clean edges matter. Runs locally in your browser, no credits — sign in free for 2 Pro downloads a day.",
+    "description": "Upscale images 2x, 4x, or 8x with Lanczos-3 interpolation — best for logos, icons, and simple graphics where clean edges matter. No neural model: high-quality interpolation, not AI restoration. Runs locally in your browser, no credits — sign in free for 2 Pro downloads a day.",
     "isPro": true
   },
   {
@@ -578,7 +578,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MP3 to WAV",
     "slug": "mp3-to-wav",
     "category": "Audio",
-    "description": "Converts MP3 files to WAV format — universal music playback and sharing across all devices and platforms to professional audio editing, mastering, and archival in DAWs and production software. All conversion happens locally in your browser with no file size limits.",
+    "description": "Converts MP3 files to WAV format — universal music playback and sharing across all devices and platforms to professional audio editing, mastering, and archival in DAWs and production software. All conversion happens locally in your browser; files up to 100 MB each.",
     "isPro": false
   },
   {
@@ -735,7 +735,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
   },
   {
     "id": "112",
-    "name": "AI Face Swap",
+    "name": "Face Swap Compositor",
     "slug": "ai-face-swap",
     "category": "AI",
     "description": "Composite a face from one photo onto another with manual position, scale, and blend controls on canvas. Meme makers and designers align swaps by hand — runs locally, free to start with unlimited saves.",
@@ -1090,7 +1090,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Favicon Generator",
     "slug": "favicon-generator",
     "category": "Design",
-    "description": "Generate complete favicon packages — ICO plus PNG and Apple touch icons — from one image. Ship every platform icon in one pass — local generation, unlimited saves.",
+    "description": "Generate favicon packages — PNG icons plus Apple touch icons — from one image. Note: the .ico file is PNG data renamed (modern browsers only). Ship every platform icon in one pass — local generation, unlimited saves.",
     "isPro": false
   },
   {
@@ -1098,7 +1098,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Case Converter",
     "slug": "case-converter",
     "category": "Text",
-    "description": "Transform text between uppercase, lowercase, title case, camelCase, snake_case, kebab-case, sentence case, and alternating case with a single click. All processing is local.",
+    "description": "Transform text between uppercase, lowercase, title case, camelCase, snake_case, and kebab-case with a single click. All processing is local.",
     "isPro": false
   },
   {
@@ -1138,7 +1138,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Barcode Generator",
     "slug": "barcode-generator",
     "category": "Utility",
-    "description": "Generates scannable barcodes in UPC-A, EAN-13, Code 128, and Code 39 from typed input. Input never leaves your device — everything runs locally in your browser.",
+    "description": "Generates styled barcodes in UPC-A, EAN-13, Code 128, and Code 39 from typed input. Decorative renderer, not a certified symbology encoder — verify scans before print runs. Input never leaves your device — everything runs locally in your browser.",
     "isPro": false
   },
   {
@@ -1234,7 +1234,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG Editor",
     "slug": "svg-editor",
     "category": "Design",
-    "description": "Edit SVG code with live preview — paths, fills, transforms — plus SVGO optimization. Tweak icons without Illustrator — local editing, unlimited saves.",
+    "description": "Edit SVG code with live preview — paths, fills, transforms. Tweak icons without Illustrator — local editing, unlimited saves.",
     "isPro": false
   },
   {
@@ -1258,7 +1258,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SaaS Metrics Dashboard",
     "slug": "saas-metrics-dashboard",
     "category": "Growth & Marketing",
-    "description": "Track ARR, MRR, LTV, CAC, NPS, churn, runway, and A/B tests with scenario modeling and PDF export in this SaaS dashboard — all computed locally. Founders model what-if churn shifts live — sign in free to unlock the page; everything runs locally.",
+    "description": "Track ARR, MRR, LTV, CAC, NPS, churn, runway, and A/B tests with scenario modeling and PDF export in this SaaS dashboard — all computed locally. Founders model what-if churn shifts live — free, no signup, everything runs locally.",
     "isPro": true
   },
   {
@@ -1290,7 +1290,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MAC Address Generator",
     "slug": "mac-address-generator",
     "category": "Privacy",
-    "description": "Generate random MAC addresses with valid OUI structure for labs and testing. Fill virtual networks credibly — local generation, free, no signup.",
+    "description": "Generate random MAC addresses for labs and testing — pure random hex, no OUI or unicast-bit management. Fill virtual networks credibly — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -1362,7 +1362,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF OCR (Scanned Docs)",
     "slug": "pdf-ocr",
     "category": "PDF",
-    "description": "OCR scanned PDFs into searchable, selectable text with Tesseract.js — 100+ languages. Convert a 50-page scan into researchable text — local processing, unlimited saves.",
+    "description": "OCR scanned PDFs into extractable text with Tesseract.js — English, Hindi, Spanish, or French. Convert a 50-page scan into researchable text — local processing, unlimited saves.",
     "isPro": false
   },
   {
@@ -1514,7 +1514,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Voter ID Form Helper",
     "slug": "voter-id-form-helper",
     "category": "indian-utilities",
-    "description": "Get document checklists and step-by-step guidance for Indian voter registration forms — Form 6 (new enrollment), Form 7 (correction/objection), and Form 8 (name transfer within constituency).",
+    "description": "Get document checklists and step-by-step guidance for Indian voter registration forms — Form 6 (new enrollment), Form 7 (objection/deletion of a voter name), and Form 8 (correction, shifting, or replacement EPIC).",
     "isPro": false
   },
   {
@@ -2058,7 +2058,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image Format Converter",
     "slug": "image-format-converter",
     "category": "Image",
-    "description": "Convert one image from any format to any other — PNG, JPG, WebP, HEIC, AVIF, SVG, TIFF, GIF, and more. Pick your input, pick your output, done. Nothing is uploaded; every conversion runs in your browser.",
+    "description": "Convert one browser-decodable image to PNG, JPG, or WebP — the only outputs canvas can encode. HEIC/SVG/JXL/TIFF and other exotic targets fail honestly instead of pretending. Nothing is uploaded; every conversion runs in your browser.",
     "isPro": false
   },
   {
@@ -2074,7 +2074,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Document Converter",
     "slug": "document-converter",
     "category": "Converter",
-    "description": "Organize documents across PDF, DOCX, TXT, HTML, Markdown, RTF, ODT, and EPUB filename targets. Files queue locally with a 150MB per-file intake cap — your files never leave your device.",
+    "description": "Organize documents across PDF, Word, Excel, PowerPoint, Image, HTML, EPUB, and HEIC filename targets. Files queue locally with a 150MB per-file intake cap — your files never leave your device.",
     "isPro": false
   },
   {
@@ -2130,7 +2130,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Redact PDF",
     "slug": "redact-pdf",
     "category": "PDF",
-    "description": "Redact sensitive text permanently — PII, prices, names — with true content removal from PDFs. Share contracts safely, not just covered visually — local processing, unlimited saves.",
+    "description": "Cover sensitive passages with black rectangles — PII, prices, names — with visual redaction directly in your browser. Share contracts with hidden regions — local processing, unlimited saves.",
     "isPro": false
   },
   {
@@ -2514,7 +2514,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to GIF",
     "slug": "png-to-gif",
     "category": "Image",
-    "description": "Convert PNG images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "PNG to GIF output is not produced here — browsers have no GIF encoder, so Canvas conversion fails locally instead of downloading. Convert PNG to JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -2522,7 +2522,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to GIF",
     "slug": "jpg-to-gif",
     "category": "Image",
-    "description": "Convert JPG images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "JPG to GIF output is not produced here — browsers have no GIF encoder, so Canvas conversion fails locally instead of downloading. Convert JPG to PNG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -2530,7 +2530,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WebP to GIF",
     "slug": "webp-to-gif",
     "category": "Image",
-    "description": "Convert WEBP images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "WebP to GIF output is not produced here — browsers have no GIF encoder, so Canvas conversion fails locally instead of downloading. Convert WebP to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -2674,7 +2674,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to GIF",
     "slug": "bmp-to-gif",
     "category": "Image",
-    "description": "Convert BMP images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "BMP to GIF output is not produced here — browsers have no GIF encoder, so Canvas conversion fails locally instead of downloading. Convert BMP to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -2714,7 +2714,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to GIF",
     "slug": "heic-to-gif",
     "category": "Image",
-    "description": "Convert HEIC images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "HEIC to GIF output is not produced here — browsers have no GIF encoder, so Canvas conversion fails locally instead of downloading. Convert HEIC to JPG/PNG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -2746,7 +2746,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to JXL",
     "slug": "jpg-to-jxl",
     "category": "Image",
-    "description": "Convert JPG images to JXL format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "JXL output is not encodable in browsers — this conversion fails honestly. For next-gen compression today, convert to WebP instead. Photos never leave your device.",
     "isPro": false
   },
   {
@@ -2754,7 +2754,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to GIF",
     "slug": "jxl-to-gif",
     "category": "Image",
-    "description": "Convert JXL images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "JXL to GIF output is not produced here — browsers have no GIF encoder, so Canvas conversion fails locally instead of downloading, and JXL input itself may not decode in browsers. Convert JXL to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -2770,7 +2770,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to JXL",
     "slug": "png-to-jxl",
     "category": "Image",
-    "description": "Convert PNG graphics to JPEG XL for next-gen lossless storage at smaller sizes. Archive design assets in the future-proof format — local Canvas work, unlimited saves.",
+    "description": "JXL output is not encodable in browsers — this conversion fails honestly. For archival today, keep PNG or convert to WebP. Local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -2786,7 +2786,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to GIF",
     "slug": "svg-to-gif",
     "category": "Image",
-    "description": "Rasterize SVG vectors to GIFs for legacy animation and universal compatibility. Animate icons where only GIF plays — local Canvas work, unlimited saves.",
+    "description": "SVG to GIF output is not produced here — browsers have no GIF encoder, so Canvas conversion fails locally instead of downloading. Convert SVG to PNG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -2810,7 +2810,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to GIF",
     "slug": "tiff-to-gif",
     "category": "Image",
-    "description": "Convert TIFF scans and photos to compact GIF in your browser — small previews where full TIFFs are overkill where full TIFFs are overkill.",
+    "description": "TIFF to GIF output is not produced here — browsers have no GIF encoder, so Canvas conversion fails locally instead of downloading, and TIFF input itself may not decode in browsers. Convert TIFF to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -3770,7 +3770,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Phone Number Parser",
     "slug": "phone-parser",
     "category": "Developer",
-    "description": "Parse and validate international phone numbers with automatic country detection from the dial code. All validation runs locally in your browser.",
+    "description": "Parse and validate international phone numbers for 18 built-in dial codes with automatic country detection. Returns country, code, national number, and E.164 — no area-code or carrier lookup. All validation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -3802,7 +3802,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MAC Vendor Lookup",
     "slug": "mac-vendor-lookup",
     "category": "Developer",
-    "description": "Look up device manufacturer from a MAC address OUI prefix, covering thousands of registered vendors from Apple and Samsung to Intel and Cisco.",
+    "description": "Look up device manufacturer from a MAC address OUI prefix against a built-in list of ~550 vendors, from Apple and Samsung to Intel and Cisco.",
     "isPro": false
   },
   {
@@ -3970,7 +3970,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Words Per Page Calculator",
     "slug": "words-per-page-calculator",
     "category": "Calculator",
-    "description": "Estimate how many pages your word count fills at different font sizes — compare 11pt vs 12pt, single vs double spacing, for essays and manuscripts.",
+    "description": "Estimate pages from word count and font size — about 500 words/page at 12pt, 600 at 10pt and under. Font-size-only math, no spacing or margin inputs — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4914,7 +4914,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Sleep Calculator",
     "slug": "sleep-calculator",
     "category": "Health",
-    "description": "Compute ideal bedtimes and wake times in 90-minute sleep cycles. Wake refreshed at cycle ends, not mid-dream — free, local, no signup.",
+    "description": "Compute ideal sleep bedtimes counting back in 90-minute cycles — whole and half-cycle rows (2 to 5 cycles) minus a 15-minute buffer. Wake refreshed at cycle ends, not mid-dream — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5858,7 +5858,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Color Palette Generator",
     "slug": "color-palette-generator",
     "category": "Design",
-    "description": "Generate harmonious color palettes from a base color. Includes complementary, analogous, and triadic color schemes for designers. Work never leaves your device — everything renders locally in your browser.",
+    "description": "Generate a fixed 6-color palette from a base color at set hue offsets (+30/+60/+120/+180/+210). Click any swatch to copy its HEX. Work never leaves your device — everything renders locally in your browser.",
     "isPro": false
   },
   {
@@ -6002,7 +6002,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Fraction to Decimal Calculator",
     "slug": "fraction-to-decimal-calculator",
     "category": "Calculator",
-    "description": "Convert fractions to decimal numbers. Shows the step-by-step division process. Numbers never leave your device — every calculation runs locally in your browser.",
+    "description": "Convert a Numerator/Denominator fraction to a 6-place decimal with percent and equivalents. Shows the decimal result directly. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6138,7 +6138,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Algebra Calculator",
     "slug": "algebra-calculator",
     "category": "Calculator",
-    "description": "Solve algebraic expressions and linear equations with steps — variables isolated cleanly. Check homework before class — free, local, no signup.",
+    "description": "Evaluate arithmetic algebra expressions with + − × ÷, parentheses and decimals — digits-only evaluator, no variables. Check homework before class — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6322,7 +6322,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Time Zone Converter",
     "slug": "time-zone-converter",
     "category": "Utility",
-    "description": "Convert times across world zones with DST handled — schedule global meetings right. See 9am New York everywhere instantly — free, local, no signup.",
+    "description": "Show the current time in one IANA timezone — type a zone like America/New_York for its now plus UTC and local times. Single-box lookup — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6338,7 +6338,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Work Hours Calculator",
     "slug": "work-hours-calculator",
     "category": "Calculator",
-    "description": "Calculate total work hours between start and end times with a configurable break. Essential for timesheets and payroll. Numbers never leave your device — every calculation runs locally in your browser.",
+    "description": "Calculate total work hours for a single shift between start and end times with one configurable break. Essential for timesheets and payroll. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6642,7 +6642,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ASCII Table Generator",
     "slug": "ascii-table-generator",
     "category": "Text",
-    "description": "Browse and search the full ASCII table — decimals, hex, symbols, and HTML entities. Find that the copyright sign is &#169; in seconds — free, local, developer reference.",
+    "description": "Format CSV text into a bordered plain-text ASCII table — pipes, + separators and a = header rule. Paste rows, get a monospaced text table — free, local, developer reference.",
     "isPro": false
   },
   {
@@ -6874,7 +6874,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Duplicate Word Remover",
     "slug": "duplicate-word-remover",
     "category": "Text",
-    "description": "Remove duplicate words from text while preserving the first occurrence and original word order. Leaves line structure intact — only targets repeated words, not lines.",
+    "description": "Remove duplicate words from text while preserving the first occurrence and original word order. Flattens text into one space-separated line — newlines are not preserved.",
     "isPro": false
   },
   {
@@ -7826,7 +7826,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to AVIF",
     "slug": "jpg-to-avif",
     "category": "Image",
-    "description": "Convert JPG images to AVIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "Convert JPG images to AVIF format in Chromium browsers (Chrome/Edge encode AVIF via Canvas; Firefox/Safari refuse with guidance — use WebP there). Photos never leave your device — processing runs locally.",
     "isPro": false
   },
   {
@@ -7834,7 +7834,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to HEIC",
     "slug": "png-to-heic",
     "category": "Image",
-    "description": "Convert PNG graphics to HEIC for Apple-optimized storage at half the bytes. Shrink screenshot libraries for iCloud — local Canvas work, unlimited saves.",
+    "description": "Request PNG to HEIC output for Apple storage — but browsers have no HEIC encoder, so Canvas conversion fails locally instead of downloading. For Apple sharing convert PNG to JPG instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7842,7 +7842,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to BMP",
     "slug": "png-to-bmp",
     "category": "Image",
-    "description": "Convert PNG images to uncompressed BMP in your browser — for legacy software and embedded systems that accept nothing else.",
+    "description": "PNG to BMP output is not produced here — browsers have no BMP encoder, so Canvas conversion fails locally instead of downloading. Convert PNG to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7850,7 +7850,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to TIFF",
     "slug": "png-to-tiff",
     "category": "Image",
-    "description": "Convert PNG images to TIFF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "PNG to TIFF output is not produced here — browsers have no TIFF encoder, so Canvas conversion fails locally instead of downloading. Convert PNG to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7858,7 +7858,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PNG to ICO",
     "slug": "png-to-ico",
     "category": "Image",
-    "description": "Generate multi-size Windows ICO favicons from PNG graphics in batch. Ship crisp taskbar icons from transparent art — local Canvas work, unlimited saves.",
+    "description": "PNG to ICO output is not produced here — browsers have no ICO encoder, so Canvas conversion fails locally instead of downloading. Convert PNG to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7866,7 +7866,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to HEIC",
     "slug": "jpg-to-heic",
     "category": "Image",
-    "description": "Convert JPG images to HEIC format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "JPG to HEIC output is not encodable in browsers — Canvas has no HEIC encoder, so conversion fails locally. For smaller Apple-friendly files convert JPG to WebP or keep JPG — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7874,7 +7874,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to SVG",
     "slug": "jpg-to-svg",
     "category": "Image",
-    "description": "Trace JPG photos and logos into SVG vectors — rescue raster logos as scalable art. Rebuild brand marks from compressed copies — local tracing, unlimited saves.",
+    "description": "JPG to SVG vector output is not produced here — no tracing engine exists and Canvas cannot encode SVG, so conversion fails locally. For scalable logos redraw as SVG by hand, or convert JPG to PNG — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7882,7 +7882,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to BMP",
     "slug": "jpg-to-bmp",
     "category": "Image",
-    "description": "Convert JPG images to BMP format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "JPG to BMP output is not produced here — browsers have no BMP encoder, so Canvas conversion fails locally instead of downloading. Convert JPG to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7890,7 +7890,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to TIFF",
     "slug": "jpg-to-tiff",
     "category": "Image",
-    "description": "Convert JPG images to TIFF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "JPG to TIFF output is not produced here — browsers have no TIFF encoder, so Canvas conversion fails locally instead of downloading. Convert JPG to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7898,7 +7898,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JPG to ICO",
     "slug": "jpg-to-ico",
     "category": "Image",
-    "description": "Convert JPG photos to ICO favicons in your browser — 16/32/48 px multi-size icons ready to link with a single rel=icon tag.",
+    "description": "JPG to ICO output is not produced here — browsers have no ICO encoder, so Canvas conversion fails locally instead of downloading. Convert JPG to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7906,7 +7906,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WEBP to HEIC",
     "slug": "webp-to-heic",
     "category": "Image",
-    "description": "Convert WEBP images to HEIC format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "WEBP to HEIC output is not encodable in browsers — Canvas has no HEIC encoder, so conversion fails locally. For Apple workflows convert WEBP to JPG or PNG instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7914,7 +7914,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WEBP to SVG",
     "slug": "webp-to-svg",
     "category": "Image",
-    "description": "Convert WEBP images to SVG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "WEBP to SVG vector output is not produced here — no tracing engine exists and Canvas cannot encode SVG, so conversion fails locally. Convert WEBP to PNG instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7922,7 +7922,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WEBP to BMP",
     "slug": "webp-to-bmp",
     "category": "Image",
-    "description": "Convert WEBP images to BMP format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "WebP to BMP output is not produced here — WebP input decodes, but Canvas cannot encode BMP, so conversion fails locally. Convert WebP to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7930,7 +7930,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WEBP to TIFF",
     "slug": "webp-to-tiff",
     "category": "Image",
-    "description": "Convert WebP images to lossless TIFF for print and archival handoff. Take web art into press workflows — local Canvas work, unlimited saves.",
+    "description": "WebP to TIFF output is not produced here — WebP input decodes, but Canvas cannot encode TIFF, so conversion fails locally. Convert WebP to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7938,7 +7938,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WEBP to ICO",
     "slug": "webp-to-ico",
     "category": "Image",
-    "description": "Convert WEBP images to ICO format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "WebP to ICO output is not produced here — WebP input decodes, but Canvas cannot encode ICO, so conversion fails locally. Convert WebP to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7946,7 +7946,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "WEBP to JXL",
     "slug": "webp-to-jxl",
     "category": "Image",
-    "description": "Convert WEBP images to JXL format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "WEBP to JXL output is not produced here — Canvas cannot encode JXL, so conversion fails locally. Convert WEBP to JPG or PNG instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7954,7 +7954,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to SVG",
     "slug": "heic-to-svg",
     "category": "Image",
-    "description": "Trace iPhone HEIC photos into SVG vectors for logos salvaged from snapshots. Rebuild brand art from a phone pic — local tracing, unlimited saves.",
+    "description": "HEIC to SVG vector output is not produced here — HEIC input decodes via heic2any but SVG cannot be encoded by Canvas, so conversion fails locally. Convert HEIC to PNG instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7962,7 +7962,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to BMP",
     "slug": "heic-to-bmp",
     "category": "Image",
-    "description": "Convert HEIC images to BMP format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "HEIC to BMP output is not produced here — HEIC input decodes via heic2any, but Canvas cannot encode BMP, so conversion fails locally. Convert HEIC to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7970,7 +7970,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to TIFF",
     "slug": "heic-to-tiff",
     "category": "Image",
-    "description": "Convert iPhone HEIC shots to lossless TIFF for print and professional handoff. Take phone photos into press workflows — local Canvas work, unlimited saves.",
+    "description": "HEIC to TIFF output is not produced here — HEIC input decodes via heic2any, but Canvas cannot encode TIFF, so conversion fails locally. Convert HEIC to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7978,7 +7978,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to ICO",
     "slug": "heic-to-ico",
     "category": "Image",
-    "description": "Convert HEIC images to ICO format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "HEIC to ICO output is not produced here — HEIC input decodes via heic2any, but Canvas cannot encode ICO, so conversion fails locally. Convert HEIC to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -7986,7 +7986,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HEIC to JXL",
     "slug": "heic-to-jxl",
     "category": "Image",
-    "description": "Migrate iPhone HEIC photos to JPEG XL for the most advanced archival available. Move Apple libraries to future-proof storage — local Canvas work, unlimited saves.",
+    "description": "HEIC to JXL output is not produced here — HEIC input decodes via heic2any, but Canvas cannot encode JXL, so conversion fails locally. Convert HEIC to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8002,7 +8002,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to HEIC",
     "slug": "avif-to-heic",
     "category": "Image",
-    "description": "Convert AVIF images to HEIC format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "AVIF to HEIC output is not produced here — AVIF input decodes, but Canvas has no HEIC encoder, so conversion fails locally. Convert AVIF to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8010,7 +8010,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to SVG",
     "slug": "avif-to-svg",
     "category": "Image",
-    "description": "Trace AVIF rasters into scalable SVG vectors for logos resurrected from compressed copies. Rebuild a lost logo as infinite-resolution art — local tracing, unlimited saves.",
+    "description": "AVIF to SVG vector output is not produced here — no tracing engine exists and Canvas cannot encode SVG, so conversion fails locally. For AVIF images use AVIF to PNG instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8018,7 +8018,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to BMP",
     "slug": "avif-to-bmp",
     "category": "Image",
-    "description": "Convert AVIF images to uncompressed BMP for legacy pipelines and pixel-level analysis. Feed modern photos into older lab software — local Canvas work, unlimited saves.",
+    "description": "AVIF to BMP output is not produced here — AVIF input decodes, but Canvas cannot encode BMP, so conversion fails locally. Convert AVIF to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8026,7 +8026,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to TIFF",
     "slug": "avif-to-tiff",
     "category": "Image",
-    "description": "Convert AVIF photos to lossless TIFF for print publishing and professional archives. Prepare press-ready files from next-gen originals — local Canvas work, unlimited saves.",
+    "description": "AVIF to TIFF output is not produced here — AVIF input decodes, but Canvas cannot encode TIFF, so conversion fails locally. Convert AVIF to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8034,7 +8034,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to GIF",
     "slug": "avif-to-gif",
     "category": "Image",
-    "description": "Turn AVIF images into universally compatible GIFs for legacy platforms and simple animations. Post next-gen art where only GIF uploads work — local Canvas work, unlimited saves.",
+    "description": "AVIF to GIF output is not produced here — AVIF input decodes, but Canvas cannot encode GIF, so conversion fails locally. Convert AVIF to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8042,7 +8042,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to ICO",
     "slug": "avif-to-ico",
     "category": "Image",
-    "description": "Convert AVIF images to ICO format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "AVIF to ICO output is not produced here — AVIF input decodes, but Canvas cannot encode ICO, so conversion fails locally. Convert AVIF to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8050,7 +8050,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AVIF to JXL",
     "slug": "avif-to-jxl",
     "category": "Image",
-    "description": "Convert AVIF images to JXL format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "AVIF to JXL output is not produced here — AVIF input decodes, but Canvas cannot encode JXL, so conversion fails locally. Convert AVIF to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8058,7 +8058,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to HEIC",
     "slug": "svg-to-heic",
     "category": "Image",
-    "description": "Rasterize SVG vectors to HEIC for Apple-optimized asset delivery. Ship tiny icons into iOS apps — local Canvas work, unlimited saves.",
+    "description": "SVG input rasterizes fine, but HEIC output is not encodable — Canvas has no HEIC encoder, so conversion fails locally. Rasterize SVG to PNG instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8066,7 +8066,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to BMP",
     "slug": "svg-to-bmp",
     "category": "Image",
-    "description": "Convert SVG vectors to BMP raster in your browser — only when legacy compatibility demands it, since PNG beats BMP everywhere else.",
+    "description": "SVG to BMP output is not produced here — SVG input rasterizes, but Canvas cannot encode BMP, so conversion fails locally. Convert SVG to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8074,7 +8074,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to TIFF",
     "slug": "svg-to-tiff",
     "category": "Image",
-    "description": "Convert SVG vectors to print-grade TIFF in your browser — resolution-independent artwork rasterized at any size from web size to poster size.",
+    "description": "SVG to TIFF output is not produced here — SVG input rasterizes, but Canvas cannot encode TIFF, so conversion fails locally. Convert SVG to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8082,7 +8082,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to ICO",
     "slug": "svg-to-ico",
     "category": "Image",
-    "description": "Generate Windows ICO favicons directly from SVG masters at any resolution. Build razor-sharp icon sets from vectors — local Canvas work, unlimited saves.",
+    "description": "SVG to ICO output is not produced here — SVG input rasterizes, but Canvas cannot encode ICO, so conversion fails locally. Convert SVG to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8090,7 +8090,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SVG to JXL",
     "slug": "svg-to-jxl",
     "category": "Image",
-    "description": "Rasterize SVG vectors to next-gen JPEG XL for archival icon libraries. Store infinite-resolution art in future-proof pixels — local Canvas work, unlimited saves.",
+    "description": "SVG to JXL output is not produced here — SVG input rasterizes, but Canvas cannot encode JXL, so conversion fails locally. Convert SVG to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8098,7 +8098,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to HEIC",
     "slug": "bmp-to-heic",
     "category": "Image",
-    "description": "Convert BMP images to HEIC format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "BMP to HEIC output is not produced here — BMP input loads, but Canvas has no HEIC encoder, so conversion fails locally. Convert BMP to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8106,7 +8106,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to SVG",
     "slug": "bmp-to-svg",
     "category": "Image",
-    "description": "Vectorize BMP bitmaps into scalable SVGs — rescue legacy clip-art for modern use. Turn pixelated 90s graphics into clean vectors — local tracing, unlimited saves.",
+    "description": "BMP to SVG vector output is not produced here — BMP input loads but no tracing engine exists and Canvas cannot encode SVG, so conversion fails locally. Convert BMP to PNG instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8114,7 +8114,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to TIFF",
     "slug": "bmp-to-tiff",
     "category": "Image",
-    "description": "Convert BMP bitmaps to lossless TIFF for print archives and professional handoff. Move legacy scans into press workflows — local Canvas work, unlimited saves.",
+    "description": "BMP to TIFF output is not produced here — BMP input loads, but Canvas cannot encode TIFF, so conversion fails locally. Convert BMP to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8122,7 +8122,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to ICO",
     "slug": "bmp-to-ico",
     "category": "Image",
-    "description": "Convert BMP images to ICO format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "BMP to ICO output is not produced here — BMP input loads, but Canvas cannot encode ICO, so conversion fails locally. Convert BMP to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8130,7 +8130,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "BMP to JXL",
     "slug": "bmp-to-jxl",
     "category": "Image",
-    "description": "Convert BMP bitmaps to next-gen JPEG XL in your browser — rescue uncompressed legacy files into efficient modern archival.",
+    "description": "BMP to JXL output is not produced here — BMP input loads, but Canvas cannot encode JXL, so conversion fails locally. Convert BMP to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8138,7 +8138,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to HEIC",
     "slug": "tiff-to-heic",
     "category": "Image",
-    "description": "Convert lossless TIFF archives to efficient HEIC for Apple storage and sharing. Halve archival bytes for the Apple ecosystem — local Canvas work, unlimited saves.",
+    "description": "TIFF to HEIC output is not produced here — TIFF input may not decode in browsers, and Canvas has no HEIC encoder, so conversion fails locally. Convert TIFF to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8146,7 +8146,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to SVG",
     "slug": "tiff-to-svg",
     "category": "Image",
-    "description": "Trace TIFF scans into SVG vectors — rescue high-contrast art from print archives. Rebuild logos from press files — local tracing, unlimited saves.",
+    "description": "TIFF to SVG vector output is not produced here — browsers cannot decode TIFF input and Canvas cannot encode SVG, so conversion fails locally. Convert supported images to PNG instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8154,7 +8154,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to BMP",
     "slug": "tiff-to-bmp",
     "category": "Image",
-    "description": "Convert TIFF images to BMP format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "TIFF to BMP output is not produced here — TIFF input may not decode in browsers, and Canvas cannot encode BMP, so conversion fails locally. Convert TIFF to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8162,7 +8162,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to ICO",
     "slug": "tiff-to-ico",
     "category": "Image",
-    "description": "Generate Windows ICO favicons from high-res TIFF masters. Build icons from press-quality sources — local Canvas work, unlimited saves.",
+    "description": "TIFF to ICO output is not produced here — TIFF input may not decode in browsers, and Canvas cannot encode ICO, so conversion fails locally. Convert TIFF to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8170,7 +8170,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "TIFF to JXL",
     "slug": "tiff-to-jxl",
     "category": "Image",
-    "description": "Convert TIFF images to JXL format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "TIFF to JXL output is not produced here — TIFF input may not decode in browsers, and Canvas cannot encode JXL, so conversion fails locally. Convert TIFF to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8178,7 +8178,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to HEIC",
     "slug": "gif-to-heic",
     "category": "Image",
-    "description": "Convert GIF animations and stills to space-efficient HEIC for Apple workflows. Halve sticker libraries for iOS apps — local Canvas work, unlimited saves.",
+    "description": "GIF to HEIC output is not produced here — GIF input decodes, but Canvas has no HEIC encoder, so conversion fails locally. Convert GIF to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8186,7 +8186,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to SVG",
     "slug": "gif-to-svg",
     "category": "Image",
-    "description": "Convert GIF images to SVG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "GIF to SVG output is not produced here — Canvas cannot encode SVG, so conversion fails locally with no vector or wrapper file. Convert GIF to PNG or WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8194,7 +8194,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to BMP",
     "slug": "gif-to-bmp",
     "category": "Image",
-    "description": "Convert GIF images to BMP format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "GIF to BMP output is not produced here — GIF input decodes, but Canvas cannot encode BMP, so conversion fails locally. Convert GIF to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8202,7 +8202,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to TIFF",
     "slug": "gif-to-tiff",
     "category": "Image",
-    "description": "Convert GIF images to print-grade TIFF in your browser — frames and stills rasterized for publishing for print and publishing workflows.",
+    "description": "GIF to TIFF output is not produced here — GIF input decodes, but Canvas cannot encode TIFF, so conversion fails locally. Convert GIF to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8210,7 +8210,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to ICO",
     "slug": "gif-to-ico",
     "category": "Image",
-    "description": "Convert GIF images to ICO format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "GIF to ICO output is not produced here — GIF input decodes, but Canvas cannot encode ICO, so conversion fails locally. Convert GIF to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8218,7 +8218,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GIF to JXL",
     "slug": "gif-to-jxl",
     "category": "Image",
-    "description": "Convert GIFs to next-gen JPEG XL for archival-grade stills at tiny sizes. Future-proof meme libraries with full-color frames — local Canvas work, unlimited saves.",
+    "description": "GIF to JXL output is not produced here — GIF input decodes, but Canvas cannot encode JXL, so conversion fails locally. Convert GIF to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8226,7 +8226,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to HEIC",
     "slug": "ico-to-heic",
     "category": "Image",
-    "description": "Convert ICO icons to HEIC for Apple ecosystem asset catalogs. Feed Windows artwork into Xcode projects — local Canvas work, unlimited saves.",
+    "description": "ICO to HEIC output is not produced here — ICO input loads, but Canvas has no HEIC encoder, so conversion fails locally. Convert ICO to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8242,7 +8242,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to SVG",
     "slug": "ico-to-svg",
     "category": "Image",
-    "description": "Trace Windows ICO icons into scalable SVG vectors for modern icon systems. Rebuild favicon sets as infinite-resolution art — local tracing, unlimited saves.",
+    "description": "ICO to SVG vector output is not produced here — no tracing engine exists and Canvas cannot encode SVG, so conversion fails locally. Convert ICO to PNG instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8250,7 +8250,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to BMP",
     "slug": "ico-to-bmp",
     "category": "Image",
-    "description": "Convert ICO favicons to BMP bitmaps in your browser — full-size icon artwork for legacy Windows software for editing in legacy Windows apps.",
+    "description": "ICO to BMP output is not produced here — ICO input loads, but Canvas cannot encode BMP, so conversion fails locally. Convert ICO to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8258,7 +8258,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to TIFF",
     "slug": "ico-to-tiff",
     "category": "Image",
-    "description": "Convert ICO images to TIFF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "ICO to TIFF output is not produced here — ICO input loads, but Canvas cannot encode TIFF, so conversion fails locally. Convert ICO to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8266,7 +8266,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to GIF",
     "slug": "ico-to-gif",
     "category": "Image",
-    "description": "Convert ICO images to GIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "ICO to GIF output is not produced here — ICO input loads, but Canvas cannot encode GIF, so conversion fails locally. Convert ICO to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8274,7 +8274,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "ICO to JXL",
     "slug": "ico-to-jxl",
     "category": "Image",
-    "description": "Convert ICO images to JXL format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "ICO to JXL output is not produced here — ICO input loads, but Canvas cannot encode JXL, so conversion fails locally. Convert ICO to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8282,7 +8282,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to HEIC",
     "slug": "jxl-to-heic",
     "category": "Image",
-    "description": "Convert JPEG XL photos to Apple HEIC in your browser — native iPhone and Mac format from next-gen originals across the whole Apple ecosystem.",
+    "description": "JXL to HEIC output is not produced here — JXL input may not decode in browsers, and Canvas has no HEIC encoder, so conversion fails locally. Convert JXL to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8290,7 +8290,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to AVIF",
     "slug": "jxl-to-avif",
     "category": "Image",
-    "description": "Convert JXL images to AVIF format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "Convert JXL images to AVIF format in Chromium browsers — JXL input itself may not decode outside Chromium, and AVIF encodes Chromium-only. Photos never leave your device — processing runs locally.",
     "isPro": false
   },
   {
@@ -8298,7 +8298,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to SVG",
     "slug": "jxl-to-svg",
     "category": "Image",
-    "description": "Convert JXL images to SVG format in your browser. Photos never leave your device — processing runs locally in your browser with Canvas and WebAssembly.",
+    "description": "JXL to SVG output is not produced here — browsers cannot decode JXL input and Canvas cannot encode SVG, so conversion fails locally. Convert supported images to PNG instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8306,7 +8306,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to BMP",
     "slug": "jxl-to-bmp",
     "category": "Image",
-    "description": "Convert JPEG XL images to raw BMP bitmaps for legacy analysis pipelines. Feed next-gen captures into older lab tools — local Canvas work, unlimited saves.",
+    "description": "JXL to BMP output is not produced here — JXL input may not decode in browsers, and Canvas cannot encode BMP, so conversion fails locally. Convert JXL to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8314,7 +8314,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to TIFF",
     "slug": "jxl-to-tiff",
     "category": "Image",
-    "description": "Convert JPEG XL photos to archival TIFF in your browser — lossless masters for print and publishing for print and long-term archival.",
+    "description": "JXL to TIFF output is not produced here — JXL input may not decode in browsers, and Canvas cannot encode TIFF, so conversion fails locally. Convert JXL to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
@@ -8322,7 +8322,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "JXL to ICO",
     "slug": "jxl-to-ico",
     "category": "Image",
-    "description": "Generate Windows ICO favicons from JPEG XL sources in batch. Build icon sets from next-gen art — local Canvas work, unlimited saves.",
+    "description": "JXL to ICO output is not produced here — JXL input may not decode in browsers, and Canvas cannot encode ICO, so conversion fails locally. Convert JXL to PNG/JPG/WebP instead — local, unlimited saves.",
     "isPro": false
   },
   {
