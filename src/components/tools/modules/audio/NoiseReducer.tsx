@@ -46,9 +46,6 @@ const MIME_TYPES: Record<string, string> = {
 export default function NoiseReducer() {
   const [file, setFile] = useState<File | null>(null);
   const [level, setLevel] = useState<Level>('moderate');
-  const [useNoiseProfile, setUseNoiseProfile] = useState(false);
-  const [noiseStart, setNoiseStart] = useState(0);
-  const [noiseEnd, setNoiseEnd] = useState(5);
   const [outputFormat, setOutputFormat] = useState<OutputFormat>('wav');
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
@@ -98,27 +95,14 @@ export default function NoiseReducer() {
 
       await ffmpeg.writeFile(inputName, await fetchFile(file));
 
-      if (useNoiseProfile) {
-        const noiseName = `noise_${ts}.wav`;
-        await ffmpeg.exec([
-          '-i', inputName,
-          '-af', `atrim=start=${noiseStart}:end=${noiseEnd}`,
-          '-f', 'wav',
-          noiseName,
-        ]);
-        await ffmpeg.exec([
-          '-i', inputName,
-          '-af', `anlmdn=s=${LEVEL_ANLMDN[level]}`,
-          outputName,
-        ]);
-        await ffmpeg.deleteFile(noiseName);
-      } else {
-        await ffmpeg.exec([
-          '-i', inputName,
-          '-af', `afftdn=nf=${LEVEL_NF[level]}`,
-          outputName,
-        ]);
-      }
+      // Single-pass reduction (afftdn/anlmdn by level). The old "sample
+      // noise profile" toggle extracted a clip and deleted it — neither
+      // filter consumes a profile, so the toggle changed nothing.
+      await ffmpeg.exec([
+        '-i', inputName,
+        '-af', `afftdn=nf=${LEVEL_NF[level]}`,
+        outputName,
+      ]);
 
       const data = await ffmpeg.readFile(outputName);
 
@@ -196,51 +180,6 @@ export default function NoiseReducer() {
               <p className="text-[10px] text-[var(--text-muted)] mt-1.5">{`afftdn nf=${LEVEL_NF[level]}`}</p>
             </div>
 
-            <label className="flex items-center gap-2.5 cursor-pointer select-none">
-              <input
-                type="checkbox"
-                checked={useNoiseProfile}
-                onChange={e => setUseNoiseProfile(e.target.checked)}
-                disabled={isProcessing}
-                className="rounded border-[var(--border-subtle)] text-violet-500 focus:ring-violet-500 disabled:opacity-50"
-              />
-              <div>
-                <span className="text-xs font-semibold text-[var(--text-primary)]">Sample noise profile</span>
-                <p className="text-[10px] text-[var(--text-muted)]">Select a noise-only section for targeted removal using non-local means denoising</p>
-              </div>
-            </label>
-
-            {useNoiseProfile && (
-              <div className="grid grid-cols-2 gap-3 pl-7">
-                <div>
-                  <label htmlFor="lbl-noisereducer-noise-start-sec" className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Noise Start (sec)</label>
-                  <input id="lbl-noisereducer-noise-start-sec" aria-label="Noise Start (sec)"
-                    type="number"
-                    min={0}
-                    step={0.1}
-                    value={noiseStart}
-                    onChange={e => setNoiseStart(Math.max(0, Number(e.target.value)))}
-                    disabled={isProcessing}
-                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-violet-500 disabled:opacity-50"
-                  />
-                  <span className="text-[10px] text-[var(--text-muted)] mt-1 block">{Math.floor(noiseStart / 60)}:{(noiseStart % 60).toFixed(1).padStart(4, '0')}</span>
-                </div>
-                <div>
-                  <label htmlFor="lbl-noisereducer-noise-end-sec" className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Noise End (sec)</label>
-                  <input id="lbl-noisereducer-noise-end-sec" aria-label="Noise End (sec)"
-                    type="number"
-                    min={0}
-                    step={0.1}
-                    value={noiseEnd}
-                    onChange={e => setNoiseEnd(Math.max(0, Number(e.target.value)))}
-                    disabled={isProcessing}
-                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 disabled:opacity-50"
-                  />
-                  <span className="text-[10px] text-[var(--text-muted)] mt-1 block">{Math.floor(noiseEnd / 60)}:{(noiseEnd % 60).toFixed(1).padStart(4, '0')}</span>
-                </div>
-              </div>
-            )}
-
             <div>
               <label htmlFor="lbl-noisereducer-output-format" className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Output Format</label>
               <select id="lbl-noisereducer-output-format" aria-label="Output Format"
@@ -263,14 +202,14 @@ export default function NoiseReducer() {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                {useNoiseProfile ? 'Sample Noise & Reduce' : 'Reduce Noise'}
+                {isProcessing ? 'Reducing noise...' : 'Reduce Noise'}
               </button>
             )}
 
             {isProcessing && (
               <div className="space-y-2">
                 <div className="flex justify-between text-[10px] font-semibold text-violet-600 dark:text-violet-400">
-                  <span>{useNoiseProfile ? 'Analyzing noise profile & processing...' : 'Reducing noise...'}</span>
+                  <span>Reducing noise...</span>
                   <span>{progress}%</span>
                 </div>
                 <div className="w-full bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">

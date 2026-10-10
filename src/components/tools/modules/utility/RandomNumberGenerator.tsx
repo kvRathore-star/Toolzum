@@ -8,7 +8,7 @@ import { randInt, shuffleArray } from './GeneratorsShared';
 
 export default function RandomNumberGenerator() {
   const [min, setMin] = useState('1'); const [max, setMax] = useState('100'); const [count, setCount] = useState('5'); const [unique, setUnique] = useState(false); const [sort, setSort] = useState(false);
-  const [result, setResult] = useState<number[]>([]); const [history, setHistory] = useState<{ nums: number[]; timestamp: string }[]>([]);
+  const [result, setResult] = useState<number[]>([]);
   const generate = () => {
     const mn = parseInt(min); const mx = parseInt(max); const c = parseInt(count);
     if (isNaN(mn) || isNaN(mx) || isNaN(c)) return;
@@ -24,7 +24,7 @@ export default function RandomNumberGenerator() {
     { label: 'Dice Roll (1-6)', apply: () => { setMin('1'); setMax('6'); setCount('1'); } },
     { label: 'Lottery (1-49)', apply: () => { setMin('1'); setMax('49'); setCount('6'); setUnique(true); } },
     { label: '100 Numbers (1-1000)', apply: () => { setMin('1'); setMax('1000'); setCount('100'); } },
-    { label: 'Clear', apply: () => { setResult([]); setHistory([]); } },
+    { label: 'Clear', apply: () => { setResult([]); } },
   ];
 
   const resultText = result.length > 0 ? 'Generated ' + result.length + ' numbers (' + (unique ? 'unique' : 'with repeats') + ')' : 'Configure range and generate';

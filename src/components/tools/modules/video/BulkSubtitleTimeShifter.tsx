@@ -9,7 +9,7 @@ const timePresets = [
   { label: 'Advance 0.5s', offset: -500 },
   { label: 'Delay 5s', offset: 5000 },
   { label: 'Advance 2s', offset: -2000 },
-  { label: 'Sync to video', offset: 0 },
+  { label: 'Reset offset (0 ms)', offset: 0 },
 ];
 
 const sampleSrt = `1

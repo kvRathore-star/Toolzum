@@ -43,7 +43,6 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
   const [dstFormat, setDstFormat] = useState<typeof FORMATS[number]>((defaultTo as typeof FORMATS[number]) || 'DOCX');
   const [isDragOver, setIsDragOver] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [quality, setQuality] = useState<'low' | 'medium' | 'high'>('high');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Document ceiling is 150MB at intake (matches the download gate, so no
@@ -242,15 +241,7 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
         )}
 
         {files.length > 0 && (
-          <div className="flex items-center gap-3">
-            <label className="text-xs font-medium text-[var(--text-secondary)]">Quality:</label>
-            {(['low', 'medium', 'high'] as const).map(q => (
-              <button key={q} onClick={() => setQuality(q)}
-                className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${quality === q ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
-                {q.charAt(0).toUpperCase() + q.slice(1)}
-              </button>
-            ))}
-          </div>
+          <div className="text-xs text-[var(--text-secondary)]">Files are renamed to the target extension — pick the right target above.</div>
         )}
 
         <button onClick={handleConvert} disabled={files.length === 0 || isProcessing}

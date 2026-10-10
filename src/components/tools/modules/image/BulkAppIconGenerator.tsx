@@ -26,7 +26,6 @@ const ICON_SIZES = [
 ];
 
 const FREE_LIMIT = 5;
-const PRO_MAX = 100;
 
 export default function BulkAppIconGenerator() {
   const [source, setSource] = useState<'svg' | 'image'>('svg');

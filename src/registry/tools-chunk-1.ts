@@ -1568,7 +1568,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: 'How do I build a starter palette?', answer: 'Add 5 colors by hex: primary, secondary, accent, background, and text (e.g. #4F46E5 indigo primary). Name each as you go — the kit stays readable when the team grows.' },
       { question: 'Where is my kit stored?', answer: 'In your browser\'s localStorage under brandKit_colors and brandKit_fonts — it reloads on every visit to this device with no account. Seeds 4 starter colors (Primary #4F46E5, Secondary #10B981, Accent #F59E0B, Text #111827) plus Inter and Roboto; new hex must match #RRGGBB. Export the JSON backup before clearing browser data or switching machines.' },
       { question: 'How do developers use the export?', answer: 'The JSON carries hex codes with names — paste straight into Tailwind config or CSS variables. One export keeps design and code using identical values.' },
-      { question: 'Is my brand data uploaded?', answer: 'No — everything stores locally in your browser. Only the JSON export passes through the free download quota (3 a day anonymous, 5 signed-in).' },
+      { question: 'Is my brand data uploaded?', answer: 'No — everything stores locally in your browser. Brand Kit is a free tool, so JSON exports save unlimited — download caps apply only to Pro tools (2 a day signed-in).' },
     ],
   },
   {

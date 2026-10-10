@@ -81,7 +81,7 @@ export default function PgpKeyGenerator() {
 
           <div className="space-y-1">
             <label htmlFor="lbl-pgpkeygenerator-passphrase-password-lock" className="text-[10px] text-[var(--text-muted)] font-bold">Passphrase (Password Lock)</label>
-            <input id="lbl-pgpkeygenerator-passphrase-password-lock" aria-label="Passphrase (Password Lock)" type="text" value={passphrase} onChange={e => setPassphrase(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+            <input id="lbl-pgpkeygenerator-passphrase-password-lock" aria-label="Passphrase (Password Lock)" type="password" value={passphrase} onChange={e => setPassphrase(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           </div>
 
           <button onClick={generateKeys} disabled={isGenerating} className="w-full mt-4 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50">

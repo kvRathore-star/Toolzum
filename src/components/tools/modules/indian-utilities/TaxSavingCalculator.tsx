@@ -66,7 +66,9 @@ export default function TaxSavingCalculator() {
     const hraExemption = Math.max(0, hra);
 
     const stdDeduction = 50000;
-    const old80C = Math.min(inputs.investment80C, 150000);
+    // Home-loan principal repayment qualifies under 80C within the same
+    // overall 1.5L cap — the old code collected the input but never added it.
+    const old80C = Math.min(inputs.investment80C + inputs.homeLoanPrincipal, 150000);
     const old80CCD = Math.min(inputs.nps80CCD, 50000);
     const old80D = Math.min(inputs.healthInsurance80D, 25000);
     const homeInterest = Math.min(inputs.homeLoanInterest, 200000);
