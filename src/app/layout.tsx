@@ -27,11 +27,11 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://toolzum.com'),
   alternates: { canonical: "https://toolzum.com/" },
   title: {
-    default: "Toolzum – Privacy-First Web Tools",
+    default: "Toolzum – Free Privacy-First Tools",
     template: "%s | Toolzum",
   },
   description:
-    `${toolCount}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Most run fully in your browser with nothing uploaded; cloud AI tools are clearly marked.`,
+    `${toolCount} free web tools — PDF, image, audio, video, converters, AI editors. Most run in your browser with nothing uploaded. No signup to start.`,
   robots: "index, follow",
   manifest: "/manifest.json",
   icons: {
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Toolzum",
-    title: "Toolzum – Privacy-First Web Tools",
+    title: `Toolzum — ${toolCount} free tools, no signup`,
     description:
-      `${toolCount}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Most run fully in your browser with nothing uploaded; cloud AI tools are clearly marked.`,
+      `${toolCount} free web tools — PDF, image, audio, video, converters, AI editors. Most run in your browser with nothing uploaded. No signup to start.`,
     images: [{ url: "/og/home/index.webp", width: 1200, height: 630 }],
   },
   twitter: {
@@ -83,7 +83,7 @@ export default function RootLayout({
                 "name": "Toolzum",
                 "url": "https://toolzum.com",
                 "logo": "https://toolzum.com/og/branding/index.webp",
-                "description": `${toolCount}+ free, privacy-first web tools that run entirely in your browser.`,
+                "description": `${toolCount} free, privacy-first web tools. Most run in your browser with nothing uploaded.`,
                 "email": "contact@toolzum.com",
                 "founder": { "@type": "Person", "name": "Kirtiwardhan Rathore" },
                 "sameAs": [],
@@ -93,7 +93,7 @@ export default function RootLayout({
                 "@type": "WebSite",
                 "name": "Toolzum",
                 "url": "https://toolzum.com",
-                "description": `${toolCount}+ free, privacy-first web tools. Most processed in your browser — nothing uploaded for local tools.`,
+                "description": `${toolCount} free, privacy-first web tools. Most run in your browser — nothing uploaded for local tools.`,
                 "potentialAction": {
                   "@type": "SearchAction",
                   "target": {
