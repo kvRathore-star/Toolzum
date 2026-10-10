@@ -45,6 +45,7 @@ export default function AdminReviewsPage() {
   }, [router]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- auth-gated one-shot fetch: runs once when session resolves, not per render
     if (!isPending) void load();
   }, [isPending, load]);
 
