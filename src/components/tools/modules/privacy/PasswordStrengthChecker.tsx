@@ -75,10 +75,10 @@ export default function PasswordStrengthChecker() {
         </div>
 
         {/* Audit Details */}
-        <div className="bg-[var(--bg-overlay)] rounded-2xl p-6 border border-zinc-800 flex flex-col justify-between min-h-[180px]">
+        <div className="bg-[var(--bg-overlay)] rounded-2xl p-6 border border-[var(--border-subtle)] flex flex-col justify-between min-h-[180px]">
           {password ? (
             <div className="space-y-3 text-xs text-[var(--text-muted)] animate-in zoom-in-95">
-              <h4 className="text-sm font-bold text-zinc-300 uppercase">Entropy Diagnostics</h4>
+              <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase">Entropy Diagnostics</h4>
               <div className="space-y-1">
                 <p>💡 Estimated Crack Time: <span className="font-bold text-[var(--text-primary)]">{evaluation.crack_times_display.offline_fast_hashing_1e10_per_second}</span></p>
                 {evaluation.feedback.warning && (

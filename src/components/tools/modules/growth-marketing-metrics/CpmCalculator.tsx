@@ -170,7 +170,7 @@ export default function CpmCalculator() {
             </>
           ) : (
             <>
-              <div className="rounded-2xl p-6 border bg-blue-50 dark:bg-blue-950/20 border-[var(--accent)]/20 dark:border-blue-900/30 flex flex-col justify-center items-center min-h-[160px]">
+              <div className="rounded-2xl p-6 border bg-[var(--accent)]/10 dark:bg-[var(--accent)]/10 border-[var(--accent)]/20 dark:border-[var(--accent)]/20 flex flex-col justify-center items-center min-h-[160px]">
                 <div className="flex items-center gap-2 mb-2">
                   <DollarSign className="w-4 h-4 text-[var(--accent)]" />
                   <span className="text-xs font-bold text-[var(--text-secondary)] uppercase">

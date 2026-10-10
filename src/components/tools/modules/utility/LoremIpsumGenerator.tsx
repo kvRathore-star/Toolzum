@@ -11,7 +11,7 @@ export default function LoremIpsumGenerator() {
   const generate = () => {
     const sentences: string[] = []; const total = type === 'words' ? count : type === 'sentences' ? count : count * 4;
     for (let i = 0; i < total; i++) { const len = randInt(5, 15); const words: string[] = []; for (let j = 0; j < len; j++) words.push(randItem(LOREM_WORDS)); words[0]! = words[0]!.charAt(0).toUpperCase() + words[0]!.slice(1); sentences.push(words.join(' ') + '.'); }
-    if (type === 'words') { const text = sentences.slice(0, count).join(' ').toLowerCase(); setResult(text); }
+    if (type === 'words') { const text = sentences.join(' ').split(' ').slice(0, count).join(' ').toLowerCase(); setResult(text); }
     else if (type === 'sentences') setResult(sentences.join(' '));
     else { const paras: string[] = []; for (let i = 0; i < count; i++) { let p = sentences.slice(i * 4, (i + 1) * 4).join(' '); if (i === 0 && startLorem) p = 'Lorem ipsum dolor sit amet, ' + p.charAt(0).toLowerCase() + p.slice(1); paras.push(p); } setResult(paras.join('\n\n')); }
   };

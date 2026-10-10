@@ -843,6 +843,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "What data can a QR code contain?", answer: "Text, URLs, phone numbers, email addresses, WiFi credentials, vCards, and other encoded data. The tool displays whatever text was encoded in the QR code." },
       { question: "Does it work with damaged QR codes?", answer: "The jsQR library has built-in error correction and can often read partially damaged or obscured QR codes, especially those encoded with high error correction level." },
       { question: "When using QR Code Reader, is my image uploaded to a server?", answer: "No. QR code decoding happens entirely in your browser using the jsQR library. Your image never leaves your device." },
+      { question: "Why does paste say the clipboard holds text, not image data?", answer: "The paste button scans the clipboard item for image types and decodes the first image blob; copying a file in Finder, Explorer, or Photos puts a file reference or text on the clipboard, not pixels. Fix: open the image and copy the picture itself (not the file), or upload the PNG, JPG, GIF, BMP, or WebP directly. Decoding tries both normal and inverted pixels, so light-on-dark codes still read." },
     ],
     seoTitle: "QR Code Reader – Free Online",
   },
@@ -851,8 +852,8 @@ export const entries_chunk_2: ToolMetadata[] = [
     name: "Lorem Ipsum Generator",
     slug: "lorem-ipsum-generator",
     category: "Text",
-    description: 'Generate placeholder text in multiple styles — Standard Lorem Ipsum, Cicero (original Latin), Legal, Startup, Coffee, and Pirate themes. Customizable paragraph and word counts for design mockups.',
-    seoDescription: 'Free online Lorem Ipsum Generator — classic, Cicero, legal, startup, coffee, pirate themes. Paragraphs and word counts. ',
+    description: 'Generate Lorem-style placeholder text by paragraphs, sentences, or words — paragraphs run 4 sentences with an optional classic lead. Match real content volume in mockups — free, local, no signup.',
+    seoDescription: 'Free online Lorem Ipsum Generator — paragraphs, sentences, or word batches. ',
     dependencies: "none",
     showInCategory: true,
     instructions: [
@@ -862,7 +863,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     ],
     faqs: [
       { question: "Why use placeholder text at all?", answer: "Real-looking text reveals layout problems (overflows, orphans, contrast) that gray boxes hide. Clients also review design instead of proofreading when content isn't final." },
-      { question: "What are the themed variants for?", answer: "Legal, startup, coffee, and pirate themes match mockup context so demos feel intentional — a coffee-shop site mock reads better with coffee-themed filler than Cicero Latin." },
+      { question: "What output sizes are available?", answer: "Three modes: paragraphs (4 sentences each, so 3 paragraphs ≈ 12 sentences), sentences, or a word batch; paragraphs mode can open with the classic 'Lorem ipsum dolor sit amet, ' lead via the checkbox (on by default)." },
       { question: "How much filler do I need?", answer: "Match the real content's volume: 3 paragraphs where 3 will live. One paragraph under-tests the layout; ten pages of lorem nobody reads wastes review attention." },
       { question: "Never ship lorem to production — right?", answer: "Right. Search engines index it, screen readers read it aloud, and clients screenshot it. Grep your build for 'lorem' before every launch." },
       { question: "When using Lorem Ipsum Generator, is anything uploaded?", answer: "No. Generation runs entirely in your browser. Nothing leaves your device." },
@@ -889,6 +890,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Can I look up any TLD?", answer: "Most generic TLDs (.com, .net, .org) and many country-code TLDs are supported. Some ccTLDs may have limited data depending on the registry's RDAP implementation." },
       { question: "Why is registrant contact info redacted?", answer: "GDPR and other privacy regulations require registries to hide personal contact details. The lookup shows the registrar and public data, but personal info is masked." },
       { question: "Is the lookup query stored?", answer: "No. Lookups go through a first-party RDAP proxy plus public RDAP/whois providers, so the queried domain is visible to those providers. No search history is stored on our server." },
+      { question: "How long does a lookup wait, and how much history is kept?", answer: "Each provider gets 15 seconds before the tool moves on — first-party RDAP first, then rdap.org, then the whois fallback. The recent-lookups row keeps your last 5 domains for one-click re-checks." },
     ],
     seoTitle: "WHOIS Lookup – Free Online",
   },
@@ -911,6 +913,7 @@ export const entries_chunk_2: ToolMetadata[] = [
       { question: "Does it check the full certificate chain?", answer: "It shows chain entries when the certificate API returns them. The transparency-log fallback carries no live chain — confirm expiry against the live server before acting." },
       { question: "What is a SAN (Subject Alternative Name)?", answer: "A SAN is an additional domain name or IP address covered by the same certificate. Many certificates secure multiple domains (e.g., example.com and www.example.com) via SANs." },
       { question: "Is the check query stored?", answer: "No. Your browser queries third-party certificate APIs (ssl-checker.io with a crt.sh fallback), so the checked domain is visible to those providers. No search history is stored on our server." },
+      { question: "When does a certificate count as expiring?", answer: "Fewer than 30 days remaining reads Expiring, below 0 reads Expired. Each provider gets 15 seconds before the fallback runs, and the recent-checks row keeps your last 5 domains." },
     ],
     seoTitle: "Free Online SSL Checker",
   },
@@ -3088,14 +3091,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     instructions: [
       { title: "1. Enter revenue and costs", desc: "All three P&L layers." },
       { title: "2. Read profit and margins", desc: "Bottom line with percentages." },
-      { title: "3. Track monthly", desc: "Trend over single-point snapshots." },
+      { title: "3. Rerun each period", desc: "Snapshots only — no history is stored." },
     ],
     faqs: [
-      { question: 'What goes into P&L?', answer: 'Revenue minus COGS (gross), minus operating expenses (operating), minus interest/tax (net). Enter all three layers for the true bottom line.' },
+      { question: 'What goes into P&L?', answer: 'Revenue minus COGS is gross profit; minus operating expenses is net income plus margin percent. Three inputs only — no interest/tax layer, so adjust separately for lenders.' },
       { question: 'Profitable but cash-poor?', answer: 'Common — unpaid invoices count as revenue before cash arrives. Track receivables aging alongside P&L, not instead of it.' },
       { question: 'Monthly or annual?', answer: 'Monthly for operations, annual for strategy — same math, different decisions. Compare month-over-month trends, not single points.' },
 
-      { question: 'Work a P&L example?', answer: 'Revenue $50,000 minus $32,000 costs leaves $18,000 profit — a 36% margin. Enter your own two numbers and the tool splits profit from margin the same way.' },      { question: 'Are figures uploaded?', answer: 'No — math runs locally in your browser. Figures never leave your device.' },
+      { question: 'Work a P&L example?', answer: 'Revenue $100,000 minus $60,000 COGS minus $25,000 operating expenses leaves $15,000 net — a 15.0% margin. The tool splits gross profit from net income the same way.' },      { question: 'Are figures uploaded?', answer: 'No — math runs locally in your browser. Figures never leave your device.' },
     ],
   },
   {

@@ -26,8 +26,8 @@ export default function CAGRCalculator() {
     <div className="space-y-4">
       <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 text-center">
         <div className="text-xs text-emerald-600 dark:text-emerald-400 font-medium mb-1">Compound Annual Growth Rate</div>
-        <div className="text-3xl font-bold text-emerald-700 dark:text-emerald-300">${cagr.toFixed(2)}%</div>
-        <div className="text-xs text-[var(--text-secondary)] mt-1">Total return: ${totalReturn.toFixed(2)}%</div>
+        <div className="text-3xl font-bold text-emerald-700 dark:text-emerald-300">{cagr.toFixed(2)}%</div>
+        <div className="text-xs text-[var(--text-secondary)] mt-1">Total return: {totalReturn.toFixed(2)}%</div>
       </div>
       <div className="bg-[var(--bg-surface)] rounded-xl p-3">
         <div className="text-xs text-[var(--text-secondary)] mb-2">Year-by-Year Growth</div>

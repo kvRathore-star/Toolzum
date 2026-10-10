@@ -26,7 +26,7 @@ export default function SalesTaxCalculator() {
   const resultText = `Subtotal: $${a.toFixed(2)}\nTax (${r}%): $${tax.toFixed(2)}\nTotal: $${(a + tax).toFixed(2)}`;
   const presets = [
     { label: '$100 CA 7.25%', apply: () => { setAmount('100'); setMode('state'); setState('CA'); } },
-    { label: '$50 NY 8%', apply: () => { setAmount('50'); setMode('state'); setState('NY'); } },
+    { label: '$50 NY 4%', apply: () => { setAmount('50'); setMode('state'); setState('NY'); } },
   ];
   return (
     <>

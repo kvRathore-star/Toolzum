@@ -241,7 +241,7 @@ export default function SaasPricingCalculator() {
 
           {/* Core Metrics Breakdown */}
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider pb-2 border-b border-[var(--border-subtle)] dark:border-zinc-800">
+            <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider pb-2 border-b border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
               Economics Analysis
             </h3>
             
@@ -267,7 +267,7 @@ export default function SaasPricingCalculator() {
 
           {/* Growth Simulator Output */}
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider pb-2 border-b border-[var(--border-subtle)] dark:border-zinc-800 flex items-center justify-between">
+            <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider pb-2 border-b border-[var(--border-subtle)] dark:border-[var(--border-subtle)] flex items-center justify-between">
               <span>12-Month Projections</span>
               <span className="text-[10px] text-[var(--text-muted)] font-normal">Assumes 30% of OpEx allocated to CAC acquisition</span>
             </h3>
@@ -275,7 +275,7 @@ export default function SaasPricingCalculator() {
             <div className="overflow-x-auto">
               <table className="w-full text-xs text-left text-[var(--text-secondary)]">
                 <thead>
-                  <tr className="border-b border-[var(--border-subtle)] dark:border-zinc-800 text-[var(--text-muted)] font-semibold">
+                    <tr className="border-b border-[var(--border-subtle)] dark:border-[var(--border-subtle)] text-[var(--text-muted)] font-semibold">
                     <th className="py-2">Month</th>
                     <th className="py-2">End Users</th>
                     <th className="py-2 text-[var(--accent)]">Churned</th>
@@ -284,13 +284,13 @@ export default function SaasPricingCalculator() {
                     <th className="py-2 text-right">Profit</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800/50">
+                <tbody className="divide-y divide-[var(--border-subtle)] dark:divide-[var(--border-subtle)]">
                   {projections.map(proj => (
-                    <tr key={proj.month} className="hover:bg-[var(--bg-overlay)]/50 dark:hover:bg-zinc-800/20">
+                    <tr key={proj.month} className="hover:bg-[var(--bg-overlay)]/50 dark:hover:bg-[var(--bg-elevated)]/50">
                       <td className="py-2.5 font-semibold text-[var(--text-primary)]">Month {proj.month}</td>
                       <td className="py-2.5 font-bold text-[var(--text-primary)]">{proj.endCust.toLocaleString()}</td>
                       <td className="py-2.5 text-rose-700 dark:text-rose-400">-{proj.churned}</td>
-                      <td className="py-2.5 font-semibold text-[var(--text-primary)] dark:text-zinc-200">${Math.round(proj.mrr).toLocaleString()}</td>
+                      <td className="py-2.5 font-semibold text-[var(--text-primary)] dark:text-[var(--text-primary)]">${Math.round(proj.mrr).toLocaleString()}</td>
                       <td className="py-2.5 text-[var(--text-muted)]">${Math.round(proj.arr).toLocaleString()}</td>
                       <td className="py-2.5 font-bold text-emerald-500 text-right">${Math.round(proj.grossProfit).toLocaleString()}</td>
                     </tr>

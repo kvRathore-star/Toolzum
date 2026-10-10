@@ -279,7 +279,7 @@ function ZalgoView() {
           ].map(({ label, v, s }) => (
             <label key={label} className="flex items-center gap-2 cursor-pointer text-sm text-[var(--text-primary)] font-semibold select-none">
               <input type="checkbox" checked={v} onChange={e => s(e.target.checked)}
-                className="rounded border-[var(--border-subtle)] dark:border-zinc-800 text-red-600 focus:ring-red-500 h-4 w-4" />
+                className="rounded border-[var(--border-subtle)] dark:border-[var(--border-subtle)] text-red-600 focus:ring-red-500 h-4 w-4" />
               {label}
             </label>
           ))}
@@ -302,7 +302,7 @@ function ZalgoView() {
           <div className="px-4 py-3 bg-black/20 border-b border-[var(--border-subtle)] dark:border-[var(--border-subtle)] flex justify-between items-center shrink-0">
             <span className="text-[var(--text-primary)] text-sm font-bold uppercase tracking-wider">Cursed Zalgo Output</span>
             <button onClick={() => { if (output) { clipboardWrite(output).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); } }} disabled={!output}
-              className="text-xs text-[var(--accent)] hover:text-blue-700 dark:hover:text-blue-400 font-semibold disabled:opacity-50 cursor-pointer">Copy</button>
+              className="text-xs text-[var(--accent)] hover:opacity-80 font-semibold disabled:opacity-50 cursor-pointer">Copy</button>
           </div>
           <textarea aria-label="Cursed text will creep here..." value={output} readOnly placeholder="Cursed text will creep here..."
             className="flex-1 p-4 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-sans text-lg text-red-500 dark:text-red-400 overflow-y-auto" />

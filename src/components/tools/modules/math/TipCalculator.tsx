@@ -12,7 +12,9 @@ export default function TipCalculator() {
   const b = Number(bill);
   const tip = b * pct / 100;
   const total = b + tip;
-  const resultText = `Tip: $${tip.toFixed(2)}\nTotal: $${total.toFixed(2)}\nEach: $${(total / split).toFixed(2)}`;
+  // Split of 0/negative would print $Infinity — clamp to at least 1.
+  const heads = split > 0 ? split : 1;
+  const resultText = `Tip: $${tip.toFixed(2)}\nTotal: $${total.toFixed(2)}\nEach: $${(total / heads).toFixed(2)}`;
   const presets = [
     { label: '$50 18%', apply: () => { setBill('50'); setPct(18); } },
     { label: '$100 20%', apply: () => { setBill('100'); setPct(20); } },
@@ -36,9 +38,9 @@ export default function TipCalculator() {
         <div className="text-xs space-y-1">
           <div>Tip: ${tip.toFixed(2)}</div>
           <div>Total: ${total.toFixed(2)}</div>
-          <div className="font-bold">Each: ${(total / split).toFixed(2)}</div>
+          <div className="font-bold">Each: ${(total / heads).toFixed(2)}</div>
         </div>
-        <CalcActions result={resultText} downloadData={`Tip,Total,Each\n$${tip.toFixed(2)},$${total.toFixed(2)},$${(total / split).toFixed(2)}`} downloadFilename="tip.csv" />
+        <CalcActions result={resultText} downloadData={`Tip,Total,Each\n$${tip.toFixed(2)},$${total.toFixed(2)},$${(total / heads).toFixed(2)}`} downloadFilename="tip.csv" />
       </div>
     </>
   );

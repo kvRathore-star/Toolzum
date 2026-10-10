@@ -145,7 +145,7 @@ export function ProfitLossCalculator() {
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="space-y-4">
-        <h2 className="text-lg font-bold text-[var(--text-primary)]">Working Capital Calculator</h2>
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Profit &amp; Loss Calculator</h2>
         <div className="grid grid-cols-3 gap-3">
           <div>
             <label htmlFor="lbl-calcfilekitwidgets-revenue" className="text-xs text-[var(--text-secondary)] mb-1 block">Revenue ($)</label>

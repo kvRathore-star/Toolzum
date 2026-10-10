@@ -150,7 +150,7 @@ export default function ExifDataRemover() {
                   return (
                     <div key={key} className="flex justify-between border-b border-[var(--border-subtle)] py-1 last:border-0">
                       <span className="text-[var(--text-secondary)]">{key}</span>
-                      <span className="text-[var(--text-primary)] dark:text-zinc-300 font-medium text-right break-all ml-4">
+                      <span className="text-[var(--text-primary)] dark:text-[var(--text-primary)] font-medium text-right break-all ml-4">
                         {String(value)}
                       </span>
                     </div>

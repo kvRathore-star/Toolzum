@@ -114,7 +114,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Privacy Cleaner",
     "slug": "privacy-cleaner",
     "category": "Privacy",
-    "description": "Scan and clear cookies, localStorage, and cache for the current site — see what\\'s stored first. Audit trackers before wiping — local inspection, free, no signup.",
+    "description": "Scan and clear cookies, localStorage, and sessionStorage for the current site — see what\\'s stored first. Audit privacy trackers before wiping — local inspection, free, no signup.",
     "isPro": false
   },
   {
@@ -170,7 +170,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Logo Maker",
     "slug": "logo-maker",
     "category": "Branding",
-    "description": "Design simple logos with text, shapes, and icons on canvas — export PNG/SVG. Draft startup marks in an afternoon — local Canvas work, unlimited saves.",
+    "description": "Design simple logos with text, tagline, and 5 preset icons on canvas — export PNG/SVG. Draft startup marks in an afternoon — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -242,7 +242,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Fancy Text Generator",
     "slug": "fancy-text-generator",
     "category": "Text",
-    "description": "Creates stylish Unicode text in 40+ decorative font styles including double-struck, bubble, cursive, gothic, and small caps. Perfect for social media bios, gaming usernames, Discord profiles, and Instagram captions where standard fonts will not render.",
+    "description": "Creates stylish Unicode text in 16 ready-made styles — 8 letter alphabets including double-struck, cursive, gothic, and small caps, plus 8 symbol decorations. Perfect for social media bios, gaming usernames, Discord profiles, and Instagram captions where standard fonts will not render.",
     "isPro": false
   },
   {
@@ -346,7 +346,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Character Counter",
     "slug": "character-counter",
     "category": "Text",
-    "description": "Count characters, words, sentences, and reading time as you type — with and without spaces. Fit a 280-character post or 1500-word brief exactly — free, local, no signup.",
+    "description": "Count characters, letters, digits, spaces, and punctuation as you type — totals with and without spaces plus an upper/lowercase split. Fit a 280-character post exactly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -362,7 +362,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Word Counter",
     "slug": "word-counter",
     "category": "Text",
-    "description": "Analyzes your writing with real-time word count, sentence count, syllable count, paragraphs, and advanced readability metrics — Flesch-Kincaid Reading Ease, Grade Level, estimated speaking time, and keyword density. Essential for writers, students, and SEO professionals optimizing content for readability.",
+    "description": "Analyzes your writing with real-time word count, character counts with and without spaces, sentence and paragraph counts, plus estimated reading time (200 wpm) and speaking time (150 wpm). Essential for writers, students, and SEO professionals tracking length and pacing.",
     "isPro": false
   },
   {
@@ -378,7 +378,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Social Media Post Maker",
     "slug": "social-media-post-maker",
     "category": "Branding",
-    "description": "Design sized social posts with text overlays and brand colors for every network. Ship a week of creatives in one sitting — local Canvas work, unlimited saves.",
+    "description": "Design sized social posts with text overlays and brand colors in 4 network sizes. Ship a week of creatives in one sitting — local Canvas work, unlimited saves.",
     "isPro": false
   },
   {
@@ -498,7 +498,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GST Calculator",
     "slug": "gst-calculator",
     "category": "indian-utilities",
-    "description": "Computes GST-inclusive and GST-exclusive amounts for Indian tax slabs (5%, 12%, 18%, 28%) with automatic HSN/SAC code hints.",
+    "description": "Computes GST-inclusive and GST-exclusive amounts for Indian tax slabs (5%, 12%, 18%, 28%) with net, GST value, and total shown.",
     "isPro": false
   },
   {
@@ -626,7 +626,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Business Card Maker",
     "slug": "business-card-maker",
     "category": "Branding",
-    "description": "Business Card Maker provides a WYSIWYG editor with snap-to-grid alignment and preset card dimensions. Designs never leave your device — everything renders locally in your browser.",
+    "description": "Business Card Maker provides a template-based editor with 4 color schemes and front/back sides. Designs never leave your device — everything renders locally in your browser.",
     "isPro": false
   },
   {
@@ -690,7 +690,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "EXIF Data Remover",
     "slug": "exif-data-remover",
     "category": "Privacy",
-    "description": "Strips GPS coordinates, camera metadata, timestamps, and software fingerprints from JPEG and PNG images. Sensitive data never leaves your device — encryption runs locally in your browser.",
+    "description": "Strips EXIF GPS coordinates, camera metadata, timestamps, and software fingerprints from JPEG and PNG images. Sensitive data never leaves your device — stripping runs locally in your browser.",
     "isPro": false
   },
   {
@@ -810,7 +810,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Email Signature Generator",
     "slug": "email-signature-generator",
     "category": "Branding",
-    "description": "Build professional HTML email signatures with photo, links, and disclaimers. Sign every mail like a company — local generation, free, copy-paste.",
+    "description": "Build professional HTML email signatures with photo, links, and contact details. Sign every mail like a company — local generation, free, copy-paste.",
     "isPro": false
   },
   {
@@ -858,7 +858,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Password Strength Checker",
     "slug": "password-strength-checker",
     "category": "Privacy",
-    "description": "Evaluates password strength using zxcvbn entropy analysis: score, crack time estimate, length, character diversity, dictionary words, and pattern repetition.",
+    "description": "Evaluates password strength using zxcvbn entropy analysis: 0–4 score, crack-time estimate, warnings, and fix suggestions.",
     "isPro": false
   },
   {
@@ -906,7 +906,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Secure Note Sharer",
     "slug": "secure-note-sharer",
     "category": "Privacy",
-    "description": "Share secrets securely via self-decrypting note links — AES in the URL hash servers never see. Send passwords without trusting inboxes — local Web Crypto, free, no signup.",
+    "description": "Share secrets securely via self-decrypting note links — AES ciphertext in the URL fragment, key in the link query. Send passwords without trusting inboxes — local crypto-js AES, free, no signup.",
     "isPro": false
   },
   {
@@ -1042,7 +1042,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Conversion Rate Calculator",
     "slug": "conversion-rate-calculator",
     "category": "Growth & Marketing",
-    "description": "Compute conversion rates from visitors and conversions with segment splits. Turn 2% into 3% deliberately — free, local, no signup.",
+    "description": "Compute conversion rate from visitors and conversions with presets, history, and CSV export. Turn 2% into 3% deliberately — free, local, no signup.",
     "isPro": false
   },
   {
@@ -1186,7 +1186,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "LTV Calculator",
     "slug": "ltv-calculator",
     "category": "Growth & Marketing",
-    "description": "Projects customer lifetime value using average order value, purchase frequency, gross margin, and estimated customer lifespan in months. SaaS founders and e-commerce operators use LTV to determine acquisition budgets, segment high-value customers, and forecast recurring revenue.",
+    "description": "Projects customer lifetime value as average order value × yearly purchase frequency × lifespan in years, with total orders and annual value shown. SaaS founders and e-commerce operators use LTV to determine acquisition budgets and forecast revenue.",
     "isPro": false
   },
   {
@@ -1202,7 +1202,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Burn Rate Calculator",
     "slug": "burn-rate-calculator",
     "category": "Growth & Marketing",
-    "description": "Compute monthly burn and runway from cash balance and net outflow. Know exactly how many months remain — free, local, no signup.",
+    "description": "Compute monthly burn and runway from starting balance, ending balance, and months elapsed. Know exactly how many months remain — free, local, no signup.",
     "isPro": false
   },
   {
@@ -1250,7 +1250,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SaaS Pricing Calculator",
     "slug": "saas-pricing-calculator",
     "category": "Growth & Marketing",
-    "description": "Model SaaS pricing with tier math — ARPA, conversion, and expansion effects. Price the Growth tier that converts — free, local, no signup.",
+    "description": "Model SaaS unit economics — ARPU, CAC, churn, opex, and COGS sliders with LTV:CAC health bands and a 12-month projection. Price the Growth tier that converts — free, local, no signup.",
     "isPro": false
   },
   {
@@ -1282,7 +1282,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Employee Turnover Calculator",
     "slug": "employee-turnover-calculator",
     "category": "Growth & Marketing",
-    "description": "Compute annualized turnover rates and replacement cost impact. Price a 20% churn problem correctly — free, local, no signup.",
+    "description": "Compute turnover rate and retention with replacement-cost breakdown. Price a 20% churn problem correctly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -1298,7 +1298,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "IP Anonymizer",
     "slug": "ip-anonymizer",
     "category": "Privacy",
-    "description": "Anonymize IP addresses in logs — mask octets or hash consistently for analytics. Share logs without exposing users — local processing, free, no signup.",
+    "description": "Anonymize a single IP address — mask octets or hash for analytics. Share logs without exposing users — local processing, free, no signup.",
     "isPro": false
   },
   {
@@ -1322,7 +1322,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Passport Photo Maker (India)",
     "slug": "passport-photo-india",
     "category": "indian-utilities",
-    "description": "Create a compliant 3.5x4.5 cm Indian passport photo from any uploaded image. Auto-crops with proper face positioning and background standards for passport, visa, and OCI card applications.",
+    "description": "Create a compliant 3.5x4.5 cm Indian passport photo from any uploaded image. Manual crop with guides, white background, and under-50KB compression for passport, visa, and OCI card applications.",
     "isPro": false
   },
   {
@@ -1330,7 +1330,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Aadhaar Wallet Cropper",
     "slug": "aadhaar-wallet-cropper",
     "category": "indian-utilities",
-    "description": "Crops Aadhaar card images to the standard 3.5 x 3.5 cm wallet-photo size with automatic face detection using OpenCV Haar cascades. All processing is local and private.",
+    "description": "Crops Aadhaar card scans to the standard 86 x 54 mm card size with manual slider positioning and front/back sides. All processing is local and private.",
     "isPro": false
   },
   {
@@ -1394,7 +1394,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PAN Card Resizer",
     "slug": "pan-card-resizer",
     "category": "indian-utilities",
-    "description": "Resizes PAN card images to standard 3.5 x 2.5 cm dimensions with automated cropping and proper margins for official documentation. All processing is local and private.",
+    "description": "Resizes PAN photos and signatures to NSDL/UTIITSL portal specs with manual crop and under-limit compression. All processing is local and private.",
     "isPro": false
   },
   {
@@ -1490,7 +1490,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Aadhaar Card Masker",
     "slug": "aadhaar-card-masker",
     "category": "indian-utilities",
-    "description": "Securely masks the first 8 digits of your 12-digit Aadhaar number on card images, leaving only the last 4 digits visible for safe sharing. Fully local processing.",
+    "description": "Manually black out the first 8 digits of your 12-digit Aadhaar number on card images by drawing boxes — download the masked copy. Fully local processing.",
     "isPro": false
   },
   {
@@ -1530,7 +1530,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Hindi / Regional Font Generator",
     "slug": "hindi-regional-font-generator",
     "category": "indian-utilities",
-    "description": "Generate stylish Unicode fonts for Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, and other Indian regional scripts. Copy-paste styled text for social media, WhatsApp, and more.",
+    "description": "Decorate Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, and other Indian regional text with symbol borders, plus Unicode styling for English names. Copy-paste styled text for social media, WhatsApp, and more.",
     "isPro": false
   },
   {
@@ -1538,7 +1538,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Indian Age Calculator",
     "slug": "indian-age-calculator",
     "category": "indian-utilities",
-    "description": "Calculate exact age in years, months, and days from a date of birth in DD/MM/YYYY format. Includes eligibility check for Indian government age requirements.",
+    "description": "Calculate exact age in years, months, and days from day-month-year dropdowns with a target date. Includes eligibility check for Indian government age requirements.",
     "isPro": false
   },
   {
@@ -1546,7 +1546,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CGPA to Percentage Converter",
     "slug": "cgpa-to-percentage-converter",
     "category": "indian-utilities",
-    "description": "Convert CGPA to percentage using CBSE, Mumbai University (MU), Anna University, and other Indian university conversion formulas. Supports 10-point, 7-point, and 4-point CGPA scales.",
+    "description": "Convert 10-point CGPA to percentage using CBSE, Mumbai University (MU), VTU, AKTU, SPPU, Anna University, JNTU, DU, and custom-factor formulas.",
     "isPro": false
   },
   {
@@ -1626,7 +1626,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Marriage Biodata Maker",
     "slug": "marriage-biodata-maker",
     "category": "indian-utilities",
-    "description": "Creates printable matrimonial biodata forms with sections for personal details, family background, education, career, and partner preferences. Download as PDF for sharing on matrimonial platforms.",
+    "description": "Creates printable matrimonial biodata forms with sections for personal details, family background, education, career, and partner preferences. Print via popup for sharing on matrimonial platforms.",
     "isPro": false
   },
   {
@@ -1634,7 +1634,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Rental Agreement Generator",
     "slug": "rental-agreement-generator",
     "category": "indian-utilities",
-    "description": "Generates customizable rental lease and license agreements compliant with Indian property laws. Supports leave-and-license agreements and standard tenancy formats for residential and commercial properties.",
+    "description": "Generates draft rental lease and license agreements for Indian property setups. Supports leave-and-license and standard tenancy formats for residential and commercial properties — reference draft, get it vetted before signing.",
     "isPro": false
   },
   {
@@ -1666,7 +1666,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Indian Voice Transcriber",
     "slug": "indian-voice-transcriber",
     "category": "indian-utilities",
-    "description": "Transcribe Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Punjabi, Odia, Urdu, or English voice notes to text. Record or upload — students dictate answers in seconds — 1 credit per minute.",
+    "description": "Transcribe Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Punjabi, Odia, Assamese, or English voice notes to text. Record or upload — students dictate answers in seconds — 1 credit per minute.",
     "isPro": true
   },
   {
@@ -1682,7 +1682,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Social Media Calendar",
     "slug": "social-media-calendar",
     "category": "Branding",
-    "description": "Lets users plan and schedule social media posts across multiple platforms in a visual calendar view with draft, scheduled. Designs never leave your device — everything renders locally in your browser.",
+    "description": "Plan social media posts across 6 platforms in a visual month calendar with draft, scheduled, and published statuses. Designs never leave your device — everything renders locally in your browser.",
     "isPro": false
   },
   {
@@ -1978,7 +1978,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "GSTIN Lookup",
     "slug": "gstin-lookup",
     "category": "indian-utilities",
-    "description": "Verifies any GSTIN (Goods and Services Tax Identification Number) instantly — returns legal name, trade name, address, registration date, and filing status. Supports bulk CSV export for accounts teams.",
+    "description": "Checks any GSTIN format instantly — decodes state, embedded PAN, entity code, and check digit with Luhn mod-36 verification. Supports bulk file decode (up to 500) with CSV export for accounts teams.",
     "isPro": false
   },
   {
@@ -2826,7 +2826,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "UPI ID Validator & QR Generator",
     "slug": "upi-id-validator",
     "category": "indian-utilities",
-    "description": "Validates UPI ID format rules for all popular handles (@paytm, @okhdfcbank, @ybl, @sbi, @upi, @axl, @icici) and generates UPI payment QR codes with merchant name and amount. All local processing.",
+    "description": "Validates UPI ID format against 23 known handles (@paytm, @okhdfcbank, @ybl, @sbi, @axl, @icici and more) and generates UPI payment QR codes with merchant name and amount. All local processing.",
     "isPro": false
   },
   {
@@ -2858,7 +2858,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SIP / PPF / EPF Calculator",
     "slug": "indian-investment-calculator",
     "category": "indian-utilities",
-    "description": "Calculate Indian investment returns — SIP with lumpsum and monthly options, PPF with 15-year maturity, and EPF employee provident fund projections. All calculations are local with no data uploads.",
+    "description": "Calculate Indian investment returns — monthly SIP, PPF with 15-year maturity, and EPF employee provident fund projections. All calculations are local with no data uploads.",
     "isPro": false
   },
   {
@@ -3178,7 +3178,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Lorem Ipsum Generator",
     "slug": "lorem-ipsum-generator",
     "category": "Text",
-    "description": "Generate placeholder text in multiple styles — Standard Lorem Ipsum, Cicero (original Latin), Legal, Startup, Coffee, and Pirate themes. Customizable paragraph and word counts for design mockups.",
+    "description": "Generate Lorem-style placeholder text by paragraphs, sentences, or words — paragraphs run 4 sentences with an optional classic lead. Match real content volume in mockups — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4522,7 +4522,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Customer LTV Calculator",
     "slug": "customer-ltv-calculator",
     "category": "Growth & Marketing",
-    "description": "Compute customer lifetime value from ARPA, margin, and churn — know what buyers are worth. Justify $500 CAC with $2,000 LTV — free, local, no signup.",
+    "description": "Compute customer lifetime value from ARPU and churn — know what buyers are worth. Justify $500 CAC with $2,000 LTV — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4530,7 +4530,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MRR Calculator",
     "slug": "mrr-calculator",
     "category": "Growth & Marketing",
-    "description": "Calculate Monthly Recurring Revenue from customer count and average revenue per account (ARPA), with new, expansion, churned, and contraction MRR broken out so net growth is visible. Example: 120 customers at $49 ARPA = $5,880 MRR. Numbers never leave your device — every calculation runs locally in your browser.",
+    "description": "Calculate Monthly Recurring Revenue from customer count and average revenue per account (ARPA), with monthly, annual, and ARPU readouts. Example: 120 customers at $49 ARPA = $5,880 MRR. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4570,7 +4570,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Runway Calculator",
     "slug": "runway-calculator",
     "category": "Growth & Marketing",
-    "description": "Compute startup runway from cash, burn, and revenue growth — months until decisions. Act at 12 months, not 3 — free, local, no signup.",
+    "description": "Compute startup runway from cash balance and monthly burn — months until decisions. Act at 12 months, not 3 — free, local, no signup.",
     "isPro": false
   },
   {
@@ -4954,7 +4954,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Seat License Calculator",
     "slug": "seat-license-calculator",
     "category": "Growth & Marketing",
-    "description": "Calculate total cost of software licenses by seats, price per seat, and duration. Budget and plan your SaaS subscription costs. Numbers never leave your device — every calculation runs locally in your browser.",
+    "description": "Calculate total cost of software licenses by seats, price per seat, and billing cycle with annual discount. Budget and plan your SaaS subscription costs. Numbers never leave your device — every calculation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -4994,7 +4994,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Trial Conversion Calculator",
     "slug": "trial-conversion-calculator",
     "category": "Growth & Marketing",
-    "description": "Compute trial-to-paid conversion with activation splits — find funnel leaks. Lift 15% trials to 25% deliberately — free, local, no signup.",
+    "description": "Compute trial-to-paid conversion across visitor, signup, and paid stages with MRR math — find funnel leaks. Lift 15% trials to 25% deliberately — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5586,7 +5586,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Token Generator",
     "slug": "random-token-generator",
     "category": "Developer",
-    "description": "Generate cryptographically secure random tokens — hex, base64, URL-safe — for secrets and sessions. Mint a 256-bit API secret in one click — local crypto, free, no signup.",
+    "description": "Generate random tokens in hex, base64, or alphanumeric formats for secrets and sessions. Hex and base64 draw from Web Crypto (alphanumeric uses Math.random — see format notes). The API-key preset mints 64-char secrets in one click — local generation, free, no signup.",
     "isPro": false
   },
   {
@@ -5802,7 +5802,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text Replacer",
     "slug": "text-replacer",
     "category": "Text",
-    "description": "Find-and-replace text across full documents with case control — rebrand 200 mentions in one pass. Rename a product through a 50-page spec instantly — free, local, no signup.",
+    "description": "Find-and-replace text across full documents as exact literal matches — rebrand 200 mentions in one pass. Rename a product through a 50-page spec instantly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -5842,7 +5842,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Markdown Previewer",
     "slug": "markdown-previewer",
     "category": "Text",
-    "description": "Preview Markdown as rendered HTML in real time with GFM tables and task lists. Write docs seeing final output — local rendering, free, no signup.",
+    "description": "Preview Markdown as rendered HTML on demand — headings, pipe tables, code, lists, and links sanitized with DOMPurify. Write docs seeing final output — local rendering, free, no signup.",
     "isPro": false
   },
   {
@@ -6634,7 +6634,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Annual Contract Value Calculator",
     "slug": "acv-calculator",
     "category": "Growth & Marketing",
-    "description": "Compute Average Contract Value from bookings and customer counts — know deal size trends. Track enterprise motion quarterly — free, local, no signup.",
+    "description": "Compute Annual Contract Value by dividing total contract value by contract years — know deal size trends. Track enterprise motion quarterly — free, local, no signup.",
     "isPro": false
   },
   {
@@ -6882,7 +6882,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text Cleaner",
     "slug": "text-cleaner",
     "category": "Text",
-    "description": "Strip extra spaces, blank lines, and invisible characters from pasted text. Fix copy-paste mess from PDFs and web — local cleaning, free, no signup.",
+    "description": "Collapse messy whitespace into clean single-spaced text — extra spaces, line padding, and blank-line runs squashed. Fix copy-paste mess from PDFs and web — local cleaning, free, no signup.",
     "isPro": false
   },
   {
@@ -7146,7 +7146,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PIN Generator",
     "slug": "pin-generator",
     "category": "Developer",
-    "description": "Generate numeric PINs of configurable length from 4 to 10 digits for security codes, verification codes, and access tokens. Code never leaves your device — formatting and validation run locally in your browser.",
+    "description": "Generate numeric PINs in fixed lengths (4, 5, 6, 8, or 10 digits) for everyday codes and test data. Code never leaves your device — generation runs locally in your browser.",
     "isPro": false
   },
   {
@@ -7154,7 +7154,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "License Key Generator",
     "slug": "license-key-generator",
     "category": "Developer",
-    "description": "Generate formatted software license keys with segments and validation patterns. Issue XXXX-XXXX keys for releases — local generation, free, no signup.",
+    "description": "Generate formatted software license keys from any X-template with dash separators. Issue random XXXX-XXXX keys for mock releases — local generation, free, no signup.",
     "isPro": false
   },
   {
